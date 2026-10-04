@@ -1,37 +1,13 @@
 {
-  "revision": "Screenshot review R2",
-  "date": "2026-10-04",
-  "browsers": [
-    "Chromium",
-    "Firefox",
-    "WebKit"
-  ],
-  "widths": [
-    1920,
-    1600,
-    1440,
-    1366,
-    1280,
-    1024,
-    768,
-    430,
-    390,
-    360,
-    320
-  ],
-  "stats": {
-    "startTime": "2026-10-04T15:07:16.698Z",
-    "duration": 287370.61199999996,
-    "expected": 84,
-    "skipped": 0,
-    "unexpected": 0,
-    "flaky": 0
-  },
-  "visualSource": "Supplied archive engines unchanged; HTML/SVG replaces upper preview bitmap",
-  "changes": "docs/REVIEW-R2.md",
-  "limits": [
-    "Browser engine automation, not testing every physical device",
-    "Frontend prices do not initiate charges",
-    "Figma unchanged"
-  ]
+  "revision": "R3 — contextual billing and interaction repairs",
+  "matrixCases": 159,
+  "casesPerBrowser": 53,
+  "browsers": ["Chromium", "Firefox", "WebKit"],
+  "layoutWidths": [1920, 1600, 1440, 1366, 1280, 1024, 768, 430, 390, 360, 320],
+  "additionalBoundaryWidths": [599, 600, 620, 699, 700, 1199, 1200],
+  "billingDockWidths": [320, 390, 430, 768, 1024, 1199],
+  "landscape": [844, 390],
+  "resultSource": "Latest completed GitHub Actions run and its browser-evidence artifact/test-results/results.json",
+  "changes": "docs/REVIEW-R3.md",
+  "limits": ["Browser-engine automation is not physical device certification", "No live payment or authenticated API transaction", "Figma and original renderer sources unchanged"]
 }

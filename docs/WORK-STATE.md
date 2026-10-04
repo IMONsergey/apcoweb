@@ -1,13 +1,13 @@
 # Work state
 
-Repository: IMONsergey/apcoweb. Branch: main.
+Repository: IMONsergey/apcoweb.
 
-Current implementation: screenshot review R2 (2026-10-04). Read REVIEW-R2.md for the owner-authorized changes; earlier notes saying annual pricing is disabled are superseded.
+Current code: R3 contextual billing and interaction fixes. Read REVIEW-R3.md first, then REVIEW-R2.md for earlier owner-approved visual decisions. The latest completed Actions run is authoritative for checks and publication. PR validation now covers all three browser engines and uploads browser-evidence.
 
-84/84 production-build checks passed across Chromium, Firefox and WebKit. GitHub Pages is released by the existing workflow after validation; the latest Actions run is authoritative for deployment status.
+Responsive dock: <=1199px, only within pricing options. Desktop inline selector: >=1200px. Shared period state, unchanged annual arithmetic, no autofocus/backdrop/scroll lock. The removed search-background band from 6cec9ba must remain removed.
 
-Preview URL: https://imonsergey.github.io/apcoweb/
+Six original renderer/data modules, split-button construction, image assets and Figma remain protected. Optional ideas in NEXT-UX.md are not implemented product promises.
 
-Double buttons and Figma are unchanged. The upper promo now uses HTML/SVG over the supplied live background, not a baked screenshot. The native billing switch applies the approved 20% annual discount with explicit annual totals. No global Pause motion button; device reduced-motion preference remains supported.
+Local preflight was developed at /Users/erdc/Documents/apcoweb. That Mac lost connectivity during final verification and may retain uncommitted R3 preflight changes. The GitHub branch is authoritative after publication. On reconnect, inspect and reconcile local differences before pulling or pushing; do not overwrite newer GitHub work or reset unrelated changes.
 
-Local development uses 5187 and production preview 4187. Port 5173 belongs to another project. Remaining editorial/checkout questions are in CONTENT-STATUS.md.
+Dev port 5187; preview 4187. Port 5173 belongs to another project. Preview: https://imonsergey.github.io/apcoweb/

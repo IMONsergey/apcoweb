@@ -1,9 +1,15 @@
-# QA results — screenshot review R2
+# QA — R3
 
-84/84 automated checks passed: 28 cases in each of Chromium, Firefox and WebKit. No skipped, unexpected or flaky results.
+The current matrix defines 159 production-build checks: 53 cases in each of Chromium, Firefox and WebKit. The latest completed GitHub Actions run provides the pass/fail result, not a hard-coded historical count.
 
-Layout and asset checks cover 1920, 1600, 1440, 1366, 1280, 1024, 768, 430, 390, 360 and 320 px. Accessibility scans cover 1440 and 390 px. New cases verify the native annual discount, synchronized totals, single-row masked marquee, pause/reduced-motion behavior, live upper scene, enlarged contour clearance, metric typography, footer, and interrupted FAQ/dialog transitions.
+## Coverage
 
-`npm ci`, the six-engine source verification, ESLint, TypeScript and the production build passed. The production build is tested, not only the Vite development server. A production-only backdrop-filter minification issue was found and corrected before release.
+Full layout/media checks: 1920, 1600, 1440, 1366, 1280, 1024, 768, 430, 390, 360 and 320px. Additional breakpoint checks cover 599, 600, 620, 699, 700, 1199 and 1200px. The dock is checked at six responsive widths and 844x390 landscape.
 
-Screenshots in `docs/screenshots/` show the tested build. These are browser-engine tests, not a guarantee for every physical device or a complete manual assistive-technology audit. No product payment/API transaction was performed.
+Scenarios include pricing entry/exit/re-entry; period retention across resize; no hidden focus stops; modal suppression and restoration; focused actions above the panel; editable-focus and zoom suppression; natural keyboard order; rapid carousel input and scrollbar geometry; menu keys; search clear/trim/pending/pageshow; final CTA hit regions; stable modal content; persistent stopped globe; and narrow-tablet numeric padding. Existing annual-price, empty search, FAQ, menu, asset, marquee, reduced-motion and search-background-band regressions remain active.
+
+## Evidence
+
+Each workflow uploads `browser-evidence`: JSON results, full-page screenshots, responsive dock screenshots, HTML report and any failure traces. PR validation does not publish the page. The main branch publishes only after the checks succeed.
+
+Earlier files in docs/screenshots are R2 snapshots. Use the current run's artifact for R3 visuals. Do not confuse viewport automation with physical phone testing, or automated accessibility scans with a complete screen-reader audit. No payment was collected or live authenticated API transaction performed.

@@ -1,0 +1,56 @@
+/* Feedback responds to user actions; source artwork and split-button construction stay intact. */
+html { scrollbar-gutter: stable; }
+.hero-title__line { display: block; }
+.steps { container-type: inline-size; }
+.carousel-bleed { padding-left: max(var(--gutter), calc((100cqw - 1760px) / 2)); }
+.step-track {
+  --card-width: calc((min(100cqw - 2 * var(--gutter), 1760px) - 40px) / 3);
+  padding-right: max(var(--gutter), calc((100cqw - 1760px) / 2));
+}
+.search-form .search-clear {
+  align-self: center;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  padding: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  animation: feedback-in 160ms var(--ease);
+}
+.search-form .search-clear:hover { background: var(--surface); color: var(--ink); }
+.search-form .search-clear svg { width: 14px; height: 14px; }
+.search-form input::-webkit-search-cancel-button { display: none; }
+.search-spinner { width: 18px; height: 18px; border: 2px solid #ffffff55; border-top-color: white; border-radius: 50%; animation: search-pending 650ms linear infinite; }
+.search-submit:disabled { cursor: progress; }
+@keyframes search-pending { to { transform: rotate(360deg); } }
+.plan-card { transition: box-shadow 220ms var(--ease), border-color 220ms var(--ease); }
+.plan-card:focus-within { box-shadow: 0 0 0 2px #037a8f20; }
+.carousel-arrows .icon-button svg { transition: transform 220ms var(--ease); }
+.step-media img { transition: transform 320ms var(--ease); }
+.double-button:not(:disabled):active .double-button__icon svg { transform: translateX(1px) scale(.94); }
+@media (hover: hover) {
+  .carousel-arrows .icon-button:not(:disabled):first-child:hover svg { transform: translateX(-2px); }
+  .carousel-arrows .icon-button:not(:disabled):last-child:hover svg { transform: translateX(2px); }
+  .step-card:hover .step-media img { transform: translateY(-3px); }
+  .plan-card:has(.plan-button:hover) { box-shadow: 0 6px 20px #102d3509; }
+}
+@media (max-width: 1199px) {
+  .step-track { --card-width: calc((100cqw - 2 * var(--gutter) - 20px) / 2); }
+  .search-scene .search-form input { font-size: 16px; }
+}
+@media (min-width: 600px) and (max-width: 699px) {
+  .data-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 599px) {
+  .hero h1, .hero-title__line { text-wrap: balance; }
+  .step-track { --card-width: calc(100cqw - 2 * var(--gutter) - 16px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-spinner, .search-form .search-clear { animation: none; }
+  .plan-card, .step-media img, .carousel-arrows .icon-button svg { transition: none; }
+  .step-card:hover .step-media img, .carousel-arrows .icon-button:hover svg,
+  .double-button:active .double-button__icon svg { transform: none; }
+}
