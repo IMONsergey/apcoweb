@@ -1,0 +1,121 @@
+/* Approved soft disclosure treatment. Pointer state and keyboard focus are distinct. */
+.nav-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  min-height: 42px;
+  padding: 12px;
+  line-height: 20px;
+  background: transparent;
+  border-radius: 12px;
+  white-space: nowrap;
+  transition: background-color 200ms var(--ease);
+}
+.nav-trigger svg {
+  width: 12px;
+  transition: transform 220ms var(--ease);
+}
+.nav-trigger[aria-expanded='true'],
+.nav-trigger:hover {
+  background: #f1f2f4;
+}
+.nav-trigger[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+.nav-trigger:focus:not(:focus-visible) {
+  outline: none;
+}
+.nav-trigger:focus-visible {
+  outline: 2px solid var(--action);
+  outline-offset: 3px;
+}
+.nav-panel {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  width: max-content;
+  min-width: 182px;
+  max-width: 320px;
+  padding: 6px;
+  border: 1px solid #e5e8eb;
+  border-radius: 12px;
+  background: #f1f2f4;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transform-origin: top left;
+  transition:
+    opacity 200ms var(--ease),
+    transform 240ms var(--ease),
+    visibility 0s linear 240ms;
+}
+.nav-panel[data-open='true'] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+.nav-panel a {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 10px;
+  border-radius: 7px;
+  line-height: 20px;
+  white-space: nowrap;
+  transition:
+    background-color 180ms var(--ease),
+    color 180ms var(--ease);
+}
+.nav-panel__default {
+  background: white;
+}
+.nav-panel a:hover,
+.nav-panel a:focus-visible {
+  background: white;
+}
+.nav-panel:has(a:not(.nav-panel__default):hover) .nav-panel__default,
+.nav-panel:has(a:not(.nav-panel__default):focus-visible) .nav-panel__default {
+  background: transparent;
+}
+.language {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 42px;
+  padding: 10px 14px;
+  border: 1px solid #e6e9ed;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+.language svg {
+  flex: 0 0 16px;
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .desktop-nav {
+    gap: 8px;
+  }
+  .nav-trigger {
+    padding-inline: 8px;
+  }
+  .header-row {
+    gap: 16px;
+  }
+}
+@media (max-width: 1199px) {
+  .language {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-trigger,
+  .nav-trigger svg,
+  .nav-panel,
+  .nav-panel a {
+    transition: none;
+  }
+}

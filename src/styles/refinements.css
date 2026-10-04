@@ -1,0 +1,242 @@
+/* The supplied SVG has a 532 viewBox around 421 units of artwork. Account for its inner margin. */
+.audience-art {
+  position: absolute;
+  width: min(650px, 81.2%);
+  aspect-ratio: 1;
+  left: 48.9%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+.metric-card {
+  border-color: #e6edf0;
+  padding: 20px 12px 24px;
+}
+.metric-card--products,
+.metric-card--domains {
+  box-shadow: 0 0 17px #fff;
+}
+.metric-card--ipv6,
+.metric-card--cves {
+  border-color: transparent;
+}
+.metric-card dt {
+  max-width: 100%;
+  line-height: 28px;
+}
+.metric-card dt > span {
+  background: var(--tint);
+  padding: 4px 8px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.metric-card dd {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.metric-card--protocols dd {
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
+.contact-banner h3 {
+  font-size: 36px;
+  line-height: 1.14;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.footer-email {
+  font-family: var(--font-sans);
+  font-size: 14px;
+}
+.footer-email strong {
+  font-weight: 600;
+}
+.billing-switch {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.segmented {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  isolation: isolate;
+  border-radius: 5px;
+  background: white;
+}
+.segmented::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 50%;
+  background: var(--ink);
+  border-radius: 5px;
+  transform: translateX(100%);
+  transition: transform 280ms var(--ease);
+  z-index: -1;
+}
+.segmented[data-period='annually']::before {
+  transform: translateX(0);
+}
+.segmented label {
+  position: relative;
+  cursor: pointer;
+}
+.segmented input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.segmented span {
+  display: block;
+  padding: 13px 16px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  transition: color 200ms ease;
+}
+.segmented input:checked + span {
+  color: white;
+}
+.segmented input:focus-visible + span {
+  outline: 2px solid var(--action);
+  outline-offset: 3px;
+  border-radius: 5px;
+}
+.plan-price-block {
+  min-height: 102px;
+}
+.plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.price-unit {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+.price-amount {
+  display: inline-block;
+  animation: price-settle 240ms var(--ease);
+}
+.plan-billing-note {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+.selected-plan-price {
+  font-size: 32px;
+  margin-top: 20px;
+  letter-spacing: -0.04em;
+}
+@keyframes price-settle {
+  from {
+    opacity: 0.3;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (min-width: 900px) and (max-width: 1199px) {
+  .audience-grid {
+    grid-template-columns: 1fr;
+  }
+  .audience-card {
+    min-height: 480px;
+  }
+  .audience-copy {
+    width: 52%;
+    max-width: 430px;
+  }
+  .audience-copy h3 {
+    padding-right: 0;
+  }
+  .audience-art {
+    width: 65%;
+    max-width: 610px;
+    left: 49%;
+  }
+}
+@media (max-width: 899px) and (min-width: 600px) {
+  .audience-art {
+    width: 81.2%;
+    left: 48.9%;
+  }
+  .contact-banner h3 {
+    font-size: 32px;
+  }
+}
+@media (max-width: 599px) {
+  .audience-art {
+    width: 202px;
+    left: auto;
+    right: -42px;
+    top: 16px;
+    transform: none;
+  }
+  .audience-copy h3 {
+    font-size: 30px;
+    line-height: 34px;
+    padding: 36px 88px 0 0;
+    min-height: 156px;
+  }
+  .metric-card {
+    padding: 12px;
+  }
+  .metric-card dt {
+    line-height: 22px;
+  }
+  .metric-card dt > span {
+    padding: 4px 6px;
+  }
+  .contact-banner h3 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  .plan-price-block {
+    min-height: 86px;
+  }
+  .plan-billing-note {
+    font-size: 12px;
+  }
+}
+@media (max-width: 340px) {
+  .audience-art {
+    width: 178px;
+    right: -34px;
+  }
+  .audience-copy h3 {
+    font-size: 28px;
+    line-height: 32px;
+    padding-top: 28px;
+    padding-right: 64px;
+    min-height: 136px;
+  }
+  .metric-card {
+    padding: 10px;
+  }
+  .contact-banner h3 {
+    font-size: 27px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .segmented::before,
+  .segmented span {
+    transition: none;
+  }
+  .price-amount {
+    animation: none;
+  }
+}

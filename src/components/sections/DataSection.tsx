@@ -28,7 +28,9 @@ export function DataSection() {
         <dl className="data-metrics">
           {metrics.map((metric) => (
             <div className={`metric-card metric-card--${metric.id}`} key={metric.id}>
-              <dt>{metric.label}</dt>
+              <dt>
+                <span>{metric.label}</span>
+              </dt>
               <dd>{metric.value}</dd>
             </div>
           ))}

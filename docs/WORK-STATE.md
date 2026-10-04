@@ -2,14 +2,12 @@
 
 Repository: IMONsergey/apcoweb. Branch: main.
 
-React landing implementation and local QA are complete. All 60 checks passed across Chromium, Firefox and WebKit at 11 widths.
+Current implementation: screenshot review R2 (2026-10-04). Read REVIEW-R2.md for the owner-authorized changes; earlier notes saying annual pricing is disabled are superseded.
 
-GitHub Pages is configured to deploy from the workflow. The current push runs CI before publishing.
+84/84 production-build checks passed across Chromium, Firefox and WebKit. GitHub Pages is released by the existing workflow after validation; the latest Actions run is authoritative for deployment status.
 
-Published preview target: https://imonsergey.github.io/apcoweb/
+Preview URL: https://imonsergey.github.io/apcoweb/
 
-Design source: APCOSYS / CLEAR WORK — Handoff, desktop 552:319. Figma unchanged by this implementation. Preserve the original search scene and split buttons.
+Double buttons and Figma are unchanged. The upper promo now uses HTML/SVG over the supplied live background, not a baked screenshot. The native billing switch applies the approved 20% annual discount with explicit annual totals. No global Pause motion button; device reduced-motion preference remains supported.
 
-Remaining editorial/commercial decisions are in CONTENT-STATUS.md. Do not silently change pricing or assume final publication rights for trust marks and illustrative metrics.
-
-Local server: 5187; production preview: 4187. Port 5173 is used by another project.
+Local development uses 5187 and production preview 4187. Port 5173 belongs to another project. Remaining editorial/checkout questions are in CONTENT-STATUS.md.

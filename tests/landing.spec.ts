@@ -143,14 +143,12 @@ test('FAQ preserves independent states and grows with text', async ({ page }) =>
     .nth(1)
     .locator('p')
     .evaluate((el) => (el.textContent = 'This is a long editorial content check. '.repeat(30)));
-  const box = await details
-    .nth(1)
-    .evaluate((el) => ({
-      scroll: el.scrollHeight,
-      height: el.clientHeight,
-      width: el.scrollWidth,
-      clientWidth: el.clientWidth,
-    }));
+  const box = await details.nth(1).evaluate((el) => ({
+    scroll: el.scrollHeight,
+    height: el.clientHeight,
+    width: el.scrollWidth,
+    clientWidth: el.clientWidth,
+  }));
   expect(box.scroll).toBeLessThanOrEqual(box.height + 1);
   expect(box.width).toBeLessThanOrEqual(box.clientWidth + 1);
 });
@@ -172,20 +170,29 @@ test('search validates locally and forwards the verified URL parameter', async (
   await expect(page).toHaveURL('https://apcosys.net/search?search_value=example.com');
 });
 
-test('pricing dialogs do not invent an annual charge', async ({ page }) => {
+test('native billing selection applies the approved 20 percent discount', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await openLanding(page);
-  const before = await page.locator('.plan-price').allTextContents();
-  await page.getByRole('button', { name: 'Annually', exact: true }).click();
-  await expect(page.getByRole('dialog', { name: 'Annual billing' })).toBeVisible();
-  await page.keyboard.press('Escape');
-  expect(await page.locator('.plan-price').allTextContents()).toEqual(before);
+  await expect(page.locator('.price-amount')).toHaveText(['$0', '$40', '$240', '$720']);
+  await page.getByRole('radio', { name: 'Annually', exact: true }).check();
+  await expect(page.locator('dialog[open]')).toHaveCount(0);
+  await expect(page.locator('.price-amount')).toHaveText(['$0', '$32', '$192', '$576']);
+  await expect(page.locator('#plan-plus .plan-billing-note')).toHaveText('$384 billed annually');
+  await expect(page.locator('#plan-expert .plan-billing-note')).toHaveText(
+    '$2,304 billed annually',
+  );
+  await expect(page.locator('#plan-business .plan-billing-note')).toHaveText(
+    '$6,912 billed annually',
+  );
   await page.getByRole('button', { name: 'View a detailed comparison' }).click();
   await expect(page.getByRole('dialog', { name: 'Compare plans' })).toBeVisible();
-  await expect(page.getByRole('table')).toBeVisible();
+  await expect(page.getByRole('table')).toContainText('$32');
+  await expect(page.getByRole('table')).toContainText('$384');
   await page.keyboard.press('Escape');
+  await page.getByRole('radio', { name: 'Monthly', exact: true }).check();
+  await expect(page.locator('.price-amount')).toHaveText(['$0', '$40', '$240', '$720']);
   await page.getByRole('button', { name: 'View Plus', exact: true }).click();
-  await expect(page.getByRole('dialog', { name: 'PLUS plan' })).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'PLUS plan' })).toContainText('$40 / month');
 });
 
 for (const width of [1440, 390])
@@ -200,22 +207,20 @@ for (const width of [1440, 390])
     ).toEqual([]);
   });
 
-test('animated source runs, pauses and respects reduced motion', async ({ page }) => {
+test('supplied motion runs and stops for the device preference without a footer control', async ({
+  page,
+}) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.setViewportSize({ width: 1440, height: 1000 });
   await openLanding(page);
   const canvas = page.locator('.turquoise-flow canvas');
+  await canvas.scrollIntoViewIfNeeded();
   await expect(canvas).toBeVisible();
   const sample = () => canvas.evaluate((c: HTMLCanvasElement) => c.toDataURL());
   const before = await sample();
   await page.waitForTimeout(600);
   expect(await sample()).not.toEqual(before);
-  await page.getByRole('button', { name: 'Pause motion', exact: true }).click();
-  await page.evaluate(() => window.scrollTo(0, 480));
-  await page.waitForTimeout(250);
-  const paused = await sample();
-  await page.waitForTimeout(450);
-  expect(await sample()).toEqual(paused);
+  await expect(page.getByRole('button', { name: 'Pause motion', exact: true })).toHaveCount(0);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.waitForTimeout(250);
   const reduced = await sample();

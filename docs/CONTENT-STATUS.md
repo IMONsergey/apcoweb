@@ -6,7 +6,7 @@ This GitHub Pages website is a frontend review build. No authentication, API sub
 
 - Prices displayed: Free $0, Plus $40, Expert $240, Business $720.
 - Credits, user counts, product labels, metric values and organization marks are design content. They are not presented as newly measured live data.
-- Annual savings note and the monthly selection remain visible. Annual amounts are not calculated; the annual control explains the dependency and points to the current product.
+- R2 explicitly authorizes a 20% annual discount, calculated by native switching with an explicit annual total. See REVIEW-R2.md for the approved arithmetic.
 
 ## Routing
 
@@ -19,7 +19,7 @@ Verified from the current APCOSYS public frontend during implementation:
 
 ## Required before final publication
 
-- Confirm pricing periods, annual total and payment destinations. Plan cards currently open frontend information dialogs and transfer to the product.
+- Confirm payment destinations and final checkout integration. The annual arithmetic was authorized in R2; the preview still does not process payments.
 - Approve the remaining FAQ copy. The Free answer is from Figma. API and contact answers use the already stated API entitlement and provided email. Credit-consumption rules are not invented: the answer directs the visitor to the team.
 - Confirm the figures, rights/basis for the trust logos, and accuracy of product images. The Host/API images are illustrative source assets, not proof of implemented server functionality.
 - Replace remaining placeholders/examples in the fourth/fifth carousel cards when product-approved illustrations are available.

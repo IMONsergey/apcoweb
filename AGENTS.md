@@ -4,6 +4,8 @@ This is the React/TypeScript marketing website, not the authenticated SaaS appli
 
 ## Read first
 
+- docs/REVIEW-R2.md: latest owner-authorized visual changes and annual billing; this overrides earlier static-preview assumptions.
+
 - README.md: commands and deployment.
 - docs/DESIGN-CONTRACT.md: what must not change.
 - docs/CONTENT-STATUS.md: commercial and editorial inputs that remain provisional.

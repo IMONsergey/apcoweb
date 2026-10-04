@@ -50,7 +50,7 @@ export function Visual({
         <Suspense fallback={null}>
           {mounted &&
             (kind === 'flow' ? (
-              <Flow speed={0.75} strength={0.8} fps={24} resolution={160} paused={paused} />
+              <Flow speed={1} strength={1} fps={30} resolution={192} paused={paused} />
             ) : kind === 'waves' ? (
               <Waves speed={0.7} paused={paused} />
             ) : kind === 'globe' ? (

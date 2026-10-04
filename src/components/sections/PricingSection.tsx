@@ -3,10 +3,12 @@ import { plans, productUrl, supportEmail } from '../../content/site';
 import { DoubleButton } from '../ui/DoubleButton';
 import { Modal } from '../ui/Modal';
 import { Visual } from '../visuals/Visual';
+import { BillingSwitch } from '../ui/BillingSwitch';
+import { calculatePrice, formatPrice, type BillingPeriod } from '../../content/pricing';
 type Plan = (typeof plans)[number];
 export function PricingSection() {
   const [compare, setCompare] = useState(false);
-  const [annual, setAnnual] = useState(false);
+  const [period, setPeriod] = useState<BillingPeriod>('monthly');
   const [selected, setSelected] = useState<Plan | null>(null);
   return (
     <section className="pricing section-space" id="pricing" aria-labelledby="pricing-title">
@@ -26,23 +28,14 @@ export function PricingSection() {
               <br />
               and save 20%!
             </p>
-            <div className="segmented" role="group" aria-label="Billing period">
-              <button
-                type="button"
-                onClick={(event) => {
-                  event.currentTarget.focus();
-                  setAnnual(true);
-                }}
-                aria-pressed="false"
-              >
-                Annually
-              </button>
-              <button type="button" aria-pressed="true">
-                Monthly
-              </button>
-            </div>
+            <BillingSwitch value={period} onChange={setPeriod} />
           </div>
         </div>
+        <p className="sr-only" role="status" aria-live="polite">
+          {period === 'annually'
+            ? 'Annual billing selected. Displayed monthly prices include 20 percent savings. Annual totals are shown below.'
+            : 'Monthly billing selected.'}
+        </p>
         <div className="plan-grid">
           {plans.map((plan) => (
             <article
@@ -54,9 +47,21 @@ export function PricingSection() {
                 <h3>{plan.name}</h3>
                 <p className="plan-description">{plan.description}</p>
               </div>
-              <p className="plan-price">
-                <span className="sr-only">Price shown in the concept: </span>${plan.price}
-              </p>
+              <div className="plan-price-block">
+                <p className="plan-price">
+                  <span className="price-amount" key={period}>
+                    {formatPrice(calculatePrice(plan.price, period).monthly)}
+                  </span>
+                  {plan.price > 0 && <span className="price-unit">/mo</span>}
+                </p>
+                <p className="plan-billing-note">
+                  {plan.price > 0
+                    ? period === 'annually'
+                      ? `${formatPrice(calculatePrice(plan.price, period).total)} billed annually`
+                      : 'Billed monthly'
+                    : '\u00a0'}
+                </p>
+              </div>
               <dl>
                 <div>
                   <dt>Credits</dt>
@@ -132,9 +137,15 @@ export function PricingSection() {
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Price shown</th>
+                <th scope="row">Monthly price</th>
                 {plans.map((p) => (
-                  <td key={p.id}>${p.price}</td>
+                  <td key={p.id}>{formatPrice(calculatePrice(p.price, period).monthly)}</td>
+                ))}
+              </tr>
+              <tr>
+                <th scope="row">{period === 'annually' ? 'Billed annually' : 'Billed monthly'}</th>
+                {plans.map((p) => (
+                  <td key={p.id}>{formatPrice(calculatePrice(p.price, period).total)}</td>
                 ))}
               </tr>
               <tr>
@@ -164,13 +175,6 @@ export function PricingSection() {
         </p>
         <DoubleButton href={`${productUrl}/register`}>Continue in APCOSYS</DoubleButton>
       </Modal>
-      <Modal open={annual} onClose={() => setAnnual(false)} title="Annual billing">
-        <p>
-          See the current annual prices and billing terms in APCOSYS. This landing preview does not
-          calculate an unconfirmed annual payment.
-        </p>
-        <DoubleButton href={productUrl}>Open current plans</DoubleButton>
-      </Modal>
       <Modal
         open={selected !== null}
         onClose={() => setSelected(null)}
@@ -179,6 +183,14 @@ export function PricingSection() {
         {selected && (
           <>
             <p>{selected.description}</p>
+            <p className="selected-plan-price">
+              {formatPrice(calculatePrice(selected.price, period).monthly)} / month
+            </p>
+            <p className="modal-note">
+              {period === 'annually'
+                ? `${formatPrice(calculatePrice(selected.price, period).total)} billed annually · 20% savings`
+                : 'Billed monthly'}
+            </p>
             <dl className="plan-summary">
               <div>
                 <dt>Credits</dt>

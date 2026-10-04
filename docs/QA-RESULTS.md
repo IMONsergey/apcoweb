@@ -1,16 +1,9 @@
-# Local validation results
+# QA results — screenshot review R2
 
-Final run: 60/60 passed, zero failed, skipped or flaky tests.
+84/84 automated checks passed: 28 cases in each of Chromium, Firefox and WebKit. No skipped, unexpected or flaky results.
 
-- Chromium, Firefox and WebKit: 20 tests each.
-- Eleven viewport widths from 320 to 1920 px.
-- Lint, TypeScript and production build passed.
-- Automated axe scans at 1440 and 390 px found no violations in the configured WCAG A/AA checks. This is not a conformance certification.
-- Supplied rendering algorithms match the archive checksums.
-- npm audit --omit=dev: no reported vulnerabilities at the time of this run.
+Layout and asset checks cover 1920, 1600, 1440, 1366, 1280, 1024, 768, 430, 390, 360 and 320 px. Accessibility scans cover 1440 and 390 px. New cases verify the native annual discount, synchronized totals, single-row masked marquee, pause/reduced-motion behavior, live upper scene, enlarged contour clearance, metric typography, footer, and interrupted FAQ/dialog transitions.
 
-The test source is in tests/landing.spec.ts, numeric results in qa-summary.json, and representative captures in screenshots/.
+`npm ci`, the six-engine source verification, ESLint, TypeScript and the production build passed. The production build is tested, not only the Vite development server. A production-only backdrop-filter minification issue was found and corrected before release.
 
-A WebKit focus-restoration issue found during the first pass was fixed and the full suite rerun.
-
-Final service integration (billing, account creation and production API) is out of this frontend preview; search handoff is tested with an intercepted destination.
+Screenshots in `docs/screenshots/` show the tested build. These are browser-engine tests, not a guarantee for every physical device or a complete manual assistive-technology audit. No product payment/API transaction was performed.

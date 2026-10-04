@@ -3,6 +3,7 @@ import { media, navigation, productUrl } from '../content/site';
 import { DoubleButton } from './ui/DoubleButton';
 import { Icon } from './ui/Icon';
 import { Modal } from './ui/Modal';
+import { LanguageBadge } from './ui/LanguageBadge';
 export function Header() {
   const [active, setActive] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -48,13 +49,33 @@ export function Header() {
                   aria-expanded={active === group.label}
                   aria-controls={`nav-panel-${i}`}
                   onClick={() => setActive(active === group.label ? null : group.label)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'ArrowDown') {
+                      event.preventDefault();
+                      setActive(group.label);
+                      requestAnimationFrame(() =>
+                        document.querySelector<HTMLAnchorElement>(`#nav-panel-${i} a`)?.focus(),
+                      );
+                    }
+                  }}
                 >
                   {group.label}
                   <Icon name="chevron" />
                 </button>
-                <div id={`nav-panel-${i}`} className="nav-panel" hidden={active !== group.label}>
-                  {group.items.map((item) => (
-                    <a key={item.label} href={item.href} onClick={() => setActive(null)}>
+                <div
+                  id={`nav-panel-${i}`}
+                  className="nav-panel"
+                  data-open={active === group.label}
+                  aria-hidden={active !== group.label}
+                  inert={active !== group.label}
+                >
+                  {group.items.map((item, index) => (
+                    <a
+                      className={index === 0 ? 'nav-panel__default' : undefined}
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setActive(null)}
+                    >
                       {item.label}
                     </a>
                   ))}
@@ -66,9 +87,7 @@ export function Header() {
             </a>
           </nav>
           <div className="header-actions">
-            <span className="language" aria-label="Language: English">
-              EN
-            </span>
+            <LanguageBadge />
             <a href={`${productUrl}/search`} className="plain-button header-signin">
               Sign In
             </a>

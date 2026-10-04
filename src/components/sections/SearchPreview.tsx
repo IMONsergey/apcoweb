@@ -1,5 +1,7 @@
 import { useId, useState, type FormEvent } from 'react';
-import { media, metrics, productUrl, trustMarks } from '../../content/site';
+import { metrics, productUrl } from '../../content/site';
+import { SearchChrome } from './SearchChrome';
+import { TrustMarquee } from './TrustMarquee';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
 export function SearchForm({ className = '' }: { className?: string }) {
@@ -67,50 +69,24 @@ export function SearchPreview() {
         </dl>
       </div>
       <div className="container search-preview__inner">
-        <div className="search-scene" data-source="Figma 552:371 + saas mobile">
-          <picture>
-            <source media="(max-width: 340px)" srcSet={media('search-320.webp')} />
-            <source media="(max-width: 375px)" srcSet={media('search-360.webp')} />
-            <source media="(max-width: 410px)" srcSet={media('search-390.webp')} />
-            <source media="(max-width: 599px)" srcSet={media('search-430.webp')} />
-            <img
-              className="search-scene__image"
-              src={media('search-composite.webp')}
-              width="1916"
-              height="1252"
-              alt="APCOSYS search interface: One query. A closer look."
-              fetchPriority="high"
-              decoding="async"
-            />
-          </picture>
-          <div className="search-scene__haze" aria-hidden="true" />
+        <div className="search-scene" data-source="React chrome / original Handoff composition">
+          <SearchChrome />
+          <div className="search-chrome__fog" aria-hidden="true" />
+          <div className="search-scene__heading">
+            <h3>
+              <span className="search-title-desktop">One query. A closer look.</span>
+              <span className="search-title-mobile">
+                Search internet
+                <br />
+                infrastructure
+              </span>
+            </h3>
+            <p>Find hosts, services and networks.</p>
+          </div>
           <SearchForm />
         </div>
       </div>
-      <div className="container trust">
-        <p>
-          Trusted by
-          <br className="desktop-break" /> researchers and
-          <br className="desktop-break" /> organizations
-          <br className="desktop-break" /> worldwide
-        </p>
-        <ul aria-label="Organizations shown in the design">
-          {trustMarks.map(([file, name]) => (
-            <li key={file}>
-              <span className="trust-mark">
-                <img
-                  src={media(`${file}.svg`)}
-                  width="134"
-                  height="42"
-                  alt={name}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <TrustMarquee />
     </section>
   );
 }

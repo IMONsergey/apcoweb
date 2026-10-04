@@ -1,11 +1,9 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { MotionContext } from '../../hooks/useMotion';
+/** No global motion switch in the design; respect the device preference automatically. */
 export function MotionProvider({ children }: { children: ReactNode }) {
-  const [manualPause, setManualPause] = useState(false);
   const [reduced, setReduced] = useState(
-    () =>
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   );
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -13,11 +11,5 @@ export function MotionProvider({ children }: { children: ReactNode }) {
     query.addEventListener('change', onChange);
     return () => query.removeEventListener('change', onChange);
   }, []);
-  return (
-    <MotionContext
-      value={{ paused: manualPause || reduced, reduced, toggle: () => setManualPause((p) => !p) }}
-    >
-      {children}
-    </MotionContext>
-  );
+  return <MotionContext value={{ paused: reduced, reduced }}>{children}</MotionContext>;
 }
