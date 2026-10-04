@@ -1,3 +1,9 @@
+/* The supplied TurquoiseFlow and DotCascade own the backdrop. Layout wrappers must not paint over them. */
+.search-preview > .summary-wrap,
+.search-preview > .visual--flow {
+  background: none;
+}
+
 /* The complete scene is HTML/SVG over the supplied live Canvas background. No screen PNG. */
 .search-scene {
   position: relative;
