@@ -1,0 +1,25 @@
+{
+  "stats": {
+    "startTime": "2026-10-04T14:03:26.455Z",
+    "duration": 205061.99,
+    "expected": 60,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browsers": ["Chromium", "Firefox", "WebKit"],
+  "widths": [1920, 1600, 1440, 1366, 1280, 1024, 768, 430, 390, 360, 320],
+  "checks": [
+    "lint",
+    "TypeScript",
+    "production build",
+    "60 Playwright tests",
+    "axe automated scans 1440/390",
+    "motion / pause / reduced motion",
+    "supplied JS engine checksums"
+  ],
+  "limits": [
+    "Browser-engine automation, not physical-device certification",
+    "No production account creation, API or checkout performed"
+  ]
+}

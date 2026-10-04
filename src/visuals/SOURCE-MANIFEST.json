@@ -1,0 +1,112 @@
+[
+  {
+    "from": "block-second-bg/turquoise-flow/turquoise-flow.css",
+    "to": "src/visuals/flow/turquoise-flow.css",
+    "sha256": "c00e9879c77d93b381d7d4f3554525e8350b499fcca2c266699223f2d321ec1b"
+  },
+  {
+    "from": "block-second-bg/turquoise-flow/turquoise-flow.d.ts",
+    "to": "src/visuals/flow/turquoise-flow.d.ts",
+    "sha256": "ac9a2c3c331a7f4abd344343edd5b9e328ea7f5875bd69b73454060b77985d44"
+  },
+  {
+    "from": "block-second-bg/turquoise-flow/turquoise-flow.js",
+    "to": "src/visuals/flow/turquoise-flow.js",
+    "sha256": "eaa2b8dadb3307b3c2b39873a5076289632954da03819c6cc651d73364128ecc"
+  },
+  {
+    "from": "block-second-bg/turquoise-flow/TurquoiseFlow.tsx",
+    "to": "src/visuals/flow/TurquoiseFlow.tsx",
+    "sha256": "49c4f192e56140203df8033ffe1d9bd300d107d2a4d7a1a9a143842da5cf40cf"
+  },
+  {
+    "from": "Botom-waves-blocks/ice-sphere-waves-react/IceSphereWaves.tsx",
+    "to": "src/visuals/waves/IceSphereWaves.tsx",
+    "sha256": "5b0b766a74b4c37e001620563a4c4955954b11380ad665121fee24f01a4e995c"
+  },
+  {
+    "from": "Botom-waves-blocks/ice-sphere-waves-react/ice-sphere-waves.js",
+    "to": "src/visuals/waves/ice-sphere-waves.js",
+    "sha256": "753c71d369102d66f79498164cae549381ed42da59f543382580aa9af15d570d"
+  },
+  {
+    "from": "Botom-waves-blocks/ice-sphere-waves-react/ice-sphere-waves.css",
+    "to": "src/visuals/waves/ice-sphere-waves.css",
+    "sha256": "fd2965851ece7e1cbe8162171dda21545ed5af19721dc433240bb7a67e974332"
+  },
+  {
+    "from": "Botom-waves-blocks/ice-sphere-waves-react/ice-sphere-waves.d.ts",
+    "to": "src/visuals/waves/ice-sphere-waves.d.ts",
+    "sha256": "aa5675b51ec58d8965115fac1617ee7ab597f476b41040db908702cc00a15348"
+  },
+  {
+    "from": "signal-globe-react/signal-globe/land-data.js",
+    "to": "src/visuals/globe/land-data.js",
+    "sha256": "9ebf673b7b9257fe2f2d3e3ce218784281e807a475744a7ff8e32f4a4bcc3e08"
+  },
+  {
+    "from": "signal-globe-react/signal-globe/signal-globe.d.ts",
+    "to": "src/visuals/globe/signal-globe.d.ts",
+    "sha256": "ad36c55dd169d5e76fceae780d8e19718ae9497eb854e2eabe5cc608a2944c57"
+  },
+  {
+    "from": "signal-globe-react/signal-globe/signal-globe.css",
+    "to": "src/visuals/globe/signal-globe.css",
+    "sha256": "a9cfc4c2319d41f16287ed81dd876f804f9ac57d02d7ce765e0a06643e02c1e1"
+  },
+  {
+    "from": "signal-globe-react/signal-globe/signal-globe.js",
+    "to": "src/visuals/globe/signal-globe.js",
+    "sha256": "c9b3a320e97b1095dedcf5b32ac2c3cb82523874a38b04006fbabd710a844ed1"
+  },
+  {
+    "from": "signal-globe-react/signal-globe/SignalGlobe.tsx",
+    "to": "src/visuals/globe/SignalGlobe.tsx",
+    "sha256": "d6c82b8921ab9e67c12d0eca42939edd6c13b413265299b882b8a580a4d63afa"
+  },
+  {
+    "from": "dot-cascade-react/dot-cascade/dot-cascade.js",
+    "to": "src/visuals/dots/dot-cascade.js",
+    "sha256": "1ac6947120825af5fc8bedcdf1d44169bb96f17f6466ae6c91816df27c9c55fe"
+  },
+  {
+    "from": "dot-cascade-react/dot-cascade/dot-cascade.css",
+    "to": "src/visuals/dots/dot-cascade.css",
+    "sha256": "0b58adac544f5fbc9f7d58db0ca1a6db9e26c0cfcbb37dcd720c0cfbc946751e"
+  },
+  {
+    "from": "dot-cascade-react/dot-cascade/dot-cascade.d.ts",
+    "to": "src/visuals/dots/dot-cascade.d.ts",
+    "sha256": "4e824741de75ecde2f29f2cdbb6c3f7a8aa74a52700e676e82741cc759d38c32"
+  },
+  {
+    "from": "dot-cascade-react/dot-cascade/DotCascade.tsx",
+    "to": "src/visuals/dots/DotCascade.tsx",
+    "sha256": "cd352c09f6052da388752bd454caffade3fe7758210199a99fbc5b59c78a37b5"
+  },
+  {
+    "from": "clean-rings-react/clean-rings/animated-shapes.css",
+    "to": "src/visuals/shapes/animated-shapes.css",
+    "sha256": "95e8ff4f0321fc57ede6d1c8751b9f9ae0b82595d1c5d8600ce5439077870618"
+  },
+  {
+    "from": "clean-rings-react/clean-rings/AnimatedShape.tsx",
+    "to": "src/visuals/shapes/AnimatedShape.tsx",
+    "sha256": "1546a7640476808b1c03fc5c8e61cf0805d7c0f2e982be13c516f696cb377efe"
+  },
+  {
+    "from": "clean-rings-react/clean-rings/animated-shapes.d.ts",
+    "to": "src/visuals/shapes/animated-shapes.d.ts",
+    "sha256": "00e70ded67ea325da1646588e5c7ae32d3bbe3de2e682cc83eb3135522035268"
+  },
+  {
+    "from": "clean-rings-react/clean-rings/animated-shapes.js",
+    "to": "src/visuals/shapes/animated-shapes.js",
+    "sha256": "b45d6a0776796f864ccf60f514bf1020975af7dd18c40cff6f261c022a773e6f"
+  },
+  {
+    "from": "clean-rings-react/clean-rings/Rings.tsx",
+    "to": "src/visuals/shapes/Rings.tsx",
+    "sha256": "a251fd774cdaafce9a23dd2654948889f47b2cef013d0d05b6e1dbdf24be30ea"
+  }
+]
