@@ -2,14 +2,13 @@
 .billing-dock {
   display: none;
 }
-html[data-billing-dock='visible'] {
-  scroll-padding-bottom: var(--billing-dock-space, 112px);
-}
 @media (max-width: 1199px) {
   .billing--desktop {
     display: none;
   }
-  .pricing-options :is(button, a, input) {
+  /* Only document content needs scroll clearance; applying it to the fixed radios
+     can make keyboard focus try to scroll the panel itself out of its section. */
+  .pricing-options :is(.plan-grid, .comparison-action) :is(button, a, input) {
     scroll-margin-bottom: var(--billing-dock-space, 112px);
   }
   .billing-dock {

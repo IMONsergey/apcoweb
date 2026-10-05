@@ -157,8 +157,12 @@ test('visible dock is before the plan cards in natural Tab order', async ({
         requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
       }),
   );
+  const selectedRadio = page.getByRole('radio', { name: 'Monthly', exact: true });
+  await expect(selectedRadio).toHaveCSS('scroll-margin-bottom', '0px');
+  const beforeFocus = await page.evaluate(() => scrollY);
   await page.keyboard.press(previousItem);
-  await expect(page.getByRole('radio', { name: 'Monthly', exact: true })).toBeFocused();
+  await expect(selectedRadio).toBeFocused();
+  expect(Math.abs((await page.evaluate(() => scrollY)) - beforeFocus)).toBeLessThan(1);
   await page.keyboard.press('ArrowLeft');
   await expect(page.locator('#plan-plus .price-amount')).toHaveText('$32');
   await page.keyboard.press(nextItem);
