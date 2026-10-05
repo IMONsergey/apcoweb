@@ -10,6 +10,9 @@ import './styles/search-preview.css';
 import './styles/trust-marquee.css';
 import './styles/refinements.css';
 import './styles/micro-motion.css';
+import './styles/billing-dock.css';
+import './styles/interaction-feedback.css';
+import './styles/closing-action.css';
 
 const element = document.getElementById('root');
 if (!element) throw new Error('The application root was not found.');

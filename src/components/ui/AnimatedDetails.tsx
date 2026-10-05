@@ -16,7 +16,14 @@ export function AnimatedDetails({
   const running = useRef<Animation | null>(null);
   const expanded = useRef(initialOpen);
   const { reduced } = useMotion();
-  useEffect(() => () => running.current?.cancel(), []);
+  useEffect(() => {
+    const settleOnResize = () => running.current?.finish();
+    window.addEventListener('resize', settleOnResize);
+    return () => {
+      window.removeEventListener('resize', settleOnResize);
+      running.current?.cancel();
+    };
+  }, []);
   useEffect(() => {
     if (reduced) running.current?.finish();
   }, [reduced]);

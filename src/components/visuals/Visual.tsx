@@ -54,7 +54,14 @@ export function Visual({
             ) : kind === 'waves' ? (
               <Waves speed={0.7} paused={paused} />
             ) : kind === 'globe' ? (
-              <Globe speed={0.85} fps={30} pixelRatio={1.5} paused={paused} interactive={!paused} />
+              <Globe
+                renderer={paused ? 'canvas2d' : 'auto'}
+                speed={0.85}
+                fps={30}
+                pixelRatio={1.5}
+                paused={paused}
+                interactive={!paused}
+              />
             ) : kind === 'dots' ? (
               <Dots
                 overlay

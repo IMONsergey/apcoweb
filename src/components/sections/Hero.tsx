@@ -5,9 +5,8 @@ export function Hero() {
     <section className="hero" aria-labelledby="hero-title">
       <div className="container">
         <h1 id="hero-title">
-          Start with a query.
-          <br />
-          Follow what you find.
+          <span className="hero-title__line">Start with a query.</span>{' '}
+          <span className="hero-title__line">Follow what you find.</span>
         </h1>
         <div className="hero-bottom">
           <p className="lead">

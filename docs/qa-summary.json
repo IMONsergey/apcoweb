@@ -1,11 +1,14 @@
 {
-  "revision": "Screenshot review R2",
-  "date": "2026-10-04",
+  "revision": "R3 \u2014 contextual billing and interaction QA",
+  "date": "2026-10-05",
+  "sourceCommit": "78752537ba55e5c411e6604a40671f3714911cde",
+  "verificationRun": "https://github.com/IMONsergey/apcoweb/actions/runs/37264232626",
   "browsers": [
     "Chromium",
     "Firefox",
     "WebKit"
   ],
+  "checksPerBrowser": 55,
   "widths": [
     1920,
     1600,
@@ -19,19 +22,44 @@
     360,
     320
   ],
+  "dockWidths": [
+    320,
+    390,
+    430,
+    768,
+    1024,
+    1199
+  ],
+  "boundaryWidths": [
+    599,
+    600,
+    620,
+    699,
+    700,
+    1199,
+    1200
+  ],
   "stats": {
-    "startTime": "2026-10-04T15:07:16.698Z",
-    "duration": 287370.61199999996,
-    "expected": 84,
+    "startTime": "2026-10-05T04:37:35.573Z",
+    "duration": 197659.597,
+    "expected": 165,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
   },
-  "visualSource": "Supplied archive engines unchanged; HTML/SVG replaces upper preview bitmap",
-  "changes": "docs/REVIEW-R2.md",
+  "changes": "docs/REVIEW-R3.md",
+  "preserved": [
+    "Original split-button component",
+    "Approved pricing arithmetic and entitlements",
+    "All supplied source images",
+    "Six supplied rendering/data engines",
+    "Search background without added statistics gradient",
+    "Figma"
+  ],
   "limits": [
-    "Browser engine automation, not testing every physical device",
-    "Frontend prices do not initiate charges",
-    "Figma unchanged"
-  ]
+    "Browser-engine automation, not certification of all physical devices",
+    "Virtual viewport fixtures do not reproduce every physical keyboard",
+    "No authentication, checkout or paid product API request was performed"
+  ],
+  "productionVerification": "After the existing Pages deploy succeeds, run the Chromium suite with APCO_BASE_URL=https://imonsergey.github.io/apcoweb/; release status is recorded in the final PR report."
 }

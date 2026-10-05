@@ -24,3 +24,7 @@ React owns layout, semantic content, dialogs, navigation and motion preference. 
 The original module checksums are in `src/visuals/SOURCE-MANIFEST.json`. The small wrapper integration changes are listed in `docs/visual-source-verification.json`; rendering algorithms are preserved.
 
 See REVIEW-R2.md for the new marquee and interaction transitions.
+
+## R3 behavior
+
+The contextual billing panel is non-modal, stays in logical keyboard order before the plans, and is inert outside its pricing range. Reduced motion disables its translation and uses the supplied Canvas2D globe renderer to keep the stopped image visible. The renderer algorithms are unchanged. Hover media lift, search navigation feedback and focus feedback are scoped to user actions.
