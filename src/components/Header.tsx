@@ -6,11 +6,13 @@ import { DoubleButton } from './ui/DoubleButton';
 import { Icon } from './ui/Icon';
 import { Modal } from './ui/Modal';
 import { LanguageBadge } from './ui/LanguageBadge';
+import { useScrollHeader } from '../hooks/useScrollHeader';
 export function Header() {
   const { t } = useLocale();
   const [active, setActive] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const ref = useRef<HTMLElement>(null);
+  const { compact, hidden } = useScrollHeader(ref, !!active || mobileOpen);
   useEffect(() => {
     if (!active) return;
     const onPointer = (event: PointerEvent) => {
@@ -32,7 +34,15 @@ export function Header() {
   }, [active]);
   return (
     <>
-      <header className="site-header" ref={ref}>
+      <div className="header-spacer" aria-hidden="true" />
+      <header
+        className="site-header"
+        ref={ref}
+        data-compact={compact}
+        data-hidden={hidden}
+        aria-hidden={hidden || undefined}
+        inert={hidden}
+      >
         <div className="container header-row">
           <a className="brand" href="#top" aria-label={t('APCOSYS home')}>
             <img src={media('logo.svg')} width="134" height="26" alt="APCOSYS" />

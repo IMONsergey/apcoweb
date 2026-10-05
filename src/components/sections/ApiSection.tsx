@@ -1,9 +1,10 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
-import { media, productUrl } from '../../content/site';
+import { productUrl } from '../../content/site';
 import { DoubleButton } from '../ui/DoubleButton';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
+import { ApiIllustration } from '../visuals/ApiIllustration';
 export function ApiSection() {
   const { t } = useLocale();
   return (
@@ -29,16 +30,7 @@ export function ApiSection() {
           </DoubleButton>
         </div>
         <div className="api-visual">
-          <img
-            src={media('api-layers.webp')}
-            width="712"
-            height="554"
-            alt={t(
-              'Illustrative APCOSYS API documentation with a request and response. See the current documentation for the live API.',
-            )}
-            loading="lazy"
-            decoding="async"
-          />
+          <ApiIllustration />
         </div>
       </div>
     </section>

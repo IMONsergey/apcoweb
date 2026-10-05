@@ -914,8 +914,6 @@
 }
 .footer-columns a:hover {
   color: var(--action);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 .footer-bottom {
   display: flex;

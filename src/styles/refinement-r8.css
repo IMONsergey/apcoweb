@@ -1,0 +1,245 @@
+/* R8: small, useful feedback; stable reading geometry across EN and RU. */
+.header-spacer {
+  height: var(--header-height);
+}
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  width: 100%;
+  transform: translateY(0);
+  transition: transform 240ms var(--ease);
+}
+.site-header[data-compact='true'] {
+  --header-surface-height: 72px;
+  box-shadow: 0 1px 0 #12131408;
+}
+.site-header[data-hidden='true'] {
+  transform: translateY(calc(-100% - 1px));
+  pointer-events: none;
+}
+.header-row {
+  min-height: var(--header-surface-height, var(--header-height));
+}
+:root:has(.site-header[data-compact='true']) {
+  --anchor-header-height: 72px;
+}
+html {
+  scroll-padding-top: calc(var(--anchor-header-height, var(--header-height)) + 24px);
+}
+.language-panel {
+  min-width: 0;
+  width: max-content;
+}
+.language-panel button {
+  padding-inline: 10px 14px;
+}
+.audience-art .visual {
+  scale: 0.93;
+}
+.billing-dock__offer {
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+}
+.billing-dock__offer > span {
+  min-height: 0;
+}
+.comparison-action .double-button__label {
+  justify-content: flex-start;
+}
+.footer-columns a > .locale-text,
+.footer-email > strong {
+  position: relative;
+  display: inline-block;
+}
+.footer-columns a > .locale-text::after,
+.footer-email > strong::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 280ms var(--ease);
+}
+.footer-columns a:is(:hover, :focus-visible) > .locale-text::after,
+.footer-email:is(:hover, :focus-visible) > strong::after {
+  transform: scaleX(1);
+}
+.footer-columns a:focus-visible {
+  color: var(--action);
+}
+.double-button:active {
+  filter: brightness(0.97);
+}
+.double-button[data-locale-sized] .double-button__label {
+  flex: 1;
+}
+.search-free-note {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--action);
+}
+.search-form:has(.search-free-note) .search-error {
+  top: calc(100% + 36px);
+}
+/* The page wash never blocks interaction; optional fonts cannot hold it for over 220 ms. */
+#root::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 360ms ease-out;
+}
+:root[data-page-entering] #root::after {
+  opacity: 1;
+  transition: none;
+}
+.visual > div {
+  animation: atmosphere-in 420ms ease-out both;
+}
+@keyframes atmosphere-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.api-visual {
+  padding-bottom: 24px;
+}
+.api-demo-frame {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 2048 / 1511;
+  background: white;
+  pointer-events: none;
+}
+.api-demo-frame::before,
+.api-demo-frame::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background: #fff;
+  inset: 14px -14px -14px 14px;
+  opacity: 0.3;
+}
+.api-demo-frame::after {
+  inset: 24px -24px -24px 24px;
+  opacity: 0.14;
+}
+.api-demo-frame .api-demo-fallback,
+.api-demo-host {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 240ms ease;
+}
+.api-demo-frame .api-demo-fallback {
+  object-fit: contain;
+  opacity: 1;
+}
+.api-demo-host {
+  opacity: 0;
+  --api-font: var(--font-sans);
+  --api-mono: var(--font-mono);
+}
+.api-demo-frame[data-ready='true'] .api-demo-fallback {
+  opacity: 0;
+}
+.api-demo-frame[data-ready='true'] .api-demo-host {
+  opacity: 1;
+}
+.api-demo-host > api-developer-demo {
+  width: 100%;
+  display: block;
+}
+@media (min-width: 1600px) {
+  :root {
+    --text-body: clamp(18px, calc(18px + (100vw - 1600px) * 0.005), 20px);
+    --text-small: clamp(13px, calc(13px + (100vw - 1600px) * 0.005), 15px);
+    --text-control: clamp(14px, calc(14px + (100vw - 1600px) * 0.005), 16px);
+  }
+  .hero .lead {
+    font-size: clamp(20px, calc(20px + (100vw - 1600px) * 0.005), 22px);
+    line-height: 1.4;
+  }
+  .footer-columns li,
+  .plan-description,
+  .plan-card dl,
+  .billing > p {
+    font-size: var(--text-small);
+    line-height: 1.45;
+  }
+  .footer-columns .eyebrow,
+  .use-case-tags li {
+    font-size: 14px;
+  }
+  .plan-billing-note {
+    font-size: 14px;
+  }
+  .double-button,
+  .plan-button,
+  .price-unit {
+    font-size: var(--text-control);
+  }
+  .site-header .nav-trigger,
+  .site-header .plain-button,
+  .site-header .double-button {
+    font-size: 15px;
+  }
+  .footer-meta p,
+  .footer-email {
+    font-size: 15px;
+  }
+}
+@media (max-width: 599px) {
+  .site-header[data-compact='true'] {
+    --header-surface-height: 64px;
+  }
+  :root:has(.site-header[data-compact='true']) {
+    --anchor-header-height: 64px;
+  }
+  /* Show only the preserved brand/menu region, never the baked body under live copy. */
+  .closing-scene--compact > picture {
+    height: 54px;
+    overflow: hidden;
+  }
+  .closing-scene--compact > picture img {
+    height: auto;
+  }
+  .closing-scene--compact .closing-copy {
+    top: 132px;
+  }
+}
+@media (max-width: 340px) {
+  .closing-scene--compact .closing-copy {
+    top: 124px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  #root::after,
+  .api-demo-frame .api-demo-fallback,
+  .api-demo-host,
+  .footer-columns a > .locale-text::after,
+  .footer-email > strong::after {
+    transition: none;
+  }
+  .visual > div {
+    animation: none;
+  }
+}

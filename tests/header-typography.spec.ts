@@ -1,6 +1,7 @@
 import { test, expect, type Page, type Locator } from '@playwright/test';
 import { translate } from '../src/i18n/messages';
 import { typograph, noBreakNumber } from '../src/i18n/typography';
+import { revealHeader } from './helpers/locale';
 
 // Locator.click scrolls sticky controls towards the viewport center in the browser protocol.
 // Exercise an ordinary pointer click on the already visible header instead.
@@ -40,7 +41,7 @@ test('typography pipeline binds words, formats punctuation and preserves commerc
 });
 
 for (const width of [320, 390, 768, 1440]) {
-  test(`sticky header, anchor clearance and typographic reading at ${width}px`, async ({
+  test(`directional header, anchor clearance and typographic reading at ${width}px`, async ({
     page,
   }, info) => {
     await page.setViewportSize({ width, height: 900 });
@@ -53,7 +54,9 @@ for (const width of [320, 390, 768, 1440]) {
     await input.blur();
     const header = page.locator('.site-header');
     await page.locator('#api').scrollIntoViewIfNeeded();
-    await expect(header).toHaveCSS('position', 'sticky');
+    await expect(header).toHaveCSS('position', 'fixed');
+    await expect(header).toHaveAttribute('data-hidden', 'true');
+    await revealHeader(page);
     await expect.poll(() => header.evaluate((el) => el.getBoundingClientRect().top)).toBe(0);
     const position = await page.evaluate(() => scrollY);
     await selectInPlace(page, 'ru');
@@ -120,12 +123,13 @@ for (const width of [320, 390, 768, 1440]) {
       .poll(() =>
         page.evaluate(() => {
           const top = document.querySelector('#pricing')!.getBoundingClientRect().top;
-          const bottom = document.querySelector('.site-header')!.getBoundingClientRect().bottom;
-          return Math.abs(top - bottom - 24) < 1;
+          const inset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+          return Math.abs(top - inset) < 1;
         }),
       )
       .toBe(true);
     await expect(header).toHaveCSS('top', '0px');
+    await revealHeader(page);
     await selectInPlace(page, 'en');
     await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
@@ -134,6 +138,7 @@ for (const width of [320, 390, 768, 1440]) {
     if (width === 390 || width === 1440) {
       await page.locator('[data-language-selector]').click();
       await expect(page.getByRole('menuitemradio', { name: 'English', exact: true })).toBeVisible();
+      await expect(page.locator('.language-panel')).toHaveCSS('opacity', '1');
       await page.screenshot({ path: info.outputPath(`sticky-header-${width}.png`) });
     }
   });

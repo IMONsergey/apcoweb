@@ -1,5 +1,11 @@
 # Work state
 
+## Current continuation — R8, 2026-10-05
+
+R8 extends the published R7 main merge `d7bbda47e2162808ddf29cf9da8762f0c5aa52d2`. Read REVIEW-R8.md first. The requested refinements cover large-screen text, eight supplied screenshot issues, the supplied API demo, a compact directional header and stable locale geometry. R8 removes whole-section locale transforms; use native inline text with reserved EN/RU sizes. GSAP 3.13.0 is explicitly authorized for the uploaded API demo and must remain lazy. Prices, source artwork and six previous rendering/data modules are preserved. Release checks and the post-fix audit are recorded separately in REVIEW-R8.md and AUDIT-R8.md when complete.
+
+## Historical R6–R7 context
+
 Repository: IMONsergey/apcoweb. Current implementation: R6 quiet inline language dissolve, coordinated layout morph and circular menu flags. Read REVIEW-R6.md first; preserve all other released R5 interactions. Runtime/test source `d838f0266d4c6bad043c281f779e392edae6e5ac` passed **231/231** matching-browser scenarios, 77 per Chromium/Firefox/WebKit: 230 first-attempt passes and one successful WebKit frame-capture retry, with no remaining failures or skips: https://github.com/IMONsergey/apcoweb/actions/runs/37321058513. QA-RESULTS.md, qa-r6-summary.json and screenshots/r6/ retain the exact outcome.
 
 R6 delivery is PR #7: https://github.com/IMONsergey/apcoweb/pull/7. Its final release report records the exact main merge, Pages deployment and all 77 live Chromium checks. Preserve natural inline wrapping, hidden language handoff, shared layout morph, menu focus/viewport continuity, rapid reversals, reduced motion and unchanged form/billing state. Following documentation/evidence commits preserve the tested runtime and tests byte for byte.

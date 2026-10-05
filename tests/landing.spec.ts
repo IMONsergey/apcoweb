@@ -92,10 +92,10 @@ test('desktop disclosure menus, keyboard closing and local anchors', async ({ pa
   await page.getByRole('link', { name: 'See how it works', exact: true }).click();
   const anchor = await page.evaluate(() => ({
     top: document.getElementById('how-it-works')!.getBoundingClientRect().top,
-    headerBottom: document.querySelector('header')!.getBoundingClientRect().bottom,
+    inset: parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop),
   }));
-  expect(anchor.top).toBeGreaterThanOrEqual(anchor.headerBottom + 23);
-  expect(anchor.top).toBeLessThanOrEqual(anchor.headerBottom + 25);
+  expect(anchor.top).toBeGreaterThanOrEqual(anchor.inset - 1);
+  expect(anchor.top).toBeLessThanOrEqual(anchor.inset + 1);
 });
 
 test('mobile navigation scroll, dismissal, focus restoration', async ({ page }) => {
