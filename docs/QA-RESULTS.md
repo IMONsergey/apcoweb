@@ -1,23 +1,25 @@
-# QA results — R3 contextual billing
+# QA results — R4 mobile composition and EN/RU
 
-## Release candidate
+## Source and gates
 
-Source commit: `78752537ba55e5c411e6604a40671f3714911cde`.
+Final runtime/test source: `70d22b8f3dfb905f95135a14e445444a6d6a8a22`. PR #4 continues the already merged PR #3. The one code correction found by visual review is a narrow-tablet RU closing overlay extension; no assets, animation algorithms, prices, metric values or entitlements changed.
 
-[Cross-browser run](https://github.com/IMONsergey/apcoweb/actions/runs/37264232626): **165/165 passed**, 55 each in Chromium, Firefox and WebKit. No skipped, flaky or unexpected results. The run installed the browser revisions matching Playwright 1.63.0 in Ubuntu 24.04 and tested the production build.
+Locked install, six-engine checksum verification, ESLint, TypeScript, Prettier and production build pass. Local Chromium smoke passes **69/69** with no skipped, flaky or unexpected results; targeted R4 passes **14/14**. [Final cross-browser gate](https://github.com/IMONsergey/apcoweb/actions/runs/37282442712) uses the Chromium/Firefox/WebKit revisions matching locked Playwright 1.63.0. **207/207 passed**, 69 per browser, with no skipped, flaky or failed scenarios. The R4 subset is 14 per browser (42 cross-browser checks).
 
-`npm ci`, original-six-engine verification, ESLint, TypeScript, Prettier and the production build passed. Old, interrupted local runs and cached browser revisions are not counted as a release pass.
+The initial PR #3 source (`87fe41049f252b9a56697c2666bfab59b02e1417`) had already passed **204/204** in [run 37278235873](https://github.com/IMONsergey/apcoweb/actions/runs/37278235873), with zero flaky, skipped and unexpected results. [Pages run 37278769027](https://github.com/IMONsergey/apcoweb/actions/runs/37278769027) successfully published merge `3315c89985e635cb6dcf02536ce5dfb5539ca882`. Earlier Firefox subpixel assertion failures are superseded by that successful run.
 
-## Coverage
+## Visual review
 
-Layout/assets: 1920, 1600, 1440, 1366, 1280, 1024, 768, 430, 390, 360 and 320 px. Contextual billing: 320, 390, 430, 768, 1024 and 1199 px, the 1200 px desktop boundary and 844 × 390 landscape. Metric padding is additionally checked at 599/600/620/699/700/768/1199/1200 px.
+Real Pages browser captures cover **24 combinations**: EN/RU at 320, 360, 390, 430, 599, 768, 1024, 1199, 1200, 1440, 1600 and 1920 px. `screenshots/r4/capture-results.json` reports no runtime errors, missing images or measured overflow. The header, Cyrillic fonts, long copy, search input, split buttons, audience contours, mobile metric reading path/full-width globe, contextual billing dock, closing UI and uppercase footer headings were visually inspected.
 
-The dock has one shared billing state, no page scroll lock or autofocus, no inline duplicate below 1200 px, and no layout jump when switching. Tests cover entering/leaving pricing, reverse scrolling during its animation, leaving for the contact banner/FAQ, dialogs and focus restoration, text-input/keyboard/zoom suppression, and native radio Tab/arrow behavior. Hidden controls are inert.
+Visual review found a thin turquoise remnant of the prepared English CTA under the RU tablet closing overlay. The corrected local production screenshots at 600/768/899 px show it fully covered. A new regression verifies the original CTA region is covered at 600, 768, 899, 900, 1024, 1199, 1200, 1440 and 1920 px. Root screenshots retain the before-fix release; `screenshots/r4/fix/` records the correction. See the screenshot README for provenance.
 
-Other regressions cover rapid carousel input and Home/End, scrollbar-aware card sizing, query clearing and trimmed submission, restored submit feedback after browser history navigation, exact closing CTA hit areas, persistent reduced-motion globe rendering, flexible FAQ, and numeric fit. Existing background, marquee, calculation, asset, accessibility and interaction checks remain enabled.
+## Functional scope
 
-## Visual review and publication
+The suite retains R3 billing visibility, keyboard/focus/zoom/modal suppression, radio behavior, 20% annual arithmetic, carousel, search handoff, active/reduced motion, accessibility and source-artwork regressions. R4 adds compact mobile geometry, data reading order, native EN/RU selection, URL precedence, persistence, preserved query/billing/hash state, localized accessibility and prepared-CTA coverage. FAQ open/closed state and title were additionally checked through EN → RU → EN at 390 and 1440 px.
 
-`docs/screenshots/r3/` contains release-review captures. The existing Actions workflow validates and deploys main. Post-publication checks are run separately against the actual Pages URL using `APCO_BASE_URL`, and are recorded in the release report.
+## Publication and limits
 
-These checks are not a claim that all possible bugs are eliminated or every physical iOS/Android device was tested. Keyboard/zoom fixtures are controlled browser tests. Product authentication and paid transactions were not exercised. Figma, content entitlements and the six supplied rendering/data engines are unchanged.
+A successful main Pages deployment and the Chromium suite against the actual Pages URL are required after merge. The final PR release report identifies that deployment and production smoke. Documentation-only follow-up commits must leave the tested runtime/test source unchanged.
+
+RU is working localization, not client-approved marketing copy. Prepared product illustrations retain embedded English UI. Browser-engine automation does not certify every physical iOS/Android device or keyboard. Product authentication, checkout and paid API requests were not exercised; the existing review deployment remains noindex. Figma and all six supplied rendering/data modules are unchanged.

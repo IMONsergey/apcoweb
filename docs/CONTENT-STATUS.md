@@ -26,3 +26,7 @@ Verified from the current APCOSYS public frontend during implementation:
 - Approve remaining outbound destinations and remove `noindex` only when launching the final production site.
 
 The site makes no background product API calls, collects no credentials and has no analytics/cookies added by this implementation. Clicking a product link or submitting search transfers the visitor to the existing APCOSYS domain.
+
+## R4 localization
+
+EN/RU selection localizes the landing UI, metadata and accessibility labels. RU copy is a working translation of the existing English content, not client-approved marketing copy. Technical product names and the prepared illustrative product images remain intact; English labels baked into desktop/tablet illustrations are not claims that the landing selector controls the external product. Confirm the Russian editorial copy before a production-domain launch.

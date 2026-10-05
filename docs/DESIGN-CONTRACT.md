@@ -5,7 +5,7 @@
 - Instrument Sans for UI/editorial content; IBM Plex Mono for data and technical labels.
 - Light surfaces, the turquoise identity, generous typography and the original split buttons.
 - The search composition "One query. A closer look." with its original embedded interface, progressive blur and haze. The readable search input is a real HTML form positioned on that scene.
-- Prepared `saas mobile` Search/Start images. The final insertion is an original screen with a single accessible CTA link on the visible button. It is an illustration, not a fake live dashboard.
+- Prepared `saas mobile` Start images remain unchanged. R4 permits a compact phone composition over the Start asset and translated editorial overlays; the CTA is always a real single accessible link. The upper search scene remains live React with the supplied background/point renderers, never a baked screenshot.
 - Original Figma illustrations for Query/Results/Host and API. Existing crop transforms are baked into appropriately sized WebP assets; images are never stretched.
 
 ## Responsive layout
@@ -24,3 +24,7 @@
 ## Implementation improvements
 
 The Figma frames were not treated as immutable fixed pixel coordinates. Browser-specific overflow, image sizing and text wrapping are corrected in CSS while retaining the composition. White text uses the darker existing action turquoise when necessary for contrast; decorative brand color remains separate.
+
+## R4 extension
+
+At <=599 px, preserve the compact search wording, 16 px input and hidden decorative filters; both audience actions use the existing split-button construction. The mobile data order is IPv4/IPv6, Domains left, one-card-height opening over the full-width globe, Detected Products right, CVEs/Protocols, then actions. Footer headings use presentation-only uppercase. The EN/RU selector preserves billing, query and fragment state, and URL language overrides storage. REVIEW-R4.md records the working-localization boundary and release QA.

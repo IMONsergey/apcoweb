@@ -166,3 +166,37 @@ test('localized mobile page remains accessible', async ({ page }) => {
     results.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
   ).toEqual([]);
 });
+
+test('RU closing copy fully covers the prepared English CTA on tablet and desktop', async ({
+  page,
+}) => {
+  await page.goto('./?lang=ru', { waitUntil: 'networkidle' });
+  for (const [width, x, y, w, h] of [
+    [600, 0.415, 0.6275, 0.273, 0.047],
+    [768, 0.415, 0.6275, 0.273, 0.047],
+    [899, 0.415, 0.6275, 0.273, 0.047],
+    [900, 0.436, 0.686, 0.204, 0.062],
+    [1024, 0.436, 0.686, 0.204, 0.062],
+    [1199, 0.436, 0.686, 0.204, 0.062],
+    [1200, 0.45, 0.66215, 0.1456, 0.0473],
+    [1440, 0.45, 0.66215, 0.1456, 0.0473],
+    [1920, 0.45, 0.66215, 0.1456, 0.0473],
+  ]) {
+    await page.setViewportSize({ width, height: 1000 });
+    const scene = page.locator('.closing-scene');
+    await scene.scrollIntoViewIfNeeded();
+    await page.evaluate(() => document.fonts.ready);
+    const art = (await scene.boundingBox())!;
+    const copy = scene.locator('.closing-copy--translated');
+    await expect(copy).toBeVisible();
+    const cover = (await copy.boundingBox())!;
+    // Coordinates are the visible CTA in each unchanged source image, verified in R3.
+    expect(cover.x).toBeLessThanOrEqual(art.x + art.width * x);
+    expect(cover.x + cover.width).toBeGreaterThanOrEqual(art.x + art.width * (x + w));
+    expect(cover.y).toBeLessThanOrEqual(art.y + art.height * (y - h / 2));
+    expect(cover.y + cover.height).toBeGreaterThan(art.y + art.height * (y + h / 2) + 1);
+    const action = copy.getByRole('link', { name: 'Попробовать поиск', exact: true });
+    await expect(action).toHaveAttribute('href', 'https://apcosys.net/search');
+    await expect(action).toBeVisible();
+  }
+});
