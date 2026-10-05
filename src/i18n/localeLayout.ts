@@ -16,7 +16,7 @@ export function warmLocaleFonts() {
 const blocks = 'main h1, main h2, main h3, main p, main summary, footer .eyebrow';
 const sections = 'main section';
 const navText = '.site-header .nav-trigger > .locale-text';
-const controls = '.double-button';
+const controls = '.double-button, .header-signin';
 const excluded = '[aria-hidden="true"], .sr-only, dialog:not([open]), .visual';
 
 /** Measure the alternate copy once per width, then retain native, untransformed text boxes. */

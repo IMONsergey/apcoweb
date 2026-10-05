@@ -12,7 +12,7 @@ export async function revealHeader(page: Page) {
       })
       .toBe(true);
     const viewport = page.viewportSize()!;
-    await page.mouse.move(viewport.width - 10, viewport.height / 2);
+    await page.mouse.move(8, viewport.height / 2);
     await page.mouse.wheel(0, -80);
     await expect(header).toHaveAttribute('data-hidden', 'false');
   }

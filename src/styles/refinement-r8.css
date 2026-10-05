@@ -33,6 +33,37 @@ html {
 .language-panel button {
   padding-inline: 10px 14px;
 }
+.language-control .language {
+  width: 80px;
+}
+@media (min-width: 1200px) {
+  .site .site-header .header-row {
+    gap: 16px;
+  }
+  .site .site-header .desktop-nav {
+    gap: 12px;
+  }
+  .site .site-header .nav-trigger {
+    padding-inline: 10px;
+  }
+  .site .site-header .header-signin {
+    padding-inline: 14px;
+  }
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .site .site-header .desktop-nav {
+    gap: 4px;
+  }
+  .site .site-header .nav-trigger {
+    padding-inline: 6px;
+  }
+  .site .site-header .header-signin {
+    padding-inline: 12px;
+  }
+  .site .site-header .header-signup {
+    font-size: 13px;
+  }
+}
 .audience-art .visual {
   scale: 0.93;
 }

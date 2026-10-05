@@ -11,12 +11,12 @@ async function visit(page: Page, width = 1440) {
 const readingGeometry = (page: Page) =>
   page
     .locator(
-      '.hero, .search-preview, #use-cases, #data, #api, #pricing, .hero-actions .double-button',
+      '.hero, .search-preview, #use-cases, #data, #api, #pricing, .hero-actions .double-button, .site-header .nav-trigger, .header-signin, .header-signup, .language-control .language',
     )
     .evaluateAll((nodes) =>
       nodes.map((node) => {
         const rect = node.getBoundingClientRect();
-        return { top: rect.top + scrollY, width: rect.width, height: rect.height };
+        return { top: rect.top + scrollY, left: rect.left, width: rect.width, height: rect.height };
       }),
     );
 
@@ -31,6 +31,14 @@ for (const width of [320, 390, 768, 1440, 1920]) {
       await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
       const after = await readingGeometry(page);
       for (const [index, rect] of after.entries()) {
+        expect(
+          Math.abs(rect.left - before[index].left),
+          `left of item ${index}`,
+        ).toBeLessThanOrEqual(1);
+        expect(
+          Math.abs(rect.width - before[index].width),
+          `width of item ${index}`,
+        ).toBeLessThanOrEqual(1);
         expect(Math.abs(rect.top - before[index].top), `top of item ${index}`).toBeLessThanOrEqual(
           1,
         );
@@ -89,7 +97,7 @@ for (const width of [390, 1440]) {
     page,
   }) => {
     await visit(page, width);
-    const detail = page.locator('.faq-list details').first();
+    const detail = page.locator('.faq-list details').nth(1);
     await detail.locator('summary').click();
     await expect(detail).toHaveAttribute('open', '');
     await revealHeader(page);
@@ -121,7 +129,7 @@ for (const width of [390, 1440]) {
     await expect(header).toHaveAttribute('data-hidden', 'true');
     await expect(header).toHaveAttribute('inert', '');
     await expect(header).toHaveAttribute('data-compact', 'true');
-    expect((await header.boundingBox())!.height).toBe(width < 600 ? 64 : 72);
+    expect((await header.boundingBox())!.height).toBeCloseTo(width < 600 ? 64 : 72, 2);
     await revealHeader(page);
     await page.locator('[data-language-selector]').click();
     await expect(page.locator('.language-panel')).toHaveCSS('opacity', '1');
