@@ -10,7 +10,7 @@ import {
 import { flushSync } from 'react-dom';
 import { LocaleContext } from './context';
 import { translate, type Locale } from './messages';
-import { transitionLocaleText } from './textTransition';
+import { transitionLocaleText, type StopLocaleTransition } from './textTransition';
 const preferenceKey = 'apcosys.landing.language';
 const productPreferenceKey = 'i18nextLng';
 const valid = (value: unknown): value is Locale => value === 'en' || value === 'ru';
@@ -28,24 +28,26 @@ function readLocale(): Locale {
 /** Changing locale keeps pricing, query and expanded-content state mounted. */
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, update] = useState<Locale>(readLocale);
-  const stopTransition = useRef<() => void>(() => undefined);
-  const setLocale = useCallback(
-    (next: Locale) => {
-      if (next === locale) return;
-      stopTransition.current();
-      stopTransition.current = transitionLocaleText(() => flushSync(() => update(next)), next);
-      try {
-        localStorage.setItem(preferenceKey, next);
-        localStorage.setItem(productPreferenceKey, next);
-      } catch {
-        /* Preference persistence is optional. */
-      }
-      const url = new URL(window.location.href);
-      url.searchParams.set('lang', next);
-      history.replaceState(history.state, '', url);
-    },
-    [locale],
-  );
+  const requestedLocale = useRef(locale);
+  const stopTransition = useRef<StopLocaleTransition>(() => undefined);
+  const setLocale = useCallback((next: Locale) => {
+    if (next === requestedLocale.current) return;
+    requestedLocale.current = next;
+    stopTransition.current = transitionLocaleText(
+      () => flushSync(() => update(next)),
+      next,
+      () => stopTransition.current(false),
+    );
+    try {
+      localStorage.setItem(preferenceKey, next);
+      localStorage.setItem(productPreferenceKey, next);
+    } catch {
+      /* Preference persistence is optional. */
+    }
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', next);
+    history.replaceState(history.state, '', url);
+  }, []);
   useLayoutEffect(() => {
     document.documentElement.lang = locale;
     document.title =
@@ -58,14 +60,19 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     };
     motion.addEventListener('change', stopMotion);
     document.addEventListener('visibilitychange', stopMotion);
-    const sync = () => update(readLocale());
+    const sync = () => {
+      stopTransition.current(false);
+      const next = readLocale();
+      requestedLocale.current = next;
+      update(next);
+    };
     const stored = (event: StorageEvent) => {
       if (event.key === preferenceKey) sync();
     };
     window.addEventListener('popstate', sync);
     window.addEventListener('storage', stored);
     return () => {
-      stopTransition.current();
+      stopTransition.current(false);
       motion.removeEventListener('change', stopMotion);
       document.removeEventListener('visibilitychange', stopMotion);
       window.removeEventListener('popstate', sync);

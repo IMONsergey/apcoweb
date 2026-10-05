@@ -39,7 +39,9 @@
   right: 0;
 }
 .language-panel button {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   width: 100%;
   min-height: 44px;
   padding: 10px;
@@ -51,6 +53,9 @@
   text-align: left;
   white-space: nowrap;
   transition: background-color 180ms var(--ease);
+}
+.language-flag {
+  flex: 0 0 16px;
 }
 .language-panel button:lang(ru) {
   font-family: 'Inter', Arial, sans-serif;

@@ -2,15 +2,6 @@
 .locale-text--lines {
   white-space: pre-line;
 }
-.locale-text-ghost {
-  position: fixed;
-  z-index: 60;
-  display: block;
-  margin: 0;
-  padding: 0;
-  pointer-events: none;
-  user-select: none;
-}
 .price-amount {
   animation: none;
   font-variant-numeric: tabular-nums;
@@ -38,9 +29,4 @@
 .price-symbol::before,
 .price-digit__reel > span::before {
   content: attr(data-numeral);
-}
-@media (prefers-reduced-motion: reduce) {
-  .locale-text-ghost {
-    display: none;
-  }
 }

@@ -1,154 +1,97 @@
 import type { Locale } from './messages';
 
-/** Text dissolves in place, with no movement, blur or overlapping translations. */
-export function transitionLocaleText(commit: () => void, next: Locale) {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches || document.hidden) {
+export type StopLocaleTransition = (finish?: boolean) => void;
+
+/** Fade real inline text in place; switch wording only while it is invisible. */
+export function transitionLocaleText(
+  commit: () => void,
+  next: Locale,
+  cancelPrevious: () => void,
+): StopLocaleTransition {
+  const visibleText = () =>
+    Array.from(document.querySelectorAll<HTMLElement>('.locale-text')).filter((node) => {
+      const rect = node.getBoundingClientRect();
+      return (
+        rect.width > 0 &&
+        rect.height > 0 &&
+        rect.bottom > 0 &&
+        rect.top < innerHeight &&
+        getComputedStyle(node).visibility === 'visible' &&
+        !node.closest('[inert], [aria-hidden="true"], .sr-only')
+      );
+    });
+  // Read the current fade before cancelling it, so a quick reversal never flashes to full opacity.
+  const before = visibleText().map((node) => ({
+    node,
+    opacity: Number(getComputedStyle(node).opacity),
+  }));
+  cancelPrevious();
+  if (!before.length || matchMedia('(prefers-reduced-motion: reduce)').matches || document.hidden) {
     commit();
     return () => undefined;
   }
-  const before = Array.from(document.querySelectorAll<HTMLElement>('.locale-text')).flatMap(
-    (node) => {
-      const rect = node.getBoundingClientRect();
-      const style = getComputedStyle(node);
-      if (
-        !rect.width ||
-        !rect.height ||
-        rect.bottom <= 0 ||
-        rect.top >= innerHeight ||
-        style.visibility !== 'visible' ||
-        node.closest('[inert], [aria-hidden="true"], .sr-only')
-      )
-        return [];
-      const range = document.createRange();
-      range.selectNodeContents(node);
-      const textRect = range.getClientRects()[0];
-      let container = node;
-      if (style.display === 'inline') {
-        container = node.parentElement ?? node;
-        while (
-          container.parentElement &&
-          ['inline', 'contents'].includes(getComputedStyle(container).display)
-        )
-          container = container.parentElement;
-      }
-      const containerRect = container.getBoundingClientRect();
-      const containerStyle = getComputedStyle(container);
-      const insetLeft =
-        parseFloat(containerStyle.borderLeftWidth) + parseFloat(containerStyle.paddingLeft);
-      const insetRight =
-        parseFloat(containerStyle.borderRightWidth) + parseFloat(containerStyle.paddingRight);
-      const left = containerRect.left + insetLeft;
-      return [
-        {
-          node,
-          rect,
-          textRect,
-          left,
-          width: containerRect.width - insetLeft - insetRight,
-          // A translated span may start halfway through a line (inside a mark, for example).
-          // Preserve that first-line space as well as the complete wrapping container.
-          textIndent:
-            textRect && ['left', 'start'].includes(style.textAlign)
-              ? `${textRect.left - left}px`
-              : style.textIndent,
-          text: node.textContent,
-          lang: document.documentElement.lang,
-          font: style.font,
-          fontFamily: style.fontFamily,
-          fontSize: style.fontSize,
-          fontWeight: style.fontWeight,
-          lineHeight: style.lineHeight,
-          textWrap: style.textWrap,
-          letterSpacing: style.letterSpacing,
-          textTransform: style.textTransform,
-          textAlign: style.textAlign,
-          whiteSpace: style.whiteSpace,
-          color: style.color,
-        },
-      ];
-    },
-  );
   const root = document.documentElement;
-  const scrollPosition = { left: scrollX, top: scrollY };
   const scrollAnchoring = root.style.overflowAnchor;
-  // A longer translation must not move the viewport while outgoing text stays in place.
   root.style.overflowAnchor = 'none';
-  commit();
-  root.getBoundingClientRect();
-  window.scrollTo({ ...scrollPosition, behavior: 'instant' });
-  const ghosts: HTMLElement[] = [];
+  root.dataset.localeTransition = next;
   const animations: Animation[] = [];
-  // One shared timeline: quietly dissolve the old copy, then reveal the new one.
-  // The zero-opacity handoff prevents differently wrapped languages doubling up.
-  const handoff = 140 / 440;
-  const timing = { duration: 440, easing: 'linear' };
-  const easing = 'cubic-bezier(0.4, 0, 0.2, 1)';
-  for (const snapshot of before) {
-    const { node, rect, textRect, left, width, text, lang, ...typography } = snapshot;
-    if (!node.isConnected || node.textContent === text) continue;
-    const ghost = document.createElement('span');
-    ghost.className = 'locale-text-ghost';
-    ghost.setAttribute('aria-hidden', 'true');
-    ghost.inert = true;
-    ghost.lang = lang;
-    ghost.textContent = text;
-    Object.assign(ghost.style, typography, {
-      left: `${left}px`,
-      top: `${rect.top}px`,
-      width: `${width}px`,
-    });
-    document.body.append(ghost);
-    // Inline font bounds differ from a block's line box (especially large titles).
-    // Match actual text-line positions so the outgoing copy cannot jump at creation.
-    const range = document.createRange();
-    range.selectNodeContents(ghost);
-    const copyRect = range.getClientRects()[0];
-    if (textRect && copyRect) {
-      ghost.style.left = `${left + textRect.left - copyRect.left}px`;
-      ghost.style.top = `${rect.top + textRect.top - copyRect.top}px`;
-    }
-    ghosts.push(ghost);
-    animations.push(
-      ghost.animate(
-        [
-          { opacity: 1, offset: 0, easing },
-          { opacity: 0, offset: handoff },
-          { opacity: 0, offset: 1 },
-        ],
-        { ...timing, fill: 'forwards' },
-      ),
-    );
-    animations.push(
-      node.animate(
-        [
-          { opacity: 0, offset: 0 },
-          { opacity: 0, offset: handoff, easing },
-          { opacity: 1, offset: 1 },
-        ],
-        { ...timing, fill: 'backwards' },
-      ),
-    );
-  }
-  if (animations.length) document.documentElement.dataset.localeTransition = next;
   let stopped = false;
-  const stop = () => {
+  let committed = false;
+  const commitInPlace = () => {
+    if (committed) return;
+    committed = true;
+    const position = { left: scrollX, top: scrollY };
+    commit();
+    root.getBoundingClientRect();
+    window.scrollTo({ ...position, behavior: 'instant' });
+  };
+  const stop: StopLocaleTransition = (finish = true) => {
     if (stopped) return;
     stopped = true;
+    if (finish) commitInPlace();
     animations.forEach((animation) => animation.cancel());
-    ghosts.forEach((ghost) => ghost.remove());
     root.style.overflowAnchor = scrollAnchoring;
-    delete document.documentElement.dataset.localeTransition;
-    window.removeEventListener('wheel', stop);
-    window.removeEventListener('touchmove', stop);
-    window.removeEventListener('resize', stop);
+    delete root.dataset.localeTransition;
+    window.removeEventListener('wheel', finishNow);
+    window.removeEventListener('touchmove', finishNow);
+    window.removeEventListener('resize', finishNow);
   };
-  // Translation/font reflow can deliver a queued scroll event after commit. Only an
-  // intentional gesture cancels these outgoing copies; native reflow must not erase the swap.
-  window.addEventListener('wheel', stop, { passive: true });
-  window.addEventListener('touchmove', stop, { passive: true });
-  window.addEventListener('resize', stop);
-  void Promise.all(animations.map((animation) => animation.finished.catch(() => undefined))).then(
-    stop,
-  );
+  const finishNow = () => stop();
+  const fade = (node: HTMLElement, from: number, to: number, duration: number) => {
+    const animation = node.animate([{ opacity: from }, { opacity: to }], {
+      duration,
+      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      fill: 'both',
+    });
+    animation.id = to === 0 ? 'locale-text-out' : 'locale-text-in';
+    animations.push(animation);
+    return animation;
+  };
+  const finished = (group: Animation[]) =>
+    Promise.all(group.map((animation) => animation.finished.catch(() => undefined)));
+  window.addEventListener('wheel', finishNow, { passive: true });
+  window.addEventListener('touchmove', finishNow, { passive: true });
+  window.addEventListener('resize', finishNow);
+
+  if (root.lang === next) {
+    // The user returned to the still-visible language before the other one committed.
+    // Reveal that text from its current opacity rather than completing the cancelled swap.
+    commitInPlace();
+    void finished(before.map(({ node, opacity }) => fade(node, opacity, 1, 300))).then(() =>
+      stop(),
+    );
+  } else {
+    const outgoing = before.map(({ node, opacity }) => fade(node, opacity, 0, 140));
+    void finished(outgoing).then(async () => {
+      if (stopped) return;
+      commitInPlace();
+      // A newly used Cyrillic font must finish loading while the wording is still invisible.
+      await document.fonts.ready;
+      if (stopped) return;
+      const incoming = visibleText().map((node) => fade(node, 0, 1, 300));
+      outgoing.forEach((animation) => animation.cancel());
+      void finished(incoming).then(() => stop());
+    });
+  }
   return stop;
 }

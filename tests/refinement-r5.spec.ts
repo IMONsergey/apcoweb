@@ -81,6 +81,124 @@ test('language menu keyboard selection, dismissal and mobile bounds', async ({ p
   }
 });
 
+// Capture/freeze the application's own opacity timeline in the selection click turn.
+const freezeLocaleSelection = (page: Page, locale: 'en' | 'ru') =>
+  page.evaluate((locale) => {
+    const remember = (event: MouseEvent) => {
+      if (
+        !(event.target instanceof Element) ||
+        !event.target.closest(`.language-panel button[lang="${locale}"]`)
+      )
+        return;
+      Reflect.set(window, 'r6ScrollBefore', scrollY);
+      Reflect.set(
+        window,
+        'r6OriginalLines',
+        Array.from(document.querySelectorAll('.locale-text')).map((node) => {
+          const range = document.createRange();
+          range.selectNodeContents(node);
+          return {
+            node,
+            text: node.textContent,
+            lines: Array.from(range.getClientRects()).map((rect) => [
+              rect.x,
+              rect.y,
+              rect.width,
+              rect.height,
+            ]),
+          };
+        }),
+      );
+    };
+    const freeze = (event: MouseEvent) => {
+      if (
+        !(event.target instanceof Element) ||
+        !event.target.closest(`.language-panel button[lang="${locale}"]`)
+      )
+        return;
+      document.removeEventListener('click', remember, true);
+      document.removeEventListener('click', freeze);
+      document
+        .getAnimations()
+        .filter((animation) => animation.id === 'locale-text-out')
+        .forEach((animation) => {
+          animation.pause();
+          animation.currentTime = 0;
+        });
+    };
+    document.addEventListener('click', remember, true);
+    document.addEventListener('click', freeze);
+  }, locale);
+
+const sampleLocaleFade = (page: Page, time: number) =>
+  page.evaluate((time) => {
+    const animations = document
+      .getAnimations()
+      .filter((animation) => animation.id.startsWith('locale-text-'));
+    animations.forEach((animation) => (animation.currentTime = time));
+    const originals = Reflect.get(window, 'r6OriginalLines') as {
+      node: HTMLElement;
+      text: string;
+      lines: number[][];
+    }[];
+    return animations.map((animation) => {
+      const effect = animation.effect as KeyframeEffect;
+      const node = effect.target as HTMLElement;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      const style = getComputedStyle(node);
+      return {
+        phase: animation.id,
+        text: node.textContent,
+        original: originals
+          .filter((original) => original.node === node)
+          .map(({ text, lines }) => ({ text, lines }))[0],
+        lines: Array.from(range.getClientRects()).map((rect) => [
+          rect.x,
+          rect.y,
+          rect.width,
+          rect.height,
+        ]),
+        opacity: Number(style.opacity),
+        transform: style.transform,
+        filter: style.filter,
+        delay: effect.getTiming().delay,
+        opacityOnly: effect
+          .getKeyframes()
+          .every((frame) => frame.transform === undefined && frame.filter === undefined),
+      };
+    });
+  }, time);
+
+const finishOutgoing = (page: Page) =>
+  page.evaluate(async () => {
+    const outgoing = document
+      .getAnimations()
+      .filter((animation) => animation.id === 'locale-text-out');
+    const finished = Promise.all(outgoing.map((animation) => animation.finished));
+    outgoing.forEach((animation) => animation.finish());
+    await finished;
+    // Let the application's completion microtasks perform the hidden handoff before the next paint.
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    await document.fonts.ready;
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    const incoming = document
+      .getAnimations()
+      .filter((animation) => animation.id === 'locale-text-in');
+    incoming.forEach((animation) => {
+      animation.pause();
+      animation.currentTime = 0;
+    });
+    return incoming.length;
+  });
+const resumeLocale = (page: Page) =>
+  page.evaluate(() =>
+    document
+      .getAnimations()
+      .filter((animation) => animation.id.startsWith('locale-text-'))
+      .forEach((animation) => animation.play()),
+  );
+
 test('locale text dissolves, rapid changes settle, and form state stays mounted', async ({
   page,
 }, info) => {
@@ -92,87 +210,55 @@ test('locale text dissolves, rapid changes settle, and form state stays mounted'
     node.setAttribute('data-original-input', '');
     (node as HTMLInputElement).blur();
   });
-  // Freeze the app's own animation in the same click turn, after React handles it.
-  // Cross-browser assertions and screenshots must not race a short transition.
-  await page.evaluate(() => {
-    const rememberScroll = (event: MouseEvent) => {
-      if (
-        event.target instanceof Element &&
-        event.target.closest('.language-panel button[lang="ru"]')
-      )
-        Reflect.set(window, 'r5LocaleScrollBefore', scrollY);
-    };
-    const freeze = (event: MouseEvent) => {
-      if (
-        !(event.target instanceof Element) ||
-        !event.target.closest('.language-panel button[lang="ru"]')
-      )
-        return;
-      document.removeEventListener('click', freeze);
-      document.removeEventListener('click', rememberScroll, true);
-      document
-        .getAnimations()
-        .filter((animation) => {
-          const target = (animation.effect as KeyframeEffect).target;
-          return target instanceof HTMLElement && target.closest('.locale-text,.locale-text-ghost');
-        })
-        .forEach((animation) => {
-          animation.pause();
-          animation.currentTime = 220;
-        });
-    };
-    document.addEventListener('click', rememberScroll, true);
-    document.addEventListener('click', freeze);
-  });
+  await freezeLocaleSelection(page, 'ru');
   await selectLanguage(page, 'ru');
   await expect(page.locator('html')).toHaveAttribute('data-locale-transition', 'ru');
+  await expect(page.locator('#hero-title')).toContainText('Start with a query.');
+  await sampleLocaleFade(page, 70);
+  expect(await finishOutgoing(page)).toBeGreaterThan(0);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
   const scroll = await page.evaluate(() => ({
-    before: Number(Reflect.get(window, 'r5LocaleScrollBefore')),
+    before: Number(Reflect.get(window, 'r6ScrollBefore')),
     after: scrollY,
   }));
   expect(scroll.after).toBe(scroll.before);
-  expect(await page.locator('.locale-text-ghost').count()).toBeGreaterThan(0);
-  expect(
-    await page
-      .locator('.locale-text-ghost')
-      .evaluateAll((nodes) =>
-        nodes.every(
-          (node) =>
-            node.getAttribute('aria-hidden') === 'true' &&
-            (node as HTMLElement).inert &&
-            !node.querySelector('input,button,a'),
-        ),
-      ),
-  ).toBe(true);
+  await expect(page.locator('.locale-text-ghost')).toHaveCount(0);
+  await sampleLocaleFade(page, 150);
   await page.screenshot({ path: info.outputPath('language-transition-midpoint.png') });
-  await page.evaluate(() =>
-    document
-      .getAnimations()
-      .filter((animation) => {
-        const target = (animation.effect as KeyframeEffect).target;
-        return target instanceof HTMLElement && target.closest('.locale-text,.locale-text-ghost');
-      })
-      .forEach((animation) => animation.play()),
-  );
   await expect(search).toHaveValue('example.com');
   await expect(search).toHaveAttribute('data-original-input', '');
-  for (const locale of ['en', 'ru', 'en'] as const) {
+  // Interrupt the partially visible incoming text and check opacity continuity.
+  const opacity = await page
+    .locator('#hero-title .locale-text')
+    .first()
+    .evaluate((node) => Number(getComputedStyle(node).opacity));
+  await freezeLocaleSelection(page, 'en');
+  await page.locator('[data-language-selector]').dispatchEvent('click');
+  await page.getByRole('menuitemradio', { name: 'English', exact: true }).dispatchEvent('click');
+  const reversed = await page
+    .locator('#hero-title .locale-text')
+    .first()
+    .evaluate((node) => Number(getComputedStyle(node).opacity));
+  expect(reversed).toBeLessThanOrEqual(opacity + 0.03);
+  for (const locale of ['ru', 'en'] as const) {
     await page.locator('[data-language-selector]').dispatchEvent('click');
     await page
       .getByRole('menuitemradio', { name: locale === 'en' ? 'English' : 'Русский', exact: true })
       .dispatchEvent('click');
   }
-  await expect(page.locator('.locale-text-ghost')).toHaveCount(0);
   await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
   await expect(page.locator('#hero-title')).toContainText('Start with a query.');
   await expect(search).toHaveValue('example.com');
   await expect(search).toHaveAttribute('data-original-input', '');
-  expect(
-    await page
-      .locator('#hero-title .locale-text')
-      .first()
-      .evaluate((node) => getComputedStyle(node).opacity),
-  ).toBe('1');
+  await expect(page.locator('#hero-title .locale-text').first()).toHaveCSS('opacity', '1');
+  // Returning to the displayed language during the outgoing phase must cancel the queued RU commit.
+  await freezeLocaleSelection(page, 'ru');
+  await selectLanguage(page, 'ru');
+  await sampleLocaleFade(page, 70);
+  await selectLanguage(page, 'en');
+  await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(page.locator('#hero-title')).toContainText('Start with a query.');
 });
 
 test('language dissolve stays in place without overlapping EN and RU on phone and desktop', async ({
@@ -182,143 +268,27 @@ test('language dissolve stays in place without overlapping EN and RU on phone an
   for (const width of [390, 1440]) {
     await visit(page, width);
     for (const locale of ['ru', 'en'] as const) {
-      // Pause the real application timeline synchronously after its selection handler.
-      await page.evaluate((locale) => {
-        const rememberText = (event: MouseEvent) => {
-          if (
-            !(event.target instanceof Element) ||
-            !event.target.closest(`.language-panel button[lang="${locale}"]`)
-          )
-            return;
-          Reflect.set(
-            window,
-            'r6OutgoingPositions',
-            Array.from(document.querySelectorAll('.locale-text')).map((node) => {
-              const range = document.createRange();
-              range.selectNodeContents(node);
-              return {
-                text: node.textContent,
-                lines: Array.from(range.getClientRects()).map((rect) => [
-                  rect.x,
-                  rect.y,
-                  rect.width,
-                  rect.height,
-                ]),
-              };
-            }),
-          );
-        };
-        const freeze = (event: MouseEvent) => {
-          if (
-            !(event.target instanceof Element) ||
-            !event.target.closest(`.language-panel button[lang="${locale}"]`)
-          )
-            return;
-          document.removeEventListener('click', freeze);
-          document.removeEventListener('click', rememberText, true);
-          document.getAnimations().forEach((animation) => {
-            const target = (animation.effect as KeyframeEffect).target;
-            if (
-              target instanceof HTMLElement &&
-              target.matches('.locale-text,.locale-text-ghost')
-            ) {
-              animation.pause();
-              animation.currentTime = 0;
-            }
-          });
-        };
-        document.addEventListener('click', rememberText, true);
-        document.addEventListener('click', freeze);
-      }, locale);
+      const current = locale === 'ru' ? 'en' : 'ru';
+      await freezeLocaleSelection(page, locale);
       await selectLanguage(page, locale);
+      await expect(page.locator('html')).toHaveAttribute('lang', current);
       await expect(page.locator('html')).toHaveAttribute('data-locale-transition', locale);
-      const aligned = await page.locator('.locale-text-ghost').evaluateAll((nodes) => {
-        const originals = Reflect.get(window, 'r6OutgoingPositions') as {
-          text: string;
-          lines: number[][];
-        }[];
-        return nodes.map((node) => {
-          const range = document.createRange();
-          range.selectNodeContents(node);
-          const lines = Array.from(range.getClientRects()).map((rect) => [
-            rect.x,
-            rect.y,
-            rect.width,
-            rect.height,
-          ]);
-          const matched = originals.some(
-            (source) =>
-              source.text === node.textContent &&
-              source.lines.length === lines.length &&
-              source.lines.every((line, index) =>
-                line.every((value, coordinate) => Math.abs(value - lines[index][coordinate]) < 0.5),
-              ),
-          );
-          return {
-            matched,
-            text: node.textContent,
-            lines,
-            originals: matched
-              ? []
-              : originals.filter((source) => source.text === node.textContent),
-          };
-        });
-      });
-      expect(aligned.length).toBeGreaterThan(0);
-      expect(aligned.filter((copy) => !copy.matched)).toEqual([]);
-      const sample = (time: number) =>
-        page.evaluate((time) => {
-          const animations = document.getAnimations().filter((animation) => {
-            const target = (animation.effect as KeyframeEffect).target;
-            return (
-              target instanceof HTMLElement && target.matches('.locale-text,.locale-text-ghost')
-            );
-          });
-          animations.forEach((animation) => (animation.currentTime = time));
-          return animations.map((animation) => {
-            const effect = animation.effect as KeyframeEffect;
-            const target = effect.target as HTMLElement;
-            const rect = target.getBoundingClientRect();
-            const style = getComputedStyle(target);
-            return {
-              ghost: target.classList.contains('locale-text-ghost'),
-              opacity: Number(style.opacity),
-              geometry: [rect.x, rect.y, rect.width, rect.height],
-              transform: style.transform,
-              filter: style.filter,
-              delay: effect.getTiming().delay,
-              opacityOnly: effect
-                .getKeyframes()
-                .every((frame) => frame.transform === undefined && frame.filter === undefined),
-            };
-          });
-        }, time);
-      const initial = await sample(0);
-      expect(initial.length).toBeGreaterThan(0);
-      expect(initial.filter((frame) => frame.ghost).every((frame) => frame.opacity === 1)).toBe(
-        true,
-      );
-      expect(initial.filter((frame) => !frame.ghost).every((frame) => frame.opacity === 0)).toBe(
-        true,
-      );
-      await sample(70);
-      await page.screenshot({ path: info.outputPath(`dissolve-${width}-${locale}-out.png`) });
-      const handoff = await sample(140);
-      expect(handoff.every((frame) => frame.opacity < 0.001)).toBe(true);
-      const incoming = await sample(260);
-      expect(incoming.filter((frame) => frame.ghost).every((frame) => frame.opacity === 0)).toBe(
-        true,
-      );
+      const outgoing = await sampleLocaleFade(page, 70);
+      expect(outgoing.length).toBeGreaterThan(0);
       expect(
-        incoming
-          .filter((frame) => !frame.ghost)
-          .every((frame) => frame.opacity > 0 && frame.opacity < 1),
+        outgoing.every(
+          (frame) =>
+            frame.phase === 'locale-text-out' &&
+            frame.opacity > 0 &&
+            frame.opacity < 1 &&
+            frame.text === frame.original?.text,
+        ),
       ).toBe(true);
-      expect(incoming.map((frame) => frame.geometry)).toEqual(
-        initial.map((frame) => frame.geometry),
+      expect(outgoing.map((frame) => frame.lines)).toEqual(
+        outgoing.map((frame) => frame.original?.lines),
       );
       expect(
-        incoming.every(
+        outgoing.every(
           (frame) =>
             frame.opacityOnly &&
             frame.delay === 0 &&
@@ -326,16 +296,31 @@ test('language dissolve stays in place without overlapping EN and RU on phone an
             frame.filter === 'none',
         ),
       ).toBe(true);
-      await page.screenshot({ path: info.outputPath(`dissolve-${width}-${locale}-in.png`) });
-      await page.evaluate(() =>
-        document.getAnimations().forEach((animation) => {
-          const target = (animation.effect as KeyframeEffect).target;
-          if (target instanceof HTMLElement && target.matches('.locale-text,.locale-text-ghost'))
-            animation.play();
-        }),
+      await page.screenshot({ path: info.outputPath(`dissolve-${width}-${locale}-out.png`) });
+      // Complete the real outgoing animation; the application performs the hidden language handoff.
+      expect(await finishOutgoing(page)).toBeGreaterThan(0);
+      await expect(page.locator('html')).toHaveAttribute('lang', locale);
+      const hidden = await sampleLocaleFade(page, 0);
+      expect(hidden.every((frame) => frame.phase === 'locale-text-in' && frame.opacity === 0)).toBe(
+        true,
       );
-      await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
+      const incoming = await sampleLocaleFade(page, 150);
+      expect(incoming.length).toBeGreaterThan(0);
+      expect(
+        incoming.every(
+          (frame) =>
+            frame.opacity > 0 &&
+            frame.opacity < 1 &&
+            frame.opacityOnly &&
+            frame.transform === 'none' &&
+            frame.filter === 'none',
+        ),
+      ).toBe(true);
+      expect(incoming.map((frame) => frame.lines)).toEqual(hidden.map((frame) => frame.lines));
       await expect(page.locator('.locale-text-ghost')).toHaveCount(0);
+      await page.screenshot({ path: info.outputPath(`dissolve-${width}-${locale}-in.png`) });
+      await resumeLocale(page);
+      await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
       await expect(page.locator('#hero-title .locale-text').first()).toHaveCSS('opacity', '1');
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
         width + 1,
