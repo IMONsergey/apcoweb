@@ -1,4 +1,4 @@
-name: Temporary R8 browser cache
+name: Temporary R8 WebKit runtime
 on:
   push:
     branches: [work/browser-cache-r8-2026-10-05]
@@ -17,14 +17,22 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npx playwright install --with-deps webkit
       - run: |
-          tar -czf /tmp/apco-playwright-browsers.tgz -C /home/runner/.cache ms-playwright
-          sha256sum /tmp/apco-playwright-browsers.tgz > /tmp/apco-playwright-browsers.sha256
+          mkdir -p /tmp/apco-webkit-libs
+          PW_RUNTIME=/home/runner/.cache/ms-playwright/webkit-2359/minibrowser-wpe
+          LD_LIBRARY_PATH="$PW_RUNTIME/lib" ldd "$PW_RUNTIME/bin/MiniBrowser" > /tmp/apco-webkit-ldd.txt
+          awk '/ => \/(lib|usr\/lib)\// { print $3 }' /tmp/apco-webkit-ldd.txt | while read -r file; do
+            case "$(basename "$file")" in libc.so.*|libm.so.*|libpthread.so.*|libdl.so.*) continue ;; esac
+            cp -L "$file" "/tmp/apco-webkit-libs/$(basename "$file")"
+          done
+          tar -czf /tmp/apco-webkit-libs.tgz -C /tmp apco-webkit-libs
+          sha256sum /tmp/apco-webkit-libs.tgz > /tmp/apco-webkit-libs.sha256
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: apco-playwright-browsers-r8
+          name: apco-webkit-libs-r8
           retention-days: 1
           path: |
-            /tmp/apco-playwright-browsers.tgz
-            /tmp/apco-playwright-browsers.sha256
+            /tmp/apco-webkit-libs.tgz
+            /tmp/apco-webkit-libs.sha256
+            /tmp/apco-webkit-ldd.txt
