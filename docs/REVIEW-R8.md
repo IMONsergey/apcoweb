@@ -31,4 +31,4 @@ The final fixes use explicit locale attributes and font inheritance, sample rend
 
 The [six-step post-fix audit](AUDIT-R8.md) and seven inspected lossless captures in [screenshots/r8/](screenshots/r8/) retain current evidence. [qa-r8-summary.json](qa-r8-summary.json) records exact source, outcomes, build hashes and superseded candidates. Documentation-only evidence commits preserve runtime and tests byte for byte.
 
-PR #9 records the final main merge, successful Pages deployment and independent 95-scenario check against the actual published URL. A successful main deployment and published-asset hash comparison are required to establish publication.
+[RELEASE-R8.md](RELEASE-R8.md) records main merge `2151ab023e8b7b1d76f2cd2b73a9d94d5f1460fb`, successful validation/deployment, all 13 matching public asset hashes and manual live inspection. The actual Pages suite passed 95/95 with no failures, skips or retries in job `111968326646`, workflow attempt 2; the initial live job was cancelled while queued before any test execution.

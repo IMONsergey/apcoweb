@@ -172,10 +172,7 @@
     "count": 7,
     "source": "local matching Chromium, 95/95 passed",
     "format": "lossless WebP; unchanged pixels",
-    "widths": [
-      390,
-      1920
-    ],
+    "widths": [390, 1920],
     "cropProvenance": "screenshots/r8/capture-provenance.json"
   },
   "previousCandidates": [
@@ -196,7 +193,137 @@
     }
   ],
   "publication": {
-    "status": "pending successful main deployment and actual Pages suite"
+    "status": "success",
+    "mainMerge": "2151ab023e8b7b1d76f2cd2b73a9d94d5f1460fb",
+    "mainTree": "e0a10ca6bf9d5bdc5c3b094d667e788d67352509",
+    "run": 37367494555,
+    "mainValidation": {
+      "job": 111956072763,
+      "status": "success",
+      "passed": 95,
+      "failed": 0,
+      "skipped": 0,
+      "retries": 0,
+      "attempt2CarriedJob": 111968363271
+    },
+    "deployment": {
+      "job": 111960884560,
+      "status": "success",
+      "completedAt": "2026-10-05T20:24:02Z",
+      "url": "https://imonsergey.github.io/apcoweb/",
+      "attempt2CarriedJob": 111968377633
+    },
+    "productionSmoke": {
+      "job": 111968326646,
+      "runAttempt": 2,
+      "status": "success",
+      "passed": 95,
+      "failed": 0,
+      "skipped": 0,
+      "retries": 0,
+      "summaryAt": "2026-10-05T20:43:34.750Z",
+      "duration": "2.6m",
+      "previousAttempt": {
+        "job": 111962797158,
+        "status": "cancelled while queued, before any tests ran",
+        "runAttempt": 1
+      },
+      "artifact": {
+        "id": 11370941507,
+        "name": "production-review-2151ab023e8b7b1d76f2cd2b73a9d94d5f1460fb",
+        "size_in_bytes": 21991597,
+        "created_at": "2026-10-05T20:43:37Z",
+        "expires_at": "2026-10-12T20:43:35Z",
+        "digest": "sha256:c584523bf0525e599b62f865864eb5d2a58f4f09e731d3c7a7f1c254737fc84b"
+      }
+    },
+    "publishedAssets": [
+      {
+        "path": "assets/AnimatedShape-DFkMNuZG.js",
+        "sha256": "ef88652835ea03e4531ad23c19923b360d18d56cf9ed0d1b3b232cd8eb055ffe",
+        "matches": true
+      },
+      {
+        "path": "assets/AnimatedShape-oC9qFH8J.css",
+        "sha256": "62cf80c89ecd73bb9478c4727ac4c947975f498521edc76fd07dc07ffb8c5800",
+        "matches": true
+      },
+      {
+        "path": "assets/ApiDemoMount-B0im3Api.js",
+        "sha256": "fa56c25b2f77e310b9cc8eeb0e7db20b5144d6e932e907b958bc7c3e845a83a7",
+        "matches": true
+      },
+      {
+        "path": "assets/DotCascade-DhrvfaQ_.js",
+        "sha256": "70b0d0bde2f1dfcfea802b0065bd8340e121b59c6783a6564889e37c1bacbd02",
+        "matches": true
+      },
+      {
+        "path": "assets/DotCascade-xfSig_rE.css",
+        "sha256": "c25e817ba79f654184efbd289074a24a5914dd647906e23ed493af6c2d614a43",
+        "matches": true
+      },
+      {
+        "path": "assets/IceSphereWaves-BPYE6xSr.js",
+        "sha256": "f102c2a7ca20dfbef6118ddb11920ac4a12783923a292c7f00402bfa258b88dd",
+        "matches": true
+      },
+      {
+        "path": "assets/IceSphereWaves-C2ACPYef.css",
+        "sha256": "d26abf2c83d81e92bfe62c990ebd3149dc864be86ec4e288ef914a296590dfea",
+        "matches": true
+      },
+      {
+        "path": "assets/SignalGlobe-BAreWu10.css",
+        "sha256": "1ee7b970758a3944faa71a28acd89ca64d054e9446e3592af1eca84291bbcf4f",
+        "matches": true
+      },
+      {
+        "path": "assets/SignalGlobe-Dc6Oquze.js",
+        "sha256": "396a0630e4f97b1f4b7e34002268f0799d1671963991707b53e8f969718d638b",
+        "matches": true
+      },
+      {
+        "path": "assets/TurquoiseFlow-BeGYI8_4.css",
+        "sha256": "7086d878fbdebdb67e349253c568b13d988c09e20686ba482882cecb5b73df0a",
+        "matches": true
+      },
+      {
+        "path": "assets/TurquoiseFlow-uFu0yGFo.js",
+        "sha256": "ae01762b728426b2907c6cd72e145b43d4c1eb25265a30e2de3c90ecc8ec184d",
+        "matches": true
+      },
+      {
+        "path": "assets/index-B4GAZFw_.css",
+        "sha256": "89f29828d0a99ef5d0b3d1f6308903ed9e702c9de8975ad8b9c20208051fbc14",
+        "matches": true
+      },
+      {
+        "path": "assets/index-BieMqN__.js",
+        "sha256": "d179a504c26b4270d2524aebee0250b12a78bb8fdcb521dc0e28b2b6ebe057f6",
+        "matches": true
+      }
+    ],
+    "manualPublicBrowser": {
+      "url": "https://imonsergey.github.io/apcoweb/?lang=ru#top",
+      "checks": [
+        "English/Russian roundtrip and compact flag menu",
+        "header hides down, returns up at 72 px; top header 96 px",
+        "API custom-element screen mounts from lazy chunk",
+        "native internal API and top anchors"
+      ],
+      "screenshot": "screenshots/r8/live-publication.jpg",
+      "capturedAt": "2026-10-05T20:36:03.975Z",
+      "dimensions": [1348, 926],
+      "bytes": 98475,
+      "sha256": "cb84fe04fdc13f76d3415064c846e84cb0a2fd0bca3d702e71be4a200c314d79"
+    },
+    "localPublicAttempt": {
+      "status": "network blocked; no pass claimed",
+      "error": "Chromium navigation net::ERR_EMPTY_RESPONSE; cloud browser and independent HTTP resource comparison succeeded"
+    },
+    "workflowConclusion": "success",
+    "workflowAttempt": 2
   },
   "limits": [
     "Browser-engine checks do not certify every physical mobile device.",
