@@ -19,10 +19,13 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
         node.closest('[inert], [aria-hidden="true"], .sr-only')
       )
         return [];
+      const range = document.createRange();
+      range.selectNodeContents(node);
       return [
         {
           node,
           rect,
+          textRect: range.getClientRects()[0],
           text: node.textContent,
           lang: document.documentElement.lang,
           font: style.font,
@@ -56,7 +59,7 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
   const timing = { duration: 440, easing: 'linear' };
   const easing = 'cubic-bezier(0.4, 0, 0.2, 1)';
   for (const snapshot of before) {
-    const { node, rect, text, lang, ...typography } = snapshot;
+    const { node, rect, textRect, text, lang, ...typography } = snapshot;
     if (!node.isConnected || node.textContent === text) continue;
     const ghost = document.createElement('span');
     ghost.className = 'locale-text-ghost';
@@ -70,6 +73,15 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
       width: `${rect.width}px`,
     });
     document.body.append(ghost);
+    // Inline font bounds differ from a block's line box (especially large titles).
+    // Match actual text-line positions so the outgoing copy cannot jump at creation.
+    const range = document.createRange();
+    range.selectNodeContents(ghost);
+    const copyRect = range.getClientRects()[0];
+    if (textRect && copyRect) {
+      ghost.style.left = `${rect.left + textRect.left - copyRect.left}px`;
+      ghost.style.top = `${rect.top + textRect.top - copyRect.top}px`;
+    }
     ghosts.push(ghost);
     animations.push(
       ghost.animate(

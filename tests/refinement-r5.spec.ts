@@ -184,6 +184,30 @@ test('language dissolve stays in place without overlapping EN and RU on phone an
     for (const locale of ['ru', 'en'] as const) {
       // Pause the real application timeline synchronously after its selection handler.
       await page.evaluate((locale) => {
+        const rememberText = (event: MouseEvent) => {
+          if (
+            !(event.target instanceof Element) ||
+            !event.target.closest(`.language-panel button[lang="${locale}"]`)
+          )
+            return;
+          Reflect.set(
+            window,
+            'r6OutgoingPositions',
+            Array.from(document.querySelectorAll('.locale-text')).map((node) => {
+              const range = document.createRange();
+              range.selectNodeContents(node);
+              return {
+                text: node.textContent,
+                lines: Array.from(range.getClientRects()).map((rect) => [
+                  rect.x,
+                  rect.y,
+                  rect.width,
+                  rect.height,
+                ]),
+              };
+            }),
+          );
+        };
         const freeze = (event: MouseEvent) => {
           if (
             !(event.target instanceof Element) ||
@@ -191,6 +215,7 @@ test('language dissolve stays in place without overlapping EN and RU on phone an
           )
             return;
           document.removeEventListener('click', freeze);
+          document.removeEventListener('click', rememberText, true);
           document.getAnimations().forEach((animation) => {
             const target = (animation.effect as KeyframeEffect).target;
             if (
@@ -202,10 +227,37 @@ test('language dissolve stays in place without overlapping EN and RU on phone an
             }
           });
         };
+        document.addEventListener('click', rememberText, true);
         document.addEventListener('click', freeze);
       }, locale);
       await selectLanguage(page, locale);
       await expect(page.locator('html')).toHaveAttribute('data-locale-transition', locale);
+      const aligned = await page.locator('.locale-text-ghost').evaluateAll((nodes) => {
+        const originals = Reflect.get(window, 'r6OutgoingPositions') as {
+          text: string;
+          lines: number[][];
+        }[];
+        return nodes.map((node) => {
+          const range = document.createRange();
+          range.selectNodeContents(node);
+          const lines = Array.from(range.getClientRects()).map((rect) => [
+            rect.x,
+            rect.y,
+            rect.width,
+            rect.height,
+          ]);
+          return originals.some(
+            (source) =>
+              source.text === node.textContent &&
+              source.lines.length === lines.length &&
+              source.lines.every((line, index) =>
+                line.every((value, coordinate) => Math.abs(value - lines[index][coordinate]) < 0.5),
+              ),
+          );
+        });
+      });
+      expect(aligned.length).toBeGreaterThan(0);
+      expect(aligned.every(Boolean)).toBe(true);
       const sample = (time: number) =>
         page.evaluate((time) => {
           const animations = document.getAnimations().filter((animation) => {
