@@ -47,8 +47,6 @@ export function useScrollHeader(ref: RefObject<HTMLElement | null>, locked: bool
       const compact = target.getBoundingClientRect().top + scrollY > 160;
       // Set the smaller scroll inset before the browser starts its native anchor scroll.
       flushSync(() => setState((current) => ({ ...current, compact })));
-      // Firefox resolves :has() during style calculation, before native anchor navigation.
-      getComputedStyle(document.documentElement).getPropertyValue('scroll-padding-top');
     };
     const pointer = () => {
       keyboardPinned = false;

@@ -93,6 +93,7 @@ export function installLocaleLayout(site: HTMLElement) {
       const values = node.dataset.localeValues
         ? (JSON.parse(node.dataset.localeValues) as Record<string, string | number>)
         : {};
+      node.lang = other;
       node.textContent = translate(other, key, values);
     });
     document.body.append(mirror);
@@ -157,6 +158,7 @@ export function installLocaleLayout(site: HTMLElement) {
           current === 'ru' ? 'Inter, Arial, sans-serif' : '"Instrument Sans", Arial, sans-serif';
       });
       faqText.forEach((node) => {
+        node.lang = current;
         node.textContent = translate(current, node.dataset.localeKey!);
       });
       const answerHeights = otherAnswers.map((node, index) =>
@@ -168,6 +170,7 @@ export function installLocaleLayout(site: HTMLElement) {
         detail.open = openStates[index];
       });
       faqText.forEach((node, index) => {
+        node.lang = other;
         node.textContent = otherCopy[index];
       });
       liveAnswers.forEach((node, index) => {
@@ -202,14 +205,14 @@ export function installLocaleLayout(site: HTMLElement) {
       mirror.remove();
     }
   };
-  const resize = new ResizeObserver(() => {
+  const resize = () => {
     const width = site.getBoundingClientRect().width;
     if (Math.abs(width - lastWidth) < 1) return;
     lastWidth = width;
     clearTimeout(timer);
     if (fontsReady) timer = window.setTimeout(measure, 140);
-  });
-  resize.observe(site);
+  };
+  window.addEventListener('resize', resize);
   const reveal = () => root.removeAttribute('data-page-entering');
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) root.dataset.pageEntering = 'true';
   // A slow optional font must never hold the page behind a loading screen.
@@ -228,7 +231,7 @@ export function installLocaleLayout(site: HTMLElement) {
     disposed = true;
     clearTimeout(timer);
     clearTimeout(entryTimeout);
-    resize.disconnect();
+    window.removeEventListener('resize', resize);
     restore();
     reveal();
     delete root.dataset.localeLayout;

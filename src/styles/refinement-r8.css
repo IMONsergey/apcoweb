@@ -20,10 +20,8 @@
 .header-row {
   min-height: var(--header-surface-height, var(--header-height));
 }
-:root:has(.site-header[data-compact='true']) {
-  --anchor-header-height: 72px;
-}
 html {
+  --anchor-header-height: 72px;
   scroll-padding-top: calc(var(--anchor-header-height, var(--header-height)) + 24px);
 }
 .language-panel {
@@ -249,7 +247,7 @@ html {
   .site-header[data-compact='true'] {
     --header-surface-height: 64px;
   }
-  :root:has(.site-header[data-compact='true']) {
+  html {
     --anchor-header-height: 64px;
   }
   /* Show only the preserved brand/menu region, never the baked body under live copy. */

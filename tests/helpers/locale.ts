@@ -2,15 +2,15 @@ import { expect, type Page } from '@playwright/test';
 
 export async function revealHeader(page: Page) {
   const header = page.locator('.site-header');
+  // Finish the browser's queued focus scroll before checking the navigation state.
+  await expect
+    .poll(async () => {
+      const before = await page.evaluate(() => scrollY);
+      await page.waitForTimeout(80);
+      return before === (await page.evaluate(() => scrollY));
+    })
+    .toBe(true);
   if ((await header.getAttribute('data-hidden')) === 'true') {
-    // Finish the browser's queued focus scroll before exercising an upward wheel gesture.
-    await expect
-      .poll(async () => {
-        const before = await page.evaluate(() => scrollY);
-        await page.waitForTimeout(80);
-        return before === (await page.evaluate(() => scrollY));
-      })
-      .toBe(true);
     const viewport = page.viewportSize()!;
     await page.mouse.move(8, viewport.height / 2);
     await page.mouse.wheel(0, -80);
@@ -31,4 +31,11 @@ export async function selectLanguage(page: Page, language: 'en' | 'ru') {
   await expect(option).toBeInViewport({ ratio: 1 });
   const box = (await option.boundingBox())!;
   await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  // Inspect rendered geometry after native inherited font styles have reached a paint.
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+      ),
+  );
 }

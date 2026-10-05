@@ -9,6 +9,7 @@ export function LocaleText({ children, className = '' }: { children: string; cla
   return (
     <span
       className={`locale-text ${className}`.trim()}
+      lang={locale}
       data-locale-key={source?.key}
       data-locale-values={
         source && Object.keys(source.values).length ? JSON.stringify(source.values) : undefined
