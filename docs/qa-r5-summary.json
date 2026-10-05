@@ -1,0 +1,75 @@
+{
+  "revision": "R5 \u2014 language disclosure, translated text and rolling prices",
+  "date": "2026-10-05",
+  "sourceCommit": "2e612c483a3f567bf12c6577c63cc345f70be0b5",
+  "pr": "https://github.com/IMONsergey/apcoweb/pull/6",
+  "verificationRun": "https://github.com/IMONsergey/apcoweb/actions/runs/37305369987",
+  "browsers": ["Chromium", "Firefox", "WebKit"],
+  "checksPerBrowser": 76,
+  "crossBrowserStatus": "success",
+  "prChromium": {
+    "run": "https://github.com/IMONsergey/apcoweb/actions/runs/37305370031",
+    "status": "success",
+    "expected": 76,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0
+  },
+  "staticGates": {
+    "npmCi": "pass",
+    "suppliedEngineChecksums": "6/6 pass",
+    "lint": "pass",
+    "typecheck": "pass",
+    "formatCheck": "pass",
+    "build": "pass"
+  },
+  "localBrowserStatus": "unavailable: archive download returned HTML; no local browser pass recorded",
+  "newChecks": "7 R5 scenarios per engine, with prior 69 retained",
+  "menuWidths": [320, 390, 768, 1199, 1200, 1440],
+  "visualReview": {
+    "locales": ["en", "ru"],
+    "widths": [320, 390, 768, 1200, 1440],
+    "priceWidths": [390, 1440],
+    "evidence": "docs/screenshots/r5/",
+    "status": "pass",
+    "retainedCaptures": 20,
+    "workflowCaptures": 60,
+    "geometryReport": "docs/screenshots/r5/capture-results.json"
+  },
+  "productionVerification": "The main Pages workflow now runs test:production against its actual deployment URL after successful publication. The final PR release report records deployment and live smoke.",
+  "previousRelease": {
+    "mainCommit": "c9f3df73bbef17a2d95b1306106706b28d0d5a9b",
+    "revision": "R4",
+    "report": "docs/qa-summary.json"
+  },
+  "preserved": [
+    "Price and entitlement arithmetic",
+    "Metric values",
+    "Split-button action semantics",
+    "Prepared assets",
+    "Six supplied rendering/data modules",
+    "React search scene and state",
+    "Figma"
+  ],
+  "previousCandidate": {
+    "sourceCommit": "b36dc5ea882715f3a043be4303762f8d1cd7a04e",
+    "verificationRun": "https://github.com/IMONsergey/apcoweb/actions/runs/37303631917",
+    "stats": {
+      "startTime": "2026-10-05T11:36:40.255Z",
+      "duration": 342286.82200000004,
+      "expected": 228,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "visualFinding": "Midpoint screenshot showed a scroll-anchor jump when RU copy grew. Latest source disables anchoring during the transition, preserves viewport coordinates and checks them."
+  },
+  "stats": {
+    "startTime": "2026-10-05T11:50:12.949Z",
+    "duration": 334649.271,
+    "expected": 228,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
