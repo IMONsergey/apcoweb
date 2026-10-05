@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { media } from '../../content/site';
 import { Icon, type IconName } from '../ui/Icon';
@@ -24,17 +25,19 @@ export function SearchChrome({ credits = '2 000' }: { credits?: string }) {
       </div>
       <div className="search-chrome__filters">
         <span>
-          {t('Add Filter')} <Icon name="plus" />
+          <LocaleText>{t('Add Filter')}</LocaleText> <Icon name="plus" />
         </span>
         <span>
-          {t('All Types')} <Icon name="chevron" />
+          <LocaleText>{t('All Types')}</LocaleText> <Icon name="chevron" />
         </span>
       </div>
       <div className="search-chrome__account">
         <span>
-          {t('Credits:')} <b>{credits}</b>
+          <LocaleText>{t('Credits:')}</LocaleText> <b>{credits}</b>
         </span>
-        <span className="search-chrome__upgrade">{t('Upgrade Plan')}</span>
+        <span className="search-chrome__upgrade">
+          <LocaleText>{t('Upgrade Plan')}</LocaleText>
+        </span>
       </div>
     </div>
   );

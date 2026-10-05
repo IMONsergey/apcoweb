@@ -4,6 +4,8 @@ This is the React/TypeScript marketing website, not the authenticated SaaS appli
 
 ## Read first
 
+- docs/REVIEW-R5.md: styled EN/RU disclosure, text transitions, digit reels and continuous pointer-hover marquee. This extends R4; preserve keyboard-focus pause and reduced motion.
+
 - docs/REVIEW-R4.md: current mobile composition and EN/RU language behavior; this extends R3.
 
 - docs/REVIEW-R3.md: current contextual billing behavior and verified interaction fixes. Preserve the mobile dock at <=1199px and desktop control at >=1200px.

@@ -16,7 +16,7 @@ React owns layout, semantic content, dialogs, navigation and motion preference. 
 
 - Effects are dynamically imported when close to the viewport.
 - Original engines handle visibility, device-pixel limits and cleanup.
-- R2 removes the global pause control. Device reduced-motion preferences stop nonessential motion; the marquee additionally pauses on focus/hover.
+- R2 removes the global pause control. Device reduced-motion preferences stop nonessential motion; the marquee additionally pauses on keyboard focus. R5 preserves continuous movement under pointer hover.
 - All listeners and controllers are disposed on unmount; React StrictMode exercises teardown.
 - Decorative layers do not block buttons or page scrolling. Their wrappers forward pointer coordinates/listen on the containing semantic surface so gentle hover works without an invisible hit-area overlay.
 - Dot directions use one implementation: top-to-bottom for search, bottom-to-top in cards, right-to-left for API, left-to-right for the contact strip.

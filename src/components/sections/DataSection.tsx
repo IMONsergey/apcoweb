@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { metrics, productUrl } from '../../content/site';
 import { DoubleButton } from '../ui/DoubleButton';
@@ -11,14 +12,16 @@ export function DataSection() {
       <div className="container data-stage">
         <div className="data-copy">
           <h2 id="data-title">
-            {t('The data behind')}
+            <LocaleText>{t('The data behind')}</LocaleText>
             <br />
-            {t('every search.')}
+            <LocaleText>{t('every search.')}</LocaleText>
           </h2>
           <p>
-            {t(
-              'APCOSYS scans the public internet and records how internet-facing hosts respond: open ports, services and detected products.',
-            )}
+            <LocaleText>
+              {t(
+                'APCOSYS scans the public internet and records how internet-facing hosts respond: open ports, services and detected products.',
+              )}
+            </LocaleText>
           </p>
         </div>
         <div className="data-visual-field">
@@ -27,7 +30,9 @@ export function DataSection() {
             {metrics.map((metric) => (
               <div className={`metric-card metric-card--${metric.id}`} key={metric.id}>
                 <dt>
-                  <span>{t(metric.label)}</span>
+                  <span>
+                    <LocaleText>{t(metric.label)}</LocaleText>
+                  </span>
                 </dt>
                 <dd>{metric.value}</dd>
               </div>
@@ -36,10 +41,10 @@ export function DataSection() {
         </div>
         <div className="data-actions">
           <DoubleButton href={`${productUrl}/legal/data-collection-policy`} variant="dark">
-            {t('Read methodology')}
+            <LocaleText>{t('Read methodology')}</LocaleText>
           </DoubleButton>
           <DoubleButton href={`${productUrl}/docs/about`} variant="inverse">
-            {t('How we scan')}
+            <LocaleText>{t('How we scan')}</LocaleText>
           </DoubleButton>
         </div>
       </div>

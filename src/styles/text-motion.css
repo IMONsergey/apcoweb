@@ -1,0 +1,47 @@
+/* Inline boundaries keep the approved line wrapping; only visual copies leave the layout. */
+.locale-text--lines {
+  white-space: pre-line;
+}
+.locale-text-ghost {
+  position: fixed;
+  z-index: 60;
+  display: block;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  user-select: none;
+  transform-origin: top left;
+}
+.price-amount {
+  animation: none;
+  font-variant-numeric: tabular-nums;
+}
+.price-odometer {
+  display: inline-flex;
+  align-items: flex-start;
+  vertical-align: baseline;
+  line-height: 1;
+}
+.price-digit {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  width: 1ch;
+}
+.price-digit__reel {
+  display: block;
+}
+.price-digit__reel > span {
+  display: block;
+  height: 1em;
+  line-height: 1em;
+}
+.price-symbol::before,
+.price-digit__reel > span::before {
+  content: attr(data-numeral);
+}
+@media (prefers-reduced-motion: reduce) {
+  .locale-text-ghost {
+    display: none;
+  }
+}

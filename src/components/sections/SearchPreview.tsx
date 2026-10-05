@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { metrics, productUrl } from '../../content/site';
@@ -92,7 +93,7 @@ export function SearchForm({ className = '' }: { className?: string }) {
       </button>
       {error && (
         <span className="search-error" id={`${id}-error`} role="alert">
-          {t('Enter a domain, IP or technical attribute.')}
+          <LocaleText>{t('Enter a domain, IP or technical attribute.')}</LocaleText>
         </span>
       )}
     </form>
@@ -108,7 +109,9 @@ export function SearchPreview() {
         <dl className="container summary-grid">
           {metrics.map((metric) => (
             <div key={metric.id}>
-              <dt>{t(metric.label)}</dt>
+              <dt>
+                <LocaleText>{t(metric.label)}</LocaleText>
+              </dt>
               <dd>{metric.value}</dd>
             </div>
           ))}
@@ -121,7 +124,9 @@ export function SearchPreview() {
           <div className="search-scene__content">
             <div className="search-scene__heading">
               <h3>
-                <span className="search-title-desktop">{t('One query. A closer look.')}</span>
+                <span className="search-title-desktop">
+                  <LocaleText>{t('One query. A closer look.')}</LocaleText>
+                </span>
               </h3>
             </div>
             <SearchForm />

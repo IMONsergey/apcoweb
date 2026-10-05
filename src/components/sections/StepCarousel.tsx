@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { useCarousel } from '../../hooks/useCarousel';
 import { media, researchSteps } from '../../content/site';
@@ -10,16 +11,18 @@ export function StepCarousel() {
     <section id="how-it-works" className="steps section-space" aria-labelledby="steps-title">
       <div className="container section-heading-row">
         <h2 id="steps-title">
-          {t('One query,')}
+          <LocaleText>{t('One query,')}</LocaleText>
           <br />
-          {t('step by step.')}
+          <LocaleText>{t('step by step.')}</LocaleText>
         </h2>
         <div className="steps-intro">
           <Icon name="focus" width="25" height="25" />
           <p>
-            {t(
-              'Start with a single query. See which hosts match, open one, review its technical context and decide where to look next.',
-            )}
+            <LocaleText>
+              {t(
+                'Start with a single query. See which hosts match, open one, review its technical context and decide where to look next.',
+              )}
+            </LocaleText>
           </p>
         </div>
       </div>
@@ -68,10 +71,14 @@ export function StepCarousel() {
           }}
         >
           {researchSteps.map((step, i) => (
-            <li className="step-card" key={t(step.title)}>
+            <li className="step-card" key={step.title}>
               <div className="step-copy">
-                <h3>{t(step.title)}</h3>
-                <p>{t(step.description)}</p>
+                <h3>
+                  <LocaleText>{t(step.title)}</LocaleText>
+                </h3>
+                <p>
+                  <LocaleText>{t(step.description)}</LocaleText>
+                </p>
               </div>
               <div className="step-media">
                 <Visual kind="dots" direction="bottom-to-top" />

@@ -13,7 +13,7 @@
   text-align: center;
 }
 .billing-dock__offer strong,
-.billing-dock__offer span {
+.billing-dock__offer > span {
   color: var(--action);
 }
 

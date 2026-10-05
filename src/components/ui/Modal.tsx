@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { useEffect, useId, useRef, type ReactNode } from 'react';
 import { useMotion } from '../../hooks/useMotion';
@@ -98,7 +99,9 @@ export function Modal({ open, onClose, title, children, className = '' }: Props)
       }}
     >
       <div className="modal__header">
-        <h2 id={titleId}>{title}</h2>
+        <h2 id={titleId}>
+          <LocaleText>{title}</LocaleText>
+        </h2>
         <button
           type="button"
           className="icon-button"

@@ -1,6 +1,7 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import { useMotion } from '../../hooks/useMotion';
 import { Icon } from './Icon';
+import { LocaleText } from '../../i18n/LocaleText';
 
 /** Native summary keyboard behavior, with cancellable measured-height animation. */
 export function AnimatedDetails({
@@ -74,7 +75,9 @@ export function AnimatedDetails({
           toggle();
         }}
       >
-        <span>{title}</span>
+        <span>
+          <LocaleText>{title}</LocaleText>
+        </span>
         <span className="faq-icon">
           <Icon name="plus" />
           <Icon name="minus" />

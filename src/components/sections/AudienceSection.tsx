@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { DoubleButton } from '../ui/DoubleButton';
 import { Visual } from '../visuals/Visual';
@@ -7,9 +8,9 @@ export function AudienceSection() {
     <section id="use-cases" className="audiences section-space" aria-labelledby="audiences-title">
       <div className="container">
         <h2 id="audiences-title">
-          {t('For security researchers')}
+          <LocaleText>{t('For security researchers')}</LocaleText>
           <br />
-          {t('and teams.')}
+          <LocaleText>{t('and teams.')}</LocaleText>
         </h2>
         <div className="audience-grid">
           <article id="researchers" className="audience-card">
@@ -18,33 +19,35 @@ export function AudienceSection() {
             </div>
             <div className="audience-copy">
               <h3>
-                {locale === 'ru' ? (
-                  'Для исследователей'
-                ) : (
-                  <>
-                    For security
-                    <br />
-                    researchers
-                  </>
-                )}
+                <LocaleText className="locale-text--lines">
+                  {locale === 'ru' ? 'Для исследователей' : 'For security\nresearchers'}
+                </LocaleText>
               </h3>
               <p>
-                {t(
-                  'Find the infrastructure you are interested in, check what runs on it and keep investigating.',
-                )}
+                <LocaleText>
+                  {t(
+                    'Find the infrastructure you are interested in, check what runs on it and keep investigating.',
+                  )}
+                </LocaleText>
               </p>
               <ul className="use-case-tags">
-                <li>{t('Bug Bounty')}</li>
-                <li>{t('Vulnerability Research')}</li>
-                <li>{t('OSINT / Threat Investigation')}</li>
+                <li>
+                  <LocaleText>{t('Bug Bounty')}</LocaleText>
+                </li>
+                <li>
+                  <LocaleText>{t('Vulnerability Research')}</LocaleText>
+                </li>
+                <li>
+                  <LocaleText>{t('OSINT / Threat Investigation')}</LocaleText>
+                </li>
               </ul>
             </div>
             <div className="audience-actions">
               <DoubleButton href="#how-it-works">
-                {t('Explore Search & Investigation')}
+                <LocaleText>{t('Explore Search & Investigation')}</LocaleText>
               </DoubleButton>
               <DoubleButton variant="secondary" href="#pricing">
-                {t('View Plans')}
+                <LocaleText>{t('View Plans')}</LocaleText>
               </DoubleButton>
             </div>
           </article>
@@ -54,26 +57,24 @@ export function AudienceSection() {
             </div>
             <div className="audience-copy">
               <h3>
-                {locale === 'ru' ? (
-                  'Для команд безопасности'
-                ) : (
-                  <>
-                    For security
-                    <br />
-                    teams
-                  </>
-                )}
+                <LocaleText className="locale-text--lines">
+                  {locale === 'ru' ? 'Для команд безопасности' : 'For security\nteams'}
+                </LocaleText>
               </h3>
               <p>
-                {t(
-                  'Investigate the internet-facing infrastructure your organisation runs, review its technical context and bring the results into your own tools through the API. The Business plan gives up to 5 users access on one subscription.',
-                )}
+                <LocaleText>
+                  {t(
+                    'Investigate the internet-facing infrastructure your organisation runs, review its technical context and bring the results into your own tools through the API. The Business plan gives up to 5 users access on one subscription.',
+                  )}
+                </LocaleText>
               </p>
             </div>
             <div className="audience-actions">
-              <DoubleButton href="#api">{t('Explore For Teams')}</DoubleButton>
+              <DoubleButton href="#api">
+                <LocaleText>{t('Explore For Teams')}</LocaleText>
+              </DoubleButton>
               <DoubleButton variant="secondary" href="#plan-business">
-                {t('View Business Plan')}
+                <LocaleText>{t('View Business Plan')}</LocaleText>
               </DoubleButton>
             </div>
           </article>

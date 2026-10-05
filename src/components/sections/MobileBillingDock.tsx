@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { useRef, type RefObject } from 'react';
 import { useBillingDock } from '../../hooks/useBillingDock';
@@ -25,9 +26,13 @@ export function MobileBillingDock({ rangeRef, period, onChange }: Props) {
       inert={!visible}
     >
       <div className="billing-dock__offer">
-        <strong>{t('Save {discount}%', { discount: ANNUAL_DISCOUNT_PERCENT })}</strong>
+        <strong>
+          <LocaleText>{t('Save {discount}%', { discount: ANNUAL_DISCOUNT_PERCENT })}</LocaleText>
+        </strong>
         <span key={period}>
-          {t(period === 'annually' ? 'Annual billing selected' : 'with annual billing')}
+          <LocaleText>
+            {t(period === 'annually' ? 'Annual billing selected' : 'with annual billing')}
+          </LocaleText>
         </span>
       </div>
       <BillingSwitch value={period} onChange={onChange} />

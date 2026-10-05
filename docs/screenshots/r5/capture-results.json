@@ -1,0 +1,128 @@
+{
+  "sourceCommit": "2e612c483a3f567bf12c6577c63cc345f70be0b5",
+  "verificationRun": "https://github.com/IMONsergey/apcoweb/actions/runs/37305369987",
+  "browser": "Chromium",
+  "encoding": "Lossless WebP; no cropping or visual edits",
+  "captures": [
+    {
+      "file": "language-1200-en.webp",
+      "width": 1200,
+      "height": 1000,
+      "sourcePngSha256": "cb9f58daa3f22ae9f8bc8cdc266024c87c6a485e00c9022b5629f00054123bd6"
+    },
+    {
+      "file": "language-1200-ru.webp",
+      "width": 1200,
+      "height": 1000,
+      "sourcePngSha256": "a0d768689e4e4b6ef1b5344fe8c5363d4be37a48e4e3771a5e318cefe846a12d"
+    },
+    {
+      "file": "language-1440-en.webp",
+      "width": 1440,
+      "height": 1000,
+      "sourcePngSha256": "fea16f7e758f4e5b6bdbeaa830569a998932063134fb32897e2366c892ce23df"
+    },
+    {
+      "file": "language-1440-ru.webp",
+      "width": 1440,
+      "height": 1000,
+      "sourcePngSha256": "21a03e3bf760d8e0a59b661bfb4880e8b3c17b42d209b7ee798f2a7bb3705dca"
+    },
+    {
+      "file": "language-320-en.webp",
+      "width": 320,
+      "height": 1000,
+      "sourcePngSha256": "bad1543ad9daa55ea9a6fe6bbb44a71476570c1e2470c6f80959137613ff0cd9"
+    },
+    {
+      "file": "language-320-ru.webp",
+      "width": 320,
+      "height": 1000,
+      "sourcePngSha256": "fb966846fb1d40a45f0abfc534e49e7fe29df47a8fd50d465505eb7bdce8608b"
+    },
+    {
+      "file": "language-390-en.webp",
+      "width": 390,
+      "height": 1000,
+      "sourcePngSha256": "fa083da72fced6ecf6173cebf1eaf1d4fd7d89aafe08d45f5244593f30d1c609"
+    },
+    {
+      "file": "language-390-ru.webp",
+      "width": 390,
+      "height": 1000,
+      "sourcePngSha256": "d365c506f704fe8f710d1319e16fbab916b704e7d48fcd989b9e2de96f4ec531"
+    },
+    {
+      "file": "language-768-en.webp",
+      "width": 768,
+      "height": 1000,
+      "sourcePngSha256": "930af52c45c90947effbdf75c95bd6246f6e418fca3d3bd9f60a384529d7ea28"
+    },
+    {
+      "file": "language-768-ru.webp",
+      "width": 768,
+      "height": 1000,
+      "sourcePngSha256": "f7fe3bda5df7abfcff78910a207ab50ba3b6b0a829467af8275206bcb4ec69a1"
+    },
+    {
+      "file": "pricing-1440-en-annual.webp",
+      "width": 1345,
+      "height": 386,
+      "sourcePngSha256": "56abb794ed88fc30d3153ad14b3a778cd013e0da87b252365a1f930cd9afcd90"
+    },
+    {
+      "file": "pricing-1440-en-monthly.webp",
+      "width": 1345,
+      "height": 386,
+      "sourcePngSha256": "8f4e9e4b7e4cfafd7206e235776d5fdcf7d9a6b571e746a47da3af24481c0c0b"
+    },
+    {
+      "file": "pricing-1440-ru-annual.webp",
+      "width": 1345,
+      "height": 404,
+      "sourcePngSha256": "74a82cd52392d424d7154bd8201696565b238d21416cfb1cb61e6f900f3ee600"
+    },
+    {
+      "file": "pricing-1440-ru-monthly.webp",
+      "width": 1345,
+      "height": 404,
+      "sourcePngSha256": "405232ed758ef63fceba1ec55b161710f463f343f22ed5a231709e10f01e3ce6"
+    },
+    {
+      "file": "pricing-390-en-annual.webp",
+      "width": 327,
+      "height": 1429,
+      "sourcePngSha256": "56b3e54f1918b870c48ab8dfd39f077a6259b952a56a0b3c837b270e3fe6f5fa"
+    },
+    {
+      "file": "pricing-390-en-monthly.webp",
+      "width": 327,
+      "height": 1429,
+      "sourcePngSha256": "0813c8d42c32d85f5d03fc961a67380a8bc9054259c5ccfd556df7895637ae43"
+    },
+    {
+      "file": "pricing-390-ru-annual.webp",
+      "width": 327,
+      "height": 1501,
+      "sourcePngSha256": "e7f4056bbec9bb6b89e1de4d8e6ce41a0739194cdfa4839f5462fa6d4b080fe9"
+    },
+    {
+      "file": "pricing-390-ru-monthly.webp",
+      "width": 327,
+      "height": 1501,
+      "sourcePngSha256": "82d9fe85392d5e16de8441352ceb125ff2b6065f80025aa68af28138af80839a"
+    },
+    {
+      "file": "language-transition-midpoint.webp",
+      "width": 1440,
+      "height": 1000,
+      "sourcePngSha256": "13c0823e44fcb45dfb0ef894a328772a10ccb68dd01fee9ee0e9f98c47bf43b8"
+    },
+    {
+      "file": "pricing-transition-midpoint.webp",
+      "width": 1345,
+      "height": 386,
+      "sourcePngSha256": "f1733645483241a633a7a4511c5c0c02228e6b5904bf4654a12b434b2307ba5b"
+    }
+  ]
+}

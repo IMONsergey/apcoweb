@@ -1,3 +1,4 @@
+import { LocaleText } from '../i18n/LocaleText';
 import { useLocale } from '../i18n/context';
 import { useEffect, useRef, useState } from 'react';
 import { media, navigation, productUrl } from '../content/site';
@@ -40,7 +41,7 @@ export function Header() {
             {navigation.map((group, i) => (
               <div
                 className="nav-group"
-                key={t(group.label)}
+                key={group.label}
                 onKeyDown={(event) => {
                   if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
                   const links = Array.from(
@@ -83,7 +84,7 @@ export function Header() {
                     }
                   }}
                 >
-                  {t(group.label)}
+                  <LocaleText>{t(group.label)}</LocaleText>
                   <Icon name="chevron" />
                 </button>
                 <div
@@ -96,27 +97,30 @@ export function Header() {
                   {group.items.map((item, index) => (
                     <a
                       className={index === 0 ? 'nav-panel__default' : undefined}
-                      key={t(item.label)}
+                      key={item.label}
                       href={item.href}
                       onClick={() => setActive(null)}
                     >
-                      {t(item.label)}
+                      <LocaleText>{t(item.label)}</LocaleText>
                     </a>
                   ))}
                 </div>
               </div>
             ))}
-            <a className="nav-link" href="#pricing">
-              {t('Pricing')}
+            <a className="nav-link nav-trigger" href="#pricing">
+              <LocaleText>{t('Pricing')}</LocaleText>
             </a>
           </nav>
           <div className="header-actions">
-            <LanguageBadge />
+            <LanguageBadge
+              open={active === 'language'}
+              onOpenChange={(open) => setActive(open ? 'language' : null)}
+            />
             <a href={`${productUrl}/search`} className="plain-button header-signin">
-              {t('Sign In')}
+              <LocaleText>{t('Sign In')}</LocaleText>
             </a>
             <DoubleButton href={`${productUrl}/register`} compact className="header-signup">
-              {t('Create free account')}
+              <LocaleText>{t('Create free account')}</LocaleText>
             </DoubleButton>
             <button
               className="icon-button menu-toggle"
@@ -142,22 +146,26 @@ export function Header() {
         <nav aria-label={t('Mobile navigation')}>
           {navigation.map((group) => (
             <div className="mobile-nav-group" key={group.label}>
-              <p className="eyebrow">{t(group.label)}</p>
+              <p className="eyebrow">
+                <LocaleText>{t(group.label)}</LocaleText>
+              </p>
               {group.items.map((item) => (
-                <a key={t(item.label)} href={item.href} onClick={() => setMobileOpen(false)}>
-                  {t(item.label)}
+                <a key={item.label} href={item.href} onClick={() => setMobileOpen(false)}>
+                  <LocaleText>{t(item.label)}</LocaleText>
                   <Icon name="arrow" />
                 </a>
               ))}
             </div>
           ))}
           <a className="mobile-pricing" href="#pricing" onClick={() => setMobileOpen(false)}>
-            {t('Pricing')}
+            <LocaleText>{t('Pricing')}</LocaleText>
             <Icon name="arrow" />
           </a>
-          <DoubleButton href={`${productUrl}/register`}>{t('Create free account')}</DoubleButton>
+          <DoubleButton href={`${productUrl}/register`}>
+            <LocaleText>{t('Create free account')}</LocaleText>
+          </DoubleButton>
           <a className="plain-button" href={`${productUrl}/search`}>
-            {t('Sign In')}
+            <LocaleText>{t('Sign In')}</LocaleText>
           </a>
         </nav>
       </Modal>

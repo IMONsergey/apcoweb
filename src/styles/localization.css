@@ -10,34 +10,62 @@
   height: 44px;
   gap: 6px;
   padding: 10px;
-  pointer-events: none;
+  background: transparent;
 }
 .language-control .language > svg:last-child {
   flex: 0 0 10px;
   width: 10px;
   height: 10px;
 }
-.language-control select {
-  appearance: none;
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  font: 16px var(--font-sans);
-  cursor: pointer;
-  color: var(--ink);
-  background: white;
-}
-.language-control:focus-within {
+.language-control .language:focus-visible {
   outline: 2px solid var(--action);
   outline-offset: 3px;
 }
-.language-control:has(select:hover) .language {
-  background: var(--page);
+.language-control .language:hover,
+.language-control .language[aria-expanded='true'] {
+  background: #f1f2f4;
 }
 .language-control .language {
   transition: background-color 180ms var(--ease);
+}
+.language-control .language > svg:last-child {
+  transition: transform 220ms var(--ease);
+}
+.language-control .language[aria-expanded='true'] > svg:last-child {
+  transform: rotate(180deg);
+}
+.language-panel {
+  left: auto;
+  right: 0;
+}
+.language-panel button {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  white-space: nowrap;
+  transition: background-color 180ms var(--ease);
+}
+.language-panel button:lang(ru) {
+  font-family: 'Inter', Arial, sans-serif;
+}
+.language-panel button[aria-checked='true'],
+.language-panel button:hover,
+.language-panel button:focus-visible {
+  background: white;
+}
+.language-panel:has(button[aria-checked='false']:hover) button[aria-checked='true'],
+.language-panel:has(button[aria-checked='false']:focus-visible) button[aria-checked='true'] {
+  background: transparent;
+}
+.language-panel button:focus-visible {
+  outline-offset: -2px;
 }
 :root:lang(ru) {
   --font-sans: 'Inter', 'Instrument Sans', Arial, sans-serif;
@@ -173,7 +201,7 @@
     font-size: 9px;
     line-height: 20px;
   }
-  :lang(ru) .billing-dock__offer span {
+  :lang(ru) .billing-dock__offer > span {
     font-size: 11px;
   }
   :lang(ru) .footer-columns .eyebrow {
@@ -198,7 +226,9 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .language-control .language {
+  .language-control .language,
+  .language-control .language > svg:last-child,
+  .language-panel button {
     transition: none;
   }
 }

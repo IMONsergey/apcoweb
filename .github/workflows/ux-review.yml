@@ -3,6 +3,8 @@ name: Cross-browser UX review
 on:
   push:
     branches: [work/contextual-billing-2026-10-05]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:

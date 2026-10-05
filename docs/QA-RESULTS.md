@@ -1,3 +1,15 @@
+# QA results — R5 language menu and motion
+
+Source `2e612c483a3f567bf12c6577c63cc345f70be0b5` extends released R4. Locked installation, all six engine checksums, lint, TypeScript, formatting and production build pass. Local browser archives are unavailable in this environment; no local browser pass is claimed. [Final matching-browser CI](https://github.com/IMONsergey/apcoweb/actions/runs/37305369987) passed **228/228**, 76 per Chromium/Firefox/WebKit, with **zero retries, skips or failures**. The independent [PR Chromium gate](https://github.com/IMONsergey/apcoweb/actions/runs/37305370031) passed 76/76.
+
+The seven new scenarios per engine cover menu appearance/semantics and keyboard behavior, 320–1440 menu bounds, normal/reduced text motion, retained form state and viewport coordinates, rapid locale switches, rolling prices in both directions and their final digits, pointer-hover marquee continuity, phone logo size and open-menu accessibility. All 69 prior scenarios remain.
+
+`screenshots/r5/` retains 20 lossless Chromium captures. CI retains 60 R5 captures across all three engines. EN/RU menus were inspected on phones/tablets/desktops, plus monthly/annual prices and real animation midpoints. The initial passing candidate's midpoint revealed a scroll-anchor viewport jump as RU content grew; the final source preserves viewport coordinates and verifies them. `qa-r5-summary.json` records provenance and the earlier candidate separately.
+
+The main workflow now runs the Chromium suite against the actual Pages URL after successful deployment. [PR #6](https://github.com/IMONsergey/apcoweb/pull/6) is the final release report for the merge SHA, deployment and live smoke. Following documentation/evidence commits preserve the tested runtime and tests byte for byte. Physical devices, product sign-in and checkout are outside this website-only verification.
+
+The R4 report below is historical evidence.
+
 # QA results — R4 mobile composition and EN/RU
 
 ## Source and gates
