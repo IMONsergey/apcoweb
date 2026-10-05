@@ -11,3 +11,5 @@ Visual evidence is in docs/screenshots/r4. Root files capture the initial publis
 GitHub Pages: https://imonsergey.github.io/apcoweb/. Only a successful main deployment plus the post-publication Chromium suite against APCO_BASE_URL=https://imonsergey.github.io/apcoweb/ establishes the final release; a green branch run alone does not. The PR release report records the resulting deployment and live smoke.
 
 Development port: 5187. Production preview: 4187. Do not disturb 5173 (another project). The dock remains contextual at <=1199 px, desktop billing remains at >=1200 px, and all approved 20% annual arithmetic is preserved. Figma must not be changed in a code-only task.
+
+The test-only follow-up PR is a test-only release continuation after PR #4: the live CTA check now waits for its responsive image and measures both rectangles atomically. The website/build is identical to the R4 release. Its final PR report is authoritative for the latest merge/deploy and production smoke; the initial 68-pass/1-retry result is preserved transparently in REVIEW-R4.md.

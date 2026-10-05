@@ -2,7 +2,7 @@
 
 ## Source and gates
 
-Final runtime/test source: `70d22b8f3dfb905f95135a14e445444a6d6a8a22`. PR #4 continues the already merged PR #3. The one code correction found by visual review is a narrow-tablet RU closing overlay extension; no assets, animation algorithms, prices, metric values or entitlements changed.
+Runtime source and original follow-up test source: `70d22b8f3dfb905f95135a14e445444a6d6a8a22`. PR #4 continues the already merged PR #3. The one code correction found by visual review is a narrow-tablet RU closing overlay extension; no assets, animation algorithms, prices, metric values or entitlements changed.
 
 Locked install, six-engine checksum verification, ESLint, TypeScript, Prettier and production build pass. Local Chromium smoke passes **69/69** with no skipped, flaky or unexpected results; targeted R4 passes **14/14**. [Final cross-browser gate](https://github.com/IMONsergey/apcoweb/actions/runs/37282442712) uses the Chromium/Firefox/WebKit revisions matching locked Playwright 1.63.0. **207/207 passed**, 69 per browser, with no skipped, flaky or failed scenarios. The R4 subset is 14 per browser (42 cross-browser checks).
 
@@ -23,3 +23,7 @@ The suite retains R3 billing visibility, keyboard/focus/zoom/modal suppression, 
 A successful main Pages deployment and the Chromium suite against the actual Pages URL are required after merge. The final PR release report identifies that deployment and production smoke. Documentation-only follow-up commits must leave the tested runtime/test source unchanged.
 
 RU is working localization, not client-approved marketing copy. Prepared product illustrations retain embedded English UI. Browser-engine automation does not certify every physical iOS/Android device or keyboard. Product authentication, checkout and paid API requests were not exercised; the existing review deployment remains noindex. Figma and all six supplied rendering/data modules are unchanged.
+
+## Production test synchronization
+
+The first live Pages smoke after PR #4 recorded 68 first-attempt passes and one successful retry. The new closing-CTA test sampled responsive geometry before the selected Start image finished loading; its failure screenshot showed the image was still absent. The test now waits for image readiness and measures the artwork and cover rectangles atomically in the same browser evaluation. The coverage requirements are unchanged and no website source or compiled asset changes. The test-only follow-up PR records the final validation/deployment for this test-only continuation.
