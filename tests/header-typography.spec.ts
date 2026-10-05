@@ -97,7 +97,14 @@ for (const width of [320, 390, 768, 1440]) {
               el.clientWidth > 0,
           )
           .filter((el) => el.scrollWidth > el.clientWidth + 2)
-          .map((el) => el.className || el.tagName),
+          .map((el) => ({
+            id: el.id,
+            className: el.className,
+            text: el.textContent,
+            width: el.clientWidth,
+            scrollWidth: el.scrollWidth,
+            fontSize: getComputedStyle(el).fontSize,
+          })),
       );
     expect(overflow).toEqual([]);
     if (width >= 1200) await page.locator('.desktop-nav a[href="#pricing"]').click();
