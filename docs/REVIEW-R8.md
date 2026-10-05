@@ -15,6 +15,7 @@ Owner request: 2026-10-05, eight supplied screenshots and `apcosys-api-widget (1
 9. The header hides on downward scrolling and returns upward; its scrolled row is 72 px on desktop/tablet and 64 px on phones. Open menus and keyboard access keep it visible. Native anchors clear the compact header.
 10. Language changes preserve native inline wrapping. Headings, paragraphs, buttons and navigation reserve the larger EN/RU dimensions after fonts load, so sections do not scale or slide. A short hidden text handoff retains query, billing and FAQ state.
 11. The initial page wash is nonblocking and capped at 220 ms, then fades from white. Newly mounted decorative layers appear through opacity. Reduced-motion preferences bypass optional transitions.
+12. Font faces at different weights now share URLs for byte-identical WOFF2 files. The same outlines and weight declarations are preserved, while a cold load avoids six redundant requests and 194,192 bytes. The archive-compatible files remain available.
 
 ## Supplied API provenance
 

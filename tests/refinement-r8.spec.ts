@@ -121,6 +121,11 @@ test('R8 API demo loads near its section, runs the supplied sequence and pauses 
   const loaded: string[] = [];
   page.on('request', (request) => loaded.push(request.url()));
   await visit(page, 1920);
+  expect([...new Set(loaded.filter((url) => /instrument-sans.*\.woff2/.test(url)))]).toHaveLength(
+    1,
+  );
+  expect([...new Set(loaded.filter((url) => /inter-cyrillic.*\.woff2/.test(url)))]).toHaveLength(1);
+  expect([...new Set(loaded.filter((url) => /inter-latin.*\.woff2/.test(url)))]).toHaveLength(1);
   expect(loaded.some((url) => /ApiDemoMount-.*\.js/.test(url))).toBe(false);
   await expect(page.locator('api-developer-demo')).toHaveCount(0);
   await page.locator('#api').scrollIntoViewIfNeeded();
@@ -142,7 +147,9 @@ test('R8 API demo loads near its section, runs the supplied sequence and pauses 
   await page
     .locator('.api-demo-frame')
     .screenshot({ path: info.outputPath('r8-api-response-1920.png') });
-  await demo.evaluate((node) => Reflect.get(node, '_timeline').time(26, false));
+  await demo.evaluate((node) => {
+    Reflect.get(node, '_timeline').time(26, false);
+  });
   await expect(demo.locator('.completion-card')).toBeVisible();
   await page
     .locator('.api-demo-frame')
@@ -214,4 +221,30 @@ test('R8 footer underline provides pointer and keyboard feedback without changin
   await page.keyboard.press('Shift+Tab');
   await expect(link).toBeFocused();
   await expect.poll(scale).toBe(1);
+});
+
+test('R8 complete reading-flow audit evidence at phone and large desktop widths', async ({
+  page,
+}, info) => {
+  for (const width of [390, 1920]) {
+    await visit(page, width);
+    await page.screenshot({ path: info.outputPath(`r8-flow-hero-${width}.png`) });
+    for (const [name, selector] of [
+      ['search', '.search-scene'],
+      ['audiences', '#use-cases'],
+      ['data', '#data'],
+      ['api', '#api'],
+      ['pricing', '#pricing'],
+      ['closing', '.closing-scene'],
+      ['footer', '.footer'],
+    ] as const) {
+      const section = page.locator(selector);
+      await section.scrollIntoViewIfNeeded();
+      if (name === 'audiences') await expect(section.locator('.visual svg').first()).toBeVisible();
+      if (name === 'data') await expect(section.locator('.visual canvas').first()).toBeVisible();
+      if (name === 'api')
+        await expect(section.locator('.api-demo-frame')).toHaveAttribute('data-ready', 'true');
+      await section.screenshot({ path: info.outputPath(`r8-flow-${name}-${width}.png`) });
+    }
+  }
 });

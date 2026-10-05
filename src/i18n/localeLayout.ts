@@ -14,6 +14,7 @@ export function warmLocaleFonts() {
 }
 
 const blocks = 'main h1, main h2, main h3, main p, footer .eyebrow';
+const sections = 'main section';
 const navText = '.site-header .nav-trigger > .locale-text';
 const controls = '.double-button';
 const excluded = '[aria-hidden="true"], .sr-only, dialog:not([open]), .visual';
@@ -50,6 +51,8 @@ export function installLocaleLayout(site: HTMLElement) {
     const otherNav = Array.from(mirror.querySelectorAll<HTMLElement>(navText));
     const liveControls = Array.from(site.querySelectorAll<HTMLElement>(controls));
     const otherControls = Array.from(mirror.querySelectorAll<HTMLElement>(controls));
+    const liveSections = Array.from(site.querySelectorAll<HTMLElement>(sections));
+    const otherSections = Array.from(mirror.querySelectorAll<HTMLElement>(sections));
     mirror.lang = other;
     mirror.removeAttribute('id');
     mirror.dataset.localeSizing = 'true';
@@ -63,6 +66,7 @@ export function installLocaleLayout(site: HTMLElement) {
       visibility: 'hidden',
       pointerEvents: 'none',
       contain: 'layout style',
+      fontFamily: 'var(--font-sans)',
     });
     mirror.style.setProperty(
       '--font-sans',
@@ -70,6 +74,8 @@ export function installLocaleLayout(site: HTMLElement) {
     );
     // Never connect a second renderer, custom element, or dialog during sizing.
     mirror.querySelectorAll('.visual, api-developer-demo, dialog').forEach((node) => node.remove());
+    // Inert radio inputs still join native groups when connected. Keep sizing isolated.
+    mirror.querySelectorAll('input').forEach((node) => node.removeAttribute('name'));
     mirror.querySelectorAll<HTMLElement>('[data-locale-key]').forEach((node) => {
       const key = node.dataset.localeKey!;
       const values = node.dataset.localeValues
@@ -97,7 +103,7 @@ export function installLocaleLayout(site: HTMLElement) {
       for (const { node, counterpart, size } of widths) {
         if (!originals.has(node))
           originals.set(node, { height: node.style.minHeight, width: node.style.minWidth });
-        node.style.minWidth = counterpart.style.minWidth = `min(${size}px, 100%)`;
+        node.style.minWidth = counterpart.style.minWidth = size + 'px';
         if (node.matches(controls))
           node.dataset.localeSized = counterpart.dataset.localeSized = 'true';
       }
@@ -110,12 +116,34 @@ export function installLocaleLayout(site: HTMLElement) {
         return [
           {
             node,
+            counterpart,
             size: Math.ceil(Math.max(rect.height, counterpart.getBoundingClientRect().height)),
           },
         ];
       });
       // Batch writes after all measurements, avoiding read/write loops.
-      for (const { node, size } of heights) {
+      for (const { node, counterpart, size } of heights) {
+        if (!originals.has(node))
+          originals.set(node, { height: node.style.minHeight, width: node.style.minWidth });
+        node.style.minHeight = counterpart.style.minHeight = size + 'px';
+      }
+      // Reserve the native section extent too, including locale-dependent tag/metric wrapping.
+      const extents = liveSections.flatMap((node, index) => {
+        const counterpart = otherSections[index];
+        if (!counterpart || node.closest(excluded)) return [];
+        return [
+          {
+            node,
+            size: Math.ceil(
+              Math.max(
+                node.getBoundingClientRect().height,
+                counterpart.getBoundingClientRect().height,
+              ),
+            ),
+          },
+        ];
+      });
+      for (const { node, size } of extents) {
         if (!originals.has(node))
           originals.set(node, { height: node.style.minHeight, width: node.style.minWidth });
         node.style.minHeight = size + 'px';

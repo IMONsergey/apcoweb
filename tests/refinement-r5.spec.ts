@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { selectLanguage } from './helpers/locale';
+import { revealHeader, selectLanguage } from './helpers/locale';
 
 const visit = async (page: Page, width = 1440) => {
   await page.setViewportSize({ width, height: 1000 });
@@ -48,6 +48,7 @@ test('language disclosure and Pricing use the existing soft navigation treatment
   await expect(pricing).toHaveCSS('border-radius', '12px');
   await language.click();
   await pricing.click();
+  await revealHeader(page);
   await expect(language).toHaveAttribute('aria-expanded', 'false');
   await expect(page.locator('dialog[open]')).toHaveCount(0);
 });

@@ -44,6 +44,14 @@ html {
 .billing-dock__offer > span {
   min-height: 0;
 }
+.billing-dock {
+  min-height: 76px;
+}
+@media (max-width: 375px) {
+  .billing-dock {
+    min-height: 72px;
+  }
+}
 .comparison-action .double-button__label {
   justify-content: flex-start;
 }
