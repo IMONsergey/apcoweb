@@ -60,7 +60,8 @@ export function LanguageBadge({
   const { locale, setLocale, t } = useLocale();
   const focusOption = (index: number) => {
     requestAnimationFrame(() => {
-      panel.current?.querySelectorAll<HTMLButtonElement>('button')[index]?.focus();
+      const options = panel.current?.querySelectorAll<HTMLButtonElement>('button');
+      options?.[index]?.focus({ preventScroll: true });
     });
   };
   const close = () => {
@@ -88,7 +89,7 @@ export function LanguageBadge({
           : event.key === 'End'
             ? 1
             : (current + (event.key === 'ArrowDown' ? 1 : -1) + options.length) % options.length;
-      options[next]?.focus();
+      options[next]?.focus({ preventScroll: true });
     }
   };
   return (

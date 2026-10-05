@@ -4,7 +4,7 @@ This is the React/TypeScript marketing website, not the authenticated SaaS appli
 
 ## Read first
 
-- docs/REVIEW-R6.md: quiet opacity-only language changes; this replaces R5 text movement/blur. Preserve the other R5 interactions.
+- docs/REVIEW-R6.md: quiet inline-text fades, a shared layout morph and language-menu flags; this replaces R5 text movement/blur. Preserve the other R5 interactions.
 
 - docs/REVIEW-R5.md: styled EN/RU disclosure, text transitions, digit reels and continuous pointer-hover marquee. This extends R4; preserve keyboard-focus pause and reduced motion.
 

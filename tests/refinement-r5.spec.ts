@@ -136,6 +136,10 @@ const sampleLocaleFade = (page: Page, time: number) =>
       .getAnimations()
       .filter((animation) => animation.id.startsWith('locale-text-'));
     animations.forEach((animation) => (animation.currentTime = time));
+    document
+      .getAnimations()
+      .filter((animation) => animation.id === 'locale-layout')
+      .forEach((animation) => (animation.currentTime = time));
     const originals = Reflect.get(window, 'r6OriginalLines') as {
       node: HTMLElement;
       text: string;
@@ -185,6 +189,13 @@ const finishOutgoing = (page: Page) =>
     const incoming = document
       .getAnimations()
       .filter((animation) => animation.id === 'locale-text-in');
+    document
+      .getAnimations()
+      .filter((animation) => animation.id === 'locale-layout')
+      .forEach((animation) => {
+        animation.pause();
+        animation.currentTime = 0;
+      });
     incoming.forEach((animation) => {
       animation.pause();
       animation.currentTime = 0;
@@ -195,7 +206,7 @@ const resumeLocale = (page: Page) =>
   page.evaluate(() =>
     document
       .getAnimations()
-      .filter((animation) => animation.id.startsWith('locale-text-'))
+      .filter((animation) => animation.id.startsWith('locale-'))
       .forEach((animation) => animation.play()),
   );
 
@@ -316,7 +327,13 @@ test('language dissolve stays in place without overlapping EN and RU on phone an
             frame.filter === 'none',
         ),
       ).toBe(true);
-      expect(incoming.map((frame) => frame.lines)).toEqual(hidden.map((frame) => frame.lines));
+      // Container dimensions may morph together; individual words never translate or blur.
+      const overlap = await page.evaluate(() => {
+        const title = document.querySelector('.hero h1')!.getBoundingClientRect();
+        const copy = document.querySelector('.hero .lead')!.getBoundingClientRect();
+        return title.bottom > copy.top + 1;
+      });
+      expect(overlap).toBe(false);
       await expect(page.locator('.locale-text-ghost')).toHaveCount(0);
       await page.screenshot({ path: info.outputPath(`dissolve-${width}-${locale}-in.png`) });
       await resumeLocale(page);
