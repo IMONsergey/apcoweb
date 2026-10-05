@@ -1,0 +1,30 @@
+name: Temporary R8 browser cache
+on:
+  push:
+    branches: [work/browser-cache-r8-2026-10-05]
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: |
+          tar -czf /tmp/apco-playwright-browsers.tgz -C /home/runner/.cache ms-playwright
+          sha256sum /tmp/apco-playwright-browsers.tgz > /tmp/apco-playwright-browsers.sha256
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: apco-playwright-browsers-r8
+          retention-days: 1
+          path: |
+            /tmp/apco-playwright-browsers.tgz
+            /tmp/apco-playwright-browsers.sha256
