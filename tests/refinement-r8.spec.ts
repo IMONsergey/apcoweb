@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { writeFile } from 'node:fs/promises';
 import { revealHeader, selectLanguage } from './helpers/locale';
 
 async function visit(page: Page, width = 1440) {
@@ -246,5 +247,29 @@ test('R8 complete reading-flow audit evidence at phone and large desktop widths'
         await expect(section.locator('.api-demo-frame')).toHaveAttribute('data-ready', 'true');
       await section.screenshot({ path: info.outputPath(`r8-flow-${name}-${width}.png`) });
     }
+    // A full-page record keeps fixed navigation out of the middle of section crops.
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await expect(page.locator('.site-header')).toHaveAttribute('data-hidden', 'false');
+    await page.screenshot({ path: info.outputPath(`r8-flow-full-${width}.png`), fullPage: true });
+    const geometry: Record<string, { x: number; y: number; width: number; height: number }> = {};
+    for (const [name, selector] of [
+      ['hero', '.hero'],
+      ['search', '.search-scene'],
+      ['audiences', '#use-cases'],
+      ['data', '#data'],
+      ['api', '#api'],
+      ['pricing', '#pricing'],
+      ['closing', '.closing-scene'],
+      ['footer', '.footer'],
+    ] as const) {
+      geometry[name] = await page.locator(selector).evaluate((node) => {
+        const rect = node.getBoundingClientRect();
+        return { x: rect.x + scrollX, y: rect.y + scrollY, width: rect.width, height: rect.height };
+      });
+    }
+    await writeFile(
+      info.outputPath(`r8-flow-geometry-${width}.json`),
+      JSON.stringify(geometry, null, 2),
+    );
   }
 });

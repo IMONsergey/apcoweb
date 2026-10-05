@@ -222,6 +222,10 @@ html {
     --anchor-header-height: 64px;
   }
   /* Show only the preserved brand/menu region, never the baked body under live copy. */
+  .closing-scene--compact::before,
+  .closing-scene--compact::after {
+    display: none;
+  }
   .closing-scene--compact > picture {
     height: 54px;
     overflow: hidden;

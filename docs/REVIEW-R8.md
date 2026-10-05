@@ -10,7 +10,7 @@ Owner request: 2026-10-05, eight supplied screenshots and `apcosys-api-widget (1
 4. Footer links get a left-to-right underline with the existing soft color transition; keyboard focus gets the same cue.
 5. At <=1199 px, the search placeholder is “Domain, IP or attribute”; “It’s free” appears below it in the accent color. Error copy has its own nonoverlapping line.
 6. The compact billing offer is left aligned and vertically centered. The comparison action label is left aligned.
-7. The phone closing scene clips the source bitmap to its brand/menu strip, keeping baked body content behind the live account/copy from showing through. Original artwork is preserved.
+7. The phone closing scene clips the source bitmap to its brand/menu strip and removes clipped decorative backing sheets, keeping both baked content and tinted strips from showing behind the live account/copy. Original artwork is preserved.
 8. The supplied API sequence replaces the bitmap after its lazy chunk mounts. A source-image fallback keeps the section usable if that optional chunk fails.
 9. The header hides on downward scrolling and returns upward; its scrolled row is 72 px on desktop/tablet and 64 px on phones. Open menus and keyboard access keep it visible. Native anchors clear the compact header.
 10. Language changes preserve native inline wrapping. Headings, paragraphs, buttons and navigation reserve the larger EN/RU dimensions after fonts load, so sections do not scale or slide. A short hidden text handoff retains query, billing and FAQ state.
