@@ -104,5 +104,18 @@
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
+  },
+  "testReadinessFollowup": {
+    "scope": "Test synchronization only; runtime assets remain identical to sourceCommit. Latest verification and deployment are in the PR release report.",
+    "initialProductionStats": {
+      "startTime": "2026-10-05T08:29:51.957Z",
+      "duration": 489730.298,
+      "expected": 68,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 1
+    },
+    "fix": "Wait for the selected responsive image and measure cover/art rectangles in a single browser evaluation. Coverage thresholds unchanged.",
+    "reportLocation": "Final test-only follow-up pull-request description"
   }
 }

@@ -186,15 +186,30 @@ test('RU closing copy fully covers the prepared English CTA on tablet and deskto
     const scene = page.locator('.closing-scene');
     await scene.scrollIntoViewIfNeeded();
     await page.evaluate(() => document.fonts.ready);
-    const art = (await scene.boundingBox())!;
     const copy = scene.locator('.closing-copy--translated');
     await expect(copy).toBeVisible();
-    const cover = (await copy.boundingBox())!;
-    // Coordinates are the visible CTA in each unchanged source image, verified in R3.
-    expect(cover.x).toBeLessThanOrEqual(art.x + art.width * x);
-    expect(cover.x + cover.width).toBeGreaterThanOrEqual(art.x + art.width * (x + w));
-    expect(cover.y).toBeLessThanOrEqual(art.y + art.height * (y - h / 2));
-    expect(cover.y + cover.height).toBeGreaterThan(art.y + art.height * (y + h / 2) + 1);
+    // Responsive assets load asynchronously on Pages. Wait for the selected image,
+    // then measure both rectangles in one frame so scroll anchoring cannot split the sample.
+    await expect
+      .poll(() =>
+        scene.evaluate(
+          (node, region) => {
+            const image = node.querySelector('img')!;
+            const art = node.getBoundingClientRect();
+            const cover = node.querySelector('.closing-copy--translated')!.getBoundingClientRect();
+            return {
+              imageReady: image.complete && image.naturalWidth > 0,
+              left: cover.left <= art.left + art.width * region.x,
+              right: cover.right >= art.left + art.width * (region.x + region.w),
+              top: cover.top <= art.top + art.height * (region.y - region.h / 2),
+              bottom: cover.bottom > art.top + art.height * (region.y + region.h / 2) + 1,
+            };
+          },
+          // Coordinates of the visible CTA in each unchanged source image, verified in R3.
+          { x, y, w, h },
+        ),
+      )
+      .toEqual({ imageReady: true, left: true, right: true, top: true, bottom: true });
     const action = copy.getByRole('link', { name: 'Попробовать поиск', exact: true });
     await expect(action).toHaveAttribute('href', 'https://apcosys.net/search');
     await expect(action).toBeVisible();
