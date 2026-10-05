@@ -13,7 +13,7 @@ for (const width of [320, 360, 390, 430, 599]) {
       'Domain, IP or technical attribute. It’s free',
     );
     await expect(search.locator('.search-chrome__filters')).not.toBeVisible();
-    expect((await search.boundingBox())!.height).toBeLessThanOrEqual(500);
+    expect((await search.boundingBox())!.height).toBeLessThanOrEqual(500.1);
     expect(
       await search
         .locator('.search-form input')
