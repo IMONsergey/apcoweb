@@ -38,7 +38,7 @@ for (const width of [320, 360, 390, 430, 599]) {
         cards: cards.map((r) => ({ x: r.x, y: r.y, b: r.bottom, w: r.width, h: r.height })),
         globe: { x: globe.x, w: globe.width, y: globe.y, h: globe.height },
         actionTop: actions.top,
-        width: innerWidth,
+        width: document.documentElement.clientWidth,
       };
     });
     await expect(page.locator('.data-visual-field .signal-globe canvas')).toBeVisible();
