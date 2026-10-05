@@ -148,6 +148,15 @@ test('visible dock is before the plan cards in natural Tab order', async ({
   const firstAction = page.locator('#plan-free .plan-button');
   await firstAction.focus();
   await expect(page.locator('.billing-dock')).toBeVisible();
+  // Visibility updates before the browser rebuilds its sequential-focus candidates.
+  // Wait for the newly exposed fixed control to be painted, not an arbitrary delay.
+  await expect(page.locator('.billing-dock')).not.toHaveAttribute('inert', '');
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+      }),
+  );
   await page.keyboard.press(previousItem);
   await expect(page.getByRole('radio', { name: 'Monthly', exact: true })).toBeFocused();
   await page.keyboard.press('ArrowLeft');
