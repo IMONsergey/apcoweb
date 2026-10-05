@@ -11,6 +11,7 @@ import { flushSync } from 'react-dom';
 import { LocaleContext } from './context';
 import { translate, type Locale } from './messages';
 import { transitionLocaleText, type StopLocaleTransition } from './textTransition';
+import { installLocaleLayout } from './localeLayout';
 const preferenceKey = 'apcosys.landing.language';
 const productPreferenceKey = 'i18nextLng';
 const valid = (value: unknown): value is Locale => value === 'en' || value === 'ru';
@@ -53,6 +54,10 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     document.title =
       locale === 'ru' ? 'APCOSYS — Начните с запроса.' : 'APCOSYS — Start with a query.';
   }, [locale]);
+  useLayoutEffect(() => {
+    const site = document.querySelector<HTMLElement>('.site');
+    if (site) return installLocaleLayout(site);
+  }, []);
   useEffect(() => {
     const motion = matchMedia('(prefers-reduced-motion: reduce)');
     const stopMotion = () => {

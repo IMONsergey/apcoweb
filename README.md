@@ -4,6 +4,8 @@ React + TypeScript + Vite implementation of the APCOSYS landing page. Plain CSS,
 
 **Published preview:** https://imonsergey.github.io/apcoweb/
 
+Current review: [R8 refinements](docs/REVIEW-R8.md), [six-step UX audit](docs/AUDIT-R8.md), [verification evidence](docs/QA-RESULTS.md).
+
 ## Development
 
 ```sh
@@ -28,8 +30,10 @@ npm run test:smoke  # Chromium checks used in CI
 - `src/components/ui/`: shared split button, icon and native dialog.
 - `src/content/site.ts`: metrics, plans, navigation, carousel and footer data.
 - `src/i18n/`: EN/RU copy, quiet locale transitions and the shared Typograf pipeline. Translated text is formatted after interpolation; input queries, URLs and source artwork keep their original syntax.
+- `src/i18n/localeLayout.ts`: one alternate-language sizing pass after fonts load and on viewport-width changes; no transformed section containers during language changes.
 - `src/styles/`: tokens, typefaces and responsive page styles.
 - `src/visuals/`: the supplied animation engines and their React wrappers.
+- `src/visuals/api/`: the supplied API demo; its GSAP dependency is in a separate lazy chunk, loaded near the API section.
 - `public/media/`: optimized local assets exported from Figma.
 - `tests/`: browser geometry, interactions, assets, accessibility and motion checks.
 - `docs/`: implementation decisions, content status and QA.

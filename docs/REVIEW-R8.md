@@ -1,0 +1,34 @@
+# R8 — responsive refinements and quiet interaction
+
+Owner request: 2026-10-05, eight supplied screenshots and `apcosys-api-widget (1).zip`. Baseline is the published R7 main merge `d7bbda47e2162808ddf29cf9da8762f0c5aa52d2`.
+
+## Resulting behavior
+
+1. At 1600–2000 px, body copy grows gradually from 18 to 20 px and secondary reading text from 13 to 15 px. Control sizes increase selectively; the main composition is preserved.
+2. The language menu fits its labels and flags instead of retaining a 182 px minimum width.
+3. Audience contour compositions are 7% smaller.
+4. Footer links get a left-to-right underline with the existing soft color transition; keyboard focus gets the same cue.
+5. At <=1199 px, the search placeholder is “Domain, IP or attribute”; “It’s free” appears below it in the accent color. Error copy has its own nonoverlapping line.
+6. The compact billing offer is left aligned and vertically centered. The comparison action label is left aligned.
+7. The phone closing scene clips the source bitmap to its brand/menu strip and removes clipped decorative backing sheets, keeping both baked content and tinted strips from showing behind the live account/copy. Original artwork is preserved.
+8. The supplied API sequence replaces the bitmap after its lazy chunk mounts. A source-image fallback keeps the section usable if that optional chunk fails.
+9. The header hides on downward scrolling and returns upward; its scrolled row is 72 px on desktop/tablet and 64 px on phones. Open menus and keyboard access keep it visible. Native anchors clear the compact header.
+10. Language changes preserve native inline wrapping. Headings, paragraphs, buttons and navigation reserve the larger EN/RU dimensions after fonts load, so sections do not scale or slide. A short hidden text handoff retains query, billing and FAQ state.
+11. The initial page wash is nonblocking and capped at 220 ms, then fades from white. Newly mounted decorative layers appear through opacity. Reduced-motion preferences bypass optional transitions.
+12. Font faces at different weights now share URLs for byte-identical WOFF2 files. The same outlines and weight declarations are preserved, while a cold load avoids six redundant requests and 194,192 bytes. The archive-compatible files remain available.
+
+## Supplied API provenance
+
+`src/visuals/api/api-developer-demo.js` is byte-identical to the archive's source, SHA-256 `7fdc54f8094f5f48ff2d445d5964f9295637c5f143e93a44bb6bf134934f681a`. The uploaded GSAP version is pinned as `gsap@3.13.0`; its license notice is retained. No archive, real credentials or account data is included in Git. The original six rendering/data modules still pass the source-manifest checks.
+
+The widget is an illustrative screen, not an interactive API client. It remains inert and outside keyboard order. The exact 2048:1511 ratio is reserved before loading. Its source lifecycle pauses offscreen/when hidden, renders a static successful response for reduced motion, and disposes GSAP context, observers and listeners. Shared GSAP is configured before the custom element is connected. Only this lazy chunk includes GSAP.
+
+## Validation and audit
+
+Locked installation, six source checksums, lint, TypeScript, Prettier and production build pass. Runtime/test source `960cf312ea4418e441c7108336301c1ea294abc7` passed **285/285** matching Chromium/Firefox/WebKit scenarios, 95 per engine, without failures, retries or skips in [run 37365675775](https://github.com/IMONsergey/apcoweb/actions/runs/37365675775). The same source passed all 285 local scenarios. The independent PR Chromium workflow was cancelled while queued; no pass is claimed for that run. Chromium is covered by the successful cross-browser run and local 95/95.
+
+The final fixes use explicit locale attributes and font inheritance, sample rendered font geometry after a paint, measure on viewport-width changes rather than page-height observation, and keep native anchor clearance constant at the compact header height. Font dimensions and inline wrapping remain native.
+
+The [six-step post-fix audit](AUDIT-R8.md) and seven inspected lossless captures in [screenshots/r8/](screenshots/r8/) retain current evidence. [qa-r8-summary.json](qa-r8-summary.json) records exact source, outcomes, build hashes and superseded candidates. Documentation-only evidence commits preserve runtime and tests byte for byte.
+
+PR #9 records the final main merge, successful Pages deployment and independent 95-scenario check against the actual published URL. A successful main deployment and published-asset hash comparison are required to establish publication.

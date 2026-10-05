@@ -14,10 +14,10 @@ import { ClosingSection } from './components/sections/ClosingSection';
 import { MotionProvider } from './components/visuals/MotionProvider';
 import { Visual } from './components/visuals/Visual';
 export function App() {
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
   return (
     <MotionProvider>
-      <div id="top" className="site">
+      <div id="top" className="site" lang={locale}>
         <a href="#main" className="skip-link">
           <LocaleText>{t('Skip to content')}</LocaleText>
         </a>

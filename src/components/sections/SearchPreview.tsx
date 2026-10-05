@@ -7,8 +7,10 @@ import { SearchChrome } from './SearchChrome';
 import { TrustMarquee } from './TrustMarquee';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 export function SearchForm({ className = '' }: { className?: string }) {
   const { t } = useLocale();
+  const compact = useMediaQuery('(max-width: 1199px)');
   const id = useId();
   const input = useRef<HTMLInputElement>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -60,11 +62,15 @@ export function SearchForm({ className = '' }: { className?: string }) {
           setQuery(event.target.value);
           setError(false);
         }}
-        placeholder={t('Domain, IP or technical attribute. It’s free')}
+        placeholder={t(
+          compact ? 'Domain, IP or attribute' : 'Domain, IP or technical attribute. It’s free',
+        )}
         autoComplete="off"
         spellCheck={false}
         aria-invalid={error || undefined}
-        aria-describedby={error ? `${id}-error` : undefined}
+        aria-describedby={
+          [compact && `${id}-hint`, error && `${id}-error`].filter(Boolean).join(' ') || undefined
+        }
       />
       {query && !submitting && (
         <button
@@ -92,6 +98,11 @@ export function SearchForm({ className = '' }: { className?: string }) {
           <Icon name="search" />
         )}
       </button>
+      {compact && (
+        <span className="search-free-note" id={`${id}-hint`}>
+          <LocaleText>{t('It’s free')}</LocaleText>
+        </span>
+      )}
       {error && (
         <span className="search-error" id={`${id}-error`} role="alert">
           <LocaleText>{t('Enter a domain, IP or technical attribute.')}</LocaleText>

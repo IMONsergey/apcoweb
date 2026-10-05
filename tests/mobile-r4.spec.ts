@@ -11,8 +11,9 @@ for (const width of [320, 360, 390, 430, 599]) {
     await expect(search.locator('h3')).toHaveText('One query. A closer look.');
     await expect(page.getByRole('searchbox')).toHaveAttribute(
       'placeholder',
-      /Domain, IP\sor\stechnical attribute\. It’s free/,
+      /Domain, IP\sor\sattribute/,
     );
+    await expect(search.locator('.search-free-note')).toHaveText('It’s free');
     await expect(search.locator('.search-chrome__filters')).not.toBeVisible();
     expect((await search.boundingBox())!.height).toBeLessThanOrEqual(500.1);
     expect(
@@ -72,7 +73,7 @@ for (const width of [320, 360, 390, 430, 599]) {
   });
 }
 
-test('centered accent billing text preserves the contextual control', async ({ page }) => {
+test('left-aligned accent billing text preserves the contextual control', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('./', { waitUntil: 'networkidle' });
   await page.locator('#plan-plus').scrollIntoViewIfNeeded();
@@ -82,7 +83,7 @@ test('centered accent billing text preserves the contextual control', async ({ p
     align: getComputedStyle(el).textAlign,
     colors: [...el.children].map((n) => getComputedStyle(n).color),
   }));
-  expect(style.align).toBe('center');
+  expect(style.align).toBe('left');
   expect(style.colors).toEqual(['rgb(3, 122, 143)', 'rgb(3, 122, 143)']);
   await page.getByRole('radio', { name: 'Annually', exact: true }).check();
   await expect(page.locator('#plan-plus .price-amount')).toHaveText('$32');

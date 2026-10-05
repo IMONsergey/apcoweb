@@ -3,7 +3,7 @@ import { useLocale } from '../../i18n/context';
 import { DoubleButton } from '../ui/DoubleButton';
 import { Visual } from '../visuals/Visual';
 export function AudienceSection() {
-  const { t, locale } = useLocale();
+  const { t } = useLocale();
   return (
     <section id="use-cases" className="audiences section-space" aria-labelledby="audiences-title">
       <div className="container">
@@ -20,7 +20,7 @@ export function AudienceSection() {
             <div className="audience-copy">
               <h3>
                 <LocaleText className="locale-text--lines">
-                  {locale === 'ru' ? 'Для исследователей' : 'For security\nresearchers'}
+                  {t('For security\nresearchers')}
                 </LocaleText>
               </h3>
               <p>
@@ -57,9 +57,7 @@ export function AudienceSection() {
             </div>
             <div className="audience-copy">
               <h3>
-                <LocaleText className="locale-text--lines">
-                  {locale === 'ru' ? 'Для команд безопасности' : 'For security\nteams'}
-                </LocaleText>
+                <LocaleText className="locale-text--lines">{t('For security\nteams')}</LocaleText>
               </h3>
               <p>
                 <LocaleText>
