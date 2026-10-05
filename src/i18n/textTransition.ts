@@ -92,10 +92,14 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
     animations.forEach((animation) => animation.cancel());
     ghosts.forEach((ghost) => ghost.remove());
     delete document.documentElement.dataset.localeTransition;
-    window.removeEventListener('scroll', stop);
+    window.removeEventListener('wheel', stop);
+    window.removeEventListener('touchmove', stop);
     window.removeEventListener('resize', stop);
   };
-  window.addEventListener('scroll', stop, { passive: true });
+  // Translation/font reflow can deliver a queued scroll event after commit. Only an
+  // intentional gesture cancels these outgoing copies; native reflow must not erase the swap.
+  window.addEventListener('wheel', stop, { passive: true });
+  window.addEventListener('touchmove', stop, { passive: true });
   window.addEventListener('resize', stop);
   void Promise.all(animations.map((animation) => animation.finished.catch(() => undefined))).then(
     stop,

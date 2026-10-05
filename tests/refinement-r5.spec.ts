@@ -92,6 +92,29 @@ test('locale text crossfades, rapid changes settle, and form state stays mounted
     node.setAttribute('data-original-input', '');
     (node as HTMLInputElement).blur();
   });
+  // Freeze the app's own animation in the same click turn, after React handles it.
+  // Cross-browser assertions and screenshots must not race a 360 ms transition.
+  await page.evaluate(() => {
+    const freeze = (event: MouseEvent) => {
+      if (
+        !(event.target instanceof Element) ||
+        !event.target.closest('.language-panel button[lang="ru"]')
+      )
+        return;
+      document.removeEventListener('click', freeze);
+      document
+        .getAnimations()
+        .filter((animation) => {
+          const target = (animation.effect as KeyframeEffect).target;
+          return target instanceof HTMLElement && target.closest('.locale-text,.locale-text-ghost');
+        })
+        .forEach((animation) => {
+          animation.pause();
+          animation.currentTime = 180;
+        });
+    };
+    document.addEventListener('click', freeze);
+  });
   await selectLanguage(page, 'ru');
   await expect(page.locator('html')).toHaveAttribute('data-locale-transition', 'ru');
   expect(await page.locator('.locale-text-ghost').count()).toBeGreaterThan(0);
@@ -107,18 +130,6 @@ test('locale text crossfades, rapid changes settle, and form state stays mounted
         ),
       ),
   ).toBe(true);
-  await page.evaluate(() => {
-    document
-      .getAnimations()
-      .filter((animation) => {
-        const target = (animation.effect as KeyframeEffect).target;
-        return target instanceof HTMLElement && target.closest('.locale-text,.locale-text-ghost');
-      })
-      .forEach((animation) => {
-        animation.pause();
-        animation.currentTime = 180;
-      });
-  });
   await page.screenshot({ path: info.outputPath('language-transition-midpoint.png') });
   await page.evaluate(() =>
     document
