@@ -1,5 +1,6 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
+import { noBreakNumber } from '../../i18n/typography';
 import { useRef, useState } from 'react';
 import { MobileBillingDock } from './MobileBillingDock';
 import { plans, productUrl, supportEmail } from '../../content/site';
@@ -87,7 +88,7 @@ export function PricingSection() {
                     <dt>
                       <LocaleText>{t('Credits')}</LocaleText>
                     </dt>
-                    <dd>{plan.credits}</dd>
+                    <dd>{noBreakNumber(plan.credits)}</dd>
                   </div>
                   <div>
                     <dt>
@@ -196,7 +197,7 @@ export function PricingSection() {
                   <LocaleText>{t('Credits')}</LocaleText>
                 </th>
                 {plans.map((p) => (
-                  <td key={p.id}>{p.credits}</td>
+                  <td key={p.id}>{noBreakNumber(p.credits)}</td>
                 ))}
               </tr>
               <tr>
@@ -259,7 +260,7 @@ export function PricingSection() {
                 <dt>
                   <LocaleText>{t('Credits')}</LocaleText>
                 </dt>
-                <dd>{selected.credits}</dd>
+                <dd>{noBreakNumber(selected.credits)}</dd>
               </div>
               <div>
                 <dt>

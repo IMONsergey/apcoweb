@@ -11,7 +11,7 @@ for (const width of [320, 360, 390, 430, 599]) {
     await expect(search.locator('h3')).toHaveText('One query. A closer look.');
     await expect(page.getByRole('searchbox')).toHaveAttribute(
       'placeholder',
-      'Domain, IP or technical attribute. It’s free',
+      /Domain, IP\sor\stechnical attribute\. It’s free/,
     );
     await expect(search.locator('.search-chrome__filters')).not.toBeVisible();
     expect((await search.boundingBox())!.height).toBeLessThanOrEqual(500.1);

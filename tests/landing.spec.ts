@@ -90,11 +90,12 @@ test('desktop disclosure menus, keyboard closing and local anchors', async ({ pa
   await expect(trigger).toHaveAttribute('aria-expanded', 'false');
   await expect(trigger).toBeFocused();
   await page.getByRole('link', { name: 'See how it works', exact: true }).click();
-  expect(
-    await page.evaluate(() =>
-      Math.abs(document.getElementById('how-it-works')!.getBoundingClientRect().top),
-    ),
-  ).toBeLessThan(80);
+  const anchor = await page.evaluate(() => ({
+    top: document.getElementById('how-it-works')!.getBoundingClientRect().top,
+    headerBottom: document.querySelector('header')!.getBoundingClientRect().bottom,
+  }));
+  expect(anchor.top).toBeGreaterThanOrEqual(anchor.headerBottom + 23);
+  expect(anchor.top).toBeLessThanOrEqual(anchor.headerBottom + 25);
 });
 
 test('mobile navigation scroll, dismissal, focus restoration', async ({ page }) => {

@@ -21,7 +21,8 @@ export function Hero() {
               {t(
                 'Search internet-facing hosts by IP, domain, port, service or technology, see what runs on them and',
               )}
-            </LocaleText>{' '}
+            </LocaleText>
+            {'\u00a0'}
             <mark>
               <LocaleText>{t('refine your search as you go.')}</LocaleText>
             </mark>
