@@ -179,28 +179,31 @@ const finishOutgoing = (page: Page) =>
     const outgoing = document
       .getAnimations()
       .filter((animation) => animation.id === 'locale-text-out');
-    const finished = Promise.all(outgoing.map((animation) => animation.finished));
-    outgoing.forEach((animation) => animation.finish());
-    await finished;
-    // Let the application's completion microtasks perform the hidden handoff before the next paint.
-    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
-    await document.fonts.ready;
-    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
-    const incoming = document
-      .getAnimations()
-      .filter((animation) => animation.id === 'locale-text-in');
-    document
-      .getAnimations()
-      .filter((animation) => animation.id === 'locale-layout')
-      .forEach((animation) => {
-        animation.pause();
-        animation.currentTime = 0;
+    if (!outgoing.length) throw new Error('The application has no outgoing language animation');
+    const before = document.documentElement.lang;
+    // Capture the handoff in its own microtask, before a busy engine can finish the short fade.
+    const handoff = new Promise<number>((resolve) => {
+      const observer = new MutationObserver(() => {
+        if (document.documentElement.lang === before) return;
+        const incoming = document
+          .getAnimations()
+          .filter((animation) => animation.id === 'locale-text-in');
+        document
+          .getAnimations()
+          .filter(
+            (animation) => animation.id === 'locale-text-in' || animation.id === 'locale-layout',
+          )
+          .forEach((animation) => {
+            animation.pause();
+            animation.currentTime = 0;
+          });
+        observer.disconnect();
+        resolve(incoming.length);
       });
-    incoming.forEach((animation) => {
-      animation.pause();
-      animation.currentTime = 0;
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
     });
-    return incoming.length;
+    outgoing.forEach((animation) => animation.finish());
+    return handoff;
   });
 const resumeLocale = (page: Page) =>
   page.evaluate(() =>

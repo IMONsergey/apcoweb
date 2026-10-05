@@ -108,6 +108,10 @@ export function LanguageBadge({
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={panelId}
+        onMouseDown={(event) => {
+          event.preventDefault();
+          event.currentTarget.focus({ preventScroll: true });
+        }}
         onClick={() => (open ? close() : openMenu())}
         onKeyDown={(event) => {
           if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
@@ -139,6 +143,7 @@ export function LanguageBadge({
             aria-checked={locale === language.value}
             tabIndex={open && locale === language.value ? 0 : -1}
             lang={language.value}
+            onMouseDown={(event) => event.preventDefault()}
             onClick={() => {
               setLocale(language.value);
               close();

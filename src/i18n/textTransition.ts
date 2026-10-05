@@ -56,6 +56,8 @@ export function transitionLocaleText(
     return () => undefined;
   }
   const root = document.documentElement;
+  const scrollBehavior = root.style.scrollBehavior;
+  root.style.scrollBehavior = 'auto';
   // Stop a queued smooth focus scroll before fading; do not let the menu move the viewport.
   window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
   const scrollAnchoring = root.style.overflowAnchor;
@@ -119,6 +121,7 @@ export function transitionLocaleText(
     animations.forEach((animation) => animation.cancel());
     clearLayouts();
     root.style.overflowAnchor = scrollAnchoring;
+    root.style.scrollBehavior = scrollBehavior;
     delete root.dataset.localeTransition;
     window.removeEventListener('wheel', finishNow);
     window.removeEventListener('touchmove', finishNow);
