@@ -1,0 +1,17 @@
+{
+  "source": "b52211d3b39e6ef6ea8b45da0adcfc8147935dfa",
+  "captures": [
+    {
+      "path": "docs/screenshots/r7/sticky-header-390.webp",
+      "source": "test-results/header-typography-sticky-h-78d35-ypographic-reading-at-390px-chromium/sticky-header-390.png",
+      "bytes": 60586,
+      "sha256": "29029d3485d037ac4b27dfc1d2739260c39133ffde8ca105cc53574cb0d5ca95"
+    },
+    {
+      "path": "docs/screenshots/r7/sticky-header-1440.webp",
+      "source": "test-results/header-typography-sticky-h-f555e-pographic-reading-at-1440px-chromium/sticky-header-1440.png",
+      "bytes": 74044,
+      "sha256": "24da284bc633568902830e0a37b3d9f925937652bfd6f9a0b0334a63e683aaf3"
+    }
+  ]
+}
