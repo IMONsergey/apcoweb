@@ -21,11 +21,36 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
         return [];
       const range = document.createRange();
       range.selectNodeContents(node);
+      const textRect = range.getClientRects()[0];
+      let container = node;
+      if (style.display === 'inline') {
+        container = node.parentElement ?? node;
+        while (
+          container.parentElement &&
+          ['inline', 'contents'].includes(getComputedStyle(container).display)
+        )
+          container = container.parentElement;
+      }
+      const containerRect = container.getBoundingClientRect();
+      const containerStyle = getComputedStyle(container);
+      const insetLeft =
+        parseFloat(containerStyle.borderLeftWidth) + parseFloat(containerStyle.paddingLeft);
+      const insetRight =
+        parseFloat(containerStyle.borderRightWidth) + parseFloat(containerStyle.paddingRight);
+      const left = containerRect.left + insetLeft;
       return [
         {
           node,
           rect,
-          textRect: range.getClientRects()[0],
+          textRect,
+          left,
+          width: containerRect.width - insetLeft - insetRight,
+          // A translated span may start halfway through a line (inside a mark, for example).
+          // Preserve that first-line space as well as the complete wrapping container.
+          textIndent:
+            textRect && ['left', 'start'].includes(style.textAlign)
+              ? `${textRect.left - left}px`
+              : style.textIndent,
           text: node.textContent,
           lang: document.documentElement.lang,
           font: style.font,
@@ -59,7 +84,7 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
   const timing = { duration: 440, easing: 'linear' };
   const easing = 'cubic-bezier(0.4, 0, 0.2, 1)';
   for (const snapshot of before) {
-    const { node, rect, textRect, text, lang, ...typography } = snapshot;
+    const { node, rect, textRect, left, width, text, lang, ...typography } = snapshot;
     if (!node.isConnected || node.textContent === text) continue;
     const ghost = document.createElement('span');
     ghost.className = 'locale-text-ghost';
@@ -68,9 +93,9 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
     ghost.lang = lang;
     ghost.textContent = text;
     Object.assign(ghost.style, typography, {
-      left: `${rect.left}px`,
+      left: `${left}px`,
       top: `${rect.top}px`,
-      width: `${rect.width}px`,
+      width: `${width}px`,
     });
     document.body.append(ghost);
     // Inline font bounds differ from a block's line box (especially large titles).
@@ -79,7 +104,7 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
     range.selectNodeContents(ghost);
     const copyRect = range.getClientRects()[0];
     if (textRect && copyRect) {
-      ghost.style.left = `${rect.left + textRect.left - copyRect.left}px`;
+      ghost.style.left = `${left + textRect.left - copyRect.left}px`;
       ghost.style.top = `${rect.top + textRect.top - copyRect.top}px`;
     }
     ghosts.push(ghost);

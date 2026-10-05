@@ -4,6 +4,7 @@ Owner feedback replaces the R5 translated-text effect with a restrained dissolve
 
 - No translation, blur, directional exit or stagger between strings.
 - Outgoing copies align their actual text-line bounds to the original inline text. The former block-line positioning raised the large English heading by about 11 px at creation in the live browser, even before its exit animation; this baseline jump is removed.
+- Copies retain the original wrapping container and first-line indentation, including translated highlights that begin partway through a paragraph line.
 - A shared 440 ms opacity timeline gently fades the old language for 140 ms, then reveals the new language for 300 ms. The handoff at zero opacity prevents English and Russian words from appearing on top of each other, including when their line wrapping differs.
 - Real React controls, query, billing, expanded content and focus stay mounted. Language, metadata and saved preference still update immediately. Existing viewport preservation and interruptible cleanup are retained. Reduced motion switches immediately.
 - The custom language menu, navigation hover, price reels and continuous trust-logo marquee remain the released R5 behavior.

@@ -246,7 +246,7 @@ test('language dissolve stays in place without overlapping EN and RU on phone an
             rect.width,
             rect.height,
           ]);
-          return originals.some(
+          const matched = originals.some(
             (source) =>
               source.text === node.textContent &&
               source.lines.length === lines.length &&
@@ -254,10 +254,18 @@ test('language dissolve stays in place without overlapping EN and RU on phone an
                 line.every((value, coordinate) => Math.abs(value - lines[index][coordinate]) < 0.5),
               ),
           );
+          return {
+            matched,
+            text: node.textContent,
+            lines,
+            originals: matched
+              ? []
+              : originals.filter((source) => source.text === node.textContent),
+          };
         });
       });
       expect(aligned.length).toBeGreaterThan(0);
-      expect(aligned.every(Boolean)).toBe(true);
+      expect(aligned.filter((copy) => !copy.matched)).toEqual([]);
       const sample = (time: number) =>
         page.evaluate((time) => {
           const animations = document.getAnimations().filter((animation) => {
