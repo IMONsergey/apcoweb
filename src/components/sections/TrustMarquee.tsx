@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { useEffect, useRef, useState } from 'react';
 import { media, trustMarks } from '../../content/site';
@@ -24,7 +25,9 @@ export function TrustMarquee() {
   }, []);
   return (
     <div className="container trust" ref={ref} data-running={running}>
-      <p>{t('Trusted by researchers and organizations worldwide')}</p>
+      <p>
+        <LocaleText>{t('Trusted by researchers and organizations worldwide')}</LocaleText>
+      </p>
       <div
         className="trust-viewport"
         tabIndex={0}

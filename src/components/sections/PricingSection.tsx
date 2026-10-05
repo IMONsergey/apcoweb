@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { useRef, useState } from 'react';
 import { MobileBillingDock } from './MobileBillingDock';
@@ -6,6 +7,7 @@ import { DoubleButton } from '../ui/DoubleButton';
 import { Modal } from '../ui/Modal';
 import { Visual } from '../visuals/Visual';
 import { BillingSwitch } from '../ui/BillingSwitch';
+import { AnimatedPrice } from '../ui/AnimatedPrice';
 import { calculatePrice, formatPrice, type BillingPeriod } from '../../content/pricing';
 type Plan = (typeof plans)[number];
 export function PricingSection() {
@@ -21,18 +23,19 @@ export function PricingSection() {
         <div className="pricing-options" ref={rangeRef} data-testid="pricing-options">
           <div className="pricing-heading">
             <h2 id="pricing-title">
-              {t('Start free.')}
+              <LocaleText>{t('Start free.')}</LocaleText>
               <br />
               <span>
-                {t('Upgrade when your')}
-                <br className="desktop-break" /> {t('investigation needs more.')}
+                <LocaleText>{t('Upgrade when your')}</LocaleText>
+                <br className="desktop-break" />{' '}
+                <LocaleText>{t('investigation needs more.')}</LocaleText>
               </span>
             </h2>
             <div className="billing billing--desktop">
               <p>
-                {t('Subscribe annually')}
+                <LocaleText>{t('Subscribe annually')}</LocaleText>
                 <br />
-                {t('and save 20%!')}
+                <LocaleText>{t('and save 20%!')}</LocaleText>
               </p>
               <BillingSwitch value={period} onChange={setPeriod} />
             </div>
@@ -54,14 +57,18 @@ export function PricingSection() {
               >
                 <div>
                   <h3>{plan.name}</h3>
-                  <p className="plan-description">{t(plan.description)}</p>
+                  <p className="plan-description">
+                    <LocaleText>{t(plan.description)}</LocaleText>
+                  </p>
                 </div>
                 <div className="plan-price-block">
                   <p className="plan-price">
-                    <span className="price-amount" key={period}>
-                      {formatPrice(calculatePrice(plan.price, period).monthly)}
-                    </span>
-                    {plan.price > 0 && <span className="price-unit">{t('/mo')}</span>}
+                    <AnimatedPrice amount={calculatePrice(plan.price, period).monthly} />
+                    {plan.price > 0 && (
+                      <span className="price-unit">
+                        <LocaleText>{t('/mo')}</LocaleText>
+                      </span>
+                    )}
                   </p>
                   <p className="plan-billing-note">
                     {plan.price > 0
@@ -75,17 +82,21 @@ export function PricingSection() {
                 </div>
                 <dl>
                   <div>
-                    <dt>{t('Credits')}</dt>
+                    <dt>
+                      <LocaleText>{t('Credits')}</LocaleText>
+                    </dt>
                     <dd>{plan.credits}</dd>
                   </div>
                   <div>
-                    <dt>{t('Users')}</dt>
+                    <dt>
+                      <LocaleText>{t('Users')}</LocaleText>
+                    </dt>
                     <dd>{plan.users}</dd>
                   </div>
                 </dl>
                 {plan.id === 'free' ? (
                   <a className="plan-button" href={`${productUrl}/register`}>
-                    {t(plan.action)}
+                    <LocaleText>{t(plan.action)}</LocaleText>
                   </a>
                 ) : (
                   <button
@@ -97,7 +108,7 @@ export function PricingSection() {
                       setPlanOpen(true);
                     }}
                   >
-                    {t(plan.action)}
+                    <LocaleText>{t(plan.action)}</LocaleText>
                   </button>
                 )}
               </article>
@@ -111,21 +122,25 @@ export function PricingSection() {
                 setCompare(true);
               }}
             >
-              {t('View a detailed comparison')}
+              <LocaleText>{t('View a detailed comparison')}</LocaleText>
             </DoubleButton>
           </div>
         </div>
         <div className="contact-banner">
           <Visual kind="dots" direction="left-to-right" />
           <div>
-            <h3>{t('Have specific organisational requirements?')}</h3>
-            <p>{t('Tell us about your data, API or procurement needs.')}</p>
+            <h3>
+              <LocaleText>{t('Have specific organisational requirements?')}</LocaleText>
+            </h3>
+            <p>
+              <LocaleText>{t('Tell us about your data, API or procurement needs.')}</LocaleText>
+            </p>
           </div>
           <DoubleButton
             variant="inverse"
             href={`mailto:${supportEmail}?subject=APCOSYS%20organisation%20requirements`}
           >
-            {t('Talk to Us')}
+            <LocaleText>{t('Talk to Us')}</LocaleText>
           </DoubleButton>
         </div>
       </div>
@@ -138,10 +153,16 @@ export function PricingSection() {
       >
         <div className="table-scroll" tabIndex={0} role="region" aria-label={t('Plan comparison')}>
           <table>
-            <caption>{t('Allowances and access shown in the current landing concept')}</caption>
+            <caption>
+              <LocaleText>
+                {t('Allowances and access shown in the current landing concept')}
+              </LocaleText>
+            </caption>
             <thead>
               <tr>
-                <th scope="col">{t('Plan')}</th>
+                <th scope="col">
+                  <LocaleText>{t('Plan')}</LocaleText>
+                </th>
                 {plans.map((p) => (
                   <th scope="col" key={p.id}>
                     {p.name}
@@ -151,33 +172,43 @@ export function PricingSection() {
             </thead>
             <tbody>
               <tr>
-                <th scope="row">{t('Monthly price')}</th>
+                <th scope="row">
+                  <LocaleText>{t('Monthly price')}</LocaleText>
+                </th>
                 {plans.map((p) => (
                   <td key={p.id}>{formatPrice(calculatePrice(p.price, period).monthly)}</td>
                 ))}
               </tr>
               <tr>
                 <th scope="row">
-                  {t(period === 'annually' ? 'Billed annually' : 'Billed monthly')}
+                  <LocaleText>
+                    {t(period === 'annually' ? 'Billed annually' : 'Billed monthly')}
+                  </LocaleText>
                 </th>
                 {plans.map((p) => (
                   <td key={p.id}>{formatPrice(calculatePrice(p.price, period).total)}</td>
                 ))}
               </tr>
               <tr>
-                <th scope="row">{t('Credits')}</th>
+                <th scope="row">
+                  <LocaleText>{t('Credits')}</LocaleText>
+                </th>
                 {plans.map((p) => (
                   <td key={p.id}>{p.credits}</td>
                 ))}
               </tr>
               <tr>
-                <th scope="row">{t('Users')}</th>
+                <th scope="row">
+                  <LocaleText>{t('Users')}</LocaleText>
+                </th>
                 {plans.map((p) => (
                   <td key={p.id}>{p.users}</td>
                 ))}
               </tr>
               <tr>
-                <th scope="row">{t('API access')}</th>
+                <th scope="row">
+                  <LocaleText>{t('API access')}</LocaleText>
+                </th>
                 {plans.map((p) => (
                   <td key={p.id}>{p.api ? t('Included') : '—'}</td>
                 ))}
@@ -186,11 +217,15 @@ export function PricingSection() {
           </table>
         </div>
         <p className="modal-note">
-          {t(
-            'Final pricing, billing periods and purchase conditions are confirmed in APCOSYS before payment.',
-          )}
+          <LocaleText>
+            {t(
+              'Final pricing, billing periods and purchase conditions are confirmed in APCOSYS before payment.',
+            )}
+          </LocaleText>
         </p>
-        <DoubleButton href={`${productUrl}/register`}>{t('Continue in APCOSYS')}</DoubleButton>
+        <DoubleButton href={`${productUrl}/register`}>
+          <LocaleText>{t('Continue in APCOSYS')}</LocaleText>
+        </DoubleButton>
       </Modal>
       <Modal
         open={planOpen}
@@ -199,10 +234,12 @@ export function PricingSection() {
       >
         {selected && (
           <>
-            <p>{t(selected.description)}</p>
+            <p>
+              <LocaleText>{t(selected.description)}</LocaleText>
+            </p>
             <p className="selected-plan-price">
               {formatPrice(calculatePrice(selected.price, period).monthly)}
-              {t(' / month')}
+              <LocaleText>{t(' / month')}</LocaleText>
             </p>
             <p className="modal-note">
               {period === 'annually'
@@ -213,24 +250,34 @@ export function PricingSection() {
             </p>
             <dl className="plan-summary">
               <div>
-                <dt>{t('Credits')}</dt>
+                <dt>
+                  <LocaleText>{t('Credits')}</LocaleText>
+                </dt>
                 <dd>{selected.credits}</dd>
               </div>
               <div>
-                <dt>{t('Users')}</dt>
+                <dt>
+                  <LocaleText>{t('Users')}</LocaleText>
+                </dt>
                 <dd>{selected.users}</dd>
               </div>
               <div>
-                <dt>{t('API access')}</dt>
+                <dt>
+                  <LocaleText>{t('API access')}</LocaleText>
+                </dt>
                 <dd>{selected.api ? t('Included') : '—'}</dd>
               </div>
             </dl>
             <p className="modal-note">
-              {t(
-                'Continue in APCOSYS to confirm current pricing and activate your plan. No payment is collected on this preview.',
-              )}
+              <LocaleText>
+                {t(
+                  'Continue in APCOSYS to confirm current pricing and activate your plan. No payment is collected on this preview.',
+                )}
+              </LocaleText>
             </p>
-            <DoubleButton href={`${productUrl}/register`}>{t('Continue in APCOSYS')}</DoubleButton>
+            <DoubleButton href={`${productUrl}/register`}>
+              <LocaleText>{t('Continue in APCOSYS')}</LocaleText>
+            </DoubleButton>
           </>
         )}
       </Modal>

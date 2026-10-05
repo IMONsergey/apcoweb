@@ -41,6 +41,11 @@
 .footer a:hover {
   color: var(--action);
 }
+.nav-link {
+  transition:
+    background-color 200ms var(--ease),
+    color 180ms ease;
+}
 .faq-icon {
   transition:
     background-color 220ms var(--ease),

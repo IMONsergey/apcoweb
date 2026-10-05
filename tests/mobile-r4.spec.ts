@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { selectLanguage } from './helpers/locale';
 import AxeBuilder from '@axe-core/playwright';
 
 for (const width of [320, 360, 390, 430, 599]) {
@@ -93,7 +94,7 @@ for (const width of [320, 390, 768, 1440, 1920]) {
   test(`EN RU language selection and content at ${width}`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('./?review=r4', { waitUntil: 'networkidle' });
-    await expect(page.getByRole('combobox', { name: 'Language', exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Language', exact: true })).toBeVisible();
     await page.getByRole('searchbox').fill('example.com');
     await page.getByRole('searchbox').evaluate((el) => (el as HTMLInputElement).blur());
     await page.locator('#plan-plus').scrollIntoViewIfNeeded();
@@ -101,7 +102,7 @@ for (const width of [320, 390, 768, 1440, 1920]) {
     await page.evaluate(() =>
       history.replaceState(history.state, '', `${location.pathname}${location.search}#pricing`),
     );
-    await page.getByRole('combobox', { name: 'Language', exact: true }).selectOption('ru');
+    await selectLanguage(page, 'ru');
     await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Начните с запроса.');
     await expect(page.locator('.search-scene h3')).toHaveText('Один запрос. Больше контекста.');
@@ -128,7 +129,7 @@ for (const width of [320, 390, 768, 1440, 1920]) {
     expect(overflow).toEqual([]);
     await page.reload({ waitUntil: 'networkidle' });
     await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
-    await page.getByRole('combobox', { name: 'Язык', exact: true }).selectOption('en');
+    await selectLanguage(page, 'en');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await expect(page.locator('#hero-title')).toContainText('Start with a query.');
   });
@@ -152,7 +153,7 @@ test('URL locale precedence and storage denial do not break selection', async ({
       configurable: true,
     }),
   );
-  await page.getByRole('combobox', { name: 'Language', exact: true }).selectOption('ru');
+  await selectLanguage(page, 'ru');
   await expect(page.locator('#hero-title')).toContainText('Начните с запроса.');
 });
 

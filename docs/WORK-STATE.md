@@ -1,6 +1,6 @@
 # Work state
 
-Repository: IMONsergey/apcoweb. Current implementation: R4 mobile composition and EN/RU localization, extending the R3 contextual billing behavior.
+Repository: IMONsergey/apcoweb. Current candidate: R5 language-menu and text/price motion refinements in work/header-motion-r5-2026-10-05. Read REVIEW-R5.md first. Static/build gates pass; matching-browser PR checks and screenshot review are required before release. The last verified published release remains R4 at main c9f3df73bbef17a2d95b1306106706b28d0d5a9b until those gates and the new Pages deployment succeed. The R4 provenance below is preserved.
 
 Read REVIEW-R4.md first, then REVIEW-R3.md and DESIGN-CONTRACT.md. Do not restart R4. The original PR #3 was already merged at the start of this continuation: source `87fe41049f252b9a56697c2666bfab59b02e1417`, merge `3315c89985e635cb6dcf02536ce5dfb5539ca882`. Its cross-browser run 37278235873 passed 204/204 and Pages deploy 37278769027 succeeded.
 

@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { useId } from 'react';
 import type { BillingPeriod } from '../../content/pricing';
@@ -23,7 +24,9 @@ export function BillingSwitch({
               checked={value === period}
               onChange={() => onChange(period)}
             />
-            <span>{t(period === 'annually' ? 'Annually' : 'Monthly')}</span>
+            <span>
+              <LocaleText>{t(period === 'annually' ? 'Annually' : 'Monthly')}</LocaleText>
+            </span>
           </label>
         ))}
       </div>

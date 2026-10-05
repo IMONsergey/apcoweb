@@ -93,7 +93,7 @@
   margin: 0;
   cursor: pointer;
 }
-.segmented span {
+.segmented label > span {
   display: block;
   padding: 13px 16px;
   font-size: 14px;
@@ -233,7 +233,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .segmented::before,
-  .segmented span {
+  .segmented label > span {
     transition: none;
   }
   .price-amount {

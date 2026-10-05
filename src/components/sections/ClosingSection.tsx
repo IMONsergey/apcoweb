@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { media, productUrl } from '../../content/site';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useLocale } from '../../i18n/context';
@@ -39,20 +40,26 @@ export function ClosingSection() {
           {compact && (
             <div className="closing-account" aria-hidden="true">
               <span>
-                {t('Credits:')} <b>500</b>
+                <LocaleText>{t('Credits:')}</LocaleText> <b>500</b>
               </span>
-              <span className="closing-account__upgrade">{t('Upgrade Plan')}</span>
+              <span className="closing-account__upgrade">
+                <LocaleText>{t('Upgrade Plan')}</LocaleText>
+              </span>
             </div>
           )}
           {compact || translatedDesktop ? (
             <div className={`closing-copy${translatedDesktop ? ' closing-copy--translated' : ''}`}>
-              <p className="eyebrow">{t('INTERNET INFRASTRUCTURE SEARCH')}</p>
-              <h3>{t('Start with your first query.')}</h3>
+              <p className="eyebrow">
+                <LocaleText>{t('INTERNET INFRASTRUCTURE SEARCH')}</LocaleText>
+              </p>
+              <h3>
+                <LocaleText>{t('Start with your first query.')}</LocaleText>
+              </h3>
               <p className="closing-copy__note">
-                {t('TRY THE PUBLIC SEARCH BEFORE CREATING AN ACCOUNT')}
+                <LocaleText>{t('TRY THE PUBLIC SEARCH BEFORE CREATING AN ACCOUNT')}</LocaleText>
               </p>
               <DoubleButton href={`${productUrl}/search`} icon="external">
-                {t('Try free search')}
+                <LocaleText>{t('Try free search')}</LocaleText>
               </DoubleButton>
             </div>
           ) : (

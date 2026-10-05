@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { DoubleButton } from '../ui/DoubleButton';
 import { productUrl } from '../../content/site';
@@ -7,20 +8,30 @@ export function Hero() {
     <section className="hero" aria-labelledby="hero-title">
       <div className="container">
         <h1 id="hero-title">
-          <span className="hero-title__line">{t('Start with a query.')}</span>{' '}
-          <span className="hero-title__line">{t('Follow what you find.')}</span>
+          <span className="hero-title__line">
+            <LocaleText>{t('Start with a query.')}</LocaleText>
+          </span>{' '}
+          <span className="hero-title__line">
+            <LocaleText>{t('Follow what you find.')}</LocaleText>
+          </span>
         </h1>
         <div className="hero-bottom">
           <p className="lead">
-            {t(
-              'Search internet-facing hosts by IP, domain, port, service or technology, see what runs on them and',
-            )}{' '}
-            <mark>{t('refine your search as you go.')}</mark>
+            <LocaleText>
+              {t(
+                'Search internet-facing hosts by IP, domain, port, service or technology, see what runs on them and',
+              )}
+            </LocaleText>{' '}
+            <mark>
+              <LocaleText>{t('refine your search as you go.')}</LocaleText>
+            </mark>
           </p>
           <div className="hero-actions">
-            <DoubleButton href={`${productUrl}/search`}>{t('Try free search')}</DoubleButton>
+            <DoubleButton href={`${productUrl}/search`}>
+              <LocaleText>{t('Try free search')}</LocaleText>
+            </DoubleButton>
             <DoubleButton href="#how-it-works" variant="secondary" icon="down">
-              {t('See how it works')}
+              <LocaleText>{t('See how it works')}</LocaleText>
             </DoubleButton>
           </div>
         </div>

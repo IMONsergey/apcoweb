@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { media, productUrl } from '../../content/site';
 import { DoubleButton } from '../ui/DoubleButton';
@@ -11,18 +12,20 @@ export function ApiSection() {
       <div className="container api-grid">
         <div className="api-copy">
           <h2 id="api-title">
-            {t('Bring Apcosys')}
-            <br className="api-break" /> {t('data into your')}
-            <br className="api-break" /> {t('own tools.')}
+            <LocaleText>{t('Bring Apcosys')}</LocaleText>
+            <br className="api-break" /> <LocaleText>{t('data into your')}</LocaleText>
+            <br className="api-break" /> <LocaleText>{t('own tools.')}</LocaleText>
           </h2>
           <Icon name="focus" width="25" height="25" />
           <p>
-            {t(
-              'Query APCOSYS programmatically and work with the results in your scripts, pipelines and reports. API access is available on Plus, Expert and Business plans.',
-            )}
+            <LocaleText>
+              {t(
+                'Query APCOSYS programmatically and work with the results in your scripts, pipelines and reports. API access is available on Plus, Expert and Business plans.',
+              )}
+            </LocaleText>
           </p>
           <DoubleButton variant="inverse" href={`${productUrl}/docs/api`}>
-            {t('View API Docs')}
+            <LocaleText>{t('View API Docs')}</LocaleText>
           </DoubleButton>
         </div>
         <div className="api-visual">

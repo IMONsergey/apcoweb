@@ -85,11 +85,6 @@
     transform: translate3d(-50%, 0, 0);
   }
 }
-@media (hover: hover) {
-  .trust-viewport:hover .trust-track {
-    animation-play-state: paused;
-  }
-}
 @media (min-width: 1800px) {
   .trust-group {
     --logo-gap: 92px;
@@ -127,16 +122,16 @@
     --logo-gap: 32px;
   }
   .trust-group li {
-    flex-basis: 140px;
+    flex-basis: 128px;
   }
   .trust-mark {
-    width: 140px;
-    height: 64px;
-    padding: 14px;
+    width: 128px;
+    height: 60px;
+    padding: 12px;
   }
   .trust-mark img {
-    width: 112px;
-    height: 30px;
+    width: 96px;
+    height: 26px;
   }
   .trust-track {
     animation-duration: 42s;

@@ -1,3 +1,4 @@
+import { LocaleText } from '../i18n/LocaleText';
 import { useLocale } from '../i18n/context';
 import { footerGroups, media, supportEmail } from '../content/site';
 export function Footer() {
@@ -8,11 +9,15 @@ export function Footer() {
         <nav className="footer-columns" aria-label={t('Footer')}>
           {footerGroups.map((group) => (
             <div key={group.title}>
-              <p className="eyebrow">{t(group.title)}</p>
+              <p className="eyebrow">
+                <LocaleText>{t(group.title)}</LocaleText>
+              </p>
               <ul>
                 {group.links.map(([label, href]) => (
                   <li key={label}>
-                    <a href={href}>{t(label)}</a>
+                    <a href={href}>
+                      <LocaleText>{t(label)}</LocaleText>
+                    </a>
                   </li>
                 ))}
               </ul>

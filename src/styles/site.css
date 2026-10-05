@@ -663,7 +663,7 @@
   flex: 1 1 0;
   max-width: 1100px;
 }
-.pricing-heading h2 > span {
+.pricing-heading h2 > span:not(.locale-text) {
   font-weight: 400;
   line-height: 1.03;
 }

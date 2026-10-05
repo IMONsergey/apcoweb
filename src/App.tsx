@@ -1,3 +1,4 @@
+import { LocaleText } from './i18n/LocaleText';
 import { useLocale } from './i18n/context';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -18,7 +19,7 @@ export function App() {
     <MotionProvider>
       <div id="top" className="site">
         <a href="#main" className="skip-link">
-          {t('Skip to content')}
+          <LocaleText>{t('Skip to content')}</LocaleText>
         </a>
         <Header />
         <main id="main">

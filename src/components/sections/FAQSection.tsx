@@ -1,3 +1,4 @@
+import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { productUrl, supportEmail } from '../../content/site';
 import { AnimatedDetails } from '../ui/AnimatedDetails';
@@ -7,35 +8,45 @@ export function FAQSection() {
     <section className="faq-section section-space" id="faq" aria-labelledby="faq-title">
       <div className="container faq-grid">
         <h2 id="faq-title">
-          {t('Good questions.')}
+          <LocaleText>{t('Good questions.')}</LocaleText>
           <br />
-          {t('Clear answers.')}
+          <LocaleText>{t('Clear answers.')}</LocaleText>
         </h2>
         <div className="faq-list">
           <AnimatedDetails title={t('How does the Free plan work?')} initialOpen>
             <p>
-              {t('The existing Free plan introduces the service for personal, non-commercial use.')}
+              <LocaleText>
+                {t(
+                  'The existing Free plan introduces the service for personal, non-commercial use.',
+                )}
+              </LocaleText>
             </p>
           </AnimatedDetails>
           <AnimatedDetails title={t('What consumes search credits?')}>
             <p>
-              {t('For the current credit usage rules,')}{' '}
+              <LocaleText>{t('For the current credit usage rules,')}</LocaleText>{' '}
               <a href={`mailto:${supportEmail}?subject=APCOSYS%20search%20credits`}>
-                {t('contact our team')}
+                <LocaleText>{t('contact our team')}</LocaleText>
               </a>
               .
             </p>
           </AnimatedDetails>
           <AnimatedDetails title={t('Can I use the API?')}>
             <p>
-              {t('API access is available on Plus, Expert and Business plans.')}{' '}
-              <a href={`${productUrl}/docs/api`}>{t('View API documentation')}</a>.
+              <LocaleText>
+                {t('API access is available on Plus, Expert and Business plans.')}
+              </LocaleText>{' '}
+              <a href={`${productUrl}/docs/api`}>
+                <LocaleText>{t('View API documentation')}</LocaleText>
+              </a>
+              .
             </p>
           </AnimatedDetails>
           <AnimatedDetails title={t('How can I contact the team?')}>
             <p>
-              {t('Write to')} <a href={`mailto:${supportEmail}`}>{supportEmail}</a>{' '}
-              {t('about your data, API or procurement needs.')}
+              <LocaleText>{t('Write to')}</LocaleText>{' '}
+              <a href={`mailto:${supportEmail}`}>{supportEmail}</a>{' '}
+              <LocaleText>{t('about your data, API or procurement needs.')}</LocaleText>
             </p>
           </AnimatedDetails>
         </div>
