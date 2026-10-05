@@ -107,6 +107,14 @@ test('logo marquee moves continuously and pauses for focus and reduced motion', 
   await page.waitForTimeout(500);
   expect(await offset()).toBeLessThan(start - 2);
   await viewport.focus();
+  await expect(page.locator('.trust-track')).toHaveCSS('animation-play-state', 'paused');
+  // Sample after the compositor has committed the paused animation, not the previous frame.
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+      }),
+  );
   const focused = await offset();
   await page.waitForTimeout(250);
   expect(Math.abs((await offset()) - focused)).toBeLessThan(0.5);

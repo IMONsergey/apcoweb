@@ -45,7 +45,7 @@ html[data-billing-dock='visible'] {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateY(0);
+    transform: none;
     transition-delay: 0s;
   }
   .billing-dock__offer {
