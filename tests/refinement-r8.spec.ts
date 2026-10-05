@@ -68,7 +68,7 @@ for (const width of [320, 390, 768, 1440, 1920]) {
       );
       await expect(page.locator('.search-free-note')).toHaveText('It’s free');
       await page.getByRole('searchbox').fill(' ');
-      await page.locator('.search-form button').click();
+      await page.getByRole('button', { name: 'Search APCOSYS', exact: true }).click();
       await expect(page.locator('.search-error')).toBeVisible();
       const note = (await page.locator('.search-free-note').boundingBox())!;
       const error = (await page.locator('.search-error').boundingBox())!;
