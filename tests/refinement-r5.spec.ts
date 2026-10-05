@@ -81,7 +81,7 @@ test('language menu keyboard selection, dismissal and mobile bounds', async ({ p
   }
 });
 
-test('locale text crossfades, rapid changes settle, and form state stays mounted', async ({
+test('locale text dissolves, rapid changes settle, and form state stays mounted', async ({
   page,
 }, info) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
@@ -93,7 +93,7 @@ test('locale text crossfades, rapid changes settle, and form state stays mounted
     (node as HTMLInputElement).blur();
   });
   // Freeze the app's own animation in the same click turn, after React handles it.
-  // Cross-browser assertions and screenshots must not race a 360 ms transition.
+  // Cross-browser assertions and screenshots must not race a short transition.
   await page.evaluate(() => {
     const rememberScroll = (event: MouseEvent) => {
       if (
@@ -118,7 +118,7 @@ test('locale text crossfades, rapid changes settle, and form state stays mounted
         })
         .forEach((animation) => {
           animation.pause();
-          animation.currentTime = 180;
+          animation.currentTime = 220;
         });
     };
     document.addEventListener('click', rememberScroll, true);
@@ -173,6 +173,115 @@ test('locale text crossfades, rapid changes settle, and form state stays mounted
       .first()
       .evaluate((node) => getComputedStyle(node).opacity),
   ).toBe('1');
+});
+
+test('language dissolve stays in place without overlapping EN and RU on phone and desktop', async ({
+  page,
+}, info) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  for (const width of [390, 1440]) {
+    await visit(page, width);
+    for (const locale of ['ru', 'en'] as const) {
+      // Pause the real application timeline synchronously after its selection handler.
+      await page.evaluate((locale) => {
+        const freeze = (event: MouseEvent) => {
+          if (
+            !(event.target instanceof Element) ||
+            !event.target.closest(`.language-panel button[lang="${locale}"]`)
+          )
+            return;
+          document.removeEventListener('click', freeze);
+          document.getAnimations().forEach((animation) => {
+            const target = (animation.effect as KeyframeEffect).target;
+            if (
+              target instanceof HTMLElement &&
+              target.matches('.locale-text,.locale-text-ghost')
+            ) {
+              animation.pause();
+              animation.currentTime = 0;
+            }
+          });
+        };
+        document.addEventListener('click', freeze);
+      }, locale);
+      await selectLanguage(page, locale);
+      await expect(page.locator('html')).toHaveAttribute('data-locale-transition', locale);
+      const sample = (time: number) =>
+        page.evaluate((time) => {
+          const animations = document.getAnimations().filter((animation) => {
+            const target = (animation.effect as KeyframeEffect).target;
+            return (
+              target instanceof HTMLElement && target.matches('.locale-text,.locale-text-ghost')
+            );
+          });
+          animations.forEach((animation) => (animation.currentTime = time));
+          return animations.map((animation) => {
+            const effect = animation.effect as KeyframeEffect;
+            const target = effect.target as HTMLElement;
+            const rect = target.getBoundingClientRect();
+            const style = getComputedStyle(target);
+            return {
+              ghost: target.classList.contains('locale-text-ghost'),
+              opacity: Number(style.opacity),
+              geometry: [rect.x, rect.y, rect.width, rect.height],
+              transform: style.transform,
+              filter: style.filter,
+              delay: effect.getTiming().delay,
+              opacityOnly: effect
+                .getKeyframes()
+                .every((frame) => frame.transform === undefined && frame.filter === undefined),
+            };
+          });
+        }, time);
+      const initial = await sample(0);
+      expect(initial.length).toBeGreaterThan(0);
+      expect(initial.filter((frame) => frame.ghost).every((frame) => frame.opacity === 1)).toBe(
+        true,
+      );
+      expect(initial.filter((frame) => !frame.ghost).every((frame) => frame.opacity === 0)).toBe(
+        true,
+      );
+      await sample(70);
+      await page.screenshot({ path: info.outputPath(`dissolve-${width}-${locale}-out.png`) });
+      const handoff = await sample(140);
+      expect(handoff.every((frame) => frame.opacity < 0.001)).toBe(true);
+      const incoming = await sample(260);
+      expect(incoming.filter((frame) => frame.ghost).every((frame) => frame.opacity === 0)).toBe(
+        true,
+      );
+      expect(
+        incoming
+          .filter((frame) => !frame.ghost)
+          .every((frame) => frame.opacity > 0 && frame.opacity < 1),
+      ).toBe(true);
+      expect(incoming.map((frame) => frame.geometry)).toEqual(
+        initial.map((frame) => frame.geometry),
+      );
+      expect(
+        incoming.every(
+          (frame) =>
+            frame.opacityOnly &&
+            frame.delay === 0 &&
+            frame.transform === 'none' &&
+            frame.filter === 'none',
+        ),
+      ).toBe(true);
+      await page.screenshot({ path: info.outputPath(`dissolve-${width}-${locale}-in.png`) });
+      await page.evaluate(() =>
+        document.getAnimations().forEach((animation) => {
+          const target = (animation.effect as KeyframeEffect).target;
+          if (target instanceof HTMLElement && target.matches('.locale-text,.locale-text-ghost'))
+            animation.play();
+        }),
+      );
+      await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
+      await expect(page.locator('.locale-text-ghost')).toHaveCount(0);
+      await expect(page.locator('#hero-title .locale-text').first()).toHaveCSS('opacity', '1');
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+        width + 1,
+      );
+    }
+  }
 });
 
 test('prices roll in both directions and rapid billing switches finish on the right digits', async ({

@@ -1,4 +1,4 @@
-/* Inline boundaries keep the approved line wrapping; only visual copies leave the layout. */
+/* Inline text keeps its natural wrapping; the language handoff changes opacity only. */
 .locale-text--lines {
   white-space: pre-line;
 }
@@ -10,7 +10,6 @@
   padding: 0;
   pointer-events: none;
   user-select: none;
-  transform-origin: top left;
 }
 .price-amount {
   animation: none;

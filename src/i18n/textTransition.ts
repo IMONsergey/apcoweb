@@ -1,6 +1,6 @@
 import type { Locale } from './messages';
 
-/** Only changed, visible text gets a visual outgoing copy. Real UI/state stays mounted. */
+/** Text dissolves in place, with no movement, blur or overlapping translations. */
 export function transitionLocaleText(commit: () => void, next: Locale) {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || document.hidden) {
     commit();
@@ -50,8 +50,12 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
   window.scrollTo({ ...scrollPosition, behavior: 'instant' });
   const ghosts: HTMLElement[] = [];
   const animations: Animation[] = [];
-  const direction = next === 'ru' ? -1 : 1;
-  for (const [index, snapshot] of before.entries()) {
+  // One shared timeline: quietly dissolve the old copy, then reveal the new one.
+  // The zero-opacity handoff prevents differently wrapped languages doubling up.
+  const handoff = 140 / 440;
+  const timing = { duration: 440, easing: 'linear' };
+  const easing = 'cubic-bezier(0.4, 0, 0.2, 1)';
+  for (const snapshot of before) {
     const { node, rect, text, lang, ...typography } = snapshot;
     if (!node.isConnected || node.textContent === text) continue;
     const ghost = document.createElement('span');
@@ -67,16 +71,12 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
     });
     document.body.append(ghost);
     ghosts.push(ghost);
-    const timing = {
-      duration: 360,
-      delay: Math.min(index, 5) * 12,
-      easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)',
-    };
     animations.push(
       ghost.animate(
         [
-          { opacity: 1, filter: 'blur(0px)', transform: 'translateY(0)' },
-          { opacity: 0, filter: 'blur(3px)', transform: `translateY(${direction * 8}px)` },
+          { opacity: 1, offset: 0, easing },
+          { opacity: 0, offset: handoff },
+          { opacity: 0, offset: 1 },
         ],
         { ...timing, fill: 'forwards' },
       ),
@@ -84,8 +84,9 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
     animations.push(
       node.animate(
         [
-          { opacity: 0, filter: 'blur(3px)' },
-          { opacity: 1, filter: 'blur(0px)' },
+          { opacity: 0, offset: 0 },
+          { opacity: 0, offset: handoff, easing },
+          { opacity: 1, offset: 1 },
         ],
         { ...timing, fill: 'backwards' },
       ),
