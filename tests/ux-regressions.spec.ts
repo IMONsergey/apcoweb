@@ -82,7 +82,7 @@ test('search clear preserves focus, input is mobile-zoom safe, and submitted fee
   await expect(page.getByRole('button', { name: 'Search APCOSYS', exact: true })).toBeEnabled();
 });
 
-test('closing action is aligned with the visible button in every prepared asset', async ({
+test('closing action matches preserved desktop assets and the compact mobile button', async ({
   page,
 }) => {
   const cases = [
@@ -99,6 +99,21 @@ test('closing action is aligned with the visible button in every prepared asset'
   for (const [width, x, y] of cases) {
     await page.setViewportSize({ width, height: 1000 });
     await page.locator('.closing-scene').scrollIntoViewIfNeeded();
+    if (width < 600) {
+      const action = page.locator('.closing-copy .double-button');
+      await expect(action).toBeVisible();
+      const rect = (await action.boundingBox())!;
+      expect(rect.height).toBeGreaterThanOrEqual(44);
+      expect(
+        await action.evaluate((el) => {
+          const box = el.getBoundingClientRect();
+          return !!document
+            .elementFromPoint(box.x + box.width / 2, box.y + box.height / 2)
+            ?.closest('a.double-button');
+        }),
+      ).toBe(true);
+      continue;
+    }
     await expect
       .poll(() =>
         page.locator('.closing-scene img').evaluate((el) => (el as HTMLImageElement).complete),

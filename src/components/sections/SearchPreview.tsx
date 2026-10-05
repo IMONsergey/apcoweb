@@ -1,3 +1,4 @@
+import { useLocale } from '../../i18n/context';
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { metrics, productUrl } from '../../content/site';
 import { SearchChrome } from './SearchChrome';
@@ -5,6 +6,7 @@ import { TrustMarquee } from './TrustMarquee';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
 export function SearchForm({ className = '' }: { className?: string }) {
+  const { t } = useLocale();
   const id = useId();
   const input = useRef<HTMLInputElement>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -40,10 +42,10 @@ export function SearchForm({ className = '' }: { className?: string }) {
       onSubmit={submit}
       aria-busy={submitting || undefined}
       role="search"
-      aria-label="Search internet infrastructure"
+      aria-label={t('Search internet infrastructure')}
     >
       <label className="sr-only" htmlFor={id}>
-        Domain, IP or technical attribute
+        {t('Domain, IP or technical attribute')}
       </label>
       <input
         id={id}
@@ -56,7 +58,7 @@ export function SearchForm({ className = '' }: { className?: string }) {
           setQuery(event.target.value);
           setError(false);
         }}
-        placeholder="Domain, IP or technical attribute. It’s free"
+        placeholder={t('Domain, IP or technical attribute. It’s free')}
         autoComplete="off"
         spellCheck={false}
         aria-invalid={error || undefined}
@@ -66,7 +68,7 @@ export function SearchForm({ className = '' }: { className?: string }) {
         <button
           type="button"
           className="search-clear"
-          aria-label="Clear search query"
+          aria-label={t('Clear search query')}
           onClick={() => {
             setQuery('');
             setError(false);
@@ -79,7 +81,7 @@ export function SearchForm({ className = '' }: { className?: string }) {
       <button
         type="submit"
         className="search-submit"
-        aria-label="Search APCOSYS"
+        aria-label={t('Search APCOSYS')}
         disabled={submitting}
       >
         {submitting ? (
@@ -90,22 +92,23 @@ export function SearchForm({ className = '' }: { className?: string }) {
       </button>
       {error && (
         <span className="search-error" id={`${id}-error`} role="alert">
-          Enter a domain, IP or technical attribute.
+          {t('Enter a domain, IP or technical attribute.')}
         </span>
       )}
     </form>
   );
 }
 export function SearchPreview() {
+  const { t } = useLocale();
   return (
-    <section className="search-preview" aria-label="Try APCOSYS public search">
+    <section className="search-preview" aria-label={t('Try APCOSYS public search')}>
       <Visual kind="flow" eager />
       <Visual kind="dots" eager />
       <div className="summary-wrap">
         <dl className="container summary-grid">
           {metrics.map((metric) => (
             <div key={metric.id}>
-              <dt>{metric.label}</dt>
+              <dt>{t(metric.label)}</dt>
               <dd>{metric.value}</dd>
             </div>
           ))}
@@ -115,18 +118,14 @@ export function SearchPreview() {
         <div className="search-scene" data-source="React chrome / original Handoff composition">
           <SearchChrome />
           <div className="search-chrome__fog" aria-hidden="true" />
-          <div className="search-scene__heading">
-            <h3>
-              <span className="search-title-desktop">One query. A closer look.</span>
-              <span className="search-title-mobile">
-                Search internet
-                <br />
-                infrastructure
-              </span>
-            </h3>
-            <p>Find hosts, services and networks.</p>
+          <div className="search-scene__content">
+            <div className="search-scene__heading">
+              <h3>
+                <span className="search-title-desktop">{t('One query. A closer look.')}</span>
+              </h3>
+            </div>
+            <SearchForm />
           </div>
-          <SearchForm />
         </div>
       </div>
       <TrustMarquee />

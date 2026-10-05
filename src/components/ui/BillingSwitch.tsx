@@ -1,3 +1,4 @@
+import { useLocale } from '../../i18n/context';
 import { useId } from 'react';
 import type { BillingPeriod } from '../../content/pricing';
 export function BillingSwitch({
@@ -7,10 +8,11 @@ export function BillingSwitch({
   value: BillingPeriod;
   onChange: (value: BillingPeriod) => void;
 }) {
+  const { t } = useLocale();
   const name = useId();
   return (
     <fieldset className="billing-switch">
-      <legend className="sr-only">Billing period</legend>
+      <legend className="sr-only">{t('Billing period')}</legend>
       <div className="segmented" data-period={value}>
         {(['annually', 'monthly'] as const).map((period) => (
           <label key={period}>
@@ -21,7 +23,7 @@ export function BillingSwitch({
               checked={value === period}
               onChange={() => onChange(period)}
             />
-            <span>{period === 'annually' ? 'Annually' : 'Monthly'}</span>
+            <span>{t(period === 'annually' ? 'Annually' : 'Monthly')}</span>
           </label>
         ))}
       </div>

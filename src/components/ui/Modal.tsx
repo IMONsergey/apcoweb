@@ -1,3 +1,4 @@
+import { useLocale } from '../../i18n/context';
 import { useEffect, useId, useRef, type ReactNode } from 'react';
 import { useMotion } from '../../hooks/useMotion';
 import { Icon } from './Icon';
@@ -10,6 +11,7 @@ type Props = {
 };
 /** Native dialog retains focus containment during both opening and closing transitions. */
 export function Modal({ open, onClose, title, children, className = '' }: Props) {
+  const { t } = useLocale();
   const ref = useRef<HTMLDialogElement>(null);
   const session = useRef<{ trigger: HTMLElement | null; overflow: string } | null>(null);
   const animation = useRef<Animation | null>(null);
@@ -101,7 +103,7 @@ export function Modal({ open, onClose, title, children, className = '' }: Props)
           type="button"
           className="icon-button"
           onClick={onClose}
-          aria-label="Close dialog"
+          aria-label={t('Close dialog')}
           autoFocus
         >
           <Icon name="close" />

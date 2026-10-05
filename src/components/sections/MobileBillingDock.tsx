@@ -1,3 +1,4 @@
+import { useLocale } from '../../i18n/context';
 import { useRef, type RefObject } from 'react';
 import { useBillingDock } from '../../hooks/useBillingDock';
 import { ANNUAL_DISCOUNT_PERCENT, type BillingPeriod } from '../../content/pricing';
@@ -11,6 +12,7 @@ type Props = {
 
 /** Fixed visually, but kept before the cards in reading and keyboard order. */
 export function MobileBillingDock({ rangeRef, period, onChange }: Props) {
+  const { t } = useLocale();
   const ref = useRef<HTMLElement>(null);
   const visible = useBillingDock(rangeRef, ref);
   return (
@@ -18,14 +20,14 @@ export function MobileBillingDock({ rangeRef, period, onChange }: Props) {
       ref={ref}
       className="billing-dock"
       data-visible={visible}
-      aria-label="Plan billing options"
+      aria-label={t('Plan billing options')}
       aria-hidden={!visible}
       inert={!visible}
     >
       <div className="billing-dock__offer">
-        <strong>Save {ANNUAL_DISCOUNT_PERCENT}%</strong>
+        <strong>{t('Save {discount}%', { discount: ANNUAL_DISCOUNT_PERCENT })}</strong>
         <span key={period}>
-          {period === 'annually' ? 'Annual billing selected' : 'with annual billing'}
+          {t(period === 'annually' ? 'Annual billing selected' : 'with annual billing')}
         </span>
       </div>
       <BillingSwitch value={period} onChange={onChange} />

@@ -4,6 +4,8 @@ This is the React/TypeScript marketing website, not the authenticated SaaS appli
 
 ## Read first
 
+- docs/REVIEW-R4.md: current mobile composition and EN/RU language behavior; this extends R3.
+
 - docs/REVIEW-R3.md: current contextual billing behavior and verified interaction fixes. Preserve the mobile dock at <=1199px and desktop control at >=1200px.
 
 - docs/REVIEW-R2.md: latest owner-authorized visual changes and annual billing; this overrides earlier static-preview assumptions.
