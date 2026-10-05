@@ -37,6 +37,7 @@ export function typograph(text: string, locale: Locale): string {
   if (result === undefined) {
     result = engines[locale].execute(text);
     cache.set(key, result);
+    cache.set(`${locale}:${result}`, result);
   }
   return result;
 }

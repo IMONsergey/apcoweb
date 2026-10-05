@@ -1,7 +1,26 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page, type Locator } from '@playwright/test';
 import { translate } from '../src/i18n/messages';
 import { typograph, noBreakNumber } from '../src/i18n/typography';
-import { selectLanguage } from './helpers/locale';
+
+// Locator.click scrolls sticky controls towards the viewport center in the browser protocol.
+// Exercise an ordinary pointer click on the already visible header instead.
+async function clickInPlace(page: Page, control: Locator) {
+  await expect(control).toBeInViewport({ ratio: 1 });
+  const box = (await control.boundingBox())!;
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+}
+async function selectInPlace(page: Page, locale: 'en' | 'ru') {
+  await clickInPlace(page, page.locator('[data-language-selector]'));
+  const panel = page.locator('.language-panel');
+  await expect(panel).toHaveCSS('opacity', '1');
+  await expect
+    .poll(() => panel.evaluate((el) => el.getAnimations().some((a) => a.playState === 'running')))
+    .toBe(false);
+  await clickInPlace(
+    page,
+    page.getByRole('menuitemradio', { name: locale === 'en' ? 'English' : 'Русский', exact: true }),
+  );
+}
 
 test('typography pipeline binds words, formats punctuation and preserves commercial values', () => {
   expect(translate('ru', 'Start with a query.')).toContain('с\u00a0запроса');
@@ -37,7 +56,7 @@ for (const width of [320, 390, 768, 1440]) {
     await expect(header).toHaveCSS('position', 'sticky');
     await expect.poll(() => header.evaluate((el) => el.getBoundingClientRect().top)).toBe(0);
     const position = await page.evaluate(() => scrollY);
-    await selectLanguage(page, 'ru');
+    await selectInPlace(page, 'ru');
     await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
     await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
     expect(await page.evaluate(() => scrollY)).toBe(position);
@@ -100,7 +119,7 @@ for (const width of [320, 390, 768, 1440]) {
       )
       .toBe(true);
     await expect(header).toHaveCSS('top', '0px');
-    await selectLanguage(page, 'en');
+    await selectInPlace(page, 'en');
     await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await expect(input).toHaveValue(query);

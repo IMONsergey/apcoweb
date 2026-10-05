@@ -171,6 +171,10 @@
   }
 }
 @media (max-width: 599px) {
+  :lang(ru) #audiences-title {
+    /* Keep the preposition with the long noun without exceeding a phone's reading width. */
+    font-size: clamp(29px, 9vw, 40px);
+  }
   .header-signin {
     display: none;
   }
