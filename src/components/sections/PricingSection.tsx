@@ -71,13 +71,15 @@ export function PricingSection() {
                     )}
                   </p>
                   <p className="plan-billing-note">
-                    {plan.price > 0
-                      ? period === 'annually'
-                        ? t('{amount} billed annually', {
-                            amount: formatPrice(calculatePrice(plan.price, period).total),
-                          })
-                        : t('Billed monthly')
-                      : '\u00a0'}
+                    <LocaleText>
+                      {plan.price > 0
+                        ? period === 'annually'
+                          ? t('{amount} billed annually', {
+                              amount: formatPrice(calculatePrice(plan.price, period).total),
+                            })
+                          : t('Billed monthly')
+                        : '\u00a0'}
+                    </LocaleText>
                   </p>
                 </div>
                 <dl>
@@ -210,7 +212,9 @@ export function PricingSection() {
                   <LocaleText>{t('API access')}</LocaleText>
                 </th>
                 {plans.map((p) => (
-                  <td key={p.id}>{p.api ? t('Included') : '—'}</td>
+                  <td key={p.id}>
+                    <LocaleText>{p.api ? t('Included') : '—'}</LocaleText>
+                  </td>
                 ))}
               </tr>
             </tbody>
@@ -242,11 +246,13 @@ export function PricingSection() {
               <LocaleText>{t(' / month')}</LocaleText>
             </p>
             <p className="modal-note">
-              {period === 'annually'
-                ? t('{amount} billed annually · 20% savings', {
-                    amount: formatPrice(calculatePrice(selected.price, period).total),
-                  })
-                : t('Billed monthly')}
+              <LocaleText>
+                {period === 'annually'
+                  ? t('{amount} billed annually · 20% savings', {
+                      amount: formatPrice(calculatePrice(selected.price, period).total),
+                    })
+                  : t('Billed monthly')}
+              </LocaleText>
             </p>
             <dl className="plan-summary">
               <div>
@@ -265,7 +271,9 @@ export function PricingSection() {
                 <dt>
                   <LocaleText>{t('API access')}</LocaleText>
                 </dt>
-                <dd>{selected.api ? t('Included') : '—'}</dd>
+                <dd>
+                  <LocaleText>{selected.api ? t('Included') : '—'}</LocaleText>
+                </dd>
               </div>
             </dl>
             <p className="modal-note">
