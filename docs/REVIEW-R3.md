@@ -25,6 +25,9 @@ Find technical and visual bugs; add deliberate feedback to user actions. On resp
 - Small search input text risked automatic mobile/tablet input zoom. Editable search text is now at least 16px through 1199px; page zoom is not disabled.
 - FAQ height animations finish cleanly if the viewport is resized during the transition.
 
+- The dock could fail to reappear after a desktop-to-phone resize in Firefox. A coalesced geometry check now handles scroll, resize and visual viewport changes instead of depending on a stale intersection callback.
+- Applying scroll clearance to the fixed radios made keyboard focus move the page away from pricing in WebKit. Clearance now belongs only to document-flow plan actions; native radio keyboard behavior is preserved.
+
 ## Deliberate feedback
 
 - Search: native Search keyboard hint, clear-input action with focus retained, trimmed query submission, real navigation-in-progress feedback and pageshow recovery after Back/Forward.
