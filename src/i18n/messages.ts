@@ -1,4 +1,5 @@
 /** Working translation of existing copy. Technical names and source illustrations stay intact. */
+import { typograph } from './typography';
 export const russian = {
   Language: 'Язык',
   'APCOSYS home': 'APCOSYS — главная',
@@ -200,5 +201,8 @@ export function translate(
   values: Record<string, string | number> = {},
 ) {
   const message = locale === 'ru' ? (russian[key as Message] ?? key) : key;
-  return message.replace(/\{(\w+)\}/g, (token, name: string) => String(values[name] ?? token));
+  return typograph(
+    message.replace(/\{(\w+)\}/g, (token, name: string) => String(values[name] ?? token)),
+    locale,
+  );
 }

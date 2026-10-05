@@ -11,7 +11,7 @@ for (const width of [320, 360, 390, 430, 599]) {
     await expect(search.locator('h3')).toHaveText('One query. A closer look.');
     await expect(page.getByRole('searchbox')).toHaveAttribute(
       'placeholder',
-      'Domain, IP or technical attribute. It’s free',
+      /Domain, IP\sor\stechnical attribute\. It’s free/,
     );
     await expect(search.locator('.search-chrome__filters')).not.toBeVisible();
     expect((await search.boundingBox())!.height).toBeLessThanOrEqual(500.1);
@@ -124,7 +124,16 @@ for (const width of [320, 390, 768, 1440, 1920]) {
     const overflow = await page
       .locator('h1,h2,.header-row,.audience-copy,.plan-card,.metric-card')
       .evaluateAll((nodes) =>
-        nodes.filter((n) => n.scrollWidth > n.clientWidth + 2).map((n) => n.className || n.tagName),
+        nodes
+          .filter((n) => n.scrollWidth > n.clientWidth + 2)
+          .map((n) => ({
+            id: n.id,
+            className: n.className,
+            text: n.textContent,
+            width: n.clientWidth,
+            scrollWidth: n.scrollWidth,
+            fontSize: getComputedStyle(n).fontSize,
+          })),
       );
     expect(overflow).toEqual([]);
     await page.reload({ waitUntil: 'networkidle' });

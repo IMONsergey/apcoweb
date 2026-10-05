@@ -18,6 +18,7 @@
   --radius-panel: 7px;
   --gutter: 40px;
   --section-space: 100px;
+  --header-height: 96px;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   font-family: var(--font-sans);
   font-synthesis: none;
@@ -31,7 +32,7 @@
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 32px;
+  scroll-padding-top: calc(var(--header-height) + 24px);
 }
 body {
   margin: 0;
@@ -123,6 +124,7 @@ h3 {
 p {
   font-size: 18px;
   line-height: 1.4;
+  text-wrap: pretty;
 }
 .eyebrow {
   font: 400 13px/1.4 var(--font-mono);
@@ -143,6 +145,7 @@ p {
   :root {
     --gutter: 24px;
     --section-space: 64px;
+    --header-height: 78px;
   }
   h2 {
     font-size: 40px;

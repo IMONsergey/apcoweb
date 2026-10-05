@@ -1,5 +1,6 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
+import { noBreakNumber } from '../../i18n/typography';
 import { media } from '../../content/site';
 import { Icon, type IconName } from '../ui/Icon';
 
@@ -33,7 +34,7 @@ export function SearchChrome({ credits = '2 000' }: { credits?: string }) {
       </div>
       <div className="search-chrome__account">
         <span>
-          <LocaleText>{t('Credits:')}</LocaleText> <b>{credits}</b>
+          <LocaleText>{t('Credits:')}</LocaleText> <b>{noBreakNumber(credits)}</b>
         </span>
         <span className="search-chrome__upgrade">
           <LocaleText>{t('Upgrade Plan')}</LocaleText>

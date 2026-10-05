@@ -30,7 +30,8 @@ export function Footer() {
           </a>
           <div className="footer-meta">
             <p>
-              © APCOSYS {new Date().getFullYear()} ·{' '}
+              ©{'\u00a0'}APCOSYS{'\u00a0'}
+              {new Date().getFullYear()} ·{' '}
               <a className="footer-email" href={`mailto:${supportEmail}`}>
                 <strong>{supportEmail}</strong>
               </a>

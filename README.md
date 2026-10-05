@@ -27,6 +27,7 @@ npm run test:smoke  # Chromium checks used in CI
 - `src/components/sections/`: independently editable landing sections.
 - `src/components/ui/`: shared split button, icon and native dialog.
 - `src/content/site.ts`: metrics, plans, navigation, carousel and footer data.
+- `src/i18n/`: EN/RU copy, quiet locale transitions and the shared Typograf pipeline. Translated text is formatted after interpolation; input queries, URLs and source artwork keep their original syntax.
 - `src/styles/`: tokens, typefaces and responsive page styles.
 - `src/visuals/`: the supplied animation engines and their React wrappers.
 - `public/media/`: optimized local assets exported from Figma.

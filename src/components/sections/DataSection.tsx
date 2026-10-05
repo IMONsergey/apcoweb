@@ -1,5 +1,6 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
+import { noBreakNumber } from '../../i18n/typography';
 import { metrics, productUrl } from '../../content/site';
 import { DoubleButton } from '../ui/DoubleButton';
 import { Visual } from '../visuals/Visual';
@@ -34,7 +35,7 @@ export function DataSection() {
                     <LocaleText>{t(metric.label)}</LocaleText>
                   </span>
                 </dt>
-                <dd>{metric.value}</dd>
+                <dd>{noBreakNumber(metric.value)}</dd>
               </div>
             ))}
           </dl>

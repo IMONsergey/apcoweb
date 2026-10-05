@@ -1,5 +1,6 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
+import { noBreakNumber } from '../../i18n/typography';
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { metrics, productUrl } from '../../content/site';
 import { SearchChrome } from './SearchChrome';
@@ -112,7 +113,7 @@ export function SearchPreview() {
               <dt>
                 <LocaleText>{t(metric.label)}</LocaleText>
               </dt>
-              <dd>{metric.value}</dd>
+              <dd>{noBreakNumber(metric.value)}</dd>
             </div>
           ))}
         </dl>

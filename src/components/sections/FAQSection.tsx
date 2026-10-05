@@ -44,7 +44,8 @@ export function FAQSection() {
           </AnimatedDetails>
           <AnimatedDetails title={t('How can I contact the team?')}>
             <p>
-              <LocaleText>{t('Write to')}</LocaleText>{' '}
+              <LocaleText>{t('Write to')}</LocaleText>
+              {'\u00a0'}
               <a href={`mailto:${supportEmail}`}>{supportEmail}</a>{' '}
               <LocaleText>{t('about your data, API or procurement needs.')}</LocaleText>
             </p>
