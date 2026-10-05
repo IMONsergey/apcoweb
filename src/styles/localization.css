@@ -126,7 +126,8 @@
     top: 22%;
     left: 10%;
     width: 86%;
-    min-height: 43%;
+    /* Cover the prepared CTA through its lower edge at every narrow-tablet scale. */
+    min-height: 45%;
   }
   .closing-copy--translated h3 {
     font-size: 48px;
