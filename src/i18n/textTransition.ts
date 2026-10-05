@@ -40,7 +40,14 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
       ];
     },
   );
+  const root = document.documentElement;
+  const scrollPosition = { left: scrollX, top: scrollY };
+  const scrollAnchoring = root.style.overflowAnchor;
+  // A longer translation must not move the viewport while outgoing text stays in place.
+  root.style.overflowAnchor = 'none';
   commit();
+  root.getBoundingClientRect();
+  window.scrollTo({ ...scrollPosition, behavior: 'instant' });
   const ghosts: HTMLElement[] = [];
   const animations: Animation[] = [];
   const direction = next === 'ru' ? -1 : 1;
@@ -91,6 +98,7 @@ export function transitionLocaleText(commit: () => void, next: Locale) {
     stopped = true;
     animations.forEach((animation) => animation.cancel());
     ghosts.forEach((ghost) => ghost.remove());
+    root.style.overflowAnchor = scrollAnchoring;
     delete document.documentElement.dataset.localeTransition;
     window.removeEventListener('wheel', stop);
     window.removeEventListener('touchmove', stop);

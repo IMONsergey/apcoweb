@@ -95,6 +95,13 @@ test('locale text crossfades, rapid changes settle, and form state stays mounted
   // Freeze the app's own animation in the same click turn, after React handles it.
   // Cross-browser assertions and screenshots must not race a 360 ms transition.
   await page.evaluate(() => {
+    const rememberScroll = (event: MouseEvent) => {
+      if (
+        event.target instanceof Element &&
+        event.target.closest('.language-panel button[lang="ru"]')
+      )
+        Reflect.set(window, 'r5LocaleScrollBefore', scrollY);
+    };
     const freeze = (event: MouseEvent) => {
       if (
         !(event.target instanceof Element) ||
@@ -102,6 +109,7 @@ test('locale text crossfades, rapid changes settle, and form state stays mounted
       )
         return;
       document.removeEventListener('click', freeze);
+      document.removeEventListener('click', rememberScroll, true);
       document
         .getAnimations()
         .filter((animation) => {
@@ -113,10 +121,16 @@ test('locale text crossfades, rapid changes settle, and form state stays mounted
           animation.currentTime = 180;
         });
     };
+    document.addEventListener('click', rememberScroll, true);
     document.addEventListener('click', freeze);
   });
   await selectLanguage(page, 'ru');
   await expect(page.locator('html')).toHaveAttribute('data-locale-transition', 'ru');
+  const scroll = await page.evaluate(() => ({
+    before: Number(Reflect.get(window, 'r5LocaleScrollBefore')),
+    after: scrollY,
+  }));
+  expect(scroll.after).toBe(scroll.before);
   expect(await page.locator('.locale-text-ghost').count()).toBeGreaterThan(0);
   expect(
     await page
