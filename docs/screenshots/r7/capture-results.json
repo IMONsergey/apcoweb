@@ -13,5 +13,27 @@
       "bytes": 74044,
       "sha256": "24da284bc633568902830e0a37b3d9f925937652bfd6f9a0b0334a63e683aaf3"
     }
-  ]
+  ],
+  "production": {
+    "path": "docs/screenshots/r7/production-pricing-language.jpg",
+    "url": "https://imonsergey.github.io/apcoweb/?lang=ru#pricing",
+    "bytes": 87562,
+    "sha256": "41e2dd3fb7b21e2e043a6beca196fbabf25a7c8ec3431b406f76dc0d560dd79b",
+    "kind": "actual published Pages CUA viewport",
+    "merge": "d7bbda47e2162808ddf29cf9da8762f0c5aa52d2",
+    "anchor": {
+      "headerTop": 0,
+      "headerBottom": 96,
+      "pricingTop": 119.5,
+      "scrollY": 5694
+    },
+    "menu": {
+      "headerTop": 0,
+      "scrollY": 6022,
+      "opacity": 1,
+      "flagOptions": 2,
+      "lang": "ru",
+      "transition": null
+    }
+  }
 }

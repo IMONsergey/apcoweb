@@ -1,10 +1,6 @@
 {
   "date": "2026-10-05",
-  "scope": [
-    "sticky header",
-    "anchor clearance",
-    "shared EN/RU typography"
-  ],
+  "scope": ["sticky header", "anchor clearance", "shared EN/RU typography"],
   "source": "b52211d3b39e6ef6ea8b45da0adcfc8147935dfa",
   "local": {
     "lockedInstall": "passed",
@@ -139,5 +135,125 @@
       "bytes": 74044,
       "sha256": "24da284bc633568902830e0a37b3d9f925937652bfd6f9a0b0334a63e683aaf3"
     }
-  ]
+  ],
+  "release": {
+    "merge": "d7bbda47e2162808ddf29cf9da8762f0c5aa52d2",
+    "pr": 8,
+    "run": 37333162045,
+    "workflowUrl": "https://github.com/IMONsergey/apcoweb/actions/runs/37333162045",
+    "jobs": {
+      "validate": {
+        "id": 111841126902,
+        "conclusion": "success"
+      },
+      "deploy": {
+        "id": 111842504068,
+        "conclusion": "success"
+      },
+      "productionSmoke": {
+        "id": 111842879136,
+        "conclusion": "success",
+        "stats": {
+          "startTime": "2026-10-05T15:33:18.949Z",
+          "duration": 121362.43699999999,
+          "expected": 82,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "artifactId": 11355885878,
+        "artifactBytes": 18030244,
+        "artifactSha256": "de6f17c8e79c3f1b7ea955427b361fa04e82829cd4603fcad7bb76b1549c6f72"
+      }
+    },
+    "publishedAssets": {
+      "url": "https://imonsergey.github.io/apcoweb/",
+      "noindex": true,
+      "rootAssets": ["index-Bqq3NQIO.js", "index-Bu-YxoT2.css"],
+      "assets": [
+        {
+          "name": "AnimatedShape-CxOpUeVH.js",
+          "bytes": 5236,
+          "sha256": "5ded3181eff0314fc6390867c38cc9c45c796cd5a7b376ad9cb9309f19e78bbe"
+        },
+        {
+          "name": "AnimatedShape-oC9qFH8J.css",
+          "bytes": 242,
+          "sha256": "62cf80c89ecd73bb9478c4727ac4c947975f498521edc76fd07dc07ffb8c5800"
+        },
+        {
+          "name": "DotCascade-BVbhCojZ.js",
+          "bytes": 7587,
+          "sha256": "db0e9b562d1d52d729e1bec49a432dab4493548bf763b2510b7014796353ad11"
+        },
+        {
+          "name": "DotCascade-xfSig_rE.css",
+          "bytes": 1128,
+          "sha256": "c25e817ba79f654184efbd289074a24a5914dd647906e23ed493af6c2d614a43"
+        },
+        {
+          "name": "IceSphereWaves-C2ACPYef.css",
+          "bytes": 309,
+          "sha256": "d26abf2c83d81e92bfe62c990ebd3149dc864be86ec4e288ef914a296590dfea"
+        },
+        {
+          "name": "IceSphereWaves-FTGnolX9.js",
+          "bytes": 5107,
+          "sha256": "7025992ea4373a2e48a0e551bab3d26d2530b4fbd1c3f2ed29e0c7d206eaa611"
+        },
+        {
+          "name": "SignalGlobe-BAreWu10.css",
+          "bytes": 137,
+          "sha256": "1ee7b970758a3944faa71a28acd89ca64d054e9446e3592af1eca84291bbcf4f"
+        },
+        {
+          "name": "SignalGlobe-D14i9m52.js",
+          "bytes": 14563,
+          "sha256": "da33455c4dcc738a8ad7c0423e3743163a242322c8070aae9604e04296a1f76e"
+        },
+        {
+          "name": "TurquoiseFlow-BeGYI8_4.css",
+          "bytes": 389,
+          "sha256": "7086d878fbdebdb67e349253c568b13d988c09e20686ba482882cecb5b73df0a"
+        },
+        {
+          "name": "TurquoiseFlow-CTVcbSqn.js",
+          "bytes": 6392,
+          "sha256": "d7e02f7b43338886e6bb33dbe23a4d1d6663d480370cbdf1797151af52e08235"
+        },
+        {
+          "name": "index-Bqq3NQIO.js",
+          "bytes": 339648,
+          "sha256": "fcbb161f9cb2083ce1694d46c89cee398d268d3c39dd2e8c0d196ab2c5a79f33"
+        },
+        {
+          "name": "index-Bu-YxoT2.css",
+          "bytes": 60494,
+          "sha256": "7916e2dac32db6a8e48b8b00a23fb2760e21c41bf5ac5ad0ae8cb38b1ac56151"
+        }
+      ]
+    },
+    "liveCapture": {
+      "path": "docs/screenshots/r7/production-pricing-language.jpg",
+      "url": "https://imonsergey.github.io/apcoweb/?lang=ru#pricing",
+      "bytes": 87562,
+      "sha256": "41e2dd3fb7b21e2e043a6beca196fbabf25a7c8ec3431b406f76dc0d560dd79b",
+      "kind": "actual published Pages CUA viewport",
+      "merge": "d7bbda47e2162808ddf29cf9da8762f0c5aa52d2",
+      "anchor": {
+        "headerTop": 0,
+        "headerBottom": 96,
+        "pricingTop": 119.5,
+        "scrollY": 5694
+      },
+      "menu": {
+        "headerTop": 0,
+        "scrollY": 6022,
+        "opacity": 1,
+        "flagOptions": 2,
+        "lang": "ru",
+        "transition": null
+      }
+    }
+  }
 }
