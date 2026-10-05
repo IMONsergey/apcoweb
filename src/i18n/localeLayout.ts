@@ -13,7 +13,7 @@ export function warmLocaleFonts() {
   ]).catch(() => undefined));
 }
 
-const blocks = 'main h1, main h2, main h3, main p, footer .eyebrow';
+const blocks = 'main h1, main h2, main h3, main p, main summary, footer .eyebrow';
 const sections = 'main section';
 const navText = '.site-header .nav-trigger > .locale-text';
 const controls = '.double-button';
@@ -53,6 +53,8 @@ export function installLocaleLayout(site: HTMLElement) {
     const otherControls = Array.from(mirror.querySelectorAll<HTMLElement>(controls));
     const liveSections = Array.from(site.querySelectorAll<HTMLElement>(sections));
     const otherSections = Array.from(mirror.querySelectorAll<HTMLElement>(sections));
+    const liveAnswers = Array.from(site.querySelectorAll<HTMLElement>('.faq-answer'));
+    const otherAnswers = Array.from(mirror.querySelectorAll<HTMLElement>('.faq-answer'));
     mirror.lang = other;
     mirror.removeAttribute('id');
     mirror.dataset.localeSizing = 'true';
@@ -85,6 +87,42 @@ export function installLocaleLayout(site: HTMLElement) {
     });
     document.body.append(mirror);
     try {
+      // Closed native details have no answer box. Measure only the isolated copy in two
+      // batches, then restore its disclosure state before measuring section extents.
+      const details = Array.from(mirror.querySelectorAll<HTMLDetailsElement>('.faq-list details'));
+      const openStates = details.map((detail) => detail.open);
+      const faqText = details.flatMap((detail) =>
+        Array.from(detail.querySelectorAll<HTMLElement>('[data-locale-key]')),
+      );
+      const otherCopy = faqText.map((node) => node.textContent);
+      details.forEach((detail) => {
+        detail.open = true;
+      });
+      const otherHeights = otherAnswers.map((node) => node.getBoundingClientRect().height);
+      details.forEach((detail) => {
+        detail.lang = current;
+        detail.style.fontFamily =
+          current === 'ru' ? 'Inter, Arial, sans-serif' : '"Instrument Sans", Arial, sans-serif';
+      });
+      faqText.forEach((node) => {
+        node.textContent = translate(current, node.dataset.localeKey!);
+      });
+      const answerHeights = otherAnswers.map((node, index) =>
+        Math.ceil(Math.max(otherHeights[index], node.getBoundingClientRect().height)),
+      );
+      details.forEach((detail, index) => {
+        detail.removeAttribute('lang');
+        detail.style.fontFamily = '';
+        detail.open = openStates[index];
+      });
+      faqText.forEach((node, index) => {
+        node.textContent = otherCopy[index];
+      });
+      liveAnswers.forEach((node, index) => {
+        if (!originals.has(node))
+          originals.set(node, { height: node.style.minHeight, width: node.style.minWidth });
+        node.style.minHeight = otherAnswers[index].style.minHeight = answerHeights[index] + 'px';
+      });
       const widths = [...liveNav, ...liveControls].flatMap((node, index) => {
         const counterpart = [...otherNav, ...otherControls][index];
         const blocked = node.closest(excluded);

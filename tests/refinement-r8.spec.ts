@@ -85,6 +85,34 @@ for (const width of [320, 390, 768, 1440, 1920]) {
 }
 
 for (const width of [390, 1440]) {
+  test(`R8 expanded FAQ retains disclosure and reading geometry at ${width}px`, async ({
+    page,
+  }) => {
+    await visit(page, width);
+    const detail = page.locator('.faq-list details').first();
+    await detail.locator('summary').click();
+    await expect(detail).toHaveAttribute('open', '');
+    await revealHeader(page);
+    const geometry = () =>
+      page.locator('.faq-list, .closing-section').evaluateAll((nodes) =>
+        nodes.map((node) => {
+          const rect = node.getBoundingClientRect();
+          return { top: rect.top + scrollY, height: rect.height };
+        }),
+      );
+    const before = await geometry();
+    for (const language of ['ru', 'en'] as const) {
+      await selectLanguage(page, language);
+      await expect(page.locator('html')).toHaveAttribute('lang', language);
+      await expect(detail).toHaveAttribute('open', '');
+      const after = await geometry();
+      after.forEach((rect, index) => {
+        expect(Math.abs(rect.top - before[index].top)).toBeLessThanOrEqual(1);
+        expect(Math.abs(rect.height - before[index].height)).toBeLessThanOrEqual(1);
+      });
+    }
+  });
+
   test(`R8 directional header keeps menus and keyboard usable at ${width}px`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await visit(page, width);
