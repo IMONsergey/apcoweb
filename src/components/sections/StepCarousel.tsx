@@ -1,50 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCarousel } from '../../hooks/useCarousel';
 import { media, researchSteps } from '../../content/site';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
-import { useMotion } from '../../hooks/useMotion';
 export function StepCarousel() {
-  const track = useRef<HTMLUListElement>(null);
-  const [position, setPosition] = useState(0);
-  const [positions, setPositions] = useState(3);
-  const { paused } = useMotion();
-  const update = useCallback(() => {
-    const element = track.current,
-      first = element?.firstElementChild as HTMLElement | null;
-    if (!element || !first) return;
-    const gap = parseFloat(getComputedStyle(element).gap) || 20;
-    const step = first.offsetWidth + gap;
-    const maximum = Math.max(0, element.scrollWidth - element.clientWidth);
-    const count = Math.max(1, Math.ceil(maximum / step - 0.02) + 1);
-    setPositions(count);
-    setPosition(
-      element.scrollLeft >= maximum - 2
-        ? count - 1
-        : Math.min(count - 1, Math.round(element.scrollLeft / step)),
-    );
-  }, []);
-  useEffect(() => {
-    const el = track.current;
-    if (!el) return;
-    const resize = new ResizeObserver(update);
-    resize.observe(el);
-    el.addEventListener('scroll', update, { passive: true });
-    update();
-    return () => {
-      resize.disconnect();
-      el.removeEventListener('scroll', update);
-    };
-  }, [update]);
-  function move(direction: number) {
-    const el = track.current,
-      first = el?.firstElementChild as HTMLElement | null;
-    if (!el || !first) return;
-    const step = first.offsetWidth + (parseFloat(getComputedStyle(el).gap) || 20);
-    el.scrollTo({
-      left: Math.max(0, Math.min(el.scrollWidth - el.clientWidth, (position + direction) * step)),
-      behavior: paused ? 'instant' : 'smooth',
-    });
-  }
+  const { track, position, positions, move, goTo } = useCarousel();
   return (
     <section id="how-it-works" className="steps section-space" aria-labelledby="steps-title">
       <div className="container section-heading-row">
@@ -96,7 +55,10 @@ export function StepCarousel() {
           aria-label="Five steps of an investigation"
           tabIndex={0}
           onKeyDown={(event) => {
-            if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+            if (event.key === 'Home' || event.key === 'End') {
+              event.preventDefault();
+              goTo(event.key === 'Home' ? 0 : positions - 1);
+            } else if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
               event.preventDefault();
               move(event.key === 'ArrowRight' ? 1 : -1);
             }

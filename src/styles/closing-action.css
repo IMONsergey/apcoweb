@@ -1,0 +1,78 @@
+/* Click regions follow the actual visible CTA in each supplied Start asset. Images are unchanged. */
+.closing-scene {
+  --cta-left: 45%;
+  --cta-y: 66.215%;
+  --cta-width: 14.56%;
+  --cta-height: 4.73%;
+}
+.closing-hotspot {
+  position: absolute;
+  left: var(--cta-left);
+  top: var(--cta-y);
+  width: var(--cta-width);
+  height: var(--cta-height);
+  min-height: 44px;
+  transform: translateY(-50%);
+  border-radius: 5px;
+  transition:
+    background-color 200ms var(--ease),
+    box-shadow 200ms var(--ease);
+}
+.closing-hotspot:focus-visible {
+  outline: 2px solid var(--action);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px #ffffffb3;
+}
+@media (max-width: 1199px) {
+  .closing-scene {
+    --cta-left: 43.6%;
+    --cta-y: 68.6%;
+    --cta-width: 20.4%;
+    --cta-height: 6.2%;
+  }
+}
+@media (max-width: 899px) {
+  .closing-scene {
+    --cta-left: 41.5%;
+    --cta-y: 62.75%;
+    --cta-width: 27.3%;
+    --cta-height: 4.7%;
+  }
+}
+@media (max-width: 599px) {
+  .closing-scene {
+    --cta-left: 25.5%;
+    --cta-y: 57.7%;
+    --cta-width: 48.9%;
+    --cta-height: 5%;
+  }
+}
+@media (max-width: 410px) {
+  .closing-scene {
+    --cta-left: 23.1%;
+    --cta-y: 58.55%;
+    --cta-width: 53.8%;
+    --cta-height: 5.7%;
+  }
+}
+@media (max-width: 375px) {
+  .closing-scene {
+    --cta-left: 21%;
+    --cta-y: 59.65%;
+    --cta-width: 58%;
+    --cta-height: 5.9%;
+  }
+}
+@media (max-width: 340px) {
+  .closing-scene {
+    --cta-left: 17.2%;
+    --cta-y: 67.95%;
+    --cta-width: 65.7%;
+    --cta-height: 8.3%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .closing-hotspot {
+    transition: none;
+  }
+}

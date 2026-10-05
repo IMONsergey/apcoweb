@@ -321,6 +321,7 @@
   padding-top: 128px;
   position: relative;
   isolation: isolate;
+  container-type: inline-size;
 }
 .section-heading-row {
   display: flex;
@@ -357,17 +358,17 @@
   gap: 16px;
 }
 .carousel-bleed {
-  padding-left: max(var(--gutter), calc((100vw - 1760px) / 2));
+  padding-left: max(var(--gutter), calc((100cqw - 1760px) / 2));
 }
 .step-track {
-  --card-width: calc((min(100vw - 2 * var(--gutter), 1760px) - 40px) / 3);
+  --card-width: calc((min(100cqw - 2 * var(--gutter), 1760px) - 40px) / 3);
   display: flex;
   gap: 20px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
-  padding-right: max(var(--gutter), calc((100vw - 1760px) / 2));
+  padding-right: max(var(--gutter), calc((100cqw - 1760px) / 2));
   padding-bottom: 6px;
   scroll-padding-inline: 0;
 }
@@ -884,15 +885,6 @@
   width: 100%;
   height: auto;
 }
-.closing-hotspot {
-  position: absolute;
-  left: 44.8%;
-  top: 63.5%;
-  width: 15.4%;
-  height: 6%;
-  min-height: 36px;
-  border-radius: 5px;
-}
 .closing-hotspot:hover {
   background: #ffffff10;
 }
@@ -1175,7 +1167,7 @@ th {
     padding: 24px;
   }
   .step-track {
-    --card-width: calc((100vw - 2 * var(--gutter) - 20px) / 2);
+    --card-width: calc((100cqw - 2 * var(--gutter) - 20px) / 2);
   }
   .step-copy h3 {
     font-size: 60px;
@@ -1284,12 +1276,6 @@ th {
   .closing-section {
     padding-block: 40px 80px;
   }
-  .closing-hotspot {
-    left: 43%;
-    top: 57%;
-    width: 22%;
-    height: 7%;
-  }
   .footer-columns {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 40px 24px;
@@ -1379,12 +1365,6 @@ th {
   }
   .closing-scene {
     width: min(100%, 610px);
-  }
-  .closing-hotspot {
-    left: 39%;
-    top: 50%;
-    width: 33%;
-    height: 6%;
   }
   .footer-brand {
     max-width: 42%;
@@ -1501,7 +1481,7 @@ th {
     font-size: 14px;
   }
   .step-track {
-    --card-width: calc(100vw - 2 * var(--gutter) - 16px);
+    --card-width: calc(100cqw - 2 * var(--gutter) - 16px);
     gap: 16px;
   }
   .step-copy {
@@ -1715,13 +1695,6 @@ th {
   .closing-scene::after {
     border-radius: 20px;
   }
-  .closing-hotspot {
-    left: 22.9%;
-    top: 55.55%;
-    width: 54%;
-    height: 5.9%;
-    min-height: 42px;
-  }
   .footer {
     padding-block: 32px 32px;
   }
@@ -1816,12 +1789,6 @@ th {
   }
   .header-signin {
     padding-inline: 10px;
-  }
-  .closing-hotspot {
-    left: 17%;
-    top: 55%;
-    width: 66%;
-    height: 9%;
   }
   .double-button {
     font-size: 13px;

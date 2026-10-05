@@ -39,6 +39,28 @@ export function Header() {
               <div
                 className="nav-group"
                 key={group.label}
+                onKeyDown={(event) => {
+                  if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+                  const links = Array.from(
+                    event.currentTarget.querySelectorAll<HTMLAnchorElement>('.nav-panel a'),
+                  );
+                  if (!links.length) return;
+                  const focused = links.indexOf(document.activeElement as HTMLAnchorElement);
+                  event.preventDefault();
+                  setActive(group.label);
+                  const next =
+                    event.key === 'Home'
+                      ? 0
+                      : event.key === 'End'
+                        ? links.length - 1
+                        : focused < 0
+                          ? event.key === 'ArrowUp'
+                            ? links.length - 1
+                            : 0
+                          : (focused + (event.key === 'ArrowDown' ? 1 : -1) + links.length) %
+                            links.length;
+                  requestAnimationFrame(() => links[next]?.focus());
+                }}
                 onBlur={(event) => {
                   if (!event.currentTarget.contains(event.relatedTarget)) setActive(null);
                 }}

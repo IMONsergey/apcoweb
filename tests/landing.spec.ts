@@ -173,6 +173,7 @@ test('search validates locally and forwards the verified URL parameter', async (
 test('native billing selection applies the approved 20 percent discount', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await openLanding(page);
+  await page.locator('#plan-plus').scrollIntoViewIfNeeded();
   await expect(page.locator('.price-amount')).toHaveText(['$0', '$40', '$240', '$720']);
   await page.getByRole('radio', { name: 'Annually', exact: true }).check();
   await expect(page.locator('dialog[open]')).toHaveCount(0);

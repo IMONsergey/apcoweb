@@ -1,4 +1,4 @@
-import { useId, useState, type FormEvent } from 'react';
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { metrics, productUrl } from '../../content/site';
 import { SearchChrome } from './SearchChrome';
 import { TrustMarquee } from './TrustMarquee';
@@ -6,14 +6,31 @@ import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
 export function SearchForm({ className = '' }: { className?: string }) {
   const id = useId();
+  const input = useRef<HTMLInputElement>(null);
+  const [submitting, setSubmitting] = useState(false);
+  useEffect(() => {
+    const restore = () => setSubmitting(false);
+    window.addEventListener('pageshow', restore);
+    return () => window.removeEventListener('pageshow', restore);
+  }, []);
   const [error, setError] = useState(false);
   const [query, setQuery] = useState('');
   function submit(event: FormEvent<HTMLFormElement>) {
-    if (!query.trim()) {
+    const normalized = query.trim();
+    if (!normalized) {
       event.preventDefault();
       setError(true);
-      document.getElementById(id)?.focus();
+      input.current?.focus();
+      return;
     }
+    if (submitting) {
+      event.preventDefault();
+      return;
+    }
+    if (input.current) input.current.value = normalized;
+    setQuery(normalized);
+    setError(false);
+    setSubmitting(true);
   }
   return (
     <form
@@ -21,6 +38,7 @@ export function SearchForm({ className = '' }: { className?: string }) {
       action={`${productUrl}/search`}
       method="get"
       onSubmit={submit}
+      aria-busy={submitting || undefined}
       role="search"
       aria-label="Search internet infrastructure"
     >
@@ -29,6 +47,8 @@ export function SearchForm({ className = '' }: { className?: string }) {
       </label>
       <input
         id={id}
+        ref={input}
+        enterKeyHint="search"
         type="search"
         name="search_value"
         value={query}
@@ -42,8 +62,31 @@ export function SearchForm({ className = '' }: { className?: string }) {
         aria-invalid={error || undefined}
         aria-describedby={error ? `${id}-error` : undefined}
       />
-      <button type="submit" aria-label="Search APCOSYS">
-        <Icon name="search" />
+      {query && !submitting && (
+        <button
+          type="button"
+          className="search-clear"
+          aria-label="Clear search query"
+          onClick={() => {
+            setQuery('');
+            setError(false);
+            input.current?.focus({ preventScroll: true });
+          }}
+        >
+          <Icon name="close" />
+        </button>
+      )}
+      <button
+        type="submit"
+        className="search-submit"
+        aria-label="Search APCOSYS"
+        disabled={submitting}
+      >
+        {submitting ? (
+          <span className="search-spinner" aria-hidden="true" />
+        ) : (
+          <Icon name="search" />
+        )}
       </button>
       {error && (
         <span className="search-error" id={`${id}-error`} role="alert">
