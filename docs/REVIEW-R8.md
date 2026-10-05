@@ -25,6 +25,10 @@ The widget is an illustrative screen, not an interactive API client. It remains 
 
 ## Validation and audit
 
-Local locked install, source integrity, lint, TypeScript, formatting and production build are checked before publishing. Local matching-browser execution is unavailable in this workspace; authoritative browser checks run in GitHub Actions with the exact Playwright browser versions. Their final outcome, inspected screenshots and published build identity will be recorded here after execution. The post-fix six-step audit is retained in AUDIT-R8.md when complete.
+Locked installation, six source checksums, lint, TypeScript, Prettier and production build pass. Runtime/test source `960cf312ea4418e441c7108336301c1ea294abc7` passed **285/285** matching Chromium/Firefox/WebKit scenarios, 95 per engine, without failures, retries or skips in [run 37365675775](https://github.com/IMONsergey/apcoweb/actions/runs/37365675775). The same source passed all 285 local scenarios. The independent PR Chromium workflow was cancelled while queued; no pass is claimed for that run. Chromium is covered by the successful cross-browser run and local 95/95.
 
-Do not treat this candidate note as a successful release record. A successful Pages deployment and independent checks against the actual published URL are required.
+The final fixes use explicit locale attributes and font inheritance, sample rendered font geometry after a paint, measure on viewport-width changes rather than page-height observation, and keep native anchor clearance constant at the compact header height. Font dimensions and inline wrapping remain native.
+
+The [six-step post-fix audit](AUDIT-R8.md) and seven inspected lossless captures in [screenshots/r8/](screenshots/r8/) retain current evidence. [qa-r8-summary.json](qa-r8-summary.json) records exact source, outcomes, build hashes and superseded candidates. Documentation-only evidence commits preserve runtime and tests byte for byte.
+
+PR #9 records the final main merge, successful Pages deployment and independent 95-scenario check against the actual published URL. A successful main deployment and published-asset hash comparison are required to establish publication.

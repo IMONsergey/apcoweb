@@ -1,3 +1,11 @@
+# R8 — quiet interaction and responsive refinements, 2026-10-05
+
+Runtime/test source `960cf312ea4418e441c7108336301c1ea294abc7` passed **285/285**, 95 per Chromium/Firefox/WebKit, with zero failures, skips or retries in [run 37365675775](https://github.com/IMONsergey/apcoweb/actions/runs/37365675775). All 285 also pass locally with the exact locked browser revisions. Locked install, six source checksums, lint, TypeScript, formatting and build pass. The independent PR Chromium workflow was cancelled while queued; no pass is claimed for it.
+
+Coverage includes five-width EN/RU geometry, expanded FAQ, directional navigation and keyboard access, API lazy loading/timeline/offscreen pause/reduced motion, large-screen type, footer feedback and the complete reading flow. Previous typography, pricing, marquee, accessibility, input and prepared-artwork regressions remain. The [six-step audit](AUDIT-R8.md), [seven inspected lossless captures](screenshots/r8/) and [exact QA provenance](qa-r8-summary.json) are retained. CI's asset names/sizes match the local build; published hashes are verified after deployment.
+
+[PR #9](https://github.com/IMONsergey/apcoweb/pull/9) is the final release record for main merge, Pages deployment, 95 live Chromium scenarios and asset identity. Documentation/evidence follow-ups preserve tested runtime and tests byte for byte.
+
 # R7 — sticky header and typography, 2026-10-05
 
 Runtime/test source `b52211d3b39e6ef6ea8b45da0adcfc8147935dfa`: 246/246 Chromium/Firefox/WebKit scenarios passed with zero retries/failures/skips in [run 37331119341](https://github.com/IMONsergey/apcoweb/actions/runs/37331119341); 82/82 independent Chromium checks passed in [run 37331119331](https://github.com/IMONsergey/apcoweb/actions/runs/37331119331). Locked install, checksums, lint, TypeScript, formatting, build and the local typography pipeline test pass. Matching local browsers could not be downloaded, so no local browser pass is claimed. Exact build, candidates and artifact provenance: qa-r7-summary.json; two inspected lossless captures: screenshots/r7/. Production verification follows in PR #8.

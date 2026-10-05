@@ -1,0 +1,115 @@
+[
+  {
+    "path": "search-390.webp",
+    "source": "local matching Chromium run; .work/r8-smoke-final/refinement-r8-R8-complete--0cf46-ne-and-large-desktop-widths-chromium/r8-flow-full-390.png",
+    "crop": [
+      24,
+      873,
+      351,
+      1361
+    ],
+    "pixels": [
+      327,
+      488
+    ],
+    "sha256": "95518d62260b5eeaf785ccaacf7a65767909490b6705478782720be30832c103",
+    "runtimeSource": "960cf312ea4418e441c7108336301c1ea294abc7",
+    "encoding": "lossless WebP; no rescaling or retouching"
+  },
+  {
+    "path": "audiences-1920.webp",
+    "source": "local matching Chromium run; .work/r8-smoke-final/refinement-r8-R8-complete--0cf46-ne-and-large-desktop-widths-chromium/r8-flow-full-1920.png",
+    "crop": [
+      0,
+      3059,
+      1905,
+      4085
+    ],
+    "pixels": [
+      1905,
+      1026
+    ],
+    "sha256": "a8904d7e155550f4b88cdb05c0655041762bb5871f018b147b4a3b3dbc5bc3ae",
+    "runtimeSource": "960cf312ea4418e441c7108336301c1ea294abc7",
+    "encoding": "lossless WebP; no rescaling or retouching"
+  },
+  {
+    "path": "pricing-390.webp",
+    "source": "local matching Chromium run; .work/r8-smoke-final/refinement-r8-R8-complete--0cf46-ne-and-large-desktop-widths-chromium/r8-flow-full-390.png",
+    "crop": [
+      0,
+      6014,
+      375,
+      8346
+    ],
+    "pixels": [
+      375,
+      2332
+    ],
+    "sha256": "80ce07883daca003fe58a4181c87e19cbca78ccfc67ec45d3f90f6fec298cd06",
+    "runtimeSource": "960cf312ea4418e441c7108336301c1ea294abc7",
+    "encoding": "lossless WebP; no rescaling or retouching"
+  },
+  {
+    "path": "closing-390.webp",
+    "source": "local matching Chromium run; .work/r8-smoke-final/refinement-r8-R8-complete--0cf46-ne-and-large-desktop-widths-chromium/r8-flow-full-390.png",
+    "crop": [
+      24,
+      9108,
+      351,
+      9576
+    ],
+    "pixels": [
+      327,
+      468
+    ],
+    "sha256": "92093e6b433e3a33597e0ceb01c743a9dad300fc97eb3d3f847f0c6ca90ffd20",
+    "runtimeSource": "960cf312ea4418e441c7108336301c1ea294abc7",
+    "encoding": "lossless WebP; no rescaling or retouching"
+  },
+  {
+    "path": "footer-1920.webp",
+    "source": "local matching Chromium run; .work/r8-smoke-final/refinement-r8-R8-complete--0cf46-ne-and-large-desktop-widths-chromium/r8-flow-full-1920.png",
+    "crop": [
+      0,
+      9408,
+      1905,
+      9913
+    ],
+    "pixels": [
+      1905,
+      505
+    ],
+    "sha256": "15bf8efabde7048af4e864cb135b6ce8a469d1de595d1c1a3998385d1ebd0ff1",
+    "runtimeSource": "960cf312ea4418e441c7108336301c1ea294abc7",
+    "encoding": "lossless WebP; no rescaling or retouching"
+  },
+  {
+    "path": "language-menu-1920.webp",
+    "source": "local matching Chromium run; .work/r8-smoke-final/refinement-r8-R8-stable-la-b9ab9-d-readable-layout-at-1920px-chromium/r8-hero-menu-1920.png",
+    "pixels": [
+      1920,
+      547
+    ],
+    "sha256": "b9815be97aee755cb636718823ee9b8babfa81b6d4a71086505057a2cb98ed92",
+    "crop": [
+      0,
+      0,
+      1920,
+      547
+    ],
+    "runtimeSource": "960cf312ea4418e441c7108336301c1ea294abc7",
+    "encoding": "lossless WebP; no rescaling or retouching"
+  },
+  {
+    "path": "api-response-1920.webp",
+    "source": "local matching Chromium run; .work/r8-smoke-final/refinement-r8-R8-API-demo--873ed-uence-and-pauses-off-screen-chromium/r8-api-response-1920.png",
+    "pixels": [
+      913,
+      674
+    ],
+    "sha256": "e865d3317816bf89c5ef5f1c058b80a79488a3c1441f320a23ecb527b1cc7413",
+    "runtimeSource": "960cf312ea4418e441c7108336301c1ea294abc7",
+    "encoding": "lossless WebP; no rescaling or retouching"
+  }
+]

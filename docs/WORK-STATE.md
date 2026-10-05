@@ -4,6 +4,8 @@
 
 R8 extends the published R7 main merge `d7bbda47e2162808ddf29cf9da8762f0c5aa52d2`. Read REVIEW-R8.md first. The requested refinements cover large-screen text, eight supplied screenshot issues, the supplied API demo, a compact directional header and stable locale geometry. R8 removes whole-section locale transforms; use native inline text with reserved EN/RU sizes. GSAP 3.13.0 is explicitly authorized for the uploaded API demo and must remain lazy. Prices, source artwork and six previous rendering/data modules are preserved. Release checks and the post-fix audit are recorded separately in REVIEW-R8.md and AUDIT-R8.md when complete.
 
+Runtime/test source `960cf312ea4418e441c7108336301c1ea294abc7` passes **285/285** locally and in [matching-browser CI 37365675775](https://github.com/IMONsergey/apcoweb/actions/runs/37365675775), 95 per engine, no failures/retries/skips. See QA-RESULTS.md, qa-r8-summary.json, AUDIT-R8.md and screenshots/r8/. PR #9 records the main merge, Pages deployment and actual published checks. R8's runtime/tests are unchanged by documentation-only evidence commits. Do not repeat earlier R8 candidates or restore the removed whole-section language transforms.
+
 ## Historical R6–R7 context
 
 Repository: IMONsergey/apcoweb. Current implementation: R6 quiet inline language dissolve, coordinated layout morph and circular menu flags. Read REVIEW-R6.md first; preserve all other released R5 interactions. Runtime/test source `d838f0266d4c6bad043c281f779e392edae6e5ac` passed **231/231** matching-browser scenarios, 77 per Chromium/Firefox/WebKit: 230 first-attempt passes and one successful WebKit frame-capture retry, with no remaining failures or skips: https://github.com/IMONsergey/apcoweb/actions/runs/37321058513. QA-RESULTS.md, qa-r6-summary.json and screenshots/r6/ retain the exact outcome.
@@ -25,6 +27,6 @@ GitHub Pages: https://imonsergey.github.io/apcoweb/. Only a successful main depl
 Development port: 5187. Production preview: 4187. Do not disturb 5173 (another project). The dock remains contextual at <=1199 px, desktop billing remains at >=1200 px, and all approved 20% annual arithmetic is preserved. Figma must not be changed in a code-only task.
 
 The test-only follow-up PR is a test-only release continuation after PR #4: the live CTA check now waits for its responsive image and measures both rectangles atomically. The website/build is identical to the R4 release. Its final PR report is authoritative for the latest merge/deploy and production smoke; the initial 68-pass/1-retry result is preserved transparently in REVIEW-R4.md.
-# Current task — R7 header and typography, 2026-10-05
+## Historical R7 header and typography, 2026-10-05
 
 The owner added sticky navigation and project-wide typography after R6. R6 was merged in PR #7 and published at merge `2db5dc3c610c0a14ebd7eb673b1c13df81c7c1b8`; all 77 actual Pages Chromium checks passed in run 37323365212, and 12 published JS/CSS hashes matched the tested build. R7 extends that release; see REVIEW-R7.md. Runtime/test source `b52211d3b39e6ef6ea8b45da0adcfc8147935dfa` passed all 246 three-engine scenarios with zero retries in run 37331119341 and all 82 independent Chromium checks in run 37331119331. Inspected screenshots and exact provenance are retained in screenshots/r7/ and qa-r7-summary.json. PR #8 records the final release outcome.

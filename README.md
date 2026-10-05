@@ -4,6 +4,8 @@ React + TypeScript + Vite implementation of the APCOSYS landing page. Plain CSS,
 
 **Published preview:** https://imonsergey.github.io/apcoweb/
 
+Current review: [R8 refinements](docs/REVIEW-R8.md), [six-step UX audit](docs/AUDIT-R8.md), [verification evidence](docs/QA-RESULTS.md).
+
 ## Development
 
 ```sh
