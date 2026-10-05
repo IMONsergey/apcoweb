@@ -8,6 +8,50 @@ const languages = [
   { value: 'ru', label: 'Русский' },
 ] as const;
 
+function focusInPlace(node?: HTMLElement) {
+  if (!node) return;
+  const position = { left: scrollX, top: scrollY };
+  node.focus({ preventScroll: true });
+  window.scrollTo({ ...position, behavior: 'instant' });
+}
+
+function LanguageFlag({ locale }: { locale: 'en' | 'ru' }) {
+  const clip = useId();
+  return (
+    <svg
+      className="language-flag"
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <clipPath id={clip}>
+          <circle cx="12" cy="12" r="12" />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${clip})`}>
+        {locale === 'en' ? (
+          <>
+            <path fill="#012169" d="M0 0h24v24H0z" />
+            <path stroke="#fff" strokeWidth="5" d="m0 0 24 24M24 0 0 24" />
+            <path stroke="#c8102e" strokeWidth="2" d="m0 0 24 24M24 0 0 24" />
+            <path stroke="#fff" strokeWidth="8" d="M12 0v24M0 12h24" />
+            <path stroke="#c8102e" strokeWidth="4.5" d="M12 0v24M0 12h24" />
+          </>
+        ) : (
+          <>
+            <path fill="#fff" d="M0 0h24v8H0z" />
+            <path fill="#0039a6" d="M0 8h24v8H0z" />
+            <path fill="#d52b1e" d="M0 16h24v8H0z" />
+          </>
+        )}
+      </g>
+    </svg>
+  );
+}
+
 /** Same disclosure as navigation, with native buttons and radio-menu keyboard behavior. */
 export function LanguageBadge({
   open,
@@ -18,18 +62,18 @@ export function LanguageBadge({
 }) {
   const id = useId();
   const panelId = `${id}-languages`;
-  const clip = `${id}-flag`;
   const trigger = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const { locale, setLocale, t } = useLocale();
   const focusOption = (index: number) => {
     requestAnimationFrame(() => {
-      panel.current?.querySelectorAll<HTMLButtonElement>('button')[index]?.focus();
+      const options = panel.current?.querySelectorAll<HTMLButtonElement>('button');
+      focusInPlace(options?.[index]);
     });
   };
   const close = () => {
     onOpenChange(false);
-    trigger.current?.focus({ preventScroll: true });
+    focusInPlace(trigger.current ?? undefined);
   };
   const openMenu = (index = languages.findIndex((language) => language.value === locale)) => {
     onOpenChange(true);
@@ -52,7 +96,7 @@ export function LanguageBadge({
           : event.key === 'End'
             ? 1
             : (current + (event.key === 'ArrowDown' ? 1 : -1) + options.length) % options.length;
-      options[next]?.focus();
+      focusInPlace(options[next]);
     }
   };
   return (
@@ -71,6 +115,10 @@ export function LanguageBadge({
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={panelId}
+        onMouseDown={(event) => {
+          event.preventDefault();
+          focusInPlace(event.currentTarget);
+        }}
         onClick={() => (open ? close() : openMenu())}
         onKeyDown={(event) => {
           if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
@@ -79,30 +127,7 @@ export function LanguageBadge({
           } else if (event.key === 'Tab' && open) onOpenChange(false);
         }}
       >
-        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
-          <defs>
-            <clipPath id={clip}>
-              <circle cx="12" cy="12" r="12" />
-            </clipPath>
-          </defs>
-          <g clipPath={`url(#${clip})`}>
-            {locale === 'en' ? (
-              <>
-                <path fill="#012169" d="M0 0h24v24H0z" />
-                <path stroke="#fff" strokeWidth="5" d="m0 0 24 24M24 0 0 24" />
-                <path stroke="#c8102e" strokeWidth="2" d="m0 0 24 24M24 0 0 24" />
-                <path stroke="#fff" strokeWidth="8" d="M12 0v24M0 12h24" />
-                <path stroke="#c8102e" strokeWidth="4.5" d="M12 0v24M0 12h24" />
-              </>
-            ) : (
-              <>
-                <path fill="#fff" d="M0 0h24v8H0z" />
-                <path fill="#0039a6" d="M0 8h24v8H0z" />
-                <path fill="#d52b1e" d="M0 16h24v8H0z" />
-              </>
-            )}
-          </g>
-        </svg>
+        <LanguageFlag locale={locale} />
         <LocaleText>{locale.toUpperCase()}</LocaleText>
         <Icon name="chevron" />
       </button>
@@ -125,11 +150,13 @@ export function LanguageBadge({
             aria-checked={locale === language.value}
             tabIndex={open && locale === language.value ? 0 : -1}
             lang={language.value}
+            onMouseDown={(event) => event.preventDefault()}
             onClick={() => {
               setLocale(language.value);
               close();
             }}
           >
+            <LanguageFlag locale={language.value} />
             {language.label}
           </button>
         ))}

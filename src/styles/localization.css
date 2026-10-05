@@ -1,4 +1,8 @@
 /* Locale control is present on every header size; mobile sign-in stays in the drawer. */
+:root:has(.language-panel[data-open='true']) {
+  scroll-behavior: auto;
+}
+
 .language-control {
   position: relative;
   display: inline-flex;
@@ -39,7 +43,9 @@
   right: 0;
 }
 .language-panel button {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   width: 100%;
   min-height: 44px;
   padding: 10px;
@@ -51,6 +57,9 @@
   text-align: left;
   white-space: nowrap;
   transition: background-color 180ms var(--ease);
+}
+.language-flag {
+  flex: 0 0 16px;
 }
 .language-panel button:lang(ru) {
   font-family: 'Inter', Arial, sans-serif;

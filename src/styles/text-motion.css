@@ -1,16 +1,6 @@
-/* Inline boundaries keep the approved line wrapping; only visual copies leave the layout. */
+/* Inline text keeps its natural wrapping; the language handoff changes opacity only. */
 .locale-text--lines {
   white-space: pre-line;
-}
-.locale-text-ghost {
-  position: fixed;
-  z-index: 60;
-  display: block;
-  margin: 0;
-  padding: 0;
-  pointer-events: none;
-  user-select: none;
-  transform-origin: top left;
 }
 .price-amount {
   animation: none;
@@ -39,9 +29,4 @@
 .price-symbol::before,
 .price-digit__reel > span::before {
   content: attr(data-numeral);
-}
-@media (prefers-reduced-motion: reduce) {
-  .locale-text-ghost {
-    display: none;
-  }
 }
