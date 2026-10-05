@@ -52,8 +52,6 @@ export function useScrollHeader(ref: RefObject<HTMLElement | null>, locked: bool
     };
     const pointer = () => {
       keyboardPinned = false;
-      travel = 0;
-      previous = Math.max(0, scrollY);
     };
     schedule();
     window.addEventListener('scroll', schedule, { passive: true });

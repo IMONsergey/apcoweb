@@ -42,6 +42,14 @@ export function installLocaleLayout(site: HTMLElement) {
       return;
     }
     measuring = true;
+    // Allow font metrics to settle before connecting a sizing tree. The tree itself
+    // is connected, read and removed in one task, so other UI never sees duplicate controls.
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    if (disposed || !site.isConnected) {
+      measuring = false;
+      return;
+    }
     restore();
     const current = root.lang as Locale;
     const other: Locale = current === 'ru' ? 'en' : 'ru';
@@ -89,11 +97,6 @@ export function installLocaleLayout(site: HTMLElement) {
     });
     document.body.append(mirror);
     try {
-      // WebKit settles container queries and font metrics on the next rendering turn.
-      // The isolated tree stays invisible and does not connect any visual renderer.
-      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
-      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
-      if (disposed || !site.isConnected) return;
       const widths = [...liveNav, ...liveControls].flatMap((node, index) => {
         const counterpart = [...otherNav, ...otherControls][index];
         const blocked = node.closest(excluded);
@@ -136,8 +139,6 @@ export function installLocaleLayout(site: HTMLElement) {
           originals.set(node, { height: node.style.minHeight, width: node.style.minWidth });
         node.style.minHeight = counterpart.style.minHeight = size + 'px';
       }
-      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
-      if (disposed || !site.isConnected) return;
       // Closed native details have no answer box. Measure only the isolated copy in two
       // batches, then restore its disclosure state before measuring section extents.
       const details = Array.from(mirror.querySelectorAll<HTMLDetailsElement>('.faq-list details'));
