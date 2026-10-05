@@ -107,13 +107,8 @@
   font-size: clamp(17px, 2.7cqw, 32px);
 }
 :lang(ru) .audience-copy h3 {
-  font-size: clamp(30px, 3.2vw, 44px);
+  font-size: clamp(28px, 2.4vw, 35px);
   line-height: 1.1;
-}
-@media (min-width: 600px) {
-  :lang(ru) #researchers .audience-copy h3 {
-    font-size: clamp(28px, 2.4vw, 35px);
-  }
 }
 :lang(ru) .footer-columns .eyebrow {
   overflow-wrap: anywhere;
