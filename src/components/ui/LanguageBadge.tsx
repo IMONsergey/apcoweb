@@ -8,6 +8,13 @@ const languages = [
   { value: 'ru', label: 'Русский' },
 ] as const;
 
+function focusInPlace(node?: HTMLElement) {
+  if (!node) return;
+  const position = { left: scrollX, top: scrollY };
+  node.focus({ preventScroll: true });
+  window.scrollTo({ ...position, behavior: 'instant' });
+}
+
 function LanguageFlag({ locale }: { locale: 'en' | 'ru' }) {
   const clip = useId();
   return (
@@ -61,12 +68,12 @@ export function LanguageBadge({
   const focusOption = (index: number) => {
     requestAnimationFrame(() => {
       const options = panel.current?.querySelectorAll<HTMLButtonElement>('button');
-      options?.[index]?.focus({ preventScroll: true });
+      focusInPlace(options?.[index]);
     });
   };
   const close = () => {
     onOpenChange(false);
-    trigger.current?.focus({ preventScroll: true });
+    focusInPlace(trigger.current ?? undefined);
   };
   const openMenu = (index = languages.findIndex((language) => language.value === locale)) => {
     onOpenChange(true);
@@ -89,7 +96,7 @@ export function LanguageBadge({
           : event.key === 'End'
             ? 1
             : (current + (event.key === 'ArrowDown' ? 1 : -1) + options.length) % options.length;
-      options[next]?.focus({ preventScroll: true });
+      focusInPlace(options[next]);
     }
   };
   return (
@@ -110,7 +117,7 @@ export function LanguageBadge({
         aria-controls={panelId}
         onMouseDown={(event) => {
           event.preventDefault();
-          event.currentTarget.focus({ preventScroll: true });
+          focusInPlace(event.currentTarget);
         }}
         onClick={() => (open ? close() : openMenu())}
         onKeyDown={(event) => {

@@ -1,4 +1,8 @@
 /* Locale control is present on every header size; mobile sign-in stays in the drawer. */
+:root:has(.language-panel[data-open='true']) {
+  scroll-behavior: auto;
+}
+
 .language-control {
   position: relative;
   display: inline-flex;

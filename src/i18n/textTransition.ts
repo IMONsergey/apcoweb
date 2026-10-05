@@ -3,7 +3,7 @@ import type { Locale } from './messages';
 export type StopLocaleTransition = (finish?: boolean) => void;
 
 const layoutSelector =
-  'header .nav-link, header .language, header .header-actions > a, .hero h1, .hero .lead, .hero-actions, main > :not(.hero), footer';
+  'header .nav-group, header .nav-link, header .language, header .header-actions > a, .hero h1, .hero .lead, .hero-actions, main > :not(.hero), footer';
 const layoutBoxes = () =>
   Array.from(document.querySelectorAll<HTMLElement>(layoutSelector)).flatMap((node) => {
     const rect = node.getBoundingClientRect();
