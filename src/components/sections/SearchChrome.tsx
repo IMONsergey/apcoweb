@@ -1,10 +1,12 @@
+import { useLocale } from '../../i18n/context';
 import { media } from '../../content/site';
 import { Icon, type IconName } from '../ui/Icon';
 
 const previewIcons: IconName[] = ['search', 'database', 'scanner', 'cube', 'book', 'bookmark'];
 
 /** Decorative product chrome: search below it is a real native form. */
-export function SearchChrome() {
+export function SearchChrome({ credits = '2 000' }: { credits?: string }) {
+  const { t } = useLocale();
   return (
     <div className="search-chrome" aria-hidden="true">
       <div className="search-chrome__surface" />
@@ -22,17 +24,17 @@ export function SearchChrome() {
       </div>
       <div className="search-chrome__filters">
         <span>
-          Add Filter <Icon name="plus" />
+          {t('Add Filter')} <Icon name="plus" />
         </span>
         <span>
-          All Types <Icon name="chevron" />
+          {t('All Types')} <Icon name="chevron" />
         </span>
       </div>
       <div className="search-chrome__account">
         <span>
-          Credits: <b>2 000</b>
+          {t('Credits:')} <b>{credits}</b>
         </span>
-        <span className="search-chrome__upgrade">Upgrade Plan</span>
+        <span className="search-chrome__upgrade">{t('Upgrade Plan')}</span>
       </div>
     </div>
   );

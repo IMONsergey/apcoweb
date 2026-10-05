@@ -1,0 +1,210 @@
+/* Locale control is present on every header size; mobile sign-in stays in the drawer. */
+.language-control {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  border-radius: 5px;
+}
+.language-control .language {
+  display: flex;
+  height: 44px;
+  gap: 6px;
+  padding: 10px;
+  pointer-events: none;
+}
+.language-control .language > svg:last-child {
+  flex: 0 0 10px;
+  width: 10px;
+  height: 10px;
+}
+.language-control select {
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  font: 16px var(--font-sans);
+  cursor: pointer;
+  color: var(--ink);
+  background: white;
+}
+.language-control:focus-within {
+  outline: 2px solid var(--action);
+  outline-offset: 3px;
+}
+.language-control:has(select:hover) .language {
+  background: var(--page);
+}
+.language-control .language {
+  transition: background-color 180ms var(--ease);
+}
+:root:lang(ru) {
+  --font-sans: 'Inter', 'Instrument Sans', Arial, sans-serif;
+}
+:lang(ru) .nav-trigger {
+  white-space: nowrap;
+}
+:lang(ru) .desktop-nav {
+  gap: 10px;
+}
+:lang(ru) .header-row {
+  gap: 16px;
+}
+:lang(ru) .hero .lead {
+  max-width: 790px;
+}
+:lang(ru) .step-copy h3 {
+  font-size: clamp(40px, 4.7vw, 70px);
+  line-height: 1.03;
+  overflow-wrap: break-word;
+}
+:lang(ru) .metric-card dt {
+  line-height: 22px;
+}
+:lang(ru) .metric-card dt > span {
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+:lang(ru) .search-scene__heading h3 {
+  font-size: clamp(17px, 2.7cqw, 32px);
+}
+:lang(ru) .audience-copy h3 {
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1.1;
+}
+:lang(ru) .footer-columns .eyebrow {
+  overflow-wrap: anywhere;
+}
+:lang(ru) .plan-description {
+  min-height: 36px;
+}
+/* Original artwork stays in place; only editorial content is overlaid for RU. */
+.closing-copy--translated {
+  position: absolute;
+  left: 16%;
+  top: 28%;
+  width: 74%;
+  min-height: 44%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fcfcfc;
+  text-align: center;
+  padding: 16px;
+}
+.closing-copy--translated h3 {
+  font-size: clamp(32px, 5.6vw, 76px);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  max-width: 800px;
+  margin: 24px 0;
+}
+.closing-copy--translated .closing-copy__note {
+  font: 400 12px/18px var(--font-mono);
+}
+.closing-copy--translated .double-button {
+  margin-top: 32px;
+}
+@media (max-width: 1399px) and (min-width: 1200px) {
+  :lang(ru) .desktop-nav {
+    gap: 4px;
+  }
+  :lang(ru) .header-signin {
+    padding-inline: 12px;
+  }
+  :lang(ru) .nav-trigger {
+    padding-inline: 6px;
+  }
+  :lang(ru) .header-signup {
+    font-size: 13px;
+  }
+}
+@media (max-width: 899px) {
+  .closing-copy--translated {
+    top: 22%;
+    left: 10%;
+    width: 86%;
+    min-height: 43%;
+  }
+  .closing-copy--translated h3 {
+    font-size: 48px;
+  }
+}
+@media (max-width: 599px) {
+  .header-signin {
+    display: none;
+  }
+  .header-row {
+    gap: 10px;
+  }
+  .header-actions {
+    gap: 10px;
+  }
+  .language-control .language {
+    font-size: 13px;
+    padding: 10px 8px;
+  }
+  :lang(ru) .hero h1 {
+    font-size: clamp(34px, 9.7vw, 44px);
+    line-height: 1.06;
+  }
+  :lang(ru) .hero .lead {
+    font-size: 17px;
+    line-height: 25px;
+  }
+  :lang(ru) .audience-copy h3 {
+    font-size: 26px;
+    line-height: 30px;
+  }
+  :lang(ru) .search-scene__heading h3 {
+    font-size: 24px;
+    line-height: 1.15;
+  }
+  :lang(ru) .search-chrome__account {
+    font-size: 11px;
+  }
+  :lang(ru) .step-copy h3 {
+    font-size: 38px;
+  }
+  :lang(ru) .metric-card dt {
+    font-size: 9px;
+    line-height: 20px;
+  }
+  :lang(ru) .billing-dock__offer span {
+    font-size: 11px;
+  }
+  :lang(ru) .footer-columns .eyebrow {
+    font-size: 11px;
+    line-height: 17px;
+  }
+}
+@media (max-width: 340px) {
+  .header-actions {
+    gap: 8px;
+  }
+  .language-control .language {
+    padding-inline: 7px;
+    gap: 4px;
+  }
+  :lang(ru) .audience-copy h3 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  :lang(ru) .closing-copy h3 {
+    font-size: 30px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .language-control .language {
+    transition: none;
+  }
+}
+
+@media (max-width: 599px) {
+  :lang(ru) .audience-art {
+    width: 148px;
+    right: -64px;
+  }
+}

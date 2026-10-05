@@ -1,37 +1,41 @@
+import { useLocale } from '../../i18n/context';
 import { productUrl, supportEmail } from '../../content/site';
 import { AnimatedDetails } from '../ui/AnimatedDetails';
 export function FAQSection() {
+  const { t } = useLocale();
   return (
     <section className="faq-section section-space" id="faq" aria-labelledby="faq-title">
       <div className="container faq-grid">
         <h2 id="faq-title">
-          Good questions.
+          {t('Good questions.')}
           <br />
-          Clear answers.
+          {t('Clear answers.')}
         </h2>
         <div className="faq-list">
-          <AnimatedDetails title="How does the Free plan work?" initialOpen>
-            <p>The existing Free plan introduces the service for personal, non-commercial use.</p>
-          </AnimatedDetails>
-          <AnimatedDetails title="What consumes search credits?">
+          <AnimatedDetails title={t('How does the Free plan work?')} initialOpen>
             <p>
-              For the current credit usage rules,{' '}
+              {t('The existing Free plan introduces the service for personal, non-commercial use.')}
+            </p>
+          </AnimatedDetails>
+          <AnimatedDetails title={t('What consumes search credits?')}>
+            <p>
+              {t('For the current credit usage rules,')}{' '}
               <a href={`mailto:${supportEmail}?subject=APCOSYS%20search%20credits`}>
-                contact our team
+                {t('contact our team')}
               </a>
               .
             </p>
           </AnimatedDetails>
-          <AnimatedDetails title="Can I use the API?">
+          <AnimatedDetails title={t('Can I use the API?')}>
             <p>
-              API access is available on Plus, Expert and Business plans.{' '}
-              <a href={`${productUrl}/docs/api`}>View API documentation</a>.
+              {t('API access is available on Plus, Expert and Business plans.')}{' '}
+              <a href={`${productUrl}/docs/api`}>{t('View API documentation')}</a>.
             </p>
           </AnimatedDetails>
-          <AnimatedDetails title="How can I contact the team?">
+          <AnimatedDetails title={t('How can I contact the team?')}>
             <p>
-              Write to <a href={`mailto:${supportEmail}`}>{supportEmail}</a> about your data, API or
-              procurement needs.
+              {t('Write to')} <a href={`mailto:${supportEmail}`}>{supportEmail}</a>{' '}
+              {t('about your data, API or procurement needs.')}
             </p>
           </AnimatedDetails>
         </div>

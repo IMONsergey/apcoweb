@@ -1,16 +1,18 @@
+import { useLocale } from '../i18n/context';
 import { footerGroups, media, supportEmail } from '../content/site';
 export function Footer() {
+  const { t } = useLocale();
   return (
     <footer className="footer">
       <div className="container">
-        <nav className="footer-columns" aria-label="Footer">
+        <nav className="footer-columns" aria-label={t('Footer')}>
           {footerGroups.map((group) => (
             <div key={group.title}>
-              <p className="eyebrow">{group.title}</p>
+              <p className="eyebrow">{t(group.title)}</p>
               <ul>
                 {group.links.map(([label, href]) => (
                   <li key={label}>
-                    <a href={href}>{label}</a>
+                    <a href={href}>{t(label)}</a>
                   </li>
                 ))}
               </ul>
@@ -18,7 +20,7 @@ export function Footer() {
           ))}
         </nav>
         <div className="footer-bottom">
-          <a className="footer-brand" href="#top" aria-label="APCOSYS home">
+          <a className="footer-brand" href="#top" aria-label={t('APCOSYS home')}>
             <img src={media('logo.svg')} width="360" height="70" alt="APCOSYS" loading="lazy" />
           </a>
           <div className="footer-meta">

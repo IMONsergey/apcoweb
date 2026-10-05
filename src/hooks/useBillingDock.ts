@@ -5,7 +5,7 @@ const isEditing = (element: Element | null) =>
   element instanceof HTMLElement &&
   (element.isContentEditable ||
     element.matches(
-      'textarea, select, input:not([type="radio"]):not([type="checkbox"]):not([type="button"]):not([type="submit"])',
+      'textarea, select:not([data-language-selector]), input:not([type="radio"]):not([type="checkbox"]):not([type="button"]):not([type="submit"])',
     ));
 
 /** A section-scoped control, without scroll lock, modal semantics or automatic focus. */

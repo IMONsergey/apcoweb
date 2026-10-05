@@ -1,9 +1,19 @@
 import { media, productUrl } from '../../content/site';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useLocale } from '../../i18n/context';
+import { DoubleButton } from '../ui/DoubleButton';
+
 export function ClosingSection() {
+  const compact = useMediaQuery('(max-width: 599px)');
+  const { locale, t } = useLocale();
+  const translatedDesktop = !compact && locale !== 'en';
   return (
-    <section className="closing-section" aria-label="Start your first query">
+    <section className="closing-section" aria-label={t('Start your first query')}>
       <div className="container">
-        <div className="closing-scene" data-source="saas mobile / Start">
+        <div
+          className={`closing-scene${compact ? ' closing-scene--compact' : ''}`}
+          data-source="Prepared saas mobile / Start artwork, cropped non-destructively"
+        >
           <picture>
             <source media="(max-width: 340px)" srcSet={media('start-320.webp')} />
             <source media="(max-width: 375px)" srcSet={media('start-360.webp')} />
@@ -15,18 +25,45 @@ export function ClosingSection() {
               src={media('start-desktop.webp')}
               width="2880"
               height="1894"
-              alt="Start with your first query. Try the public search before creating an account."
+              alt={
+                compact || translatedDesktop
+                  ? ''
+                  : t(
+                      'Start with your first query. Try the public search before creating an account.',
+                    )
+              }
               loading="lazy"
               decoding="async"
             />
           </picture>
-          <a
-            className="closing-hotspot"
-            href={`${productUrl}/search`}
-            aria-label="Start your first query in APCOSYS"
-          >
-            <span className="sr-only">Try free search</span>
-          </a>
+          {compact && (
+            <div className="closing-account" aria-hidden="true">
+              <span>
+                {t('Credits:')} <b>500</b>
+              </span>
+              <span className="closing-account__upgrade">{t('Upgrade Plan')}</span>
+            </div>
+          )}
+          {compact || translatedDesktop ? (
+            <div className={`closing-copy${translatedDesktop ? ' closing-copy--translated' : ''}`}>
+              <p className="eyebrow">{t('INTERNET INFRASTRUCTURE SEARCH')}</p>
+              <h3>{t('Start with your first query.')}</h3>
+              <p className="closing-copy__note">
+                {t('TRY THE PUBLIC SEARCH BEFORE CREATING AN ACCOUNT')}
+              </p>
+              <DoubleButton href={`${productUrl}/search`} icon="external">
+                {t('Try free search')}
+              </DoubleButton>
+            </div>
+          ) : (
+            <a
+              className="closing-hotspot"
+              href={`${productUrl}/search`}
+              aria-label={t('Start your first query in APCOSYS')}
+            >
+              <span className="sr-only">{t('Try free search')}</span>
+            </a>
+          )}
         </div>
       </div>
     </section>

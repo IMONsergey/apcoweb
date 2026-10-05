@@ -1,8 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
+import { LocaleProvider } from './i18n/LocaleProvider';
 import './styles/instrument-sans.css';
 import './styles/ibm-plex-mono.css';
+import './styles/cyrillic.css';
 import './styles/tokens.css';
 import './styles/site.css';
 import './styles/navigation.css';
@@ -13,11 +15,15 @@ import './styles/micro-motion.css';
 import './styles/billing-dock.css';
 import './styles/interaction-feedback.css';
 import './styles/closing-action.css';
+import './styles/mobile-refinement.css';
+import './styles/localization.css';
 
 const element = document.getElementById('root');
 if (!element) throw new Error('The application root was not found.');
 createRoot(element).render(
   <StrictMode>
-    <App />
+    <LocaleProvider>
+      <App />
+    </LocaleProvider>
   </StrictMode>,
 );

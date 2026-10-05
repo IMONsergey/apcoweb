@@ -1,3 +1,4 @@
+import { useLocale } from '../i18n/context';
 import { useEffect, useRef, useState } from 'react';
 import { media, navigation, productUrl } from '../content/site';
 import { DoubleButton } from './ui/DoubleButton';
@@ -5,6 +6,7 @@ import { Icon } from './ui/Icon';
 import { Modal } from './ui/Modal';
 import { LanguageBadge } from './ui/LanguageBadge';
 export function Header() {
+  const { t } = useLocale();
   const [active, setActive] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const ref = useRef<HTMLElement>(null);
@@ -31,14 +33,14 @@ export function Header() {
     <>
       <header className="site-header" ref={ref}>
         <div className="container header-row">
-          <a className="brand" href="#top" aria-label="APCOSYS home">
+          <a className="brand" href="#top" aria-label={t('APCOSYS home')}>
             <img src={media('logo.svg')} width="134" height="26" alt="APCOSYS" />
           </a>
-          <nav className="desktop-nav" aria-label="Main navigation">
+          <nav className="desktop-nav" aria-label={t('Main navigation')}>
             {navigation.map((group, i) => (
               <div
                 className="nav-group"
-                key={group.label}
+                key={t(group.label)}
                 onKeyDown={(event) => {
                   if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
                   const links = Array.from(
@@ -81,7 +83,7 @@ export function Header() {
                     }
                   }}
                 >
-                  {group.label}
+                  {t(group.label)}
                   <Icon name="chevron" />
                 </button>
                 <div
@@ -94,32 +96,32 @@ export function Header() {
                   {group.items.map((item, index) => (
                     <a
                       className={index === 0 ? 'nav-panel__default' : undefined}
-                      key={item.label}
+                      key={t(item.label)}
                       href={item.href}
                       onClick={() => setActive(null)}
                     >
-                      {item.label}
+                      {t(item.label)}
                     </a>
                   ))}
                 </div>
               </div>
             ))}
             <a className="nav-link" href="#pricing">
-              Pricing
+              {t('Pricing')}
             </a>
           </nav>
           <div className="header-actions">
             <LanguageBadge />
             <a href={`${productUrl}/search`} className="plain-button header-signin">
-              Sign In
+              {t('Sign In')}
             </a>
             <DoubleButton href={`${productUrl}/register`} compact className="header-signup">
-              Create free account
+              {t('Create free account')}
             </DoubleButton>
             <button
               className="icon-button menu-toggle"
               type="button"
-              aria-label="Open navigation"
+              aria-label={t('Open navigation')}
               aria-expanded={mobileOpen}
               onClick={(event) => {
                 event.currentTarget.focus();
@@ -134,28 +136,28 @@ export function Header() {
       <Modal
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
-        title="Navigation"
+        title={t('Navigation')}
         className="mobile-navigation"
       >
-        <nav aria-label="Mobile navigation">
+        <nav aria-label={t('Mobile navigation')}>
           {navigation.map((group) => (
             <div className="mobile-nav-group" key={group.label}>
-              <p className="eyebrow">{group.label}</p>
+              <p className="eyebrow">{t(group.label)}</p>
               {group.items.map((item) => (
-                <a key={item.label} href={item.href} onClick={() => setMobileOpen(false)}>
-                  {item.label}
+                <a key={t(item.label)} href={item.href} onClick={() => setMobileOpen(false)}>
+                  {t(item.label)}
                   <Icon name="arrow" />
                 </a>
               ))}
             </div>
           ))}
           <a className="mobile-pricing" href="#pricing" onClick={() => setMobileOpen(false)}>
-            Pricing
+            {t('Pricing')}
             <Icon name="arrow" />
           </a>
-          <DoubleButton href={`${productUrl}/register`}>Create free account</DoubleButton>
+          <DoubleButton href={`${productUrl}/register`}>{t('Create free account')}</DoubleButton>
           <a className="plain-button" href={`${productUrl}/search`}>
-            Sign In
+            {t('Sign In')}
           </a>
         </nav>
       </Modal>

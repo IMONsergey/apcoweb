@@ -1,8 +1,10 @@
+import { useLocale } from '../../i18n/context';
 import { useEffect, useRef, useState } from 'react';
 import { media, trustMarks } from '../../content/site';
 
 /** One semantic list, with an inaccessible visual duplicate for the seamless loop. */
 export function TrustMarquee() {
+  const { t } = useLocale();
   const ref = useRef<HTMLDivElement>(null);
   const [running, setRunning] = useState(false);
   useEffect(() => {
@@ -22,12 +24,12 @@ export function TrustMarquee() {
   }, []);
   return (
     <div className="container trust" ref={ref} data-running={running}>
-      <p>Trusted by researchers and organizations worldwide</p>
+      <p>{t('Trusted by researchers and organizations worldwide')}</p>
       <div
         className="trust-viewport"
         tabIndex={0}
         role="region"
-        aria-label="Organizations — focus to pause scrolling"
+        aria-label={t('Organizations — focus to pause scrolling')}
       >
         <div className="trust-track">
           {[0, 1].map((copy) => (

@@ -1,3 +1,4 @@
+import { useLocale } from './i18n/context';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Hero } from './components/sections/Hero';
@@ -12,11 +13,12 @@ import { ClosingSection } from './components/sections/ClosingSection';
 import { MotionProvider } from './components/visuals/MotionProvider';
 import { Visual } from './components/visuals/Visual';
 export function App() {
+  const { t } = useLocale();
   return (
     <MotionProvider>
       <div id="top" className="site">
         <a href="#main" className="skip-link">
-          Skip to content
+          {t('Skip to content')}
         </a>
         <Header />
         <main id="main">
