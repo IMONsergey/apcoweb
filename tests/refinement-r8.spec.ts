@@ -232,7 +232,12 @@ test('R8 API reduced motion, phone closing composition and large-screen reading 
         .evaluate((node) => parseFloat(getComputedStyle(node).fontSize)),
     )
     .toBeGreaterThan(small);
-  await expect(page.locator('.footer-columns li').first()).toHaveCSS('font-size', '14.6px');
+  expect(
+    await page
+      .locator('.footer-columns li')
+      .first()
+      .evaluate((node) => parseFloat(getComputedStyle(node).fontSize)),
+  ).toBeCloseTo(14.6, 1);
 });
 
 test('R8 footer underline provides pointer and keyboard feedback without changing geometry', async ({

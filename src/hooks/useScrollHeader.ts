@@ -8,6 +8,7 @@ export function useScrollHeader(ref: RefObject<HTMLElement | null>, locked: bool
     let previous = scrollY;
     let travel = 0;
     let frame = 0;
+    let keyboardPinned = false;
     const update = () => {
       frame = 0;
       const y = Math.max(0, scrollY);
@@ -15,7 +16,7 @@ export function useScrollHeader(ref: RefObject<HTMLElement | null>, locked: bool
       previous = y;
       if (Math.sign(delta) !== Math.sign(travel)) travel = delta;
       else travel += delta;
-      const pinned = locked || !!ref.current?.querySelector(':focus-visible');
+      const pinned = locked || keyboardPinned || !!ref.current?.querySelector(':focus-visible');
       setState((current) => {
         const compact = y > 80;
         const hidden =
@@ -31,6 +32,8 @@ export function useScrollHeader(ref: RefObject<HTMLElement | null>, locked: bool
     const keyboard = (event: KeyboardEvent) => {
       if (event.key !== 'Tab') return;
       travel = 0;
+      previous = Math.max(0, scrollY);
+      keyboardPinned = true;
       // Restore the controls before the browser computes its next native tab stop.
       flushSync(() =>
         setState((current) => (current.hidden ? { ...current, hidden: false } : current)),
@@ -44,18 +47,31 @@ export function useScrollHeader(ref: RefObject<HTMLElement | null>, locked: bool
       const compact = target.getBoundingClientRect().top + scrollY > 160;
       // Set the smaller scroll inset before the browser starts its native anchor scroll.
       flushSync(() => setState((current) => ({ ...current, compact })));
+      // Firefox resolves :has() during style calculation, before native anchor navigation.
+      getComputedStyle(document.documentElement).getPropertyValue('scroll-padding-top');
+    };
+    const pointer = () => {
+      keyboardPinned = false;
+      travel = 0;
+      previous = Math.max(0, scrollY);
     };
     schedule();
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
     document.addEventListener('keydown', keyboard);
     document.addEventListener('click', anchor, true);
+    window.addEventListener('wheel', pointer, { passive: true });
+    document.addEventListener('pointerdown', pointer, { passive: true });
+    document.addEventListener('touchstart', pointer, { passive: true });
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);
       document.removeEventListener('keydown', keyboard);
       document.removeEventListener('click', anchor, true);
+      window.removeEventListener('wheel', pointer);
+      document.removeEventListener('pointerdown', pointer);
+      document.removeEventListener('touchstart', pointer);
     };
   }, [locked, ref]);
   return { compact: state.compact, hidden: locked ? false : state.hidden };

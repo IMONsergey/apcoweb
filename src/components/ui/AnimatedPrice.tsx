@@ -14,7 +14,12 @@ export function AnimatedPrice({ amount }: { amount: number }) {
     const direction = amount > previous.current ? 1 : -1;
     const changed = amount !== previous.current;
     previous.current = amount;
-    if (reduced || !changed || !root.current) {
+    if (
+      reduced ||
+      matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !changed ||
+      !root.current
+    ) {
       animations.current.forEach((animation) => animation.cancel());
       animations.current = [];
       return;

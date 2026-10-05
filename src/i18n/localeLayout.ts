@@ -33,13 +33,15 @@ export function installLocaleLayout(site: HTMLElement) {
       node.style.minWidth = style.width;
       delete node.dataset.localeSized;
     });
-  const measure = () => {
-    if (disposed || !site.isConnected) return;
+  let measuring = false;
+  const measure = async () => {
+    if (disposed || !site.isConnected || measuring) return;
     if (root.hasAttribute('data-locale-transition')) {
       clearTimeout(timer);
       timer = window.setTimeout(measure, 80);
       return;
     }
+    measuring = true;
     restore();
     const current = root.lang as Locale;
     const other: Locale = current === 'ru' ? 'en' : 'ru';
@@ -87,42 +89,11 @@ export function installLocaleLayout(site: HTMLElement) {
     });
     document.body.append(mirror);
     try {
-      // Closed native details have no answer box. Measure only the isolated copy in two
-      // batches, then restore its disclosure state before measuring section extents.
-      const details = Array.from(mirror.querySelectorAll<HTMLDetailsElement>('.faq-list details'));
-      const openStates = details.map((detail) => detail.open);
-      const faqText = details.flatMap((detail) =>
-        Array.from(detail.querySelectorAll<HTMLElement>('[data-locale-key]')),
-      );
-      const otherCopy = faqText.map((node) => node.textContent);
-      details.forEach((detail) => {
-        detail.open = true;
-      });
-      const otherHeights = otherAnswers.map((node) => node.getBoundingClientRect().height);
-      details.forEach((detail) => {
-        detail.lang = current;
-        detail.style.fontFamily =
-          current === 'ru' ? 'Inter, Arial, sans-serif' : '"Instrument Sans", Arial, sans-serif';
-      });
-      faqText.forEach((node) => {
-        node.textContent = translate(current, node.dataset.localeKey!);
-      });
-      const answerHeights = otherAnswers.map((node, index) =>
-        Math.ceil(Math.max(otherHeights[index], node.getBoundingClientRect().height)),
-      );
-      details.forEach((detail, index) => {
-        detail.removeAttribute('lang');
-        detail.style.fontFamily = '';
-        detail.open = openStates[index];
-      });
-      faqText.forEach((node, index) => {
-        node.textContent = otherCopy[index];
-      });
-      liveAnswers.forEach((node, index) => {
-        if (!originals.has(node))
-          originals.set(node, { height: node.style.minHeight, width: node.style.minWidth });
-        node.style.minHeight = otherAnswers[index].style.minHeight = answerHeights[index] + 'px';
-      });
+      // WebKit settles container queries and font metrics on the next rendering turn.
+      // The isolated tree stays invisible and does not connect any visual renderer.
+      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+      if (disposed || !site.isConnected) return;
       const widths = [...liveNav, ...liveControls].flatMap((node, index) => {
         const counterpart = [...otherNav, ...otherControls][index];
         const blocked = node.closest(excluded);
@@ -165,6 +136,44 @@ export function installLocaleLayout(site: HTMLElement) {
           originals.set(node, { height: node.style.minHeight, width: node.style.minWidth });
         node.style.minHeight = counterpart.style.minHeight = size + 'px';
       }
+      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+      if (disposed || !site.isConnected) return;
+      // Closed native details have no answer box. Measure only the isolated copy in two
+      // batches, then restore its disclosure state before measuring section extents.
+      const details = Array.from(mirror.querySelectorAll<HTMLDetailsElement>('.faq-list details'));
+      const openStates = details.map((detail) => detail.open);
+      const faqText = details.flatMap((detail) =>
+        Array.from(detail.querySelectorAll<HTMLElement>('[data-locale-key]')),
+      );
+      const otherCopy = faqText.map((node) => node.textContent);
+      details.forEach((detail) => {
+        detail.open = true;
+      });
+      const otherHeights = otherAnswers.map((node) => node.getBoundingClientRect().height);
+      details.forEach((detail) => {
+        detail.lang = current;
+        detail.style.fontFamily =
+          current === 'ru' ? 'Inter, Arial, sans-serif' : '"Instrument Sans", Arial, sans-serif';
+      });
+      faqText.forEach((node) => {
+        node.textContent = translate(current, node.dataset.localeKey!);
+      });
+      const answerHeights = otherAnswers.map((node, index) =>
+        Math.ceil(Math.max(otherHeights[index], node.getBoundingClientRect().height)),
+      );
+      details.forEach((detail, index) => {
+        detail.removeAttribute('lang');
+        detail.style.fontFamily = '';
+        detail.open = openStates[index];
+      });
+      faqText.forEach((node, index) => {
+        node.textContent = otherCopy[index];
+      });
+      liveAnswers.forEach((node, index) => {
+        if (!originals.has(node))
+          originals.set(node, { height: node.style.minHeight, width: node.style.minWidth });
+        node.style.minHeight = otherAnswers[index].style.minHeight = answerHeights[index] + 'px';
+      });
       // Reserve the native section extent too, including locale-dependent tag/metric wrapping.
       const extents = liveSections.flatMap((node, index) => {
         const counterpart = otherSections[index];
@@ -188,6 +197,7 @@ export function installLocaleLayout(site: HTMLElement) {
       }
       root.dataset.localeLayout = 'ready';
     } finally {
+      measuring = false;
       mirror.remove();
     }
   };
@@ -208,9 +218,10 @@ export function installLocaleLayout(site: HTMLElement) {
   void warmLocaleFonts().then(() => {
     if (disposed) return;
     fontsReady = true;
-    measure();
-    clearTimeout(entryTimeout);
-    reveal();
+    void measure().then(() => {
+      clearTimeout(entryTimeout);
+      reveal();
+    });
   });
   return () => {
     disposed = true;

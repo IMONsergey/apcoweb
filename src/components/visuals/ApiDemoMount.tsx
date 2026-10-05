@@ -15,6 +15,16 @@ export default function ApiDemoMount({ onReady }: { onReady: () => void }) {
   useLayoutEffect(() => {
     if (!host.current) return;
     const element = document.createElement('api-developer-demo');
+    let layoutFrame = 0;
+    const layout = Reflect.get(element, '_layout') as () => void;
+    // Keep the supplied renderer intact; observer writes belong to the next frame.
+    Reflect.set(element, '_layout', () => {
+      if (!layoutFrame)
+        layoutFrame = requestAnimationFrame(() => {
+          layoutFrame = 0;
+          if (element.isConnected) layout.call(element);
+        });
+    });
     element.inert = true;
     element.setAttribute('aria-hidden', 'true');
     host.current.append(element);
@@ -23,6 +33,7 @@ export default function ApiDemoMount({ onReady }: { onReady: () => void }) {
     });
     return () => {
       cancelAnimationFrame(frame);
+      cancelAnimationFrame(layoutFrame);
       element.remove(); // disconnectedCallback reverts GSAP and disposes every observer.
     };
   }, [onReady]);
