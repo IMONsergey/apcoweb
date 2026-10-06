@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
 import { createDotCascade, type DotOptions, type DotController } from './dot-cascade.js';
+import { observeFirstPaint } from '../firstPaint';
 import './dot-cascade.css';
 
 export interface DotCascadeProps extends DotOptions {
@@ -9,6 +10,7 @@ export interface DotCascadeProps extends DotOptions {
   style?: CSSProperties;
   children?: ReactNode;
   overlay?: boolean;
+  onReady?: (ready: boolean) => void;
 }
 
 export function DotCascade({
@@ -27,6 +29,7 @@ export function DotCascade({
   displacement = 3,
   fps = 60,
   interactive = true,
+  onReady,
 }: DotCascadeProps) {
   const host = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -37,11 +40,13 @@ export function DotCascade({
     const surface = host.current.closest<HTMLElement>('.step-media, article, section');
     const target = overlay ? surface || host.current.parentElement || host.current : host.current;
     controller.current = createDotCascade(canvas.current, {}, target);
+    const stopReadiness = observeFirstPaint(canvas.current, controller.current, onReady);
     return () => {
+      stopReadiness();
       controller.current?.destroy();
       controller.current = null;
     };
-  }, [overlay]);
+  }, [overlay, onReady]);
   useEffect(() => {
     controller.current?.update({
       spacing,

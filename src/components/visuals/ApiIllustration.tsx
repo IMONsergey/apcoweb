@@ -51,16 +51,18 @@ export function ApiIllustration() {
         'Illustrative APCOSYS API documentation with a request and response. See the current documentation for the live API.',
       )}
     >
-      <img
-        className="api-demo-fallback"
-        src={media('api-layers.webp')}
-        width="712"
-        height="554"
-        alt=""
-        loading="lazy"
-        decoding="async"
-        aria-hidden="true"
-      />
+      <div className="api-demo-poster" aria-hidden="true">
+        <img
+          className="api-demo-fallback"
+          src={media('api-layers.webp')}
+          width="712"
+          height="554"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+        />
+      </div>
       <DemoBoundary>
         <Suspense fallback={null}>{mounted && <Demo onReady={onReady} />}</Suspense>
       </DemoBoundary>

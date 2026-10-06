@@ -14,7 +14,7 @@ Uploaded archive: `Коды(1).zip` (identical to the preceding `Коды.zip`).
 
 React owns layout, semantic content, dialogs, navigation and motion preference. Each supplied effect owns only its Canvas or SVG subtree. No renderer rewrites page DOM or product content.
 
-- Effects are dynamically imported when close to the viewport.
+- Effects are dynamically imported when close to the viewport, except the search backdrop and audience contours prepared on initial page load.
 - Original engines handle visibility, device-pixel limits and cleanup.
 - R2 removes the global pause control. Device reduced-motion preferences stop nonessential motion; the marquee additionally pauses on keyboard focus. R5 preserves continuous movement under pointer hover.
 - All listeners and controllers are disposed on unmount; React StrictMode exercises teardown.
@@ -33,7 +33,7 @@ The contextual billing panel is non-modal, stays in logical keyboard order befor
 
 - Locale changes use a 100 ms fade-out and 220 ms fade-in on real inline text. R8 originally reserved maximum EN/RU sizes; R9 removes that behavior at the owner's request. Displayed copy now reflows naturally, without transformed sections or alternate-language measurement. Reduced motion changes copy immediately.
 - The fixed header follows scroll direction with a 12 px noise threshold, shows at the page top and stays visible for open navigation or keyboard focus. The compact row is 72 px, or 64 px on phones. Native anchor clearance uses the compact height.
-- A white, nonblocking page wash releases after font preparation, with a 220 ms upper limit; decorative layers enter with a short opacity fade. Reduced motion bypasses both.
+- Historical R8/R9 used a white page wash and individual decorative fades. R10 uses a 520 ms opacity entrance on the page itself after the first painted frames of both search-background engines and initial font/image preparation, with no separate loader, logo or minimum dwell; see REVIEW-R10.md. Individual contour mounts do not animate their opacity.
 - Audience contours are displayed at 93% of their previous size. Their source renderers remain unchanged.
 - Footer underlines grow from left to right on hover or keyboard focus; press feedback is scoped to actual controls.
 - The owner-supplied `api-developer-demo` is isolated in shadow DOM, inert and decorative. It loads within 280 px of the viewport. Its original 30.2 s GSAP sequence pauses offscreen or when the document is hidden, uses a static response for reduced motion, and reverts its context and disposes observers/listeners on unmount. It never sends a live API request or writes the clipboard.

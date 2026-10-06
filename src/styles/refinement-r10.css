@@ -1,0 +1,115 @@
+.search-scene__content {
+  transform: translate3d(0, var(--search-lift, 0px), 0);
+}
+@media (min-width: 600px) {
+  .search-scene__content {
+    position: absolute;
+    top: 33.2%;
+    left: 28.079%;
+    width: 45.929%;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4cqw;
+    z-index: 4;
+  }
+  .search-scene__heading {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+  .search-scene__content > .search-form {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: max(40px, 5.846cqw);
+    min-height: 40px;
+  }
+}
+.search-free-note {
+  right: 0;
+  text-align: center;
+}
+.mobile-navigation[data-modal-phase='opening']::backdrop {
+  animation: menu-backdrop-in 300ms ease both;
+}
+.mobile-navigation[data-modal-phase='closing']::backdrop {
+  animation: menu-backdrop-out 190ms ease both;
+}
+@keyframes menu-backdrop-in {
+  from {
+    background-color: #102d3500;
+    backdrop-filter: blur(0);
+  }
+  to {
+    background-color: #102d354d;
+    backdrop-filter: blur(5px);
+  }
+}
+@keyframes menu-backdrop-out {
+  from {
+    background-color: #102d354d;
+    backdrop-filter: blur(5px);
+  }
+  to {
+    background-color: #102d3500;
+    backdrop-filter: blur(0);
+  }
+}
+
+/* Keep the complete interface and its quiet stacked layers within the content grid. */
+.api-grid {
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(40px, 5vw, 88px);
+}
+.api-visual {
+  width: 100%;
+  min-width: 0;
+  padding: 0 16px 16px 0;
+}
+.api-demo-frame,
+.api-demo-frame::before,
+.api-demo-frame::after {
+  border-radius: 12px;
+}
+.api-demo-frame::before {
+  inset: 8px -8px -8px 8px;
+}
+.api-demo-frame::after {
+  inset: 16px -16px -16px 16px;
+}
+.api-demo-frame .api-demo-fallback,
+.api-demo-host {
+  border-radius: inherit;
+  overflow: hidden;
+}
+.api-demo-poster {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.api-demo-frame .api-demo-fallback {
+  /* The supplied poster includes a 28 px painted layer stack below its 526 px window. */
+  height: auto;
+  object-fit: contain;
+}
+@media (max-width: 899px) {
+  .api-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 599px) {
+  .api-demo-frame,
+  .api-demo-frame::before,
+  .api-demo-frame::after {
+    border-radius: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-scene__content {
+    transform: none;
+  }
+  .mobile-navigation::backdrop {
+    animation: none;
+  }
+}

@@ -1,25 +1,58 @@
 import { warmLocaleFonts } from './localeFonts';
 
-/** Preserve the brief page wash independently of content layout and language. */
+const backgroundLayers = new Set<'flow' | 'dots'>();
+const readinessListeners = new Set<() => void>();
+
+/** Search background engines report their first actual frame, not just a loaded module. */
+export function setSearchBackgroundReady(layer: 'flow' | 'dots', ready: boolean) {
+  if (ready) backgroundLayers.add(layer);
+  else backgroundLayers.delete(layer);
+  readinessListeners.forEach((check) => check());
+}
+
+/** Reveal the whole site only after its initial background and typography are prepared. */
 export function installPageEntrance() {
   const root = document.documentElement;
   let disposed = false;
-  const reveal = () => root.removeAttribute('data-page-entering');
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) root.dataset.pageEntering = 'true';
-  // A slow optional font must never hold the page behind a loading screen.
-  const entryTimeout = window.setTimeout(reveal, 220);
-  document.addEventListener('pointerdown', reveal, { once: true });
-  document.addEventListener('keydown', reveal, { once: true });
-  void warmLocaleFonts().then(() => {
+  let contentReady = false;
+  let frame = 0;
+  if (root.hasAttribute('data-site-ready')) return () => undefined;
+  const prepared = () => contentReady && backgroundLayers.size === 2;
+  const check = () => {
+    if (disposed || !prepared()) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      return;
+    }
+    if (frame || root.hasAttribute('data-site-ready')) return;
+    frame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        if (disposed || !prepared()) return;
+        root.dataset.siteReady = 'true';
+        readinessListeners.delete(check);
+      });
+    });
+  };
+  readinessListeners.add(check);
+  const images = document.querySelectorAll<HTMLImageElement>(
+    '.site-header img, .hero img, .search-preview img',
+  );
+  void Promise.allSettled([
+    warmLocaleFonts().then(() => document.fonts.ready),
+    ...Array.from(images, (image) => {
+      // Hidden lazy images cannot finish decoding until explicitly requested.
+      image.loading = 'eager';
+      return image.decode();
+    }),
+  ]).then(() => {
     if (disposed) return;
-    clearTimeout(entryTimeout);
-    reveal();
+    contentReady = true;
+    check();
   });
   return () => {
     disposed = true;
-    clearTimeout(entryTimeout);
-    reveal();
-    document.removeEventListener('pointerdown', reveal);
-    document.removeEventListener('keydown', reveal);
+    cancelAnimationFrame(frame);
+    readinessListeners.delete(check);
   };
 }

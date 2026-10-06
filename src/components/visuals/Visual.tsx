@@ -6,13 +6,19 @@ const Waves = lazy(() => import('../../visuals/waves/IceSphereWaves'));
 const Globe = lazy(() => import('../../visuals/globe/SignalGlobe'));
 const Shape = lazy(() => import('../../visuals/shapes/AnimatedShape'));
 const Dots = lazy(() => import('../../visuals/dots/DotCascade'));
-class VisualBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+class VisualBoundary extends Component<
+  { children: ReactNode; fallback?: ReactNode; onReady?: (ready: boolean) => void },
+  { failed: boolean }
+> {
   state = { failed: false };
   static getDerivedStateFromError() {
     return { failed: true };
   }
+  componentDidCatch() {
+    this.props.onReady?.(true);
+  }
   render() {
-    return this.state.failed ? null : this.props.children;
+    return this.state.failed ? (this.props.fallback ?? null) : this.props.children;
   }
 }
 type Kind = 'flow' | 'waves' | 'globe' | 'rings' | 'rosette' | 'dots';
@@ -21,11 +27,13 @@ export function Visual({
   className = '',
   eager = false,
   direction = 'top-to-bottom',
+  onReady,
 }: {
   kind: Kind;
   className?: string;
   eager?: boolean;
   direction?: DotDirection;
+  onReady?: (ready: boolean) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(eager);
@@ -46,11 +54,21 @@ export function Visual({
   }, [mounted]);
   return (
     <div ref={ref} className={`visual visual--${kind} ${className}`} aria-hidden="true">
-      <VisualBoundary>
+      <VisualBoundary
+        onReady={onReady}
+        fallback={onReady && <div className={`visual-fallback visual-fallback--${kind}`} />}
+      >
         <Suspense fallback={null}>
           {mounted &&
             (kind === 'flow' ? (
-              <Flow speed={1} strength={1} fps={30} resolution={192} paused={paused} />
+              <Flow
+                speed={1}
+                strength={1}
+                fps={30}
+                resolution={192}
+                paused={paused}
+                onReady={onReady}
+              />
             ) : kind === 'waves' ? (
               <Waves speed={0.7} paused={paused} />
             ) : kind === 'globe' ? (
@@ -70,6 +88,7 @@ export function Visual({
                 startOpacity={0.28}
                 endOpacity={0.015}
                 interactive={!paused}
+                onReady={onReady}
               />
             ) : (
               <Shape
