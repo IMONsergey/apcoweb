@@ -26,7 +26,10 @@ export async function openLanguageMenu(page: Page) {
   return {
     trigger,
     english: page.getByRole('menuitemradio', { name: 'English', exact: true }),
-    russian: page.getByRole('menuitemradio', { name: '\u0420\u0443\u0441\u0441\u043a\u0438\u0439', exact: true }),
+    russian: page.getByRole('menuitemradio', {
+      name: '\u0420\u0443\u0441\u0441\u043a\u0438\u0439',
+      exact: true,
+    }),
     chinese: page.getByRole('menuitemradio', { name: '\u4e2d\u6587', exact: true }),
   };
 }
