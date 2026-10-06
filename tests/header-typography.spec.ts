@@ -16,18 +16,40 @@ test('English Typograf pipeline remains active and preserves commercial values',
 });
 
 for (const width of [320, 390, 768, 1440]) {
-  test(
-    'English-only header, language availability and anchor clearance at ' + width + 'px',
-    async ({ page }) => {
-      await page.setViewportSize({ width, height: 900 });
-      await page.goto('./?lang=ru', { waitUntil: 'networkidle' });
-      await page.evaluate(() => document.fonts.ready);
+  test('English-only header, language availability and anchor clearance at ' + width + 'px', async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('./?lang=ru', { waitUntil: 'networkidle' });
+    await page.evaluate(() => document.fonts.ready);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(page.locator('#hero-title')).toContainText('Start with a query.');
 
-      await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-      await expect(page.locator('#hero-title')).toContainText('Start with a query.');
+    const input = page.getByRole('searchbox');
+    await input.fill('port:443 hostname:"example.com"');
+    const header = page.locator('.site-header');
+    await page.locator('#api').scrollIntoViewIfNeeded();
+    await expect(header).toHaveAttribute('data-hidden', 'true');
+    await revealHeader(page);
 
-      const input = page.getByRole('searchbox');
-      await input.fill('port:443 hostname:"example.com"');
+    const menu = await openLanguageMenu(page);
+    await expect(menu.english).toHaveAttribute('aria-checked', 'true');
+    await expect(menu.english).toBeEnabled();
+    await expect(menu.russian).toBeDisabled();
+    await expect(menu.chinese).toBeDisabled();
+    await expect(menu.russian).toHaveAttribute('aria-disabled', 'true');
+    await expect(menu.chinese).toHaveAttribute('aria-disabled', 'true');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(input).toHaveValue('port:443 hostname:"example.com"');
 
-      const header = page.locator('.site-header');
-      await page.locator('#¶»§q«^
+    await page.keyboard.press('Escape');
+    await expect(menu.trigger).toBeFocused();
+
+    if (width >= 1200) {
+      await page.locator('.desktop-nav a[href="#pricing"]').click();
+    } else {
+      await page.getByRole('button', { name: 'Open navigation', exact: true }).click();
+      const dialog = page.getByRole('dialog', { name: 'Navigation', exact: true });
+      await dialog.getByRole('link', { name: 'Pricing', exact: true }).click();
+    }
+    await expect(page).toHaveURL(/#pricing$/);
+  });
+}
