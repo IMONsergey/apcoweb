@@ -48,31 +48,34 @@
 }
 .faq-icon {
   transition:
-    background-color 220ms var(--ease),
-    color 220ms var(--ease);
+    background-color 260ms var(--ease),
+    color 260ms var(--ease),
+    transform 300ms cubic-bezier(.16,1,.3,1);
 }
-.faq-list details[data-expanded] .faq-icon svg {
-  display: block;
-  grid-area: 1/1;
+.faq-icon__glyph {
+  transition: transform 320ms cubic-bezier(.16,1,.3,1);
+}
+.faq-icon__glyph::before,
+.faq-icon__glyph::after {
   transition:
-    opacity 200ms ease,
-    transform 240ms var(--ease);
+    transform 320ms cubic-bezier(.16,1,.3,1),
+    opacity 220ms ease;
 }
-.faq-list details[data-expanded='false'] .faq-icon svg:first-child {
-  opacity: 1;
-  transform: rotate(0);
+.faq-list details[data-expanded='false'] .faq-icon {
+  transform: scale(1);
 }
-.faq-list details[data-expanded='false'] .faq-icon svg:last-child {
+.faq-list details[data-expanded='false'] .faq-icon__glyph {
+  transform: scale(1);
+}
+.faq-list details[data-expanded='true'] .faq-icon {
+  transform: scale(.96);
+}
+.faq-list details[data-expanded='true'] .faq-icon__glyph {
+  transform: scale(.96);
+}
+.faq-list details[data-expanded='true'] .faq-icon__glyph::after {
   opacity: 0;
-  transform: rotate(-90deg);
-}
-.faq-list details[data-expanded='true'] .faq-icon svg:first-child {
-  opacity: 0;
-  transform: rotate(90deg);
-}
-.faq-list details[data-expanded='true'] .faq-icon svg:last-child {
-  opacity: 1;
-  transform: rotate(0);
+  transform: translate(-50%, -50%) rotate(90deg) scaleX(0);
 }
 .search-error {
   animation: feedback-in 180ms var(--ease);
@@ -95,7 +98,10 @@
     transform: translateY(2px);
   }
   .faq-list summary:hover .faq-icon {
-    background: var(--tint);
+    transform: scale(1.04);
+  }
+  .faq-list details[data-expanded='true'] summary:hover .faq-icon {
+    transform: scale(1);
   }
 }
 @media (prefers-reduced-motion: reduce) {

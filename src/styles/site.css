@@ -499,18 +499,33 @@
   color: var(--action);
   border-radius: 5px;
 }
-.faq-icon svg:last-child {
-  display: none;
+.faq-icon__glyph {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+.faq-icon__glyph::before,
+.faq-icon__glyph::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: currentColor;
+  transform-origin: center;
+}
+.faq-icon__glyph::before {
+  transform: translate(-50%, -50%);
+}
+.faq-icon__glyph::after {
+  transform: translate(-50%, -50%) rotate(90deg) scaleX(1);
 }
 .faq-list details[open] .faq-icon {
   background: var(--page);
   color: var(--ink);
-}
-.faq-list details[open] .faq-icon svg:first-child {
-  display: none;
-}
-.faq-list details[open] .faq-icon svg:last-child {
-  display: block;
 }
 .faq-answer {
   padding: 0 40px 28px;
