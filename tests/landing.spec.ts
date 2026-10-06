@@ -105,6 +105,10 @@ test('mobile navigation scroll, dismissal, focus restoration', async ({ page }) 
   await trigger.click();
   const dialog = page.getByRole('dialog', { name: 'Navigation' });
   await expect(dialog).toBeVisible();
+  await expect(dialog.locator('.mobile-nav-group > .eyebrow').first()).toHaveCSS(
+    'text-transform',
+    'uppercase',
+  );
   await dialog.getByRole('link', { name: 'Pricing', exact: true }).click();
   await expect(dialog).not.toBeVisible();
   await expect(page).toHaveURL(/#pricing$/);
