@@ -9,7 +9,8 @@ export function AudienceSection() {
       <div className="container">
         <h2 id="audiences-title">
           <LocaleText>{t('For security researchers')}</LocaleText>
-          <br /> <LocaleText>{t('and teams.')}</LocaleText>
+          <br />
+          <LocaleText>{t('and teams.')}</LocaleText>
         </h2>
         <div className="audience-grid">
           <article id="researchers" className="audience-card">

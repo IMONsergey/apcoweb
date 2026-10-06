@@ -169,17 +169,12 @@ for (const [width, height] of [
           parseFloat((node as HTMLElement).style.getPropertyValue('--search-lift')),
         );
     const initial = await shift();
-    // A compact hero can already place the complete form in the opening viewport.
-    expect(initial).toBeLessThanOrEqual(0);
+    expect(initial).toBeLessThan(-10);
     await form.getByRole('searchbox').fill('example.org');
     const settle = Math.max(180, startScene.y - 160);
     await page.evaluate((y) => window.scrollTo({ top: y / 2, behavior: 'instant' }), settle);
-    if (initial < 0) {
-      await expect.poll(shift).toBeGreaterThan(initial);
-      expect(await shift()).toBeLessThan(0);
-    } else {
-      await expect.poll(shift).toBe(0);
-    }
+    await expect.poll(shift).toBeGreaterThan(initial);
+    expect(await shift()).toBeLessThan(0);
     const actualScene = (await scene.boundingBox())!;
     const scroll = await page.evaluate(() => window.scrollY);
     expect(Math.abs(actualScene.y + scroll - startScene.y)).toBeLessThan(1);
