@@ -171,9 +171,12 @@ SOFTWARE.
       document.addEventListener('visibilitychange', () => this._sync(), { signal: this._events.signal });
       this._observer = new IntersectionObserver((entries) => { this._intersecting = entries[0].isIntersecting; this._sync(); }); this._observer.observe(this);
       this._render();
+      this._resizeObserver = new ResizeObserver(() => this._fitFrame());
+      this._resizeObserver.observe(this);
+      this._fitFrame();
       this._ready = true; this._initialize();
     }
-    disconnectedCallback() { this._connected = false; live.delete(this); this._events?.abort(); this._observer?.disconnect(); this._context?.revert(); this._context = null; this._timeline = null; }
+    disconnectedCallback() { this._connected = false; live.delete(this); this._events?.abort(); this._observer?.disconnect(); this._resizeObserver?.disconnect(); this._context?.revert(); this._context = null; this._timeline = null; }
     attributeChangedCallback(name, previous, next) {
       if (previous === next || !this._connected) return;
       if (name === 'scene') this._render();
@@ -184,19 +187,30 @@ SOFTWARE.
     play() { this._paused = false; this._sync(); return this; }
     pause() { this._paused = true; this._sync(); return this; }
     restart() { this._paused = false; this._initialize(); return this; }
+    _fitFrame() {
+      const viewport = this.$('.viewport'), frame = this.$('.frame'), info = SCENES[this.scene];
+      if (!viewport || !frame) return;
+      const width = viewport.clientWidth, height = viewport.clientHeight || (width * info.height / WIDTH);
+      if (!width || !height) return;
+      const scale = Math.min(width / WIDTH, height / info.height);
+      const x = (width - WIDTH * scale) / 2, y = (height - info.height * scale) / 2;
+      frame.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) scale(' + scale + ')';
+    }
     _render() {
       this._context?.revert(); this._context = null; this._timeline = null;
       const info = SCENES[this.scene];
       const markup = this.scene === 'query' ? queryMarkup() : this.scene === 'results' ? resultsMarkup() : this.scene === 'evidence' ? evidenceMarkup() : this.scene === 'suggestions' ? suggestionsMarkup() : hostMarkup();
-      // Native SVG viewBox scales the unchanged illustrative DOM; no JS layout observer.
-      this.shadowRoot.innerHTML = '<style>' + CSS + '</style><svg xmlns="http://www.w3.org/2000/svg" class="viewport" viewBox="0 0 '+WIDTH+' '+info.height+'" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><foreignObject width="'+WIDTH+'" height="'+info.height+'"><div xmlns="http://www.w3.org/1999/xhtml" class="frame" style="position:relative;height:' + info.height + 'px" inert aria-hidden="true">' + markup +
-        '<div class="cursor">' + icon('mouse-pointer') + '</div></div></foreignObject></svg>';
+      // Scale fixed illustrative DOM with a regular CSS transform. This avoids
+      // iOS/WebKit foreignObject scaling bugs while keeping the scene itself unchanged.
+      this.shadowRoot.innerHTML = '<style>' + CSS + '</style><div class="viewport" aria-hidden="true"><div class="frame" style="height:' + info.height + 'px" inert aria-hidden="true">' + markup +
+        '<div class="cursor">' + icon('mouse-pointer') + '</div></div></div>';
       if (this.scene === 'host') {
         this.$('.chart-line').setAttribute('pathLength','1');
         this.$('.chart-line').setAttribute('stroke-dasharray','1');
         this.$('.chart-line').setAttribute('stroke-dashoffset','0');
         this.$$('.vulnerability-value').forEach(function (el) { el.dataset.value=el.textContent; });
       }
+      requestAnimationFrame(() => this._fitFrame());
       if (this._ready) this._initialize();
     }
     _initialize() {

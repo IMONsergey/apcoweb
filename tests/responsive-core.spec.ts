@@ -162,3 +162,38 @@ test('components respond to their own width inside a wide viewport', async ({ pa
   expect(cards[0].x).toBe(cards[1].x);
   expect(cards[1].y).toBeGreaterThanOrEqual(cards[0].bottom);
 });
+
+
+test('mobile product scenes stay scaled inside their cards', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./', { waitUntil: 'networkidle' });
+  const track = page.locator('#research-track');
+  await track.scrollIntoViewIfNeeded();
+  await track.focus();
+
+  for (let index = 0; index < 5; index += 1) {
+    if (index > 0) await page.keyboard.press('ArrowRight');
+    const card = page.locator('.step-card').nth(index);
+    await card.scrollIntoViewIfNeeded();
+    const demo = card.locator('apcosys-product-demo');
+    await expect(demo).toBeAttached();
+
+    const geometry = await demo.evaluate((element) => {
+      const frame = element.shadowRoot!.querySelector<HTMLElement>('.frame')!;
+      const hostBox = element.getBoundingClientRect();
+      const frameBox = frame.getBoundingClientRect();
+      return {
+        foreignObject: Boolean(element.shadowRoot!.querySelector('foreignObject')),
+        hostWidth: hostBox.width,
+        hostHeight: hostBox.height,
+        frameWidth: frameBox.width,
+        frameHeight: frameBox.height,
+      };
+    });
+
+    expect(geometry.foreignObject).toBe(false);
+    expect(geometry.frameWidth).toBeLessThanOrEqual(geometry.hostWidth + 1.5);
+    expect(geometry.frameHeight).toBeLessThanOrEqual(geometry.hostHeight + 1.5);
+    expect(geometry.frameWidth).toBeGreaterThan(geometry.hostWidth * 0.96);
+  }
+});
