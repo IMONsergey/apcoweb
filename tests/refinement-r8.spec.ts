@@ -5,6 +5,7 @@ import { revealHeader, selectLanguage } from './helpers/locale';
 async function visit(page: Page, width = 1440) {
   await page.setViewportSize({ width, height: 1000 });
   await page.goto('./?lang=en', { waitUntil: 'networkidle' });
+  await expect(page.locator('html')).not.toHaveAttribute('data-page-entering');
   await page.evaluate(() => document.fonts.ready);
 }
 
@@ -281,8 +282,13 @@ test('R8 footer underline provides pointer and keyboard feedback without changin
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await visit(page);
   const link = page.locator('.footer-columns a').first();
-  await link.scrollIntoViewIfNeeded();
-  const before = await link.boundingBox();
+  await link.evaluate((node) => node.scrollIntoView({ block: 'center', behavior: 'instant' }));
+  const geometry = () =>
+    link.evaluate((node) => {
+      const rect = node.getBoundingClientRect();
+      return { x: rect.x + scrollX, y: rect.y + scrollY, width: rect.width, height: rect.height };
+    });
+  const before = await geometry();
   const scale = () =>
     link
       .locator('.locale-text')
@@ -290,14 +296,15 @@ test('R8 footer underline provides pointer and keyboard feedback without changin
   expect(await scale()).toBe(0);
   await link.hover();
   await expect.poll(scale).toBe(1);
-  expect(await link.boundingBox()).toEqual(before);
+  expect(await geometry()).toEqual(before);
   await page.mouse.move(1, 1);
   await expect.poll(scale).toBe(0);
-  await link.focus();
   await page.keyboard.press('Tab');
-  await page.keyboard.press('Shift+Tab');
+  await link.focus();
   await expect(link).toBeFocused();
+  expect(await link.evaluate((node) => node.matches(':focus-visible'))).toBe(true);
   await expect.poll(scale).toBe(1);
+  expect(await geometry()).toEqual(before);
 });
 
 test('R8 complete reading-flow audit evidence at phone and large desktop widths', async ({

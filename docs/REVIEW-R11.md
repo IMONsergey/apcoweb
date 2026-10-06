@@ -12,6 +12,8 @@ Owner request, 2026-10-06: desktop sections exceed a 16:9 screen, especially whe
 
 ## Verification
 
+Test-only synchronization follow-up `b07acfc61c69c8c93720697de80e362475c985ff` keeps the runtime and all 15 build files unchanged. R8 baselines now wait for the prepared, visible site; the footer test cancels scrolling before input, compares exact document coordinates and verifies actual keyboard focus-visible styling independently of browser link-tab preferences. The final full cached Chromium suite passes 116/116 with no retries, and the final footer check passes 3/3 cached engines. CI's earlier 346/348 result and correction provenance are retained in qa-r11-summary.json; all 21 new height/state checks had passed on their first attempt.
+
 Runtime/test source: `84335d669eed22b1ee9ab4f263117416b5819ba9`, based on the released R10 main `92badd28bb66661241f53b63043a76a72d74cd47`. Locked install, supplied-engine checksums, lint, TypeScript, formatting and clean build pass. All six changed runtime/test files and all 14 JS/CSS files plus index.html are byte-identical between the local build and the tested isolated Mac preview.
 
 The new scenarios cover 1200×1000, 1280×600, 1536×740, 1920×950 and 2560×1320 in EN/RU, full scene bounds below the header, readable text, action targets, carousel bounds, resize/language state, and the 1280×480 natural-flow fallback. The supplemental three-engine run also includes existing search entrance and six-width natural-language checks: **45/45 pass**, with no failures, skips or retries. The full Chromium result and exact source/build provenance are in [qa-r11-summary.json](qa-r11-summary.json); matching-browser CI and final Pages verification are recorded in the release pull request.

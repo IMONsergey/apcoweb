@@ -38,9 +38,10 @@
   },
   "fullCachedChromium": {
     "workers": 2,
+    "source": "b07acfc61c69c8c93720697de80e362475c985ff",
     "stats": {
-      "startTime": "2026-10-06T06:48:22.559Z",
-      "duration": 204905.32499999998,
+      "startTime": "2026-10-06T07:19:43.343Z",
+      "duration": 207196.72900000002,
       "expected": 116,
       "skipped": 0,
       "unexpected": 0,
@@ -83,7 +84,8 @@
     "src/components/sections/StepCarousel.tsx": "e3d5d456b08dc8407399ad46b791ba5f36a4c320cbc726ad478290470dab312f",
     "src/styles/short-desktop.css": "ee85980c95c54a520106122a9a1e33a0eae6a055e8dae372ccd769671497da90",
     "tests/short-desktop.spec.ts": "6cb350564d7d8bd2de9ee15372d8c440b8a243b7308ec055a0fef08e4a28458d",
-    "tests/refinement-r10.spec.ts": "5d17c24f0568f79ff920364cc7bb82c45b92f82fb47700ffdaefe4e64f069e77"
+    "tests/refinement-r10.spec.ts": "5d17c24f0568f79ff920364cc7bb82c45b92f82fb47700ffdaefe4e64f069e77",
+    "tests/refinement-r8.spec.ts": "45eb78e5222759c332f21af8b802cfe075d3e4e83c3bc32784320f7ce2e78789"
   },
   "buildSha256": {
     "index.html": "f4f099027deeeb74d4ca5dce2342ea74451b0fc2e60eb13f57dd77fe7a97a312",
@@ -158,5 +160,30 @@
       }
     ],
     "followup": "Broaden the same compact composition to wide viewports above 1100 px height, including 2560x1320; final source is separately retested."
+  },
+  "validationSource": "b07acfc61c69c8c93720697de80e362475c985ff",
+  "footerFeedbackThreeEngine": {
+    "workers": 1,
+    "source": "b07acfc61c69c8c93720697de80e362475c985ff",
+    "stats": {
+      "startTime": "2026-10-06T07:19:20.727Z",
+      "duration": 20976.061,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "ciSynchronizationCorrection": {
+    "failedHead": "49e1ff4e9fbeba293827279c1a95bf668eefb774",
+    "failedRun": 37426371041,
+    "result": "346 passed, 2 failed after retry; all 21 new height/state scenarios passed on first attempt.",
+    "causes": [
+      "Firefox compared viewport coordinates after the browser scrolled by 1 px during hover.",
+      "WebKit sampled the initial locale layout before the prepared website entrance finished."
+    ],
+    "correction": "Wait for the prepared visible page before R8 baselines. Position the footer instantly, compare exact document coordinates, and test actual focus-visible styling after keyboard input independently of browser link-tab preferences.",
+    "runtimeAndBuildUnchanged": true,
+    "supplementalMacResults": "The 21 natural-language and reading-flow scenarios passed in the earlier 24-case correction runs; cached macOS footer input required serialized testing. The final footer test passes all three engines and the complete current Chromium suite passes 116/116 without retries."
   }
 }
