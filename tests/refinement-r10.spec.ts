@@ -66,7 +66,7 @@ test('API interface and stacked layers fit the content grid', async ({ page }) =
     await page.locator('#api').scrollIntoViewIfNeeded();
     const box = await page.locator('.api-demo-frame').boundingBox();
     expect(box).not.toBeNull();
-    expect(box!.right ?? box!.x + box!.width).toBeLessThanOrEqual(width + 1);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(width + 1);
   }
 });
 
