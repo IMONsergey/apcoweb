@@ -1,0 +1,236 @@
+/* Use the actual CSS viewport, including browser chrome and display scaling. */
+@media (min-width: 1200px) and (max-height: 1100px),
+  (min-width: 1200px) and (min-aspect-ratio: 8/5) {
+  :root {
+    --section-space: clamp(24px, 4vh, 48px);
+  }
+
+  .hero {
+    padding-block: 24px 40px;
+  }
+  .hero-bottom {
+    margin-top: 48px;
+  }
+
+  .steps,
+  .audiences {
+    padding-block: clamp(16px, 2.6vh, 32px);
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(min-content, 1fr);
+    height: min(calc(100vh - 96px), 800px);
+    /* Current-language content supplies the intrinsic minimum. */
+    min-height: min-content;
+  }
+  .steps h2,
+  .audiences h2 {
+    font-size: clamp(44px, 6.5vh, 64px);
+    line-height: 1.04;
+  }
+  .steps h2 > br,
+  .audiences h2 > br {
+    display: none;
+  }
+  .section-heading-row {
+    align-items: center;
+    gap: 32px;
+  }
+  .steps-intro {
+    display: grid;
+    grid-template-columns: 25px minmax(0, 1fr);
+    gap: 16px;
+    padding: 16px;
+  }
+  .steps-intro > svg {
+    margin: 0;
+  }
+  .steps-intro p {
+    line-height: 24px;
+  }
+  .carousel-controls {
+    margin-block: 12px;
+  }
+  .step-copy {
+    min-height: 0;
+    padding: 20px 24px 0;
+  }
+  .step-copy h3 {
+    font-size: clamp(36px, 5.4vh, 52px);
+    line-height: 1.04;
+  }
+  .site[lang='ru'] .step-copy h3 {
+    font-size: clamp(34px, 5.1vh, 48px);
+    line-height: 1.06;
+  }
+  .step-copy p {
+    margin-top: 12px;
+    min-height: 0;
+  }
+  .carousel-bleed {
+    min-width: 0;
+    min-height: 0;
+  }
+  .step-track,
+  .step-card {
+    height: 100%;
+  }
+  .step-media {
+    height: 0;
+    min-height: 144px;
+    flex: 1 1 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 0 16px 16px;
+  }
+  .step-media img {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: right bottom;
+  }
+
+  .audiences h2 {
+    margin-bottom: 24px;
+  }
+  .audience-card {
+    min-height: 0;
+    padding: clamp(24px, 3.4vh, 36px);
+    gap: 24px;
+  }
+  .audience-copy {
+    width: 66%;
+    max-width: 450px;
+  }
+  .audience-copy h3 {
+    font-size: clamp(32px, 5.1vh, 42px);
+    margin-bottom: 16px;
+  }
+  .site[lang='ru'] .audience-copy h3 {
+    font-size: clamp(28px, min(4.2vh, 2.55vw), 35px);
+  }
+  .audience-art {
+    width: 66%;
+    left: 59%;
+  }
+  .audience-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .data-section {
+    padding-bottom: 24px;
+  }
+  .data-stage {
+    min-height: clamp(480px, calc(100vh - 128px), 900px);
+  }
+  .data-stage > .data-copy {
+    margin-top: 0;
+  }
+  .data-stage > .data-actions {
+    margin-bottom: 0;
+  }
+  .data-copy h2 {
+    font-size: clamp(42px, 6.1vh, 64px);
+  }
+  .data-copy > p {
+    margin-block: 24px;
+  }
+  .data-visual-field .signal-globe {
+    width: min(100%, calc((100vh - 112px) * 1.2));
+  }
+  .data-metrics .metric-card {
+    width: 216px;
+    height: clamp(120px, 18vh, 172px);
+    padding: 16px 12px;
+  }
+  .metric-card--ipv4,
+  .metric-card--products {
+    top: 5%;
+  }
+  .metric-card--ipv6,
+  .metric-card--cves {
+    top: 39%;
+  }
+  .metric-card--domains,
+  .metric-card--protocols {
+    top: 73%;
+  }
+  .metric-card--ipv6 {
+    left: 0;
+  }
+  .metric-card--cves {
+    right: 0;
+  }
+  .metric-card--protocols dd {
+    font-size: clamp(54px, 8.5vh, 80px);
+    line-height: 1;
+  }
+
+  .api-grid {
+    min-height: 0;
+    padding-block: clamp(32px, 5vh, 64px);
+  }
+  .api-copy h2 {
+    font-size: clamp(42px, 7vh, 72px);
+  }
+  .site[lang='ru'] .api-copy h2 {
+    font-size: clamp(42px, min(7vh, 5.3vw), 64px);
+  }
+  .api-copy > svg {
+    margin-block: 24px 16px;
+  }
+  .api-copy p {
+    margin-bottom: 24px;
+  }
+  .api-visual {
+    max-width: calc((100vh - 192px) * 2048 / 1511);
+    justify-self: end;
+  }
+
+  .closing-section {
+    padding-block: 24px;
+  }
+  .closing-scene {
+    max-width: min(1360px, calc((100vh - 176px) * 2880 / 1894));
+  }
+  .closing-copy--translated h3 {
+    font-size: clamp(36px, 6.2vh, 62px);
+    margin-block: 16px;
+  }
+  .closing-copy--translated .double-button {
+    margin-top: 16px;
+  }
+}
+
+@media (min-width: 1200px) and (max-height: 700px) {
+  .steps-intro {
+    padding: 12px;
+    gap: 12px;
+  }
+  .carousel-controls {
+    margin-block: 8px;
+  }
+  .step-copy {
+    padding-top: 16px;
+  }
+}
+
+/* Below the readable frame budget, every engine returns to natural document flow. */
+@media (min-width: 1200px) and (max-height: 599px) {
+  .steps {
+    display: block;
+    height: auto;
+  }
+  .step-track,
+  .step-card {
+    height: auto;
+  }
+  .step-media {
+    height: 144px;
+    flex: 0 0 auto;
+  }
+}

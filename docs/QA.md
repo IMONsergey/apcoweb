@@ -10,6 +10,7 @@ The test matrix is implemented in `tests/landing.spec.ts`. Results are generated
 - Disclosure navigation, Escape/focus restoration, mobile drawer, carousel end positions, native FAQ expansion, long text, validated search handoff, comparison and pricing dialogs.
 - Automated axe scans at desktop and phone widths. These do not establish complete WCAG conformance.
 - Animation frame changes, pause and reduced-motion behavior.
+- Height-aware desktop scenes at 1200×1000, 1280×600, 1536×740, 1920×950 and 2560×1320 in both languages; readable copy, carousel bounds, full sections below navigation, resize state and natural flow at 1280×480. Simulated CSS viewports model reduced browser height; no physical Windows check is claimed.
 
 The full-page screenshots are stored in Playwright test output. Representative review captures and an execution summary are saved in this repository after a successful run.
 

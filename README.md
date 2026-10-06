@@ -4,7 +4,7 @@ React + TypeScript + Vite implementation of the APCOSYS landing page. Plain CSS,
 
 **Published preview:** https://imonsergey.github.io/apcoweb/
 
-Current review: [R10 entrance and composition](docs/REVIEW-R10.md), [R9 natural language sizing](docs/REVIEW-R9.md), [verification evidence](docs/QA-RESULTS.md).
+Current review: [R11 desktop viewport height](docs/REVIEW-R11.md), [R10 entrance and composition](docs/REVIEW-R10.md), [R9 natural language sizing](docs/REVIEW-R9.md), [verification evidence](docs/QA-RESULTS.md).
 
 ## Development
 
