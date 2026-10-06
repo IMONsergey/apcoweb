@@ -62,4 +62,47 @@
 .language-panel button[aria-checked='true'],
 .language-panel button:not(:disabled):hover,
 .language-panel button:not(:disabled):focus-visible {
-  background: w¶»§q«^
+  background: white;
+}
+.language-panel button:focus-visible {
+  outline-offset: -2px;
+}
+.language-panel button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+.language-panel button:disabled .language-flag {
+  filter: saturate(0.75);
+}
+
+@media (max-width: 599px) {
+  .header-signin {
+    display: none;
+  }
+  .header-row {
+    gap: 10px;
+  }
+  .header-actions {
+    gap: 10px;
+  }
+  .language-control .language {
+    font-size: 13px;
+    padding: 10px 8px;
+  }
+}
+@media (max-width: 340px) {
+  .header-actions {
+    gap: 8px;
+  }
+  .language-control .language {
+    padding-inline: 7px;
+    gap: 4px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .language-control .language,
+  .language-control .language > svg:last-child,
+  .language-panel button {
+    transition: none;
+  }
+}
