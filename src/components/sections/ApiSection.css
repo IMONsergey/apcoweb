@@ -1,5 +1,3 @@
-/* Component layout, including its original responsive and locale rules. */
-
 .api-section {
   position: relative;
   isolation: isolate;
@@ -54,6 +52,68 @@
   height: auto;
   max-width: none;
 }
+.api-demo-frame {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 2048 / 1511;
+  background: white;
+  pointer-events: none;
+  border-radius: 12px;
+}
+.api-demo-frame::before,
+.api-demo-frame::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background: #fff;
+  inset: 8px -8px -8px 8px;
+  opacity: 0.3;
+  border-radius: 12px;
+}
+.api-demo-frame::after {
+  opacity: 0.14;
+  inset: 16px -16px -16px 16px;
+}
+.api-demo-frame .api-demo-fallback,
+.api-demo-host {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  pointer-events: none;
+  transition: opacity 240ms ease;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.api-demo-frame .api-demo-fallback {
+  /* The poster includes a 28 px painted layer stack below its 526 px window. */
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+}
+.api-demo-host {
+  height: 100%;
+  opacity: 0;
+  --api-font: var(--font-sans);
+  --api-mono: var(--font-mono);
+}
+.api-demo-frame[data-ready='true'] .api-demo-fallback {
+  opacity: 0;
+}
+.api-demo-frame[data-ready='true'] .api-demo-host {
+  opacity: 1;
+}
+.api-demo-host > api-developer-demo {
+  width: 100%;
+  display: block;
+}
+.api-demo-poster {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
 @container api (max-width: 1199px) {
   .api-grid {
     min-height: 0;
@@ -79,6 +139,9 @@
   }
 }
 @container api (max-width: 899px) {
+  .api-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .api-copy h2 {
     max-width: 680px;
     font-size: 56px;
@@ -112,6 +175,11 @@
     flex: 1;
     justify-content: flex-start;
   }
+  .api-demo-frame,
+  .api-demo-frame::before,
+  .api-demo-frame::after {
+    border-radius: 8px;
+  }
 }
 @container api (max-width: 375px) {
   .api-copy h2 {
@@ -125,94 +193,9 @@
     line-height: 38px;
   }
 }
-.api-demo-frame {
-  position: relative;
-  isolation: isolate;
-  width: 100%;
-  aspect-ratio: 2048 / 1511;
-  background: white;
-  pointer-events: none;
-}
-.api-demo-frame::before,
-.api-demo-frame::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  background: #fff;
-  inset: 14px -14px -14px 14px;
-  opacity: 0.3;
-}
-.api-demo-frame::after {
-  opacity: 0.14;
-  inset: 16px -16px -16px 16px;
-}
-.api-demo-frame .api-demo-fallback,
-.api-demo-host {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  transition: opacity 240ms ease;
-}
-.api-demo-frame .api-demo-fallback {
-  object-fit: contain;
-  opacity: 1;
-}
-.api-demo-host {
-  opacity: 0;
-  --api-font: var(--font-sans);
-  --api-mono: var(--font-mono);
-}
-.api-demo-frame[data-ready='true'] .api-demo-fallback {
-  opacity: 0;
-}
-.api-demo-frame[data-ready='true'] .api-demo-host {
-  opacity: 1;
-}
-.api-demo-host > api-developer-demo {
-  width: 100%;
-  display: block;
-}
 @media (prefers-reduced-motion: reduce) {
   .api-demo-frame .api-demo-fallback,
   .api-demo-host {
     transition: none;
-  }
-}
-.api-demo-frame,
-.api-demo-frame::before,
-.api-demo-frame::after {
-  border-radius: 12px;
-}
-.api-demo-frame::before {
-  inset: 8px -8px -8px 8px;
-}
-.api-demo-frame .api-demo-fallback,
-.api-demo-host {
-  border-radius: inherit;
-  overflow: hidden;
-}
-.api-demo-poster {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  overflow: hidden;
-}
-.api-demo-frame .api-demo-fallback {
-  /* The supplied poster includes a 28 px painted layer stack below its 526 px window. */
-  height: auto;
-  object-fit: contain;
-}
-@container api (max-width: 899px) {
-  .api-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-@container api (max-width: 599px) {
-  .api-demo-frame,
-  .api-demo-frame::before,
-  .api-demo-frame::after {
-    border-radius: 8px;
   }
 }

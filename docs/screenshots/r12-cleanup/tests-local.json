@@ -1,0 +1,106 @@
+{
+  "initial": {
+    "startTime": "2026-10-06T11:02:24.308Z",
+    "duration": 1142380.6919999998,
+    "expected": 379,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  },
+  "failedCases": [
+    {
+      "title": "visible dock is before the plan cards in natural Tab order",
+      "file": "billing-dock.spec.ts",
+      "project": "webkit",
+      "results": [
+        {
+          "status": "failed",
+          "error": {
+            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.billing-dock')\nExpected: visible\nReceived: hidden\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.billing-dock') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('.billing-dock')\u001b[22m\n\u001b[2m    22 \u00d7 locator resolved to <aside inert=\"\" aria-hidden=\"true\" class=\"billing-dock\" data-visible=\"false\" aria-label=\"Plan billing options\">\u2026</aside>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n",
+            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.billing-dock')\nExpected: visible\nReceived: hidden\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.billing-dock') with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('.billing-dock')\u001b[22m\n\u001b[2m    22 \u00d7 locator resolved to <aside inert=\"\" aria-hidden=\"true\" class=\"billing-dock\" data-visible=\"false\" aria-label=\"Plan billing options\">\u2026</aside>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n    at /Users/erdc/Documents/apcoweb-r12-cleanup-20261006/tests/billing-dock.spec.ts:150:47",
+            "location": {
+              "file": "/Users/erdc/Documents/apcoweb-r12-cleanup-20261006/tests/billing-dock.spec.ts",
+              "column": 47,
+              "line": 150
+            },
+            "snippet": "  148 |   const firstAction = page.locator('#plan-free .plan-button');\n  149 |   await firstAction.focus();\n> 150 |   await expect(page.locator('.billing-dock')).toBeVisible();\n      |                                               ^\n  151 |   // Visibility updates before the browser rebuilds its sequential-focus candidates.\n  152 |   // Wait for the newly exposed fixed control to be painted, not an arbitrary delay.\n  153 |   await expect(page.locator('.billing-dock')).not.toHaveAttribute('inert', '');"
+          }
+        }
+      ]
+    },
+    {
+      "title": "navigation reveals from the right, survives reversal and restores keyboard focus",
+      "file": "refinement-r10.spec.ts",
+      "project": "webkit",
+      "results": [
+        {
+          "status": "failed",
+          "error": {
+            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/erdc/Documents/apcoweb-r12-cleanup-20261006/tests/refinement-r10.spec.ts:265:21",
+            "location": {
+              "file": "/Users/erdc/Documents/apcoweb-r12-cleanup-20261006/tests/refinement-r10.spec.ts",
+              "column": 21,
+              "line": 265
+            },
+            "snippet": "  263 |       .some((frame) => String(frame.transform).includes('translateX')),\n  264 |   );\n> 265 |   expect(direction).toBe(true);\n      |                     ^\n  266 |   await expect\n  267 |     .poll(() =>\n  268 |       dialog.evaluate("
+          }
+        }
+      ]
+    },
+    {
+      "title": "R5 visual evidence and open language menu accessibility",
+      "file": "refinement-r5.spec.ts",
+      "project": "firefox",
+      "results": [
+        {
+          "status": "timedOut",
+          "error": {
+            "message": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m",
+            "stack": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+          }
+        }
+      ]
+    },
+    {
+      "title": "language menu keyboard selection, dismissal and mobile bounds",
+      "file": "refinement-r5.spec.ts",
+      "project": "webkit",
+      "results": [
+        {
+          "status": "timedOut",
+          "error": {
+            "message": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m",
+            "stack": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+          }
+        }
+      ]
+    },
+    {
+      "title": "R5 visual evidence and open language menu accessibility",
+      "file": "refinement-r5.spec.ts",
+      "project": "webkit",
+      "results": [
+        {
+          "status": "timedOut",
+          "error": {
+            "message": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m",
+            "stack": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+          }
+        }
+      ]
+    }
+  ],
+  "repeatedFailedCases": {
+    "startTime": "2026-10-06T11:23:05.405Z",
+    "duration": 120830.24699999999,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "sourceChangesBetweenRuns": [],
+  "workersInitial": 3,
+  "workersRepeat": 1,
+  "rawTracePreserved": true
+}

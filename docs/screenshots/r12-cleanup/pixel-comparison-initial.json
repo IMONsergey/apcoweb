@@ -1,0 +1,8136 @@
+{
+  "pairs": 480,
+  "pixel_identical": 448,
+  "different": [
+    {
+      "case": "chromium-2560x1440-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        2560,
+        871
+      ],
+      "after_size": [
+        2560,
+        871
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        2104,
+        549,
+        2109,
+        551
+      ],
+      "different_pixels": 9,
+      "max_channel_delta": 3
+    },
+    {
+      "case": "chromium-1440x900-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1440,
+        1201
+      ],
+      "after_size": [
+        1440,
+        1201
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        1200,
+        1420,
+        1201
+      ],
+      "different_pixels": 160,
+      "max_channel_delta": 37
+    },
+    {
+      "case": "chromium-1366x650-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        993
+      ],
+      "after_size": [
+        1366,
+        993
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        992,
+        1352,
+        993
+      ],
+      "different_pixels": 152,
+      "max_channel_delta": 38
+    },
+    {
+      "case": "chromium-1024x768-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1024,
+        589
+      ],
+      "after_size": [
+        1024,
+        589
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        501,
+        111,
+        976,
+        462
+      ],
+      "different_pixels": 165947,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "chromium-430x932-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        430,
+        1006
+      ],
+      "after_size": [
+        430,
+        1006
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        36,
+        480,
+        383,
+        935
+      ],
+      "different_pixels": 12819,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "chromium-390x844-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        390,
+        977
+      ],
+      "after_size": [
+        390,
+        977
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        37,
+        479,
+        343,
+        907
+      ],
+      "different_pixels": 10766,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "chromium-360x800-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        360,
+        946
+      ],
+      "after_size": [
+        360,
+        946
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        34,
+        451,
+        317,
+        875
+      ],
+      "different_pixels": 8107,
+      "max_channel_delta": 240
+    },
+    {
+      "case": "chromium-844x390-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        290,
+        844,
+        458
+      ],
+      "different_pixels": 90748,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-1536x864-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        1210
+      ],
+      "after_size": [
+        1536,
+        1210
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        52,
+        1536,
+        198
+      ],
+      "different_pixels": 206250,
+      "max_channel_delta": 254
+    },
+    {
+      "case": "firefox-1536x864-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        1209
+      ],
+      "after_size": [
+        1536,
+        1209
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        51,
+        1536,
+        197
+      ],
+      "different_pixels": 205799,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-1536x740-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        947
+      ],
+      "after_size": [
+        1536,
+        947
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        1536,
+        128
+      ],
+      "different_pixels": 183905,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-1536x740-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        936
+      ],
+      "after_size": [
+        1536,
+        936
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        1536,
+        123
+      ],
+      "different_pixels": 176719,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-1440x900-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1440,
+        797
+      ],
+      "after_size": [
+        1440,
+        797
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        704,
+        140,
+        1384,
+        642
+      ],
+      "different_pixels": 336997,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-1366x768-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        922
+      ],
+      "after_size": [
+        1366,
+        922
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        1366,
+        102
+      ],
+      "different_pixels": 130502,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-1366x768-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        922
+      ],
+      "after_size": [
+        1366,
+        922
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        1366,
+        102
+      ],
+      "different_pixels": 130502,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-1366x650-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        922
+      ],
+      "after_size": [
+        1366,
+        922
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        15,
+        1366,
+        161
+      ],
+      "different_pixels": 174974,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-1280x720-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        933
+      ],
+      "after_size": [
+        1280,
+        933
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        1280,
+        131
+      ],
+      "different_pixels": 152130,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-1280x600-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        654
+      ],
+      "after_size": [
+        1280,
+        654
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        737,
+        140,
+        1224,
+        499
+      ],
+      "different_pixels": 171001,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-1024x768-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1024,
+        1146
+      ],
+      "after_size": [
+        1024,
+        1146
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        68,
+        1024,
+        214
+      ],
+      "different_pixels": 132346,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-768x1024-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        768,
+        1059
+      ],
+      "after_size": [
+        768,
+        1059
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        768,
+        42
+      ],
+      "different_pixels": 27945,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-768x1024-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        768,
+        1115
+      ],
+      "after_size": [
+        768,
+        1115
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        32,
+        519,
+        720,
+        1027
+      ],
+      "different_pixels": 345265,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-390x844-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        390,
+        720
+      ],
+      "after_size": [
+        390,
+        720
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        24,
+        415,
+        350,
+        656
+      ],
+      "different_pixels": 75752,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-360x800-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        360,
+        946
+      ],
+      "after_size": [
+        360,
+        946
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        360,
+        94
+      ],
+      "different_pixels": 33774,
+      "max_channel_delta": 245
+    },
+    {
+      "case": "firefox-360x800-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        360,
+        946
+      ],
+      "after_size": [
+        360,
+        946
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        360,
+        94
+      ],
+      "different_pixels": 33774,
+      "max_channel_delta": 245
+    },
+    {
+      "case": "firefox-360x800-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        360,
+        724
+      ],
+      "after_size": [
+        360,
+        724
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        20,
+        436,
+        324,
+        660
+      ],
+      "different_pixels": 66154,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-360x800-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        360,
+        958
+      ],
+      "after_size": [
+        360,
+        958
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        360,
+        100
+      ],
+      "different_pixels": 35983,
+      "max_channel_delta": 246
+    },
+    {
+      "case": "firefox-360x800-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        360,
+        804
+      ],
+      "after_size": [
+        360,
+        804
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        20,
+        516,
+        324,
+        740
+      ],
+      "different_pixels": 65994,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-320x568-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        320,
+        735
+      ],
+      "after_size": [
+        320,
+        735
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        320,
+        671
+      ],
+      "different_pixels": 85093,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-320x568-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        320,
+        773
+      ],
+      "after_size": [
+        320,
+        773
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        320,
+        123
+      ],
+      "different_pixels": 37173,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-844x390-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        844,
+        1067
+      ],
+      "after_size": [
+        844,
+        1067
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        218,
+        844,
+        364
+      ],
+      "different_pixels": 107744,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-844x390-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        844,
+        1123
+      ],
+      "after_size": [
+        844,
+        1123
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        246,
+        844,
+        392
+      ],
+      "different_pixels": 109498,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "webkit-844x390-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        844,
+        1067
+      ],
+      "after_size": [
+        844,
+        1067
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        66,
+        465,
+        762,
+        978
+      ],
+      "different_pixels": 353460,
+      "max_channel_delta": 255
+    }
+  ],
+  "results": [
+    {
+      "case": "chromium-2560x1440-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        2560,
+        1285
+      ],
+      "after_size": [
+        2560,
+        1285
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-2560x1440-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        2560,
+        1285
+      ],
+      "after_size": [
+        2560,
+        1285
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-2560x1440-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        2560,
+        975
+      ],
+      "after_size": [
+        2560,
+        975
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-2560x1440-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        2560,
+        1201
+      ],
+      "after_size": [
+        2560,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-2560x1440-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        2560,
+        871
+      ],
+      "after_size": [
+        2560,
+        871
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-2560x1440-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        2560,
+        1310
+      ],
+      "after_size": [
+        2560,
+        1310
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-2560x1440-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        2560,
+        1310
+      ],
+      "after_size": [
+        2560,
+        1310
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-2560x1440-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        2560,
+        1012
+      ],
+      "after_size": [
+        2560,
+        1012
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-2560x1440-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        2560,
+        1201
+      ],
+      "after_size": [
+        2560,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-2560x1440-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        2560,
+        871
+      ],
+      "after_size": [
+        2560,
+        871
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        2104,
+        549,
+        2109,
+        551
+      ],
+      "different_pixels": 9,
+      "max_channel_delta": 3
+    },
+    {
+      "case": "chromium-1920x1080-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1920,
+        1285
+      ],
+      "after_size": [
+        1920,
+        1285
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1920x1080-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1920,
+        1285
+      ],
+      "after_size": [
+        1920,
+        1285
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1920x1080-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1920,
+        973
+      ],
+      "after_size": [
+        1920,
+        973
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1920x1080-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1920,
+        1201
+      ],
+      "after_size": [
+        1920,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1920x1080-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1920,
+        871
+      ],
+      "after_size": [
+        1920,
+        871
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1920x1080-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1920,
+        1309
+      ],
+      "after_size": [
+        1920,
+        1309
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1920x1080-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1920,
+        1309
+      ],
+      "after_size": [
+        1920,
+        1309
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1920x1080-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1920,
+        1007
+      ],
+      "after_size": [
+        1920,
+        1007
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1920x1080-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1920,
+        1201
+      ],
+      "after_size": [
+        1920,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1920x1080-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1920,
+        871
+      ],
+      "after_size": [
+        1920,
+        871
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x864-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        1210
+      ],
+      "after_size": [
+        1536,
+        1210
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x864-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        1210
+      ],
+      "after_size": [
+        1536,
+        1210
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x864-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        973
+      ],
+      "after_size": [
+        1536,
+        973
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x864-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        1201
+      ],
+      "after_size": [
+        1536,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x864-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        797
+      ],
+      "after_size": [
+        1536,
+        797
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x864-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        1209
+      ],
+      "after_size": [
+        1536,
+        1209
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x864-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        1209
+      ],
+      "after_size": [
+        1536,
+        1209
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x864-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        973
+      ],
+      "after_size": [
+        1536,
+        973
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x864-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        1201
+      ],
+      "after_size": [
+        1536,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x864-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        805
+      ],
+      "after_size": [
+        1536,
+        805
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x740-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        947
+      ],
+      "after_size": [
+        1536,
+        947
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x740-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        947
+      ],
+      "after_size": [
+        1536,
+        947
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x740-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        764
+      ],
+      "after_size": [
+        1536,
+        764
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x740-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        992
+      ],
+      "after_size": [
+        1536,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x740-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        654
+      ],
+      "after_size": [
+        1536,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x740-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        936
+      ],
+      "after_size": [
+        1536,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x740-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        936
+      ],
+      "after_size": [
+        1536,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x740-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        762
+      ],
+      "after_size": [
+        1536,
+        762
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x740-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        992
+      ],
+      "after_size": [
+        1536,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1536x740-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        679
+      ],
+      "after_size": [
+        1536,
+        679
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1440x900-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1440,
+        1188
+      ],
+      "after_size": [
+        1440,
+        1188
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1440x900-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1440,
+        1188
+      ],
+      "after_size": [
+        1440,
+        1188
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1440x900-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1440,
+        973
+      ],
+      "after_size": [
+        1440,
+        973
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1440x900-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1440,
+        1201
+      ],
+      "after_size": [
+        1440,
+        1201
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        1200,
+        1420,
+        1201
+      ],
+      "different_pixels": 160,
+      "max_channel_delta": 37
+    },
+    {
+      "case": "chromium-1440x900-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1440,
+        797
+      ],
+      "after_size": [
+        1440,
+        797
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1440x900-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1440,
+        1181
+      ],
+      "after_size": [
+        1440,
+        1181
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1440x900-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1440,
+        1181
+      ],
+      "after_size": [
+        1440,
+        1181
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1440x900-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1440,
+        1059
+      ],
+      "after_size": [
+        1440,
+        1059
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1440x900-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1440,
+        1201
+      ],
+      "after_size": [
+        1440,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1440x900-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1440,
+        866
+      ],
+      "after_size": [
+        1440,
+        866
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x768-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        923
+      ],
+      "after_size": [
+        1366,
+        923
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x768-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        923
+      ],
+      "after_size": [
+        1366,
+        923
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x768-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        749
+      ],
+      "after_size": [
+        1366,
+        749
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x768-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        992
+      ],
+      "after_size": [
+        1366,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x768-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        654
+      ],
+      "after_size": [
+        1366,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x768-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x768-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x768-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        829
+      ],
+      "after_size": [
+        1366,
+        829
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x768-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        993
+      ],
+      "after_size": [
+        1366,
+        993
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x768-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        720
+      ],
+      "after_size": [
+        1366,
+        720
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x650-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        923
+      ],
+      "after_size": [
+        1366,
+        923
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x650-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        923
+      ],
+      "after_size": [
+        1366,
+        923
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x650-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        749
+      ],
+      "after_size": [
+        1366,
+        749
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x650-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        992
+      ],
+      "after_size": [
+        1366,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x650-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        654
+      ],
+      "after_size": [
+        1366,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x650-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x650-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x650-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        829
+      ],
+      "after_size": [
+        1366,
+        829
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1366x650-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        993
+      ],
+      "after_size": [
+        1366,
+        993
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        992,
+        1352,
+        993
+      ],
+      "different_pixels": 152,
+      "max_channel_delta": 38
+    },
+    {
+      "case": "chromium-1366x650-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        720
+      ],
+      "after_size": [
+        1366,
+        720
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x720-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        936
+      ],
+      "after_size": [
+        1280,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x720-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        936
+      ],
+      "after_size": [
+        1280,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x720-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        739
+      ],
+      "after_size": [
+        1280,
+        739
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x720-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x720-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        654
+      ],
+      "after_size": [
+        1280,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x720-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        934
+      ],
+      "after_size": [
+        1280,
+        934
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x720-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        934
+      ],
+      "after_size": [
+        1280,
+        934
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x720-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        834
+      ],
+      "after_size": [
+        1280,
+        834
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x720-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x720-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        698
+      ],
+      "after_size": [
+        1280,
+        698
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x600-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        936
+      ],
+      "after_size": [
+        1280,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x600-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        936
+      ],
+      "after_size": [
+        1280,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x600-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        739
+      ],
+      "after_size": [
+        1280,
+        739
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x600-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x600-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        654
+      ],
+      "after_size": [
+        1280,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x600-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        934
+      ],
+      "after_size": [
+        1280,
+        934
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x600-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        934
+      ],
+      "after_size": [
+        1280,
+        934
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x600-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        834
+      ],
+      "after_size": [
+        1280,
+        834
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x600-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1280x600-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        698
+      ],
+      "after_size": [
+        1280,
+        698
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1024x768-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1024,
+        1146
+      ],
+      "after_size": [
+        1024,
+        1146
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1024x768-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1024,
+        1146
+      ],
+      "after_size": [
+        1024,
+        1146
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1024x768-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1024,
+        1326
+      ],
+      "after_size": [
+        1024,
+        1326
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1024x768-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1024,
+        893
+      ],
+      "after_size": [
+        1024,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1024x768-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1024,
+        589
+      ],
+      "after_size": [
+        1024,
+        589
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        501,
+        111,
+        976,
+        462
+      ],
+      "different_pixels": 165947,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "chromium-1024x768-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1024,
+        1154
+      ],
+      "after_size": [
+        1024,
+        1154
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1024x768-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1024,
+        1154
+      ],
+      "after_size": [
+        1024,
+        1154
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1024x768-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1024,
+        1386
+      ],
+      "after_size": [
+        1024,
+        1386
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1024x768-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1024,
+        893
+      ],
+      "after_size": [
+        1024,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-1024x768-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1024,
+        709
+      ],
+      "after_size": [
+        1024,
+        709
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-768x1024-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        768,
+        1072
+      ],
+      "after_size": [
+        768,
+        1072
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-768x1024-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        768,
+        1072
+      ],
+      "after_size": [
+        768,
+        1072
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-768x1024-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        768,
+        1292
+      ],
+      "after_size": [
+        768,
+        1292
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-768x1024-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        768,
+        893
+      ],
+      "after_size": [
+        768,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-768x1024-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        768,
+        1059
+      ],
+      "after_size": [
+        768,
+        1059
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-768x1024-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        768,
+        1097
+      ],
+      "after_size": [
+        768,
+        1097
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-768x1024-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        768,
+        1097
+      ],
+      "after_size": [
+        768,
+        1097
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-768x1024-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        768,
+        1327
+      ],
+      "after_size": [
+        768,
+        1327
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-768x1024-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        768,
+        893
+      ],
+      "after_size": [
+        768,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-768x1024-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        768,
+        1116
+      ],
+      "after_size": [
+        768,
+        1116
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-430x932-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        430,
+        993
+      ],
+      "after_size": [
+        430,
+        993
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-430x932-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        430,
+        993
+      ],
+      "after_size": [
+        430,
+        993
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-430x932-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        430,
+        1265
+      ],
+      "after_size": [
+        430,
+        1265
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-430x932-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        430,
+        1259
+      ],
+      "after_size": [
+        430,
+        1259
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-430x932-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        430,
+        750
+      ],
+      "after_size": [
+        430,
+        750
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-430x932-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        430,
+        1006
+      ],
+      "after_size": [
+        430,
+        1006
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        36,
+        480,
+        383,
+        935
+      ],
+      "different_pixels": 12819,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "chromium-430x932-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        430,
+        1006
+      ],
+      "after_size": [
+        430,
+        1006
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-430x932-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        430,
+        1300
+      ],
+      "after_size": [
+        430,
+        1300
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-430x932-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        430,
+        1283
+      ],
+      "after_size": [
+        430,
+        1283
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-430x932-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        430,
+        792
+      ],
+      "after_size": [
+        430,
+        792
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-390x844-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        390,
+        965
+      ],
+      "after_size": [
+        390,
+        965
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-390x844-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        390,
+        965
+      ],
+      "after_size": [
+        390,
+        965
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-390x844-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        390,
+        1289
+      ],
+      "after_size": [
+        390,
+        1289
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-390x844-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        390,
+        1283
+      ],
+      "after_size": [
+        390,
+        1283
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-390x844-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        390,
+        720
+      ],
+      "after_size": [
+        390,
+        720
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-390x844-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        390,
+        977
+      ],
+      "after_size": [
+        390,
+        977
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        37,
+        479,
+        343,
+        907
+      ],
+      "different_pixels": 10766,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "chromium-390x844-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        390,
+        977
+      ],
+      "after_size": [
+        390,
+        977
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-390x844-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        390,
+        1315
+      ],
+      "after_size": [
+        390,
+        1315
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-390x844-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        390,
+        1282
+      ],
+      "after_size": [
+        390,
+        1282
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-390x844-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        390,
+        829
+      ],
+      "after_size": [
+        390,
+        829
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-360x800-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        360,
+        946
+      ],
+      "after_size": [
+        360,
+        946
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        34,
+        451,
+        317,
+        875
+      ],
+      "different_pixels": 8107,
+      "max_channel_delta": 240
+    },
+    {
+      "case": "chromium-360x800-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        360,
+        946
+      ],
+      "after_size": [
+        360,
+        946
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-360x800-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        360,
+        1325
+      ],
+      "after_size": [
+        360,
+        1325
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-360x800-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        360,
+        1281
+      ],
+      "after_size": [
+        360,
+        1281
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-360x800-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        360,
+        724
+      ],
+      "after_size": [
+        360,
+        724
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-360x800-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        360,
+        958
+      ],
+      "after_size": [
+        360,
+        958
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-360x800-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        360,
+        958
+      ],
+      "after_size": [
+        360,
+        958
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-360x800-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        360,
+        1354
+      ],
+      "after_size": [
+        360,
+        1354
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-360x800-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        360,
+        1281
+      ],
+      "after_size": [
+        360,
+        1281
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-360x800-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        360,
+        805
+      ],
+      "after_size": [
+        360,
+        805
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-320x568-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        320,
+        959
+      ],
+      "after_size": [
+        320,
+        959
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-320x568-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        320,
+        959
+      ],
+      "after_size": [
+        320,
+        959
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-320x568-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        320,
+        1318
+      ],
+      "after_size": [
+        320,
+        1318
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-320x568-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        320,
+        1277
+      ],
+      "after_size": [
+        320,
+        1277
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-320x568-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        320,
+        735
+      ],
+      "after_size": [
+        320,
+        735
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-320x568-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        320,
+        980
+      ],
+      "after_size": [
+        320,
+        980
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-320x568-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        320,
+        980
+      ],
+      "after_size": [
+        320,
+        980
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-320x568-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        320,
+        1366
+      ],
+      "after_size": [
+        320,
+        1366
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-320x568-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        320,
+        1301
+      ],
+      "after_size": [
+        320,
+        1301
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-320x568-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        320,
+        772
+      ],
+      "after_size": [
+        320,
+        772
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-844x390-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-844x390-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        290,
+        844,
+        458
+      ],
+      "different_pixels": 90748,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "chromium-844x390-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        844,
+        1285
+      ],
+      "after_size": [
+        844,
+        1285
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-844x390-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        844,
+        893
+      ],
+      "after_size": [
+        844,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-844x390-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        844,
+        1067
+      ],
+      "after_size": [
+        844,
+        1067
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-844x390-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-844x390-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-844x390-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        844,
+        1334
+      ],
+      "after_size": [
+        844,
+        1334
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-844x390-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        844,
+        893
+      ],
+      "after_size": [
+        844,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "chromium-844x390-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        844,
+        1124
+      ],
+      "after_size": [
+        844,
+        1124
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-2560x1440-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        2560,
+        1286
+      ],
+      "after_size": [
+        2560,
+        1286
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-2560x1440-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        2560,
+        1286
+      ],
+      "after_size": [
+        2560,
+        1286
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-2560x1440-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        2560,
+        975
+      ],
+      "after_size": [
+        2560,
+        975
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-2560x1440-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        2560,
+        1201
+      ],
+      "after_size": [
+        2560,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-2560x1440-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        2560,
+        871
+      ],
+      "after_size": [
+        2560,
+        871
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-2560x1440-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        2560,
+        1309
+      ],
+      "after_size": [
+        2560,
+        1309
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-2560x1440-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        2560,
+        1309
+      ],
+      "after_size": [
+        2560,
+        1309
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-2560x1440-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        2560,
+        1013
+      ],
+      "after_size": [
+        2560,
+        1013
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-2560x1440-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        2560,
+        1201
+      ],
+      "after_size": [
+        2560,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-2560x1440-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        2560,
+        871
+      ],
+      "after_size": [
+        2560,
+        871
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1920x1080-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1920,
+        1284
+      ],
+      "after_size": [
+        1920,
+        1284
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1920x1080-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1920,
+        1284
+      ],
+      "after_size": [
+        1920,
+        1284
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1920x1080-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1920,
+        974
+      ],
+      "after_size": [
+        1920,
+        974
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1920x1080-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1920,
+        1201
+      ],
+      "after_size": [
+        1920,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1920x1080-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1920,
+        871
+      ],
+      "after_size": [
+        1920,
+        871
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1920x1080-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1920,
+        1309
+      ],
+      "after_size": [
+        1920,
+        1309
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1920x1080-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1920,
+        1309
+      ],
+      "after_size": [
+        1920,
+        1309
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1920x1080-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1920,
+        1007
+      ],
+      "after_size": [
+        1920,
+        1007
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1920x1080-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1920,
+        1201
+      ],
+      "after_size": [
+        1920,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1920x1080-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1920,
+        871
+      ],
+      "after_size": [
+        1920,
+        871
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x864-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        1210
+      ],
+      "after_size": [
+        1536,
+        1210
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        52,
+        1536,
+        198
+      ],
+      "different_pixels": 206250,
+      "max_channel_delta": 254
+    },
+    {
+      "case": "firefox-1536x864-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        1210
+      ],
+      "after_size": [
+        1536,
+        1210
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x864-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        973
+      ],
+      "after_size": [
+        1536,
+        973
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x864-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        1201
+      ],
+      "after_size": [
+        1536,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x864-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        797
+      ],
+      "after_size": [
+        1536,
+        797
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x864-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        1209
+      ],
+      "after_size": [
+        1536,
+        1209
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x864-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        1209
+      ],
+      "after_size": [
+        1536,
+        1209
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        51,
+        1536,
+        197
+      ],
+      "different_pixels": 205799,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-1536x864-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        973
+      ],
+      "after_size": [
+        1536,
+        973
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x864-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        1201
+      ],
+      "after_size": [
+        1536,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x864-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        805
+      ],
+      "after_size": [
+        1536,
+        805
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x740-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        947
+      ],
+      "after_size": [
+        1536,
+        947
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        1536,
+        128
+      ],
+      "different_pixels": 183905,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-1536x740-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        947
+      ],
+      "after_size": [
+        1536,
+        947
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x740-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        764
+      ],
+      "after_size": [
+        1536,
+        764
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x740-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        992
+      ],
+      "after_size": [
+        1536,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x740-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        654
+      ],
+      "after_size": [
+        1536,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x740-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        936
+      ],
+      "after_size": [
+        1536,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x740-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        936
+      ],
+      "after_size": [
+        1536,
+        936
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        1536,
+        123
+      ],
+      "different_pixels": 176719,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-1536x740-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        762
+      ],
+      "after_size": [
+        1536,
+        762
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x740-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        992
+      ],
+      "after_size": [
+        1536,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1536x740-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        679
+      ],
+      "after_size": [
+        1536,
+        679
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1440x900-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1440,
+        1187
+      ],
+      "after_size": [
+        1440,
+        1187
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1440x900-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1440,
+        1187
+      ],
+      "after_size": [
+        1440,
+        1187
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1440x900-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1440,
+        973
+      ],
+      "after_size": [
+        1440,
+        973
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1440x900-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1440,
+        1201
+      ],
+      "after_size": [
+        1440,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1440x900-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1440,
+        797
+      ],
+      "after_size": [
+        1440,
+        797
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        704,
+        140,
+        1384,
+        642
+      ],
+      "different_pixels": 336997,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-1440x900-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1440,
+        1181
+      ],
+      "after_size": [
+        1440,
+        1181
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1440x900-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1440,
+        1181
+      ],
+      "after_size": [
+        1440,
+        1181
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1440x900-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1440,
+        1059
+      ],
+      "after_size": [
+        1440,
+        1059
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1440x900-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1440,
+        1201
+      ],
+      "after_size": [
+        1440,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1440x900-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1440,
+        866
+      ],
+      "after_size": [
+        1440,
+        866
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x768-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        922
+      ],
+      "after_size": [
+        1366,
+        922
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        1366,
+        102
+      ],
+      "different_pixels": 130502,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-1366x768-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        922
+      ],
+      "after_size": [
+        1366,
+        922
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        1366,
+        102
+      ],
+      "different_pixels": 130502,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-1366x768-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        749
+      ],
+      "after_size": [
+        1366,
+        749
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x768-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        992
+      ],
+      "after_size": [
+        1366,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x768-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        654
+      ],
+      "after_size": [
+        1366,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x768-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x768-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x768-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        830
+      ],
+      "after_size": [
+        1366,
+        830
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x768-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        992
+      ],
+      "after_size": [
+        1366,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x768-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        721
+      ],
+      "after_size": [
+        1366,
+        721
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x650-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        922
+      ],
+      "after_size": [
+        1366,
+        922
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x650-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        922
+      ],
+      "after_size": [
+        1366,
+        922
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        15,
+        1366,
+        161
+      ],
+      "different_pixels": 174974,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-1366x650-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        749
+      ],
+      "after_size": [
+        1366,
+        749
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x650-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        992
+      ],
+      "after_size": [
+        1366,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x650-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        654
+      ],
+      "after_size": [
+        1366,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x650-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x650-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x650-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        830
+      ],
+      "after_size": [
+        1366,
+        830
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x650-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        992
+      ],
+      "after_size": [
+        1366,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1366x650-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        721
+      ],
+      "after_size": [
+        1366,
+        721
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x720-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        937
+      ],
+      "after_size": [
+        1280,
+        937
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x720-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        937
+      ],
+      "after_size": [
+        1280,
+        937
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x720-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        738
+      ],
+      "after_size": [
+        1280,
+        738
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x720-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x720-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        654
+      ],
+      "after_size": [
+        1280,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x720-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        933
+      ],
+      "after_size": [
+        1280,
+        933
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        1280,
+        131
+      ],
+      "different_pixels": 152130,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-1280x720-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        933
+      ],
+      "after_size": [
+        1280,
+        933
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x720-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        835
+      ],
+      "after_size": [
+        1280,
+        835
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x720-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x720-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        698
+      ],
+      "after_size": [
+        1280,
+        698
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x600-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        937
+      ],
+      "after_size": [
+        1280,
+        937
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x600-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        937
+      ],
+      "after_size": [
+        1280,
+        937
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x600-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        738
+      ],
+      "after_size": [
+        1280,
+        738
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x600-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x600-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        654
+      ],
+      "after_size": [
+        1280,
+        654
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        737,
+        140,
+        1224,
+        499
+      ],
+      "different_pixels": 171001,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-1280x600-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        933
+      ],
+      "after_size": [
+        1280,
+        933
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x600-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        933
+      ],
+      "after_size": [
+        1280,
+        933
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x600-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        835
+      ],
+      "after_size": [
+        1280,
+        835
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x600-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1280x600-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        698
+      ],
+      "after_size": [
+        1280,
+        698
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1024x768-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1024,
+        1146
+      ],
+      "after_size": [
+        1024,
+        1146
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        68,
+        1024,
+        214
+      ],
+      "different_pixels": 132346,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-1024x768-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1024,
+        1146
+      ],
+      "after_size": [
+        1024,
+        1146
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1024x768-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1024,
+        1326
+      ],
+      "after_size": [
+        1024,
+        1326
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1024x768-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1024,
+        893
+      ],
+      "after_size": [
+        1024,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1024x768-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1024,
+        588
+      ],
+      "after_size": [
+        1024,
+        588
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1024x768-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1024,
+        1153
+      ],
+      "after_size": [
+        1024,
+        1153
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1024x768-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1024,
+        1153
+      ],
+      "after_size": [
+        1024,
+        1153
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1024x768-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1024,
+        1387
+      ],
+      "after_size": [
+        1024,
+        1387
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1024x768-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1024,
+        893
+      ],
+      "after_size": [
+        1024,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-1024x768-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1024,
+        709
+      ],
+      "after_size": [
+        1024,
+        709
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-768x1024-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        768,
+        1072
+      ],
+      "after_size": [
+        768,
+        1072
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-768x1024-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        768,
+        1072
+      ],
+      "after_size": [
+        768,
+        1072
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-768x1024-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        768,
+        1293
+      ],
+      "after_size": [
+        768,
+        1293
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-768x1024-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        768,
+        893
+      ],
+      "after_size": [
+        768,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-768x1024-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        768,
+        1059
+      ],
+      "after_size": [
+        768,
+        1059
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        768,
+        42
+      ],
+      "different_pixels": 27945,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-768x1024-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        768,
+        1097
+      ],
+      "after_size": [
+        768,
+        1097
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-768x1024-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        768,
+        1097
+      ],
+      "after_size": [
+        768,
+        1097
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-768x1024-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        768,
+        1327
+      ],
+      "after_size": [
+        768,
+        1327
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-768x1024-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        768,
+        893
+      ],
+      "after_size": [
+        768,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-768x1024-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        768,
+        1115
+      ],
+      "after_size": [
+        768,
+        1115
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        32,
+        519,
+        720,
+        1027
+      ],
+      "different_pixels": 345265,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-430x932-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        430,
+        993
+      ],
+      "after_size": [
+        430,
+        993
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-430x932-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        430,
+        993
+      ],
+      "after_size": [
+        430,
+        993
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-430x932-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        430,
+        1265
+      ],
+      "after_size": [
+        430,
+        1265
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-430x932-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        430,
+        1259
+      ],
+      "after_size": [
+        430,
+        1259
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-430x932-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        430,
+        750
+      ],
+      "after_size": [
+        430,
+        750
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-430x932-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        430,
+        1006
+      ],
+      "after_size": [
+        430,
+        1006
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-430x932-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        430,
+        1006
+      ],
+      "after_size": [
+        430,
+        1006
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-430x932-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        430,
+        1300
+      ],
+      "after_size": [
+        430,
+        1300
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-430x932-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        430,
+        1283
+      ],
+      "after_size": [
+        430,
+        1283
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-430x932-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        430,
+        792
+      ],
+      "after_size": [
+        430,
+        792
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-390x844-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        390,
+        965
+      ],
+      "after_size": [
+        390,
+        965
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-390x844-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        390,
+        965
+      ],
+      "after_size": [
+        390,
+        965
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-390x844-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        390,
+        1289
+      ],
+      "after_size": [
+        390,
+        1289
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-390x844-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        390,
+        1283
+      ],
+      "after_size": [
+        390,
+        1283
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-390x844-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        390,
+        720
+      ],
+      "after_size": [
+        390,
+        720
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        24,
+        415,
+        350,
+        656
+      ],
+      "different_pixels": 75752,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-390x844-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        390,
+        978
+      ],
+      "after_size": [
+        390,
+        978
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-390x844-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        390,
+        978
+      ],
+      "after_size": [
+        390,
+        978
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-390x844-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        390,
+        1314
+      ],
+      "after_size": [
+        390,
+        1314
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-390x844-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        390,
+        1283
+      ],
+      "after_size": [
+        390,
+        1283
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-390x844-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        390,
+        828
+      ],
+      "after_size": [
+        390,
+        828
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-360x800-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        360,
+        946
+      ],
+      "after_size": [
+        360,
+        946
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        360,
+        94
+      ],
+      "different_pixels": 33774,
+      "max_channel_delta": 245
+    },
+    {
+      "case": "firefox-360x800-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        360,
+        946
+      ],
+      "after_size": [
+        360,
+        946
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        360,
+        94
+      ],
+      "different_pixels": 33774,
+      "max_channel_delta": 245
+    },
+    {
+      "case": "firefox-360x800-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        360,
+        1325
+      ],
+      "after_size": [
+        360,
+        1325
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-360x800-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        360,
+        1281
+      ],
+      "after_size": [
+        360,
+        1281
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-360x800-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        360,
+        724
+      ],
+      "after_size": [
+        360,
+        724
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        20,
+        436,
+        324,
+        660
+      ],
+      "different_pixels": 66154,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-360x800-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        360,
+        958
+      ],
+      "after_size": [
+        360,
+        958
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        360,
+        100
+      ],
+      "different_pixels": 35983,
+      "max_channel_delta": 246
+    },
+    {
+      "case": "firefox-360x800-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        360,
+        958
+      ],
+      "after_size": [
+        360,
+        958
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-360x800-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        360,
+        1354
+      ],
+      "after_size": [
+        360,
+        1354
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-360x800-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        360,
+        1281
+      ],
+      "after_size": [
+        360,
+        1281
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-360x800-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        360,
+        804
+      ],
+      "after_size": [
+        360,
+        804
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        20,
+        516,
+        324,
+        740
+      ],
+      "different_pixels": 65994,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-320x568-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        320,
+        959
+      ],
+      "after_size": [
+        320,
+        959
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-320x568-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        320,
+        959
+      ],
+      "after_size": [
+        320,
+        959
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-320x568-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        320,
+        1318
+      ],
+      "after_size": [
+        320,
+        1318
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-320x568-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        320,
+        1277
+      ],
+      "after_size": [
+        320,
+        1277
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-320x568-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        320,
+        735
+      ],
+      "after_size": [
+        320,
+        735
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        320,
+        671
+      ],
+      "different_pixels": 85093,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "firefox-320x568-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        320,
+        980
+      ],
+      "after_size": [
+        320,
+        980
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-320x568-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        320,
+        980
+      ],
+      "after_size": [
+        320,
+        980
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-320x568-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        320,
+        1365
+      ],
+      "after_size": [
+        320,
+        1365
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-320x568-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        320,
+        1301
+      ],
+      "after_size": [
+        320,
+        1301
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-320x568-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        320,
+        773
+      ],
+      "after_size": [
+        320,
+        773
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        0,
+        320,
+        123
+      ],
+      "different_pixels": 37173,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-844x390-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-844x390-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-844x390-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        844,
+        1285
+      ],
+      "after_size": [
+        844,
+        1285
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-844x390-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        844,
+        893
+      ],
+      "after_size": [
+        844,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-844x390-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        844,
+        1067
+      ],
+      "after_size": [
+        844,
+        1067
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        218,
+        844,
+        364
+      ],
+      "different_pixels": 107744,
+      "max_channel_delta": 252
+    },
+    {
+      "case": "firefox-844x390-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-844x390-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-844x390-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        844,
+        1335
+      ],
+      "after_size": [
+        844,
+        1335
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-844x390-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        844,
+        893
+      ],
+      "after_size": [
+        844,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "firefox-844x390-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        844,
+        1123
+      ],
+      "after_size": [
+        844,
+        1123
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        0,
+        246,
+        844,
+        392
+      ],
+      "different_pixels": 109498,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "webkit-2560x1440-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        2560,
+        1285
+      ],
+      "after_size": [
+        2560,
+        1285
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-2560x1440-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        2560,
+        1285
+      ],
+      "after_size": [
+        2560,
+        1285
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-2560x1440-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        2560,
+        975
+      ],
+      "after_size": [
+        2560,
+        975
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-2560x1440-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        2560,
+        1201
+      ],
+      "after_size": [
+        2560,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-2560x1440-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        2560,
+        871
+      ],
+      "after_size": [
+        2560,
+        871
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-2560x1440-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        2560,
+        1309
+      ],
+      "after_size": [
+        2560,
+        1309
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-2560x1440-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        2560,
+        1309
+      ],
+      "after_size": [
+        2560,
+        1309
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-2560x1440-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        2560,
+        1013
+      ],
+      "after_size": [
+        2560,
+        1013
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-2560x1440-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        2560,
+        1201
+      ],
+      "after_size": [
+        2560,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-2560x1440-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        2560,
+        871
+      ],
+      "after_size": [
+        2560,
+        871
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1920x1080-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1920,
+        1285
+      ],
+      "after_size": [
+        1920,
+        1285
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1920x1080-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1920,
+        1285
+      ],
+      "after_size": [
+        1920,
+        1285
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1920x1080-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1920,
+        973
+      ],
+      "after_size": [
+        1920,
+        973
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1920x1080-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1920,
+        1201
+      ],
+      "after_size": [
+        1920,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1920x1080-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1920,
+        871
+      ],
+      "after_size": [
+        1920,
+        871
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1920x1080-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1920,
+        1309
+      ],
+      "after_size": [
+        1920,
+        1309
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1920x1080-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1920,
+        1309
+      ],
+      "after_size": [
+        1920,
+        1309
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1920x1080-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1920,
+        1007
+      ],
+      "after_size": [
+        1920,
+        1007
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1920x1080-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1920,
+        1201
+      ],
+      "after_size": [
+        1920,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1920x1080-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1920,
+        871
+      ],
+      "after_size": [
+        1920,
+        871
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x864-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        1210
+      ],
+      "after_size": [
+        1536,
+        1210
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x864-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        1210
+      ],
+      "after_size": [
+        1536,
+        1210
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x864-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        973
+      ],
+      "after_size": [
+        1536,
+        973
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x864-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        1201
+      ],
+      "after_size": [
+        1536,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x864-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        797
+      ],
+      "after_size": [
+        1536,
+        797
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x864-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        1209
+      ],
+      "after_size": [
+        1536,
+        1209
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x864-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        1209
+      ],
+      "after_size": [
+        1536,
+        1209
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x864-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        973
+      ],
+      "after_size": [
+        1536,
+        973
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x864-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        1201
+      ],
+      "after_size": [
+        1536,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x864-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        805
+      ],
+      "after_size": [
+        1536,
+        805
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x740-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        947
+      ],
+      "after_size": [
+        1536,
+        947
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x740-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        947
+      ],
+      "after_size": [
+        1536,
+        947
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x740-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        764
+      ],
+      "after_size": [
+        1536,
+        764
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x740-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        992
+      ],
+      "after_size": [
+        1536,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x740-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        654
+      ],
+      "after_size": [
+        1536,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x740-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1536,
+        936
+      ],
+      "after_size": [
+        1536,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x740-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1536,
+        936
+      ],
+      "after_size": [
+        1536,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x740-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1536,
+        762
+      ],
+      "after_size": [
+        1536,
+        762
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x740-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1536,
+        992
+      ],
+      "after_size": [
+        1536,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1536x740-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1536,
+        679
+      ],
+      "after_size": [
+        1536,
+        679
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1440x900-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1440,
+        1187
+      ],
+      "after_size": [
+        1440,
+        1187
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1440x900-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1440,
+        1187
+      ],
+      "after_size": [
+        1440,
+        1187
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1440x900-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1440,
+        974
+      ],
+      "after_size": [
+        1440,
+        974
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1440x900-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1440,
+        1201
+      ],
+      "after_size": [
+        1440,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1440x900-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1440,
+        797
+      ],
+      "after_size": [
+        1440,
+        797
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1440x900-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1440,
+        1181
+      ],
+      "after_size": [
+        1440,
+        1181
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1440x900-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1440,
+        1181
+      ],
+      "after_size": [
+        1440,
+        1181
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1440x900-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1440,
+        1059
+      ],
+      "after_size": [
+        1440,
+        1059
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1440x900-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1440,
+        1201
+      ],
+      "after_size": [
+        1440,
+        1201
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1440x900-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1440,
+        866
+      ],
+      "after_size": [
+        1440,
+        866
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x768-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        923
+      ],
+      "after_size": [
+        1366,
+        923
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x768-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        923
+      ],
+      "after_size": [
+        1366,
+        923
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x768-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        749
+      ],
+      "after_size": [
+        1366,
+        749
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x768-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        992
+      ],
+      "after_size": [
+        1366,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x768-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        654
+      ],
+      "after_size": [
+        1366,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x768-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x768-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x768-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        829
+      ],
+      "after_size": [
+        1366,
+        829
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x768-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        993
+      ],
+      "after_size": [
+        1366,
+        993
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x768-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        720
+      ],
+      "after_size": [
+        1366,
+        720
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x650-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        923
+      ],
+      "after_size": [
+        1366,
+        923
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x650-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        923
+      ],
+      "after_size": [
+        1366,
+        923
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x650-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        749
+      ],
+      "after_size": [
+        1366,
+        749
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x650-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        992
+      ],
+      "after_size": [
+        1366,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x650-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        654
+      ],
+      "after_size": [
+        1366,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x650-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x650-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1366,
+        942
+      ],
+      "after_size": [
+        1366,
+        942
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x650-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1366,
+        829
+      ],
+      "after_size": [
+        1366,
+        829
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x650-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1366,
+        993
+      ],
+      "after_size": [
+        1366,
+        993
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1366x650-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1366,
+        720
+      ],
+      "after_size": [
+        1366,
+        720
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x720-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        936
+      ],
+      "after_size": [
+        1280,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x720-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        936
+      ],
+      "after_size": [
+        1280,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x720-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        739
+      ],
+      "after_size": [
+        1280,
+        739
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x720-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x720-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        654
+      ],
+      "after_size": [
+        1280,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x720-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        934
+      ],
+      "after_size": [
+        1280,
+        934
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x720-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        934
+      ],
+      "after_size": [
+        1280,
+        934
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x720-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        834
+      ],
+      "after_size": [
+        1280,
+        834
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x720-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x720-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        698
+      ],
+      "after_size": [
+        1280,
+        698
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x600-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        936
+      ],
+      "after_size": [
+        1280,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x600-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        936
+      ],
+      "after_size": [
+        1280,
+        936
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x600-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        739
+      ],
+      "after_size": [
+        1280,
+        739
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x600-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x600-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        654
+      ],
+      "after_size": [
+        1280,
+        654
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x600-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1280,
+        934
+      ],
+      "after_size": [
+        1280,
+        934
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x600-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1280,
+        934
+      ],
+      "after_size": [
+        1280,
+        934
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x600-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1280,
+        834
+      ],
+      "after_size": [
+        1280,
+        834
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x600-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1280,
+        992
+      ],
+      "after_size": [
+        1280,
+        992
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1280x600-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1280,
+        698
+      ],
+      "after_size": [
+        1280,
+        698
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1024x768-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1024,
+        1146
+      ],
+      "after_size": [
+        1024,
+        1146
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1024x768-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1024,
+        1146
+      ],
+      "after_size": [
+        1024,
+        1146
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1024x768-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1024,
+        1326
+      ],
+      "after_size": [
+        1024,
+        1326
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1024x768-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1024,
+        893
+      ],
+      "after_size": [
+        1024,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1024x768-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1024,
+        589
+      ],
+      "after_size": [
+        1024,
+        589
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1024x768-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        1024,
+        1154
+      ],
+      "after_size": [
+        1024,
+        1154
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1024x768-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        1024,
+        1154
+      ],
+      "after_size": [
+        1024,
+        1154
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1024x768-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        1024,
+        1386
+      ],
+      "after_size": [
+        1024,
+        1386
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1024x768-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        1024,
+        893
+      ],
+      "after_size": [
+        1024,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-1024x768-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        1024,
+        709
+      ],
+      "after_size": [
+        1024,
+        709
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-768x1024-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        768,
+        1072
+      ],
+      "after_size": [
+        768,
+        1072
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-768x1024-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        768,
+        1072
+      ],
+      "after_size": [
+        768,
+        1072
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-768x1024-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        768,
+        1292
+      ],
+      "after_size": [
+        768,
+        1292
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-768x1024-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        768,
+        893
+      ],
+      "after_size": [
+        768,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-768x1024-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        768,
+        1059
+      ],
+      "after_size": [
+        768,
+        1059
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-768x1024-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        768,
+        1097
+      ],
+      "after_size": [
+        768,
+        1097
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-768x1024-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        768,
+        1097
+      ],
+      "after_size": [
+        768,
+        1097
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-768x1024-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        768,
+        1327
+      ],
+      "after_size": [
+        768,
+        1327
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-768x1024-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        768,
+        893
+      ],
+      "after_size": [
+        768,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-768x1024-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        768,
+        1116
+      ],
+      "after_size": [
+        768,
+        1116
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-430x932-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        430,
+        993
+      ],
+      "after_size": [
+        430,
+        993
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-430x932-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        430,
+        993
+      ],
+      "after_size": [
+        430,
+        993
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-430x932-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        430,
+        1265
+      ],
+      "after_size": [
+        430,
+        1265
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-430x932-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        430,
+        1259
+      ],
+      "after_size": [
+        430,
+        1259
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-430x932-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        430,
+        750
+      ],
+      "after_size": [
+        430,
+        750
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-430x932-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        430,
+        1006
+      ],
+      "after_size": [
+        430,
+        1006
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-430x932-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        430,
+        1006
+      ],
+      "after_size": [
+        430,
+        1006
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-430x932-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        430,
+        1300
+      ],
+      "after_size": [
+        430,
+        1300
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-430x932-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        430,
+        1283
+      ],
+      "after_size": [
+        430,
+        1283
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-430x932-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        430,
+        792
+      ],
+      "after_size": [
+        430,
+        792
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-390x844-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        390,
+        965
+      ],
+      "after_size": [
+        390,
+        965
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-390x844-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        390,
+        965
+      ],
+      "after_size": [
+        390,
+        965
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-390x844-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        390,
+        1289
+      ],
+      "after_size": [
+        390,
+        1289
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-390x844-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        390,
+        1283
+      ],
+      "after_size": [
+        390,
+        1283
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-390x844-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        390,
+        720
+      ],
+      "after_size": [
+        390,
+        720
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-390x844-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        390,
+        977
+      ],
+      "after_size": [
+        390,
+        977
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-390x844-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        390,
+        977
+      ],
+      "after_size": [
+        390,
+        977
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-390x844-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        390,
+        1315
+      ],
+      "after_size": [
+        390,
+        1315
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-390x844-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        390,
+        1282
+      ],
+      "after_size": [
+        390,
+        1282
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-390x844-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        390,
+        829
+      ],
+      "after_size": [
+        390,
+        829
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-360x800-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        360,
+        946
+      ],
+      "after_size": [
+        360,
+        946
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-360x800-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        360,
+        946
+      ],
+      "after_size": [
+        360,
+        946
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-360x800-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        360,
+        1325
+      ],
+      "after_size": [
+        360,
+        1325
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-360x800-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        360,
+        1281
+      ],
+      "after_size": [
+        360,
+        1281
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-360x800-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        360,
+        724
+      ],
+      "after_size": [
+        360,
+        724
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-360x800-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        360,
+        958
+      ],
+      "after_size": [
+        360,
+        958
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-360x800-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        360,
+        958
+      ],
+      "after_size": [
+        360,
+        958
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-360x800-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        360,
+        1354
+      ],
+      "after_size": [
+        360,
+        1354
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-360x800-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        360,
+        1281
+      ],
+      "after_size": [
+        360,
+        1281
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-360x800-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        360,
+        805
+      ],
+      "after_size": [
+        360,
+        805
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-320x568-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        320,
+        959
+      ],
+      "after_size": [
+        320,
+        959
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-320x568-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        320,
+        959
+      ],
+      "after_size": [
+        320,
+        959
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-320x568-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        320,
+        1318
+      ],
+      "after_size": [
+        320,
+        1318
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-320x568-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        320,
+        1277
+      ],
+      "after_size": [
+        320,
+        1277
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-320x568-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        320,
+        735
+      ],
+      "after_size": [
+        320,
+        735
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-320x568-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        320,
+        980
+      ],
+      "after_size": [
+        320,
+        980
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-320x568-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        320,
+        980
+      ],
+      "after_size": [
+        320,
+        980
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-320x568-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        320,
+        1365
+      ],
+      "after_size": [
+        320,
+        1365
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-320x568-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        320,
+        1300
+      ],
+      "after_size": [
+        320,
+        1300
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-320x568-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        320,
+        772
+      ],
+      "after_size": [
+        320,
+        772
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-844x390-en",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-844x390-en",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-844x390-en",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        844,
+        1285
+      ],
+      "after_size": [
+        844,
+        1285
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-844x390-en",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        844,
+        893
+      ],
+      "after_size": [
+        844,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-844x390-en",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        844,
+        1067
+      ],
+      "after_size": [
+        844,
+        1067
+      ],
+      "equivalent": false,
+      "difference_bounds": [
+        66,
+        465,
+        762,
+        978
+      ],
+      "different_pixels": 353460,
+      "max_channel_delta": 255
+    },
+    {
+      "case": "webkit-844x390-ru",
+      "section": "#how-it-works",
+      "end": false,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-844x390-ru",
+      "section": "#how-it-works",
+      "end": true,
+      "before_size": [
+        844,
+        1103
+      ],
+      "after_size": [
+        844,
+        1103
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-844x390-ru",
+      "section": "#use-cases",
+      "end": false,
+      "before_size": [
+        844,
+        1334
+      ],
+      "after_size": [
+        844,
+        1334
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-844x390-ru",
+      "section": "#data",
+      "end": false,
+      "before_size": [
+        844,
+        893
+      ],
+      "after_size": [
+        844,
+        893
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    },
+    {
+      "case": "webkit-844x390-ru",
+      "section": "#api",
+      "end": false,
+      "before_size": [
+        844,
+        1123
+      ],
+      "after_size": [
+        844,
+        1123
+      ],
+      "equivalent": true,
+      "difference_bounds": null
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 # Work state
 
+## Current continuation — accepted R12 technical cleanup, 2026-10-06
+
+The owner accepts R12 55b1f3f as the visual base and authorizes only test/responsive-core-r12. Read REVIEW-R12-CLEANUP.md first. Three component CSS files consolidate duplicate and overridden rules; no typography, wrapping, CTA, composition, responsive state, Step scale, renderer, dependency or asset changes. No patch stylesheet. All 480 screenshot pairs are pixel-identical across the complete 96-case EN/RU/three-engine matrix; 126 integer/fractional container-boundary checks have zero differences. Local unchanged suite passes 379 cases initially and its five failed cases pass a separate one-worker repeat; initial reports/traces are preserved. Fresh locked-browser CI and the new isolated preview are recorded in draft PR #13 against the pushed cleanup commit. Do not merge, deploy Pages or change main (7951f19).
+
 ## Current comparison — R12, 2026-10-06
 
 The owner rejected PR #12's height adaptation and requires two independent versions with main untouched. Read REVIEW-R12.md first. Baseline branch compare/pre-height-r10 fully reverts main merge 7951f19; its complete tree exactly equals 92badd2. R12 branch test/responsive-core-r12 starts strictly from that rollback. Keep heading breaks, typography, CTA direction and source composition. Four component CSS files consolidate the prior cascade, use named container queries and one short-desktop spacing/media density state; long sections remain in natural flow. Five newly supplied GSAP carousel scenes are authorized, lazy and motion-only; browser SVG viewBox handles scaling without a layout observer. R10 entrance/search and original visual engines are unchanged.

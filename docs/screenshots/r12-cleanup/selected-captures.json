@@ -1,0 +1,114 @@
+[
+  {
+    "case": "chromium-2560x1440-en",
+    "section": "#use-cases",
+    "end": false,
+    "version": "before",
+    "file": "chromium-2560x1440-en-use-cases-before.png",
+    "sha256": "231a1b7b2f54dbdbb0a68badd606d9fb79db47f7ebf552a018b3b7ebcda1da6e"
+  },
+  {
+    "case": "chromium-2560x1440-en",
+    "section": "#use-cases",
+    "end": false,
+    "version": "after",
+    "file": "chromium-2560x1440-en-use-cases-after.png",
+    "sha256": "231a1b7b2f54dbdbb0a68badd606d9fb79db47f7ebf552a018b3b7ebcda1da6e"
+  },
+  {
+    "case": "chromium-1536x740-ru",
+    "section": "#data",
+    "end": false,
+    "version": "before",
+    "file": "chromium-1536x740-ru-data-before.png",
+    "sha256": "ed07952102b30b9c63c6aa9796751bcdc8deac39d8548ce1c10393e42692d1b3"
+  },
+  {
+    "case": "chromium-1536x740-ru",
+    "section": "#data",
+    "end": false,
+    "version": "after",
+    "file": "chromium-1536x740-ru-data-after.png",
+    "sha256": "ed07952102b30b9c63c6aa9796751bcdc8deac39d8548ce1c10393e42692d1b3"
+  },
+  {
+    "case": "chromium-1280x600-en",
+    "section": "#how-it-works",
+    "end": false,
+    "version": "before",
+    "file": "chromium-1280x600-en-how-it-works-before.png",
+    "sha256": "09886f354157b6fe8e11898c0a68e954df3b014407e2dfe4727bf2dacb16af34"
+  },
+  {
+    "case": "chromium-1280x600-en",
+    "section": "#how-it-works",
+    "end": false,
+    "version": "after",
+    "file": "chromium-1280x600-en-how-it-works-after.png",
+    "sha256": "09886f354157b6fe8e11898c0a68e954df3b014407e2dfe4727bf2dacb16af34"
+  },
+  {
+    "case": "firefox-768x1024-ru",
+    "section": "#api",
+    "end": false,
+    "version": "before",
+    "file": "firefox-768x1024-ru-api-before.png",
+    "sha256": "67644270b18c4e8177fda21ec42a1063f3209d37b4721db13c099b9a11bfaba9"
+  },
+  {
+    "case": "firefox-768x1024-ru",
+    "section": "#api",
+    "end": false,
+    "version": "after",
+    "file": "firefox-768x1024-ru-api-after.png",
+    "sha256": "67644270b18c4e8177fda21ec42a1063f3209d37b4721db13c099b9a11bfaba9"
+  },
+  {
+    "case": "firefox-390x844-en",
+    "section": "#api",
+    "end": false,
+    "version": "before",
+    "file": "firefox-390x844-en-api-before.png",
+    "sha256": "e04739e75a7e42856c529f5d2b2c924804ccab61b2f3bdee29e3417d7d3506dd"
+  },
+  {
+    "case": "firefox-390x844-en",
+    "section": "#api",
+    "end": false,
+    "version": "after",
+    "file": "firefox-390x844-en-api-after.png",
+    "sha256": "e04739e75a7e42856c529f5d2b2c924804ccab61b2f3bdee29e3417d7d3506dd"
+  },
+  {
+    "case": "webkit-320x568-ru",
+    "section": "#data",
+    "end": false,
+    "version": "before",
+    "file": "webkit-320x568-ru-data-before.png",
+    "sha256": "3b7661141c45c4889ed77de374d2c0c342cd14610471c48c84dd775771e1b5bc"
+  },
+  {
+    "case": "webkit-320x568-ru",
+    "section": "#data",
+    "end": false,
+    "version": "after",
+    "file": "webkit-320x568-ru-data-after.png",
+    "sha256": "3b7661141c45c4889ed77de374d2c0c342cd14610471c48c84dd775771e1b5bc"
+  },
+  {
+    "case": "webkit-844x390-en",
+    "section": "#how-it-works",
+    "end": true,
+    "version": "before",
+    "file": "webkit-844x390-en-how-it-works-end-before.png",
+    "sha256": "07350ddd3e9049113a3a2106ba61bdf50bec7f9118e1e62b4f48834860c0305c"
+  },
+  {
+    "case": "webkit-844x390-en",
+    "section": "#how-it-works",
+    "end": true,
+    "version": "after",
+    "file": "webkit-844x390-en-how-it-works-end-after.png",
+    "sha256": "07350ddd3e9049113a3a2106ba61bdf50bec7f9118e1e62b4f48834860c0305c"
+  }
+]
