@@ -5,7 +5,7 @@ import { revealHeader, selectLanguage } from './helpers/locale';
 async function visit(page: Page, width = 1440) {
   await page.setViewportSize({ width, height: 1000 });
   await page.goto('./?lang=en', { waitUntil: 'networkidle' });
-  await expect(page.locator('html')).toHaveAttribute('data-locale-layout', 'ready');
+  await page.evaluate(() => document.fonts.ready);
 }
 
 const readingGeometry = (page: Page) =>
@@ -20,32 +20,59 @@ const readingGeometry = (page: Page) =>
       }),
     );
 
-for (const width of [320, 390, 768, 1440, 1920]) {
-  test(`R8 stable language geometry and readable layout at ${width}px`, async ({ page }, info) => {
+for (const width of [320, 390, 768, 1200, 1440, 1920]) {
+  test(`language content determines natural dimensions and remains readable at ${width}px`, async ({
+    page,
+  }, info) => {
     await visit(page, width);
     const before = await readingGeometry(page);
+    const englishActionWidth = (await page
+      .locator('.hero-actions .double-button')
+      .first()
+      .boundingBox())!.width;
     expect(before.length).toBeGreaterThanOrEqual(7);
     for (const language of ['ru', 'en'] as const) {
       await selectLanguage(page, language);
       await expect(page.locator('html')).toHaveAttribute('lang', language);
       await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
       const after = await readingGeometry(page);
-      for (const [index, rect] of after.entries()) {
-        expect(
-          Math.abs(rect.left - before[index].left),
-          `left of item ${index}`,
-        ).toBeLessThanOrEqual(1);
-        expect(
-          Math.abs(rect.width - before[index].width),
-          `width of item ${index}`,
-        ).toBeLessThanOrEqual(1);
-        expect(Math.abs(rect.top - before[index].top), `top of item ${index}`).toBeLessThanOrEqual(
-          1,
-        );
-        expect(
-          Math.abs(rect.height - before[index].height),
-          `height of item ${index}`,
-        ).toBeLessThanOrEqual(1);
+      // Longer copy may change the layout. Returning to English must release all extra space.
+      if (language === 'en') {
+        for (const [index, rect] of after.entries()) {
+          for (const dimension of ['left', 'top', 'width', 'height'] as const)
+            expect(
+              Math.abs(rect[dimension] - before[index][dimension]),
+              `${dimension} of item ${index} after returning to English`,
+            ).toBeLessThanOrEqual(1);
+        }
+      }
+      if (width >= 600) {
+        const actionSizes = await page
+          .locator('.hero-actions .double-button')
+          .evaluateAll((nodes) =>
+            nodes.map((node) => {
+              const label = node.querySelector('.double-button__label')!;
+              const text = label.querySelector('.locale-text')!;
+              const style = getComputedStyle(label);
+              const contentWidth = text.getBoundingClientRect().width;
+              const padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+              const icon = node
+                .querySelector('.double-button__icon')!
+                .getBoundingClientRect().width;
+              return {
+                width: node.getBoundingClientRect().width,
+                expected: contentWidth + padding + icon,
+              };
+            }),
+          );
+        for (const { width, expected } of actionSizes)
+          expect(Math.abs(width - expected), 'button fits its current label').toBeLessThanOrEqual(
+            1,
+          );
+        if (language === 'ru') {
+          // The first hero action has a substantially longer Russian label.
+          expect(actionSizes[0].width).toBeGreaterThan(englishActionWidth + 10);
+        }
       }
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
         width + 1,
@@ -93,7 +120,7 @@ for (const width of [320, 390, 768, 1440, 1920]) {
 }
 
 for (const width of [390, 1440]) {
-  test(`R8 expanded FAQ retains disclosure and reading geometry at ${width}px`, async ({
+  test(`expanded FAQ retains disclosure and reflows its current language at ${width}px`, async ({
     page,
   }) => {
     await visit(page, width);
@@ -113,11 +140,19 @@ for (const width of [390, 1440]) {
       await selectLanguage(page, language);
       await expect(page.locator('html')).toHaveAttribute('lang', language);
       await expect(detail).toHaveAttribute('open', '');
-      const after = await geometry();
-      after.forEach((rect, index) => {
-        expect(Math.abs(rect.top - before[index].top)).toBeLessThanOrEqual(1);
-        expect(Math.abs(rect.height - before[index].height)).toBeLessThanOrEqual(1);
-      });
+      await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
+      const answer = detail.locator('.faq-answer');
+      const text = detail.locator('.faq-answer p');
+      const answerBox = (await answer.boundingBox())!;
+      const textBox = (await text.boundingBox())!;
+      expect(textBox.y + textBox.height).toBeLessThanOrEqual(answerBox.y + answerBox.height + 1);
+      if (language === 'en') {
+        const after = await geometry();
+        after.forEach((rect, index) => {
+          expect(Math.abs(rect.top - before[index].top)).toBeLessThanOrEqual(1);
+          expect(Math.abs(rect.height - before[index].height)).toBeLessThanOrEqual(1);
+        });
+      }
     }
   });
 

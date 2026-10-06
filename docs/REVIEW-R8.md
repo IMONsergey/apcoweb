@@ -1,5 +1,7 @@
 # R8 — responsive refinements and quiet interaction
 
+Historical release: R9 explicitly removes item 10's maximum EN/RU size reservation and shared header geometry. See REVIEW-R9.md for the active layout contract; other R8 refinements remain in place.
+
 Owner request: 2026-10-05, eight supplied screenshots and `apcosys-api-widget (1).zip`. Baseline is the published R7 main merge `d7bbda47e2162808ddf29cf9da8762f0c5aa52d2`.
 
 ## Resulting behavior

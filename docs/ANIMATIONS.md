@@ -31,9 +31,9 @@ The contextual billing panel is non-modal, stays in logical keyboard order befor
 
 ## R8 behavior
 
-- Locale changes use a 100 ms fade-out and 220 ms fade-in on real inline text. An offscreen alternate-language sizing pass reserves heading/paragraph heights and action/navigation widths after fonts load and after viewport-width changes. Sections do not scale or translate. Reduced motion changes copy immediately.
+- Locale changes use a 100 ms fade-out and 220 ms fade-in on real inline text. R8 originally reserved maximum EN/RU sizes; R9 removes that behavior at the owner's request. Displayed copy now reflows naturally, without transformed sections or alternate-language measurement. Reduced motion changes copy immediately.
 - The fixed header follows scroll direction with a 12 px noise threshold, shows at the page top and stays visible for open navigation or keyboard focus. The compact row is 72 px, or 64 px on phones. Native anchor clearance uses the compact height.
-- A white, nonblocking page wash releases after initial sizing, with a 220 ms upper limit; decorative layers enter with a short opacity fade. Reduced motion bypasses both.
+- A white, nonblocking page wash releases after font preparation, with a 220 ms upper limit; decorative layers enter with a short opacity fade. Reduced motion bypasses both.
 - Audience contours are displayed at 93% of their previous size. Their source renderers remain unchanged.
 - Footer underlines grow from left to right on hover or keyboard focus; press feedback is scoped to actual controls.
 - The owner-supplied `api-developer-demo` is isolated in shadow DOM, inert and decorative. It loads within 280 px of the viewport. Its original 30.2 s GSAP sequence pauses offscreen or when the document is hidden, uses a static response for reduced motion, and reverts its context and disposes observers/listeners on unmount. It never sends a live API request or writes the clipboard.

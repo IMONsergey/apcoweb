@@ -4,6 +4,8 @@ This is the React/TypeScript marketing website, not the authenticated SaaS appli
 
 ## Read first
 
+- docs/REVIEW-R9.md: owner-requested removal of R8's shared locale sizing. Active text determines native dimensions; width/height may change on language selection. This overrides the stable EN/RU geometry requirements below.
+
 - docs/REVIEW-R8.md: compact directional header, stable EN/RU text geometry, supplied API demo and responsive refinements. R8 replaces the R6 section-layout morph; preserve native inline wrapping and all other released interactions. GSAP is authorized only for the uploaded API demo.
 
 - docs/REVIEW-R7.md: sticky header, anchor clearance and shared EN/RU typography. This extends R6; retain its quiet language morph and flags.
@@ -26,6 +28,7 @@ This is the React/TypeScript marketing website, not the authenticated SaaS appli
 
 ## Rules
 
+- Size translated elements from the active language's content and normal responsive CSS. Never measure other translations or reserve their maximum dimensions in the current language. Preserve layout reflow, the quiet text fade and existing UI state.
 - Preserve the two-part button: a single link/button with a separate-looking arrow segment; one tab stop.
 - Preserve the exact search scene and its progressive blur. Do not replace it with an unrelated dashboard.
 - Mobile SaaS insertions come from the prepared saas mobile page; do not redraw them.

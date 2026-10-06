@@ -1,6 +1,12 @@
 # Work state
 
-## Current continuation — R8, 2026-10-05
+## Current continuation — R9, 2026-10-06
+
+The owner explicitly rejected R8's maximum EN/RU size reservation. R9 removes the hidden alternate-language measurement tree, all generated minimum sizes and the fixed/shared header geometry added for it. Native CSS sizes the displayed language; widths, heights and section positions may differ between locales. Read REVIEW-R9.md first. Retain quiet opacity changes, query/billing/FAQ state, compact directional header, small language menu, larger wide-screen text, 93% audience artwork, footer underline, compact search wording, page wash and the supplied API demo. Existing R8 stability assertions are replaced by natural-width and return-to-English checks. R8 and earlier review evidence below remain historical, not the current sizing contract.
+
+Local static/build gates pass; the final supplemental cached-Chromium suite passes 96/96 and all 16 manual EN/RU viewport checks have no measured overflow or runtime errors. Exact locked three-engine and published-site outcomes are recorded in the release PR/Actions; do not equate the cached local browser with the locked CI engines. REVIEW-R9.md, QA-RESULTS.md and screenshots/r9/ retain the correction and inspected evidence.
+
+## Historical R8, 2026-10-05
 
 R8 extends the published R7 main merge `d7bbda47e2162808ddf29cf9da8762f0c5aa52d2`. Read REVIEW-R8.md first. The requested refinements cover large-screen text, eight supplied screenshot issues, the supplied API demo, a compact directional header and stable locale geometry. R8 removes whole-section locale transforms; use native inline text with reserved EN/RU sizes. GSAP 3.13.0 is explicitly authorized for the uploaded API demo and must remain lazy. Prices, source artwork and six previous rendering/data modules are preserved. Release checks and the post-fix audit are recorded separately in REVIEW-R8.md and AUDIT-R8.md when complete.
 
