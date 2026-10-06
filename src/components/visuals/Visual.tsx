@@ -39,4 +39,74 @@ export function Visual({
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(eager);
   const { paused } = useMotion();
-  const compactMotion = u¶»§q«^
+  const compactMotion = useMediaQuery('(max-width: 899px), (pointer: coarse)');
+  useEffect(() => {
+    if (mounted || !ref.current) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setMounted(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: '240px' },
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, [mounted]);
+  return (
+    <div ref={ref} className={`visual visual--${kind} ${className}`} aria-hidden="true">
+      <VisualBoundary
+        onReady={onReady}
+        fallback={onReady && <div className={`visual-fallback visual-fallback--${kind}`} />}
+      >
+        <Suspense fallback={null}>
+          {mounted &&
+            (kind === 'flow' ? (
+              <Flow
+                speed={1}
+                strength={1}
+                fps={compactMotion ? 24 : 30}
+                resolution={compactMotion ? 160 : 192}
+                paused={paused}
+                onReady={onReady}
+              />
+            ) : kind === 'waves' ? (
+              <Waves speed={0.7} paused={paused} />
+            ) : kind === 'globe' ? (
+              <Globe
+                renderer={paused ? 'canvas2d' : 'auto'}
+                speed={0.85}
+                fps={compactMotion ? 24 : 30}
+                pixelRatio={compactMotion ? 1 : 1.5}
+                paused={paused}
+                interactive={!paused && !compactMotion}
+              />
+            ) : kind === 'dots' ? (
+              <Dots
+                overlay
+                direction={direction}
+                fps={compactMotion ? 24 : 30}
+                startOpacity={0.28}
+                endOpacity={0.015}
+                interactive={!paused && !compactMotion}
+                onReady={onReady}
+              />
+            ) : (
+              <Shape
+                kind={kind === 'rings' ? 'echo' : 'rosette'}
+                color="#121314"
+                opacity={0.42}
+                speed={0.75}
+                strength={0.65}
+                strokeWidth={1.35}
+                paused={paused}
+                interactive={!paused && !compactMotion}
+                fps={compactMotion ? 24 : 30}
+              />
+            ))}
+        </Suspense>
+      </VisualBoundary>
+    </div>
+  );
+}

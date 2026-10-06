@@ -64,4 +64,48 @@ html {
   }
   /* 16px avoids automatic iOS input zoom without disabling browser zoom. */
   .search-scene .search-form input {
-   ¶»§q«^
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-spinner,
+  .search-form .search-clear {
+    animation: none;
+  }
+  .plan-card {
+    transition: none;
+  }
+  .double-button:active .double-button__icon svg {
+    transform: none;
+  }
+}
+@media (min-width: 600px) and (max-width: 1199px) {
+  .search-scene .search-form input {
+    font-size: 16px;
+  }
+}
+
+.hero-title__line {
+  display: block;
+}
+@media (max-width: 599px) {
+  .hero-title__line {
+    text-wrap: balance;
+  }
+}
+
+
+/* Increase hit areas without enlarging the visible artwork. */
+.brand {
+  padding-block: 9px;
+  margin-block: -9px;
+}
+@media (pointer: coarse) {
+  .search-submit {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .search-form {
+    min-height: 44px;
+  }
+}

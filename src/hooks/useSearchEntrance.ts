@@ -33,4 +33,38 @@ export function useSearchEntrance() {
       const toolbarBottoms = ['.search-chrome__filters', '.search-chrome__account'].map(
         (selector) =>
           (element.querySelector(selector)?.getBoundingClientRect().bottom ?? sceneBox.top) +
-          window.scr¶»§q«^
+          window.scrollY,
+      );
+      const safeTop = Math.max(sceneTop + 24, ...toolbarBottoms) + 8;
+      const bottomSpace = window.innerWidth < 1200 ? 64 : 24;
+      // Keep clear of the mockup toolbar. Short screens keep their natural composition.
+      lift =
+        !reduced && window.innerWidth >= 900 && safeTop + box.height + bottomSpace <= viewport
+          ? Math.max(
+              0,
+              Math.min(naturalTop - safeTop, naturalTop + box.height + bottomSpace - viewport),
+            )
+          : 0;
+      settle = Math.max(180, sceneTop - 160);
+      render();
+    };
+    const resize = new ResizeObserver(measure);
+    resize.observe(element);
+    resize.observe(content);
+    window.addEventListener('resize', measure);
+    window.addEventListener('scroll', schedule, { passive: true });
+    measure();
+    void document.fonts.ready.then(() => {
+      if (!disposed) measure();
+    });
+    return () => {
+      disposed = true;
+      cancelAnimationFrame(frame);
+      resize.disconnect();
+      window.removeEventListener('resize', measure);
+      window.removeEventListener('scroll', schedule);
+      content.style.removeProperty('--search-lift');
+    };
+  }, [reduced]);
+  return scene;
+}
