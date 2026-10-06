@@ -64,32 +64,4 @@ html {
   }
   /* 16px avoids automatic iOS input zoom without disabling browser zoom. */
   .search-scene .search-form input {
-    font-size: 16px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .search-spinner,
-  .search-form .search-clear {
-    animation: none;
-  }
-  .plan-card {
-    transition: none;
-  }
-  .double-button:active .double-button__icon svg {
-    transform: none;
-  }
-}
-@media (min-width: 600px) and (max-width: 1199px) {
-  .search-scene .search-form input {
-    font-size: 16px;
-  }
-}
-
-.hero-title__line {
-  display: block;
-}
-@media (max-width: 599px) {
-  .hero-title__line {
-    text-wrap: balance;
-  }
-}
+   ¶»§q«^

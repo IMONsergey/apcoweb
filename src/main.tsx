@@ -4,7 +4,6 @@ import { App } from './App';
 import { LocaleProvider } from './i18n/LocaleProvider';
 import './styles/instrument-sans.css';
 import './styles/ibm-plex-mono.css';
-import './styles/cyrillic.css';
 import './styles/tokens.css';
 import './styles/site.css';
 import './styles/navigation.css';

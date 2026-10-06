@@ -1,21 +1,7 @@
-import { useId, useRef, type KeyboardEvent } from 'react';
-import { useLocale } from '../../i18n/context';
-import { LocaleText } from '../../i18n/LocaleText';
+import { useId } from 'react';
 import { Icon } from './Icon';
 
-const languages = [
-  { value: 'en', label: 'English' },
-  { value: 'ru', label: 'Русский' },
-] as const;
-
-function focusInPlace(node?: HTMLElement) {
-  if (!node) return;
-  const position = { left: scrollX, top: scrollY };
-  node.focus({ preventScroll: true });
-  window.scrollTo({ ...position, behavior: 'instant' });
-}
-
-function LanguageFlag({ locale }: { locale: 'en' | 'ru' }) {
+function EnglishFlag() {
   const clip = useId();
   return (
     <svg
@@ -32,27 +18,17 @@ function LanguageFlag({ locale }: { locale: 'en' | 'ru' }) {
         </clipPath>
       </defs>
       <g clipPath={`url(#${clip})`}>
-        {locale === 'en' ? (
-          <>
-            <path fill="#012169" d="M0 0h24v24H0z" />
-            <path stroke="#fff" strokeWidth="5" d="m0 0 24 24M24 0 0 24" />
-            <path stroke="#c8102e" strokeWidth="2" d="m0 0 24 24M24 0 0 24" />
-            <path stroke="#fff" strokeWidth="8" d="M12 0v24M0 12h24" />
-            <path stroke="#c8102e" strokeWidth="4.5" d="M12 0v24M0 12h24" />
-          </>
-        ) : (
-          <>
-            <path fill="#fff" d="M0 0h24v8H0z" />
-            <path fill="#0039a6" d="M0 8h24v8H0z" />
-            <path fill="#d52b1e" d="M0 16h24v8H0z" />
-          </>
-        )}
+        <path fill="#012169" d="M0 0h24v24H0z" />
+        <path stroke="#fff" strokeWidth="5" d="m0 0 24 24M24 0 0 24" />
+        <path stroke="#c8102e" strokeWidth="2" d="m0 0 24 24M24 0 0 24" />
+        <path stroke="#fff" strokeWidth="8" d="M12 0v24M0 12h24" />
+        <path stroke="#c8102e" strokeWidth="4.5" d="M12 0v24M0 12h24" />
       </g>
     </svg>
   );
 }
 
-/** Same disclosure as navigation, with native buttons and radio-menu keyboard behavior. */
+/** Visual language control placeholder. RU is intentionally unavailable for now. */
 export function LanguageBadge({
   open,
   onOpenChange,
@@ -60,106 +36,14 @@ export function LanguageBadge({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
-  const id = useId();
-  const panelId = `${id}-languages`;
-  const trigger = useRef<HTMLButtonElement>(null);
-  const panel = useRef<HTMLDivElement>(null);
-  const { locale, setLocale, t } = useLocale();
-  const focusOption = (index: number) => {
-    requestAnimationFrame(() => {
-      const options = panel.current?.querySelectorAll<HTMLButtonElement>('button');
-      focusInPlace(options?.[index]);
-    });
-  };
-  const close = () => {
-    onOpenChange(false);
-    focusInPlace(trigger.current ?? undefined);
-  };
-  const openMenu = (index = languages.findIndex((language) => language.value === locale)) => {
-    onOpenChange(true);
-    focusOption(index);
-  };
-  const onMenuKey = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      event.stopPropagation();
-      close();
-    } else if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-      event.preventDefault();
-      const options = Array.from(
-        panel.current?.querySelectorAll<HTMLButtonElement>('button') ?? [],
-      );
-      const current = options.indexOf(document.activeElement as HTMLButtonElement);
-      const next =
-        event.key === 'Home'
-          ? 0
-          : event.key === 'End'
-            ? 1
-            : (current + (event.key === 'ArrowDown' ? 1 : -1) + options.length) % options.length;
-      focusInPlace(options[next]);
-    }
-  };
+  void open;
+  void onOpenChange;
   return (
-    <div
-      className="language-control"
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) onOpenChange(false);
-      }}
-    >
-      <button
-        ref={trigger}
-        type="button"
-        className="language"
-        data-language-selector=""
-        aria-label={t('Language')}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onMouseDown={(event) => {
-          event.preventDefault();
-          focusInPlace(event.currentTarget);
-        }}
-        onClick={() => (open ? close() : openMenu())}
-        onKeyDown={(event) => {
-          if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-            event.preventDefault();
-            openMenu(event.key === 'ArrowUp' || event.key === 'End' ? 1 : 0);
-          } else if (event.key === 'Tab' && open) onOpenChange(false);
-        }}
-      >
-        <LanguageFlag locale={locale} />
-        <LocaleText>{locale.toUpperCase()}</LocaleText>
+    <div className="language-control" aria-label="English language">
+      <div className="language language--disabled" aria-disabled="true">
+        <EnglishFlag />
+        <span>EN</span>
         <Icon name="chevron" />
-      </button>
-      <div
-        ref={panel}
-        id={panelId}
-        role="menu"
-        aria-label={t('Language')}
-        className="nav-panel language-panel"
-        data-open={open}
-        aria-hidden={!open}
-        inert={!open}
-        onKeyDown={onMenuKey}
-      >
-        {languages.map((language) => (
-          <button
-            key={language.value}
-            type="button"
-            role="menuitemradio"
-            aria-checked={locale === language.value}
-            tabIndex={open && locale === language.value ? 0 : -1}
-            lang={language.value}
-            onMouseDown={(event) => event.preventDefault()}
-            onClick={() => {
-              setLocale(language.value);
-              close();
-            }}
-          >
-            <LanguageFlag locale={language.value} />
-            {language.label}
-          </button>
-        ))}
       </div>
     </div>
   );

@@ -1,7 +1,4 @@
-/* Inline text keeps its natural wrapping; the language handoff changes opacity only. */
-/* Explicit inheritance invalidates WebKit's inline font cache when language changes. */
-.locale-text[lang='en'],
-.locale-text[lang='ru'] {
+.locale-text {
   font: inherit;
   letter-spacing: inherit;
 }
@@ -9,30 +6,8 @@
   white-space: pre-line;
 }
 .price-amount {
+  display: inline-block;
   animation: none;
   font-variant-numeric: tabular-nums;
-}
-.price-odometer {
-  display: inline-flex;
-  align-items: flex-start;
-  vertical-align: baseline;
-  line-height: 1;
-}
-.price-digit {
-  display: inline-block;
-  height: 1em;
-  overflow: hidden;
-  width: 1ch;
-}
-.price-digit__reel {
-  display: block;
-}
-.price-digit__reel > span {
-  display: block;
-  height: 1em;
-  line-height: 1em;
-}
-.price-symbol::before,
-.price-digit__reel > span::before {
-  content: attr(data-numeral);
+  will-change: auto;
 }
