@@ -1,3 +1,9 @@
+# R11 — usable desktop viewport, 2026-10-06
+
+Runtime/test source `3a8a0b74593607d3751275ffa877f523383971a9` passes **115/115** full cached Chromium scenarios and **42/42** supplemental Chromium/Firefox/WebKit scenarios, with no failures, retries or skips. Locked install, six supplied-engine checksums, lint, TypeScript, formatting and clean production build pass. All six changed runtime/test files and all 14 JS/CSS files plus index.html match the isolated Mac preview byte for byte.
+
+Twenty normal-motion EN/RU viewport reviews have no runtime errors or page horizontal overflow. The desktop carousel and audience cards fit the actual reading height, including 1280×600 and 1536×740. The data, API and closing scenes also fit; body text and action target sizes remain readable. Very short windows return to natural flow. Four inspected lossless captures, baseline/final geometry and exact build provenance are retained in [screenshots/r11/](screenshots/r11/) and [qa-r11-summary.json](qa-r11-summary.json). Local runs use cached macOS browsers; matching-browser CI, main merge and actual Pages smoke are recorded in the R11 release pull request.
+
 # R10 — site entrance and composition, 2026-10-06
 
 Latest background-readiness correction `038d5fcc977587106bc8215acbb7983bca5c7700` waits for both painted search-background frames, initial fonts and decoded images before revealing the site. Static checks and clean builds pass; **109/109** full cached Chromium scenarios and **39/39** targeted three-engine scenarios pass without failures/retries/skips. Delayed cold starts on EN desktop and RU phone have no visible sample with missing background pixels and no JavaScript errors. All 14 JS/CSS files and index.html match the tested Mac preview. Exact evidence: [qa-r10-background-ready.json](qa-r10-background-ready.json). Earlier entrance/composition results below are historical.

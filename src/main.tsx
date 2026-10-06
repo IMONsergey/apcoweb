@@ -20,6 +20,7 @@ import './styles/localization.css';
 import './styles/text-motion.css';
 import './styles/refinement-r8.css';
 import './styles/refinement-r10.css';
+import './styles/short-desktop.css';
 
 const element = document.getElementById('root');
 if (!element) throw new Error('The application root was not found.');

@@ -12,8 +12,7 @@ export function StepCarousel() {
       <div className="container section-heading-row">
         <h2 id="steps-title">
           <LocaleText>{t('One query,')}</LocaleText>
-          <br />
-          <LocaleText>{t('step by step.')}</LocaleText>
+          <br /> <LocaleText>{t('step by step.')}</LocaleText>
         </h2>
         <div className="steps-intro">
           <Icon name="focus" width="25" height="25" />

@@ -1,0 +1,131 @@
+{
+  "revision": "R11",
+  "date": "2026-10-06",
+  "baseMain": "92badd28bb66661241f53b63043a76a72d74cd47",
+  "runtimeTestSource": "3a8a0b74593607d3751275ffa877f523383971a9",
+  "branch": "feat/short-desktop-viewport-2026-10-06",
+  "staticChecks": {
+    "lockedInstall": "npm ci --offline",
+    "sourceEngineChecksums": 6,
+    "lint": "passed",
+    "typescript": "passed",
+    "formatting": "passed",
+    "cleanBuild": "passed"
+  },
+  "macPreview": {
+    "worktree": "/Users/erdc/Documents/apcoweb-height-r11-20261006",
+    "url": "http://127.0.0.1:4195/apcoweb/",
+    "node": "22.22.2",
+    "cachedBrowserExecutables": {
+      "chromium": "chromium_headless_shell-1234",
+      "firefox": "firefox-1538",
+      "webkit": "webkit-2336"
+    },
+    "matchesChangedSourceHashes": true,
+    "matchesAllBuildHashes": true
+  },
+  "supplementalThreeEngine": {
+    "scope": "Six R11 scenarios, two existing search entrance scenarios, six existing natural-language viewport scenarios per engine",
+    "workers": 2,
+    "stats": {
+      "startTime": "2026-10-06T06:30:58.565Z",
+      "duration": 93976.484,
+      "expected": 42,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "fullCachedChromium": {
+    "workers": 2,
+    "stats": {
+      "startTime": "2026-10-06T06:33:16.799Z",
+      "duration": 204099.61299999998,
+      "expected": 115,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "visualReview": {
+    "normalMotionCases": 20,
+    "baselineCases": 16,
+    "runtimeErrors": [],
+    "pageHorizontalOverflow": false,
+    "geometry": "screenshots/r11/geometry.json",
+    "baseline": "screenshots/r11/baseline-geometry.json",
+    "inspectedScreenshots": [
+      {
+        "path": "docs/screenshots/r11/audience-en-1536x740.png",
+        "bytes": 190891,
+        "sha256": "e94ca3fbc2fcab6fb4f34492bd0c2ff5ecbb489749071a35269976d290ee64e0"
+      },
+      {
+        "path": "docs/screenshots/r11/audience-ru-1366x640.png",
+        "bytes": 159192,
+        "sha256": "d1df3aa2ffc5a791bd66ebf0b0395db87160897db236d09ed2dbb8aa83054787"
+      },
+      {
+        "path": "docs/screenshots/r11/steps-en-1536x740.png",
+        "bytes": 262268,
+        "sha256": "73b8310f5111115b151f96f49a07f87dba28e108e257ed0fceac743f995b31fb"
+      },
+      {
+        "path": "docs/screenshots/r11/steps-ru-1366x640.png",
+        "bytes": 168707,
+        "sha256": "782b7d4f8849f55ea51edd69878028e5ce024a8f894d45f543ed028215065fa4"
+      }
+    ]
+  },
+  "sourceSha256": {
+    "src/main.tsx": "33d2b203bf3a57246ec8871311ea6bb0e97dd0c5d01e3ae47125a8ec323a97a9",
+    "src/components/sections/AudienceSection.tsx": "a662b1811bec14242e831dcb6e20566c65e98bc83fb7d63209474fd98b49cee1",
+    "src/components/sections/StepCarousel.tsx": "e3d5d456b08dc8407399ad46b791ba5f36a4c320cbc726ad478290470dab312f",
+    "src/styles/short-desktop.css": "2d1a16c87a895ddeb4bdf6fa8761f6996fde56c31933e11592d3ebfbbb9be0fa",
+    "tests/short-desktop.spec.ts": "5fecee3474a4687cd2bc6747f54d9ea9b25df66d6d16c1b4853464f5327901f3",
+    "tests/refinement-r10.spec.ts": "5d17c24f0568f79ff920364cc7bb82c45b92f82fb47700ffdaefe4e64f069e77"
+  },
+  "buildSha256": {
+    "index.html": "f8d7774355ec8bb467bfa37bd380f718ddfd640d769ec5889d19cb34703fcf8f",
+    "assets/AnimatedShape-A2FbgjU4.js": "56e8c3830a8a967a9e91f85772c2948e735db9d326227c9320b763d8bc182e98",
+    "assets/AnimatedShape-oC9qFH8J.css": "62cf80c89ecd73bb9478c4727ac4c947975f498521edc76fd07dc07ffb8c5800",
+    "assets/ApiDemoMount-B7LD1Pzm.js": "f6ee1e05ae20baaf0a831fa34d7e769019602796c412c1b84b9c35aa30610376",
+    "assets/DotCascade-a4w6nMDp.js": "af80d58014d59262ca49101ffdf8778cd290af7633fa8768231ad883eba80fb4",
+    "assets/DotCascade-xfSig_rE.css": "c25e817ba79f654184efbd289074a24a5914dd647906e23ed493af6c2d614a43",
+    "assets/IceSphereWaves-6y6SLH8q.js": "ec916904e5eaa874747a944c73ac3a31be7f26ce6048a612bf7530e800829253",
+    "assets/IceSphereWaves-C2ACPYef.css": "d26abf2c83d81e92bfe62c990ebd3149dc864be86ec4e288ef914a296590dfea",
+    "assets/SignalGlobe-BAreWu10.css": "1ee7b970758a3944faa71a28acd89ca64d054e9446e3592af1eca84291bbcf4f",
+    "assets/SignalGlobe-Cn6WEhxr.js": "00f78284ec721f66464a2ede9d7a0f40cefc4d6b15bed94883e220092623594e",
+    "assets/TurquoiseFlow-BeGYI8_4.css": "7086d878fbdebdb67e349253c568b13d988c09e20686ba482882cecb5b73df0a",
+    "assets/TurquoiseFlow-xxT2NQLB.js": "8d4e716e44ae68495bb8674b83f0a230a7f8325ee0dc9604643a39f19148f80b",
+    "assets/firstPaint-DxKnB0gB.js": "5b00c34fbe80af19f7135d624b7141a0c84993bf9c77aff4b9428ccba51d0be5",
+    "assets/index-Cl7OKNZS.js": "532fcdaa5e57f025478d6d4d2786ad6426c767f36f17e83921b1e609b0dcad1b",
+    "assets/index-tRt6hD29.css": "eb301943c6b8f2d5aef275190ab75f7266bd37998636d0832ab3a01697c1f12c"
+  },
+  "earlierCandidates": [
+    {
+      "scope": "initial three-engine height tests",
+      "result": "13 passed, 2 failed",
+      "correction": "Explicit natural-flow fallback below 600 px resolves Firefox/WebKit intrinsic grid sizing; superseded by final passing source."
+    },
+    {
+      "scope": "first full cached Chromium candidate",
+      "result": "112 passed, 2 failed",
+      "correction": "Cap Russian audience/API title sizes by available width at 1200 px. Search test now accepts an already-visible natural form while retaining animated settling assertions whenever lift is required. Superseded by final 115/115 and 42/42."
+    },
+    {
+      "scope": "visual prototypes",
+      "correction": "Explicit zero-minimum grid column preserves the three-position carousel; actual media aspect ratios and metric widths preserve image geometry and full numeric values. Cap tall compact carousel at 800 px to avoid blank space."
+    }
+  ],
+  "limits": [
+    "macOS cached browser automation, followed by matching Linux CI; no physical Windows hardware result claimed.",
+    "Actual CSS viewport models lost browser height and display scaling.",
+    "Below 600 px usable height, complete text takes priority through natural document flow.",
+    "Narrow phone/tablet layouts, long pricing/FAQ sections remain naturally scrollable."
+  ],
+  "publication": {
+    "status": "pending matching-browser CI and Pages",
+    "record": "Final R11 pull request"
+  }
+}
