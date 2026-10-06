@@ -4,11 +4,13 @@ This is the React/TypeScript marketing website, not the authenticated SaaS appli
 
 ## Read first
 
+- docs/REVIEW-R12.md: this branch is a comparison candidate, based strictly on the complete PR #12 rollback. Preserve R10 composition, typography and entrance/search lifecycle. Layout is CSS-only; the five supplied GSAP product scenes are authorized alongside the API demo. Do not merge or update main without the owner's new confirmation. Earlier R10 publication instructions below are historical.
+
 - docs/REVIEW-R10.md: the whole page appears only after both search-background engines have painted, fonts and initial images are prepared. There is no loader or logo. Preserve eager audience contours, scroll-linked search placement, aligned API frame, navigation reveal and active-language natural sizing.
 
 - docs/REVIEW-R9.md: owner-requested removal of R8's shared locale sizing. Active text determines native dimensions; width/height may change on language selection. This overrides the stable EN/RU geometry requirements below.
 
-- docs/REVIEW-R8.md: compact directional header, stable EN/RU text geometry, supplied API demo and responsive refinements. R8 replaces the R6 section-layout morph; preserve native inline wrapping and all other released interactions. GSAP is authorized only for the uploaded API demo.
+- docs/REVIEW-R8.md: compact directional header, stable EN/RU text geometry, supplied API demo and responsive refinements. R8 replaces the R6 section-layout morph; preserve native inline wrapping and all other released interactions. R12 extends GSAP authorization to the five uploaded carousel scenes.
 
 - docs/REVIEW-R7.md: sticky header, anchor clearance and shared EN/RU typography. This extends R6; retain its quiet language morph and flags.
 

@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-06",
+  "runtimeSource": "30b3d44c1f69dcd9c018afa04a2daad5255a55d3",
+  "baselineSource": "d6ef695c06e454daa29e1dcc688589e1e45dd86f",
+  "origin": "Raw Playwright browser/element PNGs. No CSS/DOM changes for captures, no pixel editing. Reduced motion; fonts and visible images decoded; data screenshots wait for painted globe. Last slide uses real End key with native focus outline.",
+  "files": [
+    {
+      "file": "baseline-en-1536x740-steps-first.png",
+      "bytes": 289663,
+      "sha256": "31750af82d9edf39a476596bb192017a66f8f5386a2b79a315171c4a38831afa"
+    },
+    {
+      "file": "baseline-en-1536x740-steps-last.png",
+      "bytes": 242608,
+      "sha256": "2be1dc75c3a30b5e5af40e88715ec04255017e65cc1a64a5b4896a76dfbcd4ff"
+    },
+    {
+      "file": "baseline-en-1536x740-audience.png",
+      "bytes": 164561,
+      "sha256": "129dacc7c514285d48265cffa56432670a0b1191836553d1e57c3e7eb0cfe849"
+    },
+    {
+      "file": "baseline-en-1536x740-api.png",
+      "bytes": 155262,
+      "sha256": "1dc8a2f061d1e97fd877d2f47beadb361dc44901ec05d5c2e99912285b6537cc"
+    },
+    {
+      "file": "baseline-ru-1536x740-steps-first.png",
+      "bytes": 297402,
+      "sha256": "1997fb324fe3a1119f54bde4a63dd377722ecf5d4d78a309a7b13b7c54005ed2"
+    },
+    {
+      "file": "baseline-ru-1536x740-steps-last.png",
+      "bytes": 256831,
+      "sha256": "e1381b7f5bc2ce2593b2fed3930005399ef721bfa3cb3030c5986334117122fb"
+    },
+    {
+      "file": "baseline-ru-1536x740-audience.png",
+      "bytes": 186499,
+      "sha256": "ccc2c3db8325d39e4ce02ad75dba02f17e3d5b72fd0ff2700cd0e6218d928843"
+    },
+    {
+      "file": "baseline-ru-1536x740-api.png",
+      "bytes": 171325,
+      "sha256": "c7cffd3da24e4137135ce9887e8797a11ac5fb960b75135e1a712d38b7329ad3"
+    },
+    {
+      "file": "r12-en-1536x740-steps-first.png",
+      "bytes": 137902,
+      "sha256": "d8fbf7920b2217c52b7cb608dfb7248ee70a8d1e0f3f30d490b93e1b4ca6a945"
+    },
+    {
+      "file": "r12-en-1536x740-steps-last.png",
+      "bytes": 173296,
+      "sha256": "e3cd07eee5c800fdfdfcbc9ade1a1f7b4c0b703c4e2de59a734baa6db0d6ddab"
+    },
+    {
+      "file": "r12-en-1536x740-audience.png",
+      "bytes": 159897,
+      "sha256": "d397d417473d9d347c7202e9a1c84fcadc40b175b85bcf84189d00b14226c7d9"
+    },
+    {
+      "file": "r12-en-1536x740-api.png",
+      "bytes": 142971,
+      "sha256": "b8f994dd100ed250a2169b2357363348453bc866b0b7c8d7d3788f41796669c4"
+    },
+    {
+      "file": "r12-ru-1536x740-steps-first.png",
+      "bytes": 148056,
+      "sha256": "33d4f15ab6c190f81bf9af661e74d7e093490ca9173c469d8a95a5dec1a6da65"
+    },
+    {
+      "file": "r12-ru-1536x740-steps-last.png",
+      "bytes": 178145,
+      "sha256": "92a33632384d40f3c1add676ff97e805c8ffb4d5db2b4cbb0de065e3933e99de"
+    },
+    {
+      "file": "r12-ru-1536x740-audience.png",
+      "bytes": 180813,
+      "sha256": "1d64a36798780b55e77a0f57f90a445656cc872af43c052474d50f02a70ca4e2"
+    },
+    {
+      "file": "r12-ru-1536x740-api.png",
+      "bytes": 155517,
+      "sha256": "c1c824e92eb43765310ee5555e6a07404c75f69e98e29fb72c3690045eb73953"
+    },
+    {
+      "file": "r12-chromium-390x844-ru-data.png",
+      "bytes": 67038,
+      "sha256": "da0ac6745229cf3a9661587884b37a80cf412ead89858432fc2904ac5e8ac8d5"
+    },
+    {
+      "file": "r12-webkit-390x844-ru-data.png",
+      "bytes": 79590,
+      "sha256": "81518fc1498d883dda9488b77bb3884f765ea934d707867586519b8eb7ebe5fa"
+    },
+    {
+      "file": "r12-firefox-1366x650-en-steps.png",
+      "bytes": 84756,
+      "sha256": "2dfe67cd94a07e368b8db0a3c3ce3f52b5f573187cc5c6e7b3d7582128415bb7"
+    },
+    {
+      "file": "baseline-chromium-1920x1080-ru-audience.png",
+      "bytes": 218121,
+      "sha256": "cf58182ffd0e37ea6ab25aff37f8a13484ec3301fe6360e54795720abbe018a9"
+    },
+    {
+      "file": "r12-chromium-1920x1080-ru-audience.png",
+      "bytes": 218121,
+      "sha256": "cf58182ffd0e37ea6ab25aff37f8a13484ec3301fe6360e54795720abbe018a9"
+    }
+  ]
+}

@@ -1,0 +1,295 @@
+.audiences {
+  container-type: inline-size;
+  container-name: audiences;
+}
+
+/* Component layout, including its original responsive and locale rules. */
+
+.audiences h2 {
+  margin-bottom: clamp(32px, calc(64px * var(--space-density)), 64px);
+}
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.audience-card {
+  position: relative;
+  isolation: isolate;
+  min-height: calc(538px * var(--media-density));
+  padding: clamp(24px, calc(40px * var(--space-density)), 40px) 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(24px, calc(40px * var(--space-density)), 40px);
+  background: var(--white);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.audience-art .visual {
+  overflow: visible;
+}
+.audience-art .visual > div {
+  height: auto;
+}
+.audience-copy {
+  width: min(58%, 336px);
+}
+.audience-copy h3 {
+  font-size: 46px;
+  line-height: 1.04;
+  letter-spacing: -0.05em;
+  margin-bottom: clamp(20px, calc(28px * var(--space-density)), 28px);
+}
+.audience-copy p {
+  color: var(--body);
+}
+.use-case-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.use-case-tags li {
+  background: var(--tint);
+  padding: 6px 8px;
+  font-size: 13px;
+  line-height: 18px;
+}
+.audience-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.audience-actions .plain-button {
+  min-height: 42px;
+}
+@container audiences (max-width: 1399px) {
+  .audience-copy {
+    width: 62%;
+  }
+  .audience-copy h3 {
+    font-size: 40px;
+  }
+  .audience-card {
+    padding: clamp(24px, calc(32px * var(--space-density)), 32px) 32px;
+  }
+}
+@container audiences (max-width: 1199px) {
+  .audience-copy {
+    width: 100%;
+  }
+  .audience-copy h3 {
+    padding-right: 100px;
+  }
+  .audience-card {
+    min-height: 530px;
+  }
+}
+@container audiences (max-width: 899px) {
+  .audience-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .audience-card {
+    min-height: 470px;
+    padding: 40px;
+  }
+  .audience-copy {
+    max-width: 60%;
+  }
+  .audience-copy h3 {
+    padding-right: 0;
+    font-size: 40px;
+  }
+}
+@container audiences (max-width: 599px) {
+  .audiences h2 {
+    margin-bottom: 32px;
+  }
+  .audience-card {
+    min-height: 0;
+    padding: 24px;
+    gap: 32px;
+  }
+  .audience-copy {
+    width: 100%;
+    max-width: none;
+  }
+  .audience-copy h3 {
+    font-size: 32px;
+    line-height: 36px;
+    padding-right: 100px;
+    margin-bottom: 24px;
+  }
+  .audience-copy p {
+    max-width: none;
+  }
+  .audience-actions {
+    gap: 10px;
+  }
+  .audience-actions .double-button,
+  .audience-actions .plain-button {
+    width: 100%;
+  }
+  .audience-actions .double-button__label {
+    flex: 1;
+    justify-content: flex-start;
+  }
+  .audience-actions .plain-button {
+    align-self: stretch;
+    justify-content: flex-start;
+  }
+  .use-case-tags li {
+    font-size: 12px;
+    line-height: 17px;
+  }
+}
+@container audiences (max-width: 340px) {
+  .audience-copy h3 {
+    padding-right: 68px;
+  }
+}
+.audience-art {
+  position: absolute;
+  width: min(650px, calc(81.2% * var(--media-density)));
+  aspect-ratio: 1;
+  left: 48.9%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+@container audiences (min-width: 900px) and (max-width: 1199px) {
+  .audience-grid {
+    grid-template-columns: 1fr;
+  }
+  .audience-card {
+    min-height: 480px;
+  }
+  .audience-copy {
+    width: 52%;
+    max-width: 430px;
+  }
+  .audience-copy h3 {
+    padding-right: 0;
+  }
+  .audience-art {
+    width: 65%;
+    max-width: 610px;
+    left: 49%;
+  }
+}
+@container audiences (max-width: 899px) and (min-width: 600px) {
+  .audience-art {
+    width: 81.2%;
+    left: 48.9%;
+  }
+}
+@container audiences (max-width: 599px) {
+  .audience-art {
+    width: 202px;
+    left: auto;
+    right: -42px;
+    top: 16px;
+    transform: none;
+  }
+  .audience-copy h3 {
+    font-size: 30px;
+    line-height: 34px;
+    padding: 36px 88px 0 0;
+    min-height: 156px;
+  }
+}
+@container audiences (max-width: 340px) {
+  .audience-art {
+    width: 178px;
+    right: -34px;
+  }
+  .audience-copy h3 {
+    font-size: 28px;
+    line-height: 32px;
+    padding-top: 28px;
+    padding-right: 64px;
+    min-height: 136px;
+  }
+}
+@container audiences (max-width: 599px) {
+  .audience-art {
+    width: 176px;
+    top: 12px;
+    left: auto;
+    right: -36px;
+    transform: none;
+  }
+  .audience-copy h3 {
+    padding: 0 92px 0 0;
+    min-height: 140px;
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 20px;
+  }
+  .audience-actions > .double-button {
+    width: 100%;
+  }
+  .audience-actions > .double-button .double-button__label {
+    flex: 1;
+    justify-content: flex-start;
+  }
+}
+@container audiences (max-width: 340px) {
+  .audience-art {
+    width: 156px;
+    right: -32px;
+  }
+  .audience-copy h3 {
+    padding: 0 76px 0 0;
+    min-height: 128px;
+    font-size: 26px;
+    line-height: 30px;
+  }
+}
+.audience-art {
+  z-index: 0;
+  pointer-events: none;
+}
+.audience-copy,
+.audience-actions {
+  position: relative;
+  z-index: 1;
+}
+.site[lang='ru'] .audience-copy h3 {
+  font-size: clamp(28px, 2.4vw, 35px);
+  line-height: 1.1;
+}
+@container audiences (max-width: 599px) {
+  .site[lang='ru'] #audiences-title {
+    /* Keep the preposition with the long noun without exceeding a phone's reading width. */
+    font-size: clamp(28px, 8.4vw, 40px);
+  }
+  .site[lang='ru'] .audience-copy h3 {
+    font-size: 26px;
+    line-height: 30px;
+  }
+}
+@container audiences (max-width: 340px) {
+  .site[lang='ru'] .audience-copy h3 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+
+@container audiences (max-width: 599px) {
+  .site[lang='ru'] .audience-art {
+    width: 148px;
+    right: -64px;
+  }
+}
+.audience-art .visual {
+  scale: 0.93;
+}
+@container audiences (min-width: 1600px) {
+  .use-case-tags li {
+    font-size: 14px;
+  }
+}

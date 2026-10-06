@@ -1,44 +1,4 @@
 /* The supplied SVG has a 532 viewBox around 421 units of artwork. Account for its inner margin. */
-.audience-art {
-  position: absolute;
-  width: min(650px, 81.2%);
-  aspect-ratio: 1;
-  left: 48.9%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: -1;
-}
-.metric-card {
-  border-color: #e6edf0;
-  padding: 20px 12px 24px;
-}
-.metric-card--products,
-.metric-card--domains {
-  box-shadow: 0 0 17px #fff;
-}
-.metric-card--ipv6,
-.metric-card--cves {
-  border-color: transparent;
-}
-.metric-card dt {
-  max-width: 100%;
-  line-height: 28px;
-}
-.metric-card dt > span {
-  background: var(--tint);
-  padding: 4px 8px;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-.metric-card dd {
-  font-family: var(--font-mono);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-.metric-card--protocols dd {
-  font-family: var(--font-mono);
-  font-weight: 400;
-}
 .contact-banner h3 {
   font-size: 36px;
   line-height: 1.14;
@@ -149,58 +109,12 @@
     transform: none;
   }
 }
-@media (min-width: 900px) and (max-width: 1199px) {
-  .audience-grid {
-    grid-template-columns: 1fr;
-  }
-  .audience-card {
-    min-height: 480px;
-  }
-  .audience-copy {
-    width: 52%;
-    max-width: 430px;
-  }
-  .audience-copy h3 {
-    padding-right: 0;
-  }
-  .audience-art {
-    width: 65%;
-    max-width: 610px;
-    left: 49%;
-  }
-}
 @media (max-width: 899px) and (min-width: 600px) {
-  .audience-art {
-    width: 81.2%;
-    left: 48.9%;
-  }
   .contact-banner h3 {
     font-size: 32px;
   }
 }
 @media (max-width: 599px) {
-  .audience-art {
-    width: 202px;
-    left: auto;
-    right: -42px;
-    top: 16px;
-    transform: none;
-  }
-  .audience-copy h3 {
-    font-size: 30px;
-    line-height: 34px;
-    padding: 36px 88px 0 0;
-    min-height: 156px;
-  }
-  .metric-card {
-    padding: 12px;
-  }
-  .metric-card dt {
-    line-height: 22px;
-  }
-  .metric-card dt > span {
-    padding: 4px 6px;
-  }
   .contact-banner h3 {
     font-size: 28px;
     line-height: 32px;
@@ -213,20 +127,6 @@
   }
 }
 @media (max-width: 340px) {
-  .audience-art {
-    width: 178px;
-    right: -34px;
-  }
-  .audience-copy h3 {
-    font-size: 28px;
-    line-height: 32px;
-    padding-top: 28px;
-    padding-right: 64px;
-    min-height: 136px;
-  }
-  .metric-card {
-    padding: 10px;
-  }
   .contact-banner h3 {
     font-size: 27px;
   }

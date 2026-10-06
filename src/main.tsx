@@ -30,3 +30,8 @@ createRoot(element).render(
     </LocaleProvider>
   </StrictMode>,
 );
+
+import './components/sections/StepCarousel.css';
+import './components/sections/AudienceSection.css';
+import './components/sections/DataSection.css';
+import './components/sections/ApiSection.css';

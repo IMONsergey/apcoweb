@@ -4,7 +4,7 @@ React + TypeScript + Vite implementation of the APCOSYS landing page. Plain CSS,
 
 **Published preview:** https://imonsergey.github.io/apcoweb/
 
-Current review: [R10 entrance and composition](docs/REVIEW-R10.md), [R9 natural language sizing](docs/REVIEW-R9.md), [verification evidence](docs/QA-RESULTS.md).
+Current branch review: [R12 intrinsic responsiveness and five scenes](docs/REVIEW-R12.md), compared against the exact [R10 entrance and composition](docs/REVIEW-R10.md). Main and its published Pages site remain unchanged. See [verification evidence](docs/QA-RESULTS.md).
 
 ## Development
 
@@ -27,6 +27,7 @@ npm run test:smoke  # Chromium checks used in CI
 ## Structure
 
 - `src/components/sections/`: independently editable landing sections.
+- `src/components/sections/{StepCarousel,AudienceSection,DataSection,ApiSection}.css`: consolidated component styles, named container queries and shared spacing/media density tokens.
 - `src/components/ui/`: shared split button, icon and native dialog.
 - `src/content/site.ts`: metrics, plans, navigation, carousel and footer data.
 - `src/i18n/`: EN/RU copy, quiet locale transitions and the shared Typograf pipeline. Translated text is formatted after interpolation; input queries, URLs and source artwork keep their original syntax.
@@ -36,7 +37,8 @@ npm run test:smoke  # Chromium checks used in CI
 - `src/hooks/useSearchEntrance.ts`: moves only the live search group into the first viewport when there is room, then settles it in the stationary mockup.
 - `src/styles/`: tokens, typefaces and responsive page styles.
 - `src/visuals/`: the supplied animation engines and their React wrappers.
-- `src/visuals/api/`: the supplied API demo; its GSAP dependency is in a separate lazy chunk, loaded near the API section.
+- `src/visuals/api/`: the supplied API demo, loaded near the API section.
+- `src/visuals/product/`: the five supplied carousel scenes in one lazy module. Both demos share the existing GSAP chunk; scene scaling uses the browser's SVG viewBox, not JavaScript layout measurement.
 - `public/media/`: optimized local assets exported from Figma.
 - `tests/`: browser geometry, interactions, assets, accessibility and motion checks.
 - `docs/`: implementation decisions, content status and QA.

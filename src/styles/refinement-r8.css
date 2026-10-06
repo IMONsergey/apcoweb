@@ -31,15 +31,6 @@ html {
 .language-panel button {
   padding-inline: 10px 14px;
 }
-@media (min-width: 1200px) and (max-width: 1279px) {
-  /* Keep long headings inside the three-column carousel's narrow desktop cards. */
-  .step-copy {
-    padding-inline: 32px;
-  }
-}
-.audience-art .visual {
-  scale: 0.93;
-}
 .billing-dock__offer {
   align-items: flex-start;
   justify-content: center;
@@ -98,58 +89,6 @@ html {
 .search-form:has(.search-free-note) .search-error {
   top: calc(100% + 36px);
 }
-.api-visual {
-  padding-bottom: 24px;
-}
-.api-demo-frame {
-  position: relative;
-  isolation: isolate;
-  width: 100%;
-  aspect-ratio: 2048 / 1511;
-  background: white;
-  pointer-events: none;
-}
-.api-demo-frame::before,
-.api-demo-frame::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  background: #fff;
-  inset: 14px -14px -14px 14px;
-  opacity: 0.3;
-}
-.api-demo-frame::after {
-  inset: 24px -24px -24px 24px;
-  opacity: 0.14;
-}
-.api-demo-frame .api-demo-fallback,
-.api-demo-host {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  transition: opacity 240ms ease;
-}
-.api-demo-frame .api-demo-fallback {
-  object-fit: contain;
-  opacity: 1;
-}
-.api-demo-host {
-  opacity: 0;
-  --api-font: var(--font-sans);
-  --api-mono: var(--font-mono);
-}
-.api-demo-frame[data-ready='true'] .api-demo-fallback {
-  opacity: 0;
-}
-.api-demo-frame[data-ready='true'] .api-demo-host {
-  opacity: 1;
-}
-.api-demo-host > api-developer-demo {
-  width: 100%;
-  display: block;
-}
 @media (min-width: 1600px) {
   :root {
     --text-body: clamp(18px, calc(18px + (100vw - 1600px) * 0.005), 20px);
@@ -167,8 +106,7 @@ html {
     font-size: var(--text-small);
     line-height: 1.45;
   }
-  .footer-columns .eyebrow,
-  .use-case-tags li {
+  .footer-columns .eyebrow {
     font-size: 14px;
   }
   .plan-billing-note {
@@ -219,8 +157,6 @@ html {
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header,
-  .api-demo-frame .api-demo-fallback,
-  .api-demo-host,
   .footer-columns a > .locale-text::after,
   .footer-email > strong::after {
     transition: none;

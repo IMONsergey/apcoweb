@@ -1,0 +1,452 @@
+/* Component layout, including its original responsive and locale rules. */
+
+.data-section {
+  /* The globe deliberately extends past its content column. */
+  overflow: clip;
+  padding-top: 0;
+  padding-bottom: 40px;
+  container-type: inline-size;
+  container-name: data;
+}
+.data-stage {
+  position: relative;
+  min-height: calc(1160px * var(--media-density));
+  max-width: 1440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+.visual--globe > .signal-globe {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% * var(--media-density));
+  height: auto;
+  aspect-ratio: 2048/1739;
+}
+.data-copy {
+  position: relative;
+  text-align: center;
+  max-width: 730px;
+  z-index: 2;
+  margin-top: -52px;
+}
+.data-copy h2 {
+  font-size: clamp(54px, 5.45vw, 80px);
+  line-height: 1.02;
+}
+.data-copy > p {
+  max-width: 430px;
+  margin: clamp(28px, calc(48px * var(--space-density)), 48px) auto
+    clamp(24px, calc(40px * var(--space-density)), 40px);
+}
+.data-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.data-metrics {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.metric-card {
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-radius: 5px;
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+.metric-card dt {
+  font: 400 13px/20px var(--font-mono);
+  max-width: 100%;
+}
+.metric-card dd {
+  font: 500 24px/28px var(--font-mono);
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+}
+.metric-card--ipv4 {
+  top: 17%;
+  left: 0;
+  background: var(--action);
+  color: white;
+  border-color: transparent;
+}
+.metric-card--ipv4 dt,
+.metric-card--protocols dt {
+  color: var(--ink);
+}
+.metric-card--ipv6 {
+  top: 47%;
+  left: 13.5%;
+  background: var(--surface);
+}
+.metric-card--domains {
+  top: 68%;
+  left: 0;
+}
+.metric-card--products {
+  top: 17%;
+  right: 0;
+}
+.metric-card--cves {
+  top: 47%;
+  right: 13.5%;
+  background: var(--surface);
+}
+.metric-card--protocols {
+  top: 68%;
+  right: 0;
+  background: var(--action);
+  color: white;
+  border-color: transparent;
+}
+.metric-card--protocols dd {
+  font-size: 84px;
+  line-height: 88px;
+  font-weight: 400;
+}
+@container data (max-width: 1399px) {
+  .data-copy {
+    max-width: 660px;
+  }
+  .data-copy > p {
+    max-width: 402px;
+  }
+  .metric-card {
+    width: 190px;
+    height: 195px;
+  }
+  .metric-card dd {
+    font-size: 21px;
+  }
+  .metric-card--ipv6 {
+    left: 12%;
+  }
+  .metric-card--cves {
+    right: 12%;
+  }
+}
+@container data (max-width: 1199px) {
+  .data-stage {
+    display: block;
+    min-height: 0;
+    padding-block: 72px;
+  }
+  .data-copy {
+    margin: 0 auto;
+    max-width: 650px;
+  }
+  .data-copy h2 {
+    font-size: 60px;
+  }
+  .data-copy > p {
+    max-width: 500px;
+    margin-block: 28px;
+  }
+  .data-metrics {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .metric-card {
+    position: static;
+    width: auto;
+    height: 172px;
+  }
+  .metric-card--protocols dd {
+    font-size: 64px;
+    line-height: 68px;
+  }
+}
+@media (max-width: 599px) {
+  .data-section {
+    padding-bottom: 24px;
+  }
+}
+@container data (max-width: 599px) {
+  .data-stage {
+    padding-block: 40px 64px;
+  }
+  .data-copy h2 {
+    font-size: 40px;
+  }
+  .data-copy > p {
+    margin-block: 24px;
+  }
+  .data-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .data-actions .double-button {
+    width: 100%;
+  }
+  .data-actions .double-button__label {
+    flex: 1;
+    justify-content: flex-start;
+  }
+  .data-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .metric-card {
+    height: 144px;
+    padding: 12px;
+  }
+  .metric-card dt {
+    font-size: 10px;
+    line-height: 15px;
+  }
+  .metric-card dd {
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: -0.045em;
+  }
+  .metric-card--protocols dd {
+    font-size: 56px;
+    line-height: 60px;
+  }
+}
+@container data (max-width: 375px) {
+  .data-copy h2 {
+    font-size: 38px;
+    line-height: 40px;
+  }
+  .metric-card dd {
+    font-size: 14px;
+  }
+  .metric-card--protocols dd {
+    font-size: 56px;
+  }
+}
+@container data (max-width: 340px) {
+  .metric-card {
+    padding: 10px;
+  }
+  .metric-card dd {
+    font-size: 13px;
+  }
+  .metric-card--protocols dd {
+    font-size: 52px;
+  }
+  .data-copy h2 {
+    font-size: 36px;
+    line-height: 38px;
+  }
+}
+.metric-card {
+  border-color: #e6edf0;
+  padding: 20px 12px 24px;
+}
+.metric-card--products,
+.metric-card--domains {
+  box-shadow: 0 0 17px #fff;
+}
+.metric-card--ipv6,
+.metric-card--cves {
+  border-color: transparent;
+}
+.metric-card dt {
+  max-width: 100%;
+  line-height: 28px;
+}
+.metric-card dt > span {
+  background: var(--tint);
+  padding: 4px 8px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.metric-card dd {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.metric-card--protocols dd {
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
+@container data (max-width: 599px) {
+  .metric-card {
+    padding: 12px;
+  }
+  .metric-card dt {
+    line-height: 22px;
+  }
+  .metric-card dt > span {
+    padding: 4px 6px;
+  }
+}
+@container data (max-width: 340px) {
+  .metric-card {
+    padding: 10px;
+  }
+}
+
+@container data (min-width: 600px) and (max-width: 699px) {
+  .data-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.data-stage {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto auto 1fr;
+  justify-items: center;
+  align-items: start;
+}
+.data-stage > .data-copy {
+  grid-row: 2;
+  margin-top: -26px;
+}
+.data-stage > .data-actions {
+  grid-row: 3;
+  margin-bottom: 26px;
+  z-index: 2;
+}
+.data-visual-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.data-visual-field > .visual--globe {
+  inset: 0 -30px;
+  z-index: -1;
+}
+@container data (max-width: 1199px) {
+  .data-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .data-stage > .data-copy {
+    order: 0;
+    margin: 0 auto;
+  }
+  .data-stage > .data-actions {
+    order: 1;
+    margin-bottom: 0;
+  }
+  .data-visual-field {
+    order: 2;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    margin-top: 48px;
+  }
+  .data-visual-field .data-metrics {
+    margin-top: 0;
+  }
+  .data-visual-field > .visual--globe {
+    inset: -420px -100px -20px;
+    opacity: 0.9;
+  }
+}
+@container data (max-width: 599px) {
+  .data-stage {
+    gap: 32px;
+    padding-block: 40px 64px;
+  }
+  .data-stage > .data-copy {
+    margin: 0;
+    max-width: none;
+    width: 100%;
+  }
+  .data-copy > p {
+    margin: 24px 0 0;
+  }
+  .data-stage > .data-actions {
+    order: 3;
+    margin: 0;
+    width: 100%;
+  }
+  .data-visual-field {
+    --metric-height: 144px;
+    --metric-gap: 16px;
+    order: 2;
+    margin: 0;
+  }
+  .data-visual-field .data-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(5, var(--metric-height));
+    gap: var(--metric-gap);
+    position: relative;
+    inset: auto;
+  }
+  .data-visual-field .metric-card {
+    position: relative;
+    inset: auto;
+    height: var(--metric-height);
+    width: auto;
+    z-index: 1;
+  }
+  .metric-card--ipv4 {
+    grid-area: 1 / 1;
+  }
+  .metric-card--ipv6 {
+    grid-area: 1 / 2;
+  }
+  .metric-card--domains {
+    grid-area: 2 / 1;
+  }
+  .metric-card--products {
+    grid-area: 4 / 2;
+  }
+  .metric-card--cves {
+    grid-area: 5 / 1;
+  }
+  .metric-card--protocols {
+    grid-area: 5 / 2;
+  }
+  .data-visual-field > .visual--globe {
+    top: calc(var(--metric-height) + var(--metric-gap));
+    bottom: auto;
+    left: calc(-1 * var(--gutter));
+    right: auto;
+    width: calc(100% + 2 * var(--gutter));
+    height: calc(3 * var(--metric-height) + 2 * var(--metric-gap));
+    opacity: 1;
+  }
+  .data-visual-field .signal-globe {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@container data (max-width: 599px) {
+  .data-visual-field .signal-globe {
+    width: 145%;
+  }
+}
+.data-visual-field > .visual--globe {
+  z-index: 0;
+}
+.data-visual-field .data-metrics {
+  z-index: 1;
+}
+.site[lang='ru'] .metric-card dt {
+  line-height: 22px;
+}
+.site[lang='ru'] .metric-card dt > span {
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+@container data (max-width: 599px) {
+  .site[lang='ru'] .metric-card dt {
+    font-size: 9px;
+    line-height: 20px;
+  }
+}

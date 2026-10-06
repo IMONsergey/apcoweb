@@ -1,3 +1,11 @@
+# R12 — isolated comparison, 2026-10-06
+
+Main remains at 7951f19. The rollback baseline's full tree equals 92badd2 and passes locked install, checks/build and all 109 cached Chromium scenarios. The R12 final runtime passes checks/build and all 127 cached Chromium scenarios; the subsequent test-only component-container check passes 3/3 across Chromium/Firefox/WebKit. No failed, flaky or skipped scenarios occur in those completed runs. The earlier 54/54 targeted three-engine run is supplemental and preceded the final media-width adjustment.
+
+Baseline and final R12 each pass the complete 16-viewport × EN/RU × 3-engine comparison (96 cases each): no measured horizontal/text overflow or JavaScript errors. Normal desktop geometry matches the baseline; font sizes, line heights, weights/tracking, action orientation and object-fit remain unchanged at all tested sizes. All 384 final section screenshots were visually reviewed; selected lossless captures and exact measurement/build/input records are in [screenshots/r12/](screenshots/r12/). One screenshot capture was repeated after adding an explicit mounted-section wait; its initial error is retained in the geometry summary.
+
+See [REVIEW-R12.md](REVIEW-R12.md) for architecture, source identities, short-height measurements and consistent gzip bundle comparison. The draft R12 PR records subsequent matching-browser CI, both immutable public URLs and actual preview smoke results. No main merge is authorized.
+
 # R10 — site entrance and composition, 2026-10-06
 
 Latest background-readiness correction `038d5fcc977587106bc8215acbb7983bca5c7700` waits for both painted search-background frames, initial fonts and decoded images before revealing the site. Static checks and clean builds pass; **109/109** full cached Chromium scenarios and **39/39** targeted three-engine scenarios pass without failures/retries/skips. Delayed cold starts on EN desktop and RU phone have no visible sample with missing background pixels and no JavaScript errors. All 14 JS/CSS files and index.html match the tested Mac preview. Exact evidence: [qa-r10-background-ready.json](qa-r10-background-ready.json). Earlier entrance/composition results below are historical.

@@ -1,0 +1,19 @@
+{
+  "baselineCases": 96,
+  "r12Cases": 96,
+  "baselineErrors": [],
+  "r12Errors": [],
+  "normalDesktopGeometryDeltas": [],
+  "allViewportTypographyOrOrientationDeltas": [],
+  "initialCaptureErrors": [
+    {
+      "engine": "chromium",
+      "width": 1536,
+      "height": 864,
+      "language": "ru",
+      "error": "TimeoutError: locator.evaluate: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#how-it-works')\u001b[22m\n",
+      "errors": []
+    }
+  ],
+  "note": "One capture was repeated with an explicit mounted-section wait. This was a capture harness failure; the successful replacement and initial error are retained."
+}

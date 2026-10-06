@@ -1,0 +1,287 @@
+/* Component layout, including its original responsive and locale rules. */
+
+.steps {
+  padding-top: clamp(64px, calc(128px * var(--space-density)), 128px);
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  container-name: research;
+}
+.section-heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 64px;
+}
+.steps-intro {
+  width: 440px;
+  flex: 0 0 440px;
+  padding: clamp(24px, calc(32px * var(--space-density)), 32px);
+  background: var(--white);
+  border-radius: 5px;
+}
+.steps-intro > svg {
+  color: var(--brand);
+  margin-bottom: clamp(12px, calc(20px * var(--space-density)), 20px);
+}
+.steps-intro p {
+  line-height: 25px;
+}
+.carousel-controls {
+  margin-top: clamp(24px, calc(48px * var(--space-density)), 48px);
+  margin-bottom: clamp(16px, calc(32px * var(--space-density)), 32px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.counter {
+  font: 500 17px/22px var(--font-mono);
+}
+.carousel-arrows {
+  display: flex;
+  gap: 16px;
+}
+.carousel-bleed {
+  padding-left: max(var(--gutter), calc((100cqw - 1760px) / 2));
+}
+.step-track {
+  --card-width: calc((min(100cqw - 2 * var(--gutter), 1760px) - 40px) / 3);
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  padding-right: max(var(--gutter), calc((100cqw - 1760px) / 2));
+  padding-bottom: 6px;
+  scroll-padding-inline: 0;
+}
+.step-track::-webkit-scrollbar {
+  display: none;
+}
+.step-track:focus-visible {
+  outline-offset: -3px;
+}
+.step-card {
+  width: var(--card-width);
+  flex: 0 0 var(--card-width);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: 5px;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+.step-copy {
+  padding: clamp(24px, calc(32px * var(--space-density)), 32px) 40px 0;
+  min-height: calc(194px * var(--media-density));
+  flex: 0 0 auto;
+}
+.step-copy h3 {
+  font-size: clamp(48px, 5.9722vw, 86px);
+  line-height: 0.99;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+.step-copy p {
+  color: var(--body);
+  margin-top: clamp(20px, calc(34px * var(--space-density)), 34px);
+  min-height: 50px;
+}
+.step-media {
+  position: relative;
+  isolation: isolate;
+  margin-top: auto;
+  padding: clamp(20px, calc(40px * var(--space-density)), 40px) 0
+    clamp(18px, calc(34px * var(--space-density)), 34px) 32px;
+  background: linear-gradient(180deg, white, var(--tint));
+  min-height: calc(345px * var(--media-density));
+}
+.step-media > .visual {
+  z-index: 0;
+}
+.step-illustration {
+  position: relative;
+  width: calc(103% * var(--media-density));
+  margin-inline-start: auto;
+  height: auto;
+  max-width: none;
+  aspect-ratio: 1.49;
+  object-fit: cover;
+  border-radius: 7px 0 0 7px;
+  z-index: 1;
+  overflow: clip;
+}
+.step-illustration > img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1.49;
+  object-fit: cover;
+}
+.step-demo-host {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.step-demo-host > apcosys-product-demo {
+  width: 100%;
+  height: 100%;
+}
+@container research (min-width: 1800px) {
+  .step-media {
+    min-height: calc(395px * var(--media-density));
+  }
+}
+@container research (max-width: 1199px) {
+  .section-heading-row {
+    gap: 32px;
+  }
+  .steps-intro {
+    width: 40%;
+    flex-basis: 40%;
+    padding: 24px;
+  }
+  .step-track {
+    --card-width: calc((100cqw - 2 * var(--gutter) - 20px) / 2);
+  }
+  .step-copy h3 {
+    font-size: 60px;
+  }
+  .step-copy {
+    min-height: 218px;
+    padding-inline: 32px;
+  }
+  .step-media {
+    min-height: 320px;
+  }
+}
+@container research (max-width: 899px) {
+  .section-heading-row {
+    display: block;
+  }
+  .steps-intro {
+    width: 100%;
+    margin-top: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .steps-intro > svg {
+    flex: 0 0 25px;
+    margin-bottom: 0;
+  }
+  .steps-intro p {
+    max-width: 680px;
+  }
+  .step-copy h3 {
+    font-size: 52px;
+  }
+  .step-copy {
+    padding: 28px 24px 0;
+    min-height: 230px;
+  }
+  .step-copy p {
+    margin-top: 24px;
+  }
+  .step-media {
+    padding: 32px 0 24px 24px;
+    min-height: 246px;
+  }
+}
+@media (max-width: 599px) {
+  .steps {
+    padding-top: 64px;
+  }
+}
+@container research (max-width: 599px) {
+  .steps-intro {
+    padding: 24px;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .steps-intro p {
+    line-height: 24px;
+  }
+  .steps-intro > svg {
+    width: 20px;
+    height: 20px;
+    flex-basis: 20px;
+  }
+  .carousel-controls {
+    margin-block: 32px 24px;
+  }
+  .counter {
+    font-size: 14px;
+  }
+  .step-track {
+    --card-width: calc(100cqw - 2 * var(--gutter) - 16px);
+    gap: 16px;
+  }
+  .step-copy {
+    padding: 24px 24px 0;
+    min-height: 200px;
+  }
+  .step-copy h3 {
+    font-size: 44px;
+    line-height: 1.04;
+  }
+  .step-copy p {
+    margin-top: 24px;
+    min-height: 72px;
+  }
+  .step-media {
+    padding-top: 24px;
+    min-height: 0;
+  }
+}
+@container research (max-width: 340px) {
+  .step-copy h3 {
+    font-size: 40px;
+  }
+  .step-copy {
+    padding-inline: 20px;
+  }
+}
+.carousel-arrows .icon-button svg {
+  transition: transform 220ms var(--ease);
+}
+.step-illustration {
+  transition: transform 320ms var(--ease);
+}
+@media (hover: hover) {
+  .carousel-arrows .icon-button:not(:disabled):first-child:hover svg {
+    transform: translateX(-2px);
+  }
+  .carousel-arrows .icon-button:not(:disabled):last-child:hover svg {
+    transform: translateX(2px);
+  }
+  .step-card:hover .step-illustration {
+    transform: translateY(-3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .step-illustration,
+  .carousel-arrows .icon-button svg {
+    transition: none;
+  }
+  .step-card:hover .step-illustration,
+  .carousel-arrows .icon-button:hover svg {
+    transform: none;
+  }
+}
+.site[lang='ru'] .step-copy h3 {
+  font-size: clamp(40px, 4.7vw, 70px);
+  line-height: 1.03;
+  overflow-wrap: break-word;
+}
+@container research (max-width: 599px) {
+  .site[lang='ru'] .step-copy h3 {
+    font-size: 38px;
+  }
+}
+@container research (min-width: 1200px) and (max-width: 1279px) {
+  .step-copy {
+    padding-inline: 32px;
+  }
+}

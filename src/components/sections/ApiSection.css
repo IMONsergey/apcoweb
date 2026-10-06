@@ -1,0 +1,218 @@
+/* Component layout, including its original responsive and locale rules. */
+
+.api-section {
+  position: relative;
+  isolation: isolate;
+  background: var(--action);
+  color: white;
+  overflow: hidden;
+  container-type: inline-size;
+  container-name: api;
+}
+.api-section > .visual {
+  z-index: 0;
+  opacity: 0.75;
+}
+.api-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-items: center;
+  min-height: calc(796px * var(--media-density));
+  padding-block: clamp(48px, calc(100px * var(--space-density)), 100px);
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(40px, 5vw, 88px);
+}
+.api-copy {
+  padding-left: 40px;
+}
+.api-copy h2 {
+  font-size: clamp(48px, 5.3vw, 80px);
+  line-height: 1;
+}
+.api-copy > svg {
+  margin: clamp(28px, calc(48px * var(--space-density)), 48px) 0 24px 8px;
+}
+.api-copy p {
+  max-width: 478px;
+  margin: 0 0 clamp(24px, calc(40px * var(--space-density)), 40px) 8px;
+  color: white;
+  text-shadow: 0 1px 4px #014b58a0;
+}
+.api-copy > .double-button {
+  margin-left: 8px;
+}
+.api-visual {
+  position: relative;
+  width: calc(100% * var(--media-density));
+  justify-self: end;
+  min-width: 0;
+  padding: 0 16px 16px 0;
+}
+.api-visual img {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+@container api (max-width: 1199px) {
+  .api-grid {
+    min-height: 0;
+    padding-block: 72px;
+  }
+  .api-copy {
+    padding-left: 0;
+  }
+  .api-copy h2 {
+    font-size: 60px;
+  }
+  .api-break {
+    display: none;
+  }
+  .api-copy > svg {
+    margin: 32px 0 20px;
+  }
+  .api-copy p {
+    margin-left: 0;
+  }
+  .api-copy > .double-button {
+    margin-left: 0;
+  }
+}
+@container api (max-width: 899px) {
+  .api-copy h2 {
+    max-width: 680px;
+    font-size: 56px;
+  }
+  .api-copy p {
+    max-width: 620px;
+  }
+  .api-visual {
+    max-width: 712px;
+    margin-inline: auto;
+  }
+}
+@container api (max-width: 599px) {
+  .api-grid {
+    padding-block: 48px;
+  }
+  .api-copy h2 {
+    font-size: 40px;
+    line-height: 42px;
+  }
+  .api-copy > svg {
+    margin-block: 28px 20px;
+  }
+  .api-copy p {
+    margin-bottom: 28px;
+  }
+  .api-copy .double-button {
+    width: 100%;
+  }
+  .api-copy .double-button__label {
+    flex: 1;
+    justify-content: flex-start;
+  }
+}
+@container api (max-width: 375px) {
+  .api-copy h2 {
+    font-size: 38px;
+    line-height: 40px;
+  }
+}
+@container api (max-width: 340px) {
+  .api-copy h2 {
+    font-size: 36px;
+    line-height: 38px;
+  }
+}
+.api-demo-frame {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 2048 / 1511;
+  background: white;
+  pointer-events: none;
+}
+.api-demo-frame::before,
+.api-demo-frame::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background: #fff;
+  inset: 14px -14px -14px 14px;
+  opacity: 0.3;
+}
+.api-demo-frame::after {
+  opacity: 0.14;
+  inset: 16px -16px -16px 16px;
+}
+.api-demo-frame .api-demo-fallback,
+.api-demo-host {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 240ms ease;
+}
+.api-demo-frame .api-demo-fallback {
+  object-fit: contain;
+  opacity: 1;
+}
+.api-demo-host {
+  opacity: 0;
+  --api-font: var(--font-sans);
+  --api-mono: var(--font-mono);
+}
+.api-demo-frame[data-ready='true'] .api-demo-fallback {
+  opacity: 0;
+}
+.api-demo-frame[data-ready='true'] .api-demo-host {
+  opacity: 1;
+}
+.api-demo-host > api-developer-demo {
+  width: 100%;
+  display: block;
+}
+@media (prefers-reduced-motion: reduce) {
+  .api-demo-frame .api-demo-fallback,
+  .api-demo-host {
+    transition: none;
+  }
+}
+.api-demo-frame,
+.api-demo-frame::before,
+.api-demo-frame::after {
+  border-radius: 12px;
+}
+.api-demo-frame::before {
+  inset: 8px -8px -8px 8px;
+}
+.api-demo-frame .api-demo-fallback,
+.api-demo-host {
+  border-radius: inherit;
+  overflow: hidden;
+}
+.api-demo-poster {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.api-demo-frame .api-demo-fallback {
+  /* The supplied poster includes a 28 px painted layer stack below its 526 px window. */
+  height: auto;
+  object-fit: contain;
+}
+@container api (max-width: 899px) {
+  .api-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@container api (max-width: 599px) {
+  .api-demo-frame,
+  .api-demo-frame::before,
+  .api-demo-frame::after {
+    border-radius: 8px;
+  }
+}

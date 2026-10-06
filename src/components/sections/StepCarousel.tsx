@@ -1,9 +1,10 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { useCarousel } from '../../hooks/useCarousel';
-import { media, researchSteps } from '../../content/site';
+import { researchSteps } from '../../content/site';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
+import { StepIllustration } from '../visuals/StepIllustration';
 export function StepCarousel() {
   const { t } = useLocale();
   const { track, position, positions, move, goTo } = useCarousel();
@@ -70,7 +71,7 @@ export function StepCarousel() {
             }
           }}
         >
-          {researchSteps.map((step, i) => (
+          {researchSteps.map((step) => (
             <li className="step-card" key={step.title}>
               <div className="step-copy">
                 <h3>
@@ -82,14 +83,7 @@ export function StepCarousel() {
               </div>
               <div className="step-media">
                 <Visual kind="dots" direction="bottom-to-top" />
-                <img
-                  src={media(step.image)}
-                  width={i === 1 ? 1234 : 908}
-                  height={i === 1 ? 824 : 609}
-                  alt={t(step.alt)}
-                  loading="lazy"
-                  decoding="async"
-                />
+                <StepIllustration scene={step.scene} image={step.image} alt={t(step.alt)} />
               </div>
             </li>
           ))}

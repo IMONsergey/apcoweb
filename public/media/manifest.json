@@ -2,18 +2,6 @@
   "source": "Figma APCOSYS / CLEAR WORK \u2014 Handoff and saas mobile",
   "assets": [
     [
-      "search-shell.webp",
-      2160,
-      1421,
-      17258
-    ],
-    [
-      "search-composite.webp",
-      1916,
-      1252,
-      74230
-    ],
-    [
       "api-layers.webp",
       712,
       554,
@@ -44,12 +32,6 @@
       38878
     ],
     [
-      "search-360.webp",
-      720,
-      1600,
-      32980
-    ],
-    [
       "start-390.webp",
       780,
       1688,
@@ -74,40 +56,16 @@
       39938
     ],
     [
-      "search-768.webp",
-      1536,
-      2048,
-      43210
-    ],
-    [
       "start-768.webp",
       1536,
       2048,
       49682
     ],
     [
-      "search-430.webp",
-      860,
-      1864,
-      34738
-    ],
-    [
-      "search-320.webp",
-      640,
-      1136,
-      32368
-    ],
-    [
       "start-320.webp",
       640,
       1136,
       36732
-    ],
-    [
-      "search-390.webp",
-      780,
-      1688,
-      33988
     ]
   ]
 }
