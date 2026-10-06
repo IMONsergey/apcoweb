@@ -1,0 +1,28 @@
+# R10 — site entrance, early search and aligned interface
+
+Owner request, 2026-10-06: the preload belongs to the whole website; prepare audience contour icons on page load; bring the live search up into the opening viewport when space permits; align and round the API interface; center the compact search hint; improve the navigation entrance.
+
+Owner correction, 2026-10-06: remove the loader logo and any recognizable loading screen. The website should simply appear softly. This supersedes the first R10 branded entrance.
+
+Latest owner correction, 2026-10-06: the early reveal still exposes the second-screen background arriving later. Wait until the complete search background has rendered before revealing the whole website. This supersedes the immediate first-paint release.
+
+## Behavior
+
+- The whole React root softly appears through a 520 ms opacity transition only after TurquoiseFlow and DotCascade have each drawn their first complete frame. Their wrappers report the existing engines' actual frame counters, including if layout produces a usable size later. Initial fonts and header/hero/search images also finish preparation; these images load eagerly to avoid waiting on hidden lazy media. Two further animation frames let final typography/layout and canvas updates settle before release. The 120/1600 ms timers and input bypass were removed, so a delayed background never appears over an already visible page. There is no loading overlay, centered logo, movement, blur or minimum dwell. Hidden content cannot receive keyboard focus. Reduced motion waits for the same prepared static composition and reveals directly. Switching language and scrolling do not restart the entrance. Failed critical modules or unsupported canvas provide a complete static background rather than retaining a hidden page.
+- The per-illustration mount fade is removed. Both audience contours mount eagerly and are ready before the first scroll. Their unchanged engines still pause outside the viewport or when the page is hidden. Large below-the-fold visualizations and the supplied API/GSAP demonstration remain deferred.
+- At widths >=900 px with sufficient vertical room, the existing heading and live search form move up within their stationary mockup. Their position follows scroll using one scheduled animation frame, eases to the natural position, and returns on reverse scrolling. The toolbar has reserved clearance. Phones, short viewports and reduced motion keep the normal layout. Only the current locale is measured; inputs and the original chrome/fog remain mounted.
+- The API interface fits a normal responsive content column. Two quiet offset layers stay inside the grid, and the actual illustrative surface has 12 px desktop/tablet or 8 px phone corners. Its original aspect ratio and request/success sequence are unchanged.
+- The free-search hint is centered across its own form in EN and RU.
+- The native navigation dialog reveals from the right with a short soft edge, subtle staggered groups and a fading backdrop. Closing and interrupted reopening retain the native focus trap and release scroll locking only after the closing transition. Reduced motion opens and closes directly.
+
+Natural active-language dimensions, split buttons, other sections, prices, source assets and Figma remain unchanged. R10 supersedes R8/R9's old page wash and per-visual entrance treatment, not the natural language sizing contract.
+
+## Verification
+
+Latest runtime/test source `038d5fcc977587106bc8215acbb7983bca5c7700` passes **109/109** full cached Chromium scenarios and **39/39** targeted cached Chromium/Firefox/WebKit scenarios, thirteen per engine, without failures, retries or skips. Source-engine checksums, lint, TypeScript, formatting and clean production builds pass. All 14 JS/CSS files and index.html match the tested Mac preview. New coverage delays each critical background chunk beyond the old 1600 ms release, prevents the first usable canvas size until after its module is loaded, verifies static fallbacks for a failed module and unavailable canvas, and checks that hidden content cannot receive focus. Existing composition, interaction and accessibility checks pass.
+
+Cold-start desktop EN (1440×900) and phone RU (390×844) recordings delay TurquoiseFlow's download by 1800 ms and fonts by 500 ms. Every visible sample has both canvas readiness markers, an opaque painted flow pixel and a nonempty dot pattern. Neither case has an early reveal or JavaScript error. Inspected actual CSS transition midpoints at 140 ms retain the complete turquoise field and dot pattern. Captures and pixels: [screenshots/r10/](screenshots/r10/); exact provenance: [qa-r10-background-ready.json](qa-r10-background-ready.json).
+
+An initial partial full-suite candidate was stopped because image decoding waited on hidden lazy marquee logos. Initial header/hero/search images now load eagerly, and both final complete runs pass. The earlier immediate, logo-free entrance (`b9af58b5989cb191991020627c952fbe0e0c857f`) passed its older tests but was rejected for exposing a late background. Its evidence in qa-r10-entrance-correction.json and page-entrance.png/json is historical. The original core R10 composition/geometry evidence in qa-r10-summary.json likewise predates this readiness correction.
+
+The owner explicitly authorized publication on 2026-10-06 ("пуляй в гит"), superseding the earlier automatic-review block. The R10 pull request for `feat/page-entry-search-motion-2026-10-06` carries the final matching-browser CI, main merge, Pages deployment and live smoke evidence. The local results above retain their original pre-publication scope. The isolated Mac preview remains at `http://127.0.0.1:4194/apcoweb/`.

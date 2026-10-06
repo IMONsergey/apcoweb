@@ -7,7 +7,12 @@ import { SearchChrome } from './SearchChrome';
 import { TrustMarquee } from './TrustMarquee';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
+import { setSearchBackgroundReady } from '../../i18n/pageEntrance';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useSearchEntrance } from '../../hooks/useSearchEntrance';
+
+const flowReady = (ready: boolean) => setSearchBackgroundReady('flow', ready);
+const dotsReady = (ready: boolean) => setSearchBackgroundReady('dots', ready);
 export function SearchForm({ className = '' }: { className?: string }) {
   const { t } = useLocale();
   const compact = useMediaQuery('(max-width: 1199px)');
@@ -113,10 +118,11 @@ export function SearchForm({ className = '' }: { className?: string }) {
 }
 export function SearchPreview() {
   const { t } = useLocale();
+  const scene = useSearchEntrance();
   return (
     <section className="search-preview" aria-label={t('Try APCOSYS public search')}>
-      <Visual kind="flow" eager />
-      <Visual kind="dots" eager />
+      <Visual kind="flow" eager onReady={flowReady} />
+      <Visual kind="dots" eager onReady={dotsReady} />
       <div className="summary-wrap">
         <dl className="container summary-grid">
           {metrics.map((metric) => (
@@ -130,7 +136,11 @@ export function SearchPreview() {
         </dl>
       </div>
       <div className="container search-preview__inner">
-        <div className="search-scene" data-source="React chrome / original Handoff composition">
+        <div
+          ref={scene}
+          className="search-scene"
+          data-source="React chrome / original Handoff composition"
+        >
           <SearchChrome />
           <div className="search-chrome__fog" aria-hidden="true" />
           <div className="search-scene__content">

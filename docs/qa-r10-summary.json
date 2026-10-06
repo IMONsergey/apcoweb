@@ -1,0 +1,91 @@
+{
+  "source_commit": "cdabf1c52673d21c88bf37e4e86a304e309ddc49",
+  "source_base": "9b715bff0b35fe02a22359865a9fb41f0721af21",
+  "branch": "feat/page-entry-search-motion-2026-10-06",
+  "static_checks": {
+    "locked_install": true,
+    "source_engine_checksums": 6,
+    "lint": true,
+    "typescript": true,
+    "formatting": true,
+    "build": true
+  },
+  "local_chromium": {
+    "browser": "151.0.7922.34",
+    "cached": true,
+    "stats": {
+      "startTime": "2026-10-06T04:49:55.741Z",
+      "duration": 130839.11700000001,
+      "expected": 104,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "local_new_scenarios_other_engines": {
+    "cached": true,
+    "firefox_passed": 8,
+    "webkit_passed": 8,
+    "stats": {
+      "startTime": "2026-10-06T04:49:00.137Z",
+      "duration": 53914.977,
+      "expected": 16,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "geometry": {
+    "cases": 16,
+    "languages": [
+      "en",
+      "ru"
+    ],
+    "widths": [
+      320,
+      390,
+      768,
+      1199,
+      1200,
+      1440,
+      1920,
+      2560
+    ],
+    "overflow": 0,
+    "javascript_errors": 0,
+    "path": "screenshots/r10/geometry.json"
+  },
+  "built_assets": {
+    "count": 13,
+    "local_and_tested_preview_hashes_match": true,
+    "sha256": {
+      "assets/AnimatedShape-DKYJGzJY.js": "095e5fb5b2e3c67e6c910949b9a6d83c8af4346f8d00242868f165c1e15310c1",
+      "assets/index-C7hLvKUf.css": "6aac39bbc369c59562da5834ca9d85fb3bc48a080ef300633ba71c376d62b554",
+      "assets/SignalGlobe-Bf2LnYVs.js": "e0cc6ccfab737bb2621e6c035a82c0a183319c94d1adb63eb634da34d524c0d4",
+      "assets/IceSphereWaves-C2ACPYef.css": "d26abf2c83d81e92bfe62c990ebd3149dc864be86ec4e288ef914a296590dfea",
+      "assets/IceSphereWaves-DgdrQUcI.js": "cf918c722aaa56e7b24a39504e0304b687306c80b98250b937e43ed69c842361",
+      "assets/TurquoiseFlow-B1r8DIaP.js": "f6101a0903c3dc5aa976514523d861092c0e84e2f4f21b8b8383e51297175aa9",
+      "assets/DotCascade-xfSig_rE.css": "c25e817ba79f654184efbd289074a24a5914dd647906e23ed493af6c2d614a43",
+      "assets/index-BgEauahv.js": "86685170b8d58a6ae2c3347a72f5596d14628c4ac552c6ed94ef0ccaa77426df",
+      "assets/SignalGlobe-BAreWu10.css": "1ee7b970758a3944faa71a28acd89ca64d054e9446e3592af1eca84291bbcf4f",
+      "assets/ApiDemoMount-CuXFejsF.js": "7201668719b71b6e9cad076baaecc81a0913d15c01f067383983c95e48856780",
+      "assets/AnimatedShape-oC9qFH8J.css": "62cf80c89ecd73bb9478c4727ac4c947975f498521edc76fd07dc07ffb8c5800",
+      "assets/DotCascade-C4glMbI5.js": "93ddd56c161546a1ad831dca822de72e7c224950904b491001e46d6ddba8f5dc",
+      "assets/TurquoiseFlow-BeGYI8_4.css": "7086d878fbdebdb67e349253c568b13d988c09e20686ba482882cecb5b73df0a"
+    }
+  },
+  "earlier_candidates": [
+    "The first complete Chromium candidate passed 104/104; later browser review found a real Firefox first-screen clearance issue.",
+    "After the clearance correction, WebKit exposed a 0.006 px rounding mismatch and native Tab navigation to browser chrome. The test now permits one pixel of rounding and distinguishes browser chrome from covered page controls.",
+    "The final source and tests pass all 104 Chromium scenarios and 16 new Firefox/WebKit scenarios, with zero failures, retries or skips."
+  ],
+  "publication": {
+    "status": "blocked_awaiting_explicit_approval",
+    "destination": "https://github.com/IMONsergey/apcoweb",
+    "visibility": "public",
+    "branch_pushed": false,
+    "ci_started": false,
+    "pages_updated": false,
+    "reason": "Automatic approval review rejected git push twice because it did not recognize authorization to publish these changes to the public repository. No alternate publication method was attempted."
+  }
+}

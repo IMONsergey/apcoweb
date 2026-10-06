@@ -15,7 +15,7 @@ export function AudienceSection() {
         <div className="audience-grid">
           <article id="researchers" className="audience-card">
             <div className="audience-art">
-              <Visual kind="rings" />
+              <Visual kind="rings" eager />
             </div>
             <div className="audience-copy">
               <h3>
@@ -53,7 +53,7 @@ export function AudienceSection() {
           </article>
           <article id="teams" className="audience-card">
             <div className="audience-art">
-              <Visual kind="rosette" />
+              <Visual kind="rosette" eager />
             </div>
             <div className="audience-copy">
               <h3>

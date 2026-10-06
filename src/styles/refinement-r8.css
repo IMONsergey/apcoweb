@@ -98,32 +98,6 @@ html {
 .search-form:has(.search-free-note) .search-error {
   top: calc(100% + 36px);
 }
-/* The page wash never blocks interaction; optional fonts cannot hold it for over 220 ms. */
-#root::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 99;
-  background: white;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 360ms ease-out;
-}
-:root[data-page-entering] #root::after {
-  opacity: 1;
-  transition: none;
-}
-.visual > div {
-  animation: atmosphere-in 420ms ease-out both;
-}
-@keyframes atmosphere-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 .api-visual {
   padding-bottom: 24px;
 }
@@ -245,14 +219,10 @@ html {
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header,
-  #root::after,
   .api-demo-frame .api-demo-fallback,
   .api-demo-host,
   .footer-columns a > .locale-text::after,
   .footer-email > strong::after {
     transition: none;
-  }
-  .visual > div {
-    animation: none;
   }
 }
