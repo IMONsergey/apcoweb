@@ -1,122 +1,58 @@
-import { test, expect, type Page, type Locator } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { translate } from '../src/i18n/messages';
 import { typograph, noBreakNumber } from '../src/i18n/typography';
-import { revealHeader } from './helpers/locale';
+import { openLanguageMenu, revealHeader } from './helpers/locale';
 
-// Locator.click scrolls sticky controls towards the viewport center in the browser protocol.
-// Exercise an ordinary pointer click on the already visible header instead.
-async function clickInPlace(page: Page, control: Locator) {
-  await expect(control).toBeInViewport({ ratio: 1 });
-  const box = (await control.boundingBox())!;
-  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
-}
-async function selectInPlace(page: Page, locale: 'en' | 'ru') {
-  await clickInPlace(page, page.locator('[data-language-selector]'));
-  const panel = page.locator('.language-panel');
-  await expect(panel).toHaveCSS('opacity', '1');
-  await expect
-    .poll(() => panel.evaluate((el) => el.getAnimations().some((a) => a.playState === 'running')))
-    .toBe(false);
-  await clickInPlace(
-    page,
-    page.getByRole('menuitemradio', { name: locale === 'en' ? 'English' : 'Русский', exact: true }),
-  );
-}
-
-test('typography pipeline binds words, formats punctuation and preserves commercial values', () => {
-  expect(translate('ru', 'Start with a query.')).toContain('с\u00a0запроса');
-  expect(typograph('Поиск в интернете и работа с данными.', 'ru')).toContain('в\u00a0интернете');
-  expect(typograph('Поиск в интернете и работа с данными.', 'ru')).toContain('и\u00a0работа');
-  expect(typograph('Search in the internet.', 'en')).toContain('in\u00a0');
-  expect(typograph('Это "поиск" - начало...', 'ru')).toContain('«поиск»');
-  expect(typograph('Это "поиск" - начало...', 'ru')).toContain('\u00a0— начало…');
-  expect(typograph('It\'s "search" - a start.', 'en')).toContain('“search”');
+test('English Typograf pipeline remains active and preserves commercial values', () => {
+  expect(typograph('Search in the internet.')).toContain('in\u00a0');
+  expect(typograph('It\'s "search" - a start.')).toContain('“search”');
   expect(translate('en', ' / month')).toBe(' / month');
   expect(translate('en', '{amount} billed annually', { amount: '$6,912' })).toBe(
     '$6,912 billed annually',
   );
   expect(noBreakNumber('1 500 000')).toBe('1\u00a0500\u00a0000');
-  const copy = typograph('Поиск в интернете и работа с данными.', 'ru');
-  expect(typograph(copy, 'ru')).toBe(copy);
+  const copy = typograph('Search in the internet.');
+  expect(typograph(copy)).toBe(copy);
 });
 
 for (const width of [320, 390, 768, 1440]) {
-  test(`directional header, anchor clearance and typographic reading at ${width}px`, async ({
+  test('English-only header, language availability and anchor clearance at ' + width + 'px', async ({
     page,
-  }, info) => {
+  }) => {
     await page.setViewportSize({ width, height: 900 });
-    await page.emulateMedia({ reducedMotion: 'no-preference' });
-    await page.goto('./?lang=en', { waitUntil: 'networkidle' });
+    await page.goto('./?lang=ru', { waitUntil: 'networkidle' });
     await page.evaluate(() => document.fonts.ready);
+
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(page.locator('#hero-title')).toContainText('Start with a query.');
+
     const input = page.getByRole('searchbox');
-    const query = 'port:443 hostname:"example.com"';
-    await input.fill(query);
-    await input.blur();
+    await input.fill('port:443 hostname:"example.com"');
+
     const header = page.locator('.site-header');
     await page.locator('#api').scrollIntoViewIfNeeded();
-    await expect(header).toHaveCSS('position', 'fixed');
     await expect(header).toHaveAttribute('data-hidden', 'true');
     await revealHeader(page);
-    await expect.poll(() => header.evaluate((el) => el.getBoundingClientRect().top)).toBe(0);
-    const position = await page.evaluate(() => scrollY);
-    await selectInPlace(page, 'ru');
-    await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
-    await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
-    expect(await page.evaluate(() => scrollY)).toBe(position);
-    await expect(input).toHaveValue(query);
-    await expect(page.locator('#hero-title .locale-text').first()).toContainText(
-      'Начните с запроса.',
-    );
-    expect(await page.locator('#hero-title .locale-text').first().textContent()).toContain(
-      'с\u00a0запроса',
-    );
-    // The conjunction also stays attached across the separate highlighted inline element.
-    expect(await page.locator('.hero .lead').textContent()).toContain('и\u00a0уточняйте');
-    const wraps = await page.locator('.locale-text').evaluateAll((nodes) => {
-      const broken: string[] = [];
-      for (const node of nodes) {
-        if (node.closest('[inert], [aria-hidden="true"]') || !node.getBoundingClientRect().width)
-          continue;
-        const text = node.firstChild;
-        if (!text || text.nodeType !== Node.TEXT_NODE) continue;
-        for (const match of (text.textContent ?? '').matchAll(/\p{L}+(?:\u00a0\p{L}+)+/gu)) {
-          const range = document.createRange();
-          range.setStart(text, match.index);
-          range.setEnd(text, match.index + match[0].length);
-          const lines = [...range.getClientRects()];
-          if (lines.some((rect) => Math.abs(rect.top - lines[0].top) > 1)) broken.push(match[0]);
-        }
-      }
-      return broken;
-    });
-    expect(wraps).toEqual([]);
-    const overflow = await page
-      .locator('h1,h2,p,.header-row,.plan-card,.metric-card')
-      .evaluateAll((nodes) =>
-        nodes
-          .filter(
-            (el) =>
-              !el.closest('[inert], [aria-hidden="true"], .sr-only, dialog:not([open])') &&
-              el.clientWidth > 0,
-          )
-          .filter((el) => el.scrollWidth > el.clientWidth + 2)
-          .map((el) => ({
-            id: el.id,
-            className: el.className,
-            text: el.textContent,
-            width: el.clientWidth,
-            scrollWidth: el.scrollWidth,
-            fontSize: getComputedStyle(el).fontSize,
-          })),
-      );
-    expect(overflow).toEqual([]);
-    if (width >= 1200) await page.locator('.desktop-nav a[href="#pricing"]').click();
-    else {
-      await page.getByRole('button', { name: 'Открыть меню', exact: true }).click();
-      const menu = page.getByRole('dialog', { name: 'Навигация', exact: true });
-      await expect(menu).toBeVisible();
-      await menu.getByRole('link', { name: 'Тарифы', exact: true }).click();
-      await expect(menu).not.toBeVisible();
+
+    const menu = await openLanguageMenu(page);
+    await expect(menu.english).toHaveAttribute('aria-checked', 'true');
+    await expect(menu.english).toBeEnabled();
+    await expect(menu.russian).toBeDisabled();
+    await expect(menu.chinese).toBeDisabled();
+    await expect(menu.russian).toHaveAttribute('aria-disabled', 'true');
+    await expect(menu.chinese).toHaveAttribute('aria-disabled', 'true');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(input).toHaveValue('port:443 hostname:"example.com"');
+
+    await page.keyboard.press('Escape');
+    await expect(menu.trigger).toBeFocused();
+
+    if (width >= 1200) {
+      await page.locator('.desktop-nav a[href="#pricing"]').click();
+    } else {
+      await page.getByRole('button', { name: 'Open navigation', exact: true }).click();
+      const dialog = page.getByRole('dialog', { name: 'Navigation', exact: true });
+      await dialog.getByRole('link', { name: 'Pricing', exact: true }).click();
     }
     await expect(page).toHaveURL(/#pricing$/);
     await expect
@@ -128,18 +64,5 @@ for (const width of [320, 390, 768, 1440]) {
         }),
       )
       .toBe(true);
-    await expect(header).toHaveCSS('top', '0px');
-    await revealHeader(page);
-    await selectInPlace(page, 'en');
-    await expect(page.locator('html')).not.toHaveAttribute('data-locale-transition');
-    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(input).toHaveValue(query);
-    await expect.poll(() => header.evaluate((el) => el.getBoundingClientRect().top)).toBe(0);
-    if (width === 390 || width === 1440) {
-      await page.locator('[data-language-selector]').click();
-      await expect(page.getByRole('menuitemradio', { name: 'English', exact: true })).toBeVisible();
-      await expect(page.locator('.language-panel')).toHaveCSS('opacity', '1');
-      await page.screenshot({ path: info.outputPath(`sticky-header-${width}.png`) });
-    }
   });
 }

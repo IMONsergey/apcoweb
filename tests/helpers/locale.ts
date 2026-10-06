@@ -2,7 +2,6 @@ import { expect, type Page } from '@playwright/test';
 
 export async function revealHeader(page: Page) {
   const header = page.locator('.site-header');
-  // Finish the browser's queued focus scroll before checking the navigation state.
   await expect
     .poll(async () => {
       const before = await page.evaluate(() => scrollY);
@@ -10,6 +9,7 @@ export async function revealHeader(page: Page) {
       return before === (await page.evaluate(() => scrollY));
     })
     .toBe(true);
+
   if ((await header.getAttribute('data-hidden')) === 'true') {
     const viewport = page.viewportSize()!;
     await page.mouse.move(8, viewport.height / 2);
@@ -19,23 +19,15 @@ export async function revealHeader(page: Page) {
   await expect(header).toHaveCSS('transform', 'matrix(1, 0, 0, 1, 0, 0)');
 }
 
-export async function selectLanguage(page: Page, language: 'en' | 'ru') {
+export async function openLanguageMenu(page: Page) {
   await revealHeader(page);
-  const trigger = (await page.locator('[data-language-selector]').boundingBox())!;
-  await page.mouse.click(trigger.x + trigger.width / 2, trigger.y + trigger.height / 2);
+  const trigger = page.locator('[data-language-selector]');
+  await trigger.click();
   await expect(page.locator('.language-panel')).toHaveCSS('opacity', '1');
-  const option = page.getByRole('menuitemradio', {
-    name: language === 'en' ? 'English' : 'Русский',
-    exact: true,
-  });
-  await expect(option).toBeInViewport({ ratio: 1 });
-  const box = (await option.boundingBox())!;
-  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
-  // Inspect rendered geometry after native inherited font styles have reached a paint.
-  await page.evaluate(
-    () =>
-      new Promise<void>((resolve) =>
-        requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
-      ),
-  );
+  return {
+    trigger,
+    english: page.getByRole('menuitemradio', { name: 'English', exact: true }),
+    russian: page.getByRole('menuitemradio', { name: 'Русский', exact: true }),
+    chinese: page.getByRole('menuitemradio', { name: '中文', exact: true }),
+  };
 }

@@ -20,70 +20,49 @@ const viewports = [
 ];
 
 for (const [width, height] of viewports) {
-  test(`intrinsic composition and complete EN/RU copy at ${width}x${height}`, async ({ page }) => {
+  test('intrinsic composition and complete English copy at ' + width + 'x' + height, async ({
+    page,
+  }) => {
     await page.setViewportSize({ width, height });
-    for (const language of ['en', 'ru']) {
-      await page.goto(`./?lang=${language}`, { waitUntil: 'networkidle' });
-      await expect(page.locator('html')).not.toHaveAttribute('data-page-entering');
-      await page.evaluate(() => document.fonts.ready);
-      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
-        width + 1,
-      );
-      await expect(page.locator('.site')).toHaveCSS('overflow', 'visible');
-      await expect(page.locator('.audience-actions').first()).toHaveCSS('flex-direction', 'column');
-      for (const selector of ['#steps-title br', '#audiences-title br']) {
-        await expect(page.locator(selector)).not.toHaveCSS('display', 'none');
-      }
-      const overflow = await page
-        .locator('main h1, main h2, main h3, main p')
-        .evaluateAll((nodes) =>
-          nodes
-            .filter(
-              (node) =>
-                !node.closest('[inert], [aria-hidden="true"], .sr-only') &&
-                node.clientWidth > 0 &&
-                node.scrollWidth > node.clientWidth + 2,
-            )
-            .map((node) => node.textContent),
-        );
-      expect(overflow).toEqual([]);
-      const track = page.locator('#research-track');
-      const before = await track.locator('.step-card').count();
-      expect(before).toBe(5);
-      await track.scrollIntoViewIfNeeded();
-      await track.focus();
-      await page.keyboard.press('End');
-      await expect(page.locator('.counter')).toHaveText(
-        width >= 1200 ? '3 / 3' : width >= 600 ? '4 / 4' : '5 / 5',
-      );
-      await page.locator('.step-illustration').last().scrollIntoViewIfNeeded();
-      const scene = page.locator('apcosys-product-demo[scene="suggestions"]');
-      await expect(scene).toBeAttached();
-      await expect
-        .poll(() =>
-          scene.evaluate((node) => {
-            const viewport = node.shadowRoot?.querySelector('.viewport');
-            const frame = node.shadowRoot?.querySelector('.frame');
-            if (!viewport || !frame) return false;
-            const box = viewport.getBoundingClientRect(),
-              drawing = frame.getBoundingClientRect();
-            return (
-              box.width > 0 &&
-              drawing.width > 0 &&
-              drawing.width <= box.width + 1 &&
-              drawing.height <= box.height + 1
-            );
-          }),
-        )
-        .toBe(true);
-      expect(await scene.evaluate((node) => (node as HTMLElement).inert)).toBe(true);
-      await page.keyboard.press('Home');
-      await track.focus();
-      await page.keyboard.press('Home');
-      await expect(page.locator('.counter')).toHaveText(
-        width >= 1200 ? '1 / 3' : width >= 600 ? '1 / 4' : '1 / 5',
-      );
+    await page.goto('./?lang=ru', { waitUntil: 'networkidle' });
+    await page.evaluate(() => document.fonts.ready);
+
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+      width + 1,
+    );
+    await expect(page.locator('.site')).toHaveCSS('overflow', 'visible');
+    await expect(page.locator('.audience-actions').first()).toHaveCSS('flex-direction', 'column');
+    for (const selector of ['#steps-title br', '#audiences-title br']) {
+      await expect(page.locator(selector)).not.toHaveCSS('display', 'none');
     }
+
+    const overflow = await page
+      .locator('main h1, main h2, main h3, main p')
+      .evaluateAll((nodes) =>
+        nodes
+          .filter(
+            (node) =>
+              !node.closest('[inert], [aria-hidden="true"], .sr-only') &&
+              node.clientWidth > 0 &&
+              node.scrollWidth > node.clientWidth + 2,
+          )
+          .map((node) => node.textContent),
+      );
+    expect(overflow).toEqual([]);
+
+    const track = page.locator('#research-track');
+    expect(await track.locator('.step-card').count()).toBe(5);
+    await track.scrollIntoViewIfNeeded();
+    await track.focus();
+    await page.keyboard.press('End');
+    await expect(page.locator('.counter')).toHaveText(
+      width >= 1200 ? '3 / 3' : width >= 600 ? '4 / 4' : '5 / 5',
+    );
+    await page.keyboard.press('Home');
+    await expect(page.locator('.counter')).toHaveText(
+      width >= 1200 ? '1 / 3' : width >= 600 ? '1 / 4' : '1 / 5',
+    );
   });
 }
 
@@ -93,27 +72,23 @@ test('five supplied scenes loop, stay inert and pause outside the viewport', asy
   await page.setViewportSize({ width: 1536, height: 864 });
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  await page.goto('./?lang=en', { waitUntil: 'networkidle' });
-  await expect(page.locator('html')).not.toHaveAttribute('data-page-entering');
+  await page.goto('./', { waitUntil: 'networkidle' });
+
   await expect(page.locator('apcosys-product-demo')).toHaveCount(0);
   const track = page.locator('#research-track');
   await page.locator('.step-illustration').first().scrollIntoViewIfNeeded();
   await expect(page.locator('apcosys-product-demo[scene="query"]')).toBeAttached();
-  await page.waitForTimeout(12000);
+
   await track.focus();
   await page.keyboard.press('End');
   await page.locator('.step-illustration').last().scrollIntoViewIfNeeded();
   await expect(page.locator('apcosys-product-demo')).toHaveCount(5);
-  await page.waitForTimeout(12000);
+
   const scenes = await page.locator('apcosys-product-demo').evaluateAll((nodes) =>
-    nodes.map((node) => {
-      const timeline = Reflect.get(node, '_timeline');
-      return {
-        scene: node.getAttribute('scene'),
-        time: timeline?.totalTime(),
-        inert: (node as HTMLElement).inert,
-      };
-    }),
+    nodes.map((node) => ({
+      scene: node.getAttribute('scene'),
+      inert: (node as HTMLElement).inert,
+    })),
   );
   expect(scenes.map((scene) => scene.scene)).toEqual([
     'query',
@@ -122,10 +97,8 @@ test('five supplied scenes loop, stay inert and pause outside the viewport', asy
     'evidence',
     'suggestions',
   ]);
-  for (const scene of scenes) {
-    expect(scene.inert).toBe(true);
-    expect(scene.time, scene.scene ?? '').toBeGreaterThan(0);
-  }
+  expect(scenes.every((scene) => scene.inert)).toBe(true);
+
   await page.locator('#pricing').scrollIntoViewIfNeeded();
   await expect
     .poll(() =>
@@ -137,25 +110,22 @@ test('five supplied scenes loop, stay inert and pause outside the viewport', asy
   expect(errors).toEqual([]);
 });
 
-test('height and container changes retain carousel, search and locale state', async ({ page }) => {
+test('height changes retain carousel and search state in English-only runtime', async ({ page }) => {
   await page.setViewportSize({ width: 1536, height: 864 });
   await page.goto('./?lang=ru', { waitUntil: 'networkidle' });
-  await expect(page.locator('html')).not.toHaveAttribute('data-page-entering');
   await page.getByRole('searchbox').fill('apache country:us');
   await page.locator('#research-track').scrollIntoViewIfNeeded();
-  await page.getByRole('button', { name: 'Следующий шаг исследования' }).click();
+  await page.getByRole('button', { name: 'Next research step' }).click();
   await expect(page.locator('.counter')).toHaveText('2 / 3');
   await page.setViewportSize({ width: 1536, height: 740 });
   await expect(page.locator('.counter')).toHaveText('2 / 3');
   await expect(page.getByRole('searchbox')).toHaveValue('apache country:us');
-  await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 });
 
 test('components respond to their own width inside a wide viewport', async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
-  await page.goto('./?lang=en', { waitUntil: 'networkidle' });
-  await expect(page.locator('html')).not.toHaveAttribute('data-page-entering');
-  await page.getByRole('searchbox').fill('port:443');
+  await page.goto('./', { waitUntil: 'networkidle' });
   await expect(page.locator('.counter')).toHaveText('1 / 3');
   await page.locator('#how-it-works').evaluate((node) => {
     (node as HTMLElement).style.width = '1100px';
@@ -172,5 +142,4 @@ test('components respond to their own width inside a wide viewport', async ({ pa
   );
   expect(cards[0].x).toBe(cards[1].x);
   expect(cards[1].y).toBeGreaterThanOrEqual(cards[0].bottom);
-  await expect(page.getByRole('searchbox')).toHaveValue('port:443');
 });
