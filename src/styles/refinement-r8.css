@@ -50,12 +50,12 @@ html {
 .comparison-action .double-button__label {
   justify-content: flex-start;
 }
-.footer-columns a > .locale-text,
+.footer-columns a,
 .footer-email > strong {
   position: relative;
   display: inline-block;
 }
-.footer-columns a > .locale-text::after,
+.footer-columns a::after,
 .footer-email > strong::after {
   content: '';
   position: absolute;
@@ -68,7 +68,7 @@ html {
   transform-origin: left center;
   transition: transform 280ms var(--ease);
 }
-.footer-columns a:is(:hover, :focus-visible) > .locale-text::after,
+.footer-columns a:is(:hover, :focus-visible)::after,
 .footer-email:is(:hover, :focus-visible) > strong::after {
   transform: scaleX(1);
 }
@@ -157,7 +157,7 @@ html {
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header,
-  .footer-columns a > .locale-text::after,
+  .footer-columns a::after,
   .footer-email > strong::after {
     transition: none;
   }

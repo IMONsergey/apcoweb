@@ -1,7 +1,3 @@
-.locale-text {
-  font: inherit;
-  letter-spacing: inherit;
-}
 .locale-text--lines {
   white-space: pre-line;
 }
@@ -9,5 +5,4 @@
   display: inline-block;
   animation: none;
   font-variant-numeric: tabular-nums;
-  will-change: auto;
 }

@@ -100,7 +100,7 @@ html {
   padding-block: 9px;
   margin-block: -9px;
 }
-@media (pointer: coarse) {
+@media (max-width: 899px), (pointer: coarse) {
   .search-submit {
     min-width: 44px;
     min-height: 44px;

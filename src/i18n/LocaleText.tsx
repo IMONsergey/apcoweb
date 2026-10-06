@@ -1,12 +1,10 @@
-import { useLocale } from './context';
-import { typograph } from './typography';
+import { Fragment } from 'react';
 
-/** An inline text boundary: it preserves natural wrapping and never remounts controls. */
+/**
+ * English-only text is already authored for output. Avoid a wrapper node unless
+ * a component explicitly needs one for layout (currently multiline card titles).
+ */
 export function LocaleText({ children, className = '' }: { children: string; className?: string }) {
-  const { locale } = useLocale();
-  return (
-    <span className={`locale-text ${className}`.trim()} lang={locale}>
-      {typograph(children, locale)}
-    </span>
-  );
+  if (!className) return <Fragment>{children}</Fragment>;
+  return <span className={className}>{children}</span>;
 }
