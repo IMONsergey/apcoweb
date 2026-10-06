@@ -163,7 +163,6 @@ test('components respond to their own width inside a wide viewport', async ({ pa
   expect(cards[1].y).toBeGreaterThanOrEqual(cards[0].bottom);
 });
 
-
 test('mobile product scenes stay scaled inside their cards', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('./', { waitUntil: 'networkidle' });
