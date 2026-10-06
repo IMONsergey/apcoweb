@@ -198,3 +198,23 @@ test('narrow tablet metric values remain inside their card padding', async ({ pa
     expect(Math.min(...gaps), `Numeric values at ${width}px`).toBeGreaterThanOrEqual(-1);
   }
 });
+
+
+test('compact header does not wrap sign in around 600px', async ({ page }) => {
+  for (const width of [599, 600, 613, 660, 679, 680, 700]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('./', { waitUntil: 'networkidle' });
+
+    const signIn = page.locator('.header-signin');
+    if (width <= 679) {
+      await expect(signIn).not.toBeVisible();
+    } else {
+      await expect(signIn).toBeVisible();
+      expect((await signIn.boundingBox())!.height).toBeLessThanOrEqual(44);
+    }
+
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+      width + 1,
+    );
+  }
+});
