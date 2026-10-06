@@ -29,4 +29,46 @@ for (const width of [320, 360, 390, 430, 599]) {
     }
 
     await page.locator('#data').scrollIntoViewIfNeeded();
-    expect(await page.evaluate(() => document.documentElement.scrollWidth))¶»§q«^
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+      width + 1,
+    );
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  });
+}
+
+test('left-aligned accent billing text preserves the contextual control', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./', { waitUntil: 'networkidle' });
+  await page.locator('#pricing').scrollIntoViewIfNeeded();
+
+  const dock = page.locator('.billing-dock');
+  await expect(dock).toHaveAttribute('data-visible', 'true');
+  await expect(dock.locator('.billing-dock__offer')).toHaveCSS('text-align', 'left');
+});
+
+for (const width of [320, 390, 768, 1440]) {
+  test(
+    'language menu exposes unavailable RU and ZH without switching at ' + width,
+    async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('./?lang=ru', { waitUntil: 'networkidle' });
+
+      const menu = await openLanguageMenu(page);
+      await expect(menu.english).toBeEnabled();
+      await expect(menu.russian).toBeDisabled();
+      await expect(menu.chinese).toBeDisabled();
+      await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+      await expect(page.locator('#hero-title')).toContainText('Start with a query.');
+    },
+  );
+}
+
+test('English-only mobile page remains accessible', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./', { waitUntil: 'networkidle' });
+
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(
+    results.violations.filter((v) => v.impact === 'critical' || v.impact === 'serious'),
+  ).toEqual([]);
+});
