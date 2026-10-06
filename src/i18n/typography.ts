@@ -20,7 +20,8 @@ engine.disableRule([
 
 const cache = new Map<string, string>();
 
-export function typograph(text: string): string {
+export function typograph(text: string, _legacyLocale?: string): string {
+  void _legacyLocale;
   let result = cache.get(text);
   if (result === undefined) {
     result = engine.execute(text);

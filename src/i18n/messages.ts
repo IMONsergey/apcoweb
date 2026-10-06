@@ -3,7 +3,7 @@ import { typograph } from './typography';
 export type Locale = 'en';
 
 export function translate(
-  _locale: Locale,
+  _locale: string,
   key: string,
   values: Record<string, string | number> = {},
 ) {
