@@ -1,3 +1,9 @@
+# R9 — natural language dimensions, 2026-10-06
+
+Locked install, six supplied-engine checksums, lint, TypeScript, formatting and build pass. The final supplemental local Chromium run passes **96/96**, with zero failures, retries or skips, using cached macOS Chromium 151.0.7922.34. An earlier local run passed 94/96 because the two new FAQ checks used an ambiguous text locator; the selector was corrected and the entire suite rerun successfully. No runtime correction was needed for those test failures.
+
+The six-width language regression includes the 1200 px carousel boundary and verifies natural action widths, longer Russian labels, return-to-English dimensions, readable wrapping and compact menus. Existing input/billing/FAQ/focus, opacity transition, directional header, artwork, API demo and accessibility checks remain. Four inspected full-resolution hero captures and the 16-case EN/RU geometry record at 320–2560 px are in [screenshots/r9/](screenshots/r9/), with no measured overflow or runtime errors. Matching locked three-engine CI and post-deployment checks are the release gates, recorded in the PR/Actions release record.
+
 # R8 — quiet interaction and responsive refinements, 2026-10-05
 
 Runtime/test source `960cf312ea4418e441c7108336301c1ea294abc7` passed **285/285**, 95 per Chromium/Firefox/WebKit, with zero failures, skips or retries in [run 37365675775](https://github.com/IMONsergey/apcoweb/actions/runs/37365675775). All 285 also pass locally with the exact locked browser revisions. Locked install, six source checksums, lint, TypeScript, formatting and build pass. The independent PR Chromium workflow was cancelled while queued; no pass is claimed for it.

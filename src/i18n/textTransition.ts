@@ -1,5 +1,5 @@
 import type { Locale } from './messages';
-import { warmLocaleFonts } from './localeLayout';
+import { warmLocaleFonts } from './localeFonts';
 
 export type StopLocaleTransition = (finish?: boolean) => void;
 

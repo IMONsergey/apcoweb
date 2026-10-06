@@ -199,22 +199,14 @@ export const russian = {
 } as const;
 export type Message = keyof typeof russian;
 export type Locale = 'en' | 'ru';
-type MessageSource = { key: string; values: Record<string, string | number> };
-const sources = new Map<string, MessageSource>();
-/** Retain editorial keys for one-time bilingual layout measurement; input values never enter here. */
-export function messageSource(text: string, locale: Locale): MessageSource | undefined {
-  return sources.get(locale + ':' + text);
-}
 export function translate(
   locale: Locale,
   key: string,
   values: Record<string, string | number> = {},
 ) {
   const message = locale === 'ru' ? (russian[key as Message] ?? key) : key;
-  const result = typograph(
+  return typograph(
     message.replace(/\{(\w+)\}/g, (token, name: string) => String(values[name] ?? token)),
     locale,
   );
-  sources.set(locale + ':' + result, { key, values });
-  return result;
 }

@@ -15,6 +15,7 @@
 - Desktop carousel: three visible cards; tablet: two; phone: one with a next-card hint. Counter reports positions, not total item count. No autoplay or scroll hijacking.
 - Plans: 4 / 2 / 1 columns. Questions expand naturally with text. Navigation becomes a scrollable native modal drawer.
 - Typography and spacing use CSS media queries and flexible containers; long copy must not be clipped.
+- Translated controls and reading blocks use the active language's natural content dimensions. Changing language may change width, height and section positions. Do not measure inactive translations or reserve their maximum size for other languages.
 
 ## Sources
 

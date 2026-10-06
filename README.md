@@ -4,7 +4,7 @@ React + TypeScript + Vite implementation of the APCOSYS landing page. Plain CSS,
 
 **Published preview:** https://imonsergey.github.io/apcoweb/
 
-Current review: [R8 refinements](docs/REVIEW-R8.md), [six-step UX audit](docs/AUDIT-R8.md), [verification evidence](docs/QA-RESULTS.md).
+Current review: [R9 natural language sizing](docs/REVIEW-R9.md), [R8 refinements](docs/REVIEW-R8.md), [verification evidence](docs/QA-RESULTS.md).
 
 ## Development
 
@@ -30,7 +30,8 @@ npm run test:smoke  # Chromium checks used in CI
 - `src/components/ui/`: shared split button, icon and native dialog.
 - `src/content/site.ts`: metrics, plans, navigation, carousel and footer data.
 - `src/i18n/`: EN/RU copy, quiet locale transitions and the shared Typograf pipeline. Translated text is formatted after interpolation; input queries, URLs and source artwork keep their original syntax.
-- `src/i18n/localeLayout.ts`: one alternate-language sizing pass after fonts load and on viewport-width changes; no transformed section containers during language changes.
+- `src/i18n/localeFonts.ts`: font preparation for the quiet text handoff; no alternate-language rendering or dimension reservation. Native CSS sizes the current copy.
+- `src/i18n/pageEntrance.ts`: the short, nonblocking page wash, independent of layout and locale sizing.
 - `src/styles/`: tokens, typefaces and responsive page styles.
 - `src/visuals/`: the supplied animation engines and their React wrappers.
 - `src/visuals/api/`: the supplied API demo; its GSAP dependency is in a separate lazy chunk, loaded near the API section.
