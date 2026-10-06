@@ -36,6 +36,7 @@ for (const [width, height] of [
   [1280, 600],
   [1536, 740],
   [1920, 950],
+  [2560, 1320],
 ]) {
   test(`complete desktop scenes fit below the header at ${width}x${height}`, async ({ page }) => {
     for (const lang of ['en', 'ru']) {

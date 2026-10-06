@@ -2,7 +2,7 @@
   "revision": "R11",
   "date": "2026-10-06",
   "baseMain": "92badd28bb66661241f53b63043a76a72d74cd47",
-  "runtimeTestSource": "3a8a0b74593607d3751275ffa877f523383971a9",
+  "runtimeTestSource": "84335d669eed22b1ee9ab4f263117416b5819ba9",
   "branch": "feat/short-desktop-viewport-2026-10-06",
   "staticChecks": {
     "lockedInstall": "npm ci --offline",
@@ -25,12 +25,12 @@
     "matchesAllBuildHashes": true
   },
   "supplementalThreeEngine": {
-    "scope": "Six R11 scenarios, two existing search entrance scenarios, six existing natural-language viewport scenarios per engine",
+    "scope": "Seven R11 scenarios, two existing search entrance scenarios, six existing natural-language viewport scenarios per engine",
     "workers": 2,
     "stats": {
-      "startTime": "2026-10-06T06:30:58.565Z",
-      "duration": 93976.484,
-      "expected": 42,
+      "startTime": "2026-10-06T06:46:31.226Z",
+      "duration": 109552.55500000001,
+      "expected": 45,
       "skipped": 0,
       "unexpected": 0,
       "flaky": 0
@@ -39,16 +39,16 @@
   "fullCachedChromium": {
     "workers": 2,
     "stats": {
-      "startTime": "2026-10-06T06:33:16.799Z",
-      "duration": 204099.61299999998,
-      "expected": 115,
+      "startTime": "2026-10-06T06:48:22.559Z",
+      "duration": 204905.32499999998,
+      "expected": 116,
       "skipped": 0,
       "unexpected": 0,
       "flaky": 0
     }
   },
   "visualReview": {
-    "normalMotionCases": 20,
+    "normalMotionCases": 22,
     "baselineCases": 16,
     "runtimeErrors": [],
     "pageHorizontalOverflow": false,
@@ -57,23 +57,23 @@
     "inspectedScreenshots": [
       {
         "path": "docs/screenshots/r11/audience-en-1536x740.png",
-        "bytes": 190891,
-        "sha256": "e94ca3fbc2fcab6fb4f34492bd0c2ff5ecbb489749071a35269976d290ee64e0"
+        "bytes": 191146,
+        "sha256": "c125dfc0f4fdef82e61c426c93116133fce75981455d2c55293872f9d1adf86f"
       },
       {
         "path": "docs/screenshots/r11/audience-ru-1366x640.png",
-        "bytes": 159192,
-        "sha256": "d1df3aa2ffc5a791bd66ebf0b0395db87160897db236d09ed2dbb8aa83054787"
+        "bytes": 159108,
+        "sha256": "85bef064c75a38e59a09e379c40f97c4201a3a45ac938fd8e783b42898c454ee"
       },
       {
         "path": "docs/screenshots/r11/steps-en-1536x740.png",
-        "bytes": 262268,
-        "sha256": "73b8310f5111115b151f96f49a07f87dba28e108e257ed0fceac743f995b31fb"
+        "bytes": 262278,
+        "sha256": "50b343427cec0fba0e907681391e1b961035858542239dcd76011f5c6a8594c6"
       },
       {
         "path": "docs/screenshots/r11/steps-ru-1366x640.png",
-        "bytes": 168707,
-        "sha256": "782b7d4f8849f55ea51edd69878028e5ce024a8f894d45f543ed028215065fa4"
+        "bytes": 168704,
+        "sha256": "3edb55f90bcb0929d9946296dc25e9a77c1da8b39e2a1dbe98ff6cc6e509b5aa"
       }
     ]
   },
@@ -81,26 +81,26 @@
     "src/main.tsx": "33d2b203bf3a57246ec8871311ea6bb0e97dd0c5d01e3ae47125a8ec323a97a9",
     "src/components/sections/AudienceSection.tsx": "a662b1811bec14242e831dcb6e20566c65e98bc83fb7d63209474fd98b49cee1",
     "src/components/sections/StepCarousel.tsx": "e3d5d456b08dc8407399ad46b791ba5f36a4c320cbc726ad478290470dab312f",
-    "src/styles/short-desktop.css": "2d1a16c87a895ddeb4bdf6fa8761f6996fde56c31933e11592d3ebfbbb9be0fa",
-    "tests/short-desktop.spec.ts": "5fecee3474a4687cd2bc6747f54d9ea9b25df66d6d16c1b4853464f5327901f3",
+    "src/styles/short-desktop.css": "ee85980c95c54a520106122a9a1e33a0eae6a055e8dae372ccd769671497da90",
+    "tests/short-desktop.spec.ts": "6cb350564d7d8bd2de9ee15372d8c440b8a243b7308ec055a0fef08e4a28458d",
     "tests/refinement-r10.spec.ts": "5d17c24f0568f79ff920364cc7bb82c45b92f82fb47700ffdaefe4e64f069e77"
   },
   "buildSha256": {
-    "index.html": "f8d7774355ec8bb467bfa37bd380f718ddfd640d769ec5889d19cb34703fcf8f",
-    "assets/AnimatedShape-A2FbgjU4.js": "56e8c3830a8a967a9e91f85772c2948e735db9d326227c9320b763d8bc182e98",
+    "index.html": "f4f099027deeeb74d4ca5dce2342ea74451b0fc2e60eb13f57dd77fe7a97a312",
+    "assets/AnimatedShape-C6Ordttm.js": "8dc9a4ccc26f866fa3372700ba7b92673e2bbf6df133743acf86645f121895d6",
     "assets/AnimatedShape-oC9qFH8J.css": "62cf80c89ecd73bb9478c4727ac4c947975f498521edc76fd07dc07ffb8c5800",
-    "assets/ApiDemoMount-B7LD1Pzm.js": "f6ee1e05ae20baaf0a831fa34d7e769019602796c412c1b84b9c35aa30610376",
-    "assets/DotCascade-a4w6nMDp.js": "af80d58014d59262ca49101ffdf8778cd290af7633fa8768231ad883eba80fb4",
+    "assets/ApiDemoMount-B2hqDpop.js": "895fc9653b42b12e2f9052aa1517ad8c9b9032a408c5179a2e94f3477e1e0ac5",
+    "assets/DotCascade-BZdpoTvb.js": "386d8dfed98a5cd9a60fe56db2a4e7c6dce7c50498125f4cafbf221ed46a8448",
     "assets/DotCascade-xfSig_rE.css": "c25e817ba79f654184efbd289074a24a5914dd647906e23ed493af6c2d614a43",
-    "assets/IceSphereWaves-6y6SLH8q.js": "ec916904e5eaa874747a944c73ac3a31be7f26ce6048a612bf7530e800829253",
     "assets/IceSphereWaves-C2ACPYef.css": "d26abf2c83d81e92bfe62c990ebd3149dc864be86ec4e288ef914a296590dfea",
+    "assets/IceSphereWaves-DRCaAnVI.js": "28ffc29c74ca660eae878944ab226feedad882abea32b82f2214af4f143a3f89",
     "assets/SignalGlobe-BAreWu10.css": "1ee7b970758a3944faa71a28acd89ca64d054e9446e3592af1eca84291bbcf4f",
-    "assets/SignalGlobe-Cn6WEhxr.js": "00f78284ec721f66464a2ede9d7a0f40cefc4d6b15bed94883e220092623594e",
+    "assets/SignalGlobe-DR5r23Ki.js": "d6dd87ae007f89c8eb8e37e2272d0ac2b75ceda863b0ba17075fafc3190545a6",
     "assets/TurquoiseFlow-BeGYI8_4.css": "7086d878fbdebdb67e349253c568b13d988c09e20686ba482882cecb5b73df0a",
-    "assets/TurquoiseFlow-xxT2NQLB.js": "8d4e716e44ae68495bb8674b83f0a230a7f8325ee0dc9604643a39f19148f80b",
+    "assets/TurquoiseFlow-CA70UiCq.js": "7fc7adcb4844ab74d90a8ee07d0998b9198fc08fd6f08d8c83607c4260f4798c",
     "assets/firstPaint-DxKnB0gB.js": "5b00c34fbe80af19f7135d624b7141a0c84993bf9c77aff4b9428ccba51d0be5",
-    "assets/index-Cl7OKNZS.js": "532fcdaa5e57f025478d6d4d2786ad6426c767f36f17e83921b1e609b0dcad1b",
-    "assets/index-tRt6hD29.css": "eb301943c6b8f2d5aef275190ab75f7266bd37998636d0832ab3a01697c1f12c"
+    "assets/index-BVhClVNv.css": "b5381e8b1f41d7481658620734530103ad7f81a571e2a88e458928b34202d650",
+    "assets/index-DOIicTyR.js": "fa1f2893294359b78c5b3710eca33e9be281b5effc395896c52c395ab910d054"
   },
   "earlierCandidates": [
     {
@@ -125,7 +125,38 @@
     "Narrow phone/tablet layouts, long pricing/FAQ sections remain naturally scrollable."
   ],
   "publication": {
-    "status": "pending matching-browser CI and Pages",
-    "record": "Final R11 pull request"
+    "status": "pre-publication snapshot; final release evidence is in PR #12",
+    "record": "https://github.com/IMONsergey/apcoweb/pull/12"
+  },
+  "earlierVerifiedSource": {
+    "localSource": "3a8a0b74593607d3751275ffa877f523383971a9",
+    "chromium": {
+      "startTime": "2026-10-06T06:33:16.799Z",
+      "duration": 204099.61299999998,
+      "expected": 115,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "threeEngine": {
+      "startTime": "2026-10-06T06:30:58.565Z",
+      "duration": 93976.484,
+      "expected": 42,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "publishedHead": "ad314422a978fc6ce0abe05988567867380f6ee6",
+    "prChecks": [
+      {
+        "run": 37425116628,
+        "result": "success; 115 Chromium scenarios"
+      },
+      {
+        "run": 37425116662,
+        "result": "success; 344 first-attempt passes and 1 successful retry"
+      }
+    ],
+    "followup": "Broaden the same compact composition to wide viewports above 1100 px height, including 2560x1320; final source is separately retested."
   }
 }

@@ -1,6 +1,72 @@
 {
-  "source": "3a8a0b74593607d3751275ffa877f523383971a9",
+  "source": "84335d669eed22b1ee9ab4f263117416b5819ba9",
   "records": [
+    {
+      "width": 2560,
+      "height": 1320,
+      "lang": "en",
+      "scenes": [
+        {
+          "id": "how-it-works",
+          "top": 96.03125,
+          "height": 800,
+          "bottom": 896.03125
+        },
+        {
+          "id": "use-cases",
+          "top": 96.03125,
+          "height": 539.890625,
+          "bottom": 635.921875
+        },
+        {
+          "id": "data",
+          "top": 95.921875,
+          "height": 924,
+          "bottom": 1019.921875
+        },
+        {
+          "id": "api",
+          "top": 95.921875,
+          "height": 798.328125,
+          "bottom": 894.25
+        }
+      ],
+      "counter": "1 / 3",
+      "scrollWidth": 2560
+    },
+    {
+      "width": 2560,
+      "height": 1320,
+      "lang": "ru",
+      "scenes": [
+        {
+          "id": "how-it-works",
+          "top": 95.640625,
+          "height": 800,
+          "bottom": 895.640625
+        },
+        {
+          "id": "use-cases",
+          "top": 95.640625,
+          "height": 547.046875,
+          "bottom": 642.6875
+        },
+        {
+          "id": "data",
+          "top": 95.6875,
+          "height": 924,
+          "bottom": 1019.6875
+        },
+        {
+          "id": "api",
+          "top": 95.6875,
+          "height": 798.328125,
+          "bottom": 894.015625
+        }
+      ],
+      "counter": "1 / 3",
+      "scrollWidth": 2560
+    },
     {
       "width": 1200,
       "height": 1000,
