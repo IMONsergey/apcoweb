@@ -5,8 +5,6 @@ export function warmLocaleFonts() {
     ...[400, 500, 600].map((weight) =>
       document.fonts.load(weight + ' 20px "Instrument Sans"', 'English'),
     ),
-    ...[400, 500].map((weight) =>
-      document.fonts.load(weight + ' 14px "IBM Plex Mono"', 'English'),
-    ),
+    ...[400, 500].map((weight) => document.fonts.load(weight + ' 14px "IBM Plex Mono"', 'English')),
   ]).catch(() => undefined));
 }

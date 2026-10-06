@@ -1,5 +1,7 @@
 /* Language control remains visible while the public landing ships English-only content. */
-:root:has(.language-panel[data-open='true']) { scroll-behavior: auto; }
+:root:has(.language-panel[data-open='true']) {
+  scroll-behavior: auto;
+}
 
 .language-control {
   position: relative;
@@ -26,9 +28,16 @@
   outline-offset: 3px;
 }
 .language-control .language:hover,
-.language-control .language[aria-expanded='true'] { background: #f1f2f4; }
-.language-control .language[aria-expanded='true'] > svg:last-child { transform: rotate(180deg); }
-.language-panel { left: auto; right: 0; }
+.language-control .language[aria-expanded='true'] {
+  background: #f1f2f4;
+}
+.language-control .language[aria-expanded='true'] > svg:last-child {
+  transform: rotate(180deg);
+}
+.language-panel {
+  left: auto;
+  right: 0;
+}
 .language-panel button {
   display: flex;
   align-items: center;
@@ -43,37 +52,14 @@
   line-height: 20px;
   text-align: left;
   white-space: nowrap;
-  transition: background-color 180ms var(--ease), opacity 180ms ease;
+  transition:
+    background-color 180ms var(--ease),
+    opacity 180ms ease;
 }
-.language-flag { flex: 0 0 16px; }
+.language-flag {
+  flex: 0 0 16px;
+}
 .language-panel button[aria-checked='true'],
 .language-panel button:not(:disabled):hover,
-.language-panel button:not(:disabled):focus-visible { background: white; }
-.language-panel button:focus-visible { outline-offset: -2px; }
-.language-panel button:disabled {
-  opacity: 0.42;
-  cursor: not-allowed;
-}
-.language-panel button:disabled .language-flag { filter: saturate(0.75); }
-
-@media (max-width: 599px) {
-  .header-signin { display: none; }
-  .header-row { gap: 10px; }
-  .header-actions { gap: 10px; }
-  .language-control .language {
-    font-size: 13px;
-    padding: 10px 8px;
-  }
-}
-@media (max-width: 340px) {
-  .header-actions { gap: 8px; }
-  .language-control .language {
-    padding-inline: 7px;
-    gap: 4px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .language-control .language,
-  .language-control .language > svg:last-child,
-  .language-panel button { transition: none; }
-}
+.language-panel button:not(:disabled):focus-visible {
+  background: w¶»§q«^

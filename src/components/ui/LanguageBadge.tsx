@@ -19,8 +19,19 @@ function focusInPlace(node?: HTMLElement) {
 function LanguageFlag({ locale }: { locale: LanguageCode }) {
   const clip = useId();
   return (
-    <svg className="language-flag" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
-      <defs><clipPath id={clip}><circle cx="12" cy="12" r="12" /></clipPath></defs>
+    <svg
+      className="language-flag"
+      viewBox="0 0 24 24"
+      width="16"
+      height="16"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <clipPath id={clip}>
+          <circle cx="12" cy="12" r="12" />
+        </clipPath>
+      </defs>
       <g clipPath={'url(#' + clip + ')'}>
         {locale === 'en' ? (
           <>
@@ -33,112 +44,4 @@ function LanguageFlag({ locale }: { locale: LanguageCode }) {
         ) : locale === 'ru' ? (
           <>
             <path fill="#fff" d="M0 0h24v8H0z" />
-            <path fill="#0039a6" d="M0 8h24v8H0z" />
-            <path fill="#d52b1e" d="M0 16h24v8H0z" />
-          </>
-        ) : (
-          <>
-            <path fill="#de2910" d="M0 0h24v24H0z" />
-            <path fill="#ffde00" d="m6.2 4.1.9 2.1 2.3.2-1.8 1.5.6 2.2-2-1.2-2 1.2.6-2.2-1.8-1.5 2.3-.2z" />
-          </>
-        )}
-      </g>
-    </svg>
-  );
-}
-
-export function LanguageBadge({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
-  const id = useId();
-  const panelId = id + '-languages';
-  const trigger = useRef<HTMLButtonElement>(null);
-  const panel = useRef<HTMLDivElement>(null);
-
-  const close = () => {
-    onOpenChange(false);
-    focusInPlace(trigger.current ?? undefined);
-  };
-  const focusEnglish = () => {
-    requestAnimationFrame(() =>
-      focusInPlace(panel.current?.querySelector<HTMLButtonElement>('button:not(:disabled)') ?? undefined),
-    );
-  };
-  const openMenu = () => {
-    onOpenChange(true);
-    focusEnglish();
-  };
-  const onMenuKey = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      event.stopPropagation();
-      close();
-    } else if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-      event.preventDefault();
-      focusEnglish();
-    }
-  };
-
-  return (
-    <div className="language-control" onBlur={(event) => {
-      if (!event.currentTarget.contains(event.relatedTarget)) onOpenChange(false);
-    }}>
-      <button
-        ref={trigger}
-        type="button"
-        className="language"
-        data-language-selector=""
-        aria-label="Language"
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onMouseDown={(event) => {
-          event.preventDefault();
-          focusInPlace(event.currentTarget);
-        }}
-        onClick={() => (open ? close() : openMenu())}
-        onKeyDown={(event) => {
-          if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
-            event.preventDefault();
-            openMenu();
-          } else if (event.key === 'Tab' && open) {
-            onOpenChange(false);
-          }
-        }}
-      >
-        <LanguageFlag locale="en" />
-        <span className="locale-text" lang="en">EN</span>
-        <Icon name="chevron" />
-      </button>
-      <div
-        ref={panel}
-        id={panelId}
-        role="menu"
-        aria-label="Language"
-        className="nav-panel language-panel"
-        data-open={open}
-        aria-hidden={!open}
-        inert={!open}
-        onKeyDown={onMenuKey}
-      >
-        {languages.map((language) => (
-          <button
-            key={language.value}
-            type="button"
-            role="menuitemradio"
-            aria-checked={language.value === 'en'}
-            aria-disabled={language.disabled || undefined}
-            disabled={language.disabled}
-            tabIndex={open && !language.disabled ? 0 : -1}
-            lang={language.value === 'zh' ? 'zh-Hans' : language.value}
-            onMouseDown={(event) => event.preventDefault()}
-            onClick={() => {
-              if (!language.disabled) close();
-            }}
-          >
-            <LanguageFlag locale={language.value} />
-            <span>{language.label}</span>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
+           ¶»§q«^
