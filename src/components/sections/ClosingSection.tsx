@@ -6,8 +6,7 @@ import { DoubleButton } from '../ui/DoubleButton';
 
 export function ClosingSection() {
   const compact = useMediaQuery('(max-width: 599px)');
-  const { locale, t } = useLocale();
-  const translatedDesktop = !compact && locale !== 'en';
+  const { t } = useLocale();
   return (
     <section className="closing-section" aria-label={t('Start your first query')}>
       <div className="container">
@@ -27,7 +26,7 @@ export function ClosingSection() {
               width="2880"
               height="1894"
               alt={
-                compact || translatedDesktop
+                compact
                   ? ''
                   : t(
                       'Start with your first query. Try the public search before creating an account.',
@@ -47,8 +46,8 @@ export function ClosingSection() {
               </span>
             </div>
           )}
-          {compact || translatedDesktop ? (
-            <div className={`closing-copy${translatedDesktop ? ' closing-copy--translated' : ''}`}>
+          {compact ? (
+            <div className="closing-copy">
               <p className="eyebrow">
                 <LocaleText>{t('INTERNET INFRASTRUCTURE SEARCH')}</LocaleText>
               </p>

@@ -147,9 +147,6 @@
   line-height: 88px;
   font-weight: 400;
 }
-.site[lang='ru'] .metric-card dt {
-  line-height: 22px;
-}
 
 @container data (max-width: 1399px) {
   .data-copy {
@@ -339,10 +336,6 @@
   .data-visual-field .signal-globe {
     width: 145%;
     height: auto;
-  }
-  .site[lang='ru'] .metric-card dt {
-    font-size: 9px;
-    line-height: 20px;
   }
 }
 @container data (max-width: 375px) {

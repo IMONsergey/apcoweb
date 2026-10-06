@@ -30,6 +30,9 @@
   display: flex;
   width: max-content;
   animation: trust-travel 48s linear infinite;
+  will-change: auto;
+}
+.trust[data-running='true'] .trust-track {
   will-change: transform;
 }
 .trust-group {

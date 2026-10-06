@@ -270,15 +270,7 @@
     transform: none;
   }
 }
-.site[lang='ru'] .step-copy h3 {
-  font-size: clamp(40px, 4.7vw, 70px);
-  line-height: 1.03;
-  overflow-wrap: break-word;
-}
 @container research (max-width: 599px) {
-  .site[lang='ru'] .step-copy h3 {
-    font-size: 38px;
-  }
 }
 @container research (min-width: 1200px) and (max-width: 1279px) {
   .step-copy {

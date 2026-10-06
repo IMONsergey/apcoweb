@@ -93,3 +93,22 @@ html {
     text-wrap: balance;
   }
 }
+
+@media (pointer: coarse) {
+  .brand {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .header-signin,
+  .header-signup {
+    min-height: 44px;
+  }
+  .search-form {
+    min-height: 44px;
+  }
+  .search-form .search-submit {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}

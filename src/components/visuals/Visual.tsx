@@ -1,6 +1,7 @@
 import { Component, Suspense, lazy, useEffect, useRef, useState, type ReactNode } from 'react';
 import type { DotDirection } from '../../visuals/dots/dot-cascade';
 import { useMotion } from '../../hooks/useMotion';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 const Flow = lazy(() => import('../../visuals/flow/TurquoiseFlow'));
 const Waves = lazy(() => import('../../visuals/waves/IceSphereWaves'));
 const Globe = lazy(() => import('../../visuals/globe/SignalGlobe'));
@@ -38,6 +39,8 @@ export function Visual({
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(eager);
   const { paused } = useMotion();
+  const constrainedMotion = useMediaQuery('(max-width: 599px), (pointer: coarse)');
+  const renderFps = constrainedMotion ? 24 : 30;
   useEffect(() => {
     if (mounted || !ref.current) return;
     const io = new IntersectionObserver(
@@ -64,8 +67,8 @@ export function Visual({
               <Flow
                 speed={1}
                 strength={1}
-                fps={30}
-                resolution={192}
+                fps={renderFps}
+                resolution={constrainedMotion ? 160 : 192}
                 paused={paused}
                 onReady={onReady}
               />
@@ -75,8 +78,8 @@ export function Visual({
               <Globe
                 renderer={paused ? 'canvas2d' : 'auto'}
                 speed={0.85}
-                fps={30}
-                pixelRatio={1.5}
+                fps={renderFps}
+                pixelRatio={constrainedMotion ? 1 : 1.5}
                 paused={paused}
                 interactive={!paused}
               />
@@ -84,7 +87,7 @@ export function Visual({
               <Dots
                 overlay
                 direction={direction}
-                fps={30}
+                fps={renderFps}
                 startOpacity={0.28}
                 endOpacity={0.015}
                 interactive={!paused}
@@ -97,6 +100,7 @@ export function Visual({
                 opacity={0.42}
                 speed={0.75}
                 strength={0.65}
+                fps={renderFps}
                 strokeWidth={1.35}
                 paused={paused}
                 interactive={!paused}

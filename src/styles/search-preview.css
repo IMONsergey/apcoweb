@@ -290,4 +290,8 @@
 
 .search-preview {
   overflow: clip;
+  background:
+    linear-gradient(180deg, transparent 18%, #f5f5f5 100%),
+    radial-gradient(ellipse at 49% 42%, #91dce6 0%, transparent 58%),
+    linear-gradient(110deg, #0c4150 0%, #419cab 67%, #2996ab 100%);
 }

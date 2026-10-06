@@ -76,10 +76,6 @@
   align-items: flex-start;
   gap: 8px;
 }
-.site[lang='ru'] .audience-copy h3 {
-  font-size: clamp(28px, 2.4vw, 35px);
-  line-height: 1.1;
-}
 
 @container audiences (min-width: 1600px) {
   .use-case-tags li {
@@ -195,17 +191,9 @@
     font-size: 12px;
     line-height: 17px;
   }
-  .site[lang='ru'] #audiences-title {
-    /* Keep the preposition with the long noun within the phone's reading width. */
-    font-size: clamp(28px, 8.4vw, 40px);
-  }
   .site[lang='ru'] .audience-copy h3 {
     font-size: 26px;
     line-height: 30px;
-  }
-  .site[lang='ru'] .audience-art {
-    width: 148px;
-    right: -64px;
   }
 }
 @container audiences (max-width: 340px) {
@@ -218,9 +206,5 @@
     min-height: 128px;
     font-size: 26px;
     line-height: 30px;
-  }
-  .site[lang='ru'] .audience-copy h3 {
-    font-size: 24px;
-    line-height: 28px;
   }
 }

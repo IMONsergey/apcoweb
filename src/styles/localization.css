@@ -1,7 +1,5 @@
-/* Locale control is present on every header size; mobile sign-in stays in the drawer. */
-:root:has(.language-panel[data-open='true']) {
-  scroll-behavior: auto;
-}
+/* Language control remains visible while the public landing ships English-only content. */
+:root:has(.language-panel[data-open='true']) { scroll-behavior: auto; }
 
 .language-control {
   position: relative;
@@ -15,33 +13,22 @@
   gap: 6px;
   padding: 10px;
   background: transparent;
+  transition: background-color 180ms var(--ease);
 }
 .language-control .language > svg:last-child {
   flex: 0 0 10px;
   width: 10px;
   height: 10px;
+  transition: transform 220ms var(--ease);
 }
 .language-control .language:focus-visible {
   outline: 2px solid var(--action);
   outline-offset: 3px;
 }
 .language-control .language:hover,
-.language-control .language[aria-expanded='true'] {
-  background: #f1f2f4;
-}
-.language-control .language {
-  transition: background-color 180ms var(--ease);
-}
-.language-control .language > svg:last-child {
-  transition: transform 220ms var(--ease);
-}
-.language-control .language[aria-expanded='true'] > svg:last-child {
-  transform: rotate(180deg);
-}
-.language-panel {
-  left: auto;
-  right: 0;
-}
+.language-control .language[aria-expanded='true'] { background: #f1f2f4; }
+.language-control .language[aria-expanded='true'] > svg:last-child { transform: rotate(180deg); }
+.language-panel { left: auto; right: 0; }
 .language-panel button {
   display: flex;
   align-items: center;
@@ -56,157 +43,37 @@
   line-height: 20px;
   text-align: left;
   white-space: nowrap;
-  transition: background-color 180ms var(--ease);
+  transition: background-color 180ms var(--ease), opacity 180ms ease;
 }
-.language-flag {
-  flex: 0 0 16px;
-}
-.language-panel button:lang(ru) {
-  font-family: 'Inter', Arial, sans-serif;
-}
+.language-flag { flex: 0 0 16px; }
 .language-panel button[aria-checked='true'],
-.language-panel button:hover,
-.language-panel button:focus-visible {
-  background: white;
+.language-panel button:not(:disabled):hover,
+.language-panel button:not(:disabled):focus-visible { background: white; }
+.language-panel button:focus-visible { outline-offset: -2px; }
+.language-panel button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
 }
-.language-panel:has(button[aria-checked='false']:hover) button[aria-checked='true'],
-.language-panel:has(button[aria-checked='false']:focus-visible) button[aria-checked='true'] {
-  background: transparent;
-}
-.language-panel button:focus-visible {
-  outline-offset: -2px;
-}
-:root[lang='ru'] {
-  --font-sans: 'Inter', 'Instrument Sans', Arial, sans-serif;
-}
-.site[lang='ru'] .nav-trigger {
-  white-space: nowrap;
-}
-.site[lang='ru'] .desktop-nav {
-  gap: 10px;
-}
-.site[lang='ru'] .header-row {
-  gap: 16px;
-}
-.site[lang='ru'] .hero .lead {
-  max-width: 790px;
-}
-.site[lang='ru'] .search-scene__heading h3 {
-  font-size: clamp(17px, 2.7cqw, 32px);
-}
-.site[lang='ru'] .footer-columns .eyebrow {
-  overflow-wrap: anywhere;
-}
-.site[lang='ru'] .plan-description {
-  min-height: 36px;
-}
-/* Original artwork stays in place; only editorial content is overlaid for RU. */
-.closing-copy--translated {
-  position: absolute;
-  left: 16%;
-  top: 28%;
-  width: 74%;
-  min-height: 44%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #fcfcfc;
-  text-align: center;
-  padding: 16px;
-}
-.closing-copy--translated h3 {
-  font-size: clamp(32px, 5.6vw, 76px);
-  line-height: 1.05;
-  letter-spacing: -0.045em;
-  max-width: 800px;
-  margin: 24px 0;
-}
-.closing-copy--translated .closing-copy__note {
-  font: 400 12px/18px var(--font-mono);
-}
-.closing-copy--translated .double-button {
-  margin-top: 32px;
-}
-@media (max-width: 1399px) and (min-width: 1200px) {
-  .site[lang='ru'] .desktop-nav {
-    gap: 4px;
-  }
-  .site[lang='ru'] .header-signin {
-    padding-inline: 12px;
-  }
-  .site[lang='ru'] .nav-trigger {
-    padding-inline: 6px;
-  }
-  .site[lang='ru'] .header-signup {
-    font-size: 13px;
-  }
-}
-@media (max-width: 899px) {
-  .closing-copy--translated {
-    top: 22%;
-    left: 10%;
-    width: 86%;
-    /* Cover the prepared CTA through its lower edge at every narrow-tablet scale. */
-    min-height: 45%;
-  }
-  .closing-copy--translated h3 {
-    font-size: 48px;
-  }
-}
+.language-panel button:disabled .language-flag { filter: saturate(0.75); }
+
 @media (max-width: 599px) {
-  .header-signin {
-    display: none;
-  }
-  .header-row {
-    gap: 10px;
-  }
-  .header-actions {
-    gap: 10px;
-  }
+  .header-signin { display: none; }
+  .header-row { gap: 10px; }
+  .header-actions { gap: 10px; }
   .language-control .language {
     font-size: 13px;
     padding: 10px 8px;
   }
-  .site[lang='ru'] .hero h1 {
-    font-size: clamp(34px, 9.7vw, 44px);
-    line-height: 1.06;
-  }
-  .site[lang='ru'] .hero .lead {
-    font-size: 17px;
-    line-height: 25px;
-  }
-  .site[lang='ru'] .search-scene__heading h3 {
-    font-size: 24px;
-    line-height: 1.15;
-  }
-  .site[lang='ru'] .search-chrome__account {
-    font-size: 11px;
-  }
-  .site[lang='ru'] .billing-dock__offer > span {
-    font-size: 11px;
-  }
-  .site[lang='ru'] .footer-columns .eyebrow {
-    font-size: 11px;
-    line-height: 17px;
-  }
 }
 @media (max-width: 340px) {
-  .header-actions {
-    gap: 8px;
-  }
+  .header-actions { gap: 8px; }
   .language-control .language {
     padding-inline: 7px;
     gap: 4px;
-  }
-  .site[lang='ru'] .closing-copy h3 {
-    font-size: 30px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .language-control .language,
   .language-control .language > svg:last-child,
-  .language-panel button {
-    transition: none;
-  }
+  .language-panel button { transition: none; }
 }

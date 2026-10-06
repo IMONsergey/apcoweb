@@ -1,11 +1,9 @@
 import { useLayoutEffect, useRef } from 'react';
-import { useLocale } from '../i18n/context';
 import { useMotion } from './useMotion';
 
 /** Move only the live search group; the scene's artwork and document layout stay fixed. */
 export function useSearchEntrance() {
   const scene = useRef<HTMLDivElement>(null);
-  const { locale } = useLocale();
   const { reduced } = useMotion();
   useLayoutEffect(() => {
     const element = scene.current;
@@ -67,6 +65,6 @@ export function useSearchEntrance() {
       window.removeEventListener('scroll', schedule);
       content.style.removeProperty('--search-lift');
     };
-  }, [locale, reduced]);
+  }, [reduced]);
   return scene;
 }
