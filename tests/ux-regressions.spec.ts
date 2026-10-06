@@ -199,7 +199,6 @@ test('narrow tablet metric values remain inside their card padding', async ({ pa
   }
 });
 
-
 test('compact header does not wrap sign in around 600px', async ({ page }) => {
   for (const width of [599, 600, 613, 660, 679, 680, 700]) {
     await page.setViewportSize({ width, height: 900 });
