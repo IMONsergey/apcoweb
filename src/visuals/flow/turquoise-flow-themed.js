@@ -179,7 +179,7 @@ export function createTurquoiseFlow(canvas, options = {}) {
     for (let i = 0; i <= 48; i++) {
       const v = i / 48;
       if (settings.theme === 'dark') {
-        const bottomProgress = clamp((v - .38637) / (.86 - .38637), 0, 1);
+        const bottomProgress = clamp((v - .40) / (.70 - .40), 0, 1);
         const alpha = bottomProgress * bottomProgress * (3 - 2 * bottomProgress);
         whiteVeil.addColorStop(v, `rgba(13,17,19,${alpha})`);
       } else {

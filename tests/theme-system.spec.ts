@@ -147,15 +147,19 @@ test('dark visual audit keeps search, trust, pricing and data controls coherent'
       const context = element.getContext('2d');
       if (!context) return [] as number[][];
       const x = Math.floor(element.width / 2);
-      return [1, Math.floor(element.height * 0.42), element.height - 2].map(
-        (y) => Array.from(context.getImageData(x, y, 1, 1).data.slice(0, 3)) as number[],
-      );
+      return [
+        1,
+        Math.floor(element.height * 0.42),
+        Math.floor(element.height * 0.75),
+        element.height - 2,
+      ].map((y) => Array.from(context.getImageData(x, y, 1, 1).data.slice(0, 3)) as number[]);
     });
   const luminance = ([r, g, b]: number[]) => 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  expect(searchPixels).toHaveLength(3);
+  expect(searchPixels).toHaveLength(4);
   // Dark starts with the same live turquoise field as light; only the lower fade changes.
   expect(luminance(searchPixels[0])).toBeGreaterThan(90);
   expect(luminance(searchPixels[2])).toBeLessThan(35);
+  expect(luminance(searchPixels[3])).toBeLessThan(35);
   expect(luminance(searchPixels[1])).toBeGreaterThan(luminance(searchPixels[0]) + 40);
 
   const contactButton = page.locator('.contact-banner .double-button__label');
@@ -262,10 +266,18 @@ test('dark lower waves stay dark and closing artwork hides baked corner defects'
 
   const picture = page.locator('.closing-scene:not(.closing-scene--compact) > picture');
   await expect(picture).toHaveCSS('clip-path', 'inset(6px)');
-  const hotspot = page.locator('.closing-hotspot');
+  const hotspot = page.locator('.closing-hotspot--button');
+  await expect(hotspot).toHaveClass(/double-button/);
   await expect(hotspot).toHaveCSS('color', 'rgb(255, 255, 255)');
-  await expect(hotspot).toHaveCSS('background-color', 'rgb(42, 171, 188)');
-  await expect(hotspot.locator('.closing-hotspot__visual')).toBeVisible();
+  await expect(hotspot.locator('.double-button__label')).toHaveCSS(
+    'background-color',
+    'rgb(4, 118, 138)',
+  );
+  await expect(hotspot.locator('.double-button__icon')).toHaveCSS(
+    'background-color',
+    'rgb(4, 118, 138)',
+  );
+  await expect(hotspot.locator('.closing-hotspot__visual')).toHaveCount(0);
 });
 
 test('mobile navigation exposes appearance, language intent and scroll continuation cue', async ({

@@ -279,7 +279,15 @@ html[data-theme='dark'] .double-button--dark {
 html[data-theme='dark'] .search-preview,
 html[data-theme='dark'] .search-preview .visual-fallback--flow {
   background:
-    linear-gradient(180deg, transparent 18%, var(--surface-page) 86%),
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 40%,
+      rgb(13 17 19 / 36%) 52%,
+      rgb(13 17 19 / 82%) 64%,
+      var(--surface-page) 72%,
+      var(--surface-page) 100%
+    ),
     radial-gradient(ellipse at 49% 42%, #91dce6 0%, transparent 58%),
     linear-gradient(110deg, #0c4150 0%, #419cab 67%, #2996ab 100%);
 }

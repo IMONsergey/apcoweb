@@ -65,16 +65,21 @@ export function ClosingSection() {
                 <LocaleText>{t('Try free search')}</LocaleText>
               </DoubleButton>
             </div>
+          ) : theme === 'dark' ? (
+            <DoubleButton
+              href={`${productUrl}/search`}
+              icon="external"
+              className="closing-hotspot closing-hotspot--button"
+              aria-label={t('Start your first query in APCOSYS')}
+            >
+              <LocaleText>Start with free</LocaleText>
+            </DoubleButton>
           ) : (
             <a
               className="closing-hotspot"
               href={`${productUrl}/search`}
               aria-label={t('Start your first query in APCOSYS')}
             >
-              <span className="closing-hotspot__visual" aria-hidden="true">
-                <span>Start with free</span>
-                <span className="closing-hotspot__arrow">↗</span>
-              </span>
               <span className="sr-only">{t('Try free search')}</span>
             </a>
           )}

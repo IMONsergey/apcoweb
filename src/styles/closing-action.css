@@ -19,38 +19,28 @@
     box-shadow 200ms var(--ease);
 }
 
-.closing-hotspot__visual {
-  display: none;
-}
 html[data-theme='dark'] .closing-scene:not(.closing-scene--compact) > picture {
   overflow: hidden;
   clip-path: inset(6px);
 }
-html[data-theme='dark'] .closing-hotspot {
-  display: flex;
-  align-items: stretch;
-  background: #2aabbc;
-  color: #fff;
-  overflow: hidden;
+html[data-theme='dark'] .closing-hotspot--button {
+  --button-height: clamp(42px, 3.2vw, 54px);
+  --button-bg: var(--action);
+  --button-hover: var(--action-hover);
+  --button-color: var(--on-action);
+  width: auto;
+  height: auto;
+  min-height: var(--button-height);
+  left: calc(var(--cta-left) + var(--cta-width) / 2);
+  top: var(--cta-y);
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  overflow: visible;
+  z-index: 2;
 }
-html[data-theme='dark'] .closing-hotspot:hover {
-  background: #31b4c5;
-}
-html[data-theme='dark'] .closing-hotspot__visual {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 22%;
-  width: 100%;
-  color: #fff;
-  font: 500 clamp(10px, 0.82vw, 14px)/1 var(--font-sans);
-}
-html[data-theme='dark'] .closing-hotspot__visual > span {
-  display: grid;
-  place-items: center;
-  min-width: 0;
-}
-html[data-theme='dark'] .closing-hotspot__arrow {
-  border-left: 2px solid #0d1113;
-  font-size: 1.15em;
+html[data-theme='dark'] .closing-hotspot--button .double-button__label {
+  min-width: clamp(132px, 10vw, 172px);
+  padding-inline: clamp(16px, 1.35vw, 24px);
 }
 
 .closing-hotspot:focus-visible {
