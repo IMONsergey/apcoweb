@@ -162,6 +162,7 @@ SOFTWARE.
     get autoplay() { return this.getAttribute('autoplay') !== 'false'; }
     $(selector) { return this.shadowRoot.querySelector(selector); }
     $$(selector) { return Array.from(this.shadowRoot.querySelectorAll(selector)); }
+    _paint(name, fallback) { const value = getComputedStyle(this).getPropertyValue(name).trim(); return value || fallback; }
     connectedCallback() {
       if (this._connected) return;
       this._connected = true; live.add(this);
@@ -313,13 +314,13 @@ SOFTWARE.
       this._move(tl,'.evidence-banner-copy',1.85,.62);this._press(tl,2.55);
       tl.call(()=>{this.$('.evidence-banner-copy').dataset.copied='true';},[],2.73);
       this._pulse(tl,'.evidence-banner-check',2.73,{scale:1.12,y:0,stagger:0});
-      tl.to(banner,{backgroundColor:'#eaf8fb',duration:.28},2.73);
-      tl.to(banner,{backgroundColor:'#f6f8fa',duration:.4},3.25);
+      tl.to(banner,{backgroundColor:this._paint('--demo-anim-info','#eaf8fb'),duration:.28},2.73);
+      tl.to(banner,{backgroundColor:this._paint('--demo-anim-banner-base','#f6f8fa'),duration:.4},3.25);
       tl.call(()=>{this.$('.evidence-banner-copy').removeAttribute('data-copied');},[],3.45);
       this._move(tl,'[data-cve="0"] .evidence-severity',3.15,.65);
-      tl.to(this.$('[data-cve="0"]'),{backgroundColor:'#fff7f8',duration:.3},3.7);
+      tl.to(this.$('[data-cve="0"]'),{backgroundColor:this._paint('--demo-anim-danger','#fff7f8'),duration:.3},3.7);
       this._pulse(tl,'[data-cve="0"] .evidence-severity',3.75,{scale:1.035,y:-1,stagger:0});
-      tl.to(this.$('[data-cve="0"]'),{backgroundColor:'#ffffff',duration:.4},4.35);
+      tl.to(this.$('[data-cve="0"]'),{backgroundColor:this._paint('--demo-anim-base','#ffffff'),duration:.4},4.35);
       this._move(tl,'[data-port="22"]',4.5,.62);this._press(tl,5.18);
       this._pulse(tl,'[data-port="22"]',5.18,{scale:.99,y:0,stagger:0});
       tl.call(()=>this._evidenceService('22'),[],5.36);
@@ -433,12 +434,12 @@ SOFTWARE.
       tl.fromTo(this.$('.query-spinner'),{rotation:0},{rotation:300,duration:.6,ease:'none',immediateRender:false},3.6);
       tl.call(() => { this.$('.query-submit').removeAttribute('data-loading'); this.$('.recent-row').dataset.complete='true'; },[],4.2);
       tl.fromTo(this.$('.query-arrow'),{opacity:.4,y:4},{opacity:1,y:0,duration:.35,ease:'power2.out',immediateRender:false},4.2);
-      tl.fromTo(this.$('.recent-row'),{backgroundColor:'#ffffff',y:3},{backgroundColor:'#f1fafb',y:0,duration:.42,ease:'power2.out',immediateRender:false},4.22);
+      tl.fromTo(this.$('.recent-row'),{backgroundColor:this._paint('--demo-anim-base','#ffffff'),y:3},{backgroundColor:this._paint('--demo-anim-query-highlight','#f1fafb'),y:0,duration:.42,ease:'power2.out',immediateRender:false},4.22);
       tl.fromTo(this.$('.recent-row .recent-label'),{x:4},{x:0,duration:.45,ease:'power2.out',immediateRender:false},4.22);
       this._pulse(tl,'.recent-check',4.22,{scale:1.12,y:0,stagger:0});
       tl.to(this.$$('.recent-row').slice(1),{opacity:.82,duration:.3,stagger:.035},4.24);
       this._move(tl,'.recent-row .recent-label',4.55,.5);
-      tl.to(this.$('.recent-row'),{backgroundColor:'#ffffff',duration:.5},5.25);
+      tl.to(this.$('.recent-row'),{backgroundColor:this._paint('--demo-anim-base','#ffffff'),duration:.5},5.25);
       tl.to(this.$$('.recent-row').slice(1),{opacity:1,duration:.35,stagger:.035},5.25);
       tl.to(bar,{boxShadow:'0 0 0 0px #008da300',duration:.35,ease:'power2.inOut'},5.65);
       tl.call(() => { this.$$('.syntax-chip').forEach(function (el) { el.removeAttribute('data-active'); }); this.$('.recent-row').removeAttribute('data-complete'); },[],5.75);
@@ -446,7 +447,7 @@ SOFTWARE.
     }
     _resultsTimeline(tl) {
       const g=this._gsap, menu=this.$('.country-menu');
-      tl.call(() => { this._reset(); this._cursorAt('.filter-technologies'); g.set(this.$('.surface'),{opacity:1}); g.set(this.$$('.result-row'),{x:0,y:0,backgroundColor:'#ffffff'}); },[],0);
+      tl.call(() => { this._reset(); this._cursorAt('.filter-technologies'); g.set(this.$('.surface'),{opacity:1}); g.set(this.$$('.result-row'),{x:0,y:0,backgroundColor:this._paint('--demo-anim-base','#ffffff')}); },[],0);
       tl.to(this.$('.cursor'),{opacity:1,duration:.28},.18);
       this._move(tl,'.filter-countries',.32,.5); this._press(tl,.89);
       this._pulse(tl,'.filter-countries',.89,{scale:.98,y:0,stagger:0});
@@ -468,13 +469,13 @@ SOFTWARE.
       tl.to(this.$('.result-count'),{opacity:1,duration:.3},3);
       this._count(tl,'.result-row:not([data-row="3"]) .metric-value',2.9,.5);
       this._move(tl,'[data-row="0"] .result-tags',3.58,.5);
-      tl.to(this.$('[data-row="0"]'),{backgroundColor:'#f5fafb',duration:.35},3.88);
+      tl.to(this.$('[data-row="0"]'),{backgroundColor:this._paint('--demo-anim-highlight','#f5fafb'),duration:.35},3.88);
       this._pulse(tl,'[data-row="0"] .result-tag',4,{scale:1.025,y:-2,stagger:.035});
       this._move(tl,'[data-row="1"] .result-domain',4.35,.5);
-      tl.to(this.$('[data-row="0"]'),{backgroundColor:'#ffffff',duration:.4},4.5);
-      tl.to(this.$('[data-row="1"]'),{backgroundColor:'#f5fafb',duration:.3},4.62);
+      tl.to(this.$('[data-row="0"]'),{backgroundColor:this._paint('--demo-anim-base','#ffffff'),duration:.4},4.5);
+      tl.to(this.$('[data-row="1"]'),{backgroundColor:this._paint('--demo-anim-highlight','#f5fafb'),duration:.3},4.62);
       this._pulse(tl,'[data-row="1"] .metric-value',4.65,{scale:1.025,y:-2,stagger:.045});
-      tl.to(this.$('[data-row="1"]'),{backgroundColor:'#ffffff',duration:.4},5.5);
+      tl.to(this.$('[data-row="1"]'),{backgroundColor:this._paint('--demo-anim-base','#ffffff'),duration:.4},5.5);
       this._loop(tl,6,7.2);
     }
     _period(tl, name, at) {
@@ -509,10 +510,10 @@ SOFTWARE.
       this._pulse(tl,'.vulnerability-tile.medium',4.65,{scale:1.018,y:-3,stagger:0});
       this._move(tl,'[data-service="2"] .service-state',5,.6);
       tl.fromTo(this.$$('.service-state'),{opacity:.3,scale:.93},{opacity:1,scale:1,duration:.42,stagger:.055,ease:'power2.out',immediateRender:false},5.12);
-      tl.to(this.$('[data-service="2"]'),{backgroundColor:'#f3faf7',duration:.35},5.55);
-      tl.to(this.$('[data-service="2"] .service-state'),{backgroundColor:'#c7ecdc',duration:.35},5.55);
-      tl.to(this.$('[data-service="2"]'),{backgroundColor:'#ffffff',duration:.45},6.35);
-      tl.to(this.$('[data-service="2"] .service-state'),{backgroundColor:'#e4f6ed',duration:.45},6.35);
+      tl.to(this.$('[data-service="2"]'),{backgroundColor:this._paint('--demo-anim-success-row','#f3faf7'),duration:.35},5.55);
+      tl.to(this.$('[data-service="2"] .service-state'),{backgroundColor:this._paint('--demo-anim-success-state','#c7ecdc'),duration:.35},5.55);
+      tl.to(this.$('[data-service="2"]'),{backgroundColor:this._paint('--demo-anim-base','#ffffff'),duration:.45},6.35);
+      tl.to(this.$('[data-service="2"] .service-state'),{backgroundColor:this._paint('--demo-anim-success-state-base','#e4f6ed'),duration:.45},6.35);
       this._move(tl,'.host-copy',6.7,.65); this._press(tl,7.42);
       tl.call(() => { this.$('.host-copy').dataset.copied='true'; },[],7.6);
       this._pulse(tl,'.host-copy-check',7.6,{scale:1.12,y:0,stagger:0});

@@ -53,7 +53,9 @@ export function StepIllustration({
         decoding="async"
       />
       <SceneBoundary>
-        <Suspense fallback={null}>{mounted && <Demo scene={scene} />}</Suspense>
+        <Suspense fallback={null}>
+          {mounted && <Demo key={`${scene}-${theme}`} scene={scene} />}
+        </Suspense>
       </SceneBoundary>
     </div>
   );

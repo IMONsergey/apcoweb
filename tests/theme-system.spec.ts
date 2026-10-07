@@ -14,7 +14,7 @@ test('system theme resolves before the app and follows OS color scheme', async (
   await page.goto('./', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('html')).toHaveAttribute('data-theme-mode', 'system');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#0E1113');
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#0D1113');
   await page.emulateMedia({ colorScheme: 'light' });
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
@@ -75,13 +75,13 @@ test('dark theme replaces core surfaces instead of leaving light islands', async
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('./');
   await chooseTheme(page, 'Dark');
-  await expect(page.locator('.hero')).toHaveCSS('background-color', 'rgb(20, 25, 28)');
+  await expect(page.locator('.hero')).toHaveCSS('background-color', 'rgb(21, 27, 31)');
   await expect(page.locator('.audience-card').first()).toHaveCSS(
     'background-color',
-    'rgb(20, 25, 28)',
+    'rgb(21, 27, 31)',
   );
-  await expect(page.locator('.plan-card').first()).toHaveCSS('background-color', 'rgb(20, 25, 28)');
-  await expect(page.locator('.api-section')).toHaveCSS('background-color', 'rgb(7, 83, 97)');
+  await expect(page.locator('.plan-card').first()).toHaveCSS('background-color', 'rgb(21, 27, 31)');
+  await expect(page.locator('.api-section')).toHaveCSS('background-color', 'rgb(7, 84, 98)');
 });
 
 test('product and API shadow demos inherit their dark palettes', async ({ page }) => {
@@ -106,6 +106,90 @@ test('product and API shadow demos inherit their dark palettes', async ({ page }
       await api.evaluate((node) => getComputedStyle(node).getPropertyValue('--api-c-ffffff').trim())
     ).toLowerCase(),
   ).toBe('#14191c');
+});
+
+test('dark visual audit keeps search, trust, pricing and data controls coherent', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('./');
+  await chooseTheme(page, 'Dark');
+
+  await expect(page.locator('.trust-mark img').first()).toHaveCSS(
+    'filter',
+    'brightness(0) invert(1)',
+  );
+  await expect(page.locator('.billing--desktop .segmented')).toHaveCSS(
+    'background-color',
+    'rgb(28, 37, 42)',
+  );
+  await expect(page.locator('.language-control .language')).toHaveCSS(
+    'border-color',
+    'rgb(52, 65, 72)',
+  );
+  await expect(page.locator('.data-actions .double-button--dark .double-button__label')).toHaveCSS(
+    'background-color',
+    'rgb(4, 118, 138)',
+  );
+
+  const searchVeils = await page.locator('.search-preview').evaluate((node) => ({
+    top: getComputedStyle(node, '::before').backgroundImage,
+    bottom: getComputedStyle(node, '::after').backgroundImage,
+  }));
+  expect(searchVeils.top).toContain('linear-gradient');
+  expect(searchVeils.bottom).toContain('linear-gradient');
+});
+
+test('dark product animations never write light surfaces over their demo palettes', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('./');
+  await chooseTheme(page, 'Dark');
+  await page.locator('.step-illustration').first().scrollIntoViewIfNeeded();
+  await expect(page.locator('apcosys-product-demo')).toHaveCount(3, { timeout: 10_000 });
+
+  const brightSurfaceCount = async () =>
+    page.locator('apcosys-product-demo').evaluateAll((hosts) => {
+      const luminance = (value: string) => {
+        const match = value.match(/rgba?\(([^)]+)\)/);
+        if (!match) return 0;
+        const values = match[1]
+          .split(/[,\s/]+/)
+          .filter(Boolean)
+          .map(Number);
+        const [r, g, b] = values;
+        return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+      };
+      return hosts.flatMap((host) =>
+        Array.from(host.shadowRoot?.querySelectorAll('*') ?? []).filter((node) => {
+          const element = node as HTMLElement;
+          const box = element.getBoundingClientRect();
+          if (box.width < 20 || box.height < 16) return false;
+          const style = getComputedStyle(element);
+          const alpha = Number(
+            style.backgroundColor.match(/rgba\([^,]+,[^,]+,[^,]+,\s*([^)]+)\)/)?.[1] ?? 1,
+          );
+          return alpha > 0.8 && luminance(style.backgroundColor) > 0.62;
+        }),
+      ).length;
+    });
+
+  await expect.poll(brightSurfaceCount, { timeout: 7500, intervals: [0, 600, 1000, 1200] }).toBe(0);
+  await page.waitForTimeout(4300);
+  expect(await brightSurfaceCount()).toBe(0);
+});
+
+test('dark mobile billing dock uses the dark control surface', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./');
+  await page.evaluate(() => localStorage.setItem('apcosys-theme-mode', 'dark'));
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.locator('.pricing').scrollIntoViewIfNeeded();
+  const dock = page.locator('.billing-dock');
+  await expect(dock).toHaveAttribute('data-visible', 'true');
+  await expect(dock).toHaveCSS('background-color', 'rgb(21, 27, 31)');
+  await expect(dock.locator('.segmented')).toHaveCSS('background-color', 'rgb(28, 37, 42)');
 });
 
 test('dark closing artwork and API poster are real theme assets', async ({ page }) => {

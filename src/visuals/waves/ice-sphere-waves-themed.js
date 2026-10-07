@@ -56,7 +56,7 @@
     const enabled=()=>!destroyed&&width>0&&height>0&&visible&&!pagePaused&&!document.hidden&&!reduced()&&!settings.paused&&settings.speed>0;
     function draw(time){
       if(destroyed||!width||!height)return;
-      const start=performance.now();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;ctx.fillStyle=settings.theme==='dark'?'#0e1113':'#ffffff';ctx.fillRect(0,0,width,height);
+      const start=performance.now();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;ctx.fillStyle=settings.theme==='dark'?'#0d1113':'#ffffff';ctx.fillRect(0,0,width,height);
       for(let i=0;i<SPOTS.length;i++){
         const s=SPOTS[i],p=i*1.61;
         const driftX=(Math.sin(time*.14+p)-Math.sin(p))*.008;

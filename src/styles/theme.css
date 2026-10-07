@@ -4,24 +4,24 @@ html[data-theme='light'] {
 }
 html[data-theme='dark'] {
   color-scheme: dark;
-  --surface-page: #0e1113;
-  --surface-card: #14191c;
-  --surface-elevated: #1b2226;
-  --surface-strong: #222b30;
+  --surface-page: #0d1113;
+  --surface-card: #151b1f;
+  --surface-elevated: #1c252a;
+  --surface-strong: #263239;
   --text-primary: #f4f7f8;
-  --text-body: #c5cdd1;
-  --text-muted: #919ca2;
-  --brand-mark: #36b8c9;
-  --accent-text: #36b8c9;
-  --focus: #36b8c9;
-  --action-fill: #037a8f;
-  --action-hover-fill: #058da3;
+  --text-body: #cbd3d6;
+  --text-muted: #9ca8ae;
+  --brand-mark: #43c0d0;
+  --accent-text: #43c0d0;
+  --focus: #43c0d0;
+  --action-fill: #04768a;
+  --action-hover-fill: #0b778b;
   --on-action: #ffffff;
-  --surface-tint: #17373d;
-  --border-subtle: #2c363c;
-  --border-strong: #56636a;
-  --api-surface: #075361;
-  --visual-ink: #a8b5ba;
+  --surface-tint: #173b42;
+  --border-subtle: #344148;
+  --border-strong: #617078;
+  --api-surface: #075462;
+  --visual-ink: #b4c2c7;
 }
 
 body,
@@ -271,37 +271,43 @@ html[data-theme='dark'] .double-button--inverse {
   --button-color: var(--ink);
 }
 html[data-theme='dark'] .double-button--dark {
-  --button-bg: #273238;
-  --button-hover: #324047;
-  --button-color: var(--ink);
+  --button-bg: var(--action-fill);
+  --button-hover: var(--action-hover-fill);
+  --button-color: var(--on-action);
 }
 
 html[data-theme='dark'] .search-preview,
 html[data-theme='dark'] .search-preview .visual-fallback--flow {
   background:
-    linear-gradient(180deg, transparent 18%, #0e1113 100%),
+    linear-gradient(180deg, transparent 18%, var(--surface-page) 100%),
     radial-gradient(ellipse at 49% 42%, #0c6170 0%, transparent 58%),
     linear-gradient(110deg, #04191f 0%, #084550 67%, #0c6170 100%);
 }
 html[data-theme='dark'] .summary-wrap {
-  background: linear-gradient(180deg, #075361f2, #075361dc 68%, #07536100);
+  background: linear-gradient(
+    180deg,
+    rgb(13 17 19 / 96%) 0%,
+    rgb(7 84 98 / 88%) 34%,
+    rgb(7 84 98 / 64%) 70%,
+    rgb(7 84 98 / 0%) 100%
+  );
 }
 html[data-theme='dark'] .search-chrome__surface {
-  background: #14191c;
+  background: var(--surface-card);
   border-color: #2c363c;
 }
 html[data-theme='dark'] .search-chrome__rail {
   border-color: #2c363c;
 }
 html[data-theme='dark'] .search-chrome__rail .is-selected {
-  background: #1b2226;
+  background: var(--surface-elevated);
 }
 html[data-theme='dark'] .search-chrome__filters > span {
   border-color: #3a464c;
-  background: #14191c;
+  background: var(--surface-card);
 }
 html[data-theme='dark'] .search-chrome__account > span {
-  background: #1b2226;
+  background: var(--surface-elevated);
 }
 html[data-theme='dark'] .search-chrome__account .search-chrome__upgrade {
   background: #17373d;
@@ -319,7 +325,7 @@ html[data-theme='dark'] .search-error {
 }
 
 html[data-theme='dark'] .step-media {
-  background: linear-gradient(180deg, #14191c, #17373d);
+  background: linear-gradient(180deg, var(--surface-card), var(--surface-tint));
 }
 html[data-theme='dark'] .step-illustration {
   background: #101619;
@@ -337,7 +343,7 @@ html[data-theme='dark'] .metric-card--domains {
 }
 html[data-theme='dark'] .metric-card--ipv4,
 html[data-theme='dark'] .metric-card--protocols {
-  background: #075361;
+  background: var(--api-surface);
   color: #f4f7f8;
 }
 html[data-theme='dark'] .metric-card--ipv4 dt,
@@ -356,7 +362,7 @@ html[data-theme='dark'] .api-copy p {
 html[data-theme='dark'] .api-demo-frame,
 html[data-theme='dark'] .api-demo-frame::before,
 html[data-theme='dark'] .api-demo-frame::after {
-  background: #14191c;
+  background: var(--surface-card);
 }
 
 html[data-theme='dark'] .plan-card,
@@ -406,7 +412,7 @@ html[data-theme='dark'] .mobile-navigation .modal__header {
 
 @media (max-width: 599px) {
   html[data-theme='dark'] .search-chrome__surface {
-    background: #14191c;
+    background: var(--surface-card);
   }
 }
 
@@ -436,4 +442,94 @@ html[data-theme='dark'] .mobile-navigation .modal__header {
   html[data-theme='dark'] .closing-copy__note {
     color: var(--text-body);
   }
+}
+
+/* R14.1 global dark visual audit: remove residual light islands and strengthen depth. */
+html[data-theme='dark'] .language-control .language {
+  border-color: var(--border-subtle);
+}
+
+html[data-theme='dark'] .search-preview::before,
+html[data-theme='dark'] .search-preview::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+html[data-theme='dark'] .search-preview::before {
+  top: 0;
+  height: clamp(72px, 8vw, 124px);
+  background: linear-gradient(
+    180deg,
+    var(--surface-page) 0%,
+    rgb(13 17 19 / 58%) 38%,
+    transparent 100%
+  );
+}
+html[data-theme='dark'] .search-preview::after {
+  bottom: 0;
+  height: clamp(240px, 29vw, 430px);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(13 17 19 / 32%) 32%,
+    rgb(13 17 19 / 82%) 72%,
+    var(--surface-page) 100%
+  );
+}
+html[data-theme='dark'] .search-preview > :not(.visual) {
+  position: relative;
+  z-index: 1;
+}
+html[data-theme='dark'] .search-chrome__fog {
+  -webkit-backdrop-filter: blur(10px) saturate(0.84);
+  backdrop-filter: blur(10px) saturate(0.84);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(13 17 19 / 14%) 22%,
+    rgb(13 17 19 / 64%) 72%,
+    rgb(13 17 19 / 94%) 100%
+  );
+  mask-image: linear-gradient(transparent 0%, #000 36%, #000 100%);
+}
+html[data-theme='dark'] .trust-mark img {
+  filter: brightness(0) invert(1);
+  opacity: 0.78;
+}
+
+html[data-theme='dark'] .segmented {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+}
+html[data-theme='dark'] .segmented::before {
+  background: var(--action-fill);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 5%);
+}
+html[data-theme='dark'] .segmented label > span {
+  color: var(--text-body);
+}
+html[data-theme='dark'] .segmented input:checked + span {
+  color: var(--on-action);
+}
+html[data-theme='dark'] .segmented input:focus-visible + span {
+  outline-color: var(--focus);
+}
+html[data-theme='dark'] .billing-dock {
+  background: var(--surface-card);
+  border-color: var(--border-subtle);
+  box-shadow:
+    0 16px 42px rgb(0 0 0 / 34%),
+    0 1px 0 rgb(255 255 255 / 3%);
+}
+html[data-theme='dark'] .billing-dock__offer strong {
+  color: var(--accent-text);
+}
+
+html[data-theme='dark'] .step-card,
+html[data-theme='dark'] .plan-card,
+html[data-theme='dark'] .faq-list details,
+html[data-theme='dark'] .audience-card {
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 1.8%);
 }

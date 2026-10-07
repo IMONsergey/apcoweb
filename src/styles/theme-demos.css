@@ -1,3 +1,27 @@
+/* Runtime animation colors are separate from static demo tokens because GSAP writes inline paint values. */
+apcosys-product-demo {
+  --demo-anim-base: #ffffff;
+  --demo-anim-highlight: #f5fafb;
+  --demo-anim-query-highlight: #f1fafb;
+  --demo-anim-info: #eaf8fb;
+  --demo-anim-banner-base: #f6f8fa;
+  --demo-anim-danger: #fff7f8;
+  --demo-anim-success-row: #f3faf7;
+  --demo-anim-success-state: #c7ecdc;
+  --demo-anim-success-state-base: #e4f6ed;
+}
+html[data-theme='dark'] apcosys-product-demo {
+  --demo-anim-base: #151b1f;
+  --demo-anim-highlight: #193038;
+  --demo-anim-query-highlight: #173b42;
+  --demo-anim-info: #18383f;
+  --demo-anim-banner-base: #1b252a;
+  --demo-anim-danger: #321d22;
+  --demo-anim-success-row: #173128;
+  --demo-anim-success-state: #285a44;
+  --demo-anim-success-state-base: #1c4233;
+}
+
 /* Generated R14 shadow-DOM palettes. Light values remain inline fallbacks in the source demos. */
 html[data-theme='dark'] apcosys-product-demo {
   --demo-c-28475010: #36b8c910;

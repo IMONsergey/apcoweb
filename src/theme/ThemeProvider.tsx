@@ -37,7 +37,7 @@ function applyDomTheme(mode: ThemeMode, theme: ResolvedTheme, animate: boolean) 
   html.dataset.theme = theme;
   html.style.colorScheme = theme;
   const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-  if (meta) meta.content = theme === 'dark' ? '#0E1113' : '#03879F';
+  if (meta) meta.content = theme === 'dark' ? '#0D1113' : '#03879F';
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
