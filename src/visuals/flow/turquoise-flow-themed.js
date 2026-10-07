@@ -9,31 +9,52 @@ const SPOTS = [
 ];
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
 const finite = (n, fallback) => Number.isFinite(n) ? n : fallback;
-let sharedBrushes = null;
-let sharedSphere = null;
-let sharedWave = null;
+let sharedBrushesLight = null;
+let sharedBrushesDark = null;
+let sharedSphereLight = null;
+let sharedSphereDark = null;
+let sharedWaveLight = null;
+let sharedWaveDark = null;
+const DARK_SPOT_COLORS = [
+  [67, 174, 190],
+  [59, 161, 179],
+  [74, 179, 191],
+  [7, 96, 116],
+  [5, 82, 101],
+];
 
-function getSphere() {
-  if (sharedSphere) return sharedSphere;
+function getSphere(theme = 'light') {
+  const cached = theme === 'dark' ? sharedSphereDark : sharedSphereLight;
+  if (cached) return cached;
   const size = 128;
   const sphere = document.createElement('canvas');
   sphere.width = sphere.height = size;
   const c = sphere.getContext('2d');
   // An unfocused glow: no sphere silhouette, surface, or 3D shading.
   const glow = c.createRadialGradient(size * .46, size * .44, 0, size * .50, size * .50, size * .50);
-  glow.addColorStop(0, 'rgba(192,246,252,.70)');
-  glow.addColorStop(.28, 'rgba(181,241,249,.57)');
-  glow.addColorStop(.60, 'rgba(166,233,243,.22)');
-  glow.addColorStop(.85, 'rgba(155,226,238,.04)');
-  glow.addColorStop(1, 'rgba(155,226,238,0)');
+  if (theme === 'dark') {
+    glow.addColorStop(0, 'rgba(78,190,204,.42)');
+    glow.addColorStop(.28, 'rgba(64,176,192,.34)');
+    glow.addColorStop(.60, 'rgba(48,150,168,.14)');
+    glow.addColorStop(.85, 'rgba(38,128,148,.03)');
+    glow.addColorStop(1, 'rgba(38,128,148,0)');
+  } else {
+    glow.addColorStop(0, 'rgba(192,246,252,.70)');
+    glow.addColorStop(.28, 'rgba(181,241,249,.57)');
+    glow.addColorStop(.60, 'rgba(166,233,243,.22)');
+    glow.addColorStop(.85, 'rgba(155,226,238,.04)');
+    glow.addColorStop(1, 'rgba(155,226,238,0)');
+  }
   c.fillStyle = glow;
   c.fillRect(0, 0, size, size);
-  sharedSphere = sphere;
+  if (theme === 'dark') sharedSphereDark = sphere;
+  else sharedSphereLight = sphere;
   return sphere;
 }
 
-function getWave() {
-  if (sharedWave) return sharedWave;
+function getWave(theme = 'light') {
+  const cached = theme === 'dark' ? sharedWaveDark : sharedWaveLight;
+  if (cached) return cached;
   const size = 128;
   const wave = document.createElement('canvas');
   wave.width = wave.height = size;
@@ -49,25 +70,32 @@ function getWave() {
       const diagonal = r ? (nx - ny) / (r * Math.SQRT2) : 0;
       const angular = .30 + .70 * diagonal * diagonal;
       const p = (y * size + x) * 4;
-      rgba[p] = 208; rgba[p + 1] = 249; rgba[p + 2] = 255;
+      if (theme === 'dark') {
+        rgba[p] = 68; rgba[p + 1] = 176; rgba[p + 2] = 190;
+      } else {
+        rgba[p] = 208; rgba[p + 1] = 249; rgba[p + 2] = 255;
+      }
       rgba[p + 3] = ring * angular * 255;
     }
   }
   c.putImageData(image, 0, 0);
-  sharedWave = wave;
+  if (theme === 'dark') sharedWaveDark = wave;
+  else sharedWaveLight = wave;
   return wave;
 }
 
 // These brushes are created from radial gradients in code once, not loaded assets.
 // Pre-rendering avoids repainting gradient primitives on every animation frame.
-function getBrushes() {
-  if (sharedBrushes) return sharedBrushes;
-  sharedBrushes = SPOTS.map(spot => {
+function getBrushes(theme = 'light') {
+  const cached = theme === 'dark' ? sharedBrushesDark : sharedBrushesLight;
+  if (cached) return cached;
+  const brushes = SPOTS.map((spot, index) => {
     const brush = document.createElement('canvas');
     brush.width = brush.height = 96;
     const context = brush.getContext('2d');
     const g = context.createRadialGradient(48, 48, 0, 48, 48, 48);
-    const rgb = `${spot[6]},${spot[7]},${spot[8]}`;
+    const color = theme === 'dark' ? DARK_SPOT_COLORS[index] : [spot[6], spot[7], spot[8]];
+    const rgb = `${color[0]},${color[1]},${color[2]}`;
     // A smooth Gaussian profile; no filter(), blur, shadows, or blend modes.
     for (let i = 0; i < 25; i++) {
       const r = i / 24;
@@ -78,7 +106,9 @@ function getBrushes() {
     context.fillRect(0, 0, 96, 96);
     return brush;
   });
-  return sharedBrushes;
+  if (theme === 'dark') sharedBrushesDark = brushes;
+  else sharedBrushesLight = brushes;
+  return brushes;
 }
 
 // All instances share one rAF; the last paused/unmounted instance cancels it.
@@ -110,9 +140,6 @@ export function createTurquoiseFlow(canvas, options = {}) {
   try { ctx = canvas.getContext('2d', { alpha: false }); } catch (_) { ctx = null; }
   if (!ctx) return { update() {}, destroy() {}, getStats: () => ({ supported: false }) };
 
-  const brushes = getBrushes();
-  const sphere = getSphere();
-  const wave = getWave();
   const settings = { speed: 1, strength: 1, fps: 30, resolution: 192, paused: false, adaptive: true, theme: 'light' };
   let destroyed = false;
   let visible = !('IntersectionObserver' in window);
@@ -153,7 +180,8 @@ export function createTurquoiseFlow(canvas, options = {}) {
       const v = i / 48;
       if (settings.theme === 'dark') {
         const top = 1 - clamp(v / .16, 0, 1);
-        const bottom = Math.pow(clamp((v - .50) / .48, 0, 1), 1.08);
+        const bottomProgress = clamp((v - .34) / .38, 0, 1);
+        const bottom = bottomProgress * bottomProgress * (3 - 2 * bottomProgress);
         const alpha = Math.max(top * .98, bottom);
         whiteVeil.addColorStop(v, `rgba(13,17,19,${alpha})`);
       } else {
@@ -166,6 +194,9 @@ export function createTurquoiseFlow(canvas, options = {}) {
 
   function render(t) {
     if (!baseGradient || destroyed) return;
+    const brushes = getBrushes(settings.theme);
+    const sphere = getSphere(settings.theme);
+    const wave = getWave(settings.theme);
     const started = performance.now();
     const amplitude = settings.strength;
     ctx.setTransform(1, 0, 0, 1, 0, 0);
