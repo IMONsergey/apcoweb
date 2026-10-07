@@ -171,18 +171,16 @@ export function createTurquoiseFlow(canvas, options = {}) {
     w = nextW; h = nextH;
     canvas.width = w; canvas.height = h;
     baseGradient = ctx.createLinearGradient(0, 0, w, 0);
-    baseGradient.addColorStop(0, settings.theme === 'dark' ? '#082a31' : '#003c4c');
-    baseGradient.addColorStop(1, settings.theme === 'dark' ? '#0b5967' : '#2396af');
+    baseGradient.addColorStop(0, '#003c4c');
+    baseGradient.addColorStop(1, '#2396af');
     whiteVeil = ctx.createLinearGradient(0, 0, 0, h);
-    // Light keeps the supplied white lower fade. Dark owns both edges itself so the
-    // live canvas enters and leaves the surrounding page without CSS cover plates.
+    // The live turquoise field is identical at the top in both themes. Only the
+    // destination of the lower fade changes: light -> page white, dark -> page dark.
     for (let i = 0; i <= 48; i++) {
       const v = i / 48;
       if (settings.theme === 'dark') {
-        const top = 1 - clamp(v / .16, 0, 1);
-        const bottomProgress = clamp((v - .34) / .38, 0, 1);
-        const bottom = bottomProgress * bottomProgress * (3 - 2 * bottomProgress);
-        const alpha = Math.max(top * .98, bottom);
+        const bottomProgress = clamp((v - .38637) / (.86 - .38637), 0, 1);
+        const alpha = bottomProgress * bottomProgress * (3 - 2 * bottomProgress);
         whiteVeil.addColorStop(v, `rgba(13,17,19,${alpha})`);
       } else {
         const alpha = Math.pow(clamp((v - .38637) / (.97139 - .38637), 0, 1), 1.02082);
@@ -194,9 +192,9 @@ export function createTurquoiseFlow(canvas, options = {}) {
 
   function render(t) {
     if (!baseGradient || destroyed) return;
-    const brushes = getBrushes(settings.theme);
-    const sphere = getSphere(settings.theme);
-    const wave = getWave(settings.theme);
+    const brushes = getBrushes('light');
+    const sphere = getSphere('light');
+    const wave = getWave('light');
     const started = performance.now();
     const amplitude = settings.strength;
     ctx.setTransform(1, 0, 0, 1, 0, 0);

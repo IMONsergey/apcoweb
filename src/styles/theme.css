@@ -279,15 +279,9 @@ html[data-theme='dark'] .double-button--dark {
 html[data-theme='dark'] .search-preview,
 html[data-theme='dark'] .search-preview .visual-fallback--flow {
   background:
-    linear-gradient(
-      180deg,
-      var(--surface-page) 0%,
-      transparent 16%,
-      transparent 50%,
-      var(--surface-page) 98%
-    ),
-    radial-gradient(ellipse at 49% 40%, #0b5967 0%, transparent 58%),
-    linear-gradient(110deg, #082a31 0%, #084550 67%, #0b5967 100%);
+    linear-gradient(180deg, transparent 18%, var(--surface-page) 86%),
+    radial-gradient(ellipse at 49% 42%, #91dce6 0%, transparent 58%),
+    linear-gradient(110deg, #0c4150 0%, #419cab 67%, #2996ab 100%);
 }
 @media (min-width: 600px) {
   html[data-theme='dark'] .search-chrome {

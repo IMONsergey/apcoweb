@@ -153,9 +153,10 @@ test('dark visual audit keeps search, trust, pricing and data controls coherent'
     });
   const luminance = ([r, g, b]: number[]) => 0.2126 * r + 0.7152 * g + 0.0722 * b;
   expect(searchPixels).toHaveLength(3);
-  expect(luminance(searchPixels[0])).toBeLessThan(45);
+  // Dark starts with the same live turquoise field as light; only the lower fade changes.
+  expect(luminance(searchPixels[0])).toBeGreaterThan(90);
   expect(luminance(searchPixels[2])).toBeLessThan(35);
-  expect(luminance(searchPixels[1])).toBeGreaterThan(luminance(searchPixels[0]) + 55);
+  expect(luminance(searchPixels[1])).toBeGreaterThan(luminance(searchPixels[0]) + 40);
 
   const contactButton = page.locator('.contact-banner .double-button__label');
   await expect(contactButton).toHaveCSS('background-color', 'rgb(255, 255, 255)');
