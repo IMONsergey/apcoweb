@@ -50,7 +50,7 @@
     return result;
   }
   export function createIceWaves(canvas,options={}){
-    let ctx;try{ctx=canvas.getContext('2d',{alpha:false})}catch(error){ctx=null}
+    let ctx;try{ctx=canvas.getContext('2d',{alpha:false})}catch{ctx=null}
     if(!ctx)return {update(){},destroy(){},getStats:()=>({supported:false})};
     const settings={speed:1,paused:false,theme:'light'};
     const motion=window.matchMedia?.('(prefers-reduced-motion: reduce)');

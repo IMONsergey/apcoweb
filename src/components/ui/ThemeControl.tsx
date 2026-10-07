@@ -1,4 +1,4 @@
-import { useId, useRef, type KeyboardEvent } from 'react';
+import { useId, useLayoutEffect, useRef, type KeyboardEvent } from 'react';
 import { useTheme, type ThemeMode } from '../../theme/ThemeProvider';
 import { Icon } from './Icon';
 
@@ -8,31 +8,54 @@ const options: Array<{ value: ThemeMode; label: string }> = [
   { value: 'dark', label: 'Dark' },
 ];
 
-function ThemeOptions({ compact = false }: { compact?: boolean }) {
+function ThemeOptions({ compact = false, onSelect }: { compact?: boolean; onSelect?: () => void }) {
   const { mode, setMode } = useTheme();
+  const name = useId();
   return (
     <div
       className={compact ? 'theme-segmented' : 'theme-menu-options'}
-      role={compact ? 'radiogroup' : undefined}
+      role={compact ? 'radiogroup' : 'group'}
       aria-label="Appearance"
     >
-      {options.map((option) => (
-        <button
-          key={option.value}
-          type="button"
-          role={compact ? 'radio' : 'menuitemradio'}
-          aria-checked={mode === option.value}
-          data-active={mode === option.value}
-          onClick={() => setMode(option.value)}
-        >
-          <span>{option.label}</span>
-          {mode === option.value && (
-            <span className="theme-check" aria-hidden="true">
-              ✓
-            </span>
-          )}
-        </button>
-      ))}
+      {options.map((option) =>
+        compact ? (
+          <label key={option.value} data-active={mode === option.value}>
+            <input
+              type="radio"
+              name={name}
+              value={option.value}
+              checked={mode === option.value}
+              onChange={() => setMode(option.value)}
+            />
+            <span>{option.label}</span>
+            {mode === option.value && (
+              <span className="theme-check" aria-hidden="true">
+                ✓
+              </span>
+            )}
+          </label>
+        ) : (
+          <button
+            key={option.value}
+            type="button"
+            role="menuitemradio"
+            aria-checked={mode === option.value}
+            data-active={mode === option.value}
+            tabIndex={-1}
+            onClick={() => {
+              setMode(option.value);
+              onSelect?.();
+            }}
+          >
+            <span>{option.label}</span>
+            {mode === option.value && (
+              <span className="theme-check" aria-hidden="true">
+                ✓
+              </span>
+            )}
+          </button>
+        ),
+      )}
     </div>
   );
 }
@@ -47,11 +70,37 @@ export function ThemeMenu({
   const id = useId();
   const trigger = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
+  const focusLast = useRef(false);
+  useLayoutEffect(() => {
+    if (!open) return;
+    // Wait until the committed disclosure has its visible style before moving focus.
+    const frame = requestAnimationFrame(() => {
+      const buttons = panel.current?.querySelectorAll<HTMLButtonElement>('[role="menuitemradio"]');
+      buttons?.[focusLast.current ? buttons.length - 1 : 0]?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [open]);
+  const close = () => {
+    onOpenChange(false);
+    trigger.current?.focus({ preventScroll: true });
+  };
+  const openMenu = (last = false) => {
+    focusLast.current = last;
+    onOpenChange(true);
+    if (open) {
+      const buttons = panel.current?.querySelectorAll<HTMLButtonElement>('[role="menuitemradio"]');
+      buttons?.[last ? buttons.length - 1 : 0]?.focus({ preventScroll: true });
+    }
+  };
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Escape') {
       event.preventDefault();
-      onOpenChange(false);
-      trigger.current?.focus({ preventScroll: true });
+      event.stopPropagation();
+      close();
+    }
+    if (event.key === 'Tab') {
+      // Restore the trigger before native Tab chooses the next control outside the menu.
+      close();
     }
     if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
       const buttons = Array.from(
@@ -68,7 +117,7 @@ export function ThemeMenu({
             : current < 0
               ? 0
               : (current + (event.key === 'ArrowDown' ? 1 : -1) + buttons.length) % buttons.length;
-      buttons[next]?.focus();
+      buttons[next]?.focus({ preventScroll: true });
     }
   };
   return (
@@ -86,7 +135,13 @@ export function ThemeMenu({
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={id}
-        onClick={() => onOpenChange(!open)}
+        onClick={() => (open ? close() : openMenu())}
+        onKeyDown={(event) => {
+          if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+            event.preventDefault();
+            openMenu(event.key === 'ArrowUp');
+          }
+        }}
       >
         <Icon name="appearance" />
       </button>
@@ -102,7 +157,7 @@ export function ThemeMenu({
         onKeyDown={onKeyDown}
       >
         <p className="eyebrow">APPEARANCE</p>
-        <ThemeOptions />
+        <ThemeOptions onSelect={close} />
       </div>
     </div>
   );

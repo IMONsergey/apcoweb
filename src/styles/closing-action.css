@@ -1,9 +1,25 @@
 /* Click regions follow the actual visible CTA in each supplied Start asset. Images are unchanged. */
 .closing-scene {
+  --closing-cta-surface: #fdfdfd;
   --cta-left: 45%;
   --cta-y: 66.215%;
   --cta-width: 14.56%;
   --cta-height: 4.73%;
+}
+html[data-theme='dark'] .closing-scene {
+  --closing-cta-surface: #131517;
+}
+/* Cover the raster CTA before placing its accessible, theme-aware replacement. */
+.closing-cta-mask {
+  position: absolute;
+  left: calc(var(--cta-left) - 4px);
+  top: var(--cta-y);
+  width: calc(var(--cta-width) + 8px);
+  height: calc(var(--cta-height) + 8px);
+  background: var(--closing-cta-surface);
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
 }
 .closing-hotspot {
   position: absolute;
@@ -23,8 +39,8 @@ html[data-theme='dark'] .closing-scene:not(.closing-scene--compact) > picture {
   overflow: hidden;
   clip-path: inset(6px);
 }
-html[data-theme='dark'] .closing-hotspot--button {
-  --button-height: clamp(42px, 3.2vw, 54px);
+.closing-hotspot--button {
+  --button-height: clamp(44px, 3.2vw, 54px);
   --button-bg: var(--action);
   --button-hover: var(--action-hover);
   --button-color: var(--on-action);
@@ -38,15 +54,15 @@ html[data-theme='dark'] .closing-hotspot--button {
   overflow: visible;
   z-index: 2;
 }
-html[data-theme='dark'] .closing-hotspot--button .double-button__label {
+.closing-hotspot--button .double-button__label {
   min-width: clamp(132px, 10vw, 172px);
   padding-inline: clamp(16px, 1.35vw, 24px);
 }
 
 .closing-hotspot:focus-visible {
-  outline: 2px solid var(--action);
+  outline: 2px solid var(--focus);
   outline-offset: 4px;
-  box-shadow: 0 0 0 6px #ffffffb3;
+  box-shadow: 0 0 0 6px var(--white);
 }
 @media (max-width: 1199px) {
   .closing-scene {

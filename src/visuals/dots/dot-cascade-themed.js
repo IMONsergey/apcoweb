@@ -25,7 +25,7 @@ function unsubscribe(job) {
 export function createDotCascade(canvas, options = {}, host = canvas.parentElement || canvas) {
   const surface = canvas.parentElement || host;
   let ctx;
-  try { ctx = canvas.getContext('2d'); } catch (_) { ctx = null; }
+  try { ctx = canvas.getContext('2d'); } catch { ctx = null; }
   if (!ctx) return {update() {}, destroy() {}, getStats: () => ({supported: false})};
   const settings = {
     spacing: 22.5, dotRadius: 1.1, startOpacity: .24, endOpacity: 0,

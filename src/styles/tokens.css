@@ -8,7 +8,7 @@
   --surface-elevated: #eceef1;
   --surface-strong: #e1e4e7;
   --text-primary: #121314;
-  --text-body: #3a3e43;
+  --color-text-body: #3a3e43;
   --text-muted: #62666b;
   --brand-mark: #03879f;
   --accent-text: #037a8f;
@@ -24,7 +24,7 @@
   --page: var(--surface-page);
   --white: var(--surface-card);
   --ink: var(--text-primary);
-  --body: var(--text-body);
+  --body: var(--color-text-body);
   --muted: var(--text-muted);
   --brand: var(--action-fill);
   --action: var(--action-fill);
@@ -40,7 +40,7 @@
   --media-density: 1;
   --section-space: clamp(48px, calc(100px * var(--space-density)), 100px);
   --header-height: 96px;
-  --text-body: 18px;
+  --font-size-body: 18px;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   font-family: var(--font-sans);
   font-synthesis: none;
@@ -58,7 +58,7 @@ html {
 }
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 0;
 }
 button,
 input {
@@ -144,7 +144,7 @@ h3 {
   font-weight: 500;
 }
 p {
-  font-size: var(--text-body);
+  font-size: var(--font-size-body);
   line-height: 1.4;
   text-wrap: pretty;
 }
@@ -202,7 +202,7 @@ p {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0s !important;
   }
 }
 

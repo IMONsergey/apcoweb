@@ -1,5 +1,9 @@
 # Work state
 
+## Current candidate — R15 audit repairs, 2026-10-07
+
+The owner authorizes fixing the confirmed main and dark/menu audit findings on the R14 theme candidate. Read REVIEW-R15.md first. Color and font-size tokens are separate, Appearance has complete keyboard/native-radio behavior, the mobile dialog closes at the desktop boundary and fresh sessions start at the top. Footer targets, price fitting and closing CTA naming/geometry are repaired; maintained JS is linted and small responsive posters are supplied. Pricing and Footer own their styles. `npm run build:root` produces the client's domain-root handoff; Pages retains `/apcoweb/`. Full local Chromium passes 153 scenarios; Firefox's one serialization-only assertion is corrected and passes separately. Four domain-root smoke cases pass. WebKit and fresh three-engine CI remain pending. Publication is blocked by connector/CLI access; draft PR #16 and the original preview still contain the previous candidate. The delivery includes the committed source patch. Preview content conditions remain deliberate. Do not merge or update main without new owner confirmation.
+
 ## Current continuation — accepted R12 technical cleanup, 2026-10-06
 
 The owner accepts R12 55b1f3f as the visual base and authorizes only test/responsive-core-r12. Read REVIEW-R12-CLEANUP.md first. Three component CSS files consolidate duplicate and overridden rules; no typography, wrapping, CTA, composition, responsive state, Step scale, renderer, dependency or asset changes. No patch stylesheet. All 480 screenshot pairs are pixel-identical across the complete 96-case EN/RU/three-engine matrix; 126 integer/fractional container-boundary checks have zero differences. Local unchanged suite passes 379 cases initially and its five failed cases pass a separate one-worker repeat; initial reports/traces are preserved. Fresh locked-browser CI and the new isolated preview are recorded in draft PR #13 against the pushed cleanup commit. Do not merge, deploy Pages or change main (7951f19).
@@ -49,6 +53,7 @@ GitHub Pages: https://imonsergey.github.io/apcoweb/. Only a successful main depl
 Development port: 5187. Production preview: 4187. Do not disturb 5173 (another project). The dock remains contextual at <=1199 px, desktop billing remains at >=1200 px, and all approved 20% annual arithmetic is preserved. Figma must not be changed in a code-only task.
 
 The test-only follow-up PR is a test-only release continuation after PR #4: the live CTA check now waits for its responsive image and measures both rectangles atomically. The website/build is identical to the R4 release. Its final PR report is authoritative for the latest merge/deploy and production smoke; the initial 68-pass/1-retry result is preserved transparently in REVIEW-R4.md.
+
 ## Historical R7 header and typography, 2026-10-05
 
 The owner added sticky navigation and project-wide typography after R6. R6 was merged in PR #7 and published at merge `2db5dc3c610c0a14ebd7eb673b1c13df81c7c1b8`; all 77 actual Pages Chromium checks passed in run 37323365212, and 12 published JS/CSS hashes matched the tested build. R7 extends that release; see REVIEW-R7.md. Runtime/test source `b52211d3b39e6ef6ea8b45da0adcfc8147935dfa` passed all 246 three-engine scenarios with zero retries in run 37331119341 and all 82 independent Chromium checks in run 37331119331. Inspected screenshots and exact provenance are retained in screenshots/r7/ and qa-r7-summary.json. PR #8 records the final release outcome.

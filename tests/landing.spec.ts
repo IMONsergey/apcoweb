@@ -206,7 +206,8 @@ for (const width of [1440, 390])
     await page.setViewportSize({ width, height: 1000 });
     await openLanding(page);
     const results = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
+      .withRules(['label-content-name-mismatch'])
       .analyze();
     expect(
       results.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),

@@ -4,6 +4,8 @@ This is the React/TypeScript marketing website, not the authenticated SaaS appli
 
 ## Read first
 
+- docs/REVIEW-R15.md: audit fixes on the R14 theme candidate. Preserve the supplied visual effects and the theme-invariant API section; use the new typography, accessible controls and regression coverage. Client handoff builds use `npm run build:root` for a domain root. The R12 restriction on merging/updating main still applies.
+
 - docs/REVIEW-R12.md: this branch is a comparison candidate, based strictly on the complete PR #12 rollback. Preserve R10 composition, typography and entrance/search lifecycle. Layout is CSS-only; the five supplied GSAP product scenes are authorized alongside the API demo. Do not merge or update main without the owner's new confirmation. Earlier R10 publication instructions below are historical.
 
 - docs/REVIEW-R10.md: the whole page appears only after both search-background engines have painted, fonts and initial images are prepared. There is no loader or logo. Preserve eager audience contours, scroll-linked search placement, aligned API frame, navigation reveal and active-language natural sizing.

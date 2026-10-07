@@ -2,7 +2,6 @@
 .search-scene__content {
   display: contents;
 }
-.footer-columns .eyebrow,
 .mobile-nav-group > .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.04em;

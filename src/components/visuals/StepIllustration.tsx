@@ -3,6 +3,11 @@ import { media } from '../../content/site';
 import { useTheme } from '../../theme/ThemeProvider';
 
 const Demo = lazy(() => import('./StepDemoMount'));
+const posterWidths: Record<string, number> = {
+  'step-query.webp': 908,
+  'step-results.webp': 1234,
+  'step-host.webp': 1164,
+};
 
 class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
@@ -46,6 +51,11 @@ export function StepIllustration({
     <div ref={ref} className="step-illustration" role="img" aria-label={alt}>
       <img
         src={media(themedImage)}
+        srcSet={[360, 600]
+          .map((width) => `${media(themedImage.replace('.webp', `-${width}.webp`))} ${width}w`)
+          .concat(`${media(themedImage)} ${posterWidths[image]}w`)
+          .join(', ')}
+        sizes="(max-width: 599px) calc(100vw - 108px), (max-width: 1199px) calc((100vw - 120px) / 2), (min-width: 1800px) 522px, calc((100vw - 220px) / 3)"
         width="908"
         height="609"
         alt=""

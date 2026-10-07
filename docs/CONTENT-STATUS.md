@@ -1,6 +1,6 @@
 # Content and integration status
 
-This GitHub Pages website is a frontend review build. No authentication, API subscription or payment is implemented locally.
+This is a frontend client-review build, hosted either at a domain root or under a configured subdirectory. No authentication, API subscription or payment is implemented locally. The accepted source commit must match the delivered `dist`; see README for both build targets.
 
 ## Preserved from the supplied Figma concept
 
@@ -22,11 +22,22 @@ Verified from the current APCOSYS public frontend during implementation:
 - Confirm payment destinations and final checkout integration. The annual arithmetic was authorized in R2; the preview still does not process payments.
 - Approve the remaining FAQ copy. The Free answer is from Figma. API and contact answers use the already stated API entitlement and provided email. Credit-consumption rules are not invented: the answer directs the visitor to the team.
 - Confirm the figures, rights/basis for the trust logos, and accuracy of product images. The Host/API images are illustrative source assets, not proof of implemented server functionality.
-- Replace remaining placeholders/examples in the fourth/fifth carousel cards when product-approved illustrations are available.
+- Approve the illustrative examples in all five animated carousel scenes before treating them as product screenshots.
 - Approve remaining outbound destinations and remove `noindex` only when launching the final production site.
 
 The site makes no background product API calls, collects no credentials and has no analytics/cookies added by this implementation. Clicking a product link or submitting search transfers the visitor to the existing APCOSYS domain.
 
-## R4 localization
+## Current language and theme availability
 
-EN/RU selection localizes the landing UI, metadata and accessibility labels. RU copy is a working translation of the existing English content, not client-approved marketing copy. Technical product names and the prepared illustrative product images remain intact; English labels baked into desktop/tablet illustrations are not claims that the landing selector controls the external product. Confirm the Russian editorial copy before a production-domain launch.
+The review UI is English. English is the active language; Russian and Chinese are disabled and labelled SOON. Retained Russian translation source is historical working copy, not a currently available or client-approved translation. The landing selector does not control the external product's language.
+
+Light, Dark and System are implemented. The API block intentionally preserves its original cyan and light product interface in both themes; other theme surfaces and effects use the selected palette.
+
+## Preview routing decisions
+
+- Monitoring links to the product search entry; it does not start a separate monitoring flow on this landing page.
+- Bug Bounty, Vulnerability Research and OSINT links share the researchers overview.
+- Explore For Teams leads to the API overview, which describes the current integration path.
+- Sign In opens the existing product search entry and its authentication controls.
+
+These existing review destinations are retained without inventing new product routes. Confirm their names and final product flows with the owner before production publication.

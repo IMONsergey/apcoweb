@@ -14,7 +14,17 @@ export function Header() {
   const [active, setActive] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const ref = useRef<HTMLElement>(null);
+  const brand = useRef<HTMLAnchorElement>(null);
   const { compact, hidden } = useScrollHeader(ref, !!active || mobileOpen);
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1200px)');
+    const onChange = () => {
+      setActive(null);
+      if (desktop.matches) setMobileOpen(false);
+    };
+    desktop.addEventListener('change', onChange);
+    return () => desktop.removeEventListener('change', onChange);
+  }, []);
   useEffect(() => {
     if (!active) return;
     const onPointer = (event: PointerEvent) => {
@@ -46,7 +56,7 @@ export function Header() {
         inert={hidden}
       >
         <div className="container header-row">
-          <a className="brand" href="#top" aria-label={t('APCOSYS home')}>
+          <a ref={brand} className="brand" href="#top" aria-label={t('APCOSYS home')}>
             <Logo />
           </a>
           <nav className="desktop-nav" aria-label={t('Main navigation')}>
@@ -158,6 +168,7 @@ export function Header() {
         onClose={() => setMobileOpen(false)}
         title={t('Navigation')}
         className="mobile-navigation"
+        fallbackFocus={brand}
       >
         <nav aria-label={t('Mobile navigation')}>
           {navigation.map((group) => (

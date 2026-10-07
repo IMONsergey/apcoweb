@@ -3,9 +3,6 @@
   display: none;
 }
 @media (max-width: 1199px) {
-  .billing--desktop {
-    display: none;
-  }
   /* Only document content needs scroll clearance; applying it to the fixed radios
      can make keyboard focus try to scroll the panel itself out of its section. */
   .pricing-options :is(.plan-grid, .comparison-action) :is(button, a, input) {

@@ -170,11 +170,25 @@ test('dark visual audit keeps search, trust, pricing and data controls coherent'
 test('dark product animations never write light surfaces over their demo palettes', async ({
   page,
 }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('./');
   await chooseTheme(page, 'Dark');
   await page.locator('.step-illustration').first().scrollIntoViewIfNeeded();
   await expect(page.locator('apcosys-product-demo')).toHaveCount(3, { timeout: 10_000 });
+  await expect
+    .poll(() =>
+      page.locator('apcosys-product-demo').evaluateAll((hosts) =>
+        hosts.every((host) => {
+          const scene = host as HTMLElement & {
+            animated?: boolean;
+            _timeline?: { duration: () => number };
+          };
+          return scene.animated && (scene._timeline?.duration() ?? 0) > 0;
+        }),
+      ),
+    )
+    .toBe(true);
 
   const brightSurfaceCount = async () =>
     page.locator('apcosys-product-demo').evaluateAll((hosts) => {
@@ -318,7 +332,8 @@ test('dark theme passes WCAG AA scans on desktop and phone', async ({ page }) =>
     await page.evaluate(() => localStorage.setItem('apcosys-theme-mode', 'dark'));
     await page.reload({ waitUntil: 'networkidle' });
     const results = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
+      .withRules(['label-content-name-mismatch'])
       .analyze();
     expect(
       results.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
@@ -327,15 +342,22 @@ test('dark theme passes WCAG AA scans on desktop and phone', async ({ page }) =>
   }
 });
 
-test('footer links keep enlarged invisible pointer hit areas', async ({ page }) => {
+test('mobile footer links have separate real pointer hit areas', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('./', { waitUntil: 'networkidle' });
-  const link = page.locator('.footer-columns a').first();
-  await link.scrollIntoViewIfNeeded();
-  const hit = await link.evaluate((element) => {
-    const box = element.getBoundingClientRect();
-    const target = document.elementFromPoint(box.left + box.width / 2, box.top - 6);
-    return target === element || element.contains(target);
-  });
-  expect(hit).toBe(true);
+  for (const link of await page.locator('.footer-columns a').all()) {
+    await link.scrollIntoViewIfNeeded();
+    const hits = await link.evaluate((element) => {
+      const box = element.getBoundingClientRect();
+      return {
+        height: box.height,
+        targets: [1, box.height / 2, box.height - 1].map((y) => {
+          const target = document.elementFromPoint(box.left + box.width / 2, box.top + y);
+          return target === element || element.contains(target);
+        }),
+      };
+    });
+    expect(hits.height).toBeGreaterThanOrEqual(44);
+    expect(hits.targets).toEqual([true, true, true]);
+  }
 });

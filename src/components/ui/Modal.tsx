@@ -1,6 +1,6 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
-import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { useMotion } from '../../hooks/useMotion';
 import { Icon } from './Icon';
 type Props = {
@@ -9,9 +9,10 @@ type Props = {
   title: string;
   children: ReactNode;
   className?: string;
+  fallbackFocus?: RefObject<HTMLElement | null>;
 };
 /** Native dialog retains focus containment during both opening and closing transitions. */
-export function Modal({ open, onClose, title, children, className = '' }: Props) {
+export function Modal({ open, onClose, title, children, className = '', fallbackFocus }: Props) {
   const { t } = useLocale();
   const ref = useRef<HTMLDialogElement>(null);
   const session = useRef<{ trigger: HTMLElement | null; overflow: string } | null>(null);
@@ -42,8 +43,12 @@ export function Modal({ open, onClose, title, children, className = '' }: Props)
       if (!previous) return;
       document.body.style.overflow = previous.overflow;
       requestAnimationFrame(() => {
-        if (previous.trigger?.isConnected && !document.querySelector('dialog[open]'))
-          previous.trigger.focus({ preventScroll: true });
+        if (document.querySelector('dialog[open]')) return;
+        const visibleTrigger =
+          previous.trigger?.isConnected && previous.trigger.getClientRects().length > 0;
+        const target = visibleTrigger ? previous.trigger : fallbackFocus?.current;
+        if (target?.isConnected && !target.closest('[inert]'))
+          target.focus({ preventScroll: true });
       });
     };
     if (open) {
@@ -53,6 +58,8 @@ export function Modal({ open, onClose, title, children, className = '' }: Props)
           overflow: document.body.style.overflow,
         };
         dialog.showModal();
+        // Fresh sessions start at the first item; interrupted reopening retains its position.
+        dialog.scrollTop = 0;
         document.body.style.overflow = 'hidden';
       }
       // Reopening during the closing phase does not call showModal again. Restore its focus.
@@ -116,7 +123,7 @@ export function Modal({ open, onClose, title, children, className = '' }: Props)
       }
     }
     return () => contentAnimations.current.forEach((item) => item.cancel());
-  }, [open, reduced]);
+  }, [open, reduced, fallbackFocus]);
   useEffect(() => {
     const dialog = ref.current;
     if (!open || !dialog?.classList.contains('mobile-navigation')) {

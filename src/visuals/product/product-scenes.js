@@ -61,7 +61,6 @@ SOFTWARE.
     evidence: { height: 840, label: 'APCOSYS evidence demo: a service is selected, technical evidence is updated, and its banner is copied.' },
     suggestions: { height: 840, label: 'APCOSYS suggested queries demo: a query is typed, results appear, and a suggested search is run.' }
   };
-  const escape = function (text) { return String(text).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   const icon = function (name, extra) { return ASSETS.icons[name].replace(/\sclass="[^"]*"/,'').replace('<svg ', '<svg aria-hidden="true" class="ui-icon ' + (extra || '') + '" '); };
   const flag = function (country) { return '<img class="flag" alt="" draggable="false" src="' + ASSETS.flags[country] + '">'; };
   const rows = [

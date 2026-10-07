@@ -56,6 +56,8 @@
   visibility: visible;
   pointer-events: auto;
   transform: translateY(0);
+  /* Opening visibility must be immediate so keyboard focus can enter the panel. */
+  transition-property: opacity, transform;
   transition-delay: 0s;
 }
 .nav-panel a {

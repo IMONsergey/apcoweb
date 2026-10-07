@@ -137,7 +137,7 @@ function unsubscribe(job) {
  */
 export function createTurquoiseFlow(canvas, options = {}) {
   let ctx;
-  try { ctx = canvas.getContext('2d', { alpha: false }); } catch (_) { ctx = null; }
+  try { ctx = canvas.getContext('2d', { alpha: false }); } catch { ctx = null; }
   if (!ctx) return { update() {}, destroy() {}, getStats: () => ({ supported: false }) };
 
   const settings = { speed: 1, strength: 1, fps: 30, resolution: 192, paused: false, adaptive: true, theme: 'light' };

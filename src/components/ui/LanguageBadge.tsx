@@ -111,7 +111,7 @@ export function LanguageBadge({
         type="button"
         className="language"
         data-language-selector=""
-        aria-label="Language"
+        aria-label="EN — Language"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={panelId}
