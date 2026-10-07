@@ -81,10 +81,12 @@ test('dark theme replaces core surfaces instead of leaving light islands', async
     'rgb(21, 27, 31)',
   );
   await expect(page.locator('.plan-card').first()).toHaveCSS('background-color', 'rgb(21, 27, 31)');
-  await expect(page.locator('.api-section')).toHaveCSS('background-color', 'rgb(7, 84, 98)');
+  await expect(page.locator('.api-section')).toHaveCSS('background-color', 'rgb(3, 122, 143)');
 });
 
-test('product and API shadow demos inherit their dark palettes', async ({ page }) => {
+test('product demos use dark paint while the API composition stays theme-invariant', async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('./');
   await chooseTheme(page, 'Dark');
@@ -101,11 +103,16 @@ test('product and API shadow demos inherit their dark palettes', async ({ page }
   await page.locator('.api-demo-frame').scrollIntoViewIfNeeded();
   const api = page.locator('api-developer-demo');
   await expect(api).toBeAttached({ timeout: 10_000 });
+  expect(await api.evaluate((node) => getComputedStyle(node).backgroundColor)).toBe(
+    'rgb(255, 255, 255)',
+  );
   expect(
-    (
-      await api.evaluate((node) => getComputedStyle(node).getPropertyValue('--api-c-ffffff').trim())
-    ).toLowerCase(),
-  ).toBe('#14191c');
+    await api.evaluate(
+      (node) =>
+        getComputedStyle(node.shadowRoot?.querySelector('.completion-card') as Element)
+          .backgroundColor,
+    ),
+  ).toBe('rgb(255, 255, 255)');
 });
 
 test('dark visual audit keeps search, trust, pricing and data controls coherent', async ({
@@ -132,12 +139,27 @@ test('dark visual audit keeps search, trust, pricing and data controls coherent'
     'rgb(4, 118, 138)',
   );
 
-  const searchVeils = await page.locator('.search-preview').evaluate((node) => ({
-    top: getComputedStyle(node, '::before').backgroundImage,
-    bottom: getComputedStyle(node, '::after').backgroundImage,
-  }));
-  expect(searchVeils.top).toContain('linear-gradient');
-  expect(searchVeils.bottom).toContain('linear-gradient');
+  const searchPixels = await page
+    .locator('.search-preview canvas')
+    .first()
+    .evaluate((canvas) => {
+      const element = canvas as HTMLCanvasElement;
+      const context = element.getContext('2d');
+      if (!context) return [] as number[][];
+      const x = Math.floor(element.width / 2);
+      return [1, Math.floor(element.height * 0.42), element.height - 2].map(
+        (y) => Array.from(context.getImageData(x, y, 1, 1).data.slice(0, 3)) as number[],
+      );
+    });
+  const luminance = ([r, g, b]: number[]) => 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  expect(searchPixels).toHaveLength(3);
+  expect(luminance(searchPixels[0])).toBeLessThan(45);
+  expect(luminance(searchPixels[2])).toBeLessThan(35);
+  expect(luminance(searchPixels[1])).toBeGreaterThan(luminance(searchPixels[0]) + 55);
+
+  const contactButton = page.locator('.contact-banner .double-button__label');
+  await expect(contactButton).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+  await expect(contactButton).toHaveCSS('color', 'rgb(18, 19, 20)');
 });
 
 test('dark product animations never write light surfaces over their demo palettes', async ({
@@ -207,7 +229,42 @@ test('dark closing artwork and API poster are real theme assets', async ({ page 
   expect(await closing.evaluate((img: HTMLImageElement) => img.currentSrc)).toContain('-dark.webp');
   const poster = page.locator('.api-demo-fallback');
   await poster.scrollIntoViewIfNeeded();
-  expect(await poster.getAttribute('src')).toContain('api-layers-dark.webp');
+  expect(await poster.getAttribute('src')).toContain('api-layers.webp');
+  expect(await poster.getAttribute('src')).not.toContain('-dark.webp');
+});
+
+test('dark lower waves stay dark and closing artwork hides baked corner defects', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('./');
+  await chooseTheme(page, 'Dark');
+  await page.locator('.lower-scene').scrollIntoViewIfNeeded();
+  await expect(page.locator('.lower-scene canvas')).toBeVisible({ timeout: 10_000 });
+
+  const wavePixels = await page.locator('.lower-scene canvas').evaluate((canvas) => {
+    const element = canvas as HTMLCanvasElement;
+    const context = element.getContext('2d');
+    if (!context) return [] as number[][];
+    return [0.25, 0.55, 0.85].map(
+      (ratio) =>
+        Array.from(
+          context
+            .getImageData(Math.floor(element.width * 0.5), Math.floor(element.height * ratio), 1, 1)
+            .data.slice(0, 3),
+        ) as number[],
+    );
+  });
+  wavePixels.forEach(([r, g, b]) => {
+    expect(0.2126 * r + 0.7152 * g + 0.0722 * b).toBeLessThan(85);
+  });
+
+  const picture = page.locator('.closing-scene:not(.closing-scene--compact) > picture');
+  await expect(picture).toHaveCSS('clip-path', 'inset(6px)');
+  const hotspot = page.locator('.closing-hotspot');
+  await expect(hotspot).toHaveCSS('color', 'rgb(255, 255, 255)');
+  await expect(hotspot).toHaveCSS('background-color', 'rgb(42, 171, 188)');
+  await expect(hotspot.locator('.closing-hotspot__visual')).toBeVisible();
 });
 
 test('mobile navigation exposes appearance, language intent and scroll continuation cue', async ({

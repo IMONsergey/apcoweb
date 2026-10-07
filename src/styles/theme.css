@@ -279,18 +279,15 @@ html[data-theme='dark'] .double-button--dark {
 html[data-theme='dark'] .search-preview,
 html[data-theme='dark'] .search-preview .visual-fallback--flow {
   background:
-    linear-gradient(180deg, transparent 18%, var(--surface-page) 100%),
-    radial-gradient(ellipse at 49% 42%, #0c6170 0%, transparent 58%),
-    linear-gradient(110deg, #04191f 0%, #084550 67%, #0c6170 100%);
-}
-html[data-theme='dark'] .summary-wrap {
-  background: linear-gradient(
-    180deg,
-    rgb(13 17 19 / 96%) 0%,
-    rgb(7 84 98 / 88%) 34%,
-    rgb(7 84 98 / 64%) 70%,
-    rgb(7 84 98 / 0%) 100%
-  );
+    linear-gradient(
+      180deg,
+      var(--surface-page) 0%,
+      transparent 16%,
+      transparent 50%,
+      var(--surface-page) 98%
+    ),
+    radial-gradient(ellipse at 49% 40%, #0b5967 0%, transparent 58%),
+    linear-gradient(110deg, #082a31 0%, #084550 67%, #0b5967 100%);
 }
 html[data-theme='dark'] .search-chrome__surface {
   background: var(--surface-card);
@@ -351,18 +348,10 @@ html[data-theme='dark'] .metric-card--protocols dt {
   color: #d7e3e6;
 }
 
-html[data-theme='dark'] .api-section {
-  background: var(--api-surface);
-  color: #f4f7f8;
-}
-html[data-theme='dark'] .api-copy p {
-  color: #e4eef0;
-  text-shadow: 0 1px 5px rgb(0 0 0 / 25%);
-}
-html[data-theme='dark'] .api-demo-frame,
-html[data-theme='dark'] .api-demo-frame::before,
-html[data-theme='dark'] .api-demo-frame::after {
-  background: var(--surface-card);
+html[data-theme='dark'] .contact-banner .double-button--inverse {
+  --button-bg: #ffffff;
+  --button-hover: #eaf2f4;
+  --button-color: #121314;
 }
 
 html[data-theme='dark'] .plan-card,
@@ -449,39 +438,6 @@ html[data-theme='dark'] .language-control .language {
   border-color: var(--border-subtle);
 }
 
-html[data-theme='dark'] .search-preview::before,
-html[data-theme='dark'] .search-preview::after {
-  content: '';
-  position: absolute;
-  inset-inline: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-html[data-theme='dark'] .search-preview::before {
-  top: 0;
-  height: clamp(72px, 8vw, 124px);
-  background: linear-gradient(
-    180deg,
-    var(--surface-page) 0%,
-    rgb(13 17 19 / 58%) 38%,
-    transparent 100%
-  );
-}
-html[data-theme='dark'] .search-preview::after {
-  bottom: 0;
-  height: clamp(240px, 29vw, 430px);
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgb(13 17 19 / 32%) 32%,
-    rgb(13 17 19 / 82%) 72%,
-    var(--surface-page) 100%
-  );
-}
-html[data-theme='dark'] .search-preview > :not(.visual) {
-  position: relative;
-  z-index: 1;
-}
 html[data-theme='dark'] .search-chrome__fog {
   -webkit-backdrop-filter: blur(10px) saturate(0.84);
   backdrop-filter: blur(10px) saturate(0.84);
@@ -528,6 +484,12 @@ html[data-theme='dark'] .billing-dock__offer strong {
 }
 
 html[data-theme='dark'] .step-card,
+html[data-theme='dark'] .contact-banner .double-button--inverse {
+  --button-bg: #ffffff;
+  --button-hover: #eaf2f4;
+  --button-color: #121314;
+}
+
 html[data-theme='dark'] .plan-card,
 html[data-theme='dark'] .faq-list details,
 html[data-theme='dark'] .audience-card {

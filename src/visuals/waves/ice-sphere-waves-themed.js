@@ -15,16 +15,19 @@
   function tick(now){raf=0;jobs.forEach(fn=>fn(now));if(jobs.size)raf=requestAnimationFrame(tick)}
   function add(fn){jobs.add(fn);if(!raf)raf=requestAnimationFrame(tick)}
   function remove(fn){jobs.delete(fn);if(!jobs.size&&raf){cancelAnimationFrame(raf);raf=0}}
-  let sharedBrushes=null;
-  function getBrushes(){
-    if(sharedBrushes)return sharedBrushes;
+  let sharedBrushesLight=null,sharedBrushesDark=null;
+  const DARK_COLORS=[[24,66,76],[33,82,92],[29,72,83],[35,86,96],[43,96,106],[31,78,88],[28,70,80],[39,93,103],[30,76,86]];
+  function getBrushes(theme='light'){
+    const cached=theme==='dark'?sharedBrushesDark:sharedBrushesLight;
+    if(cached)return cached;
   // These tiny brushes are drawn by code once. No uploaded image is used.
   const brushes=SPOTS.map(s=>{
     const c=document.createElement('canvas');c.width=c.height=128;
     const ctx=c.getContext('2d'),image=ctx.createImageData(128,128),data=image.data;
     for(let y=0;y<128;y++)for(let x=0;x<128;x++){
       const dx=(x+.5-64)/16,dy=(y+.5-64)/16,i=(y*128+x)*4;
-      data[i]=s[5];data[i+1]=s[6];data[i+2]=s[7];data[i+3]=Math.exp(-.5*(dx*dx+dy*dy))*255;
+      const color=theme==='dark'?DARK_COLORS[SPOTS.indexOf(s)]:[s[5],s[6],s[7]];
+      data[i]=color[0];data[i+1]=color[1];data[i+2]=color[2];data[i+3]=Math.exp(-.5*(dx*dx+dy*dy))*255;
     }
     ctx.putImageData(image,0,0);return c;
   });
@@ -35,19 +38,20 @@
     const weight=r?(.80+.20*((nx-ny)/(r*Math.SQRT2))**2):.80;
     // Broad, low-opacity light only: no dark trough or sharply defined contour.
     const alpha=(Math.exp(-.5*((r-.625)/.095)**2)*.20+Math.exp(-.5*((r-.625)/.17)**2)*.04)*weight;
-    ri.data[i]=255;
-    ri.data[i+1]=255;
-    ri.data[i+2]=255;
+    const ringColor=theme==='dark'?[62,117,128]:[255,255,255];
+    ri.data[i]=ringColor[0];
+    ri.data[i+1]=ringColor[1];
+    ri.data[i+2]=ringColor[2];
     ri.data[i+3]=alpha*255;
   }
   rc.putImageData(ri,0,0);
-    sharedBrushes={brushes,ring};
-    return sharedBrushes;
+    const result={brushes,ring};
+    if(theme==='dark')sharedBrushesDark=result;else sharedBrushesLight=result;
+    return result;
   }
   export function createIceWaves(canvas,options={}){
     let ctx;try{ctx=canvas.getContext('2d',{alpha:false})}catch(error){ctx=null}
     if(!ctx)return {update(){},destroy(){},getStats:()=>({supported:false})};
-    const {brushes,ring}=getBrushes();
     const settings={speed:1,paused:false,theme:'light'};
     const motion=window.matchMedia?.('(prefers-reduced-motion: reduce)');
     let width=0,height=0,correction=1,veil=null,visible=true,destroyed=false,pagePaused=false;
@@ -56,6 +60,7 @@
     const enabled=()=>!destroyed&&width>0&&height>0&&visible&&!pagePaused&&!document.hidden&&!reduced()&&!settings.paused&&settings.speed>0;
     function draw(time){
       if(destroyed||!width||!height)return;
+      const {brushes,ring}=getBrushes(settings.theme);
       const start=performance.now();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;ctx.fillStyle=settings.theme==='dark'?'#0d1113':'#ffffff';ctx.fillRect(0,0,width,height);
       for(let i=0;i<SPOTS.length;i++){
         const s=SPOTS[i],p=i*1.61;
@@ -63,7 +68,7 @@
         const driftY=(Math.sin(time*.11+p*1.3)-Math.sin(p*1.3))*.005;
         const breath=1+(Math.sin(time*.18+p)-Math.sin(p))*.025;
         const sx=s[2]*width*breath,sy=s[3]*height*(2-breath);
-        ctx.globalAlpha=s[4];
+        ctx.globalAlpha=s[4]*(settings.theme==='dark'?.72:1);
         ctx.drawImage(brushes[i],(s[0]+driftX)*width-sx*4,(s[1]+driftY)*height-sy*4,sx*8,sy*8);
       }
       const origin=SPOTS[7],p=7*1.61;
@@ -73,7 +78,7 @@
       for(let i=0;i<3;i++){
         const age=(time/22+.08+i/3)%1;
         const radius=width*(.035+.53*age),extent=radius/.625;
-        ctx.globalAlpha=.65*smooth(0,.18,age)*(1-smooth(.55,1,age));
+        ctx.globalAlpha=(settings.theme==='dark'?.32:.65)*smooth(0,.18,age)*(1-smooth(.55,1,age));
         ctx.drawImage(ring,-extent,-extent,extent*2,extent*2);
       }
       ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;ctx.fillStyle=veil;ctx.fillRect(0,0,width,height);
@@ -92,7 +97,7 @@
       veil=ctx.createLinearGradient(0,0,0,height);
       for(let i=0;i<=80;i++){
         const y=i/80,a=1-smooth(.17,.24,y)*smooth(0,.07,1-y);
-        veil.addColorStop(y,settings.theme==='dark'?'rgba(14,17,19,'+a+')':'rgba(255,255,255,'+a+')');
+        veil.addColorStop(y,settings.theme==='dark'?'rgba(13,17,19,'+(Math.min(1,a+.16))+')':'rgba(255,255,255,'+a+')');
       }
       draw(reduced()?0:phase);sync();
     }

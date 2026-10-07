@@ -1,4 +1,15 @@
 .api-section {
+  /* This cyan product/API composition is intentionally theme-invariant. */
+  --action: #037a8f;
+  --action-hover: #036c7f;
+  --white: #ffffff;
+  --ink: #121314;
+  --body: #3a3e43;
+  --muted: #62666b;
+  --surface: #eceef1;
+  --line: #dde1e5;
+  --tint: #d3eaee;
+  --on-action: #ffffff;
   position: relative;
   isolation: isolate;
   background: var(--action);

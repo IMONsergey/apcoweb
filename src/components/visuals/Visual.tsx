@@ -32,6 +32,7 @@ export function Visual({
   direction = 'top-to-bottom',
   onReady,
   budget = 'primary',
+  themeOverride,
 }: {
   kind: Kind;
   className?: string;
@@ -39,11 +40,13 @@ export function Visual({
   direction?: DotDirection;
   onReady?: (ready: boolean) => void;
   budget?: MotionBudget;
+  themeOverride?: 'light' | 'dark';
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(eager);
   const { paused } = useMotion();
   const { theme } = useTheme();
+  const visualTheme = themeOverride ?? theme;
   const constrainedMotion = useMediaQuery('(max-width: 599px), (pointer: coarse)');
   const supportingConstrained = budget === 'supporting' && constrainedMotion;
   const renderFps = supportingConstrained ? 18 : constrainedMotion ? 24 : 30;
@@ -72,15 +75,15 @@ export function Visual({
             (kind === 'flow' ? (
               <Flow
                 speed={1}
-                strength={theme === 'dark' ? 0.9 : 1}
+                strength={visualTheme === 'dark' ? 0.9 : 1}
                 fps={renderFps}
                 resolution={constrainedMotion ? 160 : 192}
                 paused={paused}
-                theme={theme}
+                theme={visualTheme}
                 onReady={onReady}
               />
             ) : kind === 'waves' ? (
-              <Waves speed={0.7} paused={paused} theme={theme} />
+              <Waves speed={0.7} paused={paused} theme={visualTheme} />
             ) : kind === 'globe' ? (
               <Globe
                 renderer={paused ? 'canvas2d' : 'auto'}
@@ -89,9 +92,9 @@ export function Visual({
                 pixelRatio={constrainedMotion ? 1 : 1.5}
                 paused={paused}
                 interactive={!paused}
-                landColor={theme === 'dark' ? '#5FAFBC' : '#6AB6C2'}
-                shellColor={theme === 'dark' ? '#2E3B40' : '#FFFFFF'}
-                signalColor={theme === 'dark' ? '#42C0CF' : '#269CAD'}
+                landColor={visualTheme === 'dark' ? '#5FAFBC' : '#6AB6C2'}
+                shellColor={visualTheme === 'dark' ? '#2E3B40' : '#FFFFFF'}
+                signalColor={visualTheme === 'dark' ? '#42C0CF' : '#269CAD'}
               />
             ) : kind === 'dots' ? (
               <Dots
@@ -100,14 +103,14 @@ export function Visual({
                 fps={renderFps}
                 startOpacity={supportingConstrained ? 0.14 : 0.28}
                 endOpacity={supportingConstrained ? 0.008 : 0.015}
-                color={theme === 'dark' ? '#A9DCE2' : '#FFFFFF'}
+                color={visualTheme === 'dark' ? '#A9DCE2' : '#FFFFFF'}
                 interactive={!paused}
                 onReady={onReady}
               />
             ) : (
               <Shape
                 kind={kind === 'rings' ? 'echo' : 'rosette'}
-                color={theme === 'dark' ? '#A8B5BA' : '#121314'}
+                color={visualTheme === 'dark' ? '#A8B5BA' : '#121314'}
                 opacity={0.42}
                 speed={0.75}
                 strength={0.65}

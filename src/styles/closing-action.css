@@ -18,6 +18,41 @@
     background-color 200ms var(--ease),
     box-shadow 200ms var(--ease);
 }
+
+.closing-hotspot__visual {
+  display: none;
+}
+html[data-theme='dark'] .closing-scene:not(.closing-scene--compact) > picture {
+  overflow: hidden;
+  clip-path: inset(6px);
+}
+html[data-theme='dark'] .closing-hotspot {
+  display: flex;
+  align-items: stretch;
+  background: #2aabbc;
+  color: #fff;
+  overflow: hidden;
+}
+html[data-theme='dark'] .closing-hotspot:hover {
+  background: #31b4c5;
+}
+html[data-theme='dark'] .closing-hotspot__visual {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22%;
+  width: 100%;
+  color: #fff;
+  font: 500 clamp(10px, 0.82vw, 14px)/1 var(--font-sans);
+}
+html[data-theme='dark'] .closing-hotspot__visual > span {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+}
+html[data-theme='dark'] .closing-hotspot__arrow {
+  border-left: 2px solid #0d1113;
+  font-size: 1.15em;
+}
+
 .closing-hotspot:focus-visible {
   outline: 2px solid var(--action);
   outline-offset: 4px;

@@ -144,14 +144,22 @@ export function createTurquoiseFlow(canvas, options = {}) {
     w = nextW; h = nextH;
     canvas.width = w; canvas.height = h;
     baseGradient = ctx.createLinearGradient(0, 0, w, 0);
-    baseGradient.addColorStop(0, settings.theme === 'dark' ? '#04191f' : '#003c4c');
-    baseGradient.addColorStop(1, settings.theme === 'dark' ? '#0c6170' : '#2396af');
+    baseGradient.addColorStop(0, settings.theme === 'dark' ? '#082a31' : '#003c4c');
+    baseGradient.addColorStop(1, settings.theme === 'dark' ? '#0b5967' : '#2396af');
     whiteVeil = ctx.createLinearGradient(0, 0, 0, h);
-    // A static vertical veil retains the reference's nearly white lower edge.
-    for (let i = 0; i <= 32; i++) {
-      const v = i / 32;
-      const alpha = Math.pow(clamp((v - .38637) / (.97139 - .38637), 0, 1), 1.02082);
-      whiteVeil.addColorStop(v, settings.theme === 'dark' ? `rgba(14,17,19,${alpha})` : `rgba(246,246,246,${alpha})`);
+    // Light keeps the supplied white lower fade. Dark owns both edges itself so the
+    // live canvas enters and leaves the surrounding page without CSS cover plates.
+    for (let i = 0; i <= 48; i++) {
+      const v = i / 48;
+      if (settings.theme === 'dark') {
+        const top = 1 - clamp(v / .16, 0, 1);
+        const bottom = Math.pow(clamp((v - .50) / .48, 0, 1), 1.08);
+        const alpha = Math.max(top * .98, bottom);
+        whiteVeil.addColorStop(v, `rgba(13,17,19,${alpha})`);
+      } else {
+        const alpha = Math.pow(clamp((v - .38637) / (.97139 - .38637), 0, 1), 1.02082);
+        whiteVeil.addColorStop(v, `rgba(246,246,246,${alpha})`);
+      }
     }
     render(mediaMatches() ? 0 : time);
   }

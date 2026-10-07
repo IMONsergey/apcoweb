@@ -71,6 +71,10 @@ export function ClosingSection() {
               href={`${productUrl}/search`}
               aria-label={t('Start your first query in APCOSYS')}
             >
+              <span className="closing-hotspot__visual" aria-hidden="true">
+                <span>Start with free</span>
+                <span className="closing-hotspot__arrow">↗</span>
+              </span>
               <span className="sr-only">{t('Try free search')}</span>
             </a>
           )}
