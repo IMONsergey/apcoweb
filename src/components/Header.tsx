@@ -1,11 +1,13 @@
 import { LocaleText } from '../i18n/LocaleText';
 import { useLocale } from '../i18n/context';
 import { useEffect, useRef, useState } from 'react';
-import { media, navigation, productUrl } from '../content/site';
+import { navigation, productUrl } from '../content/site';
 import { DoubleButton } from './ui/DoubleButton';
 import { Icon } from './ui/Icon';
 import { Modal } from './ui/Modal';
 import { LanguageBadge } from './ui/LanguageBadge';
+import { ThemeMenu, MobileThemeControl } from './ui/ThemeControl';
+import { Logo } from './ui/Logo';
 import { useScrollHeader } from '../hooks/useScrollHeader';
 export function Header() {
   const { t } = useLocale();
@@ -45,7 +47,7 @@ export function Header() {
       >
         <div className="container header-row">
           <a className="brand" href="#top" aria-label={t('APCOSYS home')}>
-            <img src={media('logo.svg')} width="134" height="26" alt="APCOSYS" />
+            <Logo />
           </a>
           <nav className="desktop-nav" aria-label={t('Main navigation')}>
             {navigation.map((group, i) => (
@@ -122,6 +124,10 @@ export function Header() {
             </a>
           </nav>
           <div className="header-actions">
+            <ThemeMenu
+              open={active === 'appearance'}
+              onOpenChange={(open) => setActive(open ? 'appearance' : null)}
+            />
             <LanguageBadge
               open={active === 'language'}
               onOpenChange={(open) => setActive(open ? 'language' : null)}
@@ -167,6 +173,7 @@ export function Header() {
               ))}
             </div>
           ))}
+          <MobileThemeControl />
           <a className="mobile-pricing" href="#pricing" onClick={() => setMobileOpen(false)}>
             <LocaleText>{t('Pricing')}</LocaleText>
             <Icon name="arrow" />

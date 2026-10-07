@@ -2,6 +2,7 @@ import { Component, Suspense, lazy, useEffect, useRef, useState, type ReactNode 
 import type { DotDirection } from '../../visuals/dots/dot-cascade';
 import { useMotion } from '../../hooks/useMotion';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useTheme } from '../../theme/ThemeProvider';
 const Flow = lazy(() => import('../../visuals/flow/TurquoiseFlow'));
 const Waves = lazy(() => import('../../visuals/waves/IceSphereWaves'));
 const Globe = lazy(() => import('../../visuals/globe/SignalGlobe'));
@@ -23,24 +24,29 @@ class VisualBoundary extends Component<
   }
 }
 type Kind = 'flow' | 'waves' | 'globe' | 'rings' | 'rosette' | 'dots';
+type MotionBudget = 'primary' | 'supporting';
 export function Visual({
   kind,
   className = '',
   eager = false,
   direction = 'top-to-bottom',
   onReady,
+  budget = 'primary',
 }: {
   kind: Kind;
   className?: string;
   eager?: boolean;
   direction?: DotDirection;
   onReady?: (ready: boolean) => void;
+  budget?: MotionBudget;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(eager);
   const { paused } = useMotion();
+  const { theme } = useTheme();
   const constrainedMotion = useMediaQuery('(max-width: 599px), (pointer: coarse)');
-  const renderFps = constrainedMotion ? 24 : 30;
+  const supportingConstrained = budget === 'supporting' && constrainedMotion;
+  const renderFps = supportingConstrained ? 18 : constrainedMotion ? 24 : 30;
   useEffect(() => {
     if (mounted || !ref.current) return;
     const io = new IntersectionObserver(
@@ -66,14 +72,15 @@ export function Visual({
             (kind === 'flow' ? (
               <Flow
                 speed={1}
-                strength={1}
+                strength={theme === 'dark' ? 0.9 : 1}
                 fps={renderFps}
                 resolution={constrainedMotion ? 160 : 192}
                 paused={paused}
+                theme={theme}
                 onReady={onReady}
               />
             ) : kind === 'waves' ? (
-              <Waves speed={0.7} paused={paused} />
+              <Waves speed={0.7} paused={paused} theme={theme} />
             ) : kind === 'globe' ? (
               <Globe
                 renderer={paused ? 'canvas2d' : 'auto'}
@@ -82,21 +89,25 @@ export function Visual({
                 pixelRatio={constrainedMotion ? 1 : 1.5}
                 paused={paused}
                 interactive={!paused}
+                landColor={theme === 'dark' ? '#5FAFBC' : '#6AB6C2'}
+                shellColor={theme === 'dark' ? '#2E3B40' : '#FFFFFF'}
+                signalColor={theme === 'dark' ? '#42C0CF' : '#269CAD'}
               />
             ) : kind === 'dots' ? (
               <Dots
                 overlay
                 direction={direction}
                 fps={renderFps}
-                startOpacity={0.28}
-                endOpacity={0.015}
+                startOpacity={supportingConstrained ? 0.14 : 0.28}
+                endOpacity={supportingConstrained ? 0.008 : 0.015}
+                color={theme === 'dark' ? '#A9DCE2' : '#FFFFFF'}
                 interactive={!paused}
                 onReady={onReady}
               />
             ) : (
               <Shape
                 kind={kind === 'rings' ? 'echo' : 'rosette'}
-                color="#121314"
+                color={theme === 'dark' ? '#A8B5BA' : '#121314'}
                 opacity={0.42}
                 speed={0.75}
                 strength={0.65}

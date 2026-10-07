@@ -2,6 +2,7 @@ import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { noBreakNumber } from '../../i18n/typography';
 import { media } from '../../content/site';
+import { Logo } from '../ui/Logo';
 import { Icon, type IconName } from '../ui/Icon';
 
 const previewIcons: IconName[] = ['search', 'database', 'scanner', 'cube', 'book', 'bookmark'];
@@ -13,7 +14,7 @@ export function SearchChrome({ credits = '2 000' }: { credits?: string }) {
     <div className="search-chrome" aria-hidden="true">
       <div className="search-chrome__surface" />
       <div className="search-chrome__mobile-brand">
-        <img src={media('logo.svg')} width="110" height="22" alt="" />
+        <Logo />
         <Icon name="menu" />
       </div>
       <div className="search-chrome__rail">

@@ -164,6 +164,11 @@ export function LanguageBadge({
           >
             <LanguageFlag locale={language.value} />
             <span>{language.label}</span>
+            {language.disabled && (
+              <span className="language-soon" aria-hidden="true">
+                SOON
+              </span>
+            )}
           </button>
         ))}
       </div>

@@ -1,6 +1,6 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
-import { useEffect, useId, useRef, type ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { useMotion } from '../../hooks/useMotion';
 import { Icon } from './Icon';
 type Props = {
@@ -19,6 +19,7 @@ export function Modal({ open, onClose, title, children, className = '' }: Props)
   const contentAnimations = useRef<Animation[]>([]);
   const titleId = useId();
   const { reduced } = useMotion();
+  const [canScroll, setCanScroll] = useState(false);
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog) return;
@@ -118,6 +119,25 @@ export function Modal({ open, onClose, title, children, className = '' }: Props)
   }, [open, reduced]);
   useEffect(() => {
     const dialog = ref.current;
+    if (!open || !dialog?.classList.contains('mobile-navigation')) {
+      setCanScroll(false);
+      return;
+    }
+    const update = () =>
+      setCanScroll(dialog.scrollTop + dialog.clientHeight < dialog.scrollHeight - 4);
+    update();
+    dialog.addEventListener('scroll', update, { passive: true });
+    const resize = new ResizeObserver(update);
+    resize.observe(dialog);
+    const frame = requestAnimationFrame(update);
+    return () => {
+      cancelAnimationFrame(frame);
+      resize.disconnect();
+      dialog.removeEventListener('scroll', update);
+    };
+  }, [open]);
+  useEffect(() => {
+    const dialog = ref.current;
     return () => {
       animation.current?.cancel();
       contentAnimations.current.forEach((item) => item.cancel());
@@ -130,6 +150,7 @@ export function Modal({ open, onClose, title, children, className = '' }: Props)
     <dialog
       ref={ref}
       className={`modal ${className}`}
+      data-scroll-cue={canScroll || undefined}
       aria-labelledby={titleId}
       onCancel={(event) => {
         event.preventDefault();
@@ -162,6 +183,9 @@ export function Modal({ open, onClose, title, children, className = '' }: Props)
         </button>
       </div>
       {children}
+      {className.includes('mobile-navigation') && (
+        <div className="mobile-nav-scroll-cue" aria-hidden="true" />
+      )}
     </dialog>
   );
 }

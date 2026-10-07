@@ -47,7 +47,7 @@
   .search-title-desktop {
     display: inline;
   }
-  .search-scene__heading h3 {
+  .search-scene__heading h2 {
     max-width: 100%;
     margin-inline: auto;
     font-size: clamp(24px, 6.65vw, 28px);

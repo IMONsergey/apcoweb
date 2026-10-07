@@ -1,7 +1,11 @@
 'use client';
 
 import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
-import { createTurquoiseFlow, type FlowController, type FlowOptions } from './turquoise-flow.js';
+import {
+  createTurquoiseFlow,
+  type FlowController,
+  type FlowOptions,
+} from './turquoise-flow-themed.js';
 import { observeFirstPaint } from '../firstPaint';
 import './turquoise-flow.css';
 
@@ -23,6 +27,7 @@ export function TurquoiseFlow({
   resolution = 192,
   paused = false,
   adaptive = true,
+  theme = 'light',
   onReady,
 }: TurquoiseFlowProps) {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -40,8 +45,8 @@ export function TurquoiseFlow({
   }, [onReady]);
 
   useEffect(() => {
-    controller.current?.update({ speed, strength, fps, resolution, paused, adaptive });
-  }, [speed, strength, fps, resolution, paused, adaptive]);
+    controller.current?.update({ speed, strength, fps, resolution, paused, adaptive, theme });
+  }, [speed, strength, fps, resolution, paused, adaptive, theme]);
 
   return (
     <div className={`turquoise-flow ${className}`.trim()} style={style}>

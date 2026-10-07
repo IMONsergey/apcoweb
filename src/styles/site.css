@@ -74,7 +74,7 @@
   --button-height: 46px;
   --button-bg: var(--action);
   --button-hover: var(--action-hover);
-  --button-color: var(--white);
+  --button-color: var(--on-action);
   display: inline-flex;
   align-items: stretch;
   justify-content: flex-start;

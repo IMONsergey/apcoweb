@@ -10,6 +10,7 @@ import {
 } from 'react';
 import { media } from '../../content/site';
 import { useLocale } from '../../i18n/context';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const Demo = lazy(() => import('./ApiDemoMount'));
 class DemoBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
@@ -23,6 +24,7 @@ class DemoBoundary extends Component<{ children: ReactNode }, { failed: boolean 
 }
 export function ApiIllustration() {
   const { t } = useLocale();
+  const { theme } = useTheme();
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
   const [ready, setReady] = useState(false);
@@ -54,7 +56,7 @@ export function ApiIllustration() {
       <div className="api-demo-poster" aria-hidden="true">
         <img
           className="api-demo-fallback"
-          src={media('api-layers.webp')}
+          src={media(theme === 'dark' ? 'api-layers-dark.webp' : 'api-layers.webp')}
           width="712"
           height="554"
           alt=""

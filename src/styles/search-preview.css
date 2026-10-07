@@ -135,7 +135,7 @@
   z-index: 3;
   text-align: center;
 }
-.search-scene__heading h3 {
+.search-scene__heading h2 {
   font: 500 clamp(18px, 2.82cqw, 34px)/1.15 var(--font-sans);
   letter-spacing: -0.045em;
 }
@@ -237,7 +237,7 @@
   .search-title-mobile {
     display: block;
   }
-  .search-scene__heading h3 {
+  .search-scene__heading h2 {
     font-size: 26px;
     line-height: 28px;
   }
@@ -267,7 +267,7 @@
   .search-scene__heading {
     top: 34%;
   }
-  .search-scene__heading h3 {
+  .search-scene__heading h2 {
     font-size: 23px;
     line-height: 25px;
   }

@@ -1,6 +1,7 @@
 import { LocaleText } from '../i18n/LocaleText';
 import { useLocale } from '../i18n/context';
-import { footerGroups, media, supportEmail } from '../content/site';
+import { footerGroups, supportEmail } from '../content/site';
+import { Logo } from './ui/Logo';
 export function Footer() {
   const { t } = useLocale();
   return (
@@ -26,7 +27,7 @@ export function Footer() {
         </nav>
         <div className="footer-bottom">
           <a className="footer-brand" href="#top" aria-label={t('APCOSYS home')}>
-            <img src={media('logo.svg')} width="360" height="70" alt="APCOSYS" loading="lazy" />
+            <Logo className="footer-logo" />
           </a>
           <div className="footer-meta">
             <p>

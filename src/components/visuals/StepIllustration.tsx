@@ -1,5 +1,6 @@
 import { Component, Suspense, lazy, useEffect, useRef, useState, type ReactNode } from 'react';
 import { media } from '../../content/site';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const Demo = lazy(() => import('./StepDemoMount'));
 
@@ -25,6 +26,8 @@ export function StepIllustration({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
+  const themedImage = theme === 'dark' ? image.replace('.webp', '-dark.webp') : image;
   useEffect(() => {
     if (!ref.current) return;
     const observer = new IntersectionObserver(
@@ -41,7 +44,14 @@ export function StepIllustration({
   }, []);
   return (
     <div ref={ref} className="step-illustration" role="img" aria-label={alt}>
-      <img src={media(image)} width="908" height="609" alt="" loading="lazy" decoding="async" />
+      <img
+        src={media(themedImage)}
+        width="908"
+        height="609"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
       <SceneBoundary>
         <Suspense fallback={null}>{mounted && <Demo scene={scene} />}</Suspense>
       </SceneBoundary>
