@@ -47,7 +47,10 @@ test('theme switch preserves reviewed layout geometry', async ({ page }) => {
     '.faq-list details:first-child summary',
   ];
   await page.locator('.faq-list details:first-child').scrollIntoViewIfNeeded();
-  await page.mouse.wheel(0, -140);
+  // Compare geometry after returning to the top, where the auto-hiding
+  // header is always available, regardless of browser scroll timing.
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await expect(page.locator('.site-header')).toHaveAttribute('data-hidden', 'false');
   await expect(page.getByRole('button', { name: 'Appearance', exact: true })).toBeVisible();
   await page.waitForTimeout(100);
   const boxes = async () =>
