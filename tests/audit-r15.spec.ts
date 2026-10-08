@@ -120,7 +120,8 @@ test('mobile theme radios select with arrows and have one native Tab stop', asyn
   await expect(dark).toBeChecked();
   await expect(page.locator('html')).toHaveAttribute('data-theme-mode', 'dark');
   await page.keyboard.press('Tab');
-  await expect(page.locator('.mobile-pricing')).toBeFocused();
+  // Appearance is the final control in the mobile drawer; Tab wraps to close.
+  await expect(page.getByRole('button', { name: 'Close dialog' })).toBeFocused();
   await page.keyboard.press('Shift+Tab');
   await expect(dark).toBeFocused();
   await page.keyboard.press('ArrowLeft');

@@ -61,7 +61,13 @@ for (const theme of ['light', 'dark'] as const) {
     await expect(themeControl.locator('.theme-check svg')).toHaveCount(1);
     await expect(themeControl.locator('.theme-check')).not.toHaveText('✓');
     await themeControl.getByRole('radio', { name: 'System', exact: true }).check();
-    await expect(themeControl.getByRole('radio', { name: 'System' })).toBeChecked();
+    const system = themeControl.getByRole('radio', { name: 'System' });
+    await expect(system).toBeChecked();
     await expect(themeControl.locator('.theme-check svg')).toHaveCount(1);
+    await system.focus();
+    await page.keyboard.press('Tab');
+    await expect(dialog.getByRole('button', { name: 'Close dialog' })).toBeFocused();
+    await page.keyboard.press('Shift+Tab');
+    await expect(system).toBeFocused();
   });
 }

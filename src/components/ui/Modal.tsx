@@ -159,6 +159,24 @@ export function Modal({ open, onClose, title, children, className = '', fallback
       className={`modal ${className}`}
       data-scroll-cue={canScroll || undefined}
       aria-labelledby={titleId}
+      onKeyDown={(event) => {
+        if (event.key !== 'Tab' || !event.currentTarget.classList.contains('mobile-navigation'))
+          return;
+        const close = event.currentTarget.querySelector<HTMLButtonElement>('.modal__header button');
+        const theme = event.currentTarget.querySelector<HTMLInputElement>(
+          '.mobile-theme-control input:checked',
+        );
+        if (!close || !theme) return;
+        // Appearance is intentionally last. Wrap the drawer's keyboard focus
+        // instead of exposing a transient body/dialog focus stop in Chromium.
+        if (!event.shiftKey && document.activeElement === theme) {
+          event.preventDefault();
+          close.focus();
+        } else if (event.shiftKey && document.activeElement === close) {
+          event.preventDefault();
+          theme.focus();
+        }
+      }}
       onCancel={(event) => {
         event.preventDefault();
         onClose();
