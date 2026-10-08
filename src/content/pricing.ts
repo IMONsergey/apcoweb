@@ -1,4 +1,4 @@
-/** Owner-approved: annual billing is 20% lower than twelve monthly payments. */
+/** Annual prices use a 20% discount relative to twelve monthly payments. */
 export type BillingPeriod = 'monthly' | 'annually';
 export const ANNUAL_DISCOUNT_PERCENT = 20;
 export function calculatePrice(monthlyDollars: number, period: BillingPeriod) {

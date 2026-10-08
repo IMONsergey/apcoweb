@@ -1,15 +1,9 @@
 import { defineConfig } from '@playwright/test';
-import { existsSync } from 'node:fs';
-import { homedir } from 'node:os';
-
-const cache = `${homedir()}/Library/Caches/ms-playwright`;
-const cachedPaths = {
-  chromium: `${cache}/chromium_headless_shell-1234/chrome-headless-shell-mac-x64/chrome-headless-shell`,
-  firefox: `${cache}/firefox-1538/firefox/Nightly.app/Contents/MacOS/firefox`,
-  webkit: `${cache}/webkit-2336/pw_run.sh`,
+const browserExecutables = {
+  chromium: process.env.APCO_CHROMIUM_EXECUTABLE,
+  firefox: process.env.APCO_FIREFOX_EXECUTABLE,
+  webkit: process.env.APCO_WEBKIT_EXECUTABLE,
 };
-const cached = process.env.APCO_USE_CACHED_BROWSERS === '1';
-const chromiumExecutable = process.env.APCO_CHROMIUM_EXECUTABLE;
 export default defineConfig({
   testDir: './tests',
   fullyParallel: false,
@@ -32,15 +26,16 @@ export default defineConfig({
     name: browserName,
     use: {
       browserName,
-      launchOptions:
-        browserName === 'chromium' && chromiumExecutable
-          ? {
-              executablePath: chromiumExecutable,
-              args: ['--no-sandbox', '--disable-dev-shm-usage'],
-            }
-          : cached && existsSync(cachedPaths[browserName])
-            ? { executablePath: cachedPaths[browserName] }
-            : {},
+      ...(browserExecutables[browserName]
+        ? {
+            launchOptions: {
+              executablePath: browserExecutables[browserName],
+              ...(browserName === 'chromium'
+                ? { args: ['--no-sandbox', '--disable-dev-shm-usage'] }
+                : {}),
+            },
+          }
+        : {}),
     },
   })),
   ...(process.env.APCO_BASE_URL

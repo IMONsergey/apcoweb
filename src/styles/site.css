@@ -14,8 +14,6 @@
 }
 .site-header {
   background: var(--white);
-  position: sticky;
-  top: 0;
   z-index: 20;
 }
 .header-row {
