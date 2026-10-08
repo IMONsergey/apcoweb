@@ -121,3 +121,16 @@
     transition: none;
   }
 }
+
+/* Let the registration label wrap only when enlarged text exhausts desktop space. */
+@media (min-width: 1200px) {
+  .header-actions {
+    min-width: 0;
+  }
+  .header-signup {
+    flex-shrink: 1;
+  }
+  .header-signin {
+    flex-shrink: 0;
+  }
+}

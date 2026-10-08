@@ -4,11 +4,14 @@ This is the React/TypeScript marketing website, not the authenticated SaaS appli
 
 ## Read first
 
-- docs/REVIEW-R15.md: audit fixes on the R14 theme candidate. Preserve the supplied visual effects and the theme-invariant API section; use the new typography, accessible controls and regression coverage. Client handoff builds use `npm run build:root` for a domain root. The R12 restriction on merging/updating main still applies.
+- docs/REVIEW-R16.md: current audit follow-up and owner-supplied dark search gradient. The opaque lower palette ends at #0C1113; preserve the light renderer and six protected originals. WCAG scans use the shared helper so extra rules never replace the tag filter.
+- docs/WORK-STATE.md: current release evidence is at the top. R15 was merged as PR #17 and published on 2026-10-08 after owner approval. Earlier candidate restrictions and publication blockers below are historical; consult the current session's authorization before publishing new changes.
 
-- docs/REVIEW-R12.md: this branch is a comparison candidate, based strictly on the complete PR #12 rollback. Preserve R10 composition, typography and entrance/search lifecycle. Layout is CSS-only; the five supplied GSAP product scenes are authorized alongside the API demo. Do not merge or update main without the owner's new confirmation. Earlier R10 publication instructions below are historical.
+- docs/REVIEW-R15.md: audit fixes on the R14 theme candidate. Preserve the supplied visual effects and the theme-invariant API section; use the new typography, accessible controls and regression coverage. Client handoff builds use `npm run build:root` for a domain root. R15 is released; its original pre-publication notes are historical.
 
-- docs/REVIEW-R10.md: the whole page appears only after both search-background engines have painted, fonts and initial images are prepared. There is no loader or logo. Preserve eager audience contours, scroll-linked search placement, aligned API frame, navigation reveal and active-language natural sizing.
+- docs/REVIEW-R12.md (historical): the R12 branch was a comparison candidate, based strictly on the complete PR #12 rollback. Preserve R10 composition, typography and entrance/search lifecycle. Layout is CSS-only; the five supplied GSAP product scenes are authorized alongside the API demo. Do not merge or update main without the owner's new confirmation. Earlier R10 publication instructions below are historical.
+
+- docs/REVIEW-R10.md (historical): current content paints immediately while backgrounds prepare, with a static fallback if a chunk fails (tests/refinement-r10.spec.ts). Preserve scroll-linked search placement, aligned API frame, navigation reveal and active-language natural sizing.
 
 - docs/REVIEW-R9.md: owner-requested removal of R8's shared locale sizing. Active text determines native dimensions; width/height may change on language selection. This overrides the stable EN/RU geometry requirements below.
 

@@ -1,6 +1,16 @@
 # Work state
 
-## Current candidate — R15 audit repairs, 2026-10-07
+## Current work — R16 audit follow-up, 2026-10-08
+
+The owner requested the three follow-up audit repairs and supplied `block-second-bg-dark(1).zip` for the dark second-block background. Read REVIEW-R16.md for scope, palette and validation. Candidate branch: `fix/r16-audit-dark-gradient`. Release/CI status for this candidate is recorded in its pull request; this source snapshot does not pre-claim a successful deployment.
+
+## Released baseline — R15, 2026-10-08
+
+PR #17 was merged with owner approval: main `a070c4b427fdecdd2192818bf27cbb681ca789ec`, source tree `097496e52095903ef13c7f62bb9a22442137ab6e`. Current public URL: https://imonsergey.github.io/apcoweb/. Three-engine CI: https://github.com/IMONsergey/apcoweb/actions/runs/37662223617 (459 passed). Deployment and published-site smoke: https://github.com/IMONsergey/apcoweb/actions/runs/37724856322 (153 passed). The independent 2026-10-08 audit found that four axe tag scans were accidentally narrowed to one rule; R16 corrects that coverage issue. Older publication blockers and pending WebKit statements below are retained only as history. The original Vercel review URL is not the current release.
+
+## Historical work log
+
+### Historical candidate — R15 audit repairs, 2026-10-07
 
 The owner authorizes fixing the confirmed main and dark/menu audit findings on the R14 theme candidate. Read REVIEW-R15.md first. Color and font-size tokens are separate, Appearance has complete keyboard/native-radio behavior, the mobile dialog closes at the desktop boundary and fresh sessions start at the top. Footer targets, price fitting and closing CTA naming/geometry are repaired; maintained JS is linted and small responsive posters are supplied. Pricing and Footer own their styles. `npm run build:root` produces the client's domain-root handoff; Pages retains `/apcoweb/`. Full local Chromium passes 153 scenarios; Firefox's one serialization-only assertion is corrected and passes separately. Four domain-root smoke cases pass. WebKit and fresh three-engine CI remain pending. Publication is blocked by connector/CLI access; draft PR #16 and the original preview still contain the previous candidate. The delivery includes the committed source patch. Preview content conditions remain deliberate. Do not merge or update main without new owner confirmation.
 

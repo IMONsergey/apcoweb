@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import AxeBuilder from '@axe-core/playwright';
+import { wcagAxe } from './helpers/accessibility';
 
 for (const width of [320, 390, 430, 768, 1024, 1199]) {
   test(`contextual billing dock at ${width}px`, async ({ page }) => {
@@ -126,11 +126,7 @@ test('active dock is accessible and disappears on a short landscape viewport out
   await page.goto('./', { waitUntil: 'networkidle' });
   await page.locator('#plan-plus').scrollIntoViewIfNeeded();
   await expect(page.locator('.billing-dock')).toBeVisible();
-  const results = await new AxeBuilder({ page })
-    .include('.billing-dock')
-    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
-    .withRules(['label-content-name-mismatch'])
-    .analyze();
+  const results = await wcagAxe(page).include('.billing-dock').analyze();
   expect(results.violations.map((v) => v.id)).toEqual([]);
   await page.locator('.footer').scrollIntoViewIfNeeded();
   await expect(page.locator('.billing-dock')).not.toBeVisible();
