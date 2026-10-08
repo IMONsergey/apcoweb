@@ -23,13 +23,6 @@
 .nav-trigger[aria-expanded='true'] svg {
   transform: rotate(180deg);
 }
-.nav-trigger:focus:not(:focus-visible) {
-  outline: none;
-}
-.nav-trigger:focus-visible {
-  outline: 2px solid var(--action);
-  outline-offset: 3px;
-}
 .nav-panel {
   position: absolute;
   left: 0;
