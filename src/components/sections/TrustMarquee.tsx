@@ -1,7 +1,8 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { useEffect, useRef, useState } from 'react';
-import { media, trustMarks } from '../../content/site';
+import { trustMarks } from '../../content/site';
+import { assetUrl } from '../../content/assets';
 
 /** One semantic list, with an inaccessible visual duplicate for the seamless loop. */
 export function TrustMarquee() {
@@ -46,7 +47,7 @@ export function TrustMarquee() {
                 <li key={file}>
                   <span className="trust-mark">
                     <img
-                      src={media(`${file}.svg`)}
+                      src={assetUrl('partners', `${file}.svg`)}
                       width="134"
                       height="42"
                       alt={copy === 0 ? name : ''}

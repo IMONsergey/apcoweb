@@ -22,7 +22,7 @@ html[data-theme='dark'] apcosys-product-demo {
   --demo-anim-success-state-base: #1c4233;
 }
 
-/* Generated R14 shadow-DOM palettes. Light values remain inline fallbacks in the source demos. */
+/* Shadow DOM palettes. The embedded components retain their default light values. */
 html[data-theme='dark'] apcosys-product-demo {
   --demo-c-28475010: #36b8c910;
   --demo-c-24374026: #36b8c926;

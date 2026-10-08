@@ -1,4 +1,4 @@
-/* R14 two-environment color system. Loaded last so legacy literals can be themed without changing light output. */
+/* Theme-dependent color surfaces. Loaded after base styles to preserve cascade priority. */
 html[data-theme='light'] {
   color-scheme: light;
 }
@@ -468,7 +468,7 @@ html[data-theme='dark'] .mobile-navigation .modal__header {
   }
 }
 
-/* R14.1 global dark visual audit: remove residual light islands and strengthen depth. */
+/* Dark theme refinements for nested surfaces. */
 html[data-theme='dark'] .language-control .language {
   border-color: var(--border-subtle);
 }

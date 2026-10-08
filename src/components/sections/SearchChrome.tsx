@@ -1,7 +1,7 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { noBreakNumber } from '../../i18n/typography';
-import { media } from '../../content/site';
+import { assetUrl } from '../../content/assets';
 import { Logo } from '../ui/Logo';
 import { Icon, type IconName } from '../ui/Icon';
 
@@ -18,7 +18,7 @@ export function SearchChrome({ credits = '2 000' }: { credits?: string }) {
         <Icon name="menu" />
       </div>
       <div className="search-chrome__rail">
-        <img src={media('favicon.svg')} width="26" height="26" alt="" />
+        <img src={assetUrl('brand', 'favicon.svg')} width="26" height="26" alt="" />
         {previewIcons.map((name, index) => (
           <span key={name} className={index === 0 ? 'is-selected' : undefined}>
             <Icon name={name} />

@@ -127,12 +127,12 @@
     transition: none;
   }
 }
-/* From src/styles/mobile-refinement.css; preserved cascade order. */
+/* Mobile layout adjustments. */
 .footer-columns .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-/* From src/styles/refinement-r8.css; preserved cascade order. */
+/* Responsive component adjustments. */
 .footer-columns a > .locale-text,
 .footer-email > strong {
   position: relative;

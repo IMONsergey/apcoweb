@@ -166,7 +166,7 @@ test('dark visual audit keeps search, trust, pricing and data controls coherent'
   if (!top || !middle || !lower || !bottom) throw new Error('Missing gradient samples');
   // Dark starts with the same live turquoise field as light; only the lower fade changes.
   expect(luminance(top)).toBeGreaterThan(90);
-  // The supplied R16 palette is still teal at 75%, midway between #005567 and #003440.
+  // The dark palette remains teal at 75%, midway between #005567 and #003440.
   expect(lower[0]).toBe(0);
   expect(Math.abs(lower[1] - 69)).toBeLessThanOrEqual(3);
   expect(Math.abs(lower[2] - 84)).toBeLessThanOrEqual(3);

@@ -8,7 +8,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { media } from '../../content/site';
+import { assetUrl } from '../../content/assets';
 import { useLocale } from '../../i18n/context';
 
 const Demo = lazy(() => import('./ApiDemoMount'));
@@ -54,8 +54,8 @@ export function ApiIllustration() {
       <div className="api-demo-poster" aria-hidden="true">
         <img
           className="api-demo-fallback"
-          src={media('api-layers.webp')}
-          srcSet={`${media('api-layers-360.webp')} 360w, ${media('api-layers-600.webp')} 600w, ${media('api-layers.webp')} 712w`}
+          src={assetUrl('api', 'api-layers.webp')}
+          srcSet={`${assetUrl('api', 'api-layers-360.webp')} 360w, ${assetUrl('api', 'api-layers-600.webp')} 600w, ${assetUrl('api', 'api-layers.webp')} 712w`}
           sizes="(max-width: 899px) calc(100vw - 64px), (max-width: 1199px) 57vw, (min-width: 1800px) 836px, calc((100vw - 168px) / 2)"
           width="712"
           height="554"

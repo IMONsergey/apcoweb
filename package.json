@@ -10,13 +10,14 @@
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc -b --pretty false",
     "lint": "eslint .",
-    "format": "prettier --write src tests *.json *.ts *.js *.html",
+    "format": "prettier --write src tests scripts docs README.md *.json *.ts *.js *.html",
     "test": "playwright test",
     "test:smoke": "playwright test --project=chromium",
-    "check": "npm run verify:visuals && npm run format:check && npm run lint && npm run typecheck",
-    "format:check": "prettier --check src tests scripts *.json *.ts *.js *.html",
+    "check": "npm run verify:assets && npm run verify:visuals && npm run format:check && npm run lint && npm run typecheck",
+    "format:check": "prettier --check src tests scripts docs README.md *.json *.ts *.js *.html",
     "test:production": "playwright test --project=chromium",
-    "verify:visuals": "node scripts/verify-visuals.mjs"
+    "verify:visuals": "node scripts/verify-visuals.mjs",
+    "verify:assets": "node scripts/verify-assets.mjs"
   },
   "dependencies": {
     "gsap": "3.13.0",
