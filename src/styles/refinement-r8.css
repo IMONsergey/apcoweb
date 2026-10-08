@@ -1,6 +1,9 @@
 /* R8: small, useful feedback and responsive reading; locale copy reflows naturally. */
+/* The fixed header reserves layout space here. Match the hero surface, not
+   the page background, so returning to the top never reveals a contrasting band. */
 .header-spacer {
   height: var(--header-height);
+  background: var(--white);
 }
 .site-header {
   position: fixed;
