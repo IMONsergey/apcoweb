@@ -39,7 +39,7 @@ public/
     partners/
     illustrations/
       api/
-      hero/
+      closing/
       walkthrough/
   fonts/
 src/

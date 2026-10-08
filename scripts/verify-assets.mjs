@@ -13,7 +13,7 @@ const groups = {
     'adobe.svg',
   ],
   'assets/illustrations/api': ['api-layers.webp', 'api-layers-360.webp', 'api-layers-600.webp'],
-  'assets/illustrations/hero': ['desktop', '1024', '768', '430', '390', '360', '320'].flatMap(
+  'assets/illustrations/closing': ['desktop', '1024', '768', '430', '390', '360', '320'].flatMap(
     (size) => [`start-${size}.webp`, `start-${size}-dark.webp`],
   ),
   'assets/illustrations/walkthrough': ['query', 'results', 'host'].flatMap((scene) => [

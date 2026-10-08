@@ -6,7 +6,7 @@ All static images are stored under `public/assets/`. Image URLs in React use `as
 | ----------------------------------- | -------------------------------------------------- |
 | `assets/brand/`                     | APCOSYS favicon and standalone logo                |
 | `assets/partners/`                  | Organization logos used in the trust strip         |
-| `assets/illustrations/hero/`        | Closing-section artwork at multiple viewport sizes |
+| `assets/illustrations/closing/`     | Closing-section artwork at multiple viewport sizes |
 | `assets/illustrations/walkthrough/` | Query, results and host illustrations              |
 | `assets/illustrations/api/`         | API interface illustration                         |
 | `fonts/`                            | Local WOFF2 files and license notices              |

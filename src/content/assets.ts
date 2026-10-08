@@ -2,7 +2,7 @@
 const directories = {
   brand: 'assets/brand',
   partners: 'assets/partners',
-  hero: 'assets/illustrations/hero',
+  closing: 'assets/illustrations/closing',
   walkthrough: 'assets/illustrations/walkthrough',
   api: 'assets/illustrations/api',
 } as const;
