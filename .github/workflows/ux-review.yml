@@ -31,6 +31,8 @@ jobs:
       - run: npx playwright install --with-deps chromium firefox webkit
       - name: Cross-browser scenarios
         run: npm test
+      - name: Capture Chromium visual baselines
+        run: APCO_VISUAL_CAPTURE=1 npx playwright test tests/visual-regression.spec.ts --project=chromium --workers=1 --reporter=line
       - name: Preserve review evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
