@@ -102,10 +102,10 @@ test('logo marquee moves continuously and pauses for focus and reduced motion', 
     page
       .locator('.trust-track')
       .evaluate((el) => new DOMMatrixReadOnly(getComputedStyle(el).transform).m41);
-  await page.waitForTimeout(150);
+  await expect(page.locator('.trust')).toHaveAttribute('data-running', 'true');
+  await expect(page.locator('.trust-track')).toHaveCSS('animation-play-state', 'running');
   const start = await offset();
-  await page.waitForTimeout(500);
-  expect(await offset()).toBeLessThan(start - 2);
+  await expect.poll(offset, { timeout: 8000 }).toBeLessThan(start - 2);
   await viewport.focus();
   await expect(page.locator('.trust-track')).toHaveCSS('animation-play-state', 'paused');
   // Sample after the compositor has committed the paused animation, not the previous frame.
