@@ -316,9 +316,8 @@
   color: white;
 }
 .segmented input:focus-visible + span {
-  outline: 2px solid var(--action);
-  outline-offset: 3px;
-  border-radius: 5px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 .plan-price-block {
   min-height: 102px;

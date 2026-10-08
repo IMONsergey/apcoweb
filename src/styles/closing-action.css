@@ -59,11 +59,6 @@ html[data-theme='dark'] .closing-scene:not(.closing-scene--compact) > picture {
   padding-inline: clamp(16px, 1.35vw, 24px);
 }
 
-.closing-hotspot:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 4px;
-  box-shadow: 0 0 0 6px var(--white);
-}
 @media (max-width: 1199px) {
   .closing-scene {
     --cta-left: 43.6%;

@@ -47,9 +47,6 @@ html {
     box-shadow 220ms var(--ease),
     border-color 220ms var(--ease);
 }
-.plan-card:has(:focus-visible) {
-  box-shadow: 0 0 0 2px #037a8f20;
-}
 .double-button:not(:disabled):active .double-button__icon svg {
   transform: translateX(1px) scale(0.94);
 }

@@ -29,9 +29,6 @@ body,
   background: var(--page);
   color: var(--ink);
 }
-:focus-visible {
-  outline-color: var(--focus);
-}
 .apcosys-logo {
   display: block;
   width: 134px;
@@ -144,9 +141,9 @@ body,
   opacity: 0;
   cursor: pointer;
 }
-.theme-segmented label:has(input:focus-visible) {
-  outline: 2px solid var(--focus);
-  outline-offset: 3px;
+.theme-segmented label:has(input:focus-visible) > span:first-of-type {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 @media (max-width: 1199px) {
   .theme-control--desktop {
@@ -259,7 +256,7 @@ html[data-theme='dark'] .nav-panel {
 }
 html[data-theme='dark'] .nav-panel__default,
 html[data-theme='dark'] .nav-panel a:hover,
-html[data-theme='dark'] .nav-panel a:focus-visible,
+html[data-theme='dark'] .nav-panel a:focus,
 html[data-theme='dark'] .language-panel button[aria-checked='true'],
 html[data-theme='dark'] .language-panel button:not(:disabled):hover,
 html[data-theme='dark'] .language-panel button:not(:disabled):focus-visible {
@@ -491,9 +488,6 @@ html[data-theme='dark'] .segmented label > span {
 }
 html[data-theme='dark'] .segmented input:checked + span {
   color: var(--on-action);
-}
-html[data-theme='dark'] .segmented input:focus-visible + span {
-  outline-color: var(--focus);
 }
 html[data-theme='dark'] .billing-dock {
   background: var(--surface-card);
