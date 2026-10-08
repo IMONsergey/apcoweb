@@ -41,16 +41,20 @@ for (const theme of ['light', 'dark'] as const) {
     await page.addInitScript((mode) => localStorage.setItem('apcosys-theme-mode', mode), theme);
     await page.goto('./');
 
-    const monthly = page.getByRole('radio', { name: 'Monthly', exact: true }).first();
-    await monthly.focus();
-    const monthlyText = monthly.locator('xpath=following-sibling::span');
-    await expect(monthlyText).toHaveCSS('outline-style', 'none');
-    await expect(page.locator('.segmented').first()).toHaveCSS('box-shadow', 'none');
-
     await page.getByRole('button', { name: 'Open navigation', exact: true }).click();
     const dialog = page.getByRole('dialog', { name: 'Navigation' });
     const dark = dialog.getByRole('radio', { name: 'Dark', exact: true });
     await dark.focus();
     await expect(dark.locator('xpath=..')).toHaveCSS('outline-style', 'none');
+    await page.keyboard.press('Escape');
+
+    // On phones, billing is an inert sticky dock until its pricing section is reached.
+    await page.locator('#plan-plus').scrollIntoViewIfNeeded();
+    await expect(page.locator('.billing-dock')).toBeVisible();
+    const monthly = page.getByRole('radio', { name: 'Monthly', exact: true });
+    await monthly.focus();
+    const monthlyText = monthly.locator('xpath=following-sibling::span');
+    await expect(monthlyText).toHaveCSS('outline-style', 'none');
+    await expect(page.locator('.billing-dock .segmented')).toHaveCSS('box-shadow', 'none');
   });
 }
