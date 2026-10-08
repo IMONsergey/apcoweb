@@ -69,11 +69,11 @@
   background: white;
 }
 .nav-panel a:hover,
-.nav-panel a:focus-visible {
+.nav-panel a:focus {
   background: white;
 }
 .nav-panel:has(a:not(.nav-panel__default):hover) .nav-panel__default,
-.nav-panel:has(a:not(.nav-panel__default):focus-visible) .nav-panel__default {
+.nav-panel:has(a:not(.nav-panel__default):focus) .nav-panel__default {
   background: transparent;
 }
 .language {
