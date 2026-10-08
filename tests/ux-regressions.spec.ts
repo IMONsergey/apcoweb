@@ -27,7 +27,8 @@ test('desktop carousel uses its container width rather than scrollbar-inclusive 
   await expect(page.locator('.counter')).toHaveText('1 / 3');
   const sizes = await page.locator('.step-track').evaluate((el) => {
     const c = getComputedStyle(el);
-    const card = el.children[0].getBoundingClientRect();
+    const card = el.firstElementChild?.getBoundingClientRect();
+    if (!card) throw new Error('Missing carousel card');
     return {
       expected: el.clientWidth - parseFloat(c.paddingRight),
       actual: card.width * 3 + parseFloat(c.gap) * 2,
@@ -94,7 +95,7 @@ test('closing action matches preserved desktop assets and the compact mobile but
     [390, 0.5, 0.5855],
     [360, 0.5, 0.5965],
     [320, 0.5005, 0.6795],
-  ];
+  ] as const;
   await page.goto('./', { waitUntil: 'networkidle' });
   for (const [width, x, y] of cases) {
     await page.setViewportSize({ width, height: 1000 });
@@ -132,7 +133,7 @@ test('closing action matches preserved desktop assets and the compact mobile but
               );
               return !!target?.closest('a.closing-hotspot');
             },
-            [x, y],
+            [x, y] as const,
           ),
         { message: `Visible CTA center must be clickable at ${width}px` },
       )
@@ -170,7 +171,7 @@ test('reduced-motion globe remains visibly drawn instead of losing its single We
     if (!context) return 0;
     const data = context.getImageData(0, 0, c.width, c.height).data;
     let visible = 0;
-    for (let i = 3; i < data.length; i += 64) if (data[i] > 16) visible++;
+    for (let i = 3; i < data.length; i += 64) if ((data[i] ?? 0) > 16) visible++;
     return visible;
   });
   expect(pixels).toBeGreaterThan(100);

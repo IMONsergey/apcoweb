@@ -28,7 +28,7 @@ export function Header() {
   useEffect(() => {
     if (!active) return;
     const onPointer = (event: PointerEvent) => {
-      if (!ref.current?.contains(event.target as Node)) setActive(null);
+      if (!(event.target instanceof Node) || !ref.current?.contains(event.target)) setActive(null);
     };
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -70,7 +70,7 @@ export function Header() {
                     event.currentTarget.querySelectorAll<HTMLAnchorElement>('.nav-panel a'),
                   );
                   if (!links.length) return;
-                  const focused = links.indexOf(document.activeElement as HTMLAnchorElement);
+                  const focused = links.findIndex((link) => link === document.activeElement);
                   event.preventDefault();
                   setActive(group.label);
                   const next =

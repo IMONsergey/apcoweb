@@ -10,7 +10,7 @@ export interface DotCascadeProps extends DotOptions {
   style?: CSSProperties;
   children?: ReactNode;
   overlay?: boolean;
-  onReady?: (ready: boolean) => void;
+  onReady?: ((ready: boolean) => void) | undefined;
 }
 
 export function DotCascade({

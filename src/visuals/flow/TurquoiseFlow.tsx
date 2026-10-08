@@ -13,7 +13,7 @@ export interface TurquoiseFlowProps extends FlowOptions {
   children?: ReactNode;
   className?: string;
   style?: CSSProperties;
-  onReady?: (ready: boolean) => void;
+  onReady?: ((ready: boolean) => void) | undefined;
 }
 
 /** A normal container: it can be a card, section, hero, or absolute background. */

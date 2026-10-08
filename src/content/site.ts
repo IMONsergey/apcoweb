@@ -10,6 +10,7 @@ export const metrics = [
   { id: 'cves', label: 'Vulnerabilities (CVEs)', value: '73 227 609' },
   { id: 'protocols', label: 'Protocols', value: '56' },
 ] as const;
+export type ResearchScene = 'query' | 'results' | 'host' | 'evidence' | 'suggestions';
 export const researchSteps = [
   {
     title: 'Query.',
@@ -46,7 +47,14 @@ export const researchSteps = [
     image: 'step-query.webp',
     alt: 'Return to the query with a more specific search.',
   },
-] as const;
+] as const satisfies ReadonlyArray<{
+  title: string;
+  scene: ResearchScene;
+  description: string;
+  image: string;
+  alt: string;
+}>;
+export type ResearchPoster = (typeof researchSteps)[number]['image'];
 export const plans = [
   {
     id: 'free',

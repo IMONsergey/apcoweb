@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import type { ResearchScene } from '../../content/site';
 import '../../visuals/product/product-scenes.js';
 
 declare global {
@@ -9,7 +10,7 @@ declare global {
 }
 window.ApcosysProductScenes?.configure({ gsap });
 
-export default function StepDemoMount({ scene }: { scene: string }) {
+export default function StepDemoMount({ scene }: { scene: ResearchScene }) {
   const host = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
     if (!host.current) return;

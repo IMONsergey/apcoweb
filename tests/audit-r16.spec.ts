@@ -66,11 +66,15 @@ for (const width of [390, 1440]) {
       // Canvas gradient dithering can differ by one channel value across a row.
       for (let x = 0; x < row.length; x += 4) {
         for (let channel = 0; channel < 4; channel++) {
-          expect(Math.abs(row[x + channel] - row[channel])).toBeLessThanOrEqual(1);
+          const value = row[x + channel];
+          const reference = row[channel];
+          if (value === undefined || reference === undefined)
+            throw new Error('Missing canvas pixel');
+          expect(Math.abs(value - reference)).toBeLessThanOrEqual(1);
         }
       }
     }
-    expect(rows[2].slice(0, 4)).toEqual([12, 17, 19, 255]);
+    expect(rows[2]?.slice(0, 4)).toEqual([12, 17, 19, 255]);
     await page.evaluate(() => {
       localStorage.setItem('apcosys-theme-mode', 'light');
       window.dispatchEvent(
