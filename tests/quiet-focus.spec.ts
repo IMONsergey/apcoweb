@@ -47,6 +47,7 @@ for (const theme of ['light', 'dark'] as const) {
     await dark.focus();
     await expect(dark.locator('xpath=..')).toHaveCSS('outline-style', 'none');
     await page.keyboard.press('Escape');
+    await expect(dialog).not.toBeVisible();
 
     // On phones, billing is an inert sticky dock until its pricing section is reached.
     await page.locator('#plan-plus').scrollIntoViewIfNeeded();
