@@ -1,9 +1,0 @@
-# R12 comparison evidence
-
-The PNGs are unmodified browser captures of the exact R10 rollback and R12 runtime `30b3d44c1f69dcd9c018afa04a2daad5255a55d3`. Baseline source is remote `d6ef695c06e454daa29e1dcc688589e1e45dd86f`, whose complete tree equals `92badd2`. Later container-test/documentation commits do not alter runtime.
-
-The `1536x740` comparison pairs are full-element Chromium screenshots of both carousel ends, audience cards and API, in EN/RU. The viewport remains 1536×740, so the resulting element image can exceed the viewport height. All five supplied scenes are visible across the first/last pairs. The last-slide blue border is the actual keyboard focus ring after End; fixed navigation can appear at the edge of a scrolled element capture. These are browser outcomes, not pixel edits.
-
-Other PNGs retain normal 1920×1080 RU audience composition, short 1366×650 Firefox carousel and 390×844 RU globe in Chromium/WebKit. Capture uses reduced motion, real scrolling, decoded visible images/fonts and a painted-globe wait. Neither DOM layout nor CSS is altered for screenshots. The dedicated container-width regression changes component width only as an automated test; it is unrelated to these images.
-
-`capture-provenance.json` gives each image's byte count and SHA-256. `geometry.json.gz` is a gzip-compressed JSON comparison of all 96 baseline and 96 final cases. Its `measurementOrder` defines each compact element record; it retains coordinates and typography for every measured selector. `geometry-summary.json` is the readable result and records the one repeated capture attempt. `bundle-sizes.json`, `device-proof.json`, `unused-assets.json` and `scene-provenance.json` retain build, source and input provenance. Full test reports from matching browser CI are retained by the PR workflows; final CI/live status is recorded in the draft PR description.

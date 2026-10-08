@@ -1,5 +1,6 @@
 import { LocaleText } from '../../i18n/LocaleText';
-import { media, productUrl } from '../../content/site';
+import { productUrl } from '../../content/site';
+import { assetUrl } from '../../content/assets';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useLocale } from '../../i18n/context';
 import { useTheme } from '../../theme/ThemeProvider';
@@ -10,14 +11,11 @@ export function ClosingSection() {
   const { t } = useLocale();
   const { theme } = useTheme();
   const themed = (name: string) =>
-    media(theme === 'dark' ? name.replace('.webp', '-dark.webp') : name);
+    assetUrl('closing', theme === 'dark' ? name.replace('.webp', '-dark.webp') : name);
   return (
     <section className="closing-section" aria-label={t('Start your first query')}>
       <div className="container">
-        <div
-          className={`closing-scene${compact ? ' closing-scene--compact' : ''}`}
-          data-source="Prepared saas mobile / Start artwork, cropped non-destructively"
-        >
+        <div className={`closing-scene${compact ? ' closing-scene--compact' : ''}`}>
           <picture>
             <source media="(max-width: 340px)" srcSet={themed('start-320.webp')} />
             <source media="(max-width: 375px)" srcSet={themed('start-360.webp')} />

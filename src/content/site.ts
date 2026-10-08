@@ -1,7 +1,6 @@
 /** Copy from CLEAR WORK — Handoff; commercial details remain review inputs. */
 export const productUrl = 'https://apcosys.net';
 export const supportEmail = 'info@apcosys.net';
-export const media = (name: string): string => `${import.meta.env.BASE_URL}media/${name}`;
 export const metrics = [
   { id: 'ipv4', label: 'IPv4', value: '88 585 365' },
   { id: 'ipv6', label: 'IPv6', value: '106 984 285' },

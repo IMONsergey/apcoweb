@@ -1,5 +1,6 @@
 import { Component, Suspense, lazy, useEffect, useRef, useState, type ReactNode } from 'react';
-import { media, type ResearchPoster, type ResearchScene } from '../../content/site';
+import { type ResearchPoster, type ResearchScene } from '../../content/site';
+import { assetUrl } from '../../content/assets';
 import { useTheme } from '../../theme/ThemeProvider';
 
 const Demo = lazy(() => import('./StepDemoMount'));
@@ -50,10 +51,13 @@ export function StepIllustration({
   return (
     <div ref={ref} className="step-illustration" role="img" aria-label={alt}>
       <img
-        src={media(themedImage)}
+        src={assetUrl('walkthrough', themedImage)}
         srcSet={[360, 600]
-          .map((width) => `${media(themedImage.replace('.webp', `-${width}.webp`))} ${width}w`)
-          .concat(`${media(themedImage)} ${posterWidths[image]}w`)
+          .map(
+            (width) =>
+              `${assetUrl('walkthrough', themedImage.replace('.webp', `-${width}.webp`))} ${width}w`,
+          )
+          .concat(`${assetUrl('walkthrough', themedImage)} ${posterWidths[image]}w`)
           .join(', ')}
         sizes="(max-width: 599px) calc(100vw - 108px), (max-width: 1199px) calc((100vw - 120px) / 2), (min-width: 1800px) 522px, calc((100vw - 220px) / 3)"
         width="908"

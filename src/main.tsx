@@ -14,11 +14,11 @@ import './styles/micro-motion.css';
 import './styles/billing-dock.css';
 import './styles/interaction-feedback.css';
 import './styles/closing-action.css';
-import './styles/mobile-refinement.css';
+import './styles/mobile-layout.css';
 import './styles/localization.css';
 import './styles/text-motion.css';
-import './styles/refinement-r8.css';
-import './styles/refinement-r10.css';
+import './styles/interface-layout.css';
+import './styles/search-composition.css';
 
 const element = document.getElementById('root');
 if (!element) throw new Error('The application root was not found.');

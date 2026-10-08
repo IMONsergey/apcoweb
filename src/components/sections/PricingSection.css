@@ -431,7 +431,7 @@
 .price-digit__reel > span::before {
   content: attr(data-numeral);
 }
-/* From src/styles/refinement-r8.css; preserved cascade order. */
+/* Responsive component adjustments. */
 .comparison-action .double-button__label {
   justify-content: flex-start;
 }

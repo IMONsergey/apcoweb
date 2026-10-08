@@ -1,92 +1,82 @@
-# APCOSYS website
+# APCOSYS Website
 
-React, TypeScript, Vite and plain CSS marketing preview. This repository contains the landing page and illustrative product scenes; authentication, search and subscriptions are hosted by APCOSYS.
+A responsive marketing website built with React 19, TypeScript, Vite and CSS. The project includes product interface illustrations and decorative animations. Authentication, searching and subscription management belong to the external APCOSYS platform.
 
-**Published preview:** The current `main` branch is continuously built and deployed to
-https://imonsergey.github.io/apcoweb/ after GitHub Actions validation. The release
-commit is the deployed workflow's SHA; check the [deployment runs](https://github.com/IMONsergey/apcoweb/actions/workflows/deploy.yml) instead of relying on a hard-coded README revision.
+## Requirements
 
-**Design and visual preservation:** The Light/Dark/System theme switch, responsive navigation,
-five product scenes, and supplied rendering engines are retained. The dark second-section
-gradient blends to `#0C1113`. The six supplied JS rendering/data modules are checksum
-protected; do not blindly convert or modify them as part of TypeScript cleanup.
+- Node.js 22.12+ (see `.nvmrc`)
+- npm (dependency versions are locked in `package-lock.json`)
 
-## Development and checks
-
-Node 22.12 or newer is required.
+## Getting started
 
 ```sh
 npm ci
-npm run dev                 # http://127.0.0.1:5187/apcoweb/
-npm run check               # original-source checksums, lint and TypeScript
-npm run format:check
-npm run build               # GitHub Pages /apcoweb/ build
-npm run preview             # http://127.0.0.1:4187/apcoweb/
-npx playwright install chromium firefox webkit
-npm test                    # three-browser suite
-npm run test:smoke          # full Chromium suite
+npm run dev
 ```
 
-`APCO_CHROMIUM_EXECUTABLE` optionally selects an already installed Chromium executable. Normal local and CI runs use Playwright's installed browsers. Animation tests explicitly enable normal motion; reduced-motion tests remain separate.
+The development server runs at `http://127.0.0.1:5187/apcoweb/`.
 
-## Client handoff and hosting
+## Commands
 
-For a **domain root**, including a Vercel preview:
+| Command              | Purpose                                                         |
+| -------------------- | --------------------------------------------------------------- |
+| `npm run dev`        | Start the Vite development server                               |
+| `npm run check`      | Validate assets, engine hashes, formatting, lint and TypeScript |
+| `npm run build`      | Production build for the current GitHub Pages path              |
+| `npm run build:root` | Production build for a root-domain deployment                   |
+| `npm run preview`    | Preview an existing build                                       |
+| `npm run test:smoke` | Full Playwright suite in Chromium                               |
+| `npm test`           | Full Playwright suite in Chromium, Firefox and WebKit           |
 
-```sh
-npm ci
-npm run build:root
-npm run preview -- --base=/  # http://127.0.0.1:4187/
+Install Playwright browsers once with `npx playwright install chromium firefox webkit`.
+
+## Directory structure
+
+```text
+public/
+  assets/
+    brand/
+    partners/
+    illustrations/
+      api/
+      closing/
+      walkthrough/
+  fonts/
+src/
+  components/
+    sections/
+    ui/
+    visuals/
+  content/
+  hooks/
+  i18n/
+  styles/
+  theme/
+  visuals/
+tests/
+scripts/
+docs/
 ```
 
-For an arbitrary **subdirectory**, use its exact path:
+- `src/components/sections/` contains page sections and local component styles.
+- `src/components/ui/` contains reusable UI controls.
+- `src/components/visuals/` contains lazy-loading integration and visibility boundaries.
+- `src/visuals/` contains the rendering modules and React wrappers.
+- `src/content/` contains visible content, pricing and asset URL helpers.
+- `src/styles/` contains tokens and global styles. CSS import order in `src/main.tsx` is intentional.
+- `public/` contains static assets copied to the build without bundling.
 
-```sh
-npm run build -- --base=/client-path/
-npm run preview -- --base=/client-path/
-```
+## Deployment
 
-Upload the contents of `dist` to the matching HTTP location. Opening `index.html` with `file://` is not a deployment. Check a hard reload and all JS/CSS/media/font requests at the final path. Tests can target a running build with `APCO_BASE_URL=https://preview.example/`.
+The current GitHub Pages preview is at https://imonsergey.github.io/apcoweb/. The default Vite base is `/apcoweb/`. For a custom domain or another path, follow [Deployment](docs/DEPLOYMENT.md).
 
-Hand over `dist`, the matching source commit/branch, `package-lock.json`, this README and `docs/CONTENT-STATUS.md`. Retain the exact commit SHA and SHA-256 checksums in the delivery archive. A clean checkout of `main` is not automatically the accepted preview.
+The site ships as a preview with `noindex` and restrictive `robots.txt`. Remove those only when a production launch has been approved.
 
-`.github/workflows/deploy.yml` validates and publishes GitHub Pages only for `main`; the standard base is `/apcoweb/`. The review workflow tests Chromium, Firefox and WebKit. A root-domain build must use `build:root` or an explicit `--base=/` override.
+## Technical documentation
 
-This remains a client preview with `noindex` and a disallowing `robots.txt`. They are intentional until a separately approved production launch.
-
-## Implementation
-
-- `src/components/sections/`: landing sections and component CSS.
-- `src/components/ui/`: one-stop split buttons, native dialogs, language disclosure and appearance controls.
-- `src/theme/`: persisted Light/Dark/System, OS changes and cross-tab updates.
-- `src/styles/tokens.css`: separate semantic colors and typography sizes; `theme.css` changes paint roles.
-- `src/content/site.ts`: existing prices, entitlements, metrics and destinations.
-- `src/i18n/`: English UI and Typograf formatting. RU and Chinese are unavailable and labelled SOON; translation source is retained for future editorial work.
-- `src/i18n/pageEntrance.ts`: soft page entrance after fonts, initial images and both search backgrounds are ready, without a loader.
-- `src/visuals/`: six protected supplied originals plus maintained adapters. `verify:visuals` verifies original-source preservation; adapters and demos also pass ESLint and browser lifecycle tests.
-- `public/media/`: local source images and smaller responsive poster variants.
-- `tests/`: interaction, geometry, keyboard, accessibility, responsive and animation regressions.
-- `docs/`: current review notes, content status and historical provenance.
-
-The API composition intentionally remains cyan with a light product interface in both themes. Search starts with the same animated turquoise field in Light and Dark. The dark version's lower 40% uses the owner's opaque turquoise-to-`#0C1113` palette; the light version still resolves to `#F6F6F6`. Preserve the two-part DoubleButton, the light renderer and the six protected original visual effects.
-
-## TypeScript contracts and quality gates
-
-- React UI, state, content, hooks, browser tests and tooling use TypeScript.
-- Both `tsconfig.app.json` and `tsconfig.node.json` enable `strict`,
-  `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes` and `noImplicitReturns`.
-- Product walkthrough scenes are restricted to `ResearchScene`; image names and
-  poster dimensions are checked using `ResearchPoster` in `src/content/site.ts`.
-- Supplied JavaScript engines keep explicit `.d.ts` integration boundaries, while
-  their wrappers are type-checked. `src/visuals/product/product-scenes.js` uses a
-  typed global integration in `StepDemoMount.tsx`. Do not claim TypeScript
-  checks the internals of those JavaScript files.
-- `npm run check` validates original engine hashes, Prettier formatting, ESLint
-  and TypeScript. `npm run build` type-checks again. Playwright browser tests are
-  still required: types cannot detect visual regressions or browser behavior.
-- A successful CI run does not prove zero bugs. Check theme/viewport behavior and
-  production navigation before handing the preview to the client.
-
-## Source design
-
-Figma file `lLMSuy0RrCiPhg873xpVUY`, page **CLEAR WORK — Handoff**, desktop frame `552:319`; phone artwork comes from **saas mobile**. Responsive layouts use normal reflow and retain the approved composition. No Figma changes are part of these code repairs.
+- [Architecture](docs/ARCHITECTURE.md)
+- [Assets and licenses](docs/ASSETS.md)
+- [Deployment and transfer](docs/DEPLOYMENT.md)
+- [Content requiring approval](docs/CONTENT.md)
+- [Visual components](docs/VISUALS.md)
+- [Quality assurance](docs/QA.md)
