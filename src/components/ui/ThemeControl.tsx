@@ -30,7 +30,15 @@ function ThemeOptions({ compact = false, onSelect }: { compact?: boolean; onSele
             <span>{option.label}</span>
             {mode === option.value && (
               <span className="theme-check" aria-hidden="true">
-                ✓
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                  <path
+                    d="m3.75 9.25 3.35 3.35 7.15-7.15"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </span>
             )}
           </label>
@@ -50,7 +58,15 @@ function ThemeOptions({ compact = false, onSelect }: { compact?: boolean; onSele
             <span>{option.label}</span>
             {mode === option.value && (
               <span className="theme-check" aria-hidden="true">
-                ✓
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+                  <path
+                    d="m3.75 9.25 3.35 3.35 7.15-7.15"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </span>
             )}
           </button>

@@ -156,6 +156,35 @@
   font-size: clamp(12px, 1.37cqw, 17px);
   padding-inline: 1.8cqw;
 }
+/* A native placeholder cannot style one phrase. This aria-hidden overlay
+   follows the same padding and typography while the input remains accessible. */
+.search-desktop-placeholder {
+  display: none;
+}
+@media (min-width: 1200px) {
+  .search-scene .search-form input::placeholder {
+    color: transparent;
+  }
+  .search-desktop-placeholder {
+    position: absolute;
+    inset: 0 auto 0 calc(2px + 1.8cqw);
+    display: flex;
+    align-items: center;
+    gap: 0.32em;
+    color: var(--muted);
+    font-size: clamp(12px, 1.37cqw, 17px);
+    line-height: 1.3;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .search-desktop-placeholder__accent {
+    color: var(--accent-text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+}
 @media (max-width: 1199px) {
   .search-scene {
     width: 92%;

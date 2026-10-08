@@ -77,6 +77,12 @@ export function SearchForm({ className = '' }: { className?: string }) {
           [compact && `${id}-hint`, error && `${id}-error`].filter(Boolean).join(' ') || undefined
         }
       />
+      {!compact && !query && (
+        <span className="search-desktop-placeholder" aria-hidden="true">
+          <span>{t('Domain, IP or technical attribute.')}</span>
+          <span className="search-desktop-placeholder__accent">{t('It’s free')}</span>
+        </span>
+      )}
       {query && !submitting && (
         <button
           type="button"

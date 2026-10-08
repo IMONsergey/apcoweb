@@ -96,11 +96,22 @@ body,
   background: var(--white);
 }
 .theme-check {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
   color: var(--accent-text);
-  font: 500 12px/1 var(--font-mono);
+}
+.theme-check svg {
+  display: block;
+  width: 18px;
+  height: 18px;
 }
 .mobile-theme-control {
-  margin: 4px 0 28px;
+  margin: 28px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
 }
 .mobile-theme-control > .eyebrow {
   margin-bottom: 10px;

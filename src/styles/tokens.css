@@ -47,7 +47,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   color: var(--ink);
-  background: var(--page);
+  /* The root canvas shows through Safari's top overscroll: match the hero. */
+  background: var(--white);
 }
 * {
   box-sizing: border-box;
