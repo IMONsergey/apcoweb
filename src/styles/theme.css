@@ -256,7 +256,7 @@ html[data-theme='dark'] .nav-panel {
 }
 html[data-theme='dark'] .nav-panel__default,
 html[data-theme='dark'] .nav-panel a:hover,
-html[data-theme='dark'] .nav-panel a:focus-visible,
+html[data-theme='dark'] .nav-panel a:focus,
 html[data-theme='dark'] .language-panel button[aria-checked='true'],
 html[data-theme='dark'] .language-panel button:not(:disabled):hover,
 html[data-theme='dark'] .language-panel button:not(:disabled):focus-visible {
