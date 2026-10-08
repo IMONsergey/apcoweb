@@ -13,10 +13,17 @@ for (const theme of ['light', 'dark'] as const) {
 
     await developers.focus();
     await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('ArrowDown');
     const menuLink = page.locator('.desktop-nav .nav-panel a:focus');
     await expect(menuLink).toHaveCount(1);
     await expect(menuLink).toHaveCSS('outline-style', 'none');
-    await expect(menuLink).toHaveCSS('text-decoration-line', 'underline');
+    // Programmatic arrow-key focus is not :focus-visible in every browser.
+    // Keep a muted selection fill rather than relying on a focus ring.
+    const fills = await menuLink.evaluate((node) => ({
+      link: getComputedStyle(node).backgroundColor,
+      panel: getComputedStyle(node.parentElement!).backgroundColor,
+    }));
+    expect(fills.link).not.toBe(fills.panel);
     await page.keyboard.press('Escape');
 
     const language = page.getByRole('button', { name: 'EN — Language', exact: true });
