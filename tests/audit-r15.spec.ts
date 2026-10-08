@@ -1,4 +1,4 @@
-import AxeBuilder from '@axe-core/playwright';
+import { wcagAxe } from './helpers/accessibility';
 import { expect, test, type Page } from '@playwright/test';
 
 type Timeline = {
@@ -234,10 +234,7 @@ test('expanded Appearance, pricing and mobile navigation pass accessibility scan
 }, info) => {
   const incomplete: Array<{ state: string; rules: Array<{ id: string; targets: unknown[] }> }> = [];
   const scan = async (state: string) => {
-    const result = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
-      .withRules(['label-content-name-mismatch'])
-      .analyze();
+    const result = await wcagAxe(page).analyze();
     incomplete.push({
       state,
       rules: result.incomplete.map((rule) => ({

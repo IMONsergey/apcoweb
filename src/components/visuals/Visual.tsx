@@ -75,7 +75,7 @@ export function Visual({
             (kind === 'flow' ? (
               <Flow
                 speed={1}
-                strength={visualTheme === 'dark' ? 0.9 : 1}
+                strength={1}
                 fps={renderFps}
                 resolution={constrainedMotion ? 160 : 192}
                 paused={paused}

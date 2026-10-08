@@ -174,15 +174,17 @@ export function createTurquoiseFlow(canvas, options = {}) {
     baseGradient.addColorStop(0, '#003c4c');
     baseGradient.addColorStop(1, '#2396af');
     whiteVeil = ctx.createLinearGradient(0, 0, 0, h);
-    // The live turquoise field is identical at the top in both themes. Only the
-    // destination of the lower fade changes: light -> page white, dark -> page dark.
-    for (let i = 0; i <= 48; i++) {
-      const v = i / 48;
-      if (settings.theme === 'dark') {
-        const bottomProgress = clamp((v - .40) / (.70 - .40), 0, 1);
-        const alpha = bottomProgress * bottomProgress * (3 - 2 * bottomProgress);
-        whiteVeil.addColorStop(v, `rgba(13,17,19,${alpha})`);
-      } else {
+    // Dark lower field comes from block-second-bg-dark(1).zip, 2026-10-08.
+    // Opaque from 60% down: animated light spots cannot muddy the supplied palette.
+    if (settings.theme === 'dark') {
+      for (const [stop, color] of [
+        [0, 'rgba(0,154,180,0)'], [.36, 'rgba(0,154,180,0)'],
+        [.48, 'rgba(0,145,170,.50)'], [.60, '#007A92'], [.70, '#005567'],
+        [.80, '#003440'], [.90, '#0B1C21'], [.98, '#0C1113'], [1, '#0C1113'],
+      ]) whiteVeil.addColorStop(stop, color);
+    } else {
+      for (let i = 0; i <= 48; i++) {
+        const v = i / 48;
         const alpha = Math.pow(clamp((v - .38637) / (.97139 - .38637), 0, 1), 1.02082);
         whiteVeil.addColorStop(v, `rgba(246,246,246,${alpha})`);
       }

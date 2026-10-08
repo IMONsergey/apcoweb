@@ -1,5 +1,8 @@
 # R15 — client-preview audit repairs
 
+> Release update — 2026-10-08: this candidate was merged as PR #17 (`a070c4b`) and published at https://imonsergey.github.io/apcoweb/. Three-engine CI run 37662223617 passed 459 cases; release run 37724856322 deployed Pages and passed 153 production-smoke cases. The original local-only and blocked-publication notes below are historical. The subsequent audit found an axe filter configuration error, corrected in R16; read REVIEW-R16.md and the current WORK-STATE entry first.
+
+
 Owner request, 2026-10-07: fix the confirmed problems in the main audit (A01–A13) and the Dark/menu follow-up (A14–A17). This candidate starts from R14.5 `b075d22adfbbb8d90c0e124f4a05dcac90fd53b8`. It preserves the supplied effects, two-part buttons, prices/entitlements and intentionally light API illustration.
 
 | Audit | Repair                                                                                                                         |

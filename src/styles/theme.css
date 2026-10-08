@@ -287,16 +287,18 @@ html[data-theme='dark'] .double-button--dark {
 }
 
 html[data-theme='dark'] .search-preview,
-html[data-theme='dark'] .search-preview .visual-fallback--flow {
+html[data-theme='dark'] .search-preview .visual-fallback--flow,
+html[data-theme='dark'] .search-preview .turquoise-flow {
   background:
     linear-gradient(
       180deg,
-      transparent 0%,
-      transparent 40%,
-      rgb(13 17 19 / 36%) 52%,
-      rgb(13 17 19 / 82%) 64%,
-      var(--surface-page) 72%,
-      var(--surface-page) 100%
+      rgb(0 154 180 / 0%) 36%,
+      rgb(0 145 170 / 50%) 48%,
+      #007a92 60%,
+      #005567 70%,
+      #003440 80%,
+      #0b1c21 90%,
+      #0c1113 98%
     ),
     radial-gradient(ellipse at 49% 42%, #91dce6 0%, transparent 58%),
     linear-gradient(110deg, #0c4150 0%, #419cab 67%, #2996ab 100%);

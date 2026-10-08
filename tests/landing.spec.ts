@@ -1,5 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
-import AxeBuilder from '@axe-core/playwright';
+import { wcagAxe } from './helpers/accessibility';
 
 async function openLanding(page: Page) {
   await page.goto('./', { waitUntil: 'networkidle' });
@@ -205,10 +205,7 @@ for (const width of [1440, 390])
   test(`accessibility scan at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 1000 });
     await openLanding(page);
-    const results = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
-      .withRules(['label-content-name-mismatch'])
-      .analyze();
+    const results = await wcagAxe(page).analyze();
     expect(
       results.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
     ).toEqual([]);

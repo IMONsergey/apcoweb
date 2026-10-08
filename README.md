@@ -2,7 +2,9 @@
 
 React, TypeScript, Vite and plain CSS marketing preview. This repository contains the landing page and illustrative product scenes; authentication, search and subscriptions are hosted by APCOSYS.
 
-The current review candidate extends `feat/dark-theme-system-2026-10-07` with the [R15 audit repairs](docs/REVIEW-R15.md). It includes Light, Dark and System, responsive navigation and five supplied product animations. `main` and older preview URLs can contain different builds: hand over the accepted source commit and its matching `dist`.
+**Published R15:** `main` is at `a070c4b` (merged [PR #17](https://github.com/IMONsergey/apcoweb/pull/17)), and the matching client preview is https://imonsergey.github.io/apcoweb/. It includes the Light/Dark/System theme switch, responsive navigation and five supplied product animations.
+
+**R16 review candidate:** [`fix/r16-audit-dark-gradient`](https://github.com/IMONsergey/apcoweb/pull/18) contains the subsequent audit repairs: restored full WCAG scanning, desktop registration-button fitting with enlarged text spacing, corrected release documentation and the owner's opaque dark gradient for the second section. R16 is **not** part of the published `main` until its PR is merged and Pages deployment succeeds. Always hand over `dist` together with the exact source commit that produced it.
 
 ## Development and checks
 
@@ -61,7 +63,7 @@ This remains a client preview with `noindex` and a disallowing `robots.txt`. The
 - `tests/`: interaction, geometry, keyboard, accessibility, responsive and animation regressions.
 - `docs/`: current review notes, content status and historical provenance.
 
-The API composition intentionally remains cyan with a light product interface in both themes. Search starts with the same turquoise field in Light and Dark; its lower fade resolves to the selected page background. Preserve the two-part DoubleButton and original effects.
+The API composition intentionally remains cyan with a light product interface in both themes. Search starts with the same animated turquoise field in Light and Dark. In R16, the dark version's lower 40% uses the owner's opaque turquoise-to-`#0C1113` palette; the light version still resolves to `#F6F6F6`. Preserve the two-part DoubleButton, the light renderer and the six protected original visual effects.
 
 ## Source design
 

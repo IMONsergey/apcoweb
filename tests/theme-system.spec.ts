@@ -1,4 +1,4 @@
-import AxeBuilder from '@axe-core/playwright';
+import { wcagAxe } from './helpers/accessibility';
 import { expect, test } from '@playwright/test';
 
 async function chooseTheme(
@@ -158,7 +158,10 @@ test('dark visual audit keeps search, trust, pricing and data controls coherent'
   expect(searchPixels).toHaveLength(4);
   // Dark starts with the same live turquoise field as light; only the lower fade changes.
   expect(luminance(searchPixels[0])).toBeGreaterThan(90);
-  expect(luminance(searchPixels[2])).toBeLessThan(35);
+  // The supplied R16 palette is still teal at 75%, midway between #005567 and #003440.
+  expect(searchPixels[2][0]).toBe(0);
+  expect(Math.abs(searchPixels[2][1] - 69)).toBeLessThanOrEqual(3);
+  expect(Math.abs(searchPixels[2][2] - 84)).toBeLessThanOrEqual(3);
   expect(luminance(searchPixels[3])).toBeLessThan(35);
   expect(luminance(searchPixels[1])).toBeGreaterThan(luminance(searchPixels[0]) + 40);
 
@@ -331,10 +334,7 @@ test('dark theme passes WCAG AA scans on desktop and phone', async ({ page }) =>
     await page.goto('./');
     await page.evaluate(() => localStorage.setItem('apcosys-theme-mode', 'dark'));
     await page.reload({ waitUntil: 'networkidle' });
-    const results = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
-      .withRules(['label-content-name-mismatch'])
-      .analyze();
+    const results = await wcagAxe(page).analyze();
     expect(
       results.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
       `dark accessibility at ${width}px`,
