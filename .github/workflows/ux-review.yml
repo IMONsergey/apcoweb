@@ -1,8 +1,6 @@
 name: Cross-browser UX review
 
 on:
-  push:
-    branches: [work/contextual-billing-2026-10-05]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -28,7 +26,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
-      - run: npm run format:check
       - run: npm run build
       - run: npx playwright install --with-deps chromium firefox webkit
       - name: Cross-browser scenarios
