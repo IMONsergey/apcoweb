@@ -1,9 +1,9 @@
 import { Component, Suspense, lazy, useEffect, useRef, useState, type ReactNode } from 'react';
-import { media } from '../../content/site';
+import { media, type ResearchPoster, type ResearchScene } from '../../content/site';
 import { useTheme } from '../../theme/ThemeProvider';
 
 const Demo = lazy(() => import('./StepDemoMount'));
-const posterWidths: Record<string, number> = {
+const posterWidths: Record<ResearchPoster, number> = {
   'step-query.webp': 908,
   'step-results.webp': 1234,
   'step-host.webp': 1164,
@@ -25,8 +25,8 @@ export function StepIllustration({
   image,
   alt,
 }: {
-  scene: string;
-  image: string;
+  scene: ResearchScene;
+  image: ResearchPoster;
   alt: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);

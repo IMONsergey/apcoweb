@@ -40,7 +40,10 @@ export function useScrollHeader(ref: RefObject<HTMLElement | null>, locked: bool
       );
     };
     const anchor = (event: MouseEvent) => {
-      const link = (event.target as Element)?.closest<HTMLAnchorElement>('a[href^="#"]');
+      const link =
+        event.target instanceof Element
+          ? event.target.closest<HTMLAnchorElement>('a[href^="#"]')
+          : null;
       const id = link?.getAttribute('href')?.slice(1);
       const target = id ? document.getElementById(id) : null;
       if (!target) return;

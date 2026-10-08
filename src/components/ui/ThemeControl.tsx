@@ -127,7 +127,7 @@ export function ThemeMenu({
       );
       if (!buttons.length) return;
       event.preventDefault();
-      const current = buttons.indexOf(document.activeElement as HTMLButtonElement);
+      const current = buttons.findIndex((button) => button === document.activeElement);
       const next =
         event.key === 'Home'
           ? 0

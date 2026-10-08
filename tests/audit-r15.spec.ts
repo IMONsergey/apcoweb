@@ -312,10 +312,11 @@ test('all five active dark scene timelines preserve their palette in phase sampl
             continue;
           const match = style.backgroundColor.match(/rgba?\(([^)]+)\)/);
           if (!match) continue;
-          const [r, g, b, alpha = 1] = match[1]
+          const [r, g, b, alpha = 1] = (match[1] ?? '')
             .split(/[,\s/]+/)
             .filter(Boolean)
             .map(Number);
+          if (r === undefined || g === undefined || b === undefined) continue;
           if (alpha > 0.8 && (r * 0.2126 + g * 0.7152 + b * 0.0722) / 255 > 0.62)
             bright.push({ time, selector: element.className, color: style.backgroundColor });
         }

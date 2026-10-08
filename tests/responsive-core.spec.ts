@@ -17,7 +17,7 @@ const viewports = [
   [360, 800],
   [320, 568],
   [844, 390],
-];
+] as const;
 
 for (const [width, height] of viewports) {
   test(
@@ -159,8 +159,10 @@ test('components respond to their own width inside a wide viewport', async ({ pa
     }),
   );
 
-  expect(cards[0].x).toBe(cards[1].x);
-  expect(cards[1].y).toBeGreaterThanOrEqual(cards[0].bottom);
+  const [first, second] = cards;
+  if (!first || !second) throw new Error('Expected two audience cards');
+  expect(first.x).toBe(second.x);
+  expect(second.y).toBeGreaterThanOrEqual(first.bottom);
 });
 
 test('mobile product scenes stay scaled inside their cards', async ({ page }) => {

@@ -11,8 +11,8 @@ export function useCarousel() {
   const { paused } = useMotion();
   const update = useCallback(() => {
     const element = track.current;
-    const first = element?.firstElementChild as HTMLElement | null;
-    if (!element || !first) return;
+    const first = element?.firstElementChild;
+    if (!element || !(first instanceof HTMLElement)) return;
     const step =
       first.getBoundingClientRect().width + (parseFloat(getComputedStyle(element).gap) || 20);
     const maximum = Math.max(0, element.scrollWidth - element.clientWidth);
@@ -22,7 +22,7 @@ export function useCarousel() {
     );
     const closest = stops.current.reduce(
       (best, stop, index, values) =>
-        Math.abs(stop - element.scrollLeft) < Math.abs(values[best] - element.scrollLeft)
+        Math.abs(stop - element.scrollLeft) < Math.abs((values[best] ?? 0) - element.scrollLeft)
           ? index
           : best,
       0,
@@ -61,8 +61,10 @@ export function useCarousel() {
     const element = track.current;
     if (!element) return;
     const next = Math.max(0, Math.min(stops.current.length - 1, index));
+    const left = stops.current[next];
+    if (left === undefined) return;
     requested.current = next;
-    element.scrollTo({ left: stops.current[next], behavior: paused ? 'instant' : 'smooth' });
+    element.scrollTo({ left, behavior: paused ? 'instant' : 'smooth' });
   }
   function move(direction: number) {
     goTo((requested.current ?? position) + direction);

@@ -9,7 +9,11 @@ const Globe = lazy(() => import('../../visuals/globe/SignalGlobe'));
 const Shape = lazy(() => import('../../visuals/shapes/AnimatedShape'));
 const Dots = lazy(() => import('../../visuals/dots/DotCascade'));
 class VisualBoundary extends Component<
-  { children: ReactNode; fallback?: ReactNode; onReady?: (ready: boolean) => void },
+  {
+    children: ReactNode;
+    fallback?: ReactNode | undefined;
+    onReady?: ((ready: boolean) => void) | undefined;
+  },
   { failed: boolean }
 > {
   state = { failed: false };

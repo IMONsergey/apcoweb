@@ -2,9 +2,14 @@
 
 React, TypeScript, Vite and plain CSS marketing preview. This repository contains the landing page and illustrative product scenes; authentication, search and subscriptions are hosted by APCOSYS.
 
-**Published R15:** `main` is at `a070c4b` (merged [PR #17](https://github.com/IMONsergey/apcoweb/pull/17)), and the matching client preview is https://imonsergey.github.io/apcoweb/. It includes the Light/Dark/System theme switch, responsive navigation and five supplied product animations.
+**Published preview:** The current `main` branch is continuously built and deployed to
+https://imonsergey.github.io/apcoweb/ after GitHub Actions validation. The release
+commit is the deployed workflow's SHA; check the [deployment runs](https://github.com/IMONsergey/apcoweb/actions/workflows/deploy.yml) instead of relying on a hard-coded README revision.
 
-**R16 review candidate:** [`fix/r16-audit-dark-gradient`](https://github.com/IMONsergey/apcoweb/pull/18) contains the subsequent audit repairs: restored full WCAG scanning, desktop registration-button fitting with enlarged text spacing, corrected release documentation and the owner's opaque dark gradient for the second section. R16 is **not** part of the published `main` until its PR is merged and Pages deployment succeeds. Always hand over `dist` together with the exact source commit that produced it.
+**Design and visual preservation:** The Light/Dark/System theme switch, responsive navigation,
+five product scenes, and supplied rendering engines are retained. The dark second-section
+gradient blends to `#0C1113`. The six supplied JS rendering/data modules are checksum
+protected; do not blindly convert or modify them as part of TypeScript cleanup.
 
 ## Development and checks
 
@@ -63,7 +68,24 @@ This remains a client preview with `noindex` and a disallowing `robots.txt`. The
 - `tests/`: interaction, geometry, keyboard, accessibility, responsive and animation regressions.
 - `docs/`: current review notes, content status and historical provenance.
 
-The API composition intentionally remains cyan with a light product interface in both themes. Search starts with the same animated turquoise field in Light and Dark. In R16, the dark version's lower 40% uses the owner's opaque turquoise-to-`#0C1113` palette; the light version still resolves to `#F6F6F6`. Preserve the two-part DoubleButton, the light renderer and the six protected original visual effects.
+The API composition intentionally remains cyan with a light product interface in both themes. Search starts with the same animated turquoise field in Light and Dark. The dark version's lower 40% uses the owner's opaque turquoise-to-`#0C1113` palette; the light version still resolves to `#F6F6F6`. Preserve the two-part DoubleButton, the light renderer and the six protected original visual effects.
+
+## TypeScript contracts and quality gates
+
+- React UI, state, content, hooks, browser tests and tooling use TypeScript.
+- Both `tsconfig.app.json` and `tsconfig.node.json` enable `strict`,
+  `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes` and `noImplicitReturns`.
+- Product walkthrough scenes are restricted to `ResearchScene`; image names and
+  poster dimensions are checked using `ResearchPoster` in `src/content/site.ts`.
+- Supplied JavaScript engines keep explicit `.d.ts` integration boundaries, while
+  their wrappers are type-checked. `src/visuals/product/product-scenes.js` uses a
+  typed global integration in `StepDemoMount.tsx`. Do not claim TypeScript
+  checks the internals of those JavaScript files.
+- `npm run check` validates original engine hashes, Prettier formatting, ESLint
+  and TypeScript. `npm run build` type-checks again. Playwright browser tests are
+  still required: types cannot detect visual regressions or browser behavior.
+- A successful CI run does not prove zero bugs. Check theme/viewport behavior and
+  production navigation before handing the preview to the client.
 
 ## Source design
 

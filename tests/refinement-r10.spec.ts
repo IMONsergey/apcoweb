@@ -40,7 +40,7 @@ for (const [width, height] of [
   [1366, 650],
   [1280, 600],
   [390, 844],
-]) {
+] as const) {
   test('search remains composed and usable at ' + width + 'x' + height, async ({ page }) => {
     await page.setViewportSize({ width, height });
     await page.goto('./', { waitUntil: 'networkidle' });
@@ -73,7 +73,7 @@ test('API interface and stacked layers fit the content grid', async ({ page }) =
     [1440, 900],
     [768, 1024],
     [390, 844],
-  ]) {
+  ] as const) {
     await page.setViewportSize({ width, height });
     await page.goto('./', { waitUntil: 'networkidle' });
     await page.locator('#api').scrollIntoViewIfNeeded();

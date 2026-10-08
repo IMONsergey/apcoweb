@@ -64,10 +64,12 @@ test('theme switch preserves reviewed layout geometry', async ({ page }) => {
   await page.waitForTimeout(300);
   const dark = await boxes();
   dark.forEach((box, index) => {
-    expect(Math.abs(box.x - light[index].x), selectors[index]).toBeLessThanOrEqual(0.5);
-    expect(Math.abs(box.y - light[index].y), selectors[index]).toBeLessThanOrEqual(0.5);
-    expect(Math.abs(box.width - light[index].width), selectors[index]).toBeLessThanOrEqual(0.5);
-    expect(Math.abs(box.height - light[index].height), selectors[index]).toBeLessThanOrEqual(0.5);
+    const previous = light[index];
+    if (!previous) throw new Error('Missing geometry snapshot');
+    expect(Math.abs(box.x - previous.x), selectors[index]).toBeLessThanOrEqual(0.5);
+    expect(Math.abs(box.y - previous.y), selectors[index]).toBeLessThanOrEqual(0.5);
+    expect(Math.abs(box.width - previous.width), selectors[index]).toBeLessThanOrEqual(0.5);
+    expect(Math.abs(box.height - previous.height), selectors[index]).toBeLessThanOrEqual(0.5);
   });
 });
 
@@ -145,25 +147,31 @@ test('dark visual audit keeps search, trust, pricing and data controls coherent'
     .evaluate((canvas) => {
       const element = canvas as HTMLCanvasElement;
       const context = element.getContext('2d');
-      if (!context) return [] as number[][];
+      if (!context) return [] as Array<[number, number, number]>;
       const x = Math.floor(element.width / 2);
       return [
         1,
         Math.floor(element.height * 0.42),
         Math.floor(element.height * 0.75),
         element.height - 2,
-      ].map((y) => Array.from(context.getImageData(x, y, 1, 1).data.slice(0, 3)) as number[]);
+      ].map(
+        (y) =>
+          Array.from(context.getImageData(x, y, 1, 1).data.slice(0, 3)) as [number, number, number],
+      );
     });
-  const luminance = ([r, g, b]: number[]) => 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  const luminance = ([r, g, b]: readonly [number, number, number]) =>
+    0.2126 * r + 0.7152 * g + 0.0722 * b;
   expect(searchPixels).toHaveLength(4);
+  const [top, middle, lower, bottom] = searchPixels;
+  if (!top || !middle || !lower || !bottom) throw new Error('Missing gradient samples');
   // Dark starts with the same live turquoise field as light; only the lower fade changes.
-  expect(luminance(searchPixels[0])).toBeGreaterThan(90);
+  expect(luminance(top)).toBeGreaterThan(90);
   // The supplied R16 palette is still teal at 75%, midway between #005567 and #003440.
-  expect(searchPixels[2][0]).toBe(0);
-  expect(Math.abs(searchPixels[2][1] - 69)).toBeLessThanOrEqual(3);
-  expect(Math.abs(searchPixels[2][2] - 84)).toBeLessThanOrEqual(3);
-  expect(luminance(searchPixels[3])).toBeLessThan(35);
-  expect(luminance(searchPixels[1])).toBeGreaterThan(luminance(searchPixels[0]) + 40);
+  expect(lower[0]).toBe(0);
+  expect(Math.abs(lower[1] - 69)).toBeLessThanOrEqual(3);
+  expect(Math.abs(lower[2] - 84)).toBeLessThanOrEqual(3);
+  expect(luminance(bottom)).toBeLessThan(35);
+  expect(luminance(middle)).toBeGreaterThan(luminance(top) + 40);
 
   const contactButton = page.locator('.contact-banner .double-button__label');
   await expect(contactButton).toHaveCSS('background-color', 'rgb(255, 255, 255)');
@@ -198,11 +206,11 @@ test('dark product animations never write light surfaces over their demo palette
       const luminance = (value: string) => {
         const match = value.match(/rgba?\(([^)]+)\)/);
         if (!match) return 0;
-        const values = match[1]
+        const values = (match[1] ?? '')
           .split(/[,\s/]+/)
           .filter(Boolean)
           .map(Number);
-        const [r, g, b] = values;
+        const [r = 0, g = 0, b = 0] = values;
         return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
       };
       return hosts.flatMap((host) =>
@@ -267,14 +275,14 @@ test('dark lower waves stay dark and closing artwork hides baked corner defects'
   const wavePixels = await page.locator('.lower-scene canvas').evaluate((canvas) => {
     const element = canvas as HTMLCanvasElement;
     const context = element.getContext('2d');
-    if (!context) return [] as number[][];
+    if (!context) return [] as Array<[number, number, number]>;
     return [0.25, 0.55, 0.85].map(
       (ratio) =>
         Array.from(
           context
             .getImageData(Math.floor(element.width * 0.5), Math.floor(element.height * ratio), 1, 1)
             .data.slice(0, 3),
-        ) as number[],
+        ) as [number, number, number],
     );
   });
   wavePixels.forEach(([r, g, b]) => {

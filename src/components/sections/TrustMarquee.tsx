@@ -13,7 +13,7 @@ export function TrustMarquee() {
     let visible = false;
     const sync = () => setRunning(visible && !document.hidden);
     const observer = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
+      visible = entry?.isIntersecting ?? false;
       sync();
     });
     observer.observe(ref.current);

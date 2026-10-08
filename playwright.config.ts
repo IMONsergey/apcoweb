@@ -43,12 +43,14 @@ export default defineConfig({
             : {},
     },
   })),
-  webServer: process.env.APCO_BASE_URL
-    ? undefined
+  ...(process.env.APCO_BASE_URL
+    ? {}
     : {
-        command: 'npm run preview',
-        url: 'http://127.0.0.1:4187/apcoweb/',
-        reuseExistingServer: !process.env.CI,
-        timeout: 30000,
-      },
+        webServer: {
+          command: 'npm run preview',
+          url: 'http://127.0.0.1:4187/apcoweb/',
+          reuseExistingServer: !process.env.CI,
+          timeout: 30000,
+        },
+      }),
 });
