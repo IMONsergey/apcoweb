@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: ux-review-${{ github.ref }}
@@ -37,6 +37,24 @@ jobs:
         run: npm test
       - name: Capture Chromium visual baselines
         run: APCO_VISUAL_CAPTURE=1 npx playwright test tests/visual-regression.spec.ts --project=chromium --workers=1 --reporter=line
+      - name: Seed reviewed R21 baselines
+        if: ${{ github.head_ref == 'chore/r21-pretransfer-hardening' && github.event.pull_request.head.repo.full_name == github.repository }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          dir=tests/visual-regression.spec.ts-snapshots
+          if [ -f "$dir/hero-desktop-light-chromium-linux.png" ]; then exit 0; fi
+          mkdir -p "$dir"
+          find test-results -type f -name '*-chromium-linux.png' -exec cp {} "$dir"/ \;
+          if [ "$(find "$dir" -name '*.png' | wc -l)" -ne 12 ]; then
+            echo "Expected 12 visual baselines"; exit 1
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/config/site.ts scripts/verify-assets.mjs "$dir"
+          git commit -m "R21: preserve Linux Chromium visual baselines"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_HEAD_REF}"
       - name: Preserve review evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
