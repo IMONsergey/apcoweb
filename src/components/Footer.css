@@ -155,9 +155,6 @@
 .footer-email:is(:hover, :focus-visible) > strong::after {
   transform: scaleX(1);
 }
-.footer-columns a:focus-visible {
-  color: var(--action);
-}
 @media (min-width: 1600px) {
   .footer-columns li {
     font-size: var(--text-small);
