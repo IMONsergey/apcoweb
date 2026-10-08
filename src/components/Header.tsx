@@ -184,7 +184,6 @@ export function Header() {
               ))}
             </div>
           ))}
-          <MobileThemeControl />
           <a className="mobile-pricing" href="#pricing" onClick={() => setMobileOpen(false)}>
             <LocaleText>{t('Pricing')}</LocaleText>
             <Icon name="arrow" />
@@ -195,6 +194,7 @@ export function Header() {
           <a className="plain-button" href={`${productUrl}/search`}>
             <LocaleText>{t('Sign In')}</LocaleText>
           </a>
+          <MobileThemeControl />
         </nav>
       </Modal>
     </>
