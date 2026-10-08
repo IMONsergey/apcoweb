@@ -78,7 +78,7 @@
   .billing-dock .segmented {
     transition: box-shadow 200ms var(--ease);
   }
-  .billing-dock .segmented:focus-within {
+  .billing-dock .segmented:has(:focus-visible) {
     box-shadow: 0 0 0 4px #037a8f0b;
   }
 }

@@ -84,9 +84,11 @@ export function LanguageBadge({
       ),
     );
   };
-  const openMenu = () => {
+  const openMenu = (fromKeyboard = false) => {
     onOpenChange(true);
-    focusEnglish();
+    // Pointer activation should not paint a keyboard focus ring on English.
+    // Keyboard and assistive-technology activation still enter the menu.
+    if (fromKeyboard) focusEnglish();
   };
   const onMenuKey = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Escape') {
@@ -119,11 +121,11 @@ export function LanguageBadge({
           event.preventDefault();
           focusInPlace(event.currentTarget);
         }}
-        onClick={() => (open ? close() : openMenu())}
+        onClick={(event) => (open ? close() : openMenu(event.detail === 0))}
         onKeyDown={(event) => {
           if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
             event.preventDefault();
-            openMenu();
+            openMenu(true);
           } else if (event.key === 'Tab' && open) {
             onOpenChange(false);
           }
