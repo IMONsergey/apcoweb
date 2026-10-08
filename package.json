@@ -19,7 +19,8 @@
     "verify:visuals": "node scripts/verify-visuals.mjs",
     "verify:assets": "node scripts/verify-assets.mjs",
     "verify:bundle": "node scripts/verify-bundle.mjs",
-    "postbuild": "node scripts/verify-bundle.mjs"
+    "postbuild": "node scripts/verify-bundle.mjs",
+    "audit:production": "npm audit --omit=dev --audit-level=high"
   },
   "dependencies": {
     "gsap": "3.13.0",

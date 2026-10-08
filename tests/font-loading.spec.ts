@@ -21,6 +21,10 @@ test('custom fonts resolve from the deployed base path', async ({ page }) => {
   expect(failed).toEqual([]);
   expect(fontRequests.length).toBeGreaterThan(0);
   expect(fontRequests.every((url) => url.startsWith(`${base}fonts/`))).toBe(true);
-  expect(faces.some((face) => face.family.includes('Instrument Sans') && face.status === 'loaded')).toBe(true);
-  expect(faces.some((face) => face.family.includes('IBM Plex Mono') && face.status === 'loaded')).toBe(true);
+  expect(
+    faces.some((face) => face.family.includes('Instrument Sans') && face.status === 'loaded'),
+  ).toBe(true);
+  expect(
+    faces.some((face) => face.family.includes('IBM Plex Mono') && face.status === 'loaded'),
+  ).toBe(true);
 });
