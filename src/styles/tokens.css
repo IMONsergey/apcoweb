@@ -103,9 +103,17 @@ p,
 dd {
   margin: 0;
 }
+/* Search has its own prominent :focus-within frame. Other controls have
+   quiet keyboard-only focus cues without teal outlines. */
 :focus-visible {
-  outline: 2px solid var(--action);
-  outline-offset: 4px;
+  outline: none;
+}
+:is(a, button, summary):focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+:is(.icon-button, .brand):focus-visible {
+  opacity: 0.86;
 }
 ::selection {
   background: var(--tint);
