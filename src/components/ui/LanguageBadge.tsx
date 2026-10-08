@@ -117,11 +117,14 @@ export function LanguageBadge({
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={panelId}
-        onMouseDown={(event) => {
-          event.preventDefault();
-          focusInPlace(event.currentTarget);
+        onClick={(event) => {
+          const fromKeyboard = event.detail === 0;
+          // Mouse/touch activation focuses after the pointer event instead of
+          // forcing a focus-visible ring during mousedown.
+          if (!fromKeyboard) focusInPlace(event.currentTarget);
+          if (open) close();
+          else openMenu(fromKeyboard);
         }}
-        onClick={(event) => (open ? close() : openMenu(event.detail === 0))}
         onKeyDown={(event) => {
           if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
             event.preventDefault();
