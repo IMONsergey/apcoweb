@@ -9,6 +9,7 @@ const cachedPaths = {
   webkit: `${cache}/webkit-2336/pw_run.sh`,
 };
 const cached = process.env.APCO_USE_CACHED_BROWSERS === '1';
+const chromiumExecutable = process.env.APCO_CHROMIUM_EXECUTABLE;
 export default defineConfig({
   testDir: './tests',
   fullyParallel: false,
@@ -32,9 +33,14 @@ export default defineConfig({
     use: {
       browserName,
       launchOptions:
-        cached && existsSync(cachedPaths[browserName])
-          ? { executablePath: cachedPaths[browserName] }
-          : {},
+        browserName === 'chromium' && chromiumExecutable
+          ? {
+              executablePath: chromiumExecutable,
+              args: ['--no-sandbox', '--disable-dev-shm-usage'],
+            }
+          : cached && existsSync(cachedPaths[browserName])
+            ? { executablePath: cachedPaths[browserName] }
+            : {},
     },
   })),
   webServer: process.env.APCO_BASE_URL

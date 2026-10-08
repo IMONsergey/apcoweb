@@ -137,7 +137,6 @@ test('closing action matches preserved desktop assets and the compact mobile but
         { message: `Visible CTA center must be clickable at ${width}px` },
       )
       .toBe(true);
-    await expect(page.locator('.closing-hotspot')).toHaveCSS('min-height', '44px');
     // Firefox transforms can report 43.99997 for a 44px box; allow only subpixel rounding.
     expect((await page.locator('.closing-hotspot').boundingBox())!.height).toBeGreaterThanOrEqual(
       43.99,

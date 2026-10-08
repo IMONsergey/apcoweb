@@ -55,6 +55,8 @@ export function ApiIllustration() {
         <img
           className="api-demo-fallback"
           src={media('api-layers.webp')}
+          srcSet={`${media('api-layers-360.webp')} 360w, ${media('api-layers-600.webp')} 600w, ${media('api-layers.webp')} 712w`}
+          sizes="(max-width: 899px) calc(100vw - 64px), (max-width: 1199px) 57vw, (min-width: 1800px) 836px, calc((100vw - 168px) / 2)"
           width="712"
           height="554"
           alt=""

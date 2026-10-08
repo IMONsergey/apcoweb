@@ -1,7 +1,13 @@
 import { Component, Suspense, lazy, useEffect, useRef, useState, type ReactNode } from 'react';
 import { media } from '../../content/site';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const Demo = lazy(() => import('./StepDemoMount'));
+const posterWidths: Record<string, number> = {
+  'step-query.webp': 908,
+  'step-results.webp': 1234,
+  'step-host.webp': 1164,
+};
 
 class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
@@ -25,6 +31,8 @@ export function StepIllustration({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
+  const themedImage = theme === 'dark' ? image.replace('.webp', '-dark.webp') : image;
   useEffect(() => {
     if (!ref.current) return;
     const observer = new IntersectionObserver(
@@ -41,9 +49,23 @@ export function StepIllustration({
   }, []);
   return (
     <div ref={ref} className="step-illustration" role="img" aria-label={alt}>
-      <img src={media(image)} width="908" height="609" alt="" loading="lazy" decoding="async" />
+      <img
+        src={media(themedImage)}
+        srcSet={[360, 600]
+          .map((width) => `${media(themedImage.replace('.webp', `-${width}.webp`))} ${width}w`)
+          .concat(`${media(themedImage)} ${posterWidths[image]}w`)
+          .join(', ')}
+        sizes="(max-width: 599px) calc(100vw - 108px), (max-width: 1199px) calc((100vw - 120px) / 2), (min-width: 1800px) 522px, calc((100vw - 220px) / 3)"
+        width="908"
+        height="609"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
       <SceneBoundary>
-        <Suspense fallback={null}>{mounted && <Demo scene={scene} />}</Suspense>
+        <Suspense fallback={null}>
+          {mounted && <Demo key={`${scene}-${theme}`} scene={scene} />}
+        </Suspense>
       </SceneBoundary>
     </div>
   );

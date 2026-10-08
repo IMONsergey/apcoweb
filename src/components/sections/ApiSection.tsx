@@ -9,7 +9,7 @@ export function ApiSection() {
   const { t } = useLocale();
   return (
     <section className="api-section" id="api" aria-labelledby="api-title">
-      <Visual kind="dots" direction="right-to-left" />
+      <Visual kind="dots" direction="right-to-left" budget="supporting" themeOverride="light" />
       <div className="container api-grid">
         <div className="api-copy">
           <h2 id="api-title">

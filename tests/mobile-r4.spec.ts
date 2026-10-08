@@ -9,7 +9,7 @@ for (const width of [320, 360, 390, 430, 599]) {
     await page.evaluate(() => document.fonts.ready);
 
     const search = page.locator('.search-scene');
-    await expect(search.locator('h3')).toHaveText('One query. A closer look.');
+    await expect(search.locator('h2')).toHaveText('One query. A closer look.');
     await expect(page.getByRole('searchbox')).toHaveAttribute(
       'placeholder',
       /Domain, IP\sor\sattribute/,

@@ -1,0 +1,13 @@
+.git/
+.github/
+.vercel/
+node_modules/
+dist/
+.work/
+test-results/
+playwright-report/
+tests/
+docs/
+*.log
+*.tsbuildinfo
+.DS_Store

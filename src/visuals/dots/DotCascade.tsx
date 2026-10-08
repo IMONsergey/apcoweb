@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
-import { createDotCascade, type DotOptions, type DotController } from './dot-cascade.js';
+import { createDotCascade, type DotOptions, type DotController } from './dot-cascade-themed.js';
 import { observeFirstPaint } from '../firstPaint';
 import './dot-cascade.css';
 
@@ -29,6 +29,7 @@ export function DotCascade({
   displacement = 3,
   fps = 60,
   interactive = true,
+  color = '#FFFFFF',
   onReady,
 }: DotCascadeProps) {
   const host = useRef<HTMLDivElement>(null);
@@ -58,6 +59,7 @@ export function DotCascade({
       displacement,
       fps,
       interactive,
+      color,
     });
   }, [
     spacing,
@@ -69,6 +71,7 @@ export function DotCascade({
     displacement,
     fps,
     interactive,
+    color,
     overlay,
   ]);
   const appearance = {

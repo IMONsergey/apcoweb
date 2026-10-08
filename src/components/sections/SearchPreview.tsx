@@ -145,11 +145,11 @@ export function SearchPreview() {
           <div className="search-chrome__fog" aria-hidden="true" />
           <div className="search-scene__content">
             <div className="search-scene__heading">
-              <h3>
+              <h2>
                 <span className="search-title-desktop">
                   <LocaleText>{t('One query. A closer look.')}</LocaleText>
                 </span>
-              </h3>
+              </h2>
             </div>
             <SearchForm />
           </div>

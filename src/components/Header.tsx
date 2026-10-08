@@ -1,18 +1,30 @@
 import { LocaleText } from '../i18n/LocaleText';
 import { useLocale } from '../i18n/context';
 import { useEffect, useRef, useState } from 'react';
-import { media, navigation, productUrl } from '../content/site';
+import { navigation, productUrl } from '../content/site';
 import { DoubleButton } from './ui/DoubleButton';
 import { Icon } from './ui/Icon';
 import { Modal } from './ui/Modal';
 import { LanguageBadge } from './ui/LanguageBadge';
+import { ThemeMenu, MobileThemeControl } from './ui/ThemeControl';
+import { Logo } from './ui/Logo';
 import { useScrollHeader } from '../hooks/useScrollHeader';
 export function Header() {
   const { t } = useLocale();
   const [active, setActive] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const ref = useRef<HTMLElement>(null);
+  const brand = useRef<HTMLAnchorElement>(null);
   const { compact, hidden } = useScrollHeader(ref, !!active || mobileOpen);
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1200px)');
+    const onChange = () => {
+      setActive(null);
+      if (desktop.matches) setMobileOpen(false);
+    };
+    desktop.addEventListener('change', onChange);
+    return () => desktop.removeEventListener('change', onChange);
+  }, []);
   useEffect(() => {
     if (!active) return;
     const onPointer = (event: PointerEvent) => {
@@ -44,8 +56,8 @@ export function Header() {
         inert={hidden}
       >
         <div className="container header-row">
-          <a className="brand" href="#top" aria-label={t('APCOSYS home')}>
-            <img src={media('logo.svg')} width="134" height="26" alt="APCOSYS" />
+          <a ref={brand} className="brand" href="#top" aria-label={t('APCOSYS home')}>
+            <Logo />
           </a>
           <nav className="desktop-nav" aria-label={t('Main navigation')}>
             {navigation.map((group, i) => (
@@ -122,6 +134,10 @@ export function Header() {
             </a>
           </nav>
           <div className="header-actions">
+            <ThemeMenu
+              open={active === 'appearance'}
+              onOpenChange={(open) => setActive(open ? 'appearance' : null)}
+            />
             <LanguageBadge
               open={active === 'language'}
               onOpenChange={(open) => setActive(open ? 'language' : null)}
@@ -152,6 +168,7 @@ export function Header() {
         onClose={() => setMobileOpen(false)}
         title={t('Navigation')}
         className="mobile-navigation"
+        fallbackFocus={brand}
       >
         <nav aria-label={t('Mobile navigation')}>
           {navigation.map((group) => (
@@ -167,6 +184,7 @@ export function Header() {
               ))}
             </div>
           ))}
+          <MobileThemeControl />
           <a className="mobile-pricing" href="#pricing" onClick={() => setMobileOpen(false)}>
             <LocaleText>{t('Pricing')}</LocaleText>
             <Icon name="arrow" />

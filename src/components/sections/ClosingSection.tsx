@@ -2,11 +2,15 @@ import { LocaleText } from '../../i18n/LocaleText';
 import { media, productUrl } from '../../content/site';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useLocale } from '../../i18n/context';
+import { useTheme } from '../../theme/ThemeProvider';
 import { DoubleButton } from '../ui/DoubleButton';
 
 export function ClosingSection() {
   const compact = useMediaQuery('(max-width: 599px)');
   const { t } = useLocale();
+  const { theme } = useTheme();
+  const themed = (name: string) =>
+    media(theme === 'dark' ? name.replace('.webp', '-dark.webp') : name);
   return (
     <section className="closing-section" aria-label={t('Start your first query')}>
       <div className="container">
@@ -15,14 +19,14 @@ export function ClosingSection() {
           data-source="Prepared saas mobile / Start artwork, cropped non-destructively"
         >
           <picture>
-            <source media="(max-width: 340px)" srcSet={media('start-320.webp')} />
-            <source media="(max-width: 375px)" srcSet={media('start-360.webp')} />
-            <source media="(max-width: 410px)" srcSet={media('start-390.webp')} />
-            <source media="(max-width: 599px)" srcSet={media('start-430.webp')} />
-            <source media="(max-width: 899px)" srcSet={media('start-768.webp')} />
-            <source media="(max-width: 1199px)" srcSet={media('start-1024.webp')} />
+            <source media="(max-width: 340px)" srcSet={themed('start-320.webp')} />
+            <source media="(max-width: 375px)" srcSet={themed('start-360.webp')} />
+            <source media="(max-width: 410px)" srcSet={themed('start-390.webp')} />
+            <source media="(max-width: 599px)" srcSet={themed('start-430.webp')} />
+            <source media="(max-width: 899px)" srcSet={themed('start-768.webp')} />
+            <source media="(max-width: 1199px)" srcSet={themed('start-1024.webp')} />
             <img
-              src={media('start-desktop.webp')}
+              src={themed('start-desktop.webp')}
               width="2880"
               height="1894"
               alt={
@@ -62,13 +66,16 @@ export function ClosingSection() {
               </DoubleButton>
             </div>
           ) : (
-            <a
-              className="closing-hotspot"
-              href={`${productUrl}/search`}
-              aria-label={t('Start your first query in APCOSYS')}
-            >
-              <span className="sr-only">{t('Try free search')}</span>
-            </a>
+            <>
+              <span className="closing-cta-mask" aria-hidden="true" />
+              <DoubleButton
+                href={`${productUrl}/search`}
+                icon="external"
+                className="closing-hotspot closing-hotspot--button"
+              >
+                <LocaleText>{t('Try free search')}</LocaleText>
+              </DoubleButton>
+            </>
           )}
         </div>
       </div>

@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useRef, type CSSProperties } from 'react';
-import { createIceWaves, type IceWavesController } from './ice-sphere-waves.js';
+import { createIceWaves, type IceWavesController } from './ice-sphere-waves-themed.js';
 import './ice-sphere-waves.css';
 
 export interface IceSphereWavesProps {
   /** 0–3; 1 preserves the approved slow motion. */
   speed?: number;
   paused?: boolean;
+  theme?: 'light' | 'dark';
   className?: string;
   style?: CSSProperties;
 }
@@ -15,6 +16,7 @@ export interface IceSphereWavesProps {
 export function IceSphereWaves({
   speed = 1,
   paused = false,
+  theme = 'light',
   className = '',
   style,
 }: IceSphereWavesProps) {
@@ -30,8 +32,8 @@ export function IceSphereWaves({
     };
   }, []);
   useEffect(() => {
-    controllerRef.current?.update({ speed, paused });
-  }, [speed, paused]);
+    controllerRef.current?.update({ speed, paused, theme });
+  }, [speed, paused, theme]);
   return (
     <div className={`ice-sphere-waves ${className}`.trim()} style={style} aria-hidden="true">
       <canvas ref={canvasRef} />

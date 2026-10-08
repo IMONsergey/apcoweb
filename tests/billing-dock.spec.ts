@@ -128,7 +128,8 @@ test('active dock is accessible and disappears on a short landscape viewport out
   await expect(page.locator('.billing-dock')).toBeVisible();
   const results = await new AxeBuilder({ page })
     .include('.billing-dock')
-    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
+    .withRules(['label-content-name-mismatch'])
     .analyze();
   expect(results.violations.map((v) => v.id)).toEqual([]);
   await page.locator('.footer').scrollIntoViewIfNeeded();

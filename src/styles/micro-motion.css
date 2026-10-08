@@ -14,7 +14,6 @@
   transition: transform 240ms var(--ease);
 }
 .plain-button,
-.plan-button,
 .icon-button {
   transition:
     background-color 220ms var(--ease),
@@ -33,13 +32,9 @@
 .search-form button {
   transition: background-color 220ms var(--ease);
 }
-.footer a,
 .mobile-nav-group a,
 .nav-link {
   transition: color 180ms ease;
-}
-.footer a:hover {
-  color: var(--action);
 }
 .nav-link {
   transition:
@@ -92,11 +87,9 @@
   .double-button__icon,
   .double-button__icon svg,
   .plain-button,
-  .plan-button,
   .icon-button,
   .search-form,
   .search-form button,
-  .footer a,
   .mobile-nav-group a,
   .nav-link,
   .faq-icon,
