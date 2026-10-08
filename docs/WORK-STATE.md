@@ -2,7 +2,7 @@
 
 ## Current work — R16 audit follow-up, 2026-10-08
 
-The owner requested the three follow-up audit repairs and supplied `block-second-bg-dark(1).zip` for the dark second-block background. Read REVIEW-R16.md for scope, palette and validation. Candidate branch: `fix/r16-audit-dark-gradient`. Release/CI status for this candidate is recorded in its pull request; this source snapshot does not pre-claim a successful deployment.
+The owner requested the three follow-up audit repairs and the dark second-block gradient. Source fixes live on candidate branch `fix/r16-audit-dark-gradient` / [PR #18](https://github.com/IMONsergey/apcoweb/pull/18), **not** published `main`. The later `block-second-bg-dark(2).zip` repeats R16's opaque lower palette; no renderer replacement is needed. Read REVIEW-R16.md for scope, rendering and checks. R16 source commit `f7b6583` passed 163 Chromium and 489 Chromium/Firefox/WebKit CI cases on 2026-10-08; any newer branch commit must be checked separately. Pages still serves released R15 `a070c4b` until an authorized merge and successful deployment.
 
 ## Released baseline — R15, 2026-10-08
 

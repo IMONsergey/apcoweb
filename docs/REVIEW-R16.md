@@ -18,3 +18,9 @@ Required gates: locked install, protected-source checksums, lint/typecheck, form
 Exact execution results and publication status belong in the pull request so this source commit does not claim a deployment before it occurs. Preserve the last released baseline and CI links in WORK-STATE.
 
 Local pixel comparison against the supplied archive at 1440×950 and 390×844 CSS px (paused Canvas 2D, resolution 192) reports zero differing channels across 97,536 and 68,352 RGBA bytes respectively. Browser gradient dithering may vary by one channel value across opaque rows; the last row is asserted exactly.
+
+## Follow-up: new owner archive and CI evidence
+
+The subsequently uploaded `block-second-bg-dark(2).zip` specifies the **same** lower-gradient stop sequence as the R16 renderer and CSS fallback: 0/36% transparent, 48% half-opacity teal, then `#007A92` at 60%, `#005567` at 70%, `#003440` at 80%, `#0B1C21` at 90% and `#0C1113` at 98–100%. Its component is reference material only; replacing the maintained adapter wholesale would unnecessarily change the light version and lifecycle logic. No further visual engine change is necessary for the new archive.
+
+The original R16 source commit `f7b6583` passed [163 Chromium tests](https://github.com/IMONsergey/apcoweb/actions/runs/37732133956) and [489 tests across Chromium, Firefox and WebKit](https://github.com/IMONsergey/apcoweb/actions/runs/37732134039). Both jobs also passed their required install/check/build gates. These results apply to that source commit; new branch commits receive their own CI checks. Neither a green PR nor the archive comparison confirms that R16 has been deployed to the public `main` site.
