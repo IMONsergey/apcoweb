@@ -142,11 +142,7 @@ export function SearchPreview() {
         </dl>
       </div>
       <div className="container search-preview__inner">
-        <div
-          ref={scene}
-          className="search-scene"
-          data-source="React chrome / original Handoff composition"
-        >
+        <div ref={scene} className="search-scene">
           <SearchChrome />
           <div className="search-chrome__fog" aria-hidden="true" />
           <div className="search-scene__content">

@@ -59,10 +59,6 @@ html {
   .hero h1 {
     text-wrap: balance;
   }
-  /* 16px avoids automatic iOS input zoom without disabling browser zoom. */
-  .search-scene .search-form input {
-    font-size: 16px;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .search-spinner,

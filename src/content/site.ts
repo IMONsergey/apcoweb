@@ -1,4 +1,3 @@
-/** Copy from CLEAR WORK — Handoff; commercial details remain review inputs. */
 export const productUrl = 'https://apcosys.net';
 export const supportEmail = 'info@apcosys.net';
 export const metrics = [

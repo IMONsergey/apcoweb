@@ -32,7 +32,7 @@ export function AnimatedPrice({ amount }: { amount: number }) {
       const digit = Number(reel.dataset.digit);
       const oldDigit = /\d/.test(old[place] ?? '') ? Number(old[place]) : 0;
       const active = reel.getAnimations();
-      const height = reel.firstElementChild!.getBoundingClientRect().height;
+      const height = reel.firstElementChild?.getBoundingClientRect().height ?? 0;
       if (!height || (!active.length && oldDigit === digit)) return;
       const current = active.length
         ? -new DOMMatrixReadOnly(getComputedStyle(reel).transform).m42 / height

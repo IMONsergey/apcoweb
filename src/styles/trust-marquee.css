@@ -26,6 +26,9 @@
     transparent
   );
 }
+.trust-viewport:focus-visible {
+  box-shadow: inset 0 -2px 0 var(--muted);
+}
 .trust-track {
   display: flex;
   width: max-content;
