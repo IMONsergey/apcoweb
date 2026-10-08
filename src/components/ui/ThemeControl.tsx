@@ -71,8 +71,9 @@ export function ThemeMenu({
   const trigger = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const focusLast = useRef(false);
+  const focusMenuOnOpen = useRef(false);
   useLayoutEffect(() => {
-    if (!open) return;
+    if (!open || !focusMenuOnOpen.current) return;
     // Wait until the committed disclosure has its visible style before moving focus.
     const frame = requestAnimationFrame(() => {
       const buttons = panel.current?.querySelectorAll<HTMLButtonElement>('[role="menuitemradio"]');
@@ -84,8 +85,10 @@ export function ThemeMenu({
     onOpenChange(false);
     trigger.current?.focus({ preventScroll: true });
   };
-  const openMenu = (last = false) => {
+  const openMenu = (last = false, fromKeyboard = false) => {
     focusLast.current = last;
+    // Leave pointer focus on the trigger; only keyboard opening enters the menu.
+    focusMenuOnOpen.current = fromKeyboard;
     onOpenChange(true);
     if (open) {
       const buttons = panel.current?.querySelectorAll<HTMLButtonElement>('[role="menuitemradio"]');
@@ -135,11 +138,11 @@ export function ThemeMenu({
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={id}
-        onClick={() => (open ? close() : openMenu())}
+        onClick={(event) => (open ? close() : openMenu(false, event.detail === 0))}
         onKeyDown={(event) => {
           if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
             event.preventDefault();
-            openMenu(event.key === 'ArrowUp');
+            openMenu(event.key === 'ArrowUp', true);
           }
         }}
       >

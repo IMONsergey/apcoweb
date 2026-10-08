@@ -42,7 +42,9 @@ test('language menu keyboard dismissal stays stable', async ({ page }) => {
   await visit(page, 390);
 
   const menu = await openLanguageMenu(page);
-  await expect(menu.english).toBeFocused();
+  // Pointer activation keeps focus on the trigger and no longer paints English.
+  await expect(menu.trigger).toBeFocused();
+  await expect(menu.english).not.toBeFocused();
 
   await page.keyboard.press('ArrowDown');
   await expect(menu.english).toBeFocused();
