@@ -72,15 +72,6 @@
     padding: 12px 16px;
     min-height: 44px;
   }
-  .billing-dock .segmented input:focus-visible + span {
-    outline-offset: 2px;
-  }
-  .billing-dock .segmented {
-    transition: box-shadow 200ms var(--ease);
-  }
-  .billing-dock .segmented:has(:focus-visible) {
-    box-shadow: 0 0 0 4px #037a8f0b;
-  }
 }
 @media (max-width: 375px) {
   .billing-dock {
