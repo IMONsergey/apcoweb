@@ -6,7 +6,7 @@ export const metrics = [
   { id: 'ipv6', label: 'IPv6', value: '106 984 285' },
   { id: 'domains', label: 'Domains', value: '734 910 896' },
   { id: 'products', label: 'Detected Products', value: '1 061 725 887' },
-  { id: 'cves', label: 'Vulnerabilities (CVEs)', value: '73 227 609' },
+  { id: 'cves', label: 'CVE Associations', value: '73 227 609' },
   { id: 'protocols', label: 'Protocols', value: '56' },
 ] as const;
 export type ResearchScene = 'query' | 'results' | 'host' | 'evidence' | 'suggestions';
@@ -97,82 +97,47 @@ export const plans = [
   },
 ] as const;
 export const navigation = [
-  {
-    label: 'Platform',
-    items: [
-      { label: 'Search & Investigation', href: '#how-it-works' },
-      { label: 'Monitoring', href: `${productUrl}/search` },
-      { label: 'Data & Methodology', href: '#data' },
-    ],
-  },
-  {
-    label: 'Use Cases',
-    items: [
-      { label: 'Bug Bounty', href: '#researchers' },
-      { label: 'Vulnerability Research', href: '#researchers' },
-      { label: 'OSINT / Threat Investigation', href: '#researchers' },
-    ],
-  },
-  { label: 'For Teams', items: [{ label: 'Security Teams', href: '#teams' }] },
-  {
-    label: 'Developers',
-    items: [
-      { label: 'API', href: '#api' },
-      { label: 'Documentation', href: `${productUrl}/docs/api` },
-    ],
-  },
+  { label: 'Platform', items: [
+    { label: 'Search & Investigation', href: '/platform/search-investigation' },
+    { label: 'Data & Methodology', href: '/platform/data-methodology' },
+    { label: 'Monitoring', href: '/platform/monitoring' },
+  ] },
+  { label: 'Use Cases', items: [
+    { label: 'Bug Bounty', href: '/use-cases/bug-bounty' },
+    { label: 'Vulnerability Research', href: '/use-cases/vulnerability-research' },
+    { label: 'OSINT & Threat Investigation', href: '/use-cases/osint-threat-investigation' },
+  ] },
+  { label: 'Developers', items: [
+    { label: 'API', href: '/developers/api' },
+    { label: 'Documentation', href: productUrl + '/docs/api' },
+  ] },
 ] as const;
 export const footerGroups = [
-  {
-    title: 'Platform',
-    links: [
-      ['Search & Investigation', '#how-it-works'],
-      ['Monitoring', `${productUrl}/search`],
-      ['Data & Methodology', '#data'],
-      ['Pricing', '#pricing'],
-    ],
-  },
-  {
-    title: 'Use Cases',
-    links: [
-      ['Bug Bounty', '#researchers'],
-      ['Vulnerability Research', '#researchers'],
-      ['OSINT / Threat Investigation', '#researchers'],
-    ],
-  },
-  { title: 'For Teams', links: [['Security Teams', '#teams']] },
-  {
-    title: 'Developers',
-    links: [
-      ['API', '#api'],
-      ['Documentation', `${productUrl}/docs/api`],
-    ],
-  },
-  {
-    title: 'APCOSYS',
-    links: [
-      ['About', `${productUrl}/docs/about`],
-      ['Responsible Scanning', `${productUrl}/legal/data-collection-policy`],
-      ['Talk to Us', `mailto:${supportEmail}`],
-    ],
-  },
-  {
-    title: 'Legal',
-    links: [
-      ['API & Data License Agreement', `${productUrl}/legal/api-data-license-agreement`],
-      ['Cookie Policy', `${productUrl}/legal/cookie-policy`],
-      ['Data Collection Policy', `${productUrl}/legal/data-collection-policy`],
-      ['Data Processing Agreement', `${productUrl}/legal/data-processing-agreement`],
-      ['Privacy Policy', `${productUrl}/legal/privacy-policy`],
-      ['Terms & Conditions', `${productUrl}/legal/terms`],
-    ],
-  },
-] as const;
-export const trustMarks = [
-  ['ibm', 'IBM'],
-  ['microsoft', 'Microsoft'],
-  ['google', 'Google'],
-  ['samsung', 'Samsung'],
-  ['openai', 'OpenAI'],
-  ['adobe', 'Adobe'],
+  { title: 'Platform', links: [
+    ['Search & Investigation', '/platform/search-investigation'],
+    ['Data & Methodology', '/platform/data-methodology'],
+    ['Monitoring', '/platform/monitoring'],
+    ['Pricing', '/pricing'],
+  ] },
+  { title: 'Use Cases', links: [
+    ['Bug Bounty', '/use-cases/bug-bounty'],
+    ['Vulnerability Research', '/use-cases/vulnerability-research'],
+    ['OSINT & Threat Investigation', '/use-cases/osint-threat-investigation'],
+  ] },
+  { title: 'For Teams', links: [['Security Teams', '/teams']] },
+  { title: 'Developers', links: [
+    ['API', '/developers/api'], ['Documentation', productUrl + '/docs/api'],
+  ] },
+  { title: 'Apcosys', links: [
+    ['About', '/about'], ['Responsible Scanning', '/responsible-scanning'],
+    ['Talk to Us', '/contact'],
+  ] },
+  { title: 'Legal', links: [
+    ['API & Data License Agreement', productUrl + '/legal/api-data-license-agreement'],
+    ['Cookie Policy', productUrl + '/legal/cookie-policy'],
+    ['Data Collection Policy', productUrl + '/legal/data-collection-policy'],
+    ['Data Processing Agreement', productUrl + '/legal/data-processing-agreement'],
+    ['Privacy Policy', productUrl + '/legal/privacy-policy'],
+    ['Terms & Conditions', productUrl + '/legal/terms'],
+  ] },
 ] as const;

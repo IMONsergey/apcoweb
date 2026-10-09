@@ -18,3 +18,13 @@ export const productUrl = normalizeOrigin(
   import.meta.env.VITE_APCO_PRODUCT_URL?.trim() || 'https://apcosys.net',
 );
 export const supportEmail = import.meta.env.VITE_APCO_SUPPORT_EMAIL?.trim() || 'info@apcosys.net';
+
+/** Use the verified product sign-in URL when provided; do not guess an auth route. */
+export const signInUrl = (() => {
+  const input = import.meta.env.VITE_APCO_SIGN_IN_URL?.trim() || productUrl;
+  const url = new URL(input);
+  if (!['http:', 'https:'].includes(url.protocol) || url.origin !== productUrl) {
+    throw new Error('VITE_APCO_SIGN_IN_URL must stay on the product origin.');
+  }
+  return url.href;
+})();
