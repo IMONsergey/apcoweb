@@ -29,3 +29,14 @@ export const signInUrl = (() => {
   }
   return url.href;
 })();
+
+/** Optional verified API reference. Without it, route to on-site integration guidance. */
+export const apiDocumentationUrl = (() => {
+  const input = import.meta.env.VITE_APCO_API_DOCS_URL?.trim();
+  if (!input) return null;
+  const url = new URL(input);
+  if (url.protocol !== 'https:' || url.username || url.password) {
+    throw new Error('VITE_APCO_API_DOCS_URL must be a verified HTTPS URL.');
+  }
+  return url.href;
+})();
