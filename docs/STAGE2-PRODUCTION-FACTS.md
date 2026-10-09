@@ -67,3 +67,11 @@ The current pricing values are unchanged from the approved client-preview copy. 
 The source R21 visual system remains authoritative. Deterministic screenshots with masked canvases are regression evidence only; the dedicated real-visual suite captures unmasked canvas and GSAP states in both themes on desktop and mobile.
 
 No `main` merge or GitHub Pages publication is authorised. The project API confirms Vercel Authentication (SSO) on all deployments. READY alone does not establish protection: verify the fresh deployment against that project and test authenticated rendering. Do not publish temporary authentication links in the public repository.
+
+## Live product checks — October 9, 2026
+
+The public product was opened in the browser at https://apcosys.net/. Its guest search at `/search` renders results without sign-in. Submitting `example.com` preserved the value at `/search?search_value=example.com` and returned results. This validates the marketing form destination, not domain-ownership semantics or query preservation through account creation. Live results are not copied into the synthetic demo.
+
+The live pricing table states **1 Search Token per request without analytics** (examples: host information or bucket search), and **4 Search Tokens per search with category analytics**, for website and API searches. This wording now appears in the explainer. The public page does not establish a Credits-to-Tokens conversion, rollover, expiry or depletion behaviour.
+
+The live coverage totals differ from the client-provided totals. The requested six client figures remain unchanged in the review build and are not claimed to be current measurements. A dated approved data snapshot is needed before publication.

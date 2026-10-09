@@ -12,7 +12,7 @@ const questions = [
   {
     label: 'What uses the balance?',
     answer:
-      'The approved pricing preview lists standard search at 1 credit and search with analytics at 4 credits. These figures and API deductions require confirmation against current product accounting.',
+      'The public Apcosys pricing page lists 1 Search Token for a request without analytics, such as host information or bucket search, and 4 Search Tokens for a search with category analytics. Search Tokens cover website and API requests; the credit-to-token conversion still needs confirmation.',
   },
   {
     label: 'Upgrade or buy more?',
