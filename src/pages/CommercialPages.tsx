@@ -242,6 +242,7 @@ function ApiPage() {
       description="Query hosts, services and technologies programmatically and use the results in scripts, pipelines, reports and internal tools."
       links={[documentationLink, linkTo('Compare plans', '/pricing', true)]}
     >
+      <ApiSample />
       <StorySections
         items={[
           {
@@ -290,7 +291,6 @@ function ApiPage() {
           </Notice>
         </div>
       </section>
-      <ApiSample />
       <StorySections
         items={[
           {
