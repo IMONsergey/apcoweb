@@ -99,7 +99,11 @@ function MethodologyPage() {
               <p className="eyebrow">READ THE EVIDENCE</p>
               <h2>One host. Several levels of certainty.</h2>
             </div>
-            <p>Ports and services describe what a data source observed. Detected products may be uncertain, and CVE associations remain research leads. Always check the observation time and validate the live state.</p>
+            <p>
+              Ports and services describe what a data source observed. Detected products may be
+              uncertain, and CVE associations remain research leads. Always check the observation
+              time and validate the live state.
+            </p>
           </div>
           <ProductEvidence scenario="technology" mode="cve" />
         </div>

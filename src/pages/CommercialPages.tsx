@@ -206,7 +206,10 @@ function ApiSample() {
           </div>
           <div className="stage-api-auth">
             <span>AUTHENTICATION</span>
-            <p>Obtain your key inside Apcosys. Verify the current authentication header and the API endpoint in the documentation; this scaffold is not executable without them.</p>
+            <p>
+              Obtain your key inside Apcosys. Verify the current authentication header and the API
+              endpoint in the documentation; this scaffold is not executable without them.
+            </p>
           </div>
           <pre tabIndex={0}>
             <code>{snippet}</code>

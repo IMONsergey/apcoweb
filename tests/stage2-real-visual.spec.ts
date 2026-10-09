@@ -27,7 +27,9 @@ for (const route of siteRoutes) {
         await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
         await page.evaluate(async () => {
           await document.fonts.ready;
-          await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+          await new Promise<void>((resolve) =>
+            requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+          );
         });
         const destination = testInfo.outputPath(
           'stage2-real-visual',
@@ -56,5 +58,8 @@ test('unmasked search result and product scene details', async ({ page }, testIn
   await page.goto('./platform/search-investigation');
   await page.locator('.stage-workbench__step').nth(2).click();
   await expect(page.locator('.product-evidence__details')).toBeVisible();
-  await page.screenshot({ path: testInfo.outputPath('investigation-host-open.png'), fullPage: true });
+  await page.screenshot({
+    path: testInfo.outputPath('investigation-host-open.png'),
+    fullPage: true,
+  });
 });

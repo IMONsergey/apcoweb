@@ -17,35 +17,41 @@ const journeys: Record<'scope' | 'technology' | 'indicator', Journey> = {
   scope: {
     label: 'BUG BOUNTY / EXAMPLE INVESTIGATION',
     title: "Visibility isn't permission.",
-    introduction: 'Follow one permitted starting point through candidate infrastructure to a responsible testing decision.',
+    introduction:
+      'Follow one permitted starting point through candidate infrastructure to a responsible testing decision.',
     scenario: 'domain',
     start: 'A domain explicitly listed by a programme as in scope.',
     query: 'Search that permitted domain using the currently supported query format.',
     result: 'Inspect the host, ports and service context of candidate results.',
     next: 'Verify each selected host against the programme rules before interacting with it.',
-    caveat: 'The domain and host below are reserved examples, not a real bug bounty programme or an authorised target.',
+    caveat:
+      'The domain and host below are reserved examples, not a real bug bounty programme or an authorised target.',
   },
   technology: {
     label: 'VULNERABILITY RESEARCH / EXAMPLE INVESTIGATION',
     title: 'A version is a lead. Not a finding.',
-    introduction: 'Move from a technology observation to candidate hosts, then separate potential CVE associations from validated vulnerabilities.',
+    introduction:
+      'Move from a technology observation to candidate hosts, then separate potential CVE associations from validated vulnerabilities.',
     scenario: 'technology',
     start: 'A product and version discussed in a security advisory.',
     query: 'Use only product and version filters actually supported by the live search.',
     result: 'Compare observed host services, detection evidence and any associated CVE context.',
     next: 'Open a host, check observation age, patch backports and configuration before drawing conclusions.',
-    caveat: 'Technology, version and host information below are illustrative. No specific CVE or exploitable host is claimed.',
+    caveat:
+      'Technology, version and host information below are illustrative. No specific CVE or exploitable host is claimed.',
   },
   indicator: {
     label: 'OSINT / EXAMPLE INVESTIGATION',
     title: 'Follow attributes. Keep attribution separate.',
-    introduction: 'Take an indicator from an investigation, inspect its technical context and choose the next evidence-led query.',
+    introduction:
+      'Take an indicator from an investigation, inspect its technical context and choose the next evidence-led query.',
     scenario: 'indicator',
     start: 'An IP address present in an alert or investigation report.',
     query: 'Look up the address in the current Apcosys search.',
     result: 'Review the host view, available services, technologies and observation date.',
     next: 'Investigate a relevant service or attribute while keeping attribution unproven.',
-    caveat: '198.51.100.24 is a reserved documentation address. This is a conceptual workflow, not an incident or attribution finding.',
+    caveat:
+      '198.51.100.24 is a reserved documentation address. This is a conceptual workflow, not an incident or attribution finding.',
   },
 };
 
@@ -68,7 +74,9 @@ function EvidenceJourney({ kind }: { kind: keyof typeof journeys }) {
         <div className="stage-example-journey" aria-label="Illustrative investigation stages">
           {stages.map(([number, title, description]) => (
             <div key={number}>
-              <span>{number} / {title}</span>
+              <span>
+                {number} / {title}
+              </span>
               <p>{description}</p>
             </div>
           ))}
@@ -81,7 +89,8 @@ function EvidenceJourney({ kind }: { kind: keyof typeof journeys }) {
               ? 'Search your scope'
               : kind === 'technology'
                 ? 'Search by technology'
-                : 'Look up an IP or domain'} <span aria-hidden="true">↗</span>
+                : 'Look up an IP or domain'}{' '}
+            <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
@@ -89,6 +98,12 @@ function EvidenceJourney({ kind }: { kind: keyof typeof journeys }) {
   );
 }
 
-export function ScopeEvidence() { return <EvidenceJourney kind="scope" />; }
-export function TechnologyEvidence() { return <EvidenceJourney kind="technology" />; }
-export function IndicatorEvidence() { return <EvidenceJourney kind="indicator" />; }
+export function ScopeEvidence() {
+  return <EvidenceJourney kind="scope" />;
+}
+export function TechnologyEvidence() {
+  return <EvidenceJourney kind="technology" />;
+}
+export function IndicatorEvidence() {
+  return <EvidenceJourney kind="indicator" />;
+}

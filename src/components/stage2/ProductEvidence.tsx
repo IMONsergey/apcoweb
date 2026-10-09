@@ -10,7 +10,10 @@ type Host = {
   services: readonly { port: string; protocol: string; technology: string }[];
 };
 
-const scenarios: Record<EvidenceScenario, { query: string; description: string; hosts: readonly Host[] }> = {
+const scenarios: Record<
+  EvidenceScenario,
+  { query: string; description: string; hosts: readonly Host[] }
+> = {
   domain: {
     query: 'example.com',
     description: 'Illustrative domain investigation',
@@ -56,7 +59,9 @@ const scenarios: Record<EvidenceScenario, { query: string; description: string; 
       {
         ip: '198.51.100.24',
         hostname: 'Not established',
-        services: [{ port: '80', protocol: 'HTTP', technology: 'Illustrative product · version unknown' }],
+        services: [
+          { port: '80', protocol: 'HTTP', technology: 'Illustrative product · version unknown' },
+        ],
       },
     ],
   },
@@ -76,9 +81,15 @@ export function ProductEvidence({
   const [selected, setSelected] = useState(0);
   const host = data.hosts[Math.min(selected, data.hosts.length - 1)] ?? data.hosts[0];
   return (
-    <div className={'product-evidence' + (compact ? ' product-evidence--compact' : '')} aria-label={data.description}>
+    <div
+      className={'product-evidence' + (compact ? ' product-evidence--compact' : '')}
+      aria-label={data.description}
+    >
       <div className="product-evidence__bar">
-        <span>APCOSYS <span className="product-evidence__slash">/</span> {mode === 'cve' ? 'CONTEXT' : 'INVESTIGATION'}</span>
+        <span>
+          APCOSYS <span className="product-evidence__slash">/</span>{' '}
+          {mode === 'cve' ? 'CONTEXT' : 'INVESTIGATION'}
+        </span>
         <span className="product-evidence__status">ILLUSTRATIVE DATA · NOT LIVE RESULTS</span>
       </div>
       <div className="product-evidence__query">
@@ -104,10 +115,15 @@ export function ProductEvidence({
                 <strong>{item.ip}</strong>
                 <small>{item.hostname}</small>
               </span>
-              <span className="product-evidence__result-meta">{item.services.length} sample services <span aria-hidden="true">↗</span></span>
+              <span className="product-evidence__result-meta">
+                {item.services.length} sample services <span aria-hidden="true">↗</span>
+              </span>
             </button>
           ))}
-          <p className="product-evidence__disclaimer">Reserved documentation addresses. Entries are fictional UI examples, not observations of these hosts.</p>
+          <p className="product-evidence__disclaimer">
+            Reserved documentation addresses. Entries are fictional UI examples, not observations of
+            these hosts.
+          </p>
         </div>
         <div className="product-evidence__details" aria-live="polite" aria-atomic="true">
           <div className="product-evidence__eyebrow">
@@ -115,10 +131,18 @@ export function ProductEvidence({
             <span>SELECTED</span>
           </div>
           <h3>{host.ip}</h3>
-          <p className="product-evidence__meta">Observation timestamp <strong>Not supplied</strong></p>
+          <p className="product-evidence__meta">
+            Observation timestamp <strong>Not supplied</strong>
+          </p>
           <div className="product-evidence__properties">
-            <div><span>Domain context</span><strong>{host.hostname}</strong></div>
-            <div><span>Reported services</span><strong>{host.services.length} sample entries</strong></div>
+            <div>
+              <span>Domain context</span>
+              <strong>{host.hostname}</strong>
+            </div>
+            <div>
+              <span>Reported services</span>
+              <strong>{host.services.length} sample entries</strong>
+            </div>
           </div>
           <div className="product-evidence__services">
             <span className="product-evidence__mono">SERVICES & TECHNOLOGIES</span>
@@ -133,22 +157,34 @@ export function ProductEvidence({
           {(mode === 'cve' || scenario === 'technology') && (
             <div className="product-evidence__cve">
               <span className="product-evidence__mono">CVE ASSOCIATIONS</span>
-              <p>No CVE is asserted for this example. In a real result, compare reported product/version with vendor advisories, patch status and observation age before making a finding.</p>
+              <p>
+                No CVE is asserted for this example. In a real result, compare reported
+                product/version with vendor advisories, patch status and observation age before
+                making a finding.
+              </p>
             </div>
           )}
           {mode !== 'cve' && scenario !== 'technology' && (
             <div className="product-evidence__next">
               <span className="product-evidence__mono">NEXT STEP</span>
-              <p>{scenario === 'indicator' ? 'Use an observed service or technology to refine the investigation; do not infer attribution.' : 'Validate that a selected host belongs to your authorised research scope before testing.'}</p>
+              <p>
+                {scenario === 'indicator'
+                  ? 'Use an observed service or technology to refine the investigation; do not infer attribution.'
+                  : 'Validate that a selected host belongs to your authorised research scope before testing.'}
+              </p>
             </div>
           )}
         </div>
       </div>
       <div className="product-evidence__footer">
         <span>Example only · No live search request is performed</span>
-        <a href={productUrl + '/search'}>Open Apcosys Search <span aria-hidden="true">↗</span></a>
+        <a href={productUrl + '/search'}>
+          Open Apcosys Search <span aria-hidden="true">↗</span>
+        </a>
       </div>
-      <span className="sr-only" id={id}>Technical entries shown are designed examples, not factual detections.</span>
+      <span className="sr-only" id={id}>
+        Technical entries shown are designed examples, not factual detections.
+      </span>
     </div>
   );
 }

@@ -2,7 +2,9 @@
   background: var(--white);
   color: var(--ink);
 }
-.stage-case-evidence--technology { background: var(--surface); }
+.stage-case-evidence--technology {
+  background: var(--surface);
+}
 .stage-case-evidence__heading {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.65fr);
@@ -10,7 +12,10 @@
   align-items: end;
   margin-bottom: clamp(28px, 4vw, 54px);
 }
-.stage-case-evidence__heading .eyebrow { grid-column: 1/-1; margin: 0; }
+.stage-case-evidence__heading .eyebrow {
+  grid-column: 1/-1;
+  margin: 0;
+}
 .stage-case-evidence__heading h2 {
   max-width: 900px;
   font-size: clamp(39px, 4.2vw, 70px);
@@ -30,7 +35,10 @@
   margin-bottom: clamp(36px, 4vw, 62px);
   border-top: 1px solid var(--line);
 }
-.stage-example-journey > div { padding-top: 19px; min-width: 0; }
+.stage-example-journey > div {
+  padding-top: 19px;
+  min-width: 0;
+}
 .stage-example-journey span {
   color: var(--accent-text);
   font: 400 12px/1.5 var(--font-mono);
@@ -41,7 +49,9 @@
   line-height: 1.5;
   color: var(--body);
 }
-.stage-case-evidence > .container > .product-evidence { width: 100%; }
+.stage-case-evidence > .container > .product-evidence {
+  width: 100%;
+}
 .stage-example-footer {
   display: flex;
   justify-content: space-between;
@@ -62,15 +72,31 @@
   font-size: 14px;
 }
 @media (max-width: 1199px) {
-  .stage-case-evidence__heading { grid-template-columns: 1fr; gap: 22px; }
+  .stage-case-evidence__heading {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
 }
 @media (max-width: 899px) {
-  .stage-example-journey { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stage-example-journey {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 @media (max-width: 599px) {
-  .stage-case-evidence__heading h2 { font-size: clamp(36px, 9vw, 49px); }
-  .stage-example-journey { gap: 20px; }
-  .stage-example-journey p { font-size: 14px; }
-  .stage-example-footer { display: block; }
-  .stage-example-footer a { display: inline-block; margin-top: 18px; }
+  .stage-case-evidence__heading h2 {
+    font-size: clamp(36px, 9vw, 49px);
+  }
+  .stage-example-journey {
+    gap: 20px;
+  }
+  .stage-example-journey p {
+    font-size: 14px;
+  }
+  .stage-example-footer {
+    display: block;
+  }
+  .stage-example-footer a {
+    display: inline-block;
+    margin-top: 18px;
+  }
 }

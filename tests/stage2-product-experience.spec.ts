@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test';
 
-test('approved Hero retains one real search and an optional honest sample result', async ({ page }) => {
+test('approved Hero retains one real search and an optional honest sample result', async ({
+  page,
+}) => {
   await page.goto('./');
   await expect(page.locator('.hero .search-form')).toHaveCount(0);
   await expect(page.locator('.search-preview .search-form')).toHaveCount(1);
@@ -27,7 +29,9 @@ test('investigation results, selected host and context share one UI fragment', a
   await expect(page.locator('.stage-workbench')).toContainText('No CVE is asserted');
 });
 
-test('Monitoring has five meaningful concept states and selectable example assets', async ({ page }) => {
+test('Monitoring has five meaningful concept states and selectable example assets', async ({
+  page,
+}) => {
   await page.goto('./platform/monitoring');
   const steps = page.locator('.stage-monitor-console__nav');
   await expect(steps).toHaveCount(5);
@@ -35,9 +39,14 @@ test('Monitoring has five meaningful concept states and selectable example asset
   await page.locator('.stage-monitor-assets__list button').nth(1).click();
   await expect(page.locator('.stage-monitor-assets__details')).toContainText('198.51.100.24');
   await steps.nth(1).click();
-  await expect(page.locator('.stage-monitor-console__summary')).toContainText('Service A + Service B');
+  await expect(page.locator('.stage-monitor-console__summary')).toContainText(
+    'Service A + Service B',
+  );
   await steps.nth(4).click();
-  await expect(page.locator('.stage-monitor-console__link')).toHaveAttribute('href', /search-investigation/);
+  await expect(page.locator('.stage-monitor-console__link')).toHaveAttribute(
+    'href',
+    /search-investigation/,
+  );
   await expect(page.locator('.stage-monitor-console')).toContainText('NO LIVE ALERTS');
 });
 
@@ -54,11 +63,16 @@ for (const [route, label] of [
       await expect(journey).toContainText(step);
     }
     await expect(page.locator('.stage-case-evidence .product-evidence')).toBeVisible();
-    await expect(page.getByRole('link', { name: label }).first()).toHaveAttribute('href', /\/search$/);
+    await expect(page.getByRole('link', { name: label }).first()).toHaveAttribute(
+      'href',
+      /\/search$/,
+    );
   });
 }
 
-test('Pricing explains units before comparison without changing the original cards', async ({ page }) => {
+test('Pricing explains units before comparison without changing the original cards', async ({
+  page,
+}) => {
   await page.goto('./pricing');
   for (const plan of ['free', 'plus', 'expert', 'business']) {
     await expect(page.locator('#plan-' + plan)).toBeVisible();
@@ -68,18 +82,25 @@ test('Pricing explains units before comparison without changing the original car
   const sequence = await page.evaluate(() => {
     const guide = document.querySelector('.stage-usage-guide');
     const compare = document.querySelector('#compare-plans');
-    return Boolean(guide && compare && guide.compareDocumentPosition(compare) & Node.DOCUMENT_POSITION_FOLLOWING);
+    return Boolean(
+      guide && compare && guide.compareDocumentPosition(compare) & Node.DOCUMENT_POSITION_FOLLOWING,
+    );
   });
   expect(sequence).toBe(true);
   await expect(page.locator('#search-token-packages')).toContainText('25,000');
 });
 
-test('API starts with request, supports response and discloses unverified auth', async ({ page }) => {
+test('API starts with request, supports response and discloses unverified auth', async ({
+  page,
+}) => {
   await page.goto('./developers/api');
   const code = page.locator('.stage-code-window');
   await expect(code.locator('pre')).toContainText('APCOSYS_API_ENDPOINT');
   await expect(code.locator('.stage-api-auth')).toContainText('AUTHENTICATION');
-  await expect(code.getByRole('button', { name: 'Response', exact: true })).toHaveAttribute('aria-pressed', 'false');
+  await expect(code.getByRole('button', { name: 'Response', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'false',
+  );
   await code.getByRole('button', { name: 'Response', exact: true }).click();
   await expect(code.locator('pre')).toContainText('Illustrative response shape only');
 });

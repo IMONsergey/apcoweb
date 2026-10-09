@@ -180,15 +180,17 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
                 <ProductEvidence
                   key={story + selected}
                   compact
-                  mode={(['results', 'results', 'host', 'cve', 'host'][selected] ??
-                    'host') as EvidenceMode}
-                  scenario={(
-                    story === 'vulnerability'
+                  mode={
+                    (['results', 'results', 'host', 'cve', 'host'][selected] ??
+                      'host') as EvidenceMode
+                  }
+                  scenario={
+                    (story === 'vulnerability'
                       ? 'technology'
                       : story === 'osint' || story === 'team'
                         ? 'indicator'
-                        : 'domain'
-                  ) as EvidenceScenario}
+                        : 'domain') as EvidenceScenario
+                  }
                 />
               )}
             </div>

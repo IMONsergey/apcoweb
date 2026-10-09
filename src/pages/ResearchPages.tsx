@@ -128,7 +128,12 @@ export default function ResearchPages({ path }: { path: string }) {
       description={config.description}
       links={[
         {
-          label: path === '/use-cases/bug-bounty' ? 'Search your scope' : path === '/use-cases/vulnerability-research' ? 'Search by technology' : 'Look up an IP or domain',
+          label:
+            path === '/use-cases/bug-bounty'
+              ? 'Search your scope'
+              : path === '/use-cases/vulnerability-research'
+                ? 'Search by technology'
+                : 'Look up an IP or domain',
           href: productUrl + '/search',
         },
         config.next,
