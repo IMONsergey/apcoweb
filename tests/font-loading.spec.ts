@@ -7,7 +7,11 @@ test('custom fonts resolve from the deployed base path', async ({ page }) => {
     if (request.resourceType() === 'font') fontRequests.push(request.url());
   });
   page.on('response', (response) => {
-    if (response.url().endsWith('.woff2') && !response.ok()) failed.push(response.url());
+    // Firefox may revalidate a successfully cached font with HTTP 304.
+    // Assert genuine HTTP failures and verify the resulting FontFace state below.
+    if (response.url().endsWith('.woff2') && response.status() >= 400) {
+      failed.push(`${response.status()} ${response.url()}`);
+    }
   });
   await page.goto('./');
   const faces = await page.evaluate(async () => {
