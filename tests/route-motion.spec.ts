@@ -44,9 +44,7 @@ for (const mode of ['native', 'fallback', 'reduced'] as const) {
   });
 }
 
-test('capability content overlaps softly and leaves only the selected controls', async ({
-  page,
-}) => {
+test('capability content reveals without opacity or overlapping text', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('./');
   const panel = page.locator('.home-capabilities > .container > .morph-panel');
@@ -55,22 +53,38 @@ test('capability content overlaps softly and leaves only the selected controls',
     document
       .querySelector<HTMLButtonElement>('.home-capabilities__tabs button:nth-child(2)')!
       .click();
-    const values: { incoming: number; outgoing: number }[] = [];
+    const values: {
+      incoming: number;
+      outgoing: number;
+      newBottom: number;
+      oldTop: number;
+      hasPrevious: boolean;
+    }[] = [];
     for (let i = 0; i < 38; i++) {
       await new Promise(requestAnimationFrame);
       const root = document.querySelector('.home-capabilities > .container > .morph-panel')!;
       const incoming = root.querySelector('.morph-panel__content')!;
       const outgoing = root.querySelector('.morph-panel__outgoing');
+      const currentStyle = getComputedStyle(incoming);
+      const previousStyle = outgoing ? getComputedStyle(outgoing) : null;
       values.push({
-        incoming: Number(getComputedStyle(incoming).opacity),
-        outgoing: outgoing ? Number(getComputedStyle(outgoing).opacity) : 0,
+        incoming: Number(currentStyle.opacity),
+        outgoing: previousStyle ? Number(previousStyle.opacity) : 1,
+        newBottom:
+          currentStyle.clipPath === 'none' ? 0 : parseFloat(currentStyle.clipPath.split(' ')[2]!),
+        oldTop: previousStyle ? parseFloat(previousStyle.clipPath.replace('inset(', '')) : 100,
+        hasPrevious: !!outgoing,
       });
     }
     return values;
   });
-  expect(samples.some((s) => s.incoming > 0.15 && s.incoming < 0.85 && s.outgoing > 0.15)).toBe(
-    true,
-  );
+  expect(samples.some((s) => s.newBottom > 5 && s.newBottom < 95)).toBe(true);
+  expect(samples.some((s) => s.hasPrevious)).toBe(true);
+  for (const frame of samples) {
+    expect(frame.incoming).toBe(1);
+    expect(frame.outgoing).toBe(1);
+    if (frame.hasPrevious && frame.oldTop < 100) expect(frame.newBottom).toBe(100);
+  }
   await expect(panel.locator('.morph-panel__outgoing')).toHaveCount(0);
   await expect(page.getByRole('checkbox', { name: 'HTTPS only' })).toHaveCount(1);
 });

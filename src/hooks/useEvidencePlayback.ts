@@ -15,7 +15,7 @@ export function useEvidencePlayback(
     const cursor = root.querySelector<HTMLElement>('.evidence-cursor');
     const label = root.querySelector<HTMLElement>('[data-playback-label]');
     const progress = root.querySelector<HTMLElement>('[data-playback-progress]');
-    if (!cursor || !label || !progress) return;
+    if (!cursor) return;
     let visible = false;
     let interacting = root.matches(':hover') || root.contains(document.activeElement);
     let tl: gsap.core.Timeline;
@@ -36,7 +36,7 @@ export function useEvidencePlayback(
         const at = index * 2.2;
         tl.call(
           () => {
-            label.textContent = caption!;
+            if (label) label.textContent = caption!;
           },
           [],
           at,
@@ -91,7 +91,8 @@ export function useEvidencePlayback(
         },
         6.9,
       );
-      tl.fromTo(progress, { scaleX: 0 }, { scaleX: 1, duration: 8.8, ease: 'none' }, 0);
+      if (progress)
+        tl.fromTo(progress, { scaleX: 0 }, { scaleX: 1, duration: 8.8, ease: 'none' }, 0);
       tl.to(cursor, { opacity: 0, duration: 0.4 }, 8.5);
     }, root);
     const sync = () => {

@@ -422,7 +422,7 @@
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: clamp(28px, 5vw, 80px);
-  align-items: start;
+  align-items: stretch;
 }
 .home-searchable__index {
   display: grid;
@@ -438,6 +438,7 @@
   background: transparent;
   color: var(--ink);
   text-align: left;
+  text-decoration: none;
   transition:
     background 0.3s,
     border-color 0.3s;
@@ -445,6 +446,14 @@
 .home-searchable__index button[aria-pressed='true'] {
   background: color-mix(in srgb, var(--accent-text) 7%, var(--surface-card));
   border-color: color-mix(in srgb, var(--accent-text) 32%, var(--line));
+}
+.home-searchable__index button:hover,
+.home-searchable__index button:focus-visible {
+  text-decoration: none;
+}
+.home-searchable__index button:focus-visible strong {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 .home-searchable__index button:hover {
   background: var(--surface-elevated);
@@ -477,12 +486,28 @@
   max-width: 360px;
 }
 .home-searchable__evidence {
-  padding-top: 8px;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+  overflow: clip;
+}
+.home-searchable__evidence .data-lens {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 0;
+  border-radius: 0;
+}
+.home-searchable__evidence .data-lens > .morph-panel {
+  flex: 1;
 }
 .home-searchable__evidence > .double-button {
-  margin-top: 24px;
-  max-width: 100%;
+  align-self: flex-start;
+  margin: 20px 24px 24px;
+  max-width: calc(100% - 48px);
 }
 .home-searchable__evidence .double-button__label {
   white-space: normal;

@@ -557,7 +557,8 @@
 }
 
 .stage-signin-unverified {
-  opacity: 0.45;
+  color: var(--ink);
+  background: var(--surface);
   cursor: not-allowed;
   pointer-events: none;
 }

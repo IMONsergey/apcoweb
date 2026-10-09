@@ -137,7 +137,9 @@
   margin-top: 12px;
 }
 .site .search-scene__demo-note {
-  font-size: 10px;
+  font-size: 11px;
+  text-align: center;
+  text-wrap: balance;
 }
 .site .search-preview__inner {
   padding-bottom: 40px;
@@ -943,7 +945,7 @@
   font-size: 14px;
 }
 
-/* One continuous mint/cyan outline, shared by idle and focus states. */
+/* Brand-teal light travels across a neutral contour; focus strengthens the same surface. */
 .site .search-scene__content > .search-form {
   position: relative;
   margin-bottom: 14px;
@@ -960,19 +962,20 @@
   pointer-events: none;
   background: linear-gradient(
     110deg,
-    #30bbc8 0%,
-    #85e5d4 30%,
-    #a2e6f2 52%,
-    #39b9cd 75%,
-    #85e5d4 100%
+    var(--line) 0%,
+    color-mix(in srgb, var(--accent-text) 24%, var(--line)) 20%,
+    var(--accent-text) 43%,
+    color-mix(in srgb, var(--accent-text) 50%, var(--line)) 58%,
+    var(--line) 80%,
+    var(--line) 100%
   );
-  background-size: 240% 100%;
+  background-size: 220% 100%;
   mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: search-sheen 9s ease-in-out infinite alternate;
-  opacity: 0.65;
+  animation: search-sheen 10s ease-in-out infinite alternate;
+  opacity: 0.85;
   transition:
     opacity 0.4s,
     padding 0.4s;
@@ -983,7 +986,7 @@
 }
 .site .search-scene__content > .search-form:focus-within::after {
   opacity: 1;
-  padding: 2.5px;
+  padding: 2px;
 }
 @keyframes search-sheen {
   from {

@@ -15,6 +15,7 @@ export function ProductEvidence({
   selectedHost,
   onSelectHost,
   embedded = false,
+  showPlaybackStatus = true,
 }: {
   mode?: EvidenceMode;
   scenario?: EvidenceScenario;
@@ -22,6 +23,7 @@ export function ProductEvidence({
   selectedHost?: number;
   onSelectHost?: (index: number) => void;
   embedded?: boolean;
+  showPlaybackStatus?: boolean;
 }) {
   const id = useId();
   const [localSelection, setLocalSelection] = useState(0);
@@ -50,7 +52,7 @@ export function ProductEvidence({
       data-mode={mode}
       role="group"
       aria-label={data.description}
-      aria-describedby={id}
+      aria-describedby={compact ? id : undefined}
     >
       <MorphPanel changeKey={scenario + mode + host.ip + service.port}>
         <div className="product-evidence__bar">
@@ -204,13 +206,15 @@ export function ProductEvidence({
             )}
           </div>
         </div>
-        <div className="evidence-playback" aria-hidden="true">
-          <span className="evidence-playback__dot" />
-          <span data-playback-label>Query, host, service, context</span>
-          <span className="evidence-playback__track">
-            <i data-playback-progress />
-          </span>
-        </div>
+        {showPlaybackStatus && (
+          <div className="evidence-playback" aria-hidden="true">
+            <span className="evidence-playback__dot" />
+            <span data-playback-label>Query, host, service, context</span>
+            <span className="evidence-playback__track">
+              <i data-playback-progress />
+            </span>
+          </div>
+        )}
         {!embedded && (
           <div className="product-evidence__footer">
             <span>

@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { useMotion } from '../../hooks/useMotion';
 import { MorphPanel } from '../ui/MorphPanel';
 
-/** Layered observation field: independent signals gradually resolve into ordered planes. */
+/** One flowing field of observations: depth comes from the wave, without a wire grid. */
 export function TeamSignal({ inverse = false }: { inverse?: boolean }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const { paused, reduced } = useMotion();
@@ -23,8 +23,8 @@ export function TeamSignal({ inverse = false }: { inverse?: boolean }) {
       previous = now;
       context.clearRect(0, 0, width, height);
       const phase = state.phase;
-      const turn = -0.55 + Math.sin(phase) * 0.18 + pointer.x * 0.09;
-      const tilt = 0.82 + pointer.y * 0.06;
+      const turn = -0.24 + Math.sin(phase) * 0.035 + pointer.x * 0.07;
+      const tilt = 0.94 + pointer.y * 0.05;
       const scale = Math.min(width / 510, height / 410);
       const project = (x: number, y: number, z: number) => {
         const rx = x * Math.cos(turn) + z * Math.sin(turn);
@@ -39,50 +39,29 @@ export function TeamSignal({ inverse = false }: { inverse?: boolean }) {
           perspective,
         };
       };
-      const layers = [2, 1, 0];
-      for (const layer of layers) {
-        const points: ReturnType<typeof project>[][] = [];
-        const separation = 68 + 14 * Math.sin(phase);
-        for (let row = 0; row < 7; row++) {
-          points[row] = [];
-          for (let col = 0; col < 9; col++) {
-            const wave = Math.sin(col * 0.48 + row * 0.35 + phase + layer * 0.7);
-            const fold = (1 - Math.cos(phase)) * 0.5;
-            points[row]![col] = project(
-              (col - 4) * 47,
-              (layer - 1) * separation + wave * 18 * fold,
-              (row - 3) * 39,
-            );
-          }
+      const rgb = inverse ? '219,251,253' : '3,122,143';
+      const points: (ReturnType<typeof project> & { radius: number; alpha: number })[] = [];
+      for (let row = 0; row < 17; row++) {
+        for (let col = 0; col < 27; col++) {
+          const x = (col - 13) * 18;
+          const z = (row - 8) * 21;
+          const wave = Math.sin(x * 0.016 - phase) * 58 + Math.cos(z * 0.02 + phase) * 18;
+          const point = project(x, wave, z);
+          const crest = (wave + 76) / 152;
+          const edge = Math.min(1, (Math.min(col, 26 - col, row, 16 - row) + 1) / 3);
+          points.push({
+            ...point,
+            radius: (1.45 + crest * 0.8) * scale * point.perspective,
+            alpha: (0.24 + crest * 0.62) * edge,
+          });
         }
-        const rgb = inverse ? '204,248,250' : '3,122,143';
-        context.lineWidth = 0.65 * scale;
-        for (let row = 0; row < 7; row++) {
-          context.beginPath();
-          points[row]!.forEach((point, col) =>
-            col ? context.lineTo(point.x, point.y) : context.moveTo(point.x, point.y),
-          );
-          context.strokeStyle = `rgba(${rgb},${0.12 + layer * 0.025})`;
-          context.stroke();
-        }
-        for (let col = 0; col < 9; col++) {
-          context.beginPath();
-          points.forEach((row, i) =>
-            i ? context.lineTo(row[col]!.x, row[col]!.y) : context.moveTo(row[col]!.x, row[col]!.y),
-          );
-          context.stroke();
-        }
-        points.forEach((row, r) =>
-          row.forEach((point, c) => {
-            const pulse = Math.pow(
-              Math.max(0, Math.cos(c * 0.52 + r * 0.42 - phase * 2 + layer)),
-              16,
-            );
-            const size = (1.7 + pulse * 2.5) * scale * point.perspective;
-            context.fillStyle = `rgba(${rgb},${0.28 + pulse * 0.72})`;
-            context.fillRect(point.x - size / 2, point.y - size / 2, size, size);
-          }),
-        );
+      }
+      points.sort((a, b) => b.depth - a.depth);
+      for (const point of points) {
+        context.beginPath();
+        context.arc(point.x, point.y, point.radius, 0, Math.PI * 2);
+        context.fillStyle = `rgba(${rgb},${point.alpha})`;
+        context.fill();
       }
     };
     const timeline = gsap.to(state, {

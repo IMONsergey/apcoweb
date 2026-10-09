@@ -18,7 +18,7 @@ export function DataLens({ selected }: { selected: number }) {
         <span>{titles[selected]}</span>
         <span>Example data</span>
       </div>
-      <MorphPanel changeKey={selected} crossfade>
+      <MorphPanel changeKey={selected} reveal>
         <div className="data-lens__body" data-morph-enter>
           {selected === 0 ? (
             <>

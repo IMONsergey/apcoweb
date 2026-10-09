@@ -8,12 +8,12 @@ export function MorphPanel({
   children,
   changeKey,
   className = '',
-  crossfade = false,
+  reveal = false,
   ...props
 }: HTMLAttributes<HTMLDivElement> & {
   children: ReactNode;
   changeKey?: string | number;
-  crossfade?: boolean;
+  reveal?: boolean;
 }) {
   const frame = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
@@ -79,33 +79,40 @@ export function MorphPanel({
     const previous = previousContent.current;
     previousContent.current = inner.cloneNode(true) as HTMLElement;
     if (reduced || changeKey === undefined) return;
-    if (crossfade && previous) {
+    if (reveal && previous) {
       previous.className = 'morph-panel__outgoing';
       previous.setAttribute('aria-hidden', 'true');
       previous.inert = true;
       previous.removeAttribute('id');
       previous.querySelectorAll('[id]').forEach((node) => node.removeAttribute('id'));
       outer.append(previous);
+      // Exchange complete states in sequence: never draw two sets of text together.
+      gsap.set(inner, { clipPath: 'inset(0 0 100% 0)' });
       const timeline = gsap.timeline();
       timeline
         .fromTo(
-          inner,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.48, ease: 'sine.inOut', clearProps: 'opacity' },
-          0,
-        )
-        .to(
           previous,
-          { opacity: 0, duration: 0.48, ease: 'sine.inOut', onComplete: () => previous.remove() },
-          0,
-        );
+          { clipPath: 'inset(0% 0 0 0)' },
+          {
+            clipPath: 'inset(100% 0 0 0)',
+            duration: 0.16,
+            ease: 'power1.in',
+            onComplete: () => previous.remove(),
+          },
+        )
+        .to(inner, {
+          clipPath: 'inset(0 0 0% 0)',
+          duration: 0.3,
+          ease: 'power2.out',
+          clearProps: 'clipPath',
+        });
       return () => {
         timeline.kill();
         previous.remove();
-        gsap.set(inner, { clearProps: 'opacity' });
+        gsap.set(inner, { clearProps: 'clipPath' });
       };
     }
-    if (crossfade) return;
+    if (reveal) return;
     const targets = inner.querySelectorAll('[data-morph-enter]');
     if (!targets.length) return;
     const tween = gsap.fromTo(
@@ -117,7 +124,7 @@ export function MorphPanel({
       tween.kill();
       gsap.set(targets, { clearProps: 'opacity' });
     };
-  }, [changeKey, reduced, crossfade]);
+  }, [changeKey, reduced, reveal]);
 
   return (
     <div {...props} ref={frame} className={'morph-panel ' + className}>

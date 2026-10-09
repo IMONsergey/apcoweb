@@ -378,6 +378,8 @@
 }
 .data-section--observations .metric-card {
   gap: 14px;
+  align-items: center;
+  text-align: center;
 }
 .data-section--observations .metric-card--protocols dd:not(.metric-observation-note) {
   font-size: 23px;

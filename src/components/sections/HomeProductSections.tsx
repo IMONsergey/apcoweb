@@ -242,7 +242,7 @@ export function CapabilitiesSection() {
             </button>
           ))}
         </div>
-        <MorphPanel changeKey={selected + String(httpsOnly)} crossfade>
+        <MorphPanel changeKey={selected + String(httpsOnly)} reveal>
           <div className="home-capabilities__stage" data-morph-enter>
             <div className="home-capabilities__copy">
               <h3>{item.title}</h3>
