@@ -240,10 +240,7 @@ function ApiPage() {
       variant="technical"
       title="Apcosys data, in your own code."
       description="Query hosts, services and technologies programmatically and use the results in scripts, pipelines, reports and internal tools."
-      links={[
-        documentationLink,
-        linkTo('Compare plans', '/pricing', true),
-      ]}
+      links={[documentationLink, linkTo('Compare plans', '/pricing', true)]}
     >
       <StorySections
         items={[
