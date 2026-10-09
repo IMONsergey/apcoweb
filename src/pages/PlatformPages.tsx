@@ -1,7 +1,6 @@
 import '../styles/stage2-showcases.css';
 import { primarySearch, primaryContact, linkTo } from './pageLinks';
 import { metrics } from '../content/site';
-import { SearchForm } from '../components/sections/SearchPreview';
 import { InvestigationWorkbench } from '../components/stage2/InvestigationWorkbench';
 import { MonitoringConcept } from '../components/stage2/MonitoringConcept';
 import { DataInterpretation } from '../components/stage2/DataInterpretation';
@@ -16,29 +15,22 @@ function InvestigationPage() {
       variant="product"
       links={[primarySearch, linkTo('Data & Methodology', '/platform/data-methodology', true)]}
     >
-      <section className="stage-platform-search section-space">
-        <div className="container">
-          <h2>Query with what you already know.</h2>
-          <p>
-            Search from a technical attribute. Your query opens the existing Apcosys search product.
-          </p>
-          <SearchForm />
-          <p className="stage-helper">
-            Start with a domain or IPv4 address. Advanced attribute filters depend on the supported
-            live search syntax.
-          </p>
-        </div>
-      </section>
       <InvestigationWorkbench story="search" />
-      <section className="stage-page-crosslink" id="search-syntax">
-        <div className="container">
-          <h2>Explore the search syntax.</h2>
-          <p>
-            Begin with a domain or IP address, then review the filtering and attribute syntax
-            available in the SaaS. This introduction intentionally does not claim an unverified
-            filter grammar.
-          </p>
-          <a href={primarySearch.href}>Continue to Apcosys search ↗</a>
+      <section className="stage-syntax-note section-space" id="search-syntax">
+        <div className="container stage-syntax-note__layout">
+          <div>
+            <p className="eyebrow">QUERY LANGUAGE</p>
+            <h2>Start with what you know.</h2>
+          </div>
+          <div>
+            <p>
+              A domain or IP address is a useful starting point. Use only the search filters
+              confirmed by the current product; this preview does not imply an unverified grammar.
+            </p>
+            <a className="stage-text-link" href={primarySearch.href}>
+              Continue to Apcosys search ↗
+            </a>
+          </div>
         </div>
       </section>
     </PageFrame>
@@ -140,25 +132,7 @@ function MonitoringPage() {
       links={[linkTo('Search & Investigation', '/platform/search-investigation'), primaryContact]}
     >
       <MonitoringConcept />
-      <StorySections
-        items={[
-          {
-            title: 'Define the question.',
-            description:
-              'Start with the relevant infrastructure scope and the observation you want to understand.',
-          },
-          {
-            title: 'Interpret changes carefully.',
-            description:
-              'Changes in observed data need context. Network conditions and collection timing can affect what is seen.',
-          },
-          {
-            title: 'Continue with Search & Investigation.',
-            description:
-              'Move from a signal to the underlying host, services and technical evidence.',
-          },
-        ]}
-      />
+
     </PageFrame>
   );
 }
