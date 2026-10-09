@@ -17,5 +17,4 @@ function normalizeOrigin(input: string): string {
 export const productUrl = normalizeOrigin(
   import.meta.env.VITE_APCO_PRODUCT_URL?.trim() || 'https://apcosys.net',
 );
-export const supportEmail =
-  import.meta.env.VITE_APCO_SUPPORT_EMAIL?.trim() || 'info@apcosys.net';
+export const supportEmail = import.meta.env.VITE_APCO_SUPPORT_EMAIL?.trim() || 'info@apcosys.net';
