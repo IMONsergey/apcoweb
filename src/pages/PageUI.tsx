@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { DoubleButton } from '../components/ui/DoubleButton';
 
 export type PageLink = { label: string; href: string; secondary?: boolean };
+
 export function PageIntro({
   eyebrow,
   title,
@@ -16,20 +17,24 @@ export function PageIntro({
   return (
     <header className="stage-page-hero">
       <div className="container stage-page-hero__grid">
-        <div>
+        <div className="stage-page-hero__title">
           <p className="eyebrow">{eyebrow}</p>
           <h1>{title}</h1>
+        </div>
+        <div className="stage-page-hero__aside">
+          <p className="stage-page-hero__description">{description}</p>
           {concept && (
             <p className="stage-concept-label">
               Concept demonstration · Not a live product capability
             </p>
           )}
         </div>
-        <p className="stage-page-hero__description">{description}</p>
       </div>
     </header>
   );
 }
+
+/** The site's primary CTAs use the original R21 double-button component. */
 export function PageAction({ links }: { links: readonly PageLink[] }) {
   return (
     <div className="stage-actions">
@@ -45,6 +50,7 @@ export function PageAction({ links }: { links: readonly PageLink[] }) {
     </div>
   );
 }
+
 export function PageFrame({
   eyebrow,
   title,
@@ -67,17 +73,24 @@ export function PageFrame({
       <PageIntro eyebrow={eyebrow} title={title} description={description} concept={concept} />
       {children}
       {links && (
-        <section className="stage-page-cta section-space">
-          <div className="container">
-            <p className="eyebrow">CONTINUE EXPLORING</p>
-            <h2>Follow the next lead.</h2>
-            <PageAction links={links} />
+        <nav className="stage-related" aria-label="Continue exploring Apcosys">
+          <div className="container stage-related__inner">
+            <span className="eyebrow">CONTINUE EXPLORING</span>
+            <div className="stage-related__links">
+              {links.map(({ label, href }) => (
+                <a href={href} key={href + label}>
+                  {label} <span aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
           </div>
-        </section>
+        </nav>
       )}
     </article>
   );
 }
+
+/** Sparse editorial facts, not a generic card grid or a replacement for product scenes. */
 export function StorySections({
   items,
   variant = 'split',
@@ -90,7 +103,7 @@ export function StorySections({
       <div className="container">
         {items.map((item, i) => (
           <article className="stage-story__item" key={item.title}>
-            <div className="stage-story__index">0{i + 1}</div>
+            <span className="stage-story__index">{String(i + 1).padStart(2, '0')}</span>
             <div>
               <h2>{item.title}</h2>
               <p>{item.description}</p>
@@ -102,6 +115,7 @@ export function StorySections({
     </section>
   );
 }
+
 export function Notice({ children }: { children: ReactNode }) {
   return (
     <aside className="stage-note" role="note">
