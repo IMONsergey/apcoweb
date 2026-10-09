@@ -10,7 +10,7 @@ function AboutPage() {
       variant="editorial"
       title="Built for people who investigate the internet."
       description="Apcosys makes technical observations about internet-facing infrastructure searchable, so researchers and security teams can investigate them."
-      links={[primaryContact('Responsible Scanning', '/responsible-scanning', true)]}
+      links={[primaryContact, linkTo('Responsible Scanning', '/responsible-scanning', true)]}
     >
       <section className="stage-about-belief section-space">
         <div className="container">
@@ -68,7 +68,7 @@ function ScanningPage() {
       variant="technical"
       title="How Apcosys scans."
       description="The principles behind collecting observations from publicly accessible infrastructure — and where to direct questions or concerns."
-      links={[primaryContact('Data & Methodology', '/platform/data-methodology', true)]}
+      links={[primaryContact, linkTo('Data & Methodology', '/platform/data-methodology', true)]}
     >
       <StorySections
         items={[

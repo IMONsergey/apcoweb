@@ -1,4 +1,4 @@
-import { primarySearch, linkTo } from './pageLinks';
+import { primarySearch, primaryContact, linkTo } from './pageLinks';
 import { metrics } from '../content/site';
 import { SearchForm } from '../components/sections/SearchPreview';
 import { StepCarousel } from '../components/sections/StepCarousel';
@@ -39,7 +39,7 @@ function InvestigationPage() {
       title="Every investigation starts with a question."
       description="Turn a technical question into a query, review the hosts that match and open each one to see the services, technologies and context behind it."
       variant="product"
-      links={[primarySearch('Data & Methodology', '/platform/data-methodology', true)]}
+      links={[primarySearch, linkTo('Data & Methodology', '/platform/data-methodology', true)]}
     >
       <section className="stage-platform-search section-space">
         <div className="container">
@@ -85,7 +85,7 @@ function MethodologyPage() {
       title="Know what’s behind every result."
       description="How Apcosys represents internet infrastructure observations, what its coverage figures count and how to interpret technical context."
       variant="technical"
-      links={[primarySearch('Responsible Scanning', '/responsible-scanning', true)]}
+      links={[primarySearch, linkTo('Responsible Scanning', '/responsible-scanning', true)]}
     >
       <section className="stage-methodology section-space">
         <div className="container">
@@ -160,7 +160,7 @@ function MonitoringPage() {
       description="A conceptual view of how observed infrastructure changes might support ongoing security investigation and team evaluation."
       concept
       variant="product"
-      links={[linkTo('Search & Investigation', '/platform/search-investigation')]}
+      links={[linkTo('Search & Investigation', '/platform/search-investigation'), primaryContact]}
     >
       <section className="stage-concept-demo section-space">
         <div className="container">

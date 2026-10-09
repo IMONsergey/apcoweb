@@ -103,7 +103,7 @@ function TeamPage() {
       variant="technical"
       title="Internet intelligence for your security team."
       description="Bring internet-facing infrastructure observations into technical research, security evaluation and existing team workflows."
-      links={[primaryContact('View Business Plan', '/pricing', true)]}
+      links={[primaryContact, linkTo('View Business Plan', '/pricing', true)]}
     >
       <section className="stage-team-banner section-space">
         <div className="container">
@@ -152,7 +152,7 @@ function TeamPage() {
           <h2>Evaluating Apcosys for your security team?</h2>
           <p>Tell us about your investigation workflows, data requirements and API needs.</p>
           <PageAction
-            links={[primaryContact('Data & Methodology', '/platform/data-methodology', true)]}
+            links={[primaryContact, linkTo('Data & Methodology', '/platform/data-methodology', true)]}
           />
         </div>
       </section>

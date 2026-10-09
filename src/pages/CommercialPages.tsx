@@ -1,4 +1,4 @@
-import { primarySearch } from './pageLinks';
+import { primarySearch, linkTo } from './pageLinks';
 import { useState } from 'react';
 import { PricingSection } from '../components/sections/PricingSection';
 import { plans, productUrl } from '../content/site';
@@ -83,7 +83,7 @@ function PricingPage() {
       variant="commercial"
       title="Choose the access your research needs."
       description="Start free. Upgrade when you need more searches, deeper filters, API access or a team."
-      links={[primarySearch('Talk to Us', '/contact', true)]}
+      links={[primarySearch, linkTo('Talk to Us', '/contact', true)]}
     >
       <PricingSection />
       <FullPlanComparison />
@@ -215,11 +215,8 @@ function ApiSample() {
         </div>
         <PageAction
           links={[
-            { label: 'View API Documentation', href: productUrl + '/docs/api' }(
-              'Compare plans',
-              '/pricing',
-              true,
-            ),
+            { label: 'View API Documentation', href: productUrl + '/docs/api' },
+            linkTo('Compare plans', '/pricing', true),
           ]}
         />
       </div>
@@ -234,11 +231,8 @@ function ApiPage() {
       title="Apcosys data, in your own code."
       description="Query hosts, services and technologies programmatically and use the results in scripts, pipelines, reports and internal tools."
       links={[
-        { label: 'View API Documentation', href: productUrl + '/docs/api' }(
-          'Compare plans',
-          '/pricing',
-          true,
-        ),
+        { label: 'View API Documentation', href: productUrl + '/docs/api' },
+            linkTo('Compare plans', '/pricing', true),
       ]}
     >
       <StorySections
