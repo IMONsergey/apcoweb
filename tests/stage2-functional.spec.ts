@@ -139,7 +139,10 @@ test('registration and Sign In never claim unsupported plan selection', async ({
   await expect(page.getByRole('dialog', { name: 'PLUS plan' })).toContainText(
     'selection is not transferred',
   );
-  await expect(page.locator('.site-header .stage-signin-unverified')).toHaveAttribute('aria-disabled', 'true');
+  await expect(page.locator('.site-header .stage-signin-unverified')).toHaveAttribute(
+    'aria-disabled',
+    'true',
+  );
 });
 
 test('contact form displays required email fallback and validation', async ({ page }) => {
