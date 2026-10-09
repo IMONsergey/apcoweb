@@ -1,4 +1,3 @@
-import { primarySearch } from './pageLinks';
 import { Suspense, lazy } from 'react';
 import { siteHref } from '../app/router';
 import { PageFrame, PageAction } from './PageUI';
