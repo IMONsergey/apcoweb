@@ -143,10 +143,15 @@ export function TeamEvaluationCTA() {
           <h2 id="stage-team-cta-title">Evaluating Apcosys for your security team?</h2>
         </div>
         <div className="stage-team-cta__copy">
-          <p>Tell us about your investigation workflows, data requirements and API needs. Find the right way to evaluate Apcosys for your team.</p>
+          <p>
+            Tell us about your investigation workflows, data requirements and API needs. Find the
+            right way to evaluate Apcosys for your team.
+          </p>
           <div className="stage-actions">
             <DoubleButton href={siteHref('/contact')}>Talk to Us</DoubleButton>
-            <DoubleButton variant="secondary" href={siteHref('/teams')}>Explore Security Teams</DoubleButton>
+            <DoubleButton variant="secondary" href={siteHref('/teams')}>
+              Explore Security Teams
+            </DoubleButton>
           </div>
         </div>
       </div>

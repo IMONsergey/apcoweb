@@ -9,7 +9,12 @@ import { PricingSection } from '../components/sections/PricingSection';
 import { FAQSection } from '../components/sections/FAQSection';
 import { ClosingSection } from '../components/sections/ClosingSection';
 import { Visual } from '../components/visuals/Visual';
-import { WhatYouCanSearch, UseCasePreview, CapabilityPreview, TeamEvaluationCTA } from './HomeOverview';
+import {
+  WhatYouCanSearch,
+  UseCasePreview,
+  CapabilityPreview,
+  TeamEvaluationCTA,
+} from './HomeOverview';
 
 export default function HomePage() {
   return (
