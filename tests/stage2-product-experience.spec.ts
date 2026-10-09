@@ -24,7 +24,7 @@ test('investigation results, selected host and context share one UI fragment', a
   await expect(results.locator('.product-evidence__details h3')).toContainText('203.0.113.42');
   await steps.nth(3).click();
   await expect(page.locator('.stage-workbench .product-evidence__cve')).toBeVisible();
-  await expect(page.locator('.stage-workbench')).toContainText('not proof');
+  await expect(page.locator('.stage-workbench')).toContainText('No CVE is asserted');
 });
 
 test('Monitoring has five meaningful concept states and selectable example assets', async ({ page }) => {
@@ -49,7 +49,7 @@ for (const [route, label] of [
   test(`Use Case ${route} demonstrates the investigation and contextual CTA`, async ({ page }) => {
     await page.goto('.' + route);
     const journey = page.locator('.stage-example-journey');
-    await expect(journey.locator('> div')).toHaveCount(4);
+    await expect(journey.locator(':scope > div')).toHaveCount(4);
     for (const step of ['Starting point', 'Query', 'Result', 'Next step']) {
       await expect(journey).toContainText(step);
     }
