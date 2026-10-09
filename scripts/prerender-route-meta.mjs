@@ -1,6 +1,5 @@
 import { readFile, mkdir, writeFile, copyFile } from 'node:fs/promises';
 import { resolve, join, dirname } from 'node:path';
-import { createRequire } from 'node:module';
 import ts from 'typescript';
 
 const source = await readFile(resolve('src/content/routes.ts'), 'utf8');
