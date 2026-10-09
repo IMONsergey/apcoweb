@@ -1,6 +1,7 @@
 import { primarySearch, linkTo } from './pageLinks';
 import { useState } from 'react';
 import { PricingSection } from '../components/sections/PricingSection';
+import { CreditsExplained } from '../components/stage2/CreditsExplained';
 import { plans } from '../content/site';
 import { apiDocumentationUrl } from '../config/site';
 import { siteHref } from '../app/router';
@@ -88,26 +89,15 @@ function PricingPage() {
       links={[primarySearch, linkTo('Talk to Us', '/contact', true)]}
     >
       <PricingSection />
+      <CreditsExplained />
       <FullPlanComparison />
-      <section className="stage-credits section-space">
+      <section className="stage-credits section-space" id="search-token-packages">
         <div className="container">
-          <p className="eyebrow">CREDITS & ACCESS</p>
-          <h2>How credits work.</h2>
-          <div className="stage-credits-grid">
-            <article>
-              <span className="stage-credits__number">01</span>
-              <h3>Standard search</h3>
-              <p>A standard search is listed as using 1 credit in the approved plan description.</p>
-            </article>
-            <article>
-              <span className="stage-credits__number">04</span>
-              <h3>Search with analytics</h3>
-              <p>A search with analytics is listed as using 4 credits.</p>
-            </article>
-          </div>
-          <h2>Need more capacity?</h2>
+          <p className="eyebrow">ADDITIONAL CAPACITY / CLIENT PREVIEW</p>
+          <h2>Search Token packages.</h2>
           <p className="stage-intro">
-            Search Tokens can extend the available search capacity without changing a plan.
+            Packages shown in the approved pricing concept. Confirm eligibility, current pricing,
+            expiration and token-to-credit relationship inside the product before purchase.
           </p>
           <div className="stage-token-grid">
             <div>
@@ -172,8 +162,8 @@ function ApiSample() {
         <p className="eyebrow">DEVELOPER EXPERIENCE</p>
         <h2>Your first request.</h2>
         <p className="stage-intro">
-          Get an API key through the existing product and consult the API documentation for the
-          verified endpoint and authentication contract.
+          Prepare a request using your account API key and the confirmed endpoint, authorization
+          scheme and parameters from the live documentation.
         </p>
         <div className="stage-code-window">
           <div className="stage-code-header">
@@ -213,6 +203,10 @@ function ApiSample() {
             >
               {copied ? 'Copied' : 'Copy'}
             </button>
+          </div>
+          <div className="stage-api-auth">
+            <span>AUTHENTICATION</span>
+            <p>Obtain your key inside Apcosys. Verify the current authentication header and the API endpoint in the documentation; this scaffold is not executable without them.</p>
           </div>
           <pre tabIndex={0}>
             <code>{snippet}</code>
