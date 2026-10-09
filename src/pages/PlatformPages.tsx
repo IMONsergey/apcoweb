@@ -132,7 +132,6 @@ function MonitoringPage() {
       links={[linkTo('Search & Investigation', '/platform/search-investigation'), primaryContact]}
     >
       <MonitoringConcept />
-
     </PageFrame>
   );
 }

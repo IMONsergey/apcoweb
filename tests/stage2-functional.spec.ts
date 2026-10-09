@@ -17,17 +17,18 @@ test('R21 home preserves one real search input inside the original SearchPreview
 });
 
 for (const height of [768, 900, 1080]) {
-  test('R21 hero CTA remains visible in the first desktop fold at height ' + height, async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width: 1440, height });
-    await page.goto('./');
-    await expect(page.locator('.hero h1')).toBeVisible();
-    const primary = page.locator('.hero .double-button').first();
-    const rect = await primary.boundingBox();
-    expect(rect).not.toBeNull();
-    expect(rect!.y + rect!.height).toBeLessThanOrEqual(height + 2);
-  });
+  test(
+    'R21 hero CTA remains visible in the first desktop fold at height ' + height,
+    async ({ page }) => {
+      await page.setViewportSize({ width: 1440, height });
+      await page.goto('./');
+      await expect(page.locator('.hero h1')).toBeVisible();
+      const primary = page.locator('.hero .double-button').first();
+      const rect = await primary.boundingBox();
+      expect(rect).not.toBeNull();
+      expect(rect!.y + rect!.height).toBeLessThanOrEqual(height + 2);
+    },
+  );
 }
 
 for (const width of [320, 390, 1366, 1440, 1920]) {
