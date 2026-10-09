@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react';
+import { useRef, type ReactNode } from 'react';
+import { usePageMotion } from '../hooks/usePageMotion';
 import { DoubleButton } from '../components/ui/DoubleButton';
 
 export type PageLink = { label: string; href: string; secondary?: boolean };
@@ -68,8 +69,10 @@ export function PageFrame({
   variant?: 'editorial' | 'technical' | 'product' | 'commercial' | 'usecase' | 'developer';
   concept?: boolean;
 }) {
+  const root = useRef<HTMLElement>(null);
+  usePageMotion(root, title);
   return (
-    <article className={'stage-page stage-page--' + variant}>
+    <article ref={root} className={'stage-page stage-page--' + variant}>
       <PageIntro eyebrow={eyebrow} title={title} description={description} concept={concept} />
       {children}
       {links && (

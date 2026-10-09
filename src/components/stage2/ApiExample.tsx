@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MorphPanel } from '../ui/MorphPanel';
 import { apiRequestExample, apiResponseExample } from '../../content/product-demo';
 export function ApiExample({ compact = false }: { compact?: boolean }) {
   const [response, setResponse] = useState(false);
@@ -53,17 +54,20 @@ export function ApiExample({ compact = false }: { compact?: boolean }) {
           </p>
         </div>
       )}
-      <pre
-        tabIndex={0}
-        aria-label={response ? 'Illustrative API response' : 'API request template'}
-      >
-        <code>{snippet}</code>
-      </pre>
-      <p className="stage-code-note">
-        {response
-          ? 'Synthetic host data, not the production response schema.'
-          : 'Request template. Endpoint and authentication contract require product confirmation.'}
-      </p>
+      <MorphPanel changeKey={String(response)}>
+        <pre
+          data-morph-enter
+          tabIndex={0}
+          aria-label={response ? 'Illustrative API response' : 'API request template'}
+        >
+          <code>{snippet}</code>
+        </pre>
+        <p className="stage-code-note">
+          {response
+            ? 'Synthetic host data, not the production response schema.'
+            : 'Request template. Endpoint and authentication contract require product confirmation.'}
+        </p>
+      </MorphPanel>
       <span className="sr-only" role="status">
         {copyState === 'Copy' ? '' : copyState}
       </span>

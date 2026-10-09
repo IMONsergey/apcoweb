@@ -210,36 +210,3 @@
     transition: none;
   }
 }
-
-/* Same request/response component as the developer page; no separately styled API contract. */
-.api-visual > .stage-code-window {
-  --surface-card: var(--white);
-  --surface-elevated: var(--surface);
-  --text-primary: var(--ink);
-  --color-text-body: var(--body);
-  --text-muted: var(--muted);
-  --accent-text: var(--action-hover);
-  width: 100%;
-  max-width: 100%;
-  color: var(--text-primary);
-  background: var(--surface-card);
-}
-.api-visual .stage-code-window pre {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  min-height: 220px;
-  font-size: clamp(12px, 1.1vw, 17px);
-}
-.api-visual .stage-code-note {
-  max-width: 100%;
-}
-@media (max-width: 599px) {
-  .api-visual .stage-code-header {
-    gap: 8px;
-    padding-inline: 14px;
-  }
-  .api-visual .stage-code-window pre {
-    min-height: 180px;
-    padding: 20px 14px;
-  }
-}

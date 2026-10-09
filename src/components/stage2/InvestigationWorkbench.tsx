@@ -1,4 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
+import { researchSteps } from '../../content/site';
+import { StepIllustration } from '../visuals/StepIllustration';
+import { MorphPanel } from '../ui/MorphPanel';
 import { productUrl } from '../../config/site';
 import { siteHref } from '../../app/router';
 import { ProductEvidence, type EvidenceMode, type EvidenceScenario } from './ProductEvidence';
@@ -197,38 +200,52 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
               </span>
               <span>SYNTHETIC DEMO</span>
             </div>
-            <div className="stage-workbench__illustration">
-              <ProductEvidence
-                compact
-                embedded
-                selectedHost={hostIndex}
-                onSelectHost={setHostIndex}
-                mode={
-                  (['query', 'results', 'host', 'cve', 'continue'][selected] ??
-                    'host') as EvidenceMode
-                }
-                scenario={
-                  (story === 'vulnerability'
-                    ? 'technology'
-                    : story === 'osint' || story === 'team'
-                      ? 'indicator'
-                      : 'domain') as EvidenceScenario
-                }
-              />
-            </div>
-            <div className="stage-workbench__insight">
-              <div>
-                <span className="stage-workbench__mini">
-                  STEP {String(selected + 1).padStart(2, '0')} / 05
-                </span>
-                <h3>{data.captions[selected]}</h3>
-                <p>{data.detail[selected]}</p>
+            <MorphPanel changeKey={selected}>
+              <div className="stage-workbench__illustration" data-morph-enter>
+                <StepIllustration
+                  scene={researchSteps[selected]!.scene}
+                  image={researchSteps[selected]!.image}
+                  alt={researchSteps[selected]!.alt}
+                />
               </div>
-              <span className="stage-workbench__query" title="Example only">
-                {data.query}
-              </span>
-            </div>
+            </MorphPanel>
+            <MorphPanel changeKey={selected}>
+              <div className="stage-workbench__insight" data-morph-enter>
+                <div>
+                  <span className="stage-workbench__mini">
+                    STEP {String(selected + 1).padStart(2, '0')} / 05
+                  </span>
+                  <h3>{data.captions[selected]}</h3>
+                  <p>{data.detail[selected]}</p>
+                </div>
+                <span className="stage-workbench__query" title="Example only">
+                  {data.query}
+                </span>
+              </div>
+            </MorphPanel>
           </div>
+        </div>
+        <div className="stage-workbench__sample">
+          <div className="stage-workbench__sample-heading">
+            <h3>Inspect a sample record.</h3>
+            <p>Select a host, then a service to read its response.</p>
+          </div>
+          <ProductEvidence
+            compact
+            embedded
+            selectedHost={hostIndex}
+            onSelectHost={setHostIndex}
+            mode={
+              (['query', 'results', 'host', 'cve', 'continue'][selected] ?? 'host') as EvidenceMode
+            }
+            scenario={
+              (story === 'vulnerability'
+                ? 'technology'
+                : story === 'osint' || story === 'team'
+                  ? 'indicator'
+                  : 'domain') as EvidenceScenario
+            }
+          />
         </div>
         <div className="stage-workbench__bottom">
           <p>

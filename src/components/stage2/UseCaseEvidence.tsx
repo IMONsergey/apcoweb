@@ -1,3 +1,4 @@
+import { ResearchFilm } from './ResearchFilm';
 import { ProductEvidence, type EvidenceScenario } from './ProductEvidence';
 import { productUrl } from '../../config/site';
 
@@ -72,15 +73,20 @@ function EvidenceJourney({ kind }: { kind: keyof typeof journeys }) {
           <h2>{item.title}</h2>
           <p>{item.introduction}</p>
         </div>
-        <div className="stage-example-journey" aria-label="Illustrative investigation stages">
-          {stages.map(([number, title, description]) => (
-            <div key={number}>
-              <span>
-                {number} / {title}
-              </span>
-              <p>{description}</p>
-            </div>
-          ))}
+        <div className="stage-case-experience">
+          <div className="stage-example-journey" aria-label="Illustrative investigation stages">
+            {stages.map(([number, title, description]) => (
+              <div key={number}>
+                <span>
+                  {number} / {title}
+                </span>
+                <p>{description}</p>
+              </div>
+            ))}
+          </div>
+          <ResearchFilm
+            scene={kind === 'technology' ? 'evidence' : kind === 'indicator' ? 'host' : 'results'}
+          />
         </div>
         <ProductEvidence scenario={item.scenario} mode={kind === 'technology' ? 'cve' : 'host'} />
         <div className="stage-example-footer">

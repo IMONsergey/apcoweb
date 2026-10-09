@@ -4,7 +4,7 @@ import { siteHref } from '../../app/router';
 import { DoubleButton } from '../ui/DoubleButton';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
-import { ApiExample } from '../stage2/ApiExample';
+import { ApiIllustration } from '../visuals/ApiIllustration';
 export function ApiSection() {
   const { t } = useLocale();
   return (
@@ -30,7 +30,7 @@ export function ApiSection() {
           </DoubleButton>
         </div>
         <div className="api-visual">
-          <ApiExample compact />
+          <ApiIllustration />
         </div>
       </div>
     </section>

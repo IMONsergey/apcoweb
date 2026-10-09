@@ -1,15 +1,18 @@
 import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 
-test('home contains all new content, five snippets, one set of coverage figures', async ({
+test('home contains all new content, five animated scenes, one set of coverage figures', async ({
   page,
 }) => {
   await page.goto('./');
   for (const id of ['what-you-can-search', 'use-cases', 'capabilities'])
     await expect(page.locator('#' + id)).toBeVisible();
   await expect(page.locator('.home-team-cta')).toContainText('Evaluating Apcosys');
-  await expect(page.locator('.step-snippet')).toHaveCount(5);
-  await expect(page.locator('.step-snippet').nth(3)).toContainText('CVE ASSOCIATIONS');
+  await expect(page.locator('.step-illustration')).toHaveCount(5);
+  await expect(page.locator('.step-illustration').nth(3)).toHaveAttribute(
+    'aria-label',
+    /technical context/,
+  );
   await expect(page.locator('.summary-grid')).toContainText('CVE Associations');
   await expect(page.locator('.data-section')).not.toContainText('88 585 365');
   await page.locator('.home-capabilities__tabs').getByRole('button', { name: 'Filter' }).click();
@@ -18,7 +21,7 @@ test('home contains all new content, five snippets, one set of coverage figures'
   await expect(page.locator('.home-capabilities__screen')).not.toContainText('HTTPS redirect');
   await filter.uncheck();
   await expect(page.locator('.home-capabilities__screen')).toContainText('HTTPS redirect');
-  await expect(page.locator('.api-section .stage-code-window')).toBeVisible();
+  await expect(page.locator('.api-section .api-demo-frame')).toBeVisible();
 });
 
 for (const width of [320, 390, 599, 768]) {

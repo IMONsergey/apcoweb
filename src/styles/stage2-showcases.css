@@ -123,7 +123,7 @@
 }
 .stage-workbench__illustration {
   margin: 24px 24px 0;
-  aspect-ratio: 1257/630;
+  aspect-ratio: 1257/840;
   overflow: hidden;
   position: relative;
   border: 1px solid var(--line);
@@ -671,4 +671,35 @@
 }
 .stage-monitor-console__main > .product-evidence {
   margin-block: 30px;
+}
+
+.stage-workbench__sample {
+  margin-top: clamp(40px, 5vw, 72px);
+}
+.stage-workbench__sample-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: baseline;
+  margin-bottom: 24px;
+}
+.stage-workbench__sample-heading h3 {
+  font-size: clamp(26px, 2.6vw, 40px);
+  letter-spacing: -0.04em;
+}
+.stage-workbench__sample-heading p {
+  color: var(--muted);
+  font-size: 14px;
+}
+@media (max-width: 599px) {
+  .stage-workbench__sample-heading {
+    display: block;
+  }
+  .stage-workbench__sample-heading p {
+    margin-top: 12px;
+  }
+  .stage-workbench__illustration {
+    aspect-ratio: 1257/840;
+    margin: 16px 16px 0;
+  }
 }

@@ -1,4 +1,6 @@
 import { primarySearch, linkTo } from './pageLinks';
+import { ApiIllustration } from '../components/visuals/ApiIllustration';
+import '../styles/product-motion.css';
 import { ApiExample } from '../components/stage2/ApiExample';
 import { PricingSection } from '../components/sections/PricingSection';
 import { CreditsExplained } from '../components/stage2/CreditsExplained';
@@ -179,6 +181,22 @@ function ApiPage() {
       description="Query hosts, services and technologies programmatically and use the results in scripts, pipelines, reports and internal tools."
       links={[documentationLink, linkTo('Compare plans', '/pricing', true)]}
     >
+      <section className="stage-api-showcase section-space" aria-label="Animated API walkthrough">
+        <div className="container stage-api-showcase__grid">
+          <div className="stage-api-showcase__copy">
+            <p className="eyebrow">FROM REQUEST TO RESPONSE</p>
+            <h2>See the workflow unfold.</h2>
+            <p>
+              Set a parameter. Inspect the request. Read the response, then follow one record into
+              its details.
+            </p>
+          </div>
+          <div className="stage-api-showcase__screen">
+            <ApiIllustration />
+            <p>Illustrative API interface · no live request</p>
+          </div>
+        </div>
+      </section>
       <ApiSample />
       <StorySections
         items={[

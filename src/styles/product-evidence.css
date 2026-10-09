@@ -1,5 +1,6 @@
 /* One product fragment system, using the canonical R21 semantic tokens. */
 .product-evidence {
+  position: relative;
   container-type: inline-size;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-panel);
@@ -127,7 +128,6 @@
 .product-evidence__details {
   min-width: 0;
   padding-bottom: 24px;
-  animation: evidence-in 220ms var(--ease);
 }
 .product-evidence__details h3 {
   margin: 0 24px 8px;
@@ -173,7 +173,7 @@
   display: block;
   margin-bottom: 14px;
 }
-.product-evidence__services > div {
+.product-evidence__service {
   display: grid;
   grid-template-columns: 56px 0.65fr 1.35fr;
   gap: 12px;
@@ -289,7 +289,7 @@
   .product-evidence__hint {
     margin-left: 0;
   }
-  .product-evidence__services > div {
+  .product-evidence__service {
     grid-template-columns: 44px 0.65fr 1.35fr;
     font-size: 12px;
     gap: 8px;

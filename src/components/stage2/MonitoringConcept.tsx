@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
+import { MorphPanel } from '../ui/MorphPanel';
+import { ObservationTrace } from './ObservationTrace';
 import { siteHref } from '../../app/router';
 import { demoHosts } from '../../content/product-demo';
 import { ProductEvidence } from './ProductEvidence';
@@ -93,91 +95,96 @@ export function MonitoringConcept() {
                 Concept only · availability to be confirmed
               </p>
             </div>
-            <div className="stage-monitor-console__main">
-              <div className="stage-monitor-console__overline">
-                <span>{view.label.toUpperCase()}</span>
-                <span>0{current + 1} / 05</span>
+            <MorphPanel changeKey={current + String(assetIndex)}>
+              <div className="stage-monitor-console__main">
+                <div className="stage-monitor-console__overline">
+                  <span>{view.label.toUpperCase()}</span>
+                  <span>0{current + 1} / 05</span>
+                </div>
+                <h3 data-morph-enter>{view.headline}</h3>
+                <p>{view.detail}</p>
+                <div className="stage-monitor-assets">
+                  <div className="stage-monitor-assets__intro">
+                    <span>OBSERVATION TARGETS</span>
+                    <span>SELECT AN EXAMPLE</span>
+                  </div>
+                  <div className="stage-monitor-assets__list">
+                    {demoHosts.map((host, i) => (
+                      <button
+                        type="button"
+                        key={host.ip}
+                        aria-pressed={assetIndex === i}
+                        onClick={() => setAssetIndex(i)}
+                      >
+                        <span>
+                          <strong>{host.role}</strong>
+                          <small>{host.ip}</small>
+                        </span>
+                        <span>{assetIndex === i ? 'Selected' : 'Select'}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="stage-monitor-assets__details" aria-live="polite">
+                    <span>SELECTED / DOCUMENTATION ADDRESS</span>
+                    <strong>{asset.ip}</strong>
+                    <div>
+                      <span>Hostname</span>
+                      <span>{asset.hostname}</span>
+                    </div>
+                    <div>
+                      <span>Snapshot source</span>
+                      <span>Authored concept · no scan date</span>
+                    </div>
+                  </div>
+                </div>
+                <ObservationTrace port={service.port} active={current} />
+                {current <= 2 ? (
+                  <div className="stage-monitor-console__summary" aria-live="polite">
+                    <div>
+                      <span>{current === 0 ? 'Authorised scope' : 'Snapshot A / earlier'}</span>
+                      <strong>{current === 0 ? asset.hostname : '443 / HTTPS'}</strong>
+                      <p>
+                        {current === 0
+                          ? 'Confirm permission before observing.'
+                          : 'nginx 1.24.0 · HTTP Server header'}
+                      </p>
+                    </div>
+                    <div>
+                      <span>{current === 0 ? 'Objects to review' : 'Snapshot B / later'}</span>
+                      <strong>
+                        {current === 0
+                          ? asset.services.length + ' service records'
+                          : '443 / HTTPS + ' + service.port + ' / ' + service.protocol}
+                      </strong>
+                      <p>
+                        {current === 0
+                          ? asset.role
+                          : 'Added in this example: ' + service.technology}
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <ProductEvidence
+                    scenario="domain"
+                    mode={current === 3 ? 'services' : 'continue'}
+                    selectedHost={assetIndex}
+                    onSelectHost={setAssetIndex}
+                    compact
+                    embedded
+                  />
+                )}
+                <a
+                  className="stage-monitor-console__link"
+                  href={
+                    siteHref('/platform/search-investigation') +
+                    '?demoHost=' +
+                    encodeURIComponent(asset.ip)
+                  }
+                >
+                  Explore Search & Investigation
+                </a>
               </div>
-              <h3>{view.headline}</h3>
-              <p>{view.detail}</p>
-              <div className="stage-monitor-assets">
-                <div className="stage-monitor-assets__intro">
-                  <span>OBSERVATION TARGETS</span>
-                  <span>SELECT AN EXAMPLE</span>
-                </div>
-                <div className="stage-monitor-assets__list">
-                  {demoHosts.map((host, i) => (
-                    <button
-                      type="button"
-                      key={host.ip}
-                      aria-pressed={assetIndex === i}
-                      onClick={() => setAssetIndex(i)}
-                    >
-                      <span>
-                        <strong>{host.role}</strong>
-                        <small>{host.ip}</small>
-                      </span>
-                      <span>{assetIndex === i ? 'Selected' : 'Select'}</span>
-                    </button>
-                  ))}
-                </div>
-                <div className="stage-monitor-assets__details" aria-live="polite">
-                  <span>SELECTED / DOCUMENTATION ADDRESS</span>
-                  <strong>{asset.ip}</strong>
-                  <div>
-                    <span>Hostname</span>
-                    <span>{asset.hostname}</span>
-                  </div>
-                  <div>
-                    <span>Snapshot source</span>
-                    <span>Authored concept · no scan date</span>
-                  </div>
-                </div>
-              </div>
-              {current <= 2 ? (
-                <div className="stage-monitor-console__summary" aria-live="polite">
-                  <div>
-                    <span>{current === 0 ? 'Authorised scope' : 'Snapshot A / earlier'}</span>
-                    <strong>{current === 0 ? asset.hostname : '443 / HTTPS'}</strong>
-                    <p>
-                      {current === 0
-                        ? 'Confirm permission before observing.'
-                        : 'nginx 1.24.0 · HTTP Server header'}
-                    </p>
-                  </div>
-                  <div>
-                    <span>{current === 0 ? 'Objects to review' : 'Snapshot B / later'}</span>
-                    <strong>
-                      {current === 0
-                        ? asset.services.length + ' service records'
-                        : '443 / HTTPS + ' + service.port + ' / ' + service.protocol}
-                    </strong>
-                    <p>
-                      {current === 0 ? asset.role : 'Added in this example: ' + service.technology}
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <ProductEvidence
-                  scenario="domain"
-                  mode={current === 3 ? 'services' : 'continue'}
-                  selectedHost={assetIndex}
-                  onSelectHost={setAssetIndex}
-                  compact
-                  embedded
-                />
-              )}
-              <a
-                className="stage-monitor-console__link"
-                href={
-                  siteHref('/platform/search-investigation') +
-                  '?demoHost=' +
-                  encodeURIComponent(asset.ip)
-                }
-              >
-                Explore Search & Investigation
-              </a>
-            </div>
+            </MorphPanel>
           </div>
           <div className="stage-monitor-console__footer">
             MONITORING CONCEPT · NO LIVE ALERTS · SYNTHETIC SERVICE RECORDS

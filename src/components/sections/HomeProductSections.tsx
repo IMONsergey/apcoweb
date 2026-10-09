@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MorphPanel } from '../ui/MorphPanel';
 import { siteHref } from '../../app/router';
 import { ProductEvidence, type EvidenceMode } from '../stage2/ProductEvidence';
 import { DoubleButton } from '../ui/DoubleButton';
@@ -224,92 +225,96 @@ export function CapabilitiesSection() {
             </button>
           ))}
         </div>
-        <div className="home-capabilities__stage">
-          <div className="home-capabilities__copy">
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-            <a
-              className="stage-text-link"
-              href={siteHref(selected === 4 ? '/developers/api' : '/platform/search-investigation')}
-            >
-              {selected === 4 ? 'Explore API integration' : 'Explore Search & Investigation'}
-            </a>
-          </div>
-          <div className="home-capabilities__screen">
-            {selected === 1 ? (
-              <div className="capability-record">
-                <div className="capability-record__bar">
-                  <span>SERVICE FILTER / SYNTHETIC DEMO</span>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={httpsOnly}
-                      onChange={(e) => setHttpsOnly(e.target.checked)}
-                    />
-                    HTTPS only
-                  </label>
-                </div>
-                {demoHosts.map((host) => (
-                  <div className="capability-record__host" key={host.ip}>
-                    <strong>{host.ip}</strong>
-                    <span>{host.hostname}</span>
-                    {host.services
-                      .filter((s) => !httpsOnly || s.protocol === 'HTTPS')
-                      .map((s) => (
-                        <p key={s.port}>
-                          <code>
-                            {s.port} / {s.protocol}
-                          </code>
-                          <span>{s.technology}</span>
-                        </p>
-                      ))}
+        <MorphPanel changeKey={selected + String(httpsOnly)}>
+          <div className="home-capabilities__stage" data-morph-enter>
+            <div className="home-capabilities__copy">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <a
+                className="stage-text-link"
+                href={siteHref(
+                  selected === 4 ? '/developers/api' : '/platform/search-investigation',
+                )}
+              >
+                {selected === 4 ? 'Explore API integration' : 'Explore Search & Investigation'}
+              </a>
+            </div>
+            <div className="home-capabilities__screen">
+              {selected === 1 ? (
+                <div className="capability-record">
+                  <div className="capability-record__bar">
+                    <span>SERVICE FILTER / SYNTHETIC DEMO</span>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={httpsOnly}
+                        onChange={(e) => setHttpsOnly(e.target.checked)}
+                      />
+                      HTTPS only
+                    </label>
                   </div>
-                ))}
-              </div>
-            ) : selected === 3 ? (
-              <div className="capability-record">
-                <div className="capability-record__bar">
-                  <span>BUCKETS / CONCEPT</span>
-                  <span>Research shortlist</span>
+                  {demoHosts.map((host) => (
+                    <div className="capability-record__host" key={host.ip}>
+                      <strong>{host.ip}</strong>
+                      <span>{host.hostname}</span>
+                      {host.services
+                        .filter((s) => !httpsOnly || s.protocol === 'HTTPS')
+                        .map((s) => (
+                          <p key={s.port}>
+                            <code>
+                              {s.port} / {s.protocol}
+                            </code>
+                            <span>{s.technology}</span>
+                          </p>
+                        ))}
+                    </div>
+                  ))}
                 </div>
-                {demoHosts.map((host) => (
-                  <div className="capability-record__host" key={host.ip}>
-                    <strong>{host.hostname}</strong>
-                    <span>{host.ip}</span>
-                    <p>Review service evidence and confirm authorised scope.</p>
+              ) : selected === 3 ? (
+                <div className="capability-record">
+                  <div className="capability-record__bar">
+                    <span>BUCKETS / CONCEPT</span>
+                    <span>Research shortlist</span>
                   </div>
-                ))}
-              </div>
-            ) : selected === 4 ? (
-              <div className="capability-record">
-                <div className="capability-record__bar">
-                  <span>INTEGRATION / EXAMPLE</span>
-                  <span>Host context</span>
+                  {demoHosts.map((host) => (
+                    <div className="capability-record__host" key={host.ip}>
+                      <strong>{host.hostname}</strong>
+                      <span>{host.ip}</span>
+                      <p>Review service evidence and confirm authorised scope.</p>
+                    </div>
+                  ))}
                 </div>
-                <pre>
-                  <code>
-                    {JSON.stringify(
-                      {
-                        host: demoHosts[0]!.ip,
-                        services: demoHosts[0]!.services.map((s) => ({
-                          port: Number(s.port),
-                          technology: s.technology,
-                        })),
-                      },
-                      null,
-                      2,
-                    )}
-                  </code>
-                </pre>
-                <p className="home-product-caption">
-                  Illustrative data shape. The API contract comes from the product documentation.
-                </p>
-              </div>
-            ) : (
-              <ProductEvidence compact mode={item.mode as EvidenceMode} />
-            )}
+              ) : selected === 4 ? (
+                <div className="capability-record">
+                  <div className="capability-record__bar">
+                    <span>INTEGRATION / EXAMPLE</span>
+                    <span>Host context</span>
+                  </div>
+                  <pre>
+                    <code>
+                      {JSON.stringify(
+                        {
+                          host: demoHosts[0]!.ip,
+                          services: demoHosts[0]!.services.map((s) => ({
+                            port: Number(s.port),
+                            technology: s.technology,
+                          })),
+                        },
+                        null,
+                        2,
+                      )}
+                    </code>
+                  </pre>
+                  <p className="home-product-caption">
+                    Illustrative data shape. The API contract comes from the product documentation.
+                  </p>
+                </div>
+              ) : (
+                <ProductEvidence compact mode={item.mode as EvidenceMode} />
+              )}
+            </div>
           </div>
-        </div>
+        </MorphPanel>
       </div>
     </section>
   );
