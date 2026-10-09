@@ -35,6 +35,7 @@ export function useSiteRoute() {
     history.scrollRestoration = 'manual';
     let frame = 0;
     let restoreTimer = 0;
+    let navigationVersion = 0;
 
     const recordScroll = () => {
       cancelAnimationFrame(frame);
@@ -42,23 +43,35 @@ export function useSiteRoute() {
         history.replaceState({ ...history.state, apcoScrollY: scrollY }, '');
       });
     };
-    const waitForPage = (callback: () => void) => {
+    const waitForPage = (targetPath: string, callback: () => void) => {
+      const version = ++navigationVersion;
       let attempts = 0;
       const apply = () => {
+        if (version !== navigationVersion) return;
         const main = document.querySelector('main');
-        if (main?.querySelector('.route-fallback') && attempts++ < 70) {
+        const ready =
+          main?.dataset.route === targetPath &&
+          !!main.querySelector('h1') &&
+          !main.querySelector('.route-fallback');
+        if (!ready) {
+          if (attempts++ >= 100) return;
           restoreTimer = window.setTimeout(apply, 30);
           return;
         }
-        requestAnimationFrame(() => requestAnimationFrame(callback));
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (version === navigationVersion) callback();
+          });
+        });
       };
       apply();
     };
 
     const sync = () => {
-      setPath(getRoutePath());
+      const nextPath = getRoutePath();
+      setPath(nextPath);
       const rememberedY = Number(history.state?.apcoScrollY) || 0;
-      waitForPage(() => {
+      waitForPage(nextPath, () => {
         if (location.hash) {
           if (!resolveScroll()) {
             const observer = new MutationObserver(() => {
@@ -109,7 +122,7 @@ export function useSiteRoute() {
       history.replaceState({ ...history.state, apcoScrollY: scrollY }, '');
       history.pushState({ apcoScrollY: 0 }, '', url.pathname + url.search + url.hash);
       setPath(target);
-      waitForPage(() => {
+      waitForPage(target, () => {
         if (!url.hash || !resolveScroll()) {
           if (url.hash) {
             const observer = new MutationObserver(() => {
@@ -127,7 +140,9 @@ export function useSiteRoute() {
     window.addEventListener('popstate', sync);
     window.addEventListener('scroll', recordScroll, { passive: true });
     document.addEventListener('click', intercept);
+    if (location.hash) waitForPage(getRoutePath(), () => resolveScroll());
     return () => {
+      navigationVersion++;
       history.scrollRestoration = previousSetting;
       cancelAnimationFrame(frame);
       clearTimeout(restoreTimer);
