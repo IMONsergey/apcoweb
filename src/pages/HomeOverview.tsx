@@ -33,7 +33,7 @@ const useCases = [
     'Explore the technical attributes behind an infrastructure lead.',
     '/use-cases/osint-threat-investigation',
   ],
-];
+] as const;
 const capabilities = [
   ['Search', 'Query by technical attribute'],
   ['Filter', 'Narrow the signal'],

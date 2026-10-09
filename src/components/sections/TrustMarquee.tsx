@@ -1,10 +1,16 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { useEffect, useRef, useState } from 'react';
-import { trustMarks } from '../../content/site';
-import { assetUrl } from '../../content/assets';
 
-/** One semantic list, with an inaccessible visual duplicate for the seamless loop. */
+/** Editorial proof layer: no implied customer or partner endorsements. */
+const researchTopics = [
+  'Host research',
+  'Domain observations',
+  'Technology context',
+  'CVE associations',
+  'Service discovery',
+  'API access',
+] as const;
 export function TrustMarquee() {
   const { t } = useLocale();
   const ref = useRef<HTMLDivElement>(null);
@@ -26,36 +32,13 @@ export function TrustMarquee() {
   }, []);
   return (
     <div className="container trust" ref={ref} data-running={running}>
-      <p>
-        <LocaleText>{t('Trusted by researchers and organizations worldwide')}</LocaleText>
-      </p>
-      <div
-        className="trust-viewport"
-        tabIndex={0}
-        role="region"
-        aria-label={t('Organizations — focus to pause scrolling')}
-      >
+      <p><LocaleText>{t('A closer look at internet infrastructure')}</LocaleText></p>
+      <div className="trust-viewport" tabIndex={0} role="region" aria-label="Research areas — focus to pause scrolling">
         <div className="trust-track">
           {[0, 1].map((copy) => (
-            <ul
-              className="trust-group"
-              key={copy}
-              aria-label={copy === 0 ? 'Organizations shown in the design' : undefined}
-              aria-hidden={copy === 1 || undefined}
-            >
-              {trustMarks.map(([file, name]) => (
-                <li key={file}>
-                  <span className="trust-mark">
-                    <img
-                      src={assetUrl('partners', `${file}.svg`)}
-                      width="134"
-                      height="42"
-                      alt={copy === 0 ? name : ''}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </span>
-                </li>
+            <ul className="trust-group" key={copy} aria-hidden={copy === 1 || undefined}>
+              {researchTopics.map((name) => (
+                <li key={name}><span className="trust-mark stage-trust-topic">{name}</span></li>
               ))}
             </ul>
           ))}

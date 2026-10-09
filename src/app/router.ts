@@ -34,7 +34,7 @@ export function useSiteRoute() {
       )
         return;
       if (!(event.target instanceof Element)) return;
-      const anchor = event.target.closest('a[href]');
+      const anchor = event.target.closest('a[href]') as HTMLAnchorElement | null;
       if (
         !anchor ||
         anchor.hasAttribute('download') ||
