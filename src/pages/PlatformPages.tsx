@@ -1,4 +1,3 @@
-import { siteHref } from '../app/router';
 import { metrics } from '../content/site';
 import { SearchForm } from '../components/sections/SearchPreview';
 import { StepCarousel } from '../components/sections/StepCarousel';
