@@ -124,7 +124,7 @@ test('direct path refresh serves route-specific SEO meta in static response', as
   request,
   page,
 }) => {
-  const response = await request.get('./platform/data-methodology');
+  const response = await request.get('./platform/data-methodology/');
   expect(response.status()).toBe(200);
   const html = await response.text();
   expect(html).toContain('Data &amp; Methodology');
@@ -139,7 +139,7 @@ test('registration and Sign In never claim unsupported plan selection', async ({
   await expect(page.getByRole('dialog', { name: 'PLUS plan' })).toContainText(
     'selection is not transferred',
   );
-  await expect(page.locator('.stage-signin-unverified')).toHaveAttribute('aria-disabled', 'true');
+  await expect(page.locator('.site-header .stage-signin-unverified')).toHaveAttribute('aria-disabled', 'true');
 });
 
 test('contact form displays required email fallback and validation', async ({ page }) => {

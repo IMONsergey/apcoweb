@@ -41,6 +41,7 @@ jobs:
       - name: Route and functional tests across three browsers
         run: npx playwright test tests/stage2-routes.spec.ts tests/stage2-functional.spec.ts
       - name: Full-page screenshot review (94 frames)
+        if: always()
         run: npx playwright test tests/stage2-visual-review.spec.ts --project=chromium
       - name: Original R21 and Stage 2 comparison
         if: always()
