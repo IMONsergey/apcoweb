@@ -961,6 +961,16 @@
   border-color: transparent;
   box-shadow: 0 4px 18px rgb(3 122 143 / 8%);
 }
+/* Cover inward blur with the field's opaque surface, below its controls and contour. */
+.site .search-scene__content > .search-form::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: inherit;
+  pointer-events: none;
+}
 .site .search-scene__content > .search-form > .search-form__glow::before,
 .site .search-scene__content > .search-form::after {
   content: '';
@@ -977,6 +987,7 @@
 }
 .site .search-scene__content > .search-form > .search-form__glow {
   position: absolute;
+  z-index: -2;
   inset: -4px;
   border-radius: inherit;
   pointer-events: none;
