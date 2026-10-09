@@ -38,6 +38,8 @@ jobs:
       - run: npx playwright install --with-deps chromium firefox webkit
       - name: Three-engine interactions and route coverage
         run: npx playwright test tests/stage2-routes.spec.ts tests/stage2-functional.spec.ts
+      - name: Fourteen responsive widths across 13 pages in both themes
+        run: npx playwright test tests/r21-design-responsive.spec.ts --project=chromium
       - name: All 13 pages in desktop/mobile Light/Dark
         run: npx playwright test tests/stage2-visual-review.spec.ts --project=chromium
       - name: Compare original R21 with design candidate
