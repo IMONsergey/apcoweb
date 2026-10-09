@@ -3,6 +3,7 @@ import { researchSteps } from '../../content/site';
 import { StepIllustration } from '../visuals/StepIllustration';
 import { productUrl } from '../../config/site';
 import { siteHref } from '../../app/router';
+import { ProductEvidence, type EvidenceMode, type EvidenceScenario } from './ProductEvidence';
 
 type Story = 'search' | 'bounty' | 'vulnerability' | 'osint' | 'team';
 
@@ -168,12 +169,28 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
               <span>ILLUSTRATIVE INTERFACE</span>
             </div>
             <div className="stage-workbench__illustration">
-              <StepIllustration
-                key={selected}
-                scene={step.scene}
-                image={step.image}
-                alt={step.alt}
-              />
+              {selected === 0 || selected === 4 ? (
+                <StepIllustration
+                  key={selected}
+                  scene={step.scene}
+                  image={step.image}
+                  alt={step.alt}
+                />
+              ) : (
+                <ProductEvidence
+                  key={story + selected}
+                  compact
+                  mode={(['results', 'results', 'host', 'cve', 'host'][selected] ??
+                    'host') as EvidenceMode}
+                  scenario={(
+                    story === 'vulnerability'
+                      ? 'technology'
+                      : story === 'osint' || story === 'team'
+                        ? 'indicator'
+                        : 'domain'
+                  ) as EvidenceScenario}
+                />
+              )}
             </div>
             <div className="stage-workbench__insight">
               <div>
