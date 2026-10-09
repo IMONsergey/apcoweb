@@ -79,7 +79,9 @@ export function ProductEvidence({
   const id = useId();
   const data = scenarios[scenario];
   const [selected, setSelected] = useState(0);
-  const host: Host = data.hosts[Math.min(selected, data.hosts.length - 1)] ?? data.hosts[0] ?? { ip: '—', hostname: 'Not supplied', services: [] };
+  const fallbackHost: Host = { ip: '—', hostname: 'Not supplied', services: [] };
+  const host: Host =
+    data.hosts[Math.min(selected, data.hosts.length - 1)] ?? data.hosts[0] ?? fallbackHost;
   return (
     <div
       className={'product-evidence' + (compact ? ' product-evidence--compact' : '')}
