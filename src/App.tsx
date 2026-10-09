@@ -1,43 +1,27 @@
-import { LocaleText } from './i18n/LocaleText';
+import { Suspense, lazy } from 'react';
 import { useLocale } from './i18n/context';
+import { LocaleText } from './i18n/LocaleText';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { Hero } from './components/sections/Hero';
-import { SearchPreview } from './components/sections/SearchPreview';
-import { StepCarousel } from './components/sections/StepCarousel';
-import { AudienceSection } from './components/sections/AudienceSection';
-import { DataSection } from './components/sections/DataSection';
-import { ApiSection } from './components/sections/ApiSection';
-import { PricingSection } from './components/sections/PricingSection';
-import { FAQSection } from './components/sections/FAQSection';
-import { ClosingSection } from './components/sections/ClosingSection';
 import { MotionProvider } from './components/visuals/MotionProvider';
-import { Visual } from './components/visuals/Visual';
+import { useSiteRoute } from './app/router';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const InnerPage = lazy(() => import('./pages/InnerPage'));
+
 export function App() {
   const { locale, t } = useLocale();
-  return (
-    <MotionProvider>
-      <div id="top" className="site" lang={locale}>
-        <a href="#main" className="skip-link">
-          <LocaleText>{t('Skip to content')}</LocaleText>
-        </a>
-        <Header />
-        <main id="main">
-          <Hero />
-          <SearchPreview />
-          <StepCarousel />
-          <AudienceSection />
-          <DataSection />
-          <ApiSection />
-          <PricingSection />
-          <div className="lower-scene">
-            <Visual kind="waves" />
-            <FAQSection />
-            <ClosingSection />
-          </div>
-        </main>
-        <Footer />
-      </div>
-    </MotionProvider>
-  );
+  const path = useSiteRoute();
+  return <MotionProvider>
+    <div id="top" className="site" lang={locale}>
+      <a href="#main" className="skip-link"><LocaleText>{t('Skip to content')}</LocaleText></a>
+      <Header />
+      <main id="main" data-route={path}>
+        <Suspense fallback={<div className="route-fallback" role="status">Loading page…</div>}>
+          {path === '/' ? <HomePage /> : <InnerPage path={path} />}
+        </Suspense>
+      </main>
+      <Footer />
+    </div>
+  </MotionProvider>;
 }
