@@ -1,7 +1,9 @@
 import { primarySearch, linkTo } from './pageLinks';
 import { useState } from 'react';
 import { PricingSection } from '../components/sections/PricingSection';
-import { plans, productUrl } from '../content/site';
+import { plans } from '../content/site';
+import { apiDocumentationUrl } from '../config/site';
+import { siteHref } from '../app/router';
 import { PageFrame, Notice, StorySections, PageAction } from './PageUI';
 
 const planAccess = [
@@ -149,6 +151,13 @@ function PricingPage() {
     </PageFrame>
   );
 }
+const documentationLink = apiDocumentationUrl
+  ? { label: 'View API Documentation', href: apiDocumentationUrl }
+  : {
+      label: 'Read API integration guidance',
+      href: siteHref('/developers/api') + '#documentation',
+    };
+
 const requestExample =
   'curl --request GET "$APCOSYS_API_ENDPOINT" \\\n  --header "Authorization: Bearer $APCOSYS_API_KEY"';
 const responseExample =
@@ -158,7 +167,7 @@ function ApiSample() {
   const [copied, setCopied] = useState(false);
   const snippet = tab === 'request' ? requestExample : responseExample;
   return (
-    <section className="stage-api-demo section-space">
+    <section className="stage-api-demo section-space" id="documentation">
       <div className="container">
         <p className="eyebrow">DEVELOPER EXPERIENCE</p>
         <h2>Your first request.</h2>
@@ -213,12 +222,13 @@ function ApiSample() {
             asserted here.
           </p>
         </div>
-        <PageAction
-          links={[
-            { label: 'View API Documentation', href: productUrl + '/docs/api' },
-            linkTo('Compare plans', '/pricing', true),
-          ]}
-        />
+        {!apiDocumentationUrl && (
+          <Notice>
+            The production API documentation URL is not yet confirmed. This page explains
+            integration concepts only; do not use the illustrative request as an API contract.
+          </Notice>
+        )}
+        <PageAction links={[documentationLink, linkTo('Compare plans', '/pricing', true)]} />
       </div>
     </section>
   );
@@ -231,7 +241,7 @@ function ApiPage() {
       title="Apcosys data, in your own code."
       description="Query hosts, services and technologies programmatically and use the results in scripts, pipelines, reports and internal tools."
       links={[
-        { label: 'View API Documentation', href: productUrl + '/docs/api' },
+        documentationLink,
         linkTo('Compare plans', '/pricing', true),
       ]}
     >
