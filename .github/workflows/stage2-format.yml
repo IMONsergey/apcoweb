@@ -1,0 +1,32 @@
+name: Stage 2 source formatting
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  format:
+    if: github.head_ref == 'feat/stage2-full-website-2026-10-09'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out working branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: feat/stage2-full-website-2026-10-09
+      - name: Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Format Stage 2 implementation
+        run: |
+          npx prettier --write src
+          git config user.name "stage2-format"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src
+          if ! git diff --cached --quiet; then
+            git commit -m "style: format Stage 2 React and CSS source"
+            git push origin HEAD:feat/stage2-full-website-2026-10-09
+          fi
