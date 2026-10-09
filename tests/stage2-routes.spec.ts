@@ -4,8 +4,8 @@ import { siteRoutes } from '../src/content/routes';
 for (const route of siteRoutes) {
   test(`Stage 2 route ${route.path} resolves with a unique heading`, async ({ page }) => {
     await page.goto(`.${route.path === '/' ? '/' : route.path}`);
-    await expect(page.locator('main h1')).toHaveCount(1);
-    await expect(page.locator('main h1')).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     await expect(page).toHaveTitle(/Apcosys/i);
     await expect(page.locator('main')).toHaveAttribute('data-route', route.path);
     await expect(page.locator('.site-header')).toHaveCount(1);

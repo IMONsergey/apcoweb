@@ -12,7 +12,7 @@ for (const route of siteRoutes) {
       await page.setViewportSize({ width: widths[0], height: 844 });
       await page.addInitScript((mode) => localStorage.setItem('apcosys-theme-mode', mode), theme);
       await page.goto('.' + route.path);
-      await expect(page.locator('main h1')).toBeVisible();
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
       await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
       await page.evaluate(() => document.fonts.ready);
 
