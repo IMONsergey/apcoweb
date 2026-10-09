@@ -191,5 +191,7 @@ test('unverified API docs remain within the supported on-site guidance', async (
   await page.getByRole('link', { name: 'Read API integration guidance' }).first().click();
   await expect(page).toHaveURL(/\/developers\/api#documentation$/);
   await expect(page.locator('#documentation')).toBeInViewport();
-  await expect(page.getByText('The production API documentation URL is not yet confirmed.')).toBeVisible();
+  await expect(
+    page.getByText('The production API documentation URL is not yet confirmed.', { exact: false }),
+  ).toBeVisible();
 });
