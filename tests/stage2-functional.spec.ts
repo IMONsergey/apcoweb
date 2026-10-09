@@ -154,3 +154,34 @@ test('contact form displays required email fallback and validation', async ({ pa
     page.getByText('Messages are not stored or delivered by this website.', { exact: false }),
   ).toBeVisible();
 });
+
+test('direct hash entry waits for lazy investigation content', async ({ page }) => {
+  await page.goto('./platform/search-investigation#search-syntax');
+  await expect(page.locator('main')).toHaveAttribute(
+    'data-route',
+    '/platform/search-investigation',
+  );
+  await expect(page.locator('#search-syntax')).toBeInViewport();
+});
+
+test('browser history restores scroll after lazy route navigation', async ({ page }) => {
+  await page.goto('./platform/data-methodology');
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await page.evaluate(() => window.scrollTo({ top: 900, behavior: 'instant' }));
+  await expect
+    .poll(() => page.evaluate(() => Number(history.state?.apcoScrollY) || 0))
+    .toBeGreaterThan(600);
+  const previousY = await page.evaluate(() => window.scrollY);
+
+  await page.evaluate(() => {
+    document.querySelector<HTMLAnchorElement>('.site-header a[href$="/pricing"]')?.click();
+  });
+  await expect(page.locator('main')).toHaveAttribute('data-route', '/pricing');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Choose the access');
+
+  await page.goBack();
+  await expect(page.locator('main')).toHaveAttribute('data-route', '/platform/data-methodology');
+  await expect
+    .poll(() => page.evaluate((expected) => Math.abs(window.scrollY - expected), previousY))
+    .toBeLessThan(80);
+});
