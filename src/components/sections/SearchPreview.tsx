@@ -1,3 +1,5 @@
+import { ProductEvidence, type EvidenceScenario } from '../stage2/ProductEvidence';
+import { demoScenarios } from '../../content/product-demo';
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { noBreakNumber } from '../../i18n/typography';
@@ -125,6 +127,7 @@ export function SearchForm({ className = '' }: { className?: string }) {
 export function SearchPreview() {
   const { t } = useLocale();
   const scene = useSearchEntrance();
+  const [scenario, setScenario] = useState<EvidenceScenario>('domain');
   return (
     <section className="search-preview" aria-label={t('Try APCOSYS public search')}>
       <Visual kind="flow" eager onReady={flowReady} />
@@ -154,24 +157,26 @@ export function SearchPreview() {
               </h2>
             </div>
             <SearchForm />
-            <details className="search-scene__example">
-              <summary>
-                <span>See an example result</span>
-                <span aria-hidden="true">↗</span>
-              </summary>
-              <div className="search-scene__example-result">
-                <span className="eyebrow">ILLUSTRATIVE HOST · NOT LIVE DATA</span>
-                <div>
-                  <strong>198.51.100.24</strong>
-                  <span>443 / HTTPS</span>
-                </div>
-                <p>
-                  Documentation-only sample. A real host result includes observed services,
-                  technologies and time context. No observation is claimed for this IP.
-                </p>
-                <a href={productUrl + '/search'}>Run a search in Apcosys ↗</a>
-              </div>
-            </details>
+            <div className="search-examples" role="group" aria-label="Example investigations">
+              <span>Explore an example</span>
+              {Object.entries(demoScenarios).map(([key, example]) => (
+                <button
+                  type="button"
+                  key={key}
+                  aria-pressed={scenario === key}
+                  onClick={() => setScenario(key as EvidenceScenario)}
+                >
+                  {example.label}
+                </button>
+              ))}
+            </div>
+            <div className="search-scene__results">
+              <ProductEvidence key={scenario} scenario={scenario} compact embedded />
+            </div>
+            <p className="search-scene__demo-note">
+              Synthetic demonstration · No live observations.{' '}
+              <a href={productUrl + '/search'}>Open product search</a>
+            </p>
           </div>
         </div>
       </div>

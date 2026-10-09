@@ -1,111 +1,72 @@
+import '../../styles/product-evidence.css';
 import { useId, useState } from 'react';
 import { productUrl } from '../../config/site';
-
-export type EvidenceMode = 'results' | 'host' | 'services' | 'cve';
-export type EvidenceScenario = 'domain' | 'indicator' | 'technology';
-
-type Host = {
-  ip: string;
-  hostname: string;
-  services: readonly { port: string; protocol: string; technology: string }[];
-};
-
-const scenarios: Record<
-  EvidenceScenario,
-  { query: string; description: string; hosts: readonly Host[] }
-> = {
-  domain: {
-    query: 'example.com',
-    description: 'Illustrative domain investigation',
-    hosts: [
-      {
-        ip: '198.51.100.24',
-        hostname: 'example.com',
-        services: [
-          { port: '443', protocol: 'HTTPS', technology: 'Web service · sample' },
-          { port: '80', protocol: 'HTTP', technology: 'Redirect · sample' },
-        ],
-      },
-      {
-        ip: '203.0.113.42',
-        hostname: 'sample.example.com',
-        services: [{ port: '443', protocol: 'HTTPS', technology: 'Web service · sample' }],
-      },
-    ],
-  },
-  indicator: {
-    query: '198.51.100.24',
-    description: 'Illustrative indicator lookup',
-    hosts: [
-      {
-        ip: '198.51.100.24',
-        hostname: 'Not established',
-        services: [
-          { port: '443', protocol: 'HTTPS', technology: 'TLS · sample' },
-          { port: '22', protocol: 'SSH', technology: 'Remote service · sample' },
-        ],
-      },
-    ],
-  },
-  technology: {
-    query: 'Technology / version',
-    description: 'Illustrative technology investigation · not executable search syntax',
-    hosts: [
-      {
-        ip: '203.0.113.42',
-        hostname: 'Not established',
-        services: [{ port: '443', protocol: 'HTTPS', technology: 'Illustrative product · v1.0' }],
-      },
-      {
-        ip: '198.51.100.24',
-        hostname: 'Not established',
-        services: [
-          { port: '80', protocol: 'HTTP', technology: 'Illustrative product · version unknown' },
-        ],
-      },
-    ],
-  },
-};
+import { demoNotice, demoScenarios, type EvidenceScenario } from '../../content/product-demo';
+export type { EvidenceScenario } from '../../content/product-demo';
+export type EvidenceMode = 'query' | 'results' | 'host' | 'services' | 'cve' | 'continue';
 
 export function ProductEvidence({
   mode = 'results',
   scenario = 'domain',
   compact = false,
+  selectedHost,
+  onSelectHost,
+  embedded = false,
 }: {
   mode?: EvidenceMode;
   scenario?: EvidenceScenario;
   compact?: boolean;
+  selectedHost?: number;
+  onSelectHost?: (index: number) => void;
+  embedded?: boolean;
 }) {
   const id = useId();
-  const data = scenarios[scenario];
-  const [selected, setSelected] = useState(0);
-  const fallbackHost: Host = { ip: '—', hostname: 'Not supplied', services: [] };
-  const host: Host =
-    data.hosts[Math.min(selected, data.hosts.length - 1)] ?? data.hosts[0] ?? fallbackHost;
+  const [localSelection, setLocalSelection] = useState(0);
+  const data = demoScenarios[scenario];
+  const selected = Math.min(selectedHost ?? localSelection, data.hosts.length - 1);
+  const host = data.hosts[selected]!;
   return (
     <div
-      className={'product-evidence' + (compact ? ' product-evidence--compact' : '')}
-      role="region"
+      className={
+        'product-evidence' +
+        (compact ? ' product-evidence--compact' : '') +
+        (embedded ? ' product-evidence--embedded' : '')
+      }
+      data-mode={mode}
+      role="group"
       aria-label={data.description}
       aria-describedby={id}
     >
       <div className="product-evidence__bar">
         <span>
           APCOSYS <span className="product-evidence__slash">/</span>{' '}
-          {mode === 'cve' ? 'CONTEXT' : 'INVESTIGATION'}
+          {mode === 'cve' ? 'CVE CONTEXT' : 'INVESTIGATION'}
         </span>
-        <span className="product-evidence__status">ILLUSTRATIVE DATA · NOT LIVE RESULTS</span>
+        <span className="product-evidence__status">SYNTHETIC DEMO</span>
       </div>
       <div className="product-evidence__query">
-        <span className="product-evidence__mono">QUERY</span>
+        <span className="product-evidence__mono">
+          {scenario === 'technology' ? 'RESEARCH INPUT' : 'QUERY'}
+        </span>
         <strong>{data.query}</strong>
-        <span className="product-evidence__hint">{data.description}</span>
+        <span className="product-evidence__hint">
+          {data.hosts.length} example {data.hosts.length === 1 ? 'host' : 'hosts'}
+        </span>
       </div>
+      {mode === 'query' && (
+        <div className="product-evidence__context-note">
+          <span className="product-evidence__mono">STARTING POINT</span>
+          <p>
+            Begin with a known {data.label.toLowerCase()}. The records below show how the
+            investigation continues. Technology input illustrates intent, not verified query syntax.
+          </p>
+        </div>
+      )}
       <div className="product-evidence__layout">
         <div className="product-evidence__results">
           <div className="product-evidence__eyebrow">
-            <span>HOST RESULTS</span>
-            <span>{data.hosts.length} examples</span>
+            <span>SEARCH RESULTS</span>
+            <span>SELECT A HOST</span>
           </div>
           {data.hosts.map((item, index) => (
             <button
@@ -113,82 +74,110 @@ export function ProductEvidence({
               key={item.ip}
               className="product-evidence__result"
               aria-pressed={selected === index}
-              onClick={() => setSelected(index)}
+              onClick={() => {
+                setLocalSelection(index);
+                onSelectHost?.(index);
+              }}
             >
               <span className="product-evidence__result-main">
                 <strong>{item.ip}</strong>
                 <small>{item.hostname}</small>
               </span>
               <span className="product-evidence__result-meta">
-                {item.services.length} sample services <span aria-hidden="true">↗</span>
+                {item.services.map((s) => s.port).join(' / ')}
+                <small>{item.role}</small>
               </span>
             </button>
           ))}
-          <p className="product-evidence__disclaimer">
-            Reserved documentation addresses. Entries are fictional UI examples, not observations of
-            these hosts.
-          </p>
+          {!compact && (
+            <p className="product-evidence__disclaimer" id={id}>
+              {demoNotice}
+            </p>
+          )}
         </div>
-        <div className="product-evidence__details" aria-live="polite" aria-atomic="true">
+        <div
+          className="product-evidence__details"
+          aria-live="polite"
+          aria-atomic="true"
+          key={host.ip + mode}
+        >
           <div className="product-evidence__eyebrow">
-            <span>HOST DETAILS</span>
+            <span>{mode === 'services' ? 'SERVICES & TECHNOLOGIES' : 'HOST DETAILS'}</span>
             <span>SELECTED</span>
           </div>
           <h3>{host.ip}</h3>
-          <p className="product-evidence__meta">
-            Observation timestamp <strong>Not supplied</strong>
-          </p>
-          <div className="product-evidence__properties">
-            <div>
-              <span>Domain context</span>
-              <strong>{host.hostname}</strong>
+          <p className="product-evidence__meta">{host.hostname}</p>
+          {!compact && (
+            <div className="product-evidence__properties">
+              <div>
+                <span>Evidence source</span>
+                <strong>Authored demonstration</strong>
+              </div>
+              <div>
+                <span>Observation time</span>
+                <strong>No live observation</strong>
+              </div>
             </div>
-            <div>
-              <span>Reported services</span>
-              <strong>{host.services.length} sample entries</strong>
-            </div>
-          </div>
+          )}
           <div className="product-evidence__services">
             <span className="product-evidence__mono">SERVICES & TECHNOLOGIES</span>
             {host.services.map((service) => (
               <div key={service.port}>
-                <span className="product-evidence__port">{service.port}</span>
+                <span className="product-evidence__port">
+                  {service.port}
+                  <small>/ tcp</small>
+                </span>
                 <strong>{service.protocol}</strong>
-                <span>{service.technology}</span>
+                <span>
+                  {service.technology}
+                  {!compact && <small>{service.evidence}</small>}
+                </span>
               </div>
             ))}
           </div>
           {(mode === 'cve' || scenario === 'technology') && (
             <div className="product-evidence__cve">
               <span className="product-evidence__mono">CVE ASSOCIATIONS</span>
+              <dl>
+                <div>
+                  <dt>Detected product</dt>
+                  <dd>{host.services[0]!.technology}</dd>
+                </div>
+                <div>
+                  <dt>Applicability</dt>
+                  <dd>Requires verification</dd>
+                </div>
+              </dl>
               <p>
-                No CVE is asserted for this example. In a real result, compare reported
-                product/version with vendor advisories, patch status and observation age before
-                making a finding.
+                No CVE is asserted for this example. Check the vendor advisory, affected versions,
+                configuration and backported fixes before confirming a vulnerability.
               </p>
             </div>
           )}
-          {mode !== 'cve' && scenario !== 'technology' && (
+          {mode === 'continue' && (
             <div className="product-evidence__next">
-              <span className="product-evidence__mono">NEXT STEP</span>
-              <p>
-                {scenario === 'indicator'
-                  ? 'Use an observed service or technology to refine the investigation; do not infer attribution.'
-                  : 'Validate that a selected host belongs to your authorised research scope before testing.'}
-              </p>
+              <span className="product-evidence__mono">NEXT RESEARCH LEAD</span>
+              <strong>{host.hostname}</strong>
+              <p>{data.next}</p>
             </div>
           )}
         </div>
       </div>
-      <div className="product-evidence__footer">
-        <span>Example only · No live search request is performed</span>
-        <a href={productUrl + '/search'}>
-          Open Apcosys Search <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-      <span className="sr-only" id={id}>
-        Technical entries shown are designed examples, not factual detections.
-      </span>
+      {!embedded && (
+        <div className="product-evidence__footer">
+          <span>
+            {compact
+              ? demoNotice
+              : 'Observation, detection, association: different levels of certainty.'}
+          </span>
+          <a href={productUrl + '/search'}>Open Apcosys Search</a>
+        </div>
+      )}
+      {compact && (
+        <span className="sr-only" id={id}>
+          {demoNotice}
+        </span>
+      )}
     </div>
   );
 }

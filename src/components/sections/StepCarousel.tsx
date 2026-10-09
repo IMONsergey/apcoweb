@@ -4,7 +4,8 @@ import { useCarousel } from '../../hooks/useCarousel';
 import { researchSteps } from '../../content/site';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
-import { StepIllustration } from '../visuals/StepIllustration';
+import { StepSnippet } from '../stage2/StepSnippet';
+import { siteHref } from '../../app/router';
 export function StepCarousel() {
   const { t } = useLocale();
   const { track, position, positions, move, goTo } = useCarousel();
@@ -83,11 +84,17 @@ export function StepCarousel() {
               </div>
               <div className="step-media">
                 <Visual kind="dots" direction="bottom-to-top" />
-                <StepIllustration scene={step.scene} image={step.image} alt={t(step.alt)} />
+                <StepSnippet scene={step.scene} />
               </div>
             </li>
           ))}
         </ul>
+      </div>
+      <div className="container step-evidence-note">
+        <p>Synthetic investigation · The same example hosts across all five steps.</p>
+        <a className="stage-text-link" href={siteHref('/platform/search-investigation')}>
+          Explore Search & Investigation
+        </a>
       </div>
     </section>
   );

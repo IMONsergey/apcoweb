@@ -1,17 +1,17 @@
 import { expect, test } from '@playwright/test';
 
-test('approved Hero retains one real search and an optional honest sample result', async ({
-  page,
-}) => {
+test('Hero keeps one real search and immediately visible connected examples', async ({ page }) => {
   await page.goto('./');
   await expect(page.locator('.hero .search-form')).toHaveCount(0);
   await expect(page.locator('.search-preview .search-form')).toHaveCount(1);
-  const preview = page.locator('.search-scene__example');
-  await expect(preview.locator('.search-scene__example-result')).toBeHidden();
-  await preview.locator('summary').click();
-  await expect(preview.locator('.search-scene__example-result')).toBeVisible();
-  await expect(preview).toContainText('ILLUSTRATIVE HOST');
-  await expect(preview).toContainText('198.51.100.24');
+  const preview = page.locator('.search-scene__results');
+  await expect(preview).toBeVisible();
+  await expect(preview.locator('.product-evidence__details')).toContainText('nginx 1.24.0');
+  await page.getByRole('button', { name: 'Technology', exact: true }).click();
+  await expect(preview.locator('.product-evidence__query')).toContainText('nginx 1.24.0');
+  await expect(preview.locator('.product-evidence__cve')).toBeVisible();
+  await page.getByRole('button', { name: 'IP address', exact: true }).click();
+  await expect(preview.locator('.product-evidence__result')).toHaveCount(1);
 });
 
 test('investigation results, selected host and context share one UI fragment', async ({ page }) => {
@@ -26,6 +26,7 @@ test('investigation results, selected host and context share one UI fragment', a
   await expect(results.locator('.product-evidence__details h3')).toContainText('203.0.113.42');
   await steps.nth(3).click();
   await expect(page.locator('.stage-workbench .product-evidence__cve')).toBeVisible();
+  await expect(results.locator('.product-evidence__details h3')).toContainText('203.0.113.42');
   await expect(page.locator('.stage-workbench')).toContainText('No CVE is asserted');
 });
 
@@ -37,10 +38,10 @@ test('Monitoring has five meaningful concept states and selectable example asset
   await expect(steps).toHaveCount(5);
   await expect(page.locator('.stage-monitor-assets__list button')).toHaveCount(2);
   await page.locator('.stage-monitor-assets__list button').nth(1).click();
-  await expect(page.locator('.stage-monitor-assets__details')).toContainText('198.51.100.24');
+  await expect(page.locator('.stage-monitor-assets__details')).toContainText('203.0.113.42');
   await steps.nth(1).click();
   await expect(page.locator('.stage-monitor-console__summary')).toContainText(
-    'Service A + Service B',
+    '443 / HTTPS + 22 / SSH',
   );
   await steps.nth(4).click();
   await expect(page.locator('.stage-monitor-console__link')).toHaveAttribute(

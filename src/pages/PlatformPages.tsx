@@ -28,7 +28,7 @@ function InvestigationPage() {
               confirmed by the current product; this preview does not imply an unverified grammar.
             </p>
             <a className="stage-text-link" href={primarySearch.href}>
-              Continue to Apcosys search ↗
+              Continue to Apcosys search
             </a>
           </div>
         </div>
@@ -55,6 +55,22 @@ function MethodologyPage() {
       variant="technical"
       links={[primarySearch, linkTo('Responsible Scanning', '/responsible-scanning', true)]}
     >
+      <section className="stage-methodology-product section-space">
+        <div className="container">
+          <div className="stage-methodology-product__heading">
+            <div>
+              <p className="eyebrow">READ THE EVIDENCE</p>
+              <h2>One host. Several levels of certainty.</h2>
+            </div>
+            <p>
+              Ports and services describe what a data source observed. Detected products may be
+              uncertain, and CVE associations remain research leads. Always check the observation
+              time and validate the live state.
+            </p>
+          </div>
+          <ProductEvidence scenario="technology" mode="cve" />
+        </div>
+      </section>
       <section className="stage-methodology section-space">
         <div className="container">
           <p className="eyebrow">COVERAGE</p>
@@ -90,22 +106,6 @@ function MethodologyPage() {
               </tbody>
             </table>
           </div>
-        </div>
-      </section>
-      <section className="stage-methodology-product section-space">
-        <div className="container">
-          <div className="stage-methodology-product__heading">
-            <div>
-              <p className="eyebrow">READ THE EVIDENCE</p>
-              <h2>One host. Several levels of certainty.</h2>
-            </div>
-            <p>
-              Ports and services describe what a data source observed. Detected products may be
-              uncertain, and CVE associations remain research leads. Always check the observation
-              time and validate the live state.
-            </p>
-          </div>
-          <ProductEvidence scenario="technology" mode="cve" />
         </div>
       </section>
       <StorySections

@@ -1,5 +1,5 @@
 import { primarySearch, linkTo } from './pageLinks';
-import { useState } from 'react';
+import { ApiExample } from '../components/stage2/ApiExample';
 import { PricingSection } from '../components/sections/PricingSection';
 import { CreditsExplained } from '../components/stage2/CreditsExplained';
 import { plans } from '../content/site';
@@ -148,14 +148,7 @@ const documentationLink = apiDocumentationUrl
       href: siteHref('/developers/api') + '#documentation',
     };
 
-const requestExample =
-  'curl --request GET "$APCOSYS_API_ENDPOINT" \\\n  --header "$APCOSYS_AUTH_HEADER: $APCOSYS_API_KEY"';
-const responseExample =
-  '{\n  "note": "Illustrative response shape only",\n  "data": [],\n  "documentation": "Consult the live API reference"\n}';
 function ApiSample() {
-  const [tab, setTab] = useState<'request' | 'response'>('request');
-  const [copied, setCopied] = useState(false);
-  const snippet = tab === 'request' ? requestExample : responseExample;
   return (
     <section className="stage-api-demo section-space" id="documentation">
       <div className="container">
@@ -165,60 +158,7 @@ function ApiSample() {
           Prepare a request using your account API key and the confirmed endpoint, authorization
           scheme and parameters from the live documentation.
         </p>
-        <div className="stage-code-window">
-          <div className="stage-code-header">
-            <div className="stage-code-tabs" role="group" aria-label="API code example">
-              <button
-                type="button"
-                aria-pressed={tab === 'request'}
-                onClick={() => {
-                  setTab('request');
-                  setCopied(false);
-                }}
-              >
-                Request
-              </button>
-              <button
-                type="button"
-                aria-pressed={tab === 'response'}
-                onClick={() => {
-                  setTab('response');
-                  setCopied(false);
-                }}
-              >
-                Response
-              </button>
-            </div>
-            <button
-              type="button"
-              className="stage-code-copy"
-              onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(snippet);
-                  setCopied(true);
-                } catch {
-                  setCopied(false);
-                }
-              }}
-            >
-              {copied ? 'Copied' : 'Copy'}
-            </button>
-          </div>
-          <div className="stage-api-auth">
-            <span>AUTHENTICATION</span>
-            <p>
-              Obtain your key inside Apcosys. Verify the current authentication header and the API
-              endpoint in the documentation; this scaffold is not executable without them.
-            </p>
-          </div>
-          <pre tabIndex={0}>
-            <code>{snippet}</code>
-          </pre>
-          <p className="stage-code-note">
-            Illustrative template, not an executable API call. No endpoint or response schema is
-            asserted here.
-          </p>
-        </div>
+        <ApiExample />
         {!apiDocumentationUrl && (
           <Notice>
             The production API documentation URL is not yet confirmed. This page explains

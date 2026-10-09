@@ -71,9 +71,9 @@ test('monitoring concept changes state and does not claim real alerts', async ({
   const buttons = page.locator('.stage-monitor-console__nav');
   await buttons.nth(1).click();
   await expect(buttons.nth(1)).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.getByText('Service A + Service B')).toBeVisible();
+  await expect(page.getByText('443 / HTTPS + 80 / HTTP')).toBeVisible();
   await buttons.nth(2).click();
-  await expect(page.getByText('Inspect host context')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Review a possible change.' })).toBeVisible();
   await expect(page.getByText('NO LIVE ALERTS')).toBeVisible();
 });
 

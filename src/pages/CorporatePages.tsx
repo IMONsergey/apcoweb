@@ -47,7 +47,7 @@ function AboutPage() {
               'Questions and concerns about scanning should have an accessible contact route.',
           },
         ]}
-        variant="grid"
+        variant="split"
       />
       <section className="stage-company section-space">
         <div className="container">
@@ -86,7 +86,7 @@ function ScanningPage() {
           {
             title: 'Opting out.',
             description:
-              'If you own or administer infrastructure and have a scanning concern or an exclusion request, contact the team with the relevant networks and your contact details. No response-time promise is made here.',
+              'If you own or administer infrastructure and have a scanning concern or an exclusion request, contact the team with the relevant networks and your contact details. Include the relevant IP ranges, your role in managing them and the time of the observed traffic.',
           },
           {
             title: 'Questions or concerns.',
@@ -106,7 +106,7 @@ function ScanningPage() {
             className="stage-text-link"
             href={'mailto:' + supportEmail + '?subject=Apcosys%20scanning%20inquiry'}
           >
-            Email the scanning team ↗
+            Email the scanning team
           </a>
         </div>
       </section>
@@ -134,6 +134,15 @@ function ContactForm() {
     const company = String(data.get('company') || '').trim();
     const topic = String(data.get('topic') || '').trim();
     const message = String(data.get('message') || '').trim();
+    if (!name || !message) {
+      setStatus('Enter your name and a message containing more than spaces.');
+      form
+        .querySelector<HTMLInputElement | HTMLTextAreaElement>(
+          !name ? '[name="name"]' : '[name="message"]',
+        )
+        ?.focus();
+      return;
+    }
     const subject = encodeURIComponent('APCOSYS: ' + topic);
     const body = encodeURIComponent(
       [

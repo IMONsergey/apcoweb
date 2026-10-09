@@ -31,6 +31,15 @@ for (const route of siteRoutes) {
             requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
           );
         });
+        // Mount actual lazy canvas/GSAP content before the full-page capture; never mask it.
+        await page.evaluate(async () => {
+          for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight) {
+            scrollTo({ top: y, behavior: 'instant' });
+            await new Promise((resolve) => setTimeout(resolve, 45));
+          }
+          scrollTo({ top: 0, behavior: 'instant' });
+        });
+        await page.waitForTimeout(180);
         const destination = testInfo.outputPath(
           'stage2-real-visual',
           slug(route.path) + '-' + format.name + '-' + theme + '.png',
@@ -51,9 +60,9 @@ for (const route of siteRoutes) {
 test('unmasked search result and product scene details', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'chromium');
   await page.goto('./');
-  const example = page.locator('.search-scene__example');
-  await example.locator('summary').click();
-  await expect(example.locator('.search-scene__example-result')).toBeVisible();
+  const example = page.locator('.search-scene__results');
+  await expect(example).toBeVisible();
+  await example.scrollIntoViewIfNeeded();
   await page.screenshot({ path: testInfo.outputPath('search-example-open.png'), fullPage: true });
   await page.goto('./platform/search-investigation');
   await page.locator('.stage-workbench__step').nth(2).click();

@@ -43,4 +43,3 @@ import './styles/theme.css';
 import './styles/theme-demos.css';
 
 import './styles/stage2.css';
-import './styles/product-evidence.css';

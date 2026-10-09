@@ -35,7 +35,22 @@ export function useBillingDock(
         isEditing(document.activeElement) ||
         keyboardVisible ||
         (viewport?.scale ?? 1) > 1.1;
-      const next = !blocked && box.top < top + height - bottomInset && box.bottom > top + 24;
+      const dock = dockRef.current;
+      const dockHeight = dock?.offsetHeight ?? 100;
+      const dockBottom = dock ? parseFloat(getComputedStyle(dock).bottom) || 12 : 12;
+      const dockTop = top + height - dockHeight - dockBottom;
+      // Hide instantly when the resting dock would cover a plan's price or action.
+      const collision = Array.from(
+        range.querySelectorAll<HTMLElement>(
+          '.plan-price-block, .plan-button, .stage-plan-contact, .comparison-action',
+        ),
+      ).some((element) => {
+        const item = element.getBoundingClientRect();
+        return item.bottom > dockTop - 12 && item.top < top + height - dockBottom + 12;
+      });
+      if (dock) dock.dataset.occluded = String(collision);
+      const next =
+        !blocked && !collision && box.top < top + height - bottomInset && box.bottom > top + 24;
       setEligible((previous) => (previous === next ? previous : next));
     };
     const schedule = () => {
@@ -77,7 +92,7 @@ export function useBillingDock(
       viewport?.removeEventListener('resize', schedule);
       viewport?.removeEventListener('scroll', schedule);
     };
-  }, [compact, rangeRef]);
+  }, [compact, rangeRef, dockRef]);
 
   useEffect(() => {
     const dock = dockRef.current;

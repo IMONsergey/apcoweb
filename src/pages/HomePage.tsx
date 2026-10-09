@@ -1,3 +1,9 @@
+import {
+  SearchableSection,
+  HomeUseCases,
+  CapabilitiesSection,
+  SecurityTeamsCTA,
+} from '../components/sections/HomeProductSections';
 import { Hero } from '../components/sections/Hero';
 import { SearchPreview } from '../components/sections/SearchPreview';
 import { StepCarousel } from '../components/sections/StepCarousel';
@@ -14,11 +20,15 @@ export default function HomePage() {
     <>
       <Hero />
       <SearchPreview />
+      <SearchableSection />
       <StepCarousel />
+      <HomeUseCases />
+      <CapabilitiesSection />
       <AudienceSection />
       <DataSection />
       <ApiSection />
-      <PricingSection />
+      <PricingSection showTeamBanner={false} />
+      <SecurityTeamsCTA />
       <div className="lower-scene">
         <Visual kind="waves" />
         <FAQSection />

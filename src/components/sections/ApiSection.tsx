@@ -1,10 +1,10 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
-import { productUrl } from '../../content/site';
+import { siteHref } from '../../app/router';
 import { DoubleButton } from '../ui/DoubleButton';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
-import { ApiIllustration } from '../visuals/ApiIllustration';
+import { ApiExample } from '../stage2/ApiExample';
 export function ApiSection() {
   const { t } = useLocale();
   return (
@@ -25,12 +25,12 @@ export function ApiSection() {
               )}
             </LocaleText>
           </p>
-          <DoubleButton variant="inverse" href={`${productUrl}/docs/api`}>
-            <LocaleText>{t('View API Docs')}</LocaleText>
+          <DoubleButton variant="inverse" href={siteHref('/developers/api')}>
+            <LocaleText>{t('Explore API')}</LocaleText>
           </DoubleButton>
         </div>
         <div className="api-visual">
-          <ApiIllustration />
+          <ApiExample compact />
         </div>
       </div>
     </section>

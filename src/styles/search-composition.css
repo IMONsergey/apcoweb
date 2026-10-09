@@ -1,29 +1,95 @@
+/* R21 chrome, canvas and proportions; content now occupies its usable interior. */
+.search-scene {
+  aspect-ratio: auto;
+  min-height: 650px;
+  padding: 80px 3% 70px 8%;
+}
 .search-scene__content {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 4;
   transform: translate3d(0, var(--search-lift, 0px), 0);
 }
-@media (min-width: 600px) {
-  .search-scene__content {
-    position: absolute;
-    top: 33.2%;
-    left: 28.079%;
-    width: 45.929%;
-    display: flex;
-    flex-direction: column;
-    gap: 2.4cqw;
-    z-index: 4;
-  }
-  .search-scene__heading {
-    position: relative;
-    inset: auto;
-    width: 100%;
-  }
-  .search-scene__content > .search-form {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    height: max(40px, 5.846cqw);
-    min-height: 40px;
-  }
+.search-scene__heading {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  text-align: left;
+}
+.search-scene__heading h2 {
+  font-size: clamp(22px, 2.82cqw, 34px);
+}
+.search-scene__content > .search-form {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 54px;
+  min-height: 44px;
+  z-index: 4;
+}
+.search-scene__results {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--surface-card);
+  overflow: hidden;
+}
+.search-scene__results .product-evidence__bar {
+  display: none;
+}
+.search-scene__results .product-evidence__query {
+  padding: 14px 18px;
+}
+.search-scene__results .product-evidence__query strong {
+  font-size: 16px;
+}
+.search-scene__results .product-evidence__details {
+  padding-bottom: 12px;
+}
+.search-scene__results .product-evidence__meta {
+  margin-bottom: 16px;
+}
+.search-scene__results .product-evidence__services {
+  margin-top: 16px;
+}
+.search-scene__results .product-evidence__services > div {
+  padding: 12px 0;
+}
+.search-examples {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  color: var(--text-muted);
+  font: 400 12px/1.5 var(--font-sans);
+}
+.search-examples button {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  padding: 8px 0;
+  color: var(--text-primary);
+  min-height: 32px;
+  font-size: 13px;
+}
+.search-examples button[aria-pressed='true'] {
+  color: var(--accent-text);
+  border-bottom-color: var(--accent-text);
+}
+.search-scene__demo-note {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.search-scene__demo-note a {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  display: inline-block;
+  padding-block: 6px;
 }
 .search-free-note {
   right: 0;
@@ -55,8 +121,74 @@
     backdrop-filter: blur(0);
   }
 }
-
-/* Keep the complete interface and its quiet stacked layers within the content grid. */
+@media (max-width: 1199px) {
+  .search-scene {
+    width: 88%;
+    padding-top: 65px;
+  }
+  .search-scene__content {
+    gap: 24px;
+  }
+  .search-scene__content > .search-form {
+    margin-bottom: 8px;
+  }
+}
+@media (max-width: 599px) {
+  .search-scene {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 112px 14px 50px;
+    aspect-ratio: auto;
+  }
+  .search-scene__content {
+    display: flex;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    gap: 22px;
+  }
+  .search-scene__heading {
+    display: block;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    text-align: left;
+  }
+  .search-scene__heading h2 {
+    font-size: 26px;
+  }
+  .search-scene__content > .search-form {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 52px;
+    margin-bottom: 8px;
+  }
+  .search-examples {
+    gap: 4px 20px;
+  }
+  .search-examples > span {
+    width: 100%;
+  }
+  .search-scene__results .product-evidence__query {
+    padding: 14px;
+  }
+  .search-scene__results .product-evidence__eyebrow {
+    padding-inline: 14px;
+  }
+  .search-scene__results .product-evidence__result {
+    padding: 16px 14px;
+  }
+  .search-scene__results .product-evidence__details h3,
+  .search-scene__results .product-evidence__meta,
+  .search-scene__results .product-evidence__services {
+    margin-inline: 14px;
+  }
+  .search-scene__demo-note {
+    font-size: 12px;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .search-scene__content {
     transform: none;

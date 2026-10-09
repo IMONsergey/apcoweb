@@ -1,5 +1,4 @@
 import { siteHref } from '../../app/router';
-import { productUrl } from '../../config/site';
 
 export function TeamOperations() {
   const process = [
@@ -70,8 +69,8 @@ export function TeamOperations() {
             </div>
           </div>
           <div className="stage-team-operations__actions">
-            <a href={siteHref('/pricing')}>Compare Business ↗</a>
-            <a href={productUrl + '/docs/api'}>API documentation ↗</a>
+            <a href={siteHref('/pricing')}>Compare Business</a>
+            <a href={siteHref('/developers/api')}>API integration</a>
           </div>
         </div>
       </div>

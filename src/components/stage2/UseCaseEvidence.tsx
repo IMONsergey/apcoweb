@@ -20,7 +20,7 @@ const journeys: Record<'scope' | 'technology' | 'indicator', Journey> = {
     introduction:
       'Follow one permitted starting point through candidate infrastructure to a responsible testing decision.',
     scenario: 'domain',
-    start: 'A domain explicitly listed by a programme as in scope.',
+    start: 'example.com — a reserved stand-in for a domain explicitly permitted by a programme.',
     query: 'Search that permitted domain using the currently supported query format.',
     result: 'Inspect the host, ports and service context of candidate results.',
     next: 'Verify each selected host against the programme rules before interacting with it.',
@@ -33,8 +33,9 @@ const journeys: Record<'scope' | 'technology' | 'indicator', Journey> = {
     introduction:
       'Move from a technology observation to candidate hosts, then separate potential CVE associations from validated vulnerabilities.',
     scenario: 'technology',
-    start: 'A product and version discussed in a security advisory.',
-    query: 'Use only product and version filters actually supported by the live search.',
+    start: 'nginx 1.24.0, used here as a synthetic technology lead.',
+    query:
+      'Research input: nginx 1.24.0. Translate it into the supported product/version query syntax.',
     result: 'Compare observed host services, detection evidence and any associated CVE context.',
     next: 'Open a host, check observation age, patch backports and configuration before drawing conclusions.',
     caveat:
@@ -90,7 +91,6 @@ function EvidenceJourney({ kind }: { kind: keyof typeof journeys }) {
               : kind === 'technology'
                 ? 'Search by technology'
                 : 'Look up an IP or domain'}{' '}
-            <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>

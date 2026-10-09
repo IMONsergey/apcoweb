@@ -111,8 +111,8 @@ function TeamPage() {
       description="Bring internet-facing infrastructure observations into technical research, security evaluation and existing team workflows."
       links={[primaryContact, linkTo('View Business Plan', '/pricing', true)]}
     >
-      <TeamOperations />
       <InvestigationWorkbench story="team" />
+      <TeamOperations />
     </PageFrame>
   );
 }
@@ -146,15 +146,22 @@ export default function ResearchPages({ path }: { path: string }) {
       ) : (
         <IndicatorEvidence />
       )}
-      <StorySections items={config.items} variant="timeline" />
+      <StorySections items={config.items.slice(2)} variant="timeline" />
       <section className="stage-case-bottom">
         <div className="container">
+          <p className="stage-case-plan-line">
+            {path === '/use-cases/vulnerability-research'
+              ? 'CVE context is listed from Plus in the approved plan preview.'
+              : path === '/use-cases/bug-bounty'
+                ? 'Start free. Compare plans when your research needs more credits, filters or API access.'
+                : 'Use API access on eligible plans for repeat lookups in your own workflow.'}
+          </p>
           <Notice>
             Only investigate assets you own or are explicitly authorised to assess. A search result
             does not grant testing permission or establish attribution.
           </Notice>
           <a className="stage-text-link" href={siteHref('/platform/search-investigation')}>
-            Explore Search & Investigation →
+            Explore Search & Investigation
           </a>
         </div>
       </section>

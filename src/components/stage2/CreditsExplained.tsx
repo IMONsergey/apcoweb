@@ -17,7 +17,7 @@ const questions = [
   {
     label: 'Upgrade or buy more?',
     answer:
-      'Upgrade when you need different capabilities, limits or team access. Additional Search Tokens may provide capacity where supported. Exhaustion, rollover, expiry and compatibility rules need confirmation at checkout.',
+      'Upgrade for capabilities or team access; consider a package when you only need more search capacity. The balance-exhaustion behaviour, package compatibility, expiry and rollover are not yet verified. Confirm these before purchasing.',
   },
 ] as const;
 
@@ -33,7 +33,7 @@ export function CreditsExplained() {
             capacity.
           </p>
           <a className="stage-text-link" href="#search-token-packages">
-            See Search Token packages ↗
+            See Search Token packages
           </a>
         </div>
         <div className="stage-usage-guide__questions">

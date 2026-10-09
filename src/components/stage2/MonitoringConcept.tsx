@@ -1,76 +1,57 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { siteHref } from '../../app/router';
-
-const assets = [
-  {
-    name: 'Example domain',
-    target: 'example.com',
-    type: 'DOMAIN',
-    observations: 'Sample host context',
-    services: ['Service A', 'Service B'],
-  },
-  {
-    name: 'Example host',
-    target: '198.51.100.24',
-    type: 'IPV4 · TEST-NET-2',
-    observations: 'Sample service context',
-    services: ['Service A', 'Service C'],
-  },
-] as const;
-
+import { demoHosts } from '../../content/product-demo';
+import { ProductEvidence } from './ProductEvidence';
 const views = [
   {
     id: 'scope',
-    label: '01 / Scope',
+    label: 'Scope',
     headline: 'Choose what to observe.',
     detail:
-      'A future monitoring workflow could begin with an authorised set of domains or IP addresses. This screen does not schedule a scan.',
-    left: ['Research scope', 'Illustrative only'],
-    right: ['State', 'Concept only'],
+      'Begin with infrastructure you own or are authorised to assess. Select an example target below.',
   },
   {
     id: 'observations',
-    label: '02 / Observe',
+    label: 'Observe',
     headline: 'Compare recorded observations.',
-    detail:
-      'Service A and Service B illustrate a difference between two sample snapshots. They do not describe the selected host.',
-    left: ['Earlier observation', 'Service A'],
-    right: ['Later observation', 'Service A + Service B'],
+    detail: 'Two authored snapshots show how a service difference can become a research lead.',
   },
   {
     id: 'change',
-    label: '03 / Signal',
+    label: 'Signal',
     headline: 'Review a possible change.',
     detail:
-      'An additional service might be a useful research lead. An apparent difference does not prove a new exposure or a real incident.',
-    left: ['Example signal', 'Possible service change'],
-    right: ['Next action', 'Inspect host context'],
+      'A service appearing in a later snapshot deserves investigation. A difference alone does not prove an incident.',
   },
   {
     id: 'context',
-    label: '04 / Context',
+    label: 'Context',
     headline: 'Inspect the technical evidence.',
-    detail:
-      'Review services, technology context and observation dates before determining whether a change has meaning.',
-    left: ['Host evidence', 'Sample service attributes'],
-    right: ['CVE context', 'Unverified association'],
+    detail: 'Read the service response and detected technology before interpreting a signal.',
   },
   {
     id: 'investigate',
-    label: '05 / Investigate',
-    headline: 'Continue in Search & Investigation.',
-    detail:
-      'A future signal would hand off to the actual search and host investigation experience rather than claiming an alert is a finding.',
-    left: ['Research lead', 'Selected example asset'],
-    right: ['Destination', 'Search & Investigation'],
+    label: 'Investigate',
+    headline: 'Continue the investigation.',
+    detail: 'Carry the selected host into Search & Investigation and validate the observation.',
   },
-] as const;
-
+];
 export function MonitoringConcept() {
   const [current, setCurrent] = useState(0);
   const [assetIndex, setAssetIndex] = useState(0);
-  const view = views[current] ?? views[0];
-  const asset = assets[assetIndex] ?? assets[0];
+  const nav = useRef<HTMLDivElement>(null);
+  const view = views[current]!;
+  const asset = demoHosts[assetIndex]!;
+  const service = asset.services[1]!;
+  useEffect(() => {
+    const el = nav.current;
+    const active = el?.querySelector<HTMLElement>('[aria-pressed="true"]');
+    if (!el || !active || el.scrollWidth <= el.clientWidth) return;
+    const a = active.getBoundingClientRect(),
+      n = el.getBoundingClientRect();
+    if (a.right > n.right) el.scrollLeft += a.right - n.right;
+    else if (a.left < n.left) el.scrollLeft -= n.left - a.left;
+  }, [current]);
   return (
     <section
       className="stage-monitor-concept section-space"
@@ -83,8 +64,8 @@ export function MonitoringConcept() {
             <h2 id="monitor-concept-title">An observation is a starting point.</h2>
           </div>
           <p>
-            Select an example asset and move through a potential monitoring workflow. These are
-            interactive sample states, not live scans, alerts or product records.
+            Explore a potential monitoring workflow with synthetic snapshots. This concept does not
+            connect to live scans or alerts.
           </p>
         </div>
         <div className="stage-monitor-console">
@@ -92,10 +73,10 @@ export function MonitoringConcept() {
             <strong>
               APCOSYS <span>/ MONITORING CONCEPT</span>
             </strong>
-            <span>DEMONSTRATION / OFFLINE</span>
+            <span>SYNTHETIC DEMONSTRATION</span>
           </div>
           <div className="stage-monitor-console__body">
-            <div className="stage-monitor-console__sidebar">
+            <div className="stage-monitor-console__sidebar" ref={nav}>
               <p className="stage-monitor-console__label">WORKFLOW</p>
               {views.map((item, i) => (
                 <button
@@ -105,17 +86,16 @@ export function MonitoringConcept() {
                   aria-pressed={i === current}
                   className="stage-monitor-console__nav"
                 >
-                  <span>{item.label}</span>
-                  <span aria-hidden="true">↗</span>
+                  0{i + 1} / {item.label}
                 </button>
               ))}
-              <div className="stage-monitor-console__sidebar-footer">
-                No live monitoring connection
-              </div>
+              <p className="stage-monitor-console__sidebar-footer">
+                Concept only · availability to be confirmed
+              </p>
             </div>
             <div className="stage-monitor-console__main">
               <div className="stage-monitor-console__overline">
-                <span>CONCEPT / {view.id.toUpperCase()}</span>
+                <span>{view.label.toUpperCase()}</span>
                 <span>0{current + 1} / 05</span>
               </div>
               <h3>{view.headline}</h3>
@@ -126,66 +106,81 @@ export function MonitoringConcept() {
                   <span>SELECT AN EXAMPLE</span>
                 </div>
                 <div className="stage-monitor-assets__list">
-                  {assets.map((item, index) => (
+                  {demoHosts.map((host, i) => (
                     <button
-                      key={item.target}
                       type="button"
-                      aria-pressed={index === assetIndex}
-                      onClick={() => setAssetIndex(index)}
+                      key={host.ip}
+                      aria-pressed={assetIndex === i}
+                      onClick={() => setAssetIndex(i)}
                     >
                       <span>
-                        <strong>{item.name}</strong>
-                        <small>{item.target}</small>
+                        <strong>{host.role}</strong>
+                        <small>{host.ip}</small>
                       </span>
-                      <span aria-hidden="true">{index === assetIndex ? '●' : '○'}</span>
+                      <span>{assetIndex === i ? 'Selected' : 'Select'}</span>
                     </button>
                   ))}
                 </div>
                 <div className="stage-monitor-assets__details" aria-live="polite">
-                  <span>SELECTED / {asset.type}</span>
-                  <strong>{asset.target}</strong>
+                  <span>SELECTED / DOCUMENTATION ADDRESS</span>
+                  <strong>{asset.ip}</strong>
                   <div>
-                    <span>Illustrative services</span>
-                    <span>{asset.services.join(' · ')}</span>
+                    <span>Hostname</span>
+                    <span>{asset.hostname}</span>
                   </div>
                   <div>
-                    <span>Last observed</span>
-                    <span>Not supplied</span>
+                    <span>Snapshot source</span>
+                    <span>Authored concept · no scan date</span>
                   </div>
                 </div>
               </div>
-              <div className="stage-monitor-console__summary">
-                <div>
-                  <span>{view.left[0]}</span>
-                  <strong>{view.left[1]}</strong>
-                </div>
-                <span className="stage-monitor-console__arrow" aria-hidden="true">
-                  →
-                </span>
-                <div>
-                  <span>{view.right[0]}</span>
-                  <strong>{view.right[1]}</strong>
-                </div>
-              </div>
-              <div className="stage-monitor-console__ledger">
-                {views.map((step, index) => (
-                  <div key={step.id}>
-                    <span>0{index + 1}</span>
-                    <strong>{step.label.slice(5)}</strong>
-                    <span>{index === current ? 'Reviewing' : 'Illustrative'}</span>
+              {current <= 2 ? (
+                <div className="stage-monitor-console__summary" aria-live="polite">
+                  <div>
+                    <span>{current === 0 ? 'Authorised scope' : 'Snapshot A / earlier'}</span>
+                    <strong>{current === 0 ? asset.hostname : '443 / HTTPS'}</strong>
+                    <p>
+                      {current === 0
+                        ? 'Confirm permission before observing.'
+                        : 'nginx 1.24.0 · HTTP Server header'}
+                    </p>
                   </div>
-                ))}
-              </div>
+                  <div>
+                    <span>{current === 0 ? 'Objects to review' : 'Snapshot B / later'}</span>
+                    <strong>
+                      {current === 0
+                        ? asset.services.length + ' service records'
+                        : '443 / HTTPS + ' + service.port + ' / ' + service.protocol}
+                    </strong>
+                    <p>
+                      {current === 0 ? asset.role : 'Added in this example: ' + service.technology}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <ProductEvidence
+                  scenario="domain"
+                  mode={current === 3 ? 'services' : 'continue'}
+                  selectedHost={assetIndex}
+                  onSelectHost={setAssetIndex}
+                  compact
+                  embedded
+                />
+              )}
               <a
                 className="stage-monitor-console__link"
-                href={siteHref('/platform/search-investigation')}
+                href={
+                  siteHref('/platform/search-investigation') +
+                  '?demoHost=' +
+                  encodeURIComponent(asset.ip)
+                }
               >
-                Explore Search & Investigation ↗
+                Explore Search & Investigation
               </a>
             </div>
           </div>
           <div className="stage-monitor-console__footer">
-            STATIC PRODUCT CONCEPT · NOT A MONITORING BACKEND · NO LIVE ALERTS
+            MONITORING CONCEPT · NO LIVE ALERTS · SYNTHETIC SERVICE RECORDS
           </div>
         </div>
       </div>

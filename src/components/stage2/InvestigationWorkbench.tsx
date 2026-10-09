@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import { researchSteps } from '../../content/site';
-import { StepIllustration } from '../visuals/StepIllustration';
+import { useState, useRef, useEffect } from 'react';
 import { productUrl } from '../../config/site';
 import { siteHref } from '../../app/router';
 import { ProductEvidence, type EvidenceMode, type EvidenceScenario } from './ProductEvidence';
@@ -55,7 +53,7 @@ const stories = {
     heading: 'Technology signals need verification.',
     context:
       'A conceptual product walkthrough: detected technology, matching hosts and potential vulnerability context.',
-    query: 'Technology / version',
+    query: 'nginx 1.24.0',
     captions: [
       'Choose a technology',
       'Review matching hosts',
@@ -118,7 +116,19 @@ const stories = {
 export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) {
   const [selected, setSelected] = useState(0);
   const data = stories[story];
-  const step = researchSteps[selected] ?? researchSteps[0];
+  const [hostIndex, setHostIndex] = useState(() =>
+    new URLSearchParams(window.location.search).get('demoHost') === '203.0.113.42' ? 1 : 0,
+  );
+  const stepsRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const nav = stepsRef.current;
+    const active = nav?.querySelector<HTMLElement>('[aria-selected="true"]');
+    if (!nav || !active || nav.scrollWidth <= nav.clientWidth) return;
+    const box = active.getBoundingClientRect();
+    const frame = nav.getBoundingClientRect();
+    if (box.left < frame.left) nav.scrollLeft -= frame.left - box.left;
+    else if (box.right > frame.right) nav.scrollLeft += box.right - frame.right;
+  }, [selected]);
   return (
     <section
       className={'stage-workbench stage-workbench--' + story + ' section-space'}
@@ -134,6 +144,7 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
         </div>
         <div className="stage-workbench__stage">
           <nav
+            ref={stepsRef}
             className="stage-workbench__steps"
             role="tablist"
             aria-label="Investigation workflow steps"
@@ -146,12 +157,30 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
                 className="stage-workbench__step"
                 role="tab"
                 aria-selected={selected === index}
+                tabIndex={selected === index ? 0 : -1}
+                onKeyDown={(event) => {
+                  const keys = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'];
+                  if (!keys.includes(event.key)) return;
+                  event.preventDefault();
+                  const next =
+                    event.key === 'Home'
+                      ? 0
+                      : event.key === 'End'
+                        ? 4
+                        : (index +
+                            (event.key === 'ArrowRight' || event.key === 'ArrowDown' ? 1 : 4)) %
+                          5;
+                  setSelected(next);
+                  const nextButton = stepsRef.current
+                    ?.querySelectorAll<HTMLButtonElement>('button')
+                    .item(next);
+                  nextButton?.focus({ preventScroll: true });
+                }}
                 aria-controls={'stage-panel-' + story}
                 onClick={() => setSelected(index)}
               >
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <strong>{label}</strong>
-                <span aria-hidden="true">↗</span>
               </button>
             ))}
           </nav>
@@ -166,33 +195,26 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
               <span>
                 <i aria-hidden="true" /> APCOSYS / RESEARCH
               </span>
-              <span>ILLUSTRATIVE INTERFACE</span>
+              <span>SYNTHETIC DEMO</span>
             </div>
             <div className="stage-workbench__illustration">
-              {selected === 0 || selected === 4 ? (
-                <StepIllustration
-                  key={selected}
-                  scene={step.scene}
-                  image={step.image}
-                  alt={step.alt}
-                />
-              ) : (
-                <ProductEvidence
-                  key={story + selected}
-                  compact
-                  mode={
-                    (['results', 'results', 'host', 'cve', 'host'][selected] ??
-                      'host') as EvidenceMode
-                  }
-                  scenario={
-                    (story === 'vulnerability'
-                      ? 'technology'
-                      : story === 'osint' || story === 'team'
-                        ? 'indicator'
-                        : 'domain') as EvidenceScenario
-                  }
-                />
-              )}
+              <ProductEvidence
+                compact
+                embedded
+                selectedHost={hostIndex}
+                onSelectHost={setHostIndex}
+                mode={
+                  (['query', 'results', 'host', 'cve', 'continue'][selected] ??
+                    'host') as EvidenceMode
+                }
+                scenario={
+                  (story === 'vulnerability'
+                    ? 'technology'
+                    : story === 'osint' || story === 'team'
+                      ? 'indicator'
+                      : 'domain') as EvidenceScenario
+                }
+              />
             </div>
             <div className="stage-workbench__insight">
               <div>
@@ -214,8 +236,8 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
             screens demonstrate the intended investigation sequence.
           </p>
           <div>
-            <a href={productUrl + '/search'}>Try Search ↗</a>
-            <a href={siteHref('/platform/data-methodology')}>Data & Methodology ↗</a>
+            <a href={productUrl + '/search'}>Try Search</a>
+            <a href={siteHref('/platform/data-methodology')}>Data & Methodology</a>
           </div>
         </div>
       </div>

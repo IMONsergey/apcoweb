@@ -6,7 +6,7 @@ import { Visual } from '../visuals/Visual';
 export function AudienceSection() {
   const { t } = useLocale();
   return (
-    <section id="use-cases" className="audiences section-space" aria-labelledby="audiences-title">
+    <section id="audiences" className="audiences section-space" aria-labelledby="audiences-title">
       <div className="container">
         <h2 id="audiences-title">
           <LocaleText>{t('For security researchers')}</LocaleText>
@@ -33,13 +33,19 @@ export function AudienceSection() {
               </p>
               <ul className="use-case-tags">
                 <li>
-                  <LocaleText>{t('Bug Bounty')}</LocaleText>
+                  <a href={siteHref('/use-cases/bug-bounty')}>
+                    <LocaleText>{t('Bug Bounty')}</LocaleText>
+                  </a>
                 </li>
                 <li>
-                  <LocaleText>{t('Vulnerability Research')}</LocaleText>
+                  <a href={siteHref('/use-cases/vulnerability-research')}>
+                    <LocaleText>{t('Vulnerability Research')}</LocaleText>
+                  </a>
                 </li>
                 <li>
-                  <LocaleText>{t('OSINT / Threat Investigation')}</LocaleText>
+                  <a href={siteHref('/use-cases/osint-threat-investigation')}>
+                    <LocaleText>{t('OSINT / Threat Investigation')}</LocaleText>
+                  </a>
                 </li>
               </ul>
             </div>

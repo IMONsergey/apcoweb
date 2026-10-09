@@ -12,7 +12,7 @@ import { BillingSwitch } from '../ui/BillingSwitch';
 import { AnimatedPrice } from '../ui/AnimatedPrice';
 import { calculatePrice, formatPrice, type BillingPeriod } from '../../content/pricing';
 type Plan = (typeof plans)[number];
-export function PricingSection() {
+export function PricingSection({ showTeamBanner = true }: { showTeamBanner?: boolean }) {
   const { t } = useLocale();
   const [compare, setCompare] = useState(false);
   const rangeRef = useRef<HTMLDivElement>(null);
@@ -117,7 +117,7 @@ export function PricingSection() {
                 )}
                 {plan.id === 'business' && (
                   <a className="stage-plan-contact" href={siteHref('/contact')}>
-                    Talk to Us →
+                    Talk to Us
                   </a>
                 )}
               </article>
@@ -135,20 +135,22 @@ export function PricingSection() {
             </DoubleButton>
           </div>
         </div>
-        <div className="contact-banner">
-          <Visual kind="dots" direction="left-to-right" />
-          <div>
-            <h3>
-              <LocaleText>{t('Have specific organisational requirements?')}</LocaleText>
-            </h3>
-            <p>
-              <LocaleText>{t('Tell us about your data, API or procurement needs.')}</LocaleText>
-            </p>
+        {showTeamBanner && (
+          <div className="contact-banner">
+            <Visual kind="dots" direction="left-to-right" />
+            <div>
+              <h3>
+                <LocaleText>{t('Have specific organisational requirements?')}</LocaleText>
+              </h3>
+              <p>
+                <LocaleText>{t('Tell us about your data, API or procurement needs.')}</LocaleText>
+              </p>
+            </div>
+            <DoubleButton variant="inverse" href={siteHref('/contact')}>
+              <LocaleText>{t('Talk to Us')}</LocaleText>
+            </DoubleButton>
           </div>
-          <DoubleButton variant="inverse" href={siteHref('/contact')}>
-            <LocaleText>{t('Talk to Us')}</LocaleText>
-          </DoubleButton>
-        </div>
+        )}
       </div>
 
       <Modal

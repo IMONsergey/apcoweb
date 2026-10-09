@@ -79,7 +79,7 @@ export function PageFrame({
             <div className="stage-related__links">
               {links.map(({ label, href }) => (
                 <a href={href} key={href + label}>
-                  {label} <span aria-hidden="true">↗</span>
+                  {label}
                 </a>
               ))}
             </div>
