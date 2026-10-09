@@ -25,16 +25,6 @@ export function SearchForm({ className = '' }: { className?: string }) {
     return () => window.removeEventListener('pageshow', restore);
   }, []);
   const [error, setError] = useState(false);
-  useEffect(() => {
-    const applyExample = (event: Event) => {
-      if (!(event instanceof CustomEvent) || typeof event.detail !== 'string') return;
-      setQuery(event.detail);
-      setError(false);
-      input.current?.focus({ preventScroll: true });
-    };
-    window.addEventListener('apcosys:example-query', applyExample);
-    return () => window.removeEventListener('apcosys:example-query', applyExample);
-  }, []);
   const [query, setQuery] = useState('');
   function submit(event: FormEvent<HTMLFormElement>) {
     const normalized = query.trim();
@@ -136,10 +126,7 @@ export function SearchPreview() {
   const { t } = useLocale();
   const scene = useSearchEntrance();
   return (
-    <section
-      className="search-preview"
-      aria-label={t('Illustrative APCOSYS product search interface')}
-    >
+    <section className="search-preview" aria-label={t('Try APCOSYS public search')}>
       <Visual kind="flow" eager onReady={flowReady} />
       <Visual kind="dots" eager onReady={dotsReady} />
       <div className="summary-wrap">
@@ -166,13 +153,7 @@ export function SearchPreview() {
                 </span>
               </h2>
             </div>
-            <div
-              className="stage-preview-query"
-              aria-label="Illustrative interface, search example"
-            >
-              <span>example.com</span>
-              <span aria-hidden="true">↗</span>
-            </div>
+            <SearchForm />
           </div>
         </div>
       </div>
