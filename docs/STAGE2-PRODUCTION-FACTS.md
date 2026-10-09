@@ -41,18 +41,18 @@ illustrative request/response snippets as live documentation.
 
 The Stage 2 client review uses a shared `ProductEvidence` component for Search Results, Host Details, Services & Technologies and CVE Context. Its sample addresses are from documentation-only ranges and **its listed services are fictional illustrative records**, not a scan or live product output.
 
-| Design slot | Implemented experience | Required to switch to approved real content |
-| --- | --- | --- |
-| R21 SearchPreview | Expandable single-result example embedded within the original chrome; one real search form retained | One permitted guest-search query, sanitised result and host evidence, actual age/timestamp |
-| Search & Investigation | Five-step, selectable results/host/context interface with a shared illustrative evidence record | Approved result, host schema, supported query filters, screen/copy rights |
-| Bug Bounty | Starting point → query → result → next step, plus scope-vetting host scene | Authorised demonstration scope and representative result, excluding real client assets |
-| Vulnerability Research | Technology/version → matching examples → host → potential CVE context | Confirmed filter grammar, technology/version sample, safe CVE association and applicability notes |
-| OSINT | Example indicator → host evidence → next research lead | Approved unclassified indicator and observations with attribution restrictions |
-| Monitoring | Five selectable concept stages and two documentation-only asset examples | Actual availability roadmap, scan diff semantics, real display fields, approval to market |
-| Data & Methodology | Observation and potential CVE context integrated into host UI | Approved field definitions, dates, provenance, detection methodology |
-| Pricing | Credits/Search Tokens explainer before comparison, package display unchanged | Token:credit relationship, action costs, API deductions, exhaustion state, rollover, expiry and plan compatibility |
-| Developers / API | Request scaffold, copy, response tab and authentication guidance | Sanitised working endpoint/method/auth/payload/response, official docs destination |
-| Contact | Native mailto draft and explicit delivery notice | Owned backend/service, lawful storage/consent and error handling |
+| Design slot            | Implemented experience                                                                              | Required to switch to approved real content                                                                        |
+| ---------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| R21 SearchPreview      | Expandable single-result example embedded within the original chrome; one real search form retained | One permitted guest-search query, sanitised result and host evidence, actual age/timestamp                         |
+| Search & Investigation | Five-step, selectable results/host/context interface with a shared illustrative evidence record     | Approved result, host schema, supported query filters, screen/copy rights                                          |
+| Bug Bounty             | Starting point → query → result → next step, plus scope-vetting host scene                          | Authorised demonstration scope and representative result, excluding real client assets                             |
+| Vulnerability Research | Technology/version → matching examples → host → potential CVE context                               | Confirmed filter grammar, technology/version sample, safe CVE association and applicability notes                  |
+| OSINT                  | Example indicator → host evidence → next research lead                                              | Approved unclassified indicator and observations with attribution restrictions                                     |
+| Monitoring             | Five selectable concept stages and two documentation-only asset examples                            | Actual availability roadmap, scan diff semantics, real display fields, approval to market                          |
+| Data & Methodology     | Observation and potential CVE context integrated into host UI                                       | Approved field definitions, dates, provenance, detection methodology                                               |
+| Pricing                | Credits/Search Tokens explainer before comparison, package display unchanged                        | Token:credit relationship, action costs, API deductions, exhaustion state, rollover, expiry and plan compatibility |
+| Developers / API       | Request scaffold, copy, response tab and authentication guidance                                    | Sanitised working endpoint/method/auth/payload/response, official docs destination                                 |
+| Contact                | Native mailto draft and explicit delivery notice                                                    | Owned backend/service, lawful storage/consent and error handling                                                   |
 
 ### Verification ownership
 
