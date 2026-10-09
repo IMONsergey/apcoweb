@@ -2,6 +2,8 @@ import { LocaleText } from '../i18n/LocaleText';
 import { useLocale } from '../i18n/context';
 import { footerGroups, supportEmail } from '../content/site';
 import { Logo } from './ui/Logo';
+import { siteHref } from '../app/router';
+import { CookiePreferences } from './ui/CookiePreferences';
 export function Footer() {
   const { t } = useLocale();
   return (
@@ -16,7 +18,7 @@ export function Footer() {
               <ul>
                 {group.links.map(([label, href]) => (
                   <li key={label}>
-                    <a href={href}>
+                    <a href={href.startsWith('/') ? siteHref(href) : href}>
                       <LocaleText>{t(label)}</LocaleText>
                     </a>
                   </li>
@@ -26,10 +28,11 @@ export function Footer() {
           ))}
         </nav>
         <div className="footer-bottom">
-          <a className="footer-brand" href="#top" aria-label={t('APCOSYS home')}>
+          <a className="footer-brand" href={siteHref('/')} aria-label={t('APCOSYS home')}>
             <Logo className="footer-logo" />
           </a>
           <div className="footer-meta">
+            <CookiePreferences />
             <p>
               ©{'\u00a0'}APCOSYS{'\u00a0'}
               {new Date().getFullYear()} ·{' '}

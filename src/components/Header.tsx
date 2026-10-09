@@ -2,6 +2,8 @@ import { LocaleText } from '../i18n/LocaleText';
 import { useLocale } from '../i18n/context';
 import { useEffect, useRef, useState } from 'react';
 import { navigation, productUrl } from '../content/site';
+import { siteHref } from '../app/router';
+import { signInUrl } from '../config/site';
 import { DoubleButton } from './ui/DoubleButton';
 import { Icon } from './ui/Icon';
 import { Modal } from './ui/Modal';
@@ -56,7 +58,7 @@ export function Header() {
         inert={hidden}
       >
         <div className="container header-row">
-          <a ref={brand} className="brand" href="#top" aria-label={t('APCOSYS home')}>
+          <a ref={brand} className="brand" href={siteHref('/')} aria-label={t('APCOSYS home')}>
             <Logo />
           </a>
           <nav className="desktop-nav" aria-label={t('Main navigation')}>
@@ -120,7 +122,7 @@ export function Header() {
                     <a
                       className={index === 0 ? 'nav-panel__default' : undefined}
                       key={item.label}
-                      href={item.href}
+                      href={item.href.startsWith('/') ? siteHref(item.href) : item.href}
                       onClick={() => setActive(null)}
                     >
                       <LocaleText>{t(item.label)}</LocaleText>
@@ -129,7 +131,8 @@ export function Header() {
                 </div>
               </div>
             ))}
-            <a className="nav-link nav-trigger" href="#pricing">
+            <a className="nav-link nav-trigger" href={siteHref('/teams')}>For Teams</a>
+            <a className="nav-link nav-trigger" href={siteHref('/pricing')}>
               <LocaleText>{t('Pricing')}</LocaleText>
             </a>
           </nav>
@@ -142,11 +145,11 @@ export function Header() {
               open={active === 'language'}
               onOpenChange={(open) => setActive(open ? 'language' : null)}
             />
-            <a href={`${productUrl}/search`} className="plain-button header-signin">
+            <a href={signInUrl} className="plain-button header-signin">
               <LocaleText>{t('Sign In')}</LocaleText>
             </a>
-            <DoubleButton href={`${productUrl}/register`} compact className="header-signup">
-              <LocaleText>{t('Create free account')}</LocaleText>
+            <DoubleButton href={`${productUrl}/search`} compact className="header-signup">
+              <LocaleText>{t('Try Search')}</LocaleText>
             </DoubleButton>
             <button
               className="icon-button menu-toggle"
@@ -177,21 +180,22 @@ export function Header() {
                 <LocaleText>{t(group.label)}</LocaleText>
               </p>
               {group.items.map((item) => (
-                <a key={item.label} href={item.href} onClick={() => setMobileOpen(false)}>
+                <a key={item.label} href={item.href.startsWith('/') ? siteHref(item.href) : item.href} onClick={() => setMobileOpen(false)}>
                   <LocaleText>{t(item.label)}</LocaleText>
                   <Icon name="arrow" />
                 </a>
               ))}
             </div>
           ))}
-          <a className="mobile-pricing" href="#pricing" onClick={() => setMobileOpen(false)}>
+          <a className="mobile-pricing" href={siteHref('/teams')} onClick={() => setMobileOpen(false)}>For Teams <Icon name="arrow" /></a>
+          <a className="mobile-pricing" href={siteHref('/pricing')} onClick={() => setMobileOpen(false)}>
             <LocaleText>{t('Pricing')}</LocaleText>
             <Icon name="arrow" />
           </a>
-          <DoubleButton href={`${productUrl}/register`}>
-            <LocaleText>{t('Create free account')}</LocaleText>
+          <DoubleButton href={`${productUrl}/search`}>
+            <LocaleText>{t('Try Search')}</LocaleText>
           </DoubleButton>
-          <a className="plain-button" href={`${productUrl}/search`}>
+          <a className="plain-button" href={signInUrl}>
             <LocaleText>{t('Sign In')}</LocaleText>
           </a>
           <MobileThemeControl />
