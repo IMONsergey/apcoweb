@@ -85,7 +85,9 @@ export function ProductEvidence({
   return (
     <div
       className={'product-evidence' + (compact ? ' product-evidence--compact' : '')}
+      role="region"
       aria-label={data.description}
+      aria-describedby={id}
     >
       <div className="product-evidence__bar">
         <span>
