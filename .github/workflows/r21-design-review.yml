@@ -13,7 +13,31 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  format-docs:
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Normalize source-of-truth status document
+        run: |
+          npx prettier --write docs/STAGE2-PRODUCTION-FACTS.md
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs/STAGE2-PRODUCTION-FACTS.md
+            git commit -m "docs: normalize product fact register"
+            git push origin HEAD:feat/stage2-design-rebuild-r21
+          fi
   review:
+    needs: format-docs
     runs-on: ubuntu-24.04
     timeout-minutes: 55
     steps:
