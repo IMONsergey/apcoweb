@@ -148,3 +148,25 @@ test('reduced motion keeps API and evidence readable without playback', async ({
   await expect(page.locator('.evidence-response')).toContainText('HTTP/1.1 200 OK');
   await expect(page.locator('.evidence-cursor')).toBeHidden();
 });
+
+test('team signal field animates only while visible and respects reduced motion', async ({
+  page,
+}) => {
+  await page.goto('./');
+  const field = page.locator('.team-signal-field');
+  await field.scrollIntoViewIfNeeded();
+  const frame = () => field.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL());
+  const first = await frame();
+  await expect.poll(frame).not.toBe(first);
+  await page.locator('.hero').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(150);
+  const outside = await frame();
+  await page.waitForTimeout(250);
+  expect(await frame()).toBe(outside);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await field.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(150);
+  const still = await frame();
+  await page.waitForTimeout(250);
+  expect(await frame()).toBe(still);
+});

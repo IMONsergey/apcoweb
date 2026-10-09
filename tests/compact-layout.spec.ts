@@ -60,3 +60,17 @@ test('internal pages use distinct compact visual narratives', async ({ page }) =
     await expect(page.locator('main .eyebrow')).toHaveCount(0);
   }
 });
+
+test('data cards are keyboard operable and section actions use the shared button', async ({
+  page,
+}) => {
+  await page.goto('./');
+  const domain = page.locator('.data-map__tile').nth(1);
+  await domain.focus();
+  await domain.press('Enter');
+  await expect(domain).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.data-map__connection')).toContainText('Follow an observed domain');
+  await expect(page.locator('.home-searchable .double-button--primary')).toBeVisible();
+  await expect(page.locator('.step-evidence-note .double-button')).toBeVisible();
+  await expect(page.locator('.capability-notes__tile')).toHaveCount(2);
+});

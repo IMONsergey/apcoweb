@@ -2,7 +2,7 @@ import '../../styles/compact-experience.css';
 import { useState } from 'react';
 import { MorphPanel } from '../ui/MorphPanel';
 import { siteHref } from '../../app/router';
-import { DataLens, SearchFragment, HostFragment } from '../stage2/CompactFragments';
+import { SearchFragment, HostFragment } from '../stage2/CompactFragments';
 import { TeamSignal } from '../stage2/TeamSignal';
 import { DoubleButton } from '../ui/DoubleButton';
 import { demoHosts } from '../../content/product-demo';
@@ -36,8 +36,22 @@ const searchable = [
   },
 ] as const;
 
+const dataSamples = [
+  '198.51.100.24',
+  'portal.example.com',
+  '443 / HTTPS',
+  'nginx 1.24.0',
+  'Version applicability',
+];
+const dataRelations = [
+  'A host brings its domain, exposed services and detected software into one view.',
+  'Follow an observed domain to the host and services behind it.',
+  'A service response supplies the evidence for a technology detection.',
+  'Read the detected product and version alongside the original service evidence.',
+  'A version association is a research lead. Verify applicability before treating it as a finding.',
+];
 export function SearchableSection() {
-  const [selected, setSelected] = useState(2);
+  const [selected, setSelected] = useState(0);
   return (
     <section
       id="what-you-can-search"
@@ -45,44 +59,68 @@ export function SearchableSection() {
       aria-labelledby="searchable-title"
     >
       <div className="container">
-        <div className="home-product-heading">
+        <div className="home-product-heading data-map-heading">
           <h2 id="searchable-title">
             Search the infrastructure <br />
             behind the internet.
           </h2>
-        </div>
-        <div className="home-searchable__layout">
-          <div className="home-searchable__index" role="group" aria-label="Searchable data types">
-            {searchable.map((item, i) => (
-              <button
-                key={item.label}
-                type="button"
-                aria-pressed={selected === i}
-                onClick={() => setSelected(i)}
-              >
-                <span className="home-product-number">0{i + 1}</span>
-                <span>
-                  <strong>{item.label}</strong>
-                  <small>{item.description}</small>
-                </span>
-              </button>
-            ))}
-            <DoubleButton variant="secondary" compact href={siteHref('/platform/data-methodology')}>
-              Explore Data & Methodology
+          <div>
+            <p>
+              Explore the connections between a host, its services and the evidence behind each
+              observation.
+            </p>
+            <DoubleButton compact href={siteHref('/platform/data-methodology')}>
+              Explore Data &amp; Methodology
             </DoubleButton>
           </div>
-          <div className="home-searchable__evidence">
-            <DataLens selected={selected} />
-            <p className="home-product-caption">
-              One host connects the query, service response and detected technology. An association
-              is a lead to verify.
-            </p>
-          </div>
         </div>
+        <div className="data-map" role="group" aria-label="Searchable data types">
+          {searchable.map((item, i) => (
+            <button
+              key={item.label}
+              type="button"
+              className={'data-map__tile data-map__tile--' + i}
+              aria-pressed={selected === i}
+              onClick={() => setSelected(i)}
+            >
+              <span className="data-map__title">
+                <strong>{item.label}</strong>
+                <span aria-hidden="true" className="data-map__indicator" />
+              </span>
+              <span className="data-map__description">{item.description}</span>
+              <span className="data-map__sample">
+                <code>{dataSamples[i]}</code>
+                <span>
+                  {
+                    [
+                      'Host address',
+                      'Observed hostname',
+                      'Service response',
+                      'Detected software',
+                      'Requires verification',
+                    ][i]
+                  }
+                </span>
+              </span>
+            </button>
+          ))}
+        </div>
+        <MorphPanel changeKey={selected}>
+          <div className="data-map__connection" data-morph-enter aria-live="polite">
+            <span className="data-map__path">
+              <span>{['Query', 'Host', 'Host', 'Service', 'Technology'][selected]}</span>
+              <i aria-hidden="true" />
+              <span>{searchable[selected]!.label}</span>
+            </span>
+            <p>{dataRelations[selected]}</p>
+            <small>Illustrative data</small>
+          </div>
+        </MorphPanel>
       </div>
     </section>
   );
 }
+
 const cases = [
   {
     title: 'Bug Bounty',
@@ -160,6 +198,28 @@ export function HomeUseCases() {
     </section>
   );
 }
+const capabilityNotes = [
+  [
+    ['Start with what you know', 'An address, domain or product name.'],
+    ['Follow the result', 'Open a host to inspect its service evidence.'],
+  ],
+  [
+    ['Narrow the view', 'Keep only the protocol relevant to your question.'],
+    ['Keep the context', 'The host and its other observations remain connected.'],
+  ],
+  [
+    ['Read the response', 'Inspect what the service actually returned.'],
+    ['Check the detection', 'Compare the reported product with its evidence.'],
+  ],
+  [
+    ['Collect the leads', 'Keep related hosts in a research shortlist.'],
+    ['Pick up the investigation', 'Return to the observations you need to review.'],
+  ],
+  [
+    ['Use structured data', 'Bring supported observations into your workflow.'],
+    ['Connect your tools', 'Work with the documented request and response format.'],
+  ],
+];
 const capabilities = [
   {
     label: 'Search',
@@ -229,7 +289,7 @@ export function CapabilitiesSection() {
               <h3>{item.title}</h3>
               <p>{item.text}</p>
               <DoubleButton
-                variant="secondary"
+                variant="primary"
                 compact
                 href={siteHref(
                   selected === 4 ? '/developers/api' : '/platform/search-investigation',
@@ -314,6 +374,17 @@ export function CapabilitiesSection() {
                 <HostFragment />
               )}
             </div>
+            <div className="capability-notes">
+              {capabilityNotes[selected]!.map(([title, text], i) => (
+                <div className="capability-notes__tile" key={title}>
+                  <span className="capability-notes__mark" aria-hidden="true">
+                    {i === 0 ? '01' : '02'}
+                  </span>
+                  <h4>{title}</h4>
+                  <p>{text}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </MorphPanel>
       </div>
@@ -326,8 +397,7 @@ export function SecurityTeamsCTA() {
       <div className="container home-team-cta__layout">
         <div className="home-team-cta__copy">
           <h2 id="team-evaluation-title">
-            Evaluating Apcosys
-            <br />
+            Evaluating Apcosys <br />
             for your security team?
           </h2>
           <p>

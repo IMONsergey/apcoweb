@@ -34,3 +34,15 @@ This pass does not establish live API contracts, commercial entitlements or comp
 - Real unmasked desktop/mobile captures; original engine hashes and bundle limits remain enforced.
 
 The work stays in draft PR #28; no main merge or public release. The last Vercel preview from the previous pass is stale for this refinement. Its daily deployment quota was exhausted; do not present that URL as this version.
+
+## Follow-up: seven screenshots at 16:28–16:34
+
+- Separate the search input from the example area; add a restrained rotating gradient border and a static reduced-motion state. Keep the input keyboard/focus treatment and avoid pseudo-element overflow.
+- Increase desktop research-marquee typography to 18–22 px.
+- Replace the repeated left-index/right-table Searchable layout with five directly visible observation cards. Selection changes the explanatory connection, is keyboard operable, and uses measured-height transitions. Its Methodology CTA uses the primary double button.
+- Replace the underlined carousel footer action with the canonical double button and align its explanatory copy.
+- Preserve the five capability selectors; arrange their content as a bento: task, interactive example and two contextual notes.
+- Increase use-case section padding to 88–128 px without enlarging images or cards.
+- Give the team CTA more vertical room. Replace the SVG chip/routes with a GSAP-driven Canvas field of three projected, undulating observation planes and travelling signals. Pointer response is restrained; the loop is periodic, sleeps offscreen/in hidden tabs and becomes a still composition with reduced motion.
+
+Validation: 22 targeted interaction/layout/motion checks passed locally; desktop/mobile light/dark screenshots and accessibility checks passed, with no overflow at eight widths from 320 to 2560 and no browser runtime errors. Source integrity, lint, TypeScript and production build passed. User review is on the Mac's local port 4178; no new public release.

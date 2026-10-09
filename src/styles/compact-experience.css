@@ -463,39 +463,6 @@
   font: 400 14px/1.5 var(--font-mono);
   overflow-wrap: anywhere;
 }
-.team-signal {
-  display: block;
-  width: 100%;
-  height: auto;
-  color: var(--accent-text);
-}
-.team-signal__grid {
-  stroke: currentColor;
-  opacity: 0.07;
-  stroke-width: 1;
-}
-.team-signal__routes {
-  stroke: currentColor;
-  stroke-width: 1.5;
-  fill: none;
-}
-.team-signal__nodes {
-  fill: currentColor;
-}
-.team-signal__core rect:first-child {
-  fill: var(--surface);
-  stroke: currentColor;
-  stroke-width: 1;
-}
-.team-signal__core rect:last-child {
-  fill: currentColor;
-}
-.team-signal--inverse {
-  color: #bfeaf0;
-}
-.team-signal--inverse .team-signal__core rect:first-child {
-  fill: #037a8f;
-}
 .team-workflow {
   background: var(--surface);
 }
@@ -974,4 +941,63 @@
 .site .stage-case-experience .stage-example-journey p {
   margin-top: 8px;
   font-size: 14px;
+}
+
+/* A separate, inviting input surface above the illustrative results. */
+@property --search-orbit {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.site .search-scene__content > .search-form {
+  position: relative;
+  margin-bottom: 14px;
+  box-shadow: 0 5px 18px rgb(3 122 143 / 8%);
+  border-color: color-mix(in srgb, var(--accent-text) 28%, var(--line));
+}
+.site .search-scene__content > .search-form::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--search-orbit),
+    transparent 15%,
+    #8bd9df 28%,
+    #037a8f 38%,
+    transparent 53%,
+    transparent 70%,
+    #8bd9df 85%,
+    transparent
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: search-orbit 10s linear infinite;
+  opacity: 0.8;
+}
+.site .search-scene__content > .search-form:focus-within {
+  box-shadow:
+    0 0 0 4px rgb(3 122 143 / 12%),
+    0 7px 22px rgb(3 122 143 / 9%);
+}
+.site .search-scene__content > .search-form:focus-within::after {
+  animation-play-state: paused;
+}
+@keyframes search-orbit {
+  to {
+    --search-orbit: 360deg;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site .search-scene__content > .search-form::after {
+    animation: none;
+  }
+  .data-map__tile,
+  .data-map__indicator {
+    transition: none;
+  }
 }

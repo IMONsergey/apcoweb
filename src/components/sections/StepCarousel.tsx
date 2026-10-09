@@ -5,6 +5,7 @@ import { researchSteps } from '../../content/site';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
 import { StepIllustration } from '../visuals/StepIllustration';
+import { DoubleButton } from '../ui/DoubleButton';
 import { siteHref } from '../../app/router';
 export function StepCarousel() {
   const { t } = useLocale();
@@ -94,9 +95,9 @@ export function StepCarousel() {
         <p>
           Illustrative product walkthrough · Query, results, host, evidence and the next search.
         </p>
-        <a className="stage-text-link" href={siteHref('/platform/search-investigation')}>
+        <DoubleButton compact href={siteHref('/platform/search-investigation')}>
           Explore Search & Investigation
-        </a>
+        </DoubleButton>
       </div>
     </section>
   );
