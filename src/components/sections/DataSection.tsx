@@ -1,7 +1,8 @@
+import { siteHref } from '../../app/router';
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { noBreakNumber } from '../../i18n/typography';
-import { metrics, productUrl } from '../../content/site';
+import { metrics } from '../../content/site';
 import { DoubleButton } from '../ui/DoubleButton';
 import { Visual } from '../visuals/Visual';
 
@@ -41,10 +42,10 @@ export function DataSection() {
           </dl>
         </div>
         <div className="data-actions">
-          <DoubleButton href={`${productUrl}/legal/data-collection-policy`} variant="dark">
+          <DoubleButton href={siteHref('/platform/data-methodology')} variant="dark">
             <LocaleText>{t('Read methodology')}</LocaleText>
           </DoubleButton>
-          <DoubleButton href={`${productUrl}/docs/about`} variant="inverse">
+          <DoubleButton href={siteHref('/responsible-scanning')} variant="inverse">
             <LocaleText>{t('How we scan')}</LocaleText>
           </DoubleButton>
         </div>

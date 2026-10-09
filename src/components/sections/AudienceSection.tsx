@@ -1,3 +1,4 @@
+import { siteHref } from '../../app/router';
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { DoubleButton } from '../ui/DoubleButton';
@@ -43,10 +44,10 @@ export function AudienceSection() {
               </ul>
             </div>
             <div className="audience-actions">
-              <DoubleButton href="#how-it-works">
+              <DoubleButton href={siteHref('/platform/search-investigation')}>
                 <LocaleText>{t('Explore Search & Investigation')}</LocaleText>
               </DoubleButton>
-              <DoubleButton variant="secondary" href="#pricing">
+              <DoubleButton variant="secondary" href={siteHref('/pricing')}>
                 <LocaleText>{t('View Plans')}</LocaleText>
               </DoubleButton>
             </div>
@@ -68,10 +69,10 @@ export function AudienceSection() {
               </p>
             </div>
             <div className="audience-actions">
-              <DoubleButton href="#api">
+              <DoubleButton href={siteHref('/teams')}>
                 <LocaleText>{t('Explore For Teams')}</LocaleText>
               </DoubleButton>
-              <DoubleButton variant="secondary" href="#plan-business">
+              <DoubleButton variant="secondary" href={siteHref('/pricing')}>
                 <LocaleText>{t('View Business Plan')}</LocaleText>
               </DoubleButton>
             </div>

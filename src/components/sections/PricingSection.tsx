@@ -1,9 +1,10 @@
+import { siteHref } from '../../app/router';
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { noBreakNumber } from '../../i18n/typography';
 import { useRef, useState } from 'react';
 import { MobileBillingDock } from './MobileBillingDock';
-import { plans, productUrl, supportEmail } from '../../content/site';
+import { plans, productUrl } from '../../content/site';
 import { DoubleButton } from '../ui/DoubleButton';
 import { Modal } from '../ui/Modal';
 import { Visual } from '../visuals/Visual';
@@ -141,7 +142,7 @@ export function PricingSection() {
           </div>
           <DoubleButton
             variant="inverse"
-            href={`mailto:${supportEmail}?subject=APCOSYS%20organisation%20requirements`}
+            href={siteHref('/contact')}
           >
             <LocaleText>{t('Talk to Us')}</LocaleText>
           </DoubleButton>

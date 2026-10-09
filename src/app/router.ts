@@ -12,7 +12,8 @@ export function siteHref(path: string) {
 export function getRoutePath(): string {
   const pathname = decodeURI(window.location.pathname);
   if (base && pathname !== base && !pathname.startsWith(base + '/')) return '/404';
-  return rootedPath(pathname.slice(base.length));
+  const route = rootedPath(pathname.slice(base.length));
+  return isSitePath(route) ? route : '/404';
 }
 export function isSitePath(value: string): value is SitePath {
   return siteRoutes.some((route) => route.path === value);
