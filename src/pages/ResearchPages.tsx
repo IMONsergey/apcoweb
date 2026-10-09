@@ -1,6 +1,7 @@
 import '../styles/stage2-showcases.css';
 import '../styles/stage2-usecases.css';
-import { primarySearch, primaryContact, linkTo } from './pageLinks';
+import { primaryContact, linkTo } from './pageLinks';
+import { productUrl } from '../config/site';
 import { siteHref } from '../app/router';
 import { PageFrame, StorySections, Notice } from './PageUI';
 import { InvestigationWorkbench } from '../components/stage2/InvestigationWorkbench';
@@ -125,7 +126,13 @@ export default function ResearchPages({ path }: { path: string }) {
       eyebrow={config.eyebrow}
       title={config.title}
       description={config.description}
-      links={[primarySearch, config.next]}
+      links={[
+        {
+          label: path === '/use-cases/bug-bounty' ? 'Search your scope' : path === '/use-cases/vulnerability-research' ? 'Search by technology' : 'Look up an IP or domain',
+          href: productUrl + '/search',
+        },
+        config.next,
+      ]}
     >
       {path === '/use-cases/bug-bounty' ? (
         <ScopeEvidence />
