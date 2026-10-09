@@ -195,3 +195,13 @@ test('unverified API docs remain within the supported on-site guidance', async (
     page.getByText('The production API documentation URL is not yet confirmed.', { exact: false }),
   ).toBeVisible();
 });
+
+test('platform search keeps a single readable placeholder on desktop', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('./platform/search-investigation');
+  const input = page.locator('.stage-platform-search .search-form input');
+  await expect(input).toHaveAttribute('placeholder', /Domain, IP or technical attribute/);
+  await expect(page.locator('.stage-platform-search .search-desktop-placeholder')).toBeHidden();
+  await input.fill('example.com');
+  await expect(input).toHaveValue('example.com');
+});
