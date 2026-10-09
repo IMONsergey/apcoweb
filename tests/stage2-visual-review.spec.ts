@@ -21,23 +21,38 @@ function slug(value: string) {
 for (const route of siteRoutes) {
   for (const profile of profiles) {
     for (const theme of ['light', 'dark'] as const) {
-      test('visual review ' + slug(route.path) + ' ' + profile.id + ' ' + theme,
+      test(
+        'visual review ' + slug(route.path) + ' ' + profile.id + ' ' + theme,
         async ({ page }, testInfo) => {
           test.skip(testInfo.project.name !== 'chromium', 'Reference capture uses Chromium only.');
           test.setTimeout(100_000);
           await page.setViewportSize({ width: profile.width, height: profile.height });
-          await page.addInitScript((mode) => localStorage.setItem('apcosys-theme-mode', mode), theme);
+          await page.addInitScript(
+            (mode) => localStorage.setItem('apcosys-theme-mode', mode),
+            theme,
+          );
           await page.goto('.' + route.path, { waitUntil: 'networkidle' });
           await expect(page.locator('main h1')).toBeVisible();
           await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
           await page.evaluate(() => document.fonts.ready);
-          await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 2)).toBe(true);
+          await expect
+            .poll(() =>
+              page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 2),
+            )
+            .toBe(true);
           const name = slug(route.path) + '-' + profile.id + '-' + theme + '.png';
           const output = testInfo.outputPath('stage2-visual', name);
           await mkdir(dirname(output), { recursive: true });
-          await page.screenshot({ path: output, animations: 'disabled', fullPage: true, caret: 'hide',
-            mask: [page.locator('canvas')], maskColor: '#838b90' });
-        });
+          await page.screenshot({
+            path: output,
+            animations: 'disabled',
+            fullPage: true,
+            caret: 'hide',
+            mask: [page.locator('canvas')],
+            maskColor: '#838b90',
+          });
+        },
+      );
     }
   }
 }
@@ -45,21 +60,31 @@ for (const route of siteRoutes) {
 for (const path of ['/', '/platform/search-investigation', '/pricing', '/platform/monitoring']) {
   for (const profile of extras) {
     for (const theme of ['light', 'dark'] as const) {
-      test('visual edge ' + slug(path) + ' ' + profile.id + ' ' + theme,
+      test(
+        'visual edge ' + slug(path) + ' ' + profile.id + ' ' + theme,
         async ({ page }, testInfo) => {
           test.skip(testInfo.project.name !== 'chromium', 'Reference capture uses Chromium only.');
           test.setTimeout(100_000);
           await page.setViewportSize({ width: profile.width, height: profile.height });
-          await page.addInitScript((mode) => localStorage.setItem('apcosys-theme-mode', mode), theme);
+          await page.addInitScript(
+            (mode) => localStorage.setItem('apcosys-theme-mode', mode),
+            theme,
+          );
           await page.goto('.' + path, { waitUntil: 'networkidle' });
           await expect(page.locator('main h1')).toBeVisible();
           const name = slug(path) + '-' + profile.id + '-' + theme + '.png';
           const output = testInfo.outputPath('stage2-visual', name);
           await mkdir(dirname(output), { recursive: true });
-          await page.screenshot({ path: output,
-            animations: 'disabled', fullPage: true, caret: 'hide', mask: [page.locator('canvas')],
-            maskColor: '#838b90' });
-        });
+          await page.screenshot({
+            path: output,
+            animations: 'disabled',
+            fullPage: true,
+            caret: 'hide',
+            mask: [page.locator('canvas')],
+            maskColor: '#838b90',
+          });
+        },
+      );
     }
   }
 }

@@ -30,12 +30,17 @@ for (const width of [320, 390, 1366, 1440, 1920]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('./pricing');
     await expect(page.locator('.stage-plan-table')).toBeVisible();
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width + 2);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+      width + 2,
+    );
     const table = page.locator('.stage-table-scroll').last();
     if (width < 800) {
-      const sizes = await table.evaluate((el) => ({ content: el.scrollWidth, viewport: el.clientWidth }));
+      const sizes = await table.evaluate((el) => ({
+        content: el.scrollWidth,
+        viewport: el.clientWidth,
+      }));
       expect(sizes.content).toBeGreaterThan(sizes.viewport);
-      await table.evaluate((el) => el.scrollLeft = 9999);
+      await table.evaluate((el) => (el.scrollLeft = 9999));
       expect(await table.evaluate((el) => el.scrollLeft)).toBeGreaterThan(0);
     }
   });
@@ -54,7 +59,9 @@ test('five-step investigation workbench moves through contextual scenes', async 
 
 test('monitoring concept changes state and does not claim real alerts', async ({ page }) => {
   await page.goto('./platform/monitoring');
-  await expect(page.getByText('Concept demonstration · Not a live product capability')).toBeVisible();
+  await expect(
+    page.getByText('Concept demonstration · Not a live product capability'),
+  ).toBeVisible();
   const buttons = page.locator('.stage-monitor-console__nav');
   await buttons.nth(1).click();
   await expect(buttons.nth(1)).toHaveAttribute('aria-pressed', 'true');
@@ -84,14 +91,19 @@ test('pricing monthly and annual values follow documented discount', async ({ pa
   await expect(dialog).toBeVisible();
   await expect(dialog).toContainText('selection is not transferred');
   await dialog.getByRole('button', { name: 'Close dialog' }).click();
-  await expect(page.locator('#plan-business .stage-plan-contact')).toHaveAttribute('href', /\/contact$/);
+  await expect(page.locator('#plan-business .stage-plan-contact')).toHaveAttribute(
+    'href',
+    /\/contact$/,
+  );
 });
 
 test('API example is explicitly illustrative and request/response switch', async ({ page }) => {
   await page.goto('./developers/api');
   await expect(page.locator('.stage-code-window pre')).toContainText('APCOSYS_API_ENDPOINT');
   await page.getByRole('button', { name: 'Response', exact: true }).click();
-  await expect(page.locator('.stage-code-window pre')).toContainText('Illustrative response shape only');
+  await expect(page.locator('.stage-code-window pre')).toContainText(
+    'Illustrative response shape only',
+  );
 });
 
 test('browser history and hashed syntax link work after lazy navigation', async ({ page }) => {
@@ -102,10 +114,16 @@ test('browser history and hashed syntax link work after lazy navigation', async 
   await page.goBack();
   await expect(page.locator('main')).toHaveAttribute('data-route', '/');
   await page.goForward();
-  await expect(page.locator('main')).toHaveAttribute('data-route', '/platform/search-investigation');
+  await expect(page.locator('main')).toHaveAttribute(
+    'data-route',
+    '/platform/search-investigation',
+  );
 });
 
-test('direct path refresh serves route-specific SEO meta in static response', async ({ request, page }) => {
+test('direct path refresh serves route-specific SEO meta in static response', async ({
+  request,
+  page,
+}) => {
   const response = await request.get('./platform/data-methodology');
   expect(response.status()).toBe(200);
   const html = await response.text();
@@ -118,7 +136,9 @@ test('direct path refresh serves route-specific SEO meta in static response', as
 test('registration and Sign In never claim unsupported plan selection', async ({ page }) => {
   await page.goto('./pricing');
   await page.getByRole('button', { name: 'Choose Plus' }).click();
-  await expect(page.getByRole('dialog', { name: 'PLUS plan' })).toContainText('selection is not transferred');
+  await expect(page.getByRole('dialog', { name: 'PLUS plan' })).toContainText(
+    'selection is not transferred',
+  );
   await expect(page.locator('.stage-signin-unverified')).toHaveAttribute('aria-disabled', 'true');
 });
 
@@ -127,5 +147,7 @@ test('contact form displays required email fallback and validation', async ({ pa
   await expect(page.getByRole('button', { name: 'Prepare email' })).toBeVisible();
   await page.getByRole('button', { name: 'Prepare email' }).click();
   await expect(page.locator('[name="name"]')).toHaveAttribute('required', '');
-  await expect(page.getByText('Messages are not stored or delivered by this website.', { exact: false })).toBeVisible();
+  await expect(
+    page.getByText('Messages are not stored or delivered by this website.', { exact: false }),
+  ).toBeVisible();
 });

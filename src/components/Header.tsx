@@ -149,12 +149,16 @@ export function Header() {
             />
             {signInUrl ? (
               <a href={signInUrl} className="plain-button header-signin">
-              <LocaleText>{t('Sign In')}</LocaleText>
-            </a>
+                <LocaleText>{t('Sign In')}</LocaleText>
+              </a>
             ) : (
-              <span className="plain-button header-signin stage-signin-unverified" aria-disabled="true" title="Sign-in address awaiting verification">
-              <LocaleText>{t('Sign In')}</LocaleText>
-            </span>
+              <span
+                className="plain-button header-signin stage-signin-unverified"
+                aria-disabled="true"
+                title="Sign-in address awaiting verification"
+              >
+                <LocaleText>{t('Sign In')}</LocaleText>
+              </span>
             )}
             <DoubleButton href={`${productUrl}/search`} compact className="header-signup">
               <LocaleText>{t('Try Search')}</LocaleText>
@@ -219,12 +223,16 @@ export function Header() {
           </DoubleButton>
           {signInUrl ? (
             <a className="plain-button" href={signInUrl}>
-            <LocaleText>{t('Sign In')}</LocaleText>
-          </a>
+              <LocaleText>{t('Sign In')}</LocaleText>
+            </a>
           ) : (
-            <span className="plain-button stage-signin-unverified" aria-disabled="true" title="Sign-in address awaiting verification">
-            <LocaleText>{t('Sign In')}</LocaleText>
-          </span>
+            <span
+              className="plain-button stage-signin-unverified"
+              aria-disabled="true"
+              title="Sign-in address awaiting verification"
+            >
+              <LocaleText>{t('Sign In')}</LocaleText>
+            </span>
           )}
           <MobileThemeControl />
         </nav>

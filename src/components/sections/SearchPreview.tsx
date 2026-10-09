@@ -136,7 +136,10 @@ export function SearchPreview() {
   const { t } = useLocale();
   const scene = useSearchEntrance();
   return (
-    <section className="search-preview" aria-label={t('Illustrative APCOSYS product search interface')}>
+    <section
+      className="search-preview"
+      aria-label={t('Illustrative APCOSYS product search interface')}
+    >
       <Visual kind="flow" eager onReady={flowReady} />
       <Visual kind="dots" eager onReady={dotsReady} />
       <div className="summary-wrap">
@@ -163,8 +166,12 @@ export function SearchPreview() {
                 </span>
               </h2>
             </div>
-            <div className="stage-preview-query" aria-label="Illustrative interface, search example">
-              <span>example.com</span><span aria-hidden="true">↗</span>
+            <div
+              className="stage-preview-query"
+              aria-label="Illustrative interface, search example"
+            >
+              <span>example.com</span>
+              <span aria-hidden="true">↗</span>
             </div>
           </div>
         </div>

@@ -116,7 +116,9 @@ export function PricingSection() {
                   </button>
                 )}
                 {plan.id === 'business' && (
-                  <a className="stage-plan-contact" href={siteHref('/contact')}>Talk to Us →</a>
+                  <a className="stage-plan-contact" href={siteHref('/contact')}>
+                    Talk to Us →
+                  </a>
                 )}
               </article>
             ))}

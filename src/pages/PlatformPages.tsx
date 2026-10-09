@@ -22,7 +22,10 @@ function InvestigationPage() {
             Search from a technical attribute. Your query opens the existing Apcosys search product.
           </p>
           <SearchForm />
-          <p className="stage-helper">Start with a domain or IPv4 address. Advanced attribute filters depend on the supported live search syntax.</p>
+          <p className="stage-helper">
+            Start with a domain or IPv4 address. Advanced attribute filters depend on the supported
+            live search syntax.
+          </p>
         </div>
       </section>
       <InvestigationWorkbench story="search" />
@@ -30,7 +33,9 @@ function InvestigationPage() {
         <div className="container">
           <h2>Explore the search syntax.</h2>
           <p>
-            Begin with a domain or IP address, then review the filtering and attribute syntax available in the SaaS. This introduction intentionally does not claim an unverified filter grammar.
+            Begin with a domain or IP address, then review the filtering and attribute syntax
+            available in the SaaS. This introduction intentionally does not claim an unverified
+            filter grammar.
           </p>
           <a href={primarySearch.href}>Continue to Apcosys search ↗</a>
         </div>

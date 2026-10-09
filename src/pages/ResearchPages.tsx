@@ -3,7 +3,11 @@ import { siteHref } from '../app/router';
 import { PageFrame, StorySections, PageAction, Notice } from './PageUI';
 import { InvestigationWorkbench } from '../components/stage2/InvestigationWorkbench';
 import { TeamOperations } from '../components/stage2/TeamOperations';
-import { ScopeEvidence, TechnologyEvidence, IndicatorEvidence } from '../components/stage2/UseCaseEvidence';
+import {
+  ScopeEvidence,
+  TechnologyEvidence,
+  IndicatorEvidence,
+} from '../components/stage2/UseCaseEvidence';
 
 const caseStudies = {
   '/use-cases/bug-bounty': {
@@ -193,8 +197,22 @@ export default function ResearchPages({ path }: { path: string }) {
           </p>
         </div>
       </section>
-      <InvestigationWorkbench story={path === '/use-cases/bug-bounty' ? 'bounty' : path === '/use-cases/vulnerability-research' ? 'vulnerability' : 'osint'} />
-      {path === '/use-cases/bug-bounty' ? <ScopeEvidence /> : path === '/use-cases/vulnerability-research' ? <TechnologyEvidence /> : <IndicatorEvidence />}
+      <InvestigationWorkbench
+        story={
+          path === '/use-cases/bug-bounty'
+            ? 'bounty'
+            : path === '/use-cases/vulnerability-research'
+              ? 'vulnerability'
+              : 'osint'
+        }
+      />
+      {path === '/use-cases/bug-bounty' ? (
+        <ScopeEvidence />
+      ) : path === '/use-cases/vulnerability-research' ? (
+        <TechnologyEvidence />
+      ) : (
+        <IndicatorEvidence />
+      )}
       <StorySections items={config.items} variant="timeline" />
       <section className="stage-case-bottom">
         <div className="container">

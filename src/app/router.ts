@@ -64,7 +64,10 @@ export function useSiteRoute() {
             const observer = new MutationObserver(() => {
               if (resolveScroll()) observer.disconnect();
             });
-            observer.observe(document.querySelector('main') ?? document.body, { childList: true, subtree: true });
+            observer.observe(document.querySelector('main') ?? document.body, {
+              childList: true,
+              subtree: true,
+            });
             window.setTimeout(() => observer.disconnect(), 2500);
           }
         } else scrollTo({ top: rememberedY, behavior: 'instant' });
@@ -72,14 +75,29 @@ export function useSiteRoute() {
     };
 
     const intercept = (event: MouseEvent) => {
-      if (event.defaultPrevented || event.button !== 0 ||
-          event.metaKey || event.ctrlKey || event.altKey || event.shiftKey ||
-          !(event.target instanceof Element)) return;
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.altKey ||
+        event.shiftKey ||
+        !(event.target instanceof Element)
+      )
+        return;
       const anchor = event.target.closest('a[href]') as HTMLAnchorElement | null;
-      if (!anchor || anchor.hasAttribute('download') || (anchor.target && anchor.target !== '_self')) return;
+      if (
+        !anchor ||
+        anchor.hasAttribute('download') ||
+        (anchor.target && anchor.target !== '_self')
+      )
+        return;
       const url = new URL(anchor.href, location.href);
-      if (url.origin !== location.origin ||
-          (base && url.pathname !== base && !url.pathname.startsWith(base + '/'))) return;
+      if (
+        url.origin !== location.origin ||
+        (base && url.pathname !== base && !url.pathname.startsWith(base + '/'))
+      )
+        return;
       const target = rootedPath(url.pathname.slice(base.length));
       if (!isSitePath(target)) return;
       event.preventDefault();
@@ -97,7 +115,10 @@ export function useSiteRoute() {
             const observer = new MutationObserver(() => {
               if (resolveScroll()) observer.disconnect();
             });
-            observer.observe(document.querySelector('main') ?? document.body, { childList: true, subtree: true });
+            observer.observe(document.querySelector('main') ?? document.body, {
+              childList: true,
+              subtree: true,
+            });
             window.setTimeout(() => observer.disconnect(), 2500);
           } else scrollTo({ top: 0, behavior: 'instant' });
         }
@@ -119,7 +140,9 @@ export function useSiteRoute() {
   useEffect(() => {
     const route = siteRoutes.find((item) => item.path === path);
     const title = route
-      ? path === '/' ? 'Apcosys — Start with a query.' : route.title + ' | Apcosys'
+      ? path === '/'
+        ? 'Apcosys — Start with a query.'
+        : route.title + ' | Apcosys'
       : 'Page not found | Apcosys';
     const description = route?.description || 'Find what you need on Apcosys.';
     document.title = title;

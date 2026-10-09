@@ -36,12 +36,22 @@ export function Hero() {
           <div className="stage-query-examples" aria-label="Example query inputs">
             <span>Try an example</span>
             {['example.com', '1.1.1.1', '8.8.8.8'].map((query) => (
-              <button type="button" key={query} onClick={() => window.dispatchEvent(new CustomEvent('apcosys:example-query', { detail: query }))}>{query}</button>
+              <button
+                type="button"
+                key={query}
+                onClick={() =>
+                  window.dispatchEvent(new CustomEvent('apcosys:example-query', { detail: query }))
+                }
+              >
+                {query}
+              </button>
             ))}
           </div>
           <div className="stage-hero-search-meta">
             <span>Search as a guest. Available data and limits depend on the product.</span>
-            <a href={siteHref('/platform/search-investigation') + '#search-syntax'}>Explore search syntax ↗</a>
+            <a href={siteHref('/platform/search-investigation') + '#search-syntax'}>
+              Explore search syntax ↗
+            </a>
           </div>
         </div>
       </div>
