@@ -133,7 +133,7 @@ export function PricingSection() {
           <Visual kind="dots" direction="left-to-right" />
           <div>
             <h3>
-              <LocaleText>{t('Have specific organisational requirements?')}</LocaleText>
+              <LocaleText>{t('Have specific requirements?')}</LocaleText>
             </h3>
             <p>
               <LocaleText>{t('Tell us about your data, API or procurement needs.')}</LocaleText>
