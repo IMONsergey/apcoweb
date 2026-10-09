@@ -26,7 +26,6 @@ export function CreditsExplained() {
     <section className="stage-usage-guide section-space" aria-labelledby="usage-guide-title">
       <div className="container stage-usage-guide__layout">
         <div className="stage-usage-guide__lead">
-          <p className="eyebrow">HOW ACCESS WORKS</p>
           <h2 id="usage-guide-title">Understand your allowance.</h2>
           <p>
             Find the right level of access and understand what needs checking before adding search

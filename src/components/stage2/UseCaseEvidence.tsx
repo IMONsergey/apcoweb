@@ -1,5 +1,5 @@
-import { ResearchFilm } from './ResearchFilm';
-import { ProductEvidence, type EvidenceScenario } from './ProductEvidence';
+import { CaseFragment } from './CompactFragments';
+import type { EvidenceScenario } from './ProductEvidence';
 import { productUrl } from '../../config/site';
 
 type Journey = {
@@ -69,7 +69,6 @@ function EvidenceJourney({ kind }: { kind: keyof typeof journeys }) {
     <section className={'stage-case-evidence stage-case-evidence--' + kind + ' section-space'}>
       <div className="container">
         <div className="stage-case-evidence__heading">
-          <p className="eyebrow">{item.label}</p>
           <h2>{item.title}</h2>
           <p>{item.introduction}</p>
         </div>
@@ -84,11 +83,8 @@ function EvidenceJourney({ kind }: { kind: keyof typeof journeys }) {
               </div>
             ))}
           </div>
-          <ResearchFilm
-            scene={kind === 'technology' ? 'evidence' : kind === 'indicator' ? 'host' : 'results'}
-          />
+          <CaseFragment kind={kind} />
         </div>
-        <ProductEvidence scenario={item.scenario} mode={kind === 'technology' ? 'cve' : 'host'} />
         <div className="stage-example-footer">
           <p>{item.caveat}</p>
           <a href={productUrl + '/search'}>

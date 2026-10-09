@@ -1,5 +1,4 @@
 import { primarySearch, linkTo } from './pageLinks';
-import { ApiIllustration } from '../components/visuals/ApiIllustration';
 import '../styles/product-motion.css';
 import { ApiExample } from '../components/stage2/ApiExample';
 import { PricingSection } from '../components/sections/PricingSection';
@@ -38,7 +37,6 @@ export function FullPlanComparison() {
   return (
     <section className="stage-plan-comparison section-space" id="compare-plans">
       <div className="container">
-        <p className="eyebrow">PLAN COMPARISON</p>
         <h2>Compare plans.</h2>
         <p className="stage-intro">
           The entitlements shown are based on the approved Stage 2 client preview and must be
@@ -95,7 +93,6 @@ function PricingPage() {
       <FullPlanComparison />
       <section className="stage-credits section-space" id="search-token-packages">
         <div className="container">
-          <p className="eyebrow">ADDITIONAL CAPACITY / CLIENT PREVIEW</p>
           <h2>Search Token packages.</h2>
           <p className="stage-intro">
             Packages shown in the approved pricing concept. Confirm eligibility, current pricing,
@@ -154,7 +151,6 @@ function ApiSample() {
   return (
     <section className="stage-api-demo section-space" id="documentation">
       <div className="container">
-        <p className="eyebrow">DEVELOPER EXPERIENCE</p>
         <h2>Your first request.</h2>
         <p className="stage-intro">
           Prepare a request using your account API key and the confirmed endpoint, authorization
@@ -181,22 +177,6 @@ function ApiPage() {
       description="Query hosts, services and technologies programmatically and use the results in scripts, pipelines, reports and internal tools."
       links={[documentationLink, linkTo('Compare plans', '/pricing', true)]}
     >
-      <section className="stage-api-showcase section-space" aria-label="Animated API walkthrough">
-        <div className="container stage-api-showcase__grid">
-          <div className="stage-api-showcase__copy">
-            <p className="eyebrow">FROM REQUEST TO RESPONSE</p>
-            <h2>See the workflow unfold.</h2>
-            <p>
-              Set a parameter. Inspect the request. Read the response, then follow one record into
-              its details.
-            </p>
-          </div>
-          <div className="stage-api-showcase__screen">
-            <ApiIllustration />
-            <p>Illustrative API interface · no live request</p>
-          </div>
-        </div>
-      </section>
       <ApiSample />
       <StorySections
         items={[

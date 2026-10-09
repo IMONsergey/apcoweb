@@ -63,7 +63,7 @@ for (const [route, label] of [
     for (const step of ['Starting point', 'Query', 'Result', 'Next step']) {
       await expect(journey).toContainText(step);
     }
-    await expect(page.locator('.stage-case-evidence .product-evidence')).toBeVisible();
+    await expect(page.locator('.stage-case-evidence .case-fragment')).toBeVisible();
     await expect(page.getByRole('link', { name: label }).first()).toHaveAttribute(
       'href',
       /\/search$/,

@@ -3,7 +3,6 @@ import { MorphPanel } from '../ui/MorphPanel';
 import { ObservationTrace } from './ObservationTrace';
 import { siteHref } from '../../app/router';
 import { demoHosts } from '../../content/product-demo';
-import { ProductEvidence } from './ProductEvidence';
 const views = [
   {
     id: 'scope',
@@ -62,7 +61,6 @@ export function MonitoringConcept() {
       <div className="container">
         <div className="stage-monitor-concept__heading">
           <div>
-            <p className="eyebrow">MONITORING / CONCEPT EXPERIENCE</p>
             <h2 id="monitor-concept-title">An observation is a starting point.</h2>
           </div>
           <p>
@@ -164,14 +162,34 @@ export function MonitoringConcept() {
                     </div>
                   </div>
                 ) : (
-                  <ProductEvidence
-                    scenario="domain"
-                    mode={current === 3 ? 'services' : 'continue'}
-                    selectedHost={assetIndex}
-                    onSelectHost={setAssetIndex}
-                    compact
-                    embedded
-                  />
+                  <div className="monitor-context" data-morph-enter>
+                    <h4>
+                      {current === 3
+                        ? 'Inspect the changed service.'
+                        : 'Create the next research task.'}
+                    </h4>
+                    <dl>
+                      <div>
+                        <dt>Host</dt>
+                        <dd>{asset.hostname}</dd>
+                      </div>
+                      <div>
+                        <dt>Changed service</dt>
+                        <dd>
+                          {service.port} / {service.protocol}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt>Technology</dt>
+                        <dd>{service.technology}</dd>
+                      </div>
+                    </dl>
+                    <p>
+                      {current === 3
+                        ? 'Review the response and validate the observation before treating a change as a security finding.'
+                        : 'Continue with the selected host in Search & Investigation. Keep the observation context with the task.'}
+                    </p>
+                  </div>
                 )}
                 <a
                   className="stage-monitor-console__link"

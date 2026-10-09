@@ -28,7 +28,6 @@ export function TeamOperations() {
       <div className="container">
         <div className="stage-team-operations__header">
           <div>
-            <p className="eyebrow">ANALYST WORKFLOW</p>
             <h2 id="team-process-title">
               From question to evidence.
               <br />
@@ -51,7 +50,6 @@ export function TeamOperations() {
         </div>
         <div className="stage-team-operations__business">
           <div>
-            <p className="eyebrow">TEAM ACCESS</p>
             <h3>Business plan</h3>
             <p>
               Up to five users, higher credit allowances and API access are listed in the approved

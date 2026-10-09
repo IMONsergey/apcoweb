@@ -3,7 +3,6 @@ import { primarySearch, primaryContact, linkTo } from './pageLinks';
 import { metrics } from '../content/site';
 import { InvestigationWorkbench } from '../components/stage2/InvestigationWorkbench';
 import { MonitoringConcept } from '../components/stage2/MonitoringConcept';
-import { ProductEvidence } from '../components/stage2/ProductEvidence';
 import { PageFrame, StorySections } from './PageUI';
 
 function InvestigationPage() {
@@ -19,7 +18,6 @@ function InvestigationPage() {
       <section className="stage-syntax-note section-space" id="search-syntax">
         <div className="container stage-syntax-note__layout">
           <div>
-            <p className="eyebrow">QUERY LANGUAGE</p>
             <h2>Start with what you know.</h2>
           </div>
           <div>
@@ -59,7 +57,6 @@ function MethodologyPage() {
         <div className="container">
           <div className="stage-methodology-product__heading">
             <div>
-              <p className="eyebrow">READ THE EVIDENCE</p>
               <h2>One host. Several levels of certainty.</h2>
             </div>
             <p>
@@ -68,12 +65,39 @@ function MethodologyPage() {
               time and validate the live state.
             </p>
           </div>
-          <ProductEvidence scenario="technology" mode="cve" />
+          <div className="evidence-levels">
+            {[
+              [
+                '01',
+                'Observation',
+                '443 / HTTPS',
+                'A service responded with a particular protocol and banner.',
+              ],
+              [
+                '02',
+                'Detection',
+                'nginx / 1.24.0',
+                'A product and version inferred from the available response.',
+              ],
+              [
+                '03',
+                'Association',
+                'CVE context',
+                'A potential connection to an advisory, requiring verification.',
+              ],
+            ].map(([number, title, value, text]) => (
+              <article key={number}>
+                <span>{number}</span>
+                <h3>{title}</h3>
+                <code>{value}</code>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
       <section className="stage-methodology section-space">
         <div className="container">
-          <p className="eyebrow">COVERAGE</p>
           <h2>Coverage, defined.</h2>
           <p className="stage-intro">
             Figures supplied for the client preview. The reference date and measurement definitions

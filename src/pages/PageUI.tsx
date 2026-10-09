@@ -1,3 +1,4 @@
+import '../styles/compact-experience.css';
 import { useRef, type ReactNode } from 'react';
 import { usePageMotion } from '../hooks/usePageMotion';
 import { DoubleButton } from '../components/ui/DoubleButton';
@@ -5,7 +6,6 @@ import { DoubleButton } from '../components/ui/DoubleButton';
 export type PageLink = { label: string; href: string; secondary?: boolean };
 
 export function PageIntro({
-  eyebrow,
   title,
   description,
   concept = false,
@@ -19,7 +19,6 @@ export function PageIntro({
     <header className="stage-page-hero">
       <div className="container stage-page-hero__grid">
         <div className="stage-page-hero__title">
-          <p className="eyebrow">{eyebrow}</p>
           <h1>{title}</h1>
         </div>
         <div className="stage-page-hero__aside">
@@ -78,12 +77,11 @@ export function PageFrame({
       {links && (
         <nav className="stage-related" aria-label="Continue exploring Apcosys">
           <div className="container stage-related__inner">
-            <span className="eyebrow">CONTINUE EXPLORING</span>
             <div className="stage-related__links">
               {links.map(({ label, href }) => (
-                <a href={href} key={href + label}>
+                <DoubleButton variant="secondary" compact href={href} key={href + label}>
                   {label}
-                </a>
+                </DoubleButton>
               ))}
             </div>
           </div>

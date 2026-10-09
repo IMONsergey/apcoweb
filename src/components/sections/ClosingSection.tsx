@@ -50,9 +50,6 @@ export function ClosingSection() {
           )}
           {compact ? (
             <div className="closing-copy">
-              <p className="eyebrow">
-                <LocaleText>{t('INTERNET INFRASTRUCTURE SEARCH')}</LocaleText>
-              </p>
               <h3>
                 <LocaleText>{t('Start with your first query.')}</LocaleText>
               </h3>

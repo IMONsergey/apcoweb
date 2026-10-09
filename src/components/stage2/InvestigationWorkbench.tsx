@@ -1,6 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { researchSteps } from '../../content/site';
-import { StepIllustration } from '../visuals/StepIllustration';
 import { MorphPanel } from '../ui/MorphPanel';
 import { productUrl } from '../../config/site';
 import { siteHref } from '../../app/router';
@@ -140,7 +138,6 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
       <div className="container">
         <div className="stage-workbench__intro">
           <div>
-            <p className="eyebrow">{data.tag}</p>
             <h2>{data.heading}</h2>
           </div>
           <p>{data.context}</p>
@@ -194,21 +191,19 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
             id={'stage-panel-' + story}
             aria-labelledby={'stage-step-' + story + '-' + selected}
           >
-            <div className="stage-workbench__bar">
-              <span>
-                <i aria-hidden="true" /> APCOSYS / RESEARCH
-              </span>
-              <span>SYNTHETIC DEMO</span>
+            <div className="stage-workbench__record">
+              <ProductEvidence
+                compact
+                embedded
+                selectedHost={hostIndex}
+                onSelectHost={setHostIndex}
+                mode={
+                  (['query', 'results', 'host', 'cve', 'continue'][selected] ??
+                    'host') as EvidenceMode
+                }
+                scenario={(story === 'team' ? 'indicator' : 'domain') as EvidenceScenario}
+              />
             </div>
-            <MorphPanel changeKey={selected}>
-              <div className="stage-workbench__illustration" data-morph-enter>
-                <StepIllustration
-                  scene={researchSteps[selected]!.scene}
-                  image={researchSteps[selected]!.image}
-                  alt={researchSteps[selected]!.alt}
-                />
-              </div>
-            </MorphPanel>
             <MorphPanel changeKey={selected}>
               <div className="stage-workbench__insight" data-morph-enter>
                 <div>
@@ -224,28 +219,6 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
               </div>
             </MorphPanel>
           </div>
-        </div>
-        <div className="stage-workbench__sample">
-          <div className="stage-workbench__sample-heading">
-            <h3>Inspect a sample record.</h3>
-            <p>Select a host, then a service to read its response.</p>
-          </div>
-          <ProductEvidence
-            compact
-            embedded
-            selectedHost={hostIndex}
-            onSelectHost={setHostIndex}
-            mode={
-              (['query', 'results', 'host', 'cve', 'continue'][selected] ?? 'host') as EvidenceMode
-            }
-            scenario={
-              (story === 'vulnerability'
-                ? 'technology'
-                : story === 'osint' || story === 'team'
-                  ? 'indicator'
-                  : 'domain') as EvidenceScenario
-            }
-          />
         </div>
         <div className="stage-workbench__bottom">
           <p>

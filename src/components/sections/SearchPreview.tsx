@@ -171,7 +171,7 @@ export function SearchPreview() {
               ))}
             </div>
             <div className="search-scene__results">
-              <ProductEvidence key={scenario} scenario={scenario} compact embedded />
+              <ProductEvidence scenario={scenario} compact embedded />
             </div>
             <p className="search-scene__demo-note">
               Synthetic demonstration · No live observations.{' '}

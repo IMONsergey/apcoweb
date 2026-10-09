@@ -1,7 +1,9 @@
+import '../../styles/compact-experience.css';
 import { useState } from 'react';
 import { MorphPanel } from '../ui/MorphPanel';
 import { siteHref } from '../../app/router';
-import { ProductEvidence, type EvidenceMode } from '../stage2/ProductEvidence';
+import { DataLens, SearchFragment, HostFragment } from '../stage2/CompactFragments';
+import { TeamSignal } from '../stage2/TeamSignal';
 import { DoubleButton } from '../ui/DoubleButton';
 import { demoHosts } from '../../content/product-demo';
 import '../../styles/home-product.css';
@@ -44,7 +46,6 @@ export function SearchableSection() {
     >
       <div className="container">
         <div className="home-product-heading">
-          <p className="eyebrow">INTERNET INFRASTRUCTURE DATA</p>
           <h2 id="searchable-title">
             Search the infrastructure <br />
             behind the internet.
@@ -66,12 +67,12 @@ export function SearchableSection() {
                 </span>
               </button>
             ))}
-            <a className="stage-text-link" href={siteHref('/platform/data-methodology')}>
+            <DoubleButton variant="secondary" compact href={siteHref('/platform/data-methodology')}>
               Explore Data & Methodology
-            </a>
+            </DoubleButton>
           </div>
           <div className="home-searchable__evidence">
-            <ProductEvidence mode={searchable[selected]!.mode} compact />
+            <DataLens selected={selected} />
             <p className="home-product-caption">
               One host connects the query, service response and detected technology. An association
               is a lead to verify.
@@ -123,40 +124,38 @@ export function HomeUseCases() {
     >
       <div className="container">
         <div className="home-product-heading">
-          <p className="eyebrow">BUILT FOR INVESTIGATION</p>
           <h2 id="home-cases-title">
             Different questions. <br />
             One place to investigate them.
           </h2>
         </div>
-        <div className="home-usecases__rows">
+        <div className="home-usecases__grid">
           {cases.map((item, i) => (
             <article key={item.title}>
-              <span className="home-product-number">0{i + 1}</span>
+              <a
+                className="home-usecases__image"
+                href={siteHref(item.path)}
+                aria-label={item.label}
+                tabIndex={-1}
+              >
+                <img
+                  src={`${import.meta.env.BASE_URL}assets/use-cases/${['bug-bounty', 'vulnerability-research', 'osint'][i]}.webp`}
+                  alt=""
+                  width="1536"
+                  height="1024"
+                  loading="lazy"
+                />
+              </a>
               <div className="home-usecases__story">
                 <h3>{item.title}</h3>
-                <p>{item.task}</p>
-                <a className="stage-text-link" href={siteHref(item.path)}>
-                  {item.label}
-                </a>
-              </div>
-              <div className="home-usecases__record">
-                <span className="eyebrow">EXAMPLE INVESTIGATION</span>
-                <code>{item.input}</code>
-                <div>
-                  <span>RESULT</span>
-                  <strong>{item.result}</strong>
-                  <small>{item.detail}</small>
-                </div>
                 <p>{item.outcome}</p>
+                <DoubleButton variant="secondary" compact href={siteHref(item.path)}>
+                  {item.label}
+                </DoubleButton>
               </div>
             </article>
           ))}
         </div>
-        <p className="home-product-caption">
-          Synthetic examples with documentation addresses. No live infrastructure observations or
-          vulnerability findings.
-        </p>
       </div>
     </section>
   );
@@ -205,7 +204,6 @@ export function CapabilitiesSection() {
     >
       <div className="container">
         <div className="home-product-heading">
-          <p className="eyebrow">CAPABILITIES</p>
           <h2 id="capabilities-title">The tools to go deeper.</h2>
         </div>
         <div
@@ -230,14 +228,15 @@ export function CapabilitiesSection() {
             <div className="home-capabilities__copy">
               <h3>{item.title}</h3>
               <p>{item.text}</p>
-              <a
-                className="stage-text-link"
+              <DoubleButton
+                variant="secondary"
+                compact
                 href={siteHref(
                   selected === 4 ? '/developers/api' : '/platform/search-investigation',
                 )}
               >
                 {selected === 4 ? 'Explore API integration' : 'Explore Search & Investigation'}
-              </a>
+              </DoubleButton>
             </div>
             <div className="home-capabilities__screen">
               {selected === 1 ? (
@@ -309,8 +308,10 @@ export function CapabilitiesSection() {
                     Illustrative data shape. The API contract comes from the product documentation.
                   </p>
                 </div>
+              ) : selected === 0 ? (
+                <SearchFragment />
               ) : (
-                <ProductEvidence compact mode={item.mode as EvidenceMode} />
+                <HostFragment />
               )}
             </div>
           </div>
@@ -321,24 +322,29 @@ export function CapabilitiesSection() {
 }
 export function SecurityTeamsCTA() {
   return (
-    <section className="home-team-cta section-space" aria-labelledby="team-evaluation-title">
-      <div className="container">
-        <p className="eyebrow">FOR SECURITY TEAMS</p>
-        <div className="home-team-cta__layout">
+    <section className="home-team-cta" aria-labelledby="team-evaluation-title">
+      <div className="container home-team-cta__layout">
+        <div className="home-team-cta__copy">
           <h2 id="team-evaluation-title">
-            Evaluating Apcosys <br />
+            Evaluating Apcosys
+            <br />
             for your security team?
           </h2>
-          <div>
-            <p>
-              Tell us about your investigation workflows, data requirements and API needs. Find the
-              right way to evaluate Apcosys with your team.
-            </p>
-            <DoubleButton href={siteHref('/contact')}>Talk to Us</DoubleButton>
-            <a className="stage-text-link" href={siteHref('/teams')}>
+          <p>
+            Tell us about your investigation workflows, data requirements and API needs. Find the
+            right way to evaluate Apcosys with your team.
+          </p>
+          <div className="home-team-cta__actions">
+            <DoubleButton variant="inverse" href={siteHref('/contact')}>
+              Talk to Us
+            </DoubleButton>
+            <DoubleButton variant="inverse" href={siteHref('/teams')}>
               Explore Security Teams
-            </a>
+            </DoubleButton>
           </div>
+        </div>
+        <div className="home-team-cta__art">
+          <TeamSignal inverse />
         </div>
       </div>
     </section>

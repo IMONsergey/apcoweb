@@ -2,9 +2,9 @@ import { expect, test } from '@playwright/test';
 
 test.use({ reducedMotion: 'no-preference' });
 
-function expectContinuous(samples: { height: number; time: number }[]) {
+function expectContinuous(samples: { height: number; time: number }[], minimumDelta = 40) {
   const delta = Math.abs(samples.at(-1)!.height - samples[0]!.height);
-  expect(delta).toBeGreaterThan(40);
+  expect(delta).toBeGreaterThan(minimumDelta);
   expect(new Set(samples.map((sample) => Math.round(sample.height))).size).toBeGreaterThan(8);
   for (let i = 1; i < samples.length; i++) {
     const previous = samples[i - 1]!,
@@ -35,10 +35,11 @@ test('original API really plays, then sleeps outside the viewport', async ({ pag
 });
 
 test('all five original investigation films mount and animate', async ({ page }) => {
-  await page.goto('./platform/search-investigation');
+  await page.goto('./');
   for (const [index, name] of ['query', 'results', 'host', 'evidence', 'suggestions'].entries()) {
-    await page.locator('.stage-workbench__step').nth(index).click();
-    const scene = page.locator('.stage-workbench apcosys-product-demo');
+    const card = page.locator('.step-card').nth(index);
+    await card.scrollIntoViewIfNeeded();
+    const scene = card.locator('apcosys-product-demo');
     await scene.scrollIntoViewIfNeeded();
     await expect(scene).toHaveAttribute('scene', name);
     await expect
@@ -86,7 +87,7 @@ test('service selection produces the matching banner and animation can be paused
   page,
 }) => {
   await page.goto('./platform/search-investigation');
-  const sample = page.locator('.stage-workbench__sample');
+  const sample = page.locator('.stage-workbench__record');
   await sample.getByRole('button', { name: /80.*HTTP/ }).click();
   await expect(sample.locator('.evidence-response')).toContainText('301 Moved Permanently');
   await sample.locator('.product-evidence__result').nth(1).click();
@@ -130,14 +131,15 @@ test('capability and monitoring switches resize through intermediate frames on m
       },
       { panel, button },
     );
-    expectContinuous(sizes);
+    // Compact Monitoring states now differ by only ~17px; still require interpolation.
+    expectContinuous(sizes, 10);
   }
 });
 
 test('reduced motion keeps API and evidence readable without playback', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('./developers/api');
-  await page.locator('.stage-api-showcase').scrollIntoViewIfNeeded();
+  await page.goto('./');
+  await page.locator('#api').scrollIntoViewIfNeeded();
   await expect(page.locator('api-developer-demo')).toBeVisible();
   expect(
     await page.locator('api-developer-demo').evaluate((el) => Reflect.get(el, '_timeline')),

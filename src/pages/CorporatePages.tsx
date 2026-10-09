@@ -15,7 +15,6 @@ function AboutPage() {
     >
       <section className="stage-about-belief section-space">
         <div className="container">
-          <p className="eyebrow">WHY APCOSYS</p>
           <h2>The answer is rarely in the first result.</h2>
           <p className="stage-intro">
             Investigating internet infrastructure means working through technical observations.
@@ -51,7 +50,6 @@ function AboutPage() {
       />
       <section className="stage-company section-space">
         <div className="container">
-          <p className="eyebrow">THE COMPANY</p>
           <h2>Contact Apcosys.</h2>
           <p>
             For enquiries about the platform, data or collaboration, contact the team at{' '}
@@ -238,7 +236,6 @@ function ContactPage() {
       <section className="stage-contact section-space">
         <div className="container stage-contact-layout">
           <div className="stage-contact-aside">
-            <p className="eyebrow">GET IN TOUCH</p>
             <h2>Start a conversation.</h2>
             <p>
               Prefer email? Write to <a href={'mailto:' + supportEmail}>{supportEmail}</a>.

@@ -98,28 +98,30 @@ export function PricingSection({ showTeamBanner = true }: { showTeamBanner?: boo
                     <dd>{plan.users}</dd>
                   </div>
                 </dl>
-                {plan.id === 'free' ? (
-                  <a className="plan-button" href={`${productUrl}/register`}>
-                    <LocaleText>{t(plan.action)}</LocaleText>
-                  </a>
-                ) : (
-                  <button
-                    type="button"
-                    className="plan-button"
-                    onClick={(event) => {
-                      event.currentTarget.focus();
-                      setSelected(plan);
-                      setPlanOpen(true);
-                    }}
-                  >
-                    <LocaleText>{t(plan.action)}</LocaleText>
-                  </button>
-                )}
-                {plan.id === 'business' && (
-                  <a className="stage-plan-contact" href={siteHref('/contact')}>
-                    Talk to Us
-                  </a>
-                )}
+                <div className="plan-actions">
+                  {plan.id === 'free' ? (
+                    <a className="plan-button" href={`${productUrl}/register`}>
+                      <LocaleText>{t(plan.action)}</LocaleText>
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      className="plan-button"
+                      onClick={(event) => {
+                        event.currentTarget.focus();
+                        setSelected(plan);
+                        setPlanOpen(true);
+                      }}
+                    >
+                      <LocaleText>{t(plan.action)}</LocaleText>
+                    </button>
+                  )}
+                  {plan.id === 'business' && (
+                    <a className="plan-button stage-plan-contact" href={siteHref('/contact')}>
+                      Talk to Us
+                    </a>
+                  )}
+                </div>
               </article>
             ))}
           </div>

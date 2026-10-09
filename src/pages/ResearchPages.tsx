@@ -4,7 +4,7 @@ import { primaryContact, linkTo } from './pageLinks';
 import { productUrl } from '../config/site';
 import { siteHref } from '../app/router';
 import { PageFrame, StorySections, Notice } from './PageUI';
-import { InvestigationWorkbench } from '../components/stage2/InvestigationWorkbench';
+import { TeamWorkflow } from '../components/stage2/TeamSignal';
 import { TeamOperations } from '../components/stage2/TeamOperations';
 import {
   ScopeEvidence,
@@ -111,7 +111,7 @@ function TeamPage() {
       description="Bring internet-facing infrastructure observations into technical research, security evaluation and existing team workflows."
       links={[primaryContact, linkTo('View Business Plan', '/pricing', true)]}
     >
-      <InvestigationWorkbench story="team" />
+      <TeamWorkflow />
       <TeamOperations />
     </PageFrame>
   );
@@ -146,7 +146,7 @@ export default function ResearchPages({ path }: { path: string }) {
       ) : (
         <IndicatorEvidence />
       )}
-      <StorySections items={config.items.slice(2)} variant="timeline" />
+      <StorySections items={config.items} variant="timeline" />
       <section className="stage-case-bottom">
         <div className="container">
           <p className="stage-case-plan-line">

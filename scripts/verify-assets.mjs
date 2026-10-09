@@ -3,6 +3,7 @@ import { join, relative } from 'node:path';
 
 const root = 'public';
 const groups = {
+  'assets/use-cases': ['bug-bounty.webp', 'vulnerability-research.webp', 'osint.webp'],
   'assets/brand': ['favicon.svg', 'logo.svg'],
   'assets/partners': [
     'ibm.svg',
