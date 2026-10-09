@@ -160,3 +160,6 @@
   .stage-query-examples{gap:7px}
   .stage-query-examples>span{width:100%}
 }
+
+.stage-signin-unverified{opacity:.45;cursor:not-allowed;pointer-events:none}
+.stage-plan-contact{display:inline-block;padding:8px 2px;margin-top:12px;font-size:13px;color:var(--accent-text);text-decoration:underline;text-underline-offset:4px}

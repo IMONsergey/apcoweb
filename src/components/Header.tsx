@@ -147,9 +147,15 @@ export function Header() {
               open={active === 'language'}
               onOpenChange={(open) => setActive(open ? 'language' : null)}
             />
-            <a href={signInUrl} className="plain-button header-signin">
+            {signInUrl ? (
+              <a href={signInUrl} className="plain-button header-signin">
               <LocaleText>{t('Sign In')}</LocaleText>
             </a>
+            ) : (
+              <span className="plain-button header-signin stage-signin-unverified" aria-disabled="true" title="Sign-in address awaiting verification">
+              <LocaleText>{t('Sign In')}</LocaleText>
+            </span>
+            )}
             <DoubleButton href={`${productUrl}/search`} compact className="header-signup">
               <LocaleText>{t('Try Search')}</LocaleText>
             </DoubleButton>
@@ -211,9 +217,15 @@ export function Header() {
           <DoubleButton href={`${productUrl}/search`}>
             <LocaleText>{t('Try Search')}</LocaleText>
           </DoubleButton>
-          <a className="plain-button" href={signInUrl}>
+          {signInUrl ? (
+            <a className="plain-button" href={signInUrl}>
             <LocaleText>{t('Sign In')}</LocaleText>
           </a>
+          ) : (
+            <span className="plain-button stage-signin-unverified" aria-disabled="true" title="Sign-in address awaiting verification">
+            <LocaleText>{t('Sign In')}</LocaleText>
+          </span>
+          )}
           <MobileThemeControl />
         </nav>
       </Modal>

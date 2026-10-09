@@ -62,7 +62,7 @@ export const plans = [
     price: 0,
     credits: '500',
     users: '1',
-    action: 'Start free',
+    action: 'Start Free',
     api: false,
   },
   {
@@ -72,7 +72,7 @@ export const plans = [
     price: 40,
     credits: '25 000',
     users: '1',
-    action: 'View Plus',
+    action: 'Choose Plus',
     api: true,
   },
   {
@@ -82,17 +82,17 @@ export const plans = [
     price: 240,
     credits: '250 000',
     users: '1',
-    action: 'View Expert',
+    action: 'Choose Expert',
     api: true,
   },
   {
     id: 'business',
     name: 'BUSINESS',
-    description: 'Team access & private scanning',
+    description: 'Team research & API access',
     price: 720,
     credits: '1 500 000',
     users: '5',
-    action: 'View Business',
+    action: 'Choose Business',
     api: true,
   },
 ] as const;

@@ -115,6 +115,9 @@ export function PricingSection() {
                     <LocaleText>{t(plan.action)}</LocaleText>
                   </button>
                 )}
+                {plan.id === 'business' && (
+                  <a className="stage-plan-contact" href={siteHref('/contact')}>Talk to Us →</a>
+                )}
               </article>
             ))}
           </div>
@@ -278,7 +281,7 @@ export function PricingSection() {
             <p className="modal-note">
               <LocaleText>
                 {t(
-                  'Continue in APCOSYS to confirm current pricing and activate your plan. No payment is collected on this preview.',
+                  'The selected plan is shown for comparison only. Plan selection is not transferred to registration. Confirm the plan, pricing and billing inside Apcosys before purchase.',
                 )}
               </LocaleText>
             </p>
