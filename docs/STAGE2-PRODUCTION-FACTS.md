@@ -29,3 +29,10 @@ Do not treat these claims as approved or verified merely because a page renders 
 - Contact opens the visitor's email app instead of falsely claiming backend message delivery.
 - All route heads have static title/description/OG after build. The site is still a client-rendered Vite SPA. Set APCO_PUBLIC_SITE_ORIGIN only when the final HTTPS origin is authorised.
 - A noindex flag is not preview access protection. Protected deployment requires hosting authentication and project permissions.
+
+## Verified documentation destination
+
+The public navigation and API CTAs use in-site integration guidance until
+`VITE_APCO_API_DOCS_URL` is supplied after verifying the actual HTTPS
+reference. Do not infer `/docs/api` from the marketing site or advertise
+illustrative request/response snippets as live documentation.
