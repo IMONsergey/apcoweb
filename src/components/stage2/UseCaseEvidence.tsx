@@ -1,169 +1,94 @@
-import { siteHref } from '../../app/router';
+import { ProductEvidence, type EvidenceScenario } from './ProductEvidence';
+import { productUrl } from '../../config/site';
 
-export function ScopeEvidence() {
+type Journey = {
+  label: string;
+  title: string;
+  introduction: string;
+  scenario: EvidenceScenario;
+  start: string;
+  query: string;
+  result: string;
+  next: string;
+  caveat: string;
+};
+
+const journeys: Record<'scope' | 'technology' | 'indicator', Journey> = {
+  scope: {
+    label: 'BUG BOUNTY / EXAMPLE INVESTIGATION',
+    title: "Visibility isn't permission.",
+    introduction: 'Follow one permitted starting point through candidate infrastructure to a responsible testing decision.',
+    scenario: 'domain',
+    start: 'A domain explicitly listed by a programme as in scope.',
+    query: 'Search that permitted domain using the currently supported query format.',
+    result: 'Inspect the host, ports and service context of candidate results.',
+    next: 'Verify each selected host against the programme rules before interacting with it.',
+    caveat: 'The domain and host below are reserved examples, not a real bug bounty programme or an authorised target.',
+  },
+  technology: {
+    label: 'VULNERABILITY RESEARCH / EXAMPLE INVESTIGATION',
+    title: 'A version is a lead. Not a finding.',
+    introduction: 'Move from a technology observation to candidate hosts, then separate potential CVE associations from validated vulnerabilities.',
+    scenario: 'technology',
+    start: 'A product and version discussed in a security advisory.',
+    query: 'Use only product and version filters actually supported by the live search.',
+    result: 'Compare observed host services, detection evidence and any associated CVE context.',
+    next: 'Open a host, check observation age, patch backports and configuration before drawing conclusions.',
+    caveat: 'Technology, version and host information below are illustrative. No specific CVE or exploitable host is claimed.',
+  },
+  indicator: {
+    label: 'OSINT / EXAMPLE INVESTIGATION',
+    title: 'Follow attributes. Keep attribution separate.',
+    introduction: 'Take an indicator from an investigation, inspect its technical context and choose the next evidence-led query.',
+    scenario: 'indicator',
+    start: 'An IP address present in an alert or investigation report.',
+    query: 'Look up the address in the current Apcosys search.',
+    result: 'Review the host view, available services, technologies and observation date.',
+    next: 'Investigate a relevant service or attribute while keeping attribution unproven.',
+    caveat: '198.51.100.24 is a reserved documentation address. This is a conceptual workflow, not an incident or attribution finding.',
+  },
+};
+
+function EvidenceJourney({ kind }: { kind: keyof typeof journeys }) {
+  const item = journeys[kind];
+  const stages = [
+    ['01', 'Starting point', item.start],
+    ['02', 'Query', item.query],
+    ['03', 'Result', item.result],
+    ['04', 'Next step', item.next],
+  ] as const;
   return (
-    <section
-      className="stage-case-evidence stage-case-evidence--scope section-space"
-      aria-labelledby="scope-evidence-title"
-    >
+    <section className={'stage-case-evidence stage-case-evidence--' + kind + ' section-space'}>
       <div className="container">
         <div className="stage-case-evidence__heading">
-          <p className="eyebrow">BUG BOUNTY / AUTHORISED SCOPE</p>
-          <h2 id="scope-evidence-title">Visibility isn't permission.</h2>
-          <p>
-            Start from explicitly authorised targets and keep the programme rules alongside every
-            discovery.
-          </p>
+          <p className="eyebrow">{item.label}</p>
+          <h2>{item.title}</h2>
+          <p>{item.introduction}</p>
         </div>
-        <div className="stage-scope-console">
-          <div className="stage-scope-console__left">
-            <div className="stage-scope-console__head">
-              <span>01 / RESEARCH INPUT</span>
-              <span>EXAMPLE ONLY</span>
+        <div className="stage-example-journey" aria-label="Illustrative investigation stages">
+          {stages.map(([number, title, description]) => (
+            <div key={number}>
+              <span>{number} / {title}</span>
+              <p>{description}</p>
             </div>
-            <h3>Programme scope</h3>
-            <p>Reference input</p>
-            <strong>example.com</strong>
-            <small>Reserved example domain · No real bug bounty programme is implied</small>
-            <div className="stage-scope-console__rules">
-              <div>
-                <span>01</span> Confirm permitted domains and ranges
-              </div>
-              <div>
-                <span>02</span> Review programme exclusions
-              </div>
-              <div>
-                <span>03</span> Validate hosts before testing
-              </div>
-            </div>
-          </div>
-          <div className="stage-scope-console__right">
-            <p className="eyebrow">02 / INVESTIGATION DECISION</p>
-            <h3>Candidate infrastructure</h3>
-            <div className="stage-scope-console__host">
-              <span>Possible host association</span>
-              <strong>Requires scope verification</strong>
-              <em>NOT AUTHORISED BY A SEARCH RESULT</em>
-            </div>
-            <p>
-              Use observed services and technologies to prioritise what to inspect. Do not test a
-              system until you have verified it is in scope.
-            </p>
-            <a href={siteHref('/platform/search-investigation')}>
-              See the investigation workflow ↗
-            </a>
-          </div>
+          ))}
+        </div>
+        <ProductEvidence scenario={item.scenario} mode={kind === 'technology' ? 'cve' : 'host'} />
+        <div className="stage-example-footer">
+          <p>{item.caveat}</p>
+          <a href={productUrl + '/search'}>
+            {kind === 'scope'
+              ? 'Search your scope'
+              : kind === 'technology'
+                ? 'Search by technology'
+                : 'Look up an IP or domain'} <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
     </section>
   );
 }
 
-export function TechnologyEvidence() {
-  return (
-    <section
-      className="stage-case-evidence stage-case-evidence--technology section-space"
-      aria-labelledby="tech-evidence-title"
-    >
-      <div className="container">
-        <div className="stage-case-evidence__heading">
-          <p className="eyebrow">VULNERABILITY RESEARCH / EVIDENCE CHAIN</p>
-          <h2 id="tech-evidence-title">
-            A version is a lead.
-            <br />
-            Not a finding.
-          </h2>
-          <p>These are interpretation stages, not detections from a live host.</p>
-        </div>
-        <div className="stage-tech-console">
-          <div className="stage-tech-console__header">
-            <span>TECHNOLOGY REVIEW</span>
-            <span>ILLUSTRATIVE / NOT LIVE SCAN DATA</span>
-          </div>
-          <div className="stage-tech-console__rows">
-            <div>
-              <span>01 / OBSERVE</span>
-              <h3>Detected product</h3>
-              <p>Assess product fingerprint quality and available service evidence.</p>
-              <strong>Evidence required</strong>
-            </div>
-            <div>
-              <span>02 / COMPARE</span>
-              <h3>Reported version</h3>
-              <p>A banner or version match may not reflect deployed patches or configuration.</p>
-              <strong>Verify manually</strong>
-            </div>
-            <div>
-              <span>03 / INVESTIGATE</span>
-              <h3>CVE association</h3>
-              <p>
-                Potential CVE relevance is a prioritisation signal, not proof of exploitable
-                exposure.
-              </p>
-              <strong>Not confirmed</strong>
-            </div>
-          </div>
-          <div className="stage-tech-console__foot">
-            <strong>What still needs investigation?</strong>
-            <span>Patch status · Configuration · Observation age · Detection limits</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function IndicatorEvidence() {
-  return (
-    <section
-      className="stage-case-evidence stage-case-evidence--indicator section-space"
-      aria-labelledby="indicator-evidence-title"
-    >
-      <div className="container">
-        <div className="stage-case-evidence__heading">
-          <p className="eyebrow">OSINT / LEAD EXPLORATION</p>
-          <h2 id="indicator-evidence-title">
-            Follow attributes.
-            <br />
-            Keep attribution separate.
-          </h2>
-          <p>
-            An infrastructure indicator can lead to more questions. Technical similarity does not
-            establish control, intent or ownership.
-          </p>
-        </div>
-        <div className="stage-indicator-console">
-          <div className="stage-indicator-console__lead">
-            <span>STARTING INDICATOR</span>
-            <strong>198.51.100.24</strong>
-            <p>Documentation-only TEST-NET-2 address</p>
-          </div>
-          <div className="stage-indicator-console__edges" aria-hidden="true">
-            <span></span>
-            <span></span>
-          </div>
-          <div className="stage-indicator-console__nodes">
-            <article>
-              <span>OBSERVED SERVICE</span>
-              <h3>What answered?</h3>
-              <p>Examine available host and service observations.</p>
-            </article>
-            <article>
-              <span>RELATED ATTRIBUTE</span>
-              <h3>What else shares it?</h3>
-              <p>Form a new query from a relevant technology or service.</p>
-            </article>
-            <article>
-              <span>DOCUMENTED EVIDENCE</span>
-              <h3>When was it seen?</h3>
-              <p>Record the time and limits before drawing conclusions.</p>
-            </article>
-          </div>
-          <div className="stage-indicator-console__footer">
-            ILLUSTRATIVE RESEARCH PATH · NO ATTRIBUTION OR LIVE INDICATOR LOOKUP
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+export function ScopeEvidence() { return <EvidenceJourney kind="scope" />; }
+export function TechnologyEvidence() { return <EvidenceJourney kind="technology" />; }
+export function IndicatorEvidence() { return <EvidenceJourney kind="indicator" />; }
