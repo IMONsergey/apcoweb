@@ -237,7 +237,7 @@ function ApiPage() {
   return (
     <PageFrame
       eyebrow="DEVELOPERS · API"
-      variant="technical"
+      variant="developer"
       title="Apcosys data, in your own code."
       description="Query hosts, services and technologies programmatically and use the results in scripts, pipelines, reports and internal tools."
       links={[documentationLink, linkTo('Compare plans', '/pricing', true)]}
