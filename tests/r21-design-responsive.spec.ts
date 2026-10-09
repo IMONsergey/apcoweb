@@ -1,7 +1,9 @@
 import { expect, test } from '@playwright/test';
 import { siteRoutes } from '../src/content/routes';
 
-const widths = [320, 360, 375, 390, 430, 599, 768, 1024, 1199, 1280, 1366, 1440, 1920, 2560] as const;
+const widths = [
+  320, 360, 375, 390, 430, 599, 768, 1024, 1199, 1280, 1366, 1440, 1920, 2560,
+] as const;
 
 for (const route of siteRoutes) {
   for (const theme of ['light', 'dark'] as const) {
@@ -20,7 +22,7 @@ for (const route of siteRoutes) {
           height: width >= 1366 ? (width >= 1920 ? 1080 : 768) : 844,
         });
         const result = await page.evaluate(() => ({
-          viewport: document.documentElement.clientWidth,
+          viewport: window.innerWidth,
           scrollWidth: document.documentElement.scrollWidth,
           title: document.querySelector('main h1')?.getBoundingClientRect(),
         }));
