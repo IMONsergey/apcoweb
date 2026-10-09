@@ -1,4 +1,4 @@
-import { primarySearch, primaryContact, linkTo } from './pageLinks';
+import { primarySearch, linkTo } from './pageLinks';
 import { metrics } from '../content/site';
 import { SearchForm } from '../components/sections/SearchPreview';
 import { StepCarousel } from '../components/sections/StepCarousel';
