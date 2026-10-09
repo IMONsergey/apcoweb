@@ -215,7 +215,11 @@ function ApiSample() {
         </div>
         <PageAction
           links={[
-            { label: 'View API Documentation', href: productUrl + '/docs/api' }('Compare plans', '/pricing', true),
+            { label: 'View API Documentation', href: productUrl + '/docs/api' }(
+              'Compare plans',
+              '/pricing',
+              true,
+            ),
           ]}
         />
       </div>
@@ -230,7 +234,11 @@ function ApiPage() {
       title="Apcosys data, in your own code."
       description="Query hosts, services and technologies programmatically and use the results in scripts, pipelines, reports and internal tools."
       links={[
-        { label: 'View API Documentation', href: productUrl + '/docs/api' }('Compare plans', '/pricing', true),
+        { label: 'View API Documentation', href: productUrl + '/docs/api' }(
+          'Compare plans',
+          '/pricing',
+          true,
+        ),
       ]}
     >
       <StorySections

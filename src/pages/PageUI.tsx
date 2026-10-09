@@ -34,7 +34,11 @@ export function PageAction({ links }: { links: readonly PageLink[] }) {
   return (
     <div className="stage-actions">
       {links.map(({ label, href, secondary }) => (
-        <DoubleButton key={href + label} href={href} {...(secondary ? { variant: 'secondary' as const } : {})}>
+        <DoubleButton
+          key={href + label}
+          href={href}
+          {...(secondary ? { variant: 'secondary' as const } : {})}
+        >
           {label}
         </DoubleButton>
       ))}

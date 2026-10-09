@@ -1,11 +1,6 @@
 import { primarySearch, primaryContact, linkTo } from './pageLinks';
 import { siteHref } from '../app/router';
-import {
-  PageFrame,
-  StorySections,
-  PageAction,
-  Notice,
-} from './PageUI';
+import { PageFrame, StorySections, PageAction, Notice } from './PageUI';
 
 const caseStudies = {
   '/use-cases/bug-bounty': {
@@ -157,9 +152,7 @@ function TeamPage() {
           <h2>Evaluating Apcosys for your security team?</h2>
           <p>Tell us about your investigation workflows, data requirements and API needs.</p>
           <PageAction
-            links={[
-              primaryContact('Data & Methodology', '/platform/data-methodology', true),
-            ]}
+            links={[primaryContact('Data & Methodology', '/platform/data-methodology', true)]}
           />
         </div>
       </section>
