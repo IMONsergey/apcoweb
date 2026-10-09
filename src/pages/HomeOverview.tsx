@@ -133,3 +133,23 @@ export function CapabilityPreview() {
     </section>
   );
 }
+
+export function TeamEvaluationCTA() {
+  return (
+    <section className="stage-team-cta section-space" aria-labelledby="stage-team-cta-title">
+      <div className="container stage-team-cta__layout">
+        <div>
+          <p className="eyebrow">FOR SECURITY TEAMS</p>
+          <h2 id="stage-team-cta-title">Evaluating Apcosys for your security team?</h2>
+        </div>
+        <div className="stage-team-cta__copy">
+          <p>Tell us about your investigation workflows, data requirements and API needs. Find the right way to evaluate Apcosys for your team.</p>
+          <div className="stage-actions">
+            <DoubleButton href={siteHref('/contact')}>Talk to Us</DoubleButton>
+            <DoubleButton variant="secondary" href={siteHref('/teams')}>Explore Security Teams</DoubleButton>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

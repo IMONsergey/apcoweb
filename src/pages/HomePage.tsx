@@ -9,7 +9,7 @@ import { PricingSection } from '../components/sections/PricingSection';
 import { FAQSection } from '../components/sections/FAQSection';
 import { ClosingSection } from '../components/sections/ClosingSection';
 import { Visual } from '../components/visuals/Visual';
-import { WhatYouCanSearch, UseCasePreview, CapabilityPreview } from './HomeOverview';
+import { WhatYouCanSearch, UseCasePreview, CapabilityPreview, TeamEvaluationCTA } from './HomeOverview';
 
 export default function HomePage() {
   return (
@@ -24,6 +24,7 @@ export default function HomePage() {
       <DataSection />
       <ApiSection />
       <PricingSection />
+      <TeamEvaluationCTA />
       <div className="lower-scene">
         <Visual kind="waves" />
         <FAQSection />
