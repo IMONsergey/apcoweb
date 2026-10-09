@@ -1,36 +1,10 @@
 import { primarySearch, primaryContact, linkTo } from './pageLinks';
 import { metrics } from '../content/site';
 import { SearchForm } from '../components/sections/SearchPreview';
-import { StepCarousel } from '../components/sections/StepCarousel';
-import { PageFrame, StorySections, Notice } from './PageUI';
-
-const steps = [
-  {
-    title: 'Query with what you already know.',
-    description:
-      'Start from an IP address, domain, port, service or detected technology. Combine supported search attributes to narrow the infrastructure behind your question.',
-  },
-  {
-    title: 'Judge relevance before you click.',
-    description:
-      'Review matching hosts and the available service information. Use search filters to focus the list on what matters.',
-  },
-  {
-    title: 'One host, the full technical picture.',
-    description:
-      'Open a host to inspect available observations: ports, services, products, versions and other recorded attributes.',
-  },
-  {
-    title: 'Context, not conclusions.',
-    description:
-      'Detected products and versions may be associated with CVEs. An association is a lead to verify, not proof that the host is vulnerable.',
-  },
-  {
-    title: 'Keep the thread.',
-    description:
-      'Use a service, technology or domain from your findings to refine the query and continue the investigation.',
-  },
-] as const;
+import { InvestigationWorkbench } from '../components/stage2/InvestigationWorkbench';
+import { MonitoringConcept } from '../components/stage2/MonitoringConcept';
+import { DataInterpretation } from '../components/stage2/DataInterpretation';
+import { PageFrame, StorySections } from './PageUI';
 
 function InvestigationPage() {
   return (
@@ -48,19 +22,15 @@ function InvestigationPage() {
             Search from a technical attribute. Your query opens the existing Apcosys search product.
           </p>
           <SearchForm />
-          <p className="stage-helper">
-            Search examples will be added when supported syntax is confirmed in the product.
-          </p>
+          <p className="stage-helper">Start with a domain or IPv4 address. Advanced attribute filters depend on the supported live search syntax.</p>
         </div>
       </section>
-      <StepCarousel />
-      <StorySections items={steps.slice(1)} variant="timeline" />
-      <section className="stage-page-crosslink">
+      <InvestigationWorkbench story="search" />
+      <section className="stage-page-crosslink" id="search-syntax">
         <div className="container">
           <h2>Explore the search syntax.</h2>
           <p>
-            Learn how to turn an observed attribute into a query using the existing product
-            documentation.
+            Begin with a domain or IP address, then review the filtering and attribute syntax available in the SaaS. This introduction intentionally does not claim an unverified filter grammar.
           </p>
           <a href={primarySearch.href}>Continue to Apcosys search ↗</a>
         </div>
@@ -124,6 +94,7 @@ function MethodologyPage() {
           </div>
         </div>
       </section>
+      <DataInterpretation />
       <StorySections
         variant="split"
         items={[
@@ -162,34 +133,7 @@ function MonitoringPage() {
       variant="product"
       links={[linkTo('Search & Investigation', '/platform/search-investigation'), primaryContact]}
     >
-      <section className="stage-concept-demo section-space">
-        <div className="container">
-          <p className="eyebrow">ILLUSTRATIVE EXPERIENCE</p>
-          <h2>From one observation to the next question.</h2>
-          <div className="stage-monitor-grid">
-            <div className="stage-monitor-target">
-              <span>01 / OBSERVE</span>
-              <h3>Infrastructure</h3>
-              <p>Choose the scope you need to investigate.</p>
-            </div>
-            <div className="stage-monitor-target">
-              <span>02 / REVIEW</span>
-              <h3>Signals</h3>
-              <p>Understand the technical attributes worth revisiting.</p>
-            </div>
-            <div className="stage-monitor-target">
-              <span>03 / INVESTIGATE</span>
-              <h3>Context</h3>
-              <p>Continue to a deeper host and service examination.</p>
-            </div>
-          </div>
-          <Notice>
-            This is a non-functional product concept for client discussion. Live alerts, continuous
-            monitoring, history and available plan entitlements are not represented as existing
-            capabilities.
-          </Notice>
-        </div>
-      </section>
+      <MonitoringConcept />
       <StorySections
         items={[
           {

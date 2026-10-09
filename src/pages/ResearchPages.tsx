@@ -1,6 +1,8 @@
 import { primarySearch, primaryContact, linkTo } from './pageLinks';
 import { siteHref } from '../app/router';
 import { PageFrame, StorySections, PageAction, Notice } from './PageUI';
+import { InvestigationWorkbench } from '../components/stage2/InvestigationWorkbench';
+import { TeamOperations } from '../components/stage2/TeamOperations';
 
 const caseStudies = {
   '/use-cases/bug-bounty': {
@@ -118,6 +120,8 @@ function TeamPage() {
           </p>
         </div>
       </section>
+      <TeamOperations />
+      <InvestigationWorkbench story="team" />
       <StorySections
         items={[
           {
@@ -188,6 +192,7 @@ export default function ResearchPages({ path }: { path: string }) {
           </p>
         </div>
       </section>
+      <InvestigationWorkbench story={path === '/use-cases/bug-bounty' ? 'bounty' : path === '/use-cases/vulnerability-research' ? 'vulnerability' : 'osint'} />
       <StorySections items={config.items} variant="timeline" />
       <section className="stage-case-bottom">
         <div className="container">
