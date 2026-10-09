@@ -65,7 +65,7 @@ export function PageFrame({
   description: string;
   children: ReactNode;
   links?: readonly PageLink[];
-  variant?: 'editorial' | 'technical' | 'product' | 'commercial' | 'usecase';
+  variant?: 'editorial' | 'technical' | 'product' | 'commercial' | 'usecase' | 'developer';
   concept?: boolean;
 }) {
   return (
