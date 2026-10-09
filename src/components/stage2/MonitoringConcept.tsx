@@ -1,63 +1,74 @@
 import { useState } from 'react';
 import { siteHref } from '../../app/router';
 
+const assets = [
+  { name: 'Example domain', target: 'example.com', type: 'DOMAIN', observations: 'Sample host context', services: ['Service A', 'Service B'] },
+  { name: 'Example host', target: '198.51.100.24', type: 'IPV4 · TEST-NET-2', observations: 'Sample service context', services: ['Service A', 'Service C'] },
+] as const;
+
 const views = [
   {
-    id: 'observe',
+    id: 'scope',
     label: '01 / Scope',
-    headline: 'Define the infrastructure to review.',
-    detail:
-      'This concept starts with an authorised set of infrastructure attributes. It does not create a scheduled scan.',
-    headlineLabel: 'Observation scope',
-    left: ['Example target', 'example.com'],
+    headline: 'Choose what to observe.',
+    detail: 'A future monitoring workflow could begin with an authorised set of domains or IP addresses. This screen does not schedule a scan.',
+    left: ['Research scope', 'Illustrative only'],
     right: ['State', 'Concept only'],
   },
   {
-    id: 'signal',
-    label: '02 / Signal',
-    headline: 'Review a possible change.',
-    detail:
-      'A new service observation could be a starting point, but a difference between scans does not itself establish a new exposure.',
-    headlineLabel: 'Illustrative comparison',
+    id: 'observations',
+    label: '02 / Observe',
+    headline: 'Compare recorded observations.',
+    detail: 'Service A and Service B illustrate a difference between two sample snapshots. They do not describe the selected host.',
     left: ['Earlier observation', 'Service A'],
     right: ['Later observation', 'Service A + Service B'],
   },
   {
-    id: 'investigate',
-    label: '03 / Investigate',
-    headline: 'Move from a signal to evidence.',
-    detail:
-      'Open a host in Search & Investigation to examine the technical context and validate the underlying finding.',
-    headlineLabel: 'Research handoff',
-    left: ['Lead', 'Review observed service'],
+    id: 'change',
+    label: '03 / Signal',
+    headline: 'Review a possible change.',
+    detail: 'An additional service might be a useful research lead. An apparent difference does not prove a new exposure or a real incident.',
+    left: ['Example signal', 'Possible service change'],
     right: ['Next action', 'Inspect host context'],
+  },
+  {
+    id: 'context',
+    label: '04 / Context',
+    headline: 'Inspect the technical evidence.',
+    detail: 'Review services, technology context and observation dates before determining whether a change has meaning.',
+    left: ['Host evidence', 'Sample service attributes'],
+    right: ['CVE context', 'Unverified association'],
+  },
+  {
+    id: 'investigate',
+    label: '05 / Investigate',
+    headline: 'Continue in Search & Investigation.',
+    detail: 'A future signal would hand off to the actual search and host investigation experience rather than claiming an alert is a finding.',
+    left: ['Research lead', 'Selected example asset'],
+    right: ['Destination', 'Search & Investigation'],
   },
 ] as const;
 
 export function MonitoringConcept() {
   const [current, setCurrent] = useState(0);
+  const [assetIndex, setAssetIndex] = useState(0);
   const view = views[current] ?? views[0];
+  const asset = assets[assetIndex] ?? assets[0];
   return (
-    <section
-      className="stage-monitor-concept section-space"
-      aria-labelledby="monitor-concept-title"
-    >
+    <section className="stage-monitor-concept section-space" aria-labelledby="monitor-concept-title">
       <div className="container">
         <div className="stage-monitor-concept__heading">
           <div>
-            <p className="eyebrow">CONCEPT EXPERIENCE / NOT AVAILABLE IN THE LIVE PRODUCT</p>
-            <h2 id="monitor-concept-title">From observation to investigation.</h2>
+            <p className="eyebrow">MONITORING / CONCEPT EXPERIENCE</p>
+            <h2 id="monitor-concept-title">An observation is a starting point.</h2>
           </div>
           <p>
-            Explore how a future monitoring workflow could make a change easier to interpret. All
-            states below are static examples, not scan data, alerts or product output.
+            Select an example asset and move through a potential monitoring workflow. These are interactive sample states, not live scans, alerts or product records.
           </p>
         </div>
         <div className="stage-monitor-console">
           <div className="stage-monitor-console__header">
-            <strong>
-              APCOSYS <span>/ MONITORING CONCEPT</span>
-            </strong>
+            <strong>APCOSYS <span>/ MONITORING CONCEPT</span></strong>
             <span>DEMONSTRATION / OFFLINE</span>
           </div>
           <div className="stage-monitor-console__body">
@@ -75,52 +86,62 @@ export function MonitoringConcept() {
                   <span aria-hidden="true">↗</span>
                 </button>
               ))}
-              <div className="stage-monitor-console__sidebar-footer">
-                No live monitoring connection
-              </div>
+              <div className="stage-monitor-console__sidebar-footer">No live monitoring connection</div>
             </div>
             <div className="stage-monitor-console__main">
               <div className="stage-monitor-console__overline">
-                <span>CONCEPT / {view.headlineLabel}</span>
-                <span>0{current + 1} / 03</span>
+                <span>CONCEPT / {view.id.toUpperCase()}</span>
+                <span>0{current + 1} / 05</span>
               </div>
               <h3>{view.headline}</h3>
               <p>{view.detail}</p>
+              <div className="stage-monitor-assets">
+                <div className="stage-monitor-assets__intro">
+                  <span>OBSERVATION TARGETS</span>
+                  <span>SELECT AN EXAMPLE</span>
+                </div>
+                <div className="stage-monitor-assets__list">
+                  {assets.map((item, index) => (
+                    <button
+                      key={item.target}
+                      type="button"
+                      aria-pressed={index === assetIndex}
+                      onClick={() => setAssetIndex(index)}
+                    >
+                      <span><strong>{item.name}</strong><small>{item.target}</small></span>
+                      <span aria-hidden="true">{index === assetIndex ? '●' : '○'}</span>
+                    </button>
+                  ))}
+                </div>
+                <div className="stage-monitor-assets__details" aria-live="polite">
+                  <span>SELECTED / {asset.type}</span>
+                  <strong>{asset.target}</strong>
+                  <div>
+                    <span>Illustrative services</span>
+                    <span>{asset.services.join(' · ')}</span>
+                  </div>
+                  <div>
+                    <span>Last observed</span>
+                    <span>Not supplied</span>
+                  </div>
+                </div>
+              </div>
               <div className="stage-monitor-console__summary">
-                <div>
-                  <span>{view.left[0]}</span>
-                  <strong>{view.left[1]}</strong>
-                </div>
-                <span className="stage-monitor-console__arrow" aria-hidden="true">
-                  →
-                </span>
-                <div>
-                  <span>{view.right[0]}</span>
-                  <strong>{view.right[1]}</strong>
-                </div>
+                <div><span>{view.left[0]}</span><strong>{view.left[1]}</strong></div>
+                <span className="stage-monitor-console__arrow" aria-hidden="true">→</span>
+                <div><span>{view.right[0]}</span><strong>{view.right[1]}</strong></div>
               </div>
               <div className="stage-monitor-console__ledger">
-                <div>
-                  <span>01</span>
-                  <strong>Observe</strong>
-                  <span>{current >= 0 ? 'Illustrative' : '—'}</span>
-                </div>
-                <div>
-                  <span>02</span>
-                  <strong>Review signal</strong>
-                  <span>{current >= 1 ? 'Illustrative' : 'Not selected'}</span>
-                </div>
-                <div>
-                  <span>03</span>
-                  <strong>Investigate</strong>
-                  <span>{current >= 2 ? 'Illustrative' : 'Not selected'}</span>
-                </div>
+                {views.map((step, index) => (
+                  <div key={step.id}>
+                    <span>0{index + 1}</span>
+                    <strong>{step.label.slice(5)}</strong>
+                    <span>{index === current ? 'Reviewing' : 'Illustrative'}</span>
+                  </div>
+                ))}
               </div>
-              <a
-                className="stage-monitor-console__link"
-                href={siteHref('/platform/search-investigation')}
-              >
-                Explore the existing Search & Investigation experience ↗
+              <a className="stage-monitor-console__link" href={siteHref('/platform/search-investigation')}>
+                Explore Search & Investigation ↗
               </a>
             </div>
           </div>
