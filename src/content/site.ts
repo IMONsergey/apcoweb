@@ -1,4 +1,7 @@
-import { productUrl, supportEmail } from '../config/site';
+import { apiDocumentationUrl, productUrl, supportEmail } from '../config/site';
+
+/** Fallback stays on this site until the product owner verifies the API reference. */
+export const documentationHref = apiDocumentationUrl ?? '/developers/api#documentation';
 
 export { productUrl, supportEmail };
 export const metrics = [
@@ -117,7 +120,7 @@ export const navigation = [
     label: 'Developers',
     items: [
       { label: 'API', href: '/developers/api' },
-      { label: 'Documentation', href: productUrl + '/docs/api' },
+      { label: 'Documentation', href: documentationHref },
     ],
   },
 ] as const;
@@ -144,7 +147,7 @@ export const footerGroups = [
     title: 'Developers',
     links: [
       ['API', '/developers/api'],
-      ['Documentation', productUrl + '/docs/api'],
+      ['Documentation', documentationHref],
     ],
   },
   {
