@@ -2,6 +2,7 @@ import { primaryContact, linkTo } from './pageLinks';
 import { useState, type FormEvent } from 'react';
 import { productUrl, supportEmail } from '../content/site';
 import { PageFrame, StorySections, Notice } from './PageUI';
+import { DoubleButton } from '../components/ui/DoubleButton';
 
 function AboutPage() {
   return (
@@ -201,9 +202,9 @@ function ContactForm() {
           .
         </span>
       </label>
-      <button type="submit" className="stage-form-submit" disabled={opening}>
+      <DoubleButton type="submit" className="stage-contact-submit" disabled={opening}>
         {opening ? 'Opening email…' : 'Prepare email'}
-      </button>
+      </DoubleButton>
       {status && (
         <p className="stage-form-status" role="status">
           {status}
