@@ -17,8 +17,8 @@ export default function HomePage() {
       <WhatYouCanSearch />
       <SearchPreview />
       <StepCarousel />
-    <UseCasePreview />
-    <CapabilityPreview />
+      <UseCasePreview />
+      <CapabilityPreview />
       <AudienceSection />
       <DataSection />
       <ApiSection />

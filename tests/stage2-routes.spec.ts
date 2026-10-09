@@ -24,15 +24,23 @@ test('Stage 2 navigation changes URL and supports browser back', async ({ page }
   await expect(page.locator('main')).toHaveAttribute('data-route', '/');
 });
 
-test('Stage 2 protected preview keeps unverified monitoring visibly conceptual', async ({ page }) => {
+test('Stage 2 protected preview keeps unverified monitoring visibly conceptual', async ({
+  page,
+}) => {
   await page.goto('./platform/monitoring');
-  await expect(page.getByText('Concept demonstration · Not a live product capability')).toBeVisible();
-  await expect(page.getByText('Live alerts, continuous monitoring', { exact: false })).toBeVisible();
+  await expect(
+    page.getByText('Concept demonstration · Not a live product capability'),
+  ).toBeVisible();
+  await expect(
+    page.getByText('Live alerts, continuous monitoring', { exact: false }),
+  ).toBeVisible();
 });
 
 test('Stage 2 contact form does not claim to send without a backend', async ({ page }) => {
   await page.goto('./contact');
-  await expect(page.getByText('Messages are not stored or delivered by this website.', { exact: false })).toBeVisible();
+  await expect(
+    page.getByText('Messages are not stored or delivered by this website.', { exact: false }),
+  ).toBeVisible();
   await expect(page.getByRole('button', { name: 'Prepare email' })).toBeVisible();
   await expect(page.getByLabel('Work email')).toHaveAttribute('type', 'email');
 });
@@ -45,5 +53,7 @@ test('Stage 2 cookie preferences disclose disabled analytics', async ({ page }) 
   await expect(dialog.getByText('Analytics', { exact: true })).toBeVisible();
   await dialog.getByRole('button', { name: 'Save Preferences' }).click();
   await expect(dialog).toBeHidden();
-  expect(await page.evaluate(() => localStorage.getItem('apcosys-cookie-preferences'))).toBe('essential');
+  expect(await page.evaluate(() => localStorage.getItem('apcosys-cookie-preferences'))).toBe(
+    'essential',
+  );
 });

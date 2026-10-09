@@ -152,7 +152,10 @@ function TeamPage() {
           <h2>Evaluating Apcosys for your security team?</h2>
           <p>Tell us about your investigation workflows, data requirements and API needs.</p>
           <PageAction
-            links={[primaryContact, linkTo('Data & Methodology', '/platform/data-methodology', true)]}
+            links={[
+              primaryContact,
+              linkTo('Data & Methodology', '/platform/data-methodology', true),
+            ]}
           />
         </div>
       </section>

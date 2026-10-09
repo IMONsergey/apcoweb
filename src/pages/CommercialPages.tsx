@@ -232,7 +232,7 @@ function ApiPage() {
       description="Query hosts, services and technologies programmatically and use the results in scripts, pipelines, reports and internal tools."
       links={[
         { label: 'View API Documentation', href: productUrl + '/docs/api' },
-            linkTo('Compare plans', '/pricing', true),
+        linkTo('Compare plans', '/pricing', true),
       ]}
     >
       <StorySections

@@ -114,8 +114,8 @@ export function CapabilityPreview() {
         <p className="eyebrow">CAPABILITIES</p>
         <h2 id="stage-capabilities-title">The tools to go deeper.</h2>
         <p className="stage-intro">
-          The tools behind each step of an investigation — and a way to take the data into your
-          own workflows.
+          The tools behind each step of an investigation — and a way to take the data into your own
+          workflows.
         </p>
         <div className="stage-capabilities-grid">
           {capabilities.map(([title, description], i) => (

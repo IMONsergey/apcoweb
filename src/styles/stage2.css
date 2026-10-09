@@ -765,5 +765,13 @@
   }
 }
 
-.stage-trust-topic { font: 500 14px/1.4 var(--font-sans); text-align: center; color: var(--ink); }
-@media (max-width: 599px) { .stage-trust-topic { font-size: 12px; } }
+.stage-trust-topic {
+  font: 500 14px/1.4 var(--font-sans);
+  text-align: center;
+  color: var(--ink);
+}
+@media (max-width: 599px) {
+  .stage-trust-topic {
+    font-size: 12px;
+  }
+}

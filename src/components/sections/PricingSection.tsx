@@ -140,10 +140,7 @@ export function PricingSection() {
               <LocaleText>{t('Tell us about your data, API or procurement needs.')}</LocaleText>
             </p>
           </div>
-          <DoubleButton
-            variant="inverse"
-            href={siteHref('/contact')}
-          >
+          <DoubleButton variant="inverse" href={siteHref('/contact')}>
             <LocaleText>{t('Talk to Us')}</LocaleText>
           </DoubleButton>
         </div>
