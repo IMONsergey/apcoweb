@@ -46,3 +46,14 @@ The work stays in draft PR #28; no main merge or public release. The last Vercel
 - Give the team CTA more vertical room. Replace the SVG chip/routes with a GSAP-driven Canvas field of three projected, undulating observation planes and travelling signals. Pointer response is restrained; the loop is periodic, sleeps offscreen/in hidden tabs and becomes a still composition with reduced motion.
 
 Validation: 22 targeted interaction/layout/motion checks passed locally; desktop/mobile light/dark screenshots and accessibility checks passed, with no overflow at eight widths from 320 to 2560 and no browser runtime errors. Source integrity, lint, TypeScript and production build passed. User review is on the Mac's local port 4178; no new public release.
+
+## Follow-up: six screenshots at 16:46–16:50
+
+- Replace the multi-ring search treatment with one mint/cyan gradient. Focus intensifies the same contour instead of adding the legacy solid outline; its animation stops with reduced motion.
+- Restore the compact left-hand data selector and right-hand example. Each selector has an explicit selected indicator and supports keyboard activation; mobile uses a compact two-column selector group.
+- Crossfade the outgoing and incoming capability/data examples over 480 ms while measuring height over 560 ms. The temporary outgoing copy is inert, hidden from assistive technology, stripped of IDs and removed after the animation.
+- Preload the selected route before changing the page. Use native View Transitions with a stable header where supported, a restrained opacity fallback elsewhere, and immediate updates with reduced motion. Preserve hash navigation, focus and history scroll restoration. Superseded navigation cannot overwrite the latest choice.
+- Make Business pricing's Talk to Us action use the existing accent/on-action theme tokens and keep both actions horizontal.
+- Enlarge the team animation and reduce its three planes from 495 to 189 points, removing the secondary particle outlines. Preserve the layered observation concept and offscreen/reduced-motion controls.
+
+Validation: the 66 targeted layout, functional, route and motion scenarios passed across focused runs, including delayed route chunks, back/forward during transitions, cancelled navigation and overlapping capability content. Desktop/mobile screenshots checked in both themes; responsive overflow remained zero at eight widths. Full-page accessibility checks exposed one accent-button contrast override, which was fixed and rechecked in both themes. Search focus now has no solid CSS outline and retains its gradient. Original visual-module hashes, lint, TypeScript, asset checks and production bundle budgets remain enforced. Local Mac review remains on port 4178.

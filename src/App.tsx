@@ -6,8 +6,10 @@ import { Footer } from './components/Footer';
 import { MotionProvider } from './components/visuals/MotionProvider';
 import { useSiteRoute } from './app/router';
 
-const HomePage = lazy(() => import('./pages/HomePage'));
-const InnerPage = lazy(() => import('./pages/InnerPage'));
+import { loadHome, loadInner } from './app/routeModules';
+import './styles/route-transitions.css';
+const HomePage = lazy(loadHome);
+const InnerPage = lazy(loadInner);
 
 export function App() {
   const { locale, t } = useLocale();

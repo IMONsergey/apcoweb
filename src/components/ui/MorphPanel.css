@@ -1,4 +1,5 @@
 .morph-panel {
+  position: relative;
   min-width: 0;
   box-sizing: content-box;
 }
@@ -14,4 +15,12 @@
   .morph-panel {
     height: auto !important;
   }
+}
+
+.morph-panel__outgoing {
+  position: absolute;
+  inset: 0 0 auto;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
 }

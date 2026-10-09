@@ -2,7 +2,7 @@ import '../../styles/compact-experience.css';
 import { useState } from 'react';
 import { MorphPanel } from '../ui/MorphPanel';
 import { siteHref } from '../../app/router';
-import { SearchFragment, HostFragment } from '../stage2/CompactFragments';
+import { DataLens, SearchFragment, HostFragment } from '../stage2/CompactFragments';
 import { TeamSignal } from '../stage2/TeamSignal';
 import { DoubleButton } from '../ui/DoubleButton';
 import { demoHosts } from '../../content/product-demo';
@@ -36,20 +36,6 @@ const searchable = [
   },
 ] as const;
 
-const dataSamples = [
-  '198.51.100.24',
-  'portal.example.com',
-  '443 / HTTPS',
-  'nginx 1.24.0',
-  'Version applicability',
-];
-const dataRelations = [
-  'A host brings its domain, exposed services and detected software into one view.',
-  'Follow an observed domain to the host and services behind it.',
-  'A service response supplies the evidence for a technology detection.',
-  'Read the detected product and version alongside the original service evidence.',
-  'A version association is a research lead. Verify applicability before treating it as a finding.',
-];
 export function SearchableSection() {
   const [selected, setSelected] = useState(0);
   return (
@@ -59,63 +45,36 @@ export function SearchableSection() {
       aria-labelledby="searchable-title"
     >
       <div className="container">
-        <div className="home-product-heading data-map-heading">
+        <div className="home-product-heading">
           <h2 id="searchable-title">
             Search the infrastructure <br />
             behind the internet.
           </h2>
-          <div>
-            <p>
-              Explore the connections between a host, its services and the evidence behind each
-              observation.
-            </p>
+        </div>
+        <div className="home-searchable__layout">
+          <div className="home-searchable__index" role="group" aria-label="Searchable data types">
+            {searchable.map((item, i) => (
+              <button
+                key={item.label}
+                type="button"
+                aria-pressed={selected === i}
+                onClick={() => setSelected(i)}
+              >
+                <span className="searchable-selector" aria-hidden="true" />
+                <span>
+                  <strong>{item.label}</strong>
+                  <small>{item.description}</small>
+                </span>
+              </button>
+            ))}
+          </div>
+          <div className="home-searchable__evidence">
+            <DataLens selected={selected} />
             <DoubleButton compact href={siteHref('/platform/data-methodology')}>
               Explore Data &amp; Methodology
             </DoubleButton>
           </div>
         </div>
-        <div className="data-map" role="group" aria-label="Searchable data types">
-          {searchable.map((item, i) => (
-            <button
-              key={item.label}
-              type="button"
-              className={'data-map__tile data-map__tile--' + i}
-              aria-pressed={selected === i}
-              onClick={() => setSelected(i)}
-            >
-              <span className="data-map__title">
-                <strong>{item.label}</strong>
-                <span aria-hidden="true" className="data-map__indicator" />
-              </span>
-              <span className="data-map__description">{item.description}</span>
-              <span className="data-map__sample">
-                <code>{dataSamples[i]}</code>
-                <span>
-                  {
-                    [
-                      'Host address',
-                      'Observed hostname',
-                      'Service response',
-                      'Detected software',
-                      'Requires verification',
-                    ][i]
-                  }
-                </span>
-              </span>
-            </button>
-          ))}
-        </div>
-        <MorphPanel changeKey={selected}>
-          <div className="data-map__connection" data-morph-enter aria-live="polite">
-            <span className="data-map__path">
-              <span>{['Query', 'Host', 'Host', 'Service', 'Technology'][selected]}</span>
-              <i aria-hidden="true" />
-              <span>{searchable[selected]!.label}</span>
-            </span>
-            <p>{dataRelations[selected]}</p>
-            <small>Illustrative data</small>
-          </div>
-        </MorphPanel>
       </div>
     </section>
   );
@@ -283,7 +242,7 @@ export function CapabilitiesSection() {
             </button>
           ))}
         </div>
-        <MorphPanel changeKey={selected + String(httpsOnly)}>
+        <MorphPanel changeKey={selected + String(httpsOnly)} crossfade>
           <div className="home-capabilities__stage" data-morph-enter>
             <div className="home-capabilities__copy">
               <h3>{item.title}</h3>

@@ -25,7 +25,7 @@ export function TeamSignal({ inverse = false }: { inverse?: boolean }) {
       const phase = state.phase;
       const turn = -0.55 + Math.sin(phase) * 0.18 + pointer.x * 0.09;
       const tilt = 0.82 + pointer.y * 0.06;
-      const scale = Math.min(width / 600, height / 440);
+      const scale = Math.min(width / 510, height / 410);
       const project = (x: number, y: number, z: number) => {
         const rx = x * Math.cos(turn) + z * Math.sin(turn);
         const rz = z * Math.cos(turn) - x * Math.sin(turn);
@@ -42,22 +42,22 @@ export function TeamSignal({ inverse = false }: { inverse?: boolean }) {
       const layers = [2, 1, 0];
       for (const layer of layers) {
         const points: ReturnType<typeof project>[][] = [];
-        const separation = 58 + 18 * Math.sin(phase);
-        for (let row = 0; row < 11; row++) {
+        const separation = 68 + 14 * Math.sin(phase);
+        for (let row = 0; row < 7; row++) {
           points[row] = [];
-          for (let col = 0; col < 15; col++) {
+          for (let col = 0; col < 9; col++) {
             const wave = Math.sin(col * 0.48 + row * 0.35 + phase + layer * 0.7);
             const fold = (1 - Math.cos(phase)) * 0.5;
             points[row]![col] = project(
-              (col - 7) * 25,
-              (layer - 1) * separation + wave * 24 * fold,
-              (row - 5) * 23,
+              (col - 4) * 47,
+              (layer - 1) * separation + wave * 18 * fold,
+              (row - 3) * 39,
             );
           }
         }
         const rgb = inverse ? '204,248,250' : '3,122,143';
         context.lineWidth = 0.65 * scale;
-        for (let row = 0; row < 11; row++) {
+        for (let row = 0; row < 7; row++) {
           context.beginPath();
           points[row]!.forEach((point, col) =>
             col ? context.lineTo(point.x, point.y) : context.moveTo(point.x, point.y),
@@ -65,7 +65,7 @@ export function TeamSignal({ inverse = false }: { inverse?: boolean }) {
           context.strokeStyle = `rgba(${rgb},${0.12 + layer * 0.025})`;
           context.stroke();
         }
-        for (let col = 0; col < 15; col++) {
+        for (let col = 0; col < 9; col++) {
           context.beginPath();
           points.forEach((row, i) =>
             i ? context.lineTo(row[col]!.x, row[col]!.y) : context.moveTo(row[col]!.x, row[col]!.y),
@@ -75,16 +75,12 @@ export function TeamSignal({ inverse = false }: { inverse?: boolean }) {
         points.forEach((row, r) =>
           row.forEach((point, c) => {
             const pulse = Math.pow(
-              Math.max(0, Math.cos(c * 0.32 + r * 0.28 - phase * 2 + layer)),
+              Math.max(0, Math.cos(c * 0.52 + r * 0.42 - phase * 2 + layer)),
               16,
             );
-            const size = (1.1 + pulse * 2.2) * scale * point.perspective;
+            const size = (1.7 + pulse * 2.5) * scale * point.perspective;
             context.fillStyle = `rgba(${rgb},${0.28 + pulse * 0.72})`;
             context.fillRect(point.x - size / 2, point.y - size / 2, size, size);
-            if (pulse > 0.8) {
-              context.strokeStyle = `rgba(${rgb},${(pulse - 0.8) * 1.4})`;
-              context.strokeRect(point.x - size * 2, point.y - size * 2, size * 4, size * 4);
-            }
           }),
         );
       }

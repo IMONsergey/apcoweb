@@ -61,15 +61,19 @@ test('internal pages use distinct compact visual narratives', async ({ page }) =
   }
 });
 
-test('data cards are keyboard operable and section actions use the shared button', async ({
+test('data selectors are keyboard operable and section actions use the shared button', async ({
   page,
 }) => {
   await page.goto('./');
-  const domain = page.locator('.data-map__tile').nth(1);
+  const domain = page.locator('.home-searchable__index button').nth(1);
   await domain.focus();
   await domain.press('Enter');
   await expect(domain).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('.data-map__connection')).toContainText('Follow an observed domain');
+  await expect(page.locator('.data-lens')).toHaveAttribute('aria-label', 'Domain records');
+  await expect(page.locator('.data-lens .morph-panel__content .domain-tree')).toContainText(
+    'example.com',
+  );
+  await expect(page.locator('#plan-business .plan-button--accent')).toContainText('Talk to Us');
   await expect(page.locator('.home-searchable .double-button--primary')).toBeVisible();
   await expect(page.locator('.step-evidence-note .double-button')).toBeVisible();
   await expect(page.locator('.capability-notes__tile')).toHaveCount(2);

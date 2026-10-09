@@ -943,61 +943,69 @@
   font-size: 14px;
 }
 
-/* A separate, inviting input surface above the illustrative results. */
-@property --search-orbit {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
+/* One continuous mint/cyan outline, shared by idle and focus states. */
 .site .search-scene__content > .search-form {
   position: relative;
   margin-bottom: 14px;
-  box-shadow: 0 5px 18px rgb(3 122 143 / 8%);
-  border-color: color-mix(in srgb, var(--accent-text) 28%, var(--line));
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 3px 12px rgb(3 122 143 / 5%);
 }
 .site .search-scene__content > .search-form::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  padding: 2px;
+  padding: 1.5px;
   pointer-events: none;
-  background: conic-gradient(
-    from var(--search-orbit),
-    transparent 15%,
-    #8bd9df 28%,
-    #037a8f 38%,
-    transparent 53%,
-    transparent 70%,
-    #8bd9df 85%,
-    transparent
+  background: linear-gradient(
+    110deg,
+    #30bbc8 0%,
+    #85e5d4 30%,
+    #a2e6f2 52%,
+    #39b9cd 75%,
+    #85e5d4 100%
   );
+  background-size: 240% 100%;
   mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: search-orbit 10s linear infinite;
-  opacity: 0.8;
+  animation: search-sheen 9s ease-in-out infinite alternate;
+  opacity: 0.65;
+  transition:
+    opacity 0.4s,
+    padding 0.4s;
 }
 .site .search-scene__content > .search-form:focus-within {
-  box-shadow:
-    0 0 0 4px rgb(3 122 143 / 12%),
-    0 7px 22px rgb(3 122 143 / 9%);
+  outline: none;
+  box-shadow: 0 4px 18px rgb(40 185 198 / 9%);
 }
 .site .search-scene__content > .search-form:focus-within::after {
-  animation-play-state: paused;
+  opacity: 1;
+  padding: 2.5px;
 }
-@keyframes search-orbit {
+@keyframes search-sheen {
+  from {
+    background-position: 0% 50%;
+  }
   to {
-    --search-orbit: 360deg;
+    background-position: 100% 50%;
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .site .search-scene__content > .search-form::after {
     animation: none;
   }
-  .data-map__tile,
-  .data-map__indicator {
-    transition: none;
-  }
+}
+
+.site .plan-actions .plan-button--accent {
+  background: var(--action-fill);
+  border-color: var(--action-fill);
+  color: var(--on-action);
+}
+.site .plan-actions .plan-button--accent:hover {
+  background: var(--action-hover-fill);
+  border-color: var(--action-hover-fill);
+  color: var(--on-action);
 }

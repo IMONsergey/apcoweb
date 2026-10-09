@@ -117,7 +117,10 @@ export function PricingSection({ showTeamBanner = true }: { showTeamBanner?: boo
                     </button>
                   )}
                   {plan.id === 'business' && (
-                    <a className="plan-button stage-plan-contact" href={siteHref('/contact')}>
+                    <a
+                      className="plan-button plan-button--accent stage-plan-contact"
+                      href={siteHref('/contact')}
+                    >
                       Talk to Us
                     </a>
                   )}
