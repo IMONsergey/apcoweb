@@ -195,7 +195,11 @@ test('browser history restores scroll after lazy route navigation', async ({ pag
 });
 
 test('unverified API docs remain within the supported on-site guidance', async ({ page }) => {
-  await page.goto('./developers/api');
+  await page.goto('./');
+  await page.getByText('Can I use the API?', { exact: true }).click();
+  await page.locator('#faq').getByRole('link', { name: 'Read API integration guidance' }).click();
+  await expect(page).toHaveURL(/\/developers\/api#documentation$/);
+  await expect(page.locator('#documentation')).toBeInViewport();
   await page.getByRole('link', { name: 'Read API integration guidance' }).first().click();
   await expect(page).toHaveURL(/\/developers\/api#documentation$/);
   await expect(page.locator('#documentation')).toBeInViewport();

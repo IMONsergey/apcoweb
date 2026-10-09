@@ -1,6 +1,8 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
-import { productUrl, supportEmail } from '../../content/site';
+import { supportEmail } from '../../content/site';
+import { apiDocumentationUrl } from '../../config/site';
+import { siteHref } from '../../app/router';
 import { AnimatedDetails } from '../ui/AnimatedDetails';
 export function FAQSection() {
   const { t } = useLocale();
@@ -36,8 +38,14 @@ export function FAQSection() {
               <LocaleText>
                 {t('API access is available on Plus, Expert and Business plans.')}
               </LocaleText>{' '}
-              <a href={`${productUrl}/docs/api`}>
-                <LocaleText>{t('View API documentation')}</LocaleText>
+              <a href={apiDocumentationUrl ?? siteHref('/developers/api') + '#documentation'}>
+                <LocaleText>
+                  {t(
+                    apiDocumentationUrl
+                      ? 'View API documentation'
+                      : 'Read API integration guidance',
+                  )}
+                </LocaleText>
               </a>
               .
             </p>

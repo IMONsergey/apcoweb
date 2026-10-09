@@ -226,7 +226,7 @@ function ApiPage() {
                 <tr>
                   <th scope="col">Plan</th>
                   <th scope="col">API access</th>
-                  <th scope="col">Published plan rate limit</th>
+                  <th scope="col">Plan rate limit</th>
                 </tr>
               </thead>
               <tbody>
@@ -251,7 +251,7 @@ function ApiPage() {
           {
             title: 'Usage and credits.',
             description:
-              'API activity draws from the available plan credits. Additional Search Tokens may offer more capacity; confirm product billing rules before deployment.',
+              'API usage depends on your plan and request type. See Pricing for request costs and Search Token packages, and confirm how credits and Search Tokens relate before adding capacity.',
           },
         ]}
       />
