@@ -2,7 +2,7 @@ import '../styles/stage2-showcases.css';
 import '../styles/stage2-usecases.css';
 import { primarySearch, primaryContact, linkTo } from './pageLinks';
 import { siteHref } from '../app/router';
-import { PageFrame, StorySections, PageAction, Notice } from './PageUI';
+import { PageFrame, StorySections, Notice } from './PageUI';
 import { InvestigationWorkbench } from '../components/stage2/InvestigationWorkbench';
 import { TeamOperations } from '../components/stage2/TeamOperations';
 import {
@@ -97,11 +97,7 @@ const caseStudies = {
           'Record the observed attributes and their time context in your own investigation notes and analytical workflow.',
       },
     ],
-    next: {
-      label: 'View API Documentation',
-      href: 'https://apcosys.net/docs/api',
-      secondary: true,
-    },
+    next: linkTo('Explore API integration', '/developers/api', true),
   },
 } as const;
 
@@ -114,62 +110,8 @@ function TeamPage() {
       description="Bring internet-facing infrastructure observations into technical research, security evaluation and existing team workflows."
       links={[primaryContact, linkTo('View Business Plan', '/pricing', true)]}
     >
-      <section className="stage-team-banner section-space">
-        <div className="container">
-          <div>
-            <p className="eyebrow">SECURITY TEAMS</p>
-            <h2>Work from a question to the evidence.</h2>
-          </div>
-          <p>
-            Search, technical context and programmatic access support deeper security research. The
-            current Business plan is presented with five users and higher usage limits, subject to
-            product verification.
-          </p>
-        </div>
-      </section>
       <TeamOperations />
       <InvestigationWorkbench story="team" />
-      <StorySections
-        items={[
-          {
-            title: 'Investigate the infrastructure behind a question.',
-            description:
-              'Start from the relevant asset or technical observation, then examine the accessible infrastructure data.',
-          },
-          {
-            title: 'Give analysts the context they need.',
-            description:
-              'Review observed services, technologies and possible vulnerability associations with their methodological limits.',
-          },
-          {
-            title: 'Bring data into existing workflows.',
-            description:
-              'Use the available API access to integrate observations with scripts and internal research processes.',
-          },
-          {
-            title: 'Understand the data you rely on.',
-            description:
-              'Review coverage definitions, observation timestamps and responsible collection principles before evaluation.',
-          },
-          {
-            title: 'Choose access for your team.',
-            description:
-              'Compare the Business allowance, user access and API terms against the operational requirements of your team.',
-          },
-        ]}
-      />
-      <section className="stage-page-crosslink">
-        <div className="container">
-          <h2>Evaluating Apcosys for your security team?</h2>
-          <p>Tell us about your investigation workflows, data requirements and API needs.</p>
-          <PageAction
-            links={[
-              primaryContact,
-              linkTo('Data & Methodology', '/platform/data-methodology', true),
-            ]}
-          />
-        </div>
-      </section>
     </PageFrame>
   );
 }
@@ -185,29 +127,6 @@ export default function ResearchPages({ path }: { path: string }) {
       description={config.description}
       links={[primarySearch, config.next]}
     >
-      <section className="stage-case-proof section-space">
-        <div className="container">
-          <p className="eyebrow">RESEARCH WORKFLOW</p>
-          <h2>
-            Start with a lead.
-            <br />
-            Investigate what you find.
-          </h2>
-          <p className="stage-intro">
-            Each result is a technical observation. Use it to decide where to investigate next — not
-            as a final conclusion.
-          </p>
-        </div>
-      </section>
-      <InvestigationWorkbench
-        story={
-          path === '/use-cases/bug-bounty'
-            ? 'bounty'
-            : path === '/use-cases/vulnerability-research'
-              ? 'vulnerability'
-              : 'osint'
-        }
-      />
       {path === '/use-cases/bug-bounty' ? (
         <ScopeEvidence />
       ) : path === '/use-cases/vulnerability-research' ? (
