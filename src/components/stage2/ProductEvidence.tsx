@@ -54,7 +54,7 @@ export function ProductEvidence({
       aria-label={data.description}
       aria-describedby={compact ? id : undefined}
     >
-      <MorphPanel changeKey={scenario + mode + host.ip + service.port}>
+      <MorphPanel>
         <div className="product-evidence__bar">
           <span>
             APCOSYS <span className="product-evidence__slash">/</span>{' '}

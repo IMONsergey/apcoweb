@@ -44,49 +44,39 @@ for (const mode of ['native', 'fallback', 'reduced'] as const) {
   });
 }
 
-test('capability content reveals without opacity or overlapping text', async ({ page }) => {
+test('capability changes keep text visible without masks or duplicate states', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('./');
   const panel = page.locator('.home-capabilities > .container > .morph-panel');
   await panel.scrollIntoViewIfNeeded();
-  const samples = await page.evaluate(async () => {
-    document
-      .querySelector<HTMLButtonElement>('.home-capabilities__tabs button:nth-child(2)')!
-      .click();
-    const values: {
-      incoming: number;
-      outgoing: number;
-      newBottom: number;
-      oldTop: number;
-      hasPrevious: boolean;
-    }[] = [];
-    for (let i = 0; i < 38; i++) {
-      await new Promise(requestAnimationFrame);
-      const root = document.querySelector('.home-capabilities > .container > .morph-panel')!;
-      const incoming = root.querySelector('.morph-panel__content')!;
-      const outgoing = root.querySelector('.morph-panel__outgoing');
-      const currentStyle = getComputedStyle(incoming);
-      const previousStyle = outgoing ? getComputedStyle(outgoing) : null;
-      values.push({
-        incoming: Number(currentStyle.opacity),
-        outgoing: previousStyle ? Number(previousStyle.opacity) : 1,
-        newBottom:
-          currentStyle.clipPath === 'none' ? 0 : parseFloat(currentStyle.clipPath.split(' ')[2]!),
-        oldTop: previousStyle ? parseFloat(previousStyle.clipPath.replace('inset(', '')) : 100,
-        hasPrevious: !!outgoing,
-      });
+  const frames = await page.evaluate(async () => {
+    const samples: { opacity: string; clip: string; copies: number; heading: string }[] = [];
+    const root = document.querySelector('.home-capabilities > .container > .morph-panel')!;
+    for (const button of document.querySelectorAll<HTMLButtonElement>(
+      '.home-capabilities__tabs button',
+    )) {
+      button.click();
+      for (let i = 0; i < 12; i++) {
+        await new Promise(requestAnimationFrame);
+        const content = root.querySelector('.morph-panel__content')!;
+        const style = getComputedStyle(content);
+        samples.push({
+          opacity: style.opacity,
+          clip: style.clipPath,
+          copies: root.querySelectorAll('.home-capabilities__stage').length,
+          heading: content.querySelector('h3')!.textContent!,
+        });
+      }
     }
-    return values;
+    return samples;
   });
-  expect(samples.some((s) => s.newBottom > 5 && s.newBottom < 95)).toBe(true);
-  expect(samples.some((s) => s.hasPrevious)).toBe(true);
-  for (const frame of samples) {
-    expect(frame.incoming).toBe(1);
-    expect(frame.outgoing).toBe(1);
-    if (frame.hasPrevious && frame.oldTop < 100) expect(frame.newBottom).toBe(100);
+  expect(new Set(frames.map((frame) => frame.heading)).size).toBe(5);
+  for (const frame of frames) {
+    expect(frame.opacity).toBe('1');
+    expect(frame.clip).toBe('none');
+    expect(frame.copies).toBe(1);
   }
   await expect(panel.locator('.morph-panel__outgoing')).toHaveCount(0);
-  await expect(page.getByRole('checkbox', { name: 'HTTPS only' })).toHaveCount(1);
 });
 
 test('returning to the current page cancels an unfinished navigation', async ({ page }) => {

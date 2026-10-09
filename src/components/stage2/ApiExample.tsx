@@ -54,7 +54,7 @@ export function ApiExample({ compact = false }: { compact?: boolean }) {
           </p>
         </div>
       )}
-      <MorphPanel changeKey={String(response)}>
+      <MorphPanel>
         <pre
           data-morph-enter
           tabIndex={0}

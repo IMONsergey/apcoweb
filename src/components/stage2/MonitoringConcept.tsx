@@ -93,7 +93,7 @@ export function MonitoringConcept() {
                 Concept only · availability to be confirmed
               </p>
             </div>
-            <MorphPanel changeKey={current + String(assetIndex)}>
+            <MorphPanel>
               <div className="stage-monitor-console__main">
                 <div className="stage-monitor-console__overline">
                   <span>{view.label.toUpperCase()}</span>

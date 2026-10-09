@@ -945,48 +945,70 @@
   font-size: 14px;
 }
 
-/* Brand-teal light travels across a neutral contour; focus strengthens the same surface. */
+/* A diffuse brand-teal halo invites interaction; focus resolves it into a crisp contour. */
 .site .search-scene__content > .search-form {
+  --search-border-gradient: linear-gradient(
+    110deg,
+    color-mix(in srgb, var(--accent-text) 55%, var(--surface-card)) 0%,
+    var(--accent-text) 28%,
+    color-mix(in srgb, var(--accent-text) 28%, var(--surface-card)) 50%,
+    var(--accent-text) 74%,
+    color-mix(in srgb, var(--accent-text) 55%, var(--surface-card)) 100%
+  );
   position: relative;
   margin-bottom: 14px;
   outline: none;
   border-color: transparent;
-  box-shadow: 0 3px 12px rgb(3 122 143 / 5%);
+  box-shadow: 0 4px 18px rgb(3 122 143 / 8%);
 }
+.site .search-scene__content > .search-form > .search-form__glow::before,
 .site .search-scene__content > .search-form::after {
   content: '';
   position: absolute;
-  inset: 0;
   border-radius: inherit;
-  padding: 1.5px;
   pointer-events: none;
-  background: linear-gradient(
-    110deg,
-    var(--line) 0%,
-    color-mix(in srgb, var(--accent-text) 24%, var(--line)) 20%,
-    var(--accent-text) 43%,
-    color-mix(in srgb, var(--accent-text) 50%, var(--line)) 58%,
-    var(--line) 80%,
-    var(--line) 100%
-  );
+  background: var(--search-border-gradient);
   background-size: 220% 100%;
   mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: search-sheen 10s ease-in-out infinite alternate;
-  opacity: 0.85;
+  animation: search-sheen 8s ease-in-out infinite alternate;
+}
+.site .search-scene__content > .search-form > .search-form__glow {
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  pointer-events: none;
+  filter: blur(7px);
+  opacity: 0.7;
   transition:
-    opacity 0.4s,
-    padding 0.4s;
+    filter 0.35s ease,
+    opacity 0.35s ease;
+}
+.site .search-scene__content > .search-form > .search-form__glow::before {
+  inset: 0;
+  padding: 5px;
+}
+.site .search-scene__content > .search-form::after {
+  inset: 0;
+  padding: 2px;
+  opacity: 0.9;
+  transition:
+    opacity 0.35s ease,
+    padding 0.35s ease;
 }
 .site .search-scene__content > .search-form:focus-within {
   outline: none;
-  box-shadow: 0 4px 18px rgb(40 185 198 / 9%);
+  box-shadow: 0 3px 12px rgb(3 122 143 / 6%);
+}
+.site .search-scene__content > .search-form:focus-within > .search-form__glow {
+  filter: blur(3px);
+  opacity: 0.2;
 }
 .site .search-scene__content > .search-form:focus-within::after {
   opacity: 1;
-  padding: 2px;
+  padding: 2.5px;
 }
 @keyframes search-sheen {
   from {
@@ -997,6 +1019,7 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .site .search-scene__content > .search-form > .search-form__glow::before,
   .site .search-scene__content > .search-form::after {
     animation: none;
   }

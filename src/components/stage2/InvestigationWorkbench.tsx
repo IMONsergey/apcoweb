@@ -204,7 +204,7 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
                 scenario={(story === 'team' ? 'indicator' : 'domain') as EvidenceScenario}
               />
             </div>
-            <MorphPanel changeKey={selected}>
+            <MorphPanel>
               <div className="stage-workbench__insight" data-morph-enter>
                 <div>
                   <span className="stage-workbench__mini">

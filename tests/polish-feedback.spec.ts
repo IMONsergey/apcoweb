@@ -15,6 +15,7 @@ for (const width of [390, 1440]) {
     for (const button of await buttons.all()) {
       await button.click();
       await expect(button).toHaveAttribute('aria-pressed', 'true');
+      await expect(button).not.toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
       if (width > 767) {
         const left = await page.locator('.home-searchable__index').boundingBox();
         const right = await page.locator('.home-searchable__evidence').boundingBox();
@@ -47,4 +48,20 @@ test('removing the home playback strip keeps the evidence animation active', asy
         .evaluate((el) => Number(getComputedStyle(el).opacity)),
     )
     .toBeGreaterThan(0.1);
+});
+
+test('search halo resolves on focus and the wave ignores pointer input', async ({ page }) => {
+  await page.goto('./');
+  const form = page.locator('.search-form');
+  const halo = () =>
+    form.locator('.search-form__glow').evaluate((el) => ({
+      blur: getComputedStyle(el).filter,
+      opacity: Number(getComputedStyle(el).opacity),
+    }));
+  expect((await halo()).blur).toBe('blur(7px)');
+  expect((await halo()).opacity).toBeGreaterThan(0.5);
+  await form.locator('input').focus();
+  await expect.poll(async () => (await halo()).blur).toBe('blur(3px)');
+  await expect.poll(async () => (await halo()).opacity).toBeLessThan(0.3);
+  await expect(page.locator('.team-signal-field')).toHaveCSS('pointer-events', 'none');
 });

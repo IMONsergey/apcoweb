@@ -12,7 +12,6 @@ export function TeamSignal({ inverse = false }: { inverse?: boolean }) {
     const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
     const state = { phase: 1.2 };
-    const pointer = { x: 0, y: 0 };
     let width = 600,
       height = 440,
       visible = false,
@@ -23,8 +22,8 @@ export function TeamSignal({ inverse = false }: { inverse?: boolean }) {
       previous = now;
       context.clearRect(0, 0, width, height);
       const phase = state.phase;
-      const turn = -0.24 + Math.sin(phase) * 0.035 + pointer.x * 0.07;
-      const tilt = 0.94 + pointer.y * 0.05;
+      const turn = -0.24 + Math.sin(phase) * 0.035;
+      const tilt = 0.94;
       const scale = Math.min(width / 510, height / 410);
       const project = (x: number, y: number, z: number) => {
         const rx = x * Math.cos(turn) + z * Math.sin(turn);
@@ -98,32 +97,14 @@ export function TeamSignal({ inverse = false }: { inverse?: boolean }) {
       visible = !!entry?.isIntersecting;
       sync();
     });
-    const move = (event: PointerEvent) => {
-      if (reduced || event.pointerType !== 'mouse') return;
-      const box = canvas.getBoundingClientRect();
-      gsap.to(pointer, {
-        x: (event.clientX - box.left) / box.width - 0.5,
-        y: (event.clientY - box.top) / box.height - 0.5,
-        duration: 1,
-        overwrite: true,
-      });
-    };
-    const leave = () => {
-      gsap.to(pointer, { x: 0, y: 0, duration: 1.4, overwrite: true });
-    };
     resize.observe(canvas);
     observer.observe(canvas);
-    canvas.addEventListener('pointermove', move);
-    canvas.addEventListener('pointerleave', leave);
     document.addEventListener('visibilitychange', sync);
     return () => {
       timeline.kill();
-      gsap.killTweensOf(pointer);
       gsap.ticker.remove(render);
       resize.disconnect();
       observer.disconnect();
-      canvas.removeEventListener('pointermove', move);
-      canvas.removeEventListener('pointerleave', leave);
       document.removeEventListener('visibilitychange', sync);
     };
   }, [inverse, paused, reduced]);
@@ -196,7 +177,7 @@ export function TeamWorkflow() {
                 ),
               )}
             </div>
-            <MorphPanel changeKey={selected}>
+            <MorphPanel>
               <div className="team-workflow__record">
                 <span>{item.meta}</span>
                 <code>{item.record}</code>
@@ -217,7 +198,7 @@ export function TeamWorkflow() {
                 </button>
               ))}
             </div>
-            <MorphPanel changeKey={selected}>
+            <MorphPanel>
               <div className="team-workflow__detail" data-morph-enter>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>

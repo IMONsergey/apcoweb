@@ -16,11 +16,3 @@
     height: auto !important;
   }
 }
-
-.morph-panel__outgoing {
-  position: absolute;
-  inset: 0 0 auto;
-  pointer-events: none;
-  user-select: none;
-  z-index: 1;
-}

@@ -55,6 +55,7 @@ export function SearchForm({ className = '' }: { className?: string }) {
       role="search"
       aria-label={t('Search internet infrastructure')}
     >
+      <span className="search-form__glow" aria-hidden="true" />
       <label className="sr-only" htmlFor={id}>
         {t('Domain, IP or technical attribute')}
       </label>

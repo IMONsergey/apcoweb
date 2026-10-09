@@ -358,6 +358,7 @@
   margin-top: 8px;
 }
 .team-signal-field {
+  pointer-events: none;
   display: block;
   width: 100%;
   aspect-ratio: 600/440;
@@ -433,9 +434,9 @@
   align-items: flex-start;
   gap: 14px;
   padding: 14px 16px;
-  border: 1px solid transparent;
+  border: 1px solid var(--line);
   border-radius: var(--radius-panel);
-  background: transparent;
+  background: var(--surface-card);
   color: var(--ink);
   text-align: left;
   text-decoration: none;
