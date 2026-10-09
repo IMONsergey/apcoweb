@@ -173,8 +173,30 @@
 }
 .stage-page--product .stage-page-hero,
 .stage-page--commercial .stage-page-hero,
-.stage-page--technical .stage-page-hero {
+.stage-page--technical .stage-page-hero,
+.stage-page--usecase .stage-page-hero,
+.stage-page--developer .stage-page-hero {
   background: var(--white);
+}
+.stage-page--product .stage-page-hero,
+.stage-page--usecase .stage-page-hero,
+.stage-page--developer .stage-page-hero,
+.stage-page--commercial .stage-page-hero {
+  padding-block: clamp(48px, 4.5vw, 72px) clamp(48px, 4.8vw, 78px);
+}
+.stage-page--product .stage-page-hero h1,
+.stage-page--usecase .stage-page-hero h1,
+.stage-page--developer .stage-page-hero h1 {
+  font-size: clamp(58px, 5.5vw, 90px);
+}
+.stage-page--commercial .stage-page-hero h1 {
+  font-size: clamp(53px, 5vw, 78px);
+}
+.stage-page--product .stage-page-hero .eyebrow,
+.stage-page--usecase .stage-page-hero .eyebrow,
+.stage-page--developer .stage-page-hero .eyebrow,
+.stage-page--commercial .stage-page-hero .eyebrow {
+  margin-bottom: clamp(22px, 2.3vw, 34px);
 }
 .stage-page-crosslink {
   background: var(--white);
@@ -549,6 +571,24 @@
 @media (max-width: 599px) {
   .stage-page-hero {
     padding-block: 45px 65px;
+  }
+  .stage-page--product .stage-page-hero,
+  .stage-page--usecase .stage-page-hero,
+  .stage-page--developer .stage-page-hero,
+  .stage-page--commercial .stage-page-hero {
+    padding-block: 36px 42px;
+  }
+  .stage-page--product .stage-page-hero h1,
+  .stage-page--usecase .stage-page-hero h1,
+  .stage-page--developer .stage-page-hero h1,
+  .stage-page--commercial .stage-page-hero h1 {
+    font-size: clamp(42px, 10vw, 57px);
+  }
+  .stage-page--product .stage-page-hero .eyebrow,
+  .stage-page--usecase .stage-page-hero .eyebrow,
+  .stage-page--developer .stage-page-hero .eyebrow,
+  .stage-page--commercial .stage-page-hero .eyebrow {
+    margin-bottom: 24px;
   }
   .stage-page-hero h1 {
     font-size: clamp(44px, 11vw, 62px);
