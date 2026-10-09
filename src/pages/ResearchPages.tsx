@@ -1,3 +1,5 @@
+import '../styles/stage2-showcases.css';
+import '../styles/stage2-usecases.css';
 import { primarySearch, primaryContact, linkTo } from './pageLinks';
 import { siteHref } from '../app/router';
 import { PageFrame, StorySections, PageAction, Notice } from './PageUI';

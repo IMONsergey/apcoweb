@@ -1,3 +1,4 @@
+import '../styles/stage2-showcases.css';
 import { Hero } from '../components/sections/Hero';
 import { SearchPreview } from '../components/sections/SearchPreview';
 import { StepCarousel } from '../components/sections/StepCarousel';
