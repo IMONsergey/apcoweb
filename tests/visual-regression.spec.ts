@@ -18,7 +18,10 @@ for (const theme of ['light', 'dark'] as const) {
       const capture = process.env.APCO_VISUAL_CAPTURE === '1';
       const snapshotPath = testInfo.snapshotPath(filename);
       if (testInfo.project.name !== 'chromium') test.skip();
-      if (!capture && !existsSync(snapshotPath)) test.skip();
+      if (!capture && process.platform !== 'linux') test.skip();
+      if (!capture && !existsSync(snapshotPath)) {
+        throw new Error(`Missing committed visual baseline: ${snapshotPath}`);
+      }
 
       await page.setViewportSize({ width: scene.width, height: scene.height });
       await page.emulateMedia({ reducedMotion: 'reduce' });

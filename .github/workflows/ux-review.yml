@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: ux-review-${{ github.ref }}
@@ -26,35 +26,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run audit:production
-      - name: Report formatting changes
-        run: |
-          npx prettier --write src/config/site.ts scripts/verify-assets.mjs
-          git diff -- src/config/site.ts scripts/verify-assets.mjs
       - run: npm run check
       - run: npm run build
       - run: npx playwright install --with-deps chromium firefox webkit
-      - name: Capture Chromium visual baselines
-        run: APCO_VISUAL_CAPTURE=1 npx playwright test tests/visual-regression.spec.ts --project=chromium --workers=1 --reporter=line
-      - name: Seed reviewed R21 baselines
-        if: ${{ github.head_ref == 'chore/r21-pretransfer-hardening' && github.event.pull_request.head.repo.full_name == github.repository }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          dir=tests/visual-regression.spec.ts-snapshots
-          if [ -f "$dir/hero-desktop-light-chromium-linux.png" ]; then exit 0; fi
-          git fetch origin "refs/heads/${GITHUB_HEAD_REF}:refs/remotes/origin/${GITHUB_HEAD_REF}"
-          git checkout -B "${GITHUB_HEAD_REF}" "origin/${GITHUB_HEAD_REF}"
-          mkdir -p "$dir"
-          find test-results -type f -name '*-chromium-linux.png' -exec cp {} "$dir"/ \;
-          if [ "$(find "$dir" -name '*.png' | wc -l)" -ne 12 ]; then
-            echo "Expected 12 visual baselines"; exit 1
-          fi
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add src/config/site.ts scripts/verify-assets.mjs "$dir"
-          git commit -m "R21: preserve Linux Chromium visual baselines"
-          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_HEAD_REF}"
       - name: Cross-browser scenarios
         run: npm test
       - name: Preserve review evidence

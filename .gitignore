@@ -8,3 +8,6 @@ playwright-report/
 .env*
 !.env.example
 .vercel
+**/*-snapshots/*-darwin.png
+**/*-snapshots/*-darwin-arm64.png
+**/*-snapshots/*-win32.png
