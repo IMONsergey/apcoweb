@@ -13,7 +13,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  format:
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Format Stage 2 source without changing R21 components
+        run: |
+          npx prettier --write src/components/stage2/ProductEvidence.tsx src/components/stage2/CreditsExplained.tsx src/components/stage2/InvestigationWorkbench.tsx src/components/stage2/MonitoringConcept.tsx src/components/stage2/UseCaseEvidence.tsx src/components/sections/SearchPreview.tsx src/pages/CommercialPages.tsx src/pages/PlatformPages.tsx src/pages/ResearchPages.tsx src/styles/stage2.css src/styles/stage2-showcases.css src/styles/stage2-usecases.css src/styles/product-evidence.css tests/stage2-product-experience.spec.ts tests/stage2-real-visual.spec.ts
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add src/components/stage2 src/components/sections/SearchPreview.tsx src/pages src/styles/stage2.css src/styles/stage2-showcases.css src/styles/stage2-usecases.css src/styles/product-evidence.css tests/stage2-product-experience.spec.ts tests/stage2-real-visual.spec.ts
+            git commit -m "style: normalize product experience source"
+            git push origin HEAD:feat/stage2-design-rebuild-r21
+          fi
   review:
+    needs: format
     runs-on: ubuntu-24.04
     timeout-minutes: 55
     steps:
