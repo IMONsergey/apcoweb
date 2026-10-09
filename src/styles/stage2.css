@@ -363,6 +363,9 @@
   width: min(780px, 100%);
   margin: 28px 0;
 }
+.stage-platform-search .search-desktop-placeholder {
+  display: none;
+}
 .stage-case-proof {
   background: var(--tint);
 }
