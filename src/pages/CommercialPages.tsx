@@ -1,4 +1,4 @@
-import { primarySearch, linkTo } from './pageLinks';
+import { primarySearch } from './pageLinks';
 import { useState } from 'react';
 import { PricingSection } from '../components/sections/PricingSection';
 import { plans, productUrl } from '../content/site';
