@@ -32,7 +32,7 @@ test('Stage 2 protected preview keeps unverified monitoring visibly conceptual',
     page.getByText('Concept demonstration · Not a live product capability'),
   ).toBeVisible();
   await expect(
-    page.getByText('Live alerts, continuous monitoring', { exact: false }),
+    page.getByText('No live monitoring connection', { exact: false }),
   ).toBeVisible();
 });
 

@@ -1,3 +1,5 @@
+import { mkdir } from 'node:fs/promises';
+import { dirname } from 'node:path';
 import { expect, test } from '@playwright/test';
 import { siteRoutes } from '../src/content/routes';
 
@@ -32,6 +34,7 @@ for (const route of siteRoutes) {
           await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 2)).toBe(true);
           const name = slug(route.path) + '-' + profile.id + '-' + theme + '.png';
           const output = testInfo.outputPath('stage2-visual', name);
+          await mkdir(dirname(output), { recursive: true });
           await page.screenshot({ path: output, animations: 'disabled', fullPage: true, caret: 'hide',
             mask: [page.locator('canvas')], maskColor: '#838b90' });
         });
@@ -51,7 +54,9 @@ for (const path of ['/', '/platform/search-investigation', '/pricing', '/platfor
           await page.goto('.' + path, { waitUntil: 'networkidle' });
           await expect(page.locator('main h1')).toBeVisible();
           const name = slug(path) + '-' + profile.id + '-' + theme + '.png';
-          await page.screenshot({ path: testInfo.outputPath('stage2-visual', name),
+          const output = testInfo.outputPath('stage2-visual', name);
+          await mkdir(dirname(output), { recursive: true });
+          await page.screenshot({ path: output,
             animations: 'disabled', fullPage: true, caret: 'hide', mask: [page.locator('canvas')],
             maskColor: '#838b90' });
         });

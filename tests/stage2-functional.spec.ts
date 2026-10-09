@@ -76,7 +76,7 @@ test('distinct use-case evidence is accessible in each research journey', async 
 test('pricing monthly and annual values follow documented discount', async ({ page }) => {
   await page.goto('./pricing');
   await expect(page.locator('#plan-plus .plan-price')).toContainText('$40');
-  await page.getByRole('radiogroup', { name: 'Billing period' }).first().getByRole('radio', { name: 'Annually' }).check();
+  await page.locator('.billing--desktop').getByRole('radio', { name: 'Annually' }).check();
   await expect(page.locator('#plan-plus .plan-price')).toContainText('$32');
   await expect(page.locator('#plan-expert .plan-price')).toContainText('$192');
   await page.getByRole('button', { name: 'Choose Business' }).click();
@@ -126,6 +126,6 @@ test('contact form displays required email fallback and validation', async ({ pa
   await page.goto('./contact');
   await expect(page.getByRole('button', { name: 'Prepare email' })).toBeVisible();
   await page.getByRole('button', { name: 'Prepare email' }).click();
-  await expect(page.locator('[name="name"]')).toHaveJSProperty('validity', expect.anything());
+  await expect(page.locator('[name="name"]')).toHaveAttribute('required', '');
   await expect(page.getByText('Messages are not stored or delivered by this website.', { exact: false })).toBeVisible();
 });

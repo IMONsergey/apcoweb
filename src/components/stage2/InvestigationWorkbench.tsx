@@ -62,7 +62,7 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
           <p>{data.context}</p>
         </div>
         <div className="stage-workbench__stage">
-          <nav className="stage-workbench__steps" aria-label="Investigation workflow steps">
+          <nav className="stage-workbench__steps" role="tablist" aria-label="Investigation workflow steps">
             {data.captions.map((label, index) =>
               <button key={label} type="button" id={'stage-step-' + story + '-' + index}
                 className="stage-workbench__step" role="tab" aria-selected={selected === index}
