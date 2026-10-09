@@ -54,10 +54,7 @@ for (const filename of actual) {
     }
   } else if (filename.endsWith('.svg')) {
     const svg = data.toString('utf8');
-    if (
-      !/<svg[\s>]/i.test(svg) ||
-      /<script[\s>]|<foreignObject[\s>]|\son\w+\s*=/i.test(svg)
-    ) {
+    if (!/<svg[\s>]/i.test(svg) || /<script[\s>]|<foreignObject[\s>]|\son\w+\s*=/i.test(svg)) {
       corrupt.push(filename);
     }
   }
