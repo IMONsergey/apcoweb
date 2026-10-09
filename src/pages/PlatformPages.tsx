@@ -3,7 +3,7 @@ import { primarySearch, primaryContact, linkTo } from './pageLinks';
 import { metrics } from '../content/site';
 import { InvestigationWorkbench } from '../components/stage2/InvestigationWorkbench';
 import { MonitoringConcept } from '../components/stage2/MonitoringConcept';
-import { DataInterpretation } from '../components/stage2/DataInterpretation';
+import { ProductEvidence } from '../components/stage2/ProductEvidence';
 import { PageFrame, StorySections } from './PageUI';
 
 function InvestigationPage() {
@@ -92,7 +92,18 @@ function MethodologyPage() {
           </div>
         </div>
       </section>
-      <DataInterpretation />
+      <section className="stage-methodology-product section-space">
+        <div className="container">
+          <div className="stage-methodology-product__heading">
+            <div>
+              <p className="eyebrow">READ THE EVIDENCE</p>
+              <h2>One host. Several levels of certainty.</h2>
+            </div>
+            <p>Ports and services describe what a data source observed. Detected products may be uncertain, and CVE associations remain research leads. Always check the observation time and validate the live state.</p>
+          </div>
+          <ProductEvidence scenario="technology" mode="cve" />
+        </div>
+      </section>
       <StorySections
         variant="split"
         items={[
