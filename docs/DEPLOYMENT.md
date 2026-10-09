@@ -29,7 +29,7 @@ The old GitHub repository history is not part of a source snapshot. If preservin
 
 `.github/workflows/deploy.yml` validates and publishes the `main` branch to the current GitHub Pages site. `.github/workflows/ux-review.yml` performs cross-browser regression checks on pull requests. Replace or remove the Pages workflow when switching to client hosting.
 
-The preview's external product base is currently `https://apcosys.net` in `src/content/site.ts`. Update it only if the destination product environment changes.
+The product origin and support email can be overridden at build time using `VITE_APCO_PRODUCT_URL` and `VITE_APCO_SUPPORT_EMAIL` (see `.env.example`). Defaults are defined in `src/config/site.ts`. These variables are public: never put secrets in `VITE_*` values.
 
 ## Acceptance
 

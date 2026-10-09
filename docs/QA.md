@@ -31,3 +31,22 @@ Use `npx playwright install chromium firefox webkit` for normal local runs and
 CI. To test with an already-installed browser executable, set one of
 `APCO_CHROMIUM_EXECUTABLE`, `APCO_FIREFOX_EXECUTABLE` or
 `APCO_WEBKIT_EXECUTABLE`. Playwright has no machine-specific browser paths.
+
+## Visual regression screenshots
+
+The CI suite checks 12 committed Chromium baselines on Linux (desktop/mobile,
+Light/Dark, hero, pricing, walkthrough and navigation). Screenshots are stored in
+`tests/visual-regression.spec.ts-snapshots/`. Missing baselines fail CI; macOS and
+Windows skip pixel comparisons because font rasterization differs by platform.
+
+To intentionally refresh screenshots, capture them using the pinned Playwright
+browser on Ubuntu 24.04:
+
+```sh
+APCO_VISUAL_CAPTURE=1 npx playwright test tests/visual-regression.spec.ts --project=chromium --workers=1
+```
+
+The capture is written under `test-results/`. Review the images against the
+approved design, copy only approved `*-chromium-linux.png` files into the
+snapshot folder, and commit them alongside their corresponding changes.
+The pull-request workflow must not write back to the repository.

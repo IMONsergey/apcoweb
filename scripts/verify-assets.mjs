@@ -1,4 +1,4 @@
-import { readdir, stat, access } from 'node:fs/promises';
+import { readdir, stat, access, readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
 const root = 'public';
@@ -41,6 +41,24 @@ async function allFiles(directory) {
 }
 
 const actual = new Set(await allFiles(join(root, 'assets')));
+const corrupt = [];
+for (const filename of actual) {
+  const data = await readFile(join(root, filename));
+  if (filename.endsWith('.webp')) {
+    if (
+      data.length < 40 ||
+      data.toString('ascii', 0, 4) !== 'RIFF' ||
+      data.toString('ascii', 8, 12) !== 'WEBP'
+    ) {
+      corrupt.push(filename);
+    }
+  } else if (filename.endsWith('.svg')) {
+    const svg = data.toString('utf8');
+    if (!/<svg[\s>]/i.test(svg) || /<script[\s>]|<foreignObject[\s>]|\son\w+\s*=/i.test(svg)) {
+      corrupt.push(filename);
+    }
+  }
+}
 const missing = [...expected].filter((path) => !actual.has(path));
 const unexpected = [...actual].filter((path) => !expected.has(path));
 const localFonts = [
@@ -59,9 +77,10 @@ for (const filename of localFonts) {
   }
 }
 
-if (missing.length || unexpected.length) {
+if (missing.length || unexpected.length || corrupt.length) {
   for (const filename of missing) console.error('Missing asset:', filename);
   for (const filename of unexpected) console.error('Unregistered asset:', filename);
+  for (const filename of corrupt) console.error('Corrupt/unsafe asset:', filename);
   process.exitCode = 1;
 } else {
   console.log(

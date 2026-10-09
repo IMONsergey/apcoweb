@@ -16,6 +16,8 @@ npm run dev
 
 The development server runs at `http://127.0.0.1:5187/apcoweb/`.
 
+Public product and contact values can be overridden at build time. See `.env.example`; never place secrets in frontend `VITE_*` variables.
+
 ## Commands
 
 | Command              | Purpose                                                         |
@@ -80,3 +82,4 @@ The site ships as a preview with `noindex` and restrictive `robots.txt`. Remove 
 - [Content requiring approval](docs/CONTENT.md)
 - [Visual components](docs/VISUALS.md)
 - [Quality assurance](docs/QA.md)
+- [Client handoff checklist](docs/HANDOFF.md)

@@ -4,7 +4,7 @@
 
 `src/main.tsx` mounts the app inside the theme and locale providers. `src/App.tsx` defines the section order. Sections own their content and component-specific styling; common controls live in `src/components/ui/`.
 
-`src/content/site.ts` provides links, navigation, metrics, plan data and walkthrough metadata. `src/content/pricing.ts` contains billing calculations. `src/content/assets.ts` resolves URLs relative to Vite's base path.
+`src/content/site.ts` provides links, navigation, metrics, plan data and walkthrough metadata. `src/content/pricing.ts` contains billing calculations. `src/content/assets.ts` resolves URLs relative to Vite's base path. Public product URLs and the support email are in `src/config/site.ts`, with an example configuration in `.env.example`.
 
 Theme state is managed by `src/theme/ThemeProvider.tsx` with the `system`, `light` and `dark` modes. The initial theme is set in `index.html` before React mounts to avoid a flash of the wrong theme. English is the only selectable language currently; the locale provider retains the non-live translation infrastructure.
 
