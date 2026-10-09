@@ -1,0 +1,75 @@
+name: R21 design recovery review
+
+on:
+  push:
+    branches: [feat/stage2-design-rebuild-r21]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: design-review-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format-export:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Produce formatting reference without modifying the branch
+        run: |
+          mkdir -p /tmp/r21-format
+          cp --parents src/pages/PageUI.tsx src/pages/ResearchPages.tsx src/pages/PlatformPages.tsx src/pages/CorporatePages.tsx src/styles/stage2.css tests/stage2-functional.spec.ts /tmp/r21-format/
+          npx prettier --write src/pages/PageUI.tsx src/pages/ResearchPages.tsx src/pages/PlatformPages.tsx src/pages/CorporatePages.tsx src/styles/stage2.css tests/stage2-functional.spec.ts
+          cp --parents src/pages/PageUI.tsx src/pages/ResearchPages.tsx src/pages/PlatformPages.tsx src/pages/CorporatePages.tsx src/styles/stage2.css tests/stage2-functional.spec.ts /tmp/r21-format/formatted/
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: r21-design-formatter
+          retention-days: 3
+          path: /tmp/r21-format/formatted/
+  review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Source integrity, lint and TypeScript
+        run: npm run check
+      - name: Root-path production build
+        run: npm run build
+      - name: Save build for offline inspection
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: r21-design-build
+          retention-days: 7
+          path: dist/
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - name: Three-engine interactions and route coverage
+        run: npx playwright test tests/stage2-routes.spec.ts tests/stage2-functional.spec.ts
+      - name: All 13 pages in desktop/mobile Light/Dark
+        run: npx playwright test tests/stage2-visual-review.spec.ts --project=chromium
+      - name: Archive captured visual evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: r21-design-visual-evidence
+          retention-days: 7
+          path: |
+            test-results/
+            playwright-report/
+          if-no-files-found: ignore
