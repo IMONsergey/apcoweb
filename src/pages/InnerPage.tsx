@@ -1,6 +1,7 @@
+import { primarySearch } from './pageLinks';
 import { Suspense, lazy } from 'react';
 import { siteHref } from '../app/router';
-import { PageFrame, PageAction, primarySearch } from './PageUI';
+import { PageFrame, PageAction } from './PageUI';
 
 const PlatformPages = lazy(() => import('./PlatformPages'));
 const ResearchPages = lazy(() => import('./ResearchPages'));
@@ -37,7 +38,7 @@ export default function InnerPage({ path }: { path: string }) {
       eyebrow="PAGE NOT FOUND"
       title="This page is not here."
       description="The link may have moved. Continue exploring the Apcosys website instead."
-      links={[{ label: 'Back to homepage', href: siteHref('/') }, primarySearch]}
+      links={[{ label: 'Back to homepage', href: siteHref('/') }]}
     >
       <div className="container stage-not-found">
         <PageAction links={[{ label: 'Browse Apcosys', href: siteHref('/') }]} />

@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react';
 import { DoubleButton } from '../components/ui/DoubleButton';
-import { siteHref } from '../app/router';
-import { productUrl } from '../content/site';
 
 export type PageLink = { label: string; href: string; secondary?: boolean };
 export function PageIntro({
@@ -100,13 +98,6 @@ export function StorySections({
     </section>
   );
 }
-export const primarySearch: PageLink = { label: 'Try Search', href: productUrl + '/search' };
-export const primaryContact: PageLink = { label: 'Talk to Us', href: siteHref('/contact') };
-export const linkTo = (label: string, path: string, secondary = false): PageLink => ({
-  label,
-  href: siteHref(path),
-  secondary,
-});
 export function Notice({ children }: { children: ReactNode }) {
   return (
     <aside className="stage-note" role="note">

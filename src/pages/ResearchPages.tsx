@@ -1,12 +1,10 @@
+import { primarySearch, primaryContact, linkTo } from './pageLinks';
 import { siteHref } from '../app/router';
 import {
   PageFrame,
   StorySections,
   PageAction,
   Notice,
-  primarySearch,
-  primaryContact,
-  linkTo,
 } from './PageUI';
 
 const caseStudies = {
@@ -110,7 +108,7 @@ function TeamPage() {
       variant="technical"
       title="Internet intelligence for your security team."
       description="Bring internet-facing infrastructure observations into technical research, security evaluation and existing team workflows."
-      links={[primaryContact, linkTo('View Business Plan', '/pricing', true)]}
+      links={[primaryContact('View Business Plan', '/pricing', true)]}
     >
       <section className="stage-team-banner section-space">
         <div className="container">
@@ -160,8 +158,7 @@ function TeamPage() {
           <p>Tell us about your investigation workflows, data requirements and API needs.</p>
           <PageAction
             links={[
-              primaryContact,
-              linkTo('Data & Methodology', '/platform/data-methodology', true),
+              primaryContact('Data & Methodology', '/platform/data-methodology', true),
             ]}
           />
         </div>
