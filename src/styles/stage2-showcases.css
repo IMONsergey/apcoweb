@@ -8,6 +8,17 @@
 .stage-workbench--team {
   background: var(--surface);
 }
+.stage-page--product > .stage-workbench,
+.stage-page--product > .stage-monitor-concept,
+.stage-page--technical > .stage-team-operations {
+  padding-top: clamp(34px, 3.5vw, 58px);
+}
+.stage-page--product > .stage-monitor-concept .stage-monitor-concept__heading {
+  margin-bottom: clamp(26px, 3vw, 44px);
+}
+.stage-page--product > .stage-workbench .stage-workbench__intro {
+  margin-bottom: clamp(26px, 3vw, 44px);
+}
 .stage-workbench__intro,
 .stage-monitor-concept__heading,
 .stage-data-interpreter__top,
@@ -16,13 +27,13 @@
   grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.65fr);
   gap: 8%;
   align-items: end;
-  margin-bottom: clamp(30px, 5vw, 64px);
+  margin-bottom: clamp(26px, 3vw, 44px);
 }
 .stage-workbench__intro h2,
 .stage-monitor-concept__heading h2,
 .stage-data-interpreter__top h2,
 .stage-team-operations__header h2 {
-  font-size: clamp(38px, 4.3vw, 76px);
+  font-size: clamp(37px, 3.75vw, 62px);
   letter-spacing: -0.055em;
   line-height: 1.03;
   text-wrap: balance;
