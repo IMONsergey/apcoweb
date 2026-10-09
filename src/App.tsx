@@ -12,16 +12,26 @@ const InnerPage = lazy(() => import('./pages/InnerPage'));
 export function App() {
   const { locale, t } = useLocale();
   const path = useSiteRoute();
-  return <MotionProvider>
-    <div id="top" className="site" lang={locale}>
-      <a href="#main" className="skip-link"><LocaleText>{t('Skip to content')}</LocaleText></a>
-      <Header />
-      <main id="main" data-route={path}>
-        <Suspense fallback={<div className="route-fallback" role="status">Loading page…</div>}>
-          {path === '/' ? <HomePage /> : <InnerPage path={path} />}
-        </Suspense>
-      </main>
-      <Footer />
-    </div>
-  </MotionProvider>;
+  return (
+    <MotionProvider>
+      <div id="top" className="site" lang={locale}>
+        <a href="#main" className="skip-link">
+          <LocaleText>{t('Skip to content')}</LocaleText>
+        </a>
+        <Header />
+        <main id="main" data-route={path}>
+          <Suspense
+            fallback={
+              <div className="route-fallback" role="status">
+                Loading page…
+              </div>
+            }
+          >
+            {path === '/' ? <HomePage /> : <InnerPage path={path} />}
+          </Suspense>
+        </main>
+        <Footer />
+      </div>
+    </MotionProvider>
+  );
 }

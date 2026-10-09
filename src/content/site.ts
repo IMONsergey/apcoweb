@@ -97,47 +97,73 @@ export const plans = [
   },
 ] as const;
 export const navigation = [
-  { label: 'Platform', items: [
-    { label: 'Search & Investigation', href: '/platform/search-investigation' },
-    { label: 'Data & Methodology', href: '/platform/data-methodology' },
-    { label: 'Monitoring', href: '/platform/monitoring' },
-  ] },
-  { label: 'Use Cases', items: [
-    { label: 'Bug Bounty', href: '/use-cases/bug-bounty' },
-    { label: 'Vulnerability Research', href: '/use-cases/vulnerability-research' },
-    { label: 'OSINT & Threat Investigation', href: '/use-cases/osint-threat-investigation' },
-  ] },
-  { label: 'Developers', items: [
-    { label: 'API', href: '/developers/api' },
-    { label: 'Documentation', href: productUrl + '/docs/api' },
-  ] },
+  {
+    label: 'Platform',
+    items: [
+      { label: 'Search & Investigation', href: '/platform/search-investigation' },
+      { label: 'Data & Methodology', href: '/platform/data-methodology' },
+      { label: 'Monitoring', href: '/platform/monitoring' },
+    ],
+  },
+  {
+    label: 'Use Cases',
+    items: [
+      { label: 'Bug Bounty', href: '/use-cases/bug-bounty' },
+      { label: 'Vulnerability Research', href: '/use-cases/vulnerability-research' },
+      { label: 'OSINT & Threat Investigation', href: '/use-cases/osint-threat-investigation' },
+    ],
+  },
+  {
+    label: 'Developers',
+    items: [
+      { label: 'API', href: '/developers/api' },
+      { label: 'Documentation', href: productUrl + '/docs/api' },
+    ],
+  },
 ] as const;
 export const footerGroups = [
-  { title: 'Platform', links: [
-    ['Search & Investigation', '/platform/search-investigation'],
-    ['Data & Methodology', '/platform/data-methodology'],
-    ['Monitoring', '/platform/monitoring'],
-    ['Pricing', '/pricing'],
-  ] },
-  { title: 'Use Cases', links: [
-    ['Bug Bounty', '/use-cases/bug-bounty'],
-    ['Vulnerability Research', '/use-cases/vulnerability-research'],
-    ['OSINT & Threat Investigation', '/use-cases/osint-threat-investigation'],
-  ] },
+  {
+    title: 'Platform',
+    links: [
+      ['Search & Investigation', '/platform/search-investigation'],
+      ['Data & Methodology', '/platform/data-methodology'],
+      ['Monitoring', '/platform/monitoring'],
+      ['Pricing', '/pricing'],
+    ],
+  },
+  {
+    title: 'Use Cases',
+    links: [
+      ['Bug Bounty', '/use-cases/bug-bounty'],
+      ['Vulnerability Research', '/use-cases/vulnerability-research'],
+      ['OSINT & Threat Investigation', '/use-cases/osint-threat-investigation'],
+    ],
+  },
   { title: 'For Teams', links: [['Security Teams', '/teams']] },
-  { title: 'Developers', links: [
-    ['API', '/developers/api'], ['Documentation', productUrl + '/docs/api'],
-  ] },
-  { title: 'Apcosys', links: [
-    ['About', '/about'], ['Responsible Scanning', '/responsible-scanning'],
-    ['Talk to Us', '/contact'],
-  ] },
-  { title: 'Legal', links: [
-    ['API & Data License Agreement', productUrl + '/legal/api-data-license-agreement'],
-    ['Cookie Policy', productUrl + '/legal/cookie-policy'],
-    ['Data Collection Policy', productUrl + '/legal/data-collection-policy'],
-    ['Data Processing Agreement', productUrl + '/legal/data-processing-agreement'],
-    ['Privacy Policy', productUrl + '/legal/privacy-policy'],
-    ['Terms & Conditions', productUrl + '/legal/terms'],
-  ] },
+  {
+    title: 'Developers',
+    links: [
+      ['API', '/developers/api'],
+      ['Documentation', productUrl + '/docs/api'],
+    ],
+  },
+  {
+    title: 'Apcosys',
+    links: [
+      ['About', '/about'],
+      ['Responsible Scanning', '/responsible-scanning'],
+      ['Talk to Us', '/contact'],
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      ['API & Data License Agreement', productUrl + '/legal/api-data-license-agreement'],
+      ['Cookie Policy', productUrl + '/legal/cookie-policy'],
+      ['Data Collection Policy', productUrl + '/legal/data-collection-policy'],
+      ['Data Processing Agreement', productUrl + '/legal/data-processing-agreement'],
+      ['Privacy Policy', productUrl + '/legal/privacy-policy'],
+      ['Terms & Conditions', productUrl + '/legal/terms'],
+    ],
+  },
 ] as const;

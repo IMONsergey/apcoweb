@@ -20,20 +20,40 @@ export function isSitePath(value: string): value is SitePath {
 export function useSiteRoute() {
   const [path, setPath] = useState(getRoutePath);
   useEffect(() => {
-    function sync() { setPath(getRoutePath()); }
+    function sync() {
+      setPath(getRoutePath());
+    }
     function intercept(event: MouseEvent) {
-      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.altKey ||
+        event.shiftKey
+      )
+        return;
       if (!(event.target instanceof Element)) return;
       const anchor = event.target.closest('a[href]');
-      if (!anchor || anchor.hasAttribute('download') || anchor.target && anchor.target !== '_self') return;
+      if (
+        !anchor ||
+        anchor.hasAttribute('download') ||
+        (anchor.target && anchor.target !== '_self')
+      )
+        return;
       const url = new URL(anchor.href, location.href);
-      if (url.origin !== location.origin || (base && url.pathname !== base && !url.pathname.startsWith(base + '/'))) return;
+      if (
+        url.origin !== location.origin ||
+        (base && url.pathname !== base && !url.pathname.startsWith(base + '/'))
+      )
+        return;
       const target = rootedPath(url.pathname.slice(base.length));
       if (!isSitePath(target) && target !== '/404') return;
       event.preventDefault();
       if (url.href !== location.href) history.pushState(null, '', url.href);
       sync();
-      if (url.hash) requestAnimationFrame(() => document.getElementById(url.hash.slice(1))?.scrollIntoView());
+      if (url.hash)
+        requestAnimationFrame(() => document.getElementById(url.hash.slice(1))?.scrollIntoView());
       else window.scrollTo({ top: 0, behavior: 'instant' });
     }
     window.addEventListener('popstate', sync);
@@ -45,7 +65,11 @@ export function useSiteRoute() {
   }, []);
   useEffect(() => {
     const route = siteRoutes.find((item) => item.path === path);
-    const title = route ? (path === '/' ? 'Apcosys — Start with a query.' : route.title + ' | Apcosys') : 'Page not found | Apcosys';
+    const title = route
+      ? path === '/'
+        ? 'Apcosys — Start with a query.'
+        : route.title + ' | Apcosys'
+      : 'Page not found | Apcosys';
     const description = route?.description || 'Find what you need on Apcosys.';
     document.title = title;
     function meta(selector: string, content: string, attr = 'content') {

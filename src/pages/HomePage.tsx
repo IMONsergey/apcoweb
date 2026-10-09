@@ -11,19 +11,21 @@ import { Visual } from '../components/visuals/Visual';
 import { HomeOverview } from './HomeOverview';
 
 export default function HomePage() {
-  return <>
-    <Hero />
-    <HomeOverview />
-    <SearchPreview />
-    <StepCarousel />
-    <AudienceSection />
-    <DataSection />
-    <ApiSection />
-    <PricingSection />
-    <div className="lower-scene">
-      <Visual kind="waves" />
-      <FAQSection />
-      <ClosingSection />
-    </div>
-  </>;
+  return (
+    <>
+      <Hero />
+      <HomeOverview />
+      <SearchPreview />
+      <StepCarousel />
+      <AudienceSection />
+      <DataSection />
+      <ApiSection />
+      <PricingSection />
+      <div className="lower-scene">
+        <Visual kind="waves" />
+        <FAQSection />
+        <ClosingSection />
+      </div>
+    </>
+  );
 }

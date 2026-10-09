@@ -131,7 +131,9 @@ export function Header() {
                 </div>
               </div>
             ))}
-            <a className="nav-link nav-trigger" href={siteHref('/teams')}>For Teams</a>
+            <a className="nav-link nav-trigger" href={siteHref('/teams')}>
+              For Teams
+            </a>
             <a className="nav-link nav-trigger" href={siteHref('/pricing')}>
               <LocaleText>{t('Pricing')}</LocaleText>
             </a>
@@ -180,15 +182,29 @@ export function Header() {
                 <LocaleText>{t(group.label)}</LocaleText>
               </p>
               {group.items.map((item) => (
-                <a key={item.label} href={item.href.startsWith('/') ? siteHref(item.href) : item.href} onClick={() => setMobileOpen(false)}>
+                <a
+                  key={item.label}
+                  href={item.href.startsWith('/') ? siteHref(item.href) : item.href}
+                  onClick={() => setMobileOpen(false)}
+                >
                   <LocaleText>{t(item.label)}</LocaleText>
                   <Icon name="arrow" />
                 </a>
               ))}
             </div>
           ))}
-          <a className="mobile-pricing" href={siteHref('/teams')} onClick={() => setMobileOpen(false)}>For Teams <Icon name="arrow" /></a>
-          <a className="mobile-pricing" href={siteHref('/pricing')} onClick={() => setMobileOpen(false)}>
+          <a
+            className="mobile-pricing"
+            href={siteHref('/teams')}
+            onClick={() => setMobileOpen(false)}
+          >
+            For Teams <Icon name="arrow" />
+          </a>
+          <a
+            className="mobile-pricing"
+            href={siteHref('/pricing')}
+            onClick={() => setMobileOpen(false)}
+          >
             <LocaleText>{t('Pricing')}</LocaleText>
             <Icon name="arrow" />
           </a>
