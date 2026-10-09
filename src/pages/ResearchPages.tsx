@@ -121,7 +121,7 @@ export default function ResearchPages({ path }: { path: string }) {
   if (!config) return null;
   return (
     <PageFrame
-      variant="editorial"
+      variant="usecase"
       eyebrow={config.eyebrow}
       title={config.title}
       description={config.description}
