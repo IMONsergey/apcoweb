@@ -36,3 +36,34 @@ The public navigation and API CTAs use in-site integration guidance until
 `VITE_APCO_API_DOCS_URL` is supplied after verifying the actual HTTPS
 reference. Do not infer `/docs/api` from the marketing site or advertise
 illustrative request/response snippets as live documentation.
+
+## October 9 product-experience implementation
+
+The Stage 2 client review uses a shared `ProductEvidence` component for Search Results, Host Details, Services & Technologies and CVE Context. Its sample addresses are from documentation-only ranges and **its listed services are fictional illustrative records**, not a scan or live product output.
+
+| Design slot | Implemented experience | Required to switch to approved real content |
+| --- | --- | --- |
+| R21 SearchPreview | Expandable single-result example embedded within the original chrome; one real search form retained | One permitted guest-search query, sanitised result and host evidence, actual age/timestamp |
+| Search & Investigation | Five-step, selectable results/host/context interface with a shared illustrative evidence record | Approved result, host schema, supported query filters, screen/copy rights |
+| Bug Bounty | Starting point → query → result → next step, plus scope-vetting host scene | Authorised demonstration scope and representative result, excluding real client assets |
+| Vulnerability Research | Technology/version → matching examples → host → potential CVE context | Confirmed filter grammar, technology/version sample, safe CVE association and applicability notes |
+| OSINT | Example indicator → host evidence → next research lead | Approved unclassified indicator and observations with attribution restrictions |
+| Monitoring | Five selectable concept stages and two documentation-only asset examples | Actual availability roadmap, scan diff semantics, real display fields, approval to market |
+| Data & Methodology | Observation and potential CVE context integrated into host UI | Approved field definitions, dates, provenance, detection methodology |
+| Pricing | Credits/Search Tokens explainer before comparison, package display unchanged | Token:credit relationship, action costs, API deductions, exhaustion state, rollover, expiry and plan compatibility |
+| Developers / API | Request scaffold, copy, response tab and authentication guidance | Sanitised working endpoint/method/auth/payload/response, official docs destination |
+| Contact | Native mailto draft and explicit delivery notice | Owned backend/service, lawful storage/consent and error handling |
+
+### Verification ownership
+
+The product owner must supply three distinct **working** guest queries for a fully interactive multi-result home teaser; without them, the existing single illustrative sample remains visibly labelled. Confirm the actual search query transfer to `/search` before promising `Run this search` deep links.
+
+The API reference must include host, environment, method, authentication headers, request parameters, pagination, rate limits and a sanitised real response. Do not publish secrets or client records into this public website repository.
+
+The current pricing values are unchanged from the approved client-preview copy. Nothing in the visual explainer asserts unverified conversions or expiry rules. Publication must wait for approval of that mechanics sheet.
+
+### Design review and hosting
+
+The source R21 visual system remains authoritative. Deterministic screenshots with masked canvases are regression evidence only; the dedicated real-visual suite captures unmasked canvas and GSAP states in both themes on desktop and mobile.
+
+No `main` merge or GitHub Pages publication is authorised. Vercel READY does not prove password protection; the account owner must verify deployment protection before distributing confidential client preview links.
