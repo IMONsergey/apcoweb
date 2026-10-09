@@ -149,7 +149,7 @@ const documentationLink = apiDocumentationUrl
     };
 
 const requestExample =
-  'curl --request GET "$APCOSYS_API_ENDPOINT" \\\n  --header "\$APCOSYS_AUTH_HEADER: \$APCOSYS_API_KEY"';
+  'curl --request GET "$APCOSYS_API_ENDPOINT" \\\n  --header "$APCOSYS_AUTH_HEADER: $APCOSYS_API_KEY"';
 const responseExample =
   '{\n  "note": "Illustrative response shape only",\n  "data": [],\n  "documentation": "Consult the live API reference"\n}';
 function ApiSample() {
