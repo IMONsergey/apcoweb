@@ -41,87 +41,95 @@ const capabilities = [
   ['Buckets', 'Keep your research together'],
   ['API', 'Work with Apcosys programmatically'],
 ];
-export function HomeOverview() {
+export function WhatYouCanSearch() {
   return (
-    <>
-      <section
-        className="stage-section stage-searchable section-space"
-        id="searchable-data"
-        aria-labelledby="searchable-title"
-      >
-        <div className="container">
-          <p className="eyebrow">INTERNET INFRASTRUCTURE DATA</p>
-          <h2 id="searchable-title">Search the infrastructure behind the internet.</h2>
-          <p className="stage-intro">
-            Apcosys turns observations from publicly accessible internet infrastructure into
-            searchable technical data for security research and investigation.
-          </p>
-          <div className="stage-entity-grid">
-            {entities.map(([title, description], index) => (
-              <article key={title} className={'stage-entity stage-entity--' + index}>
-                <span className="stage-entity__count">0{index + 1}</span>
-                <h3>{title}</h3>
-                <p>{description}</p>
-              </article>
-            ))}
-          </div>
-          <a className="stage-text-link" href={siteHref('/platform/data-methodology')}>
-            Explore Data & Methodology →
-          </a>
+    <section
+      className="stage-section stage-searchable section-space"
+      id="searchable-data"
+      aria-labelledby="searchable-title"
+    >
+      <div className="container">
+        <p className="eyebrow">INTERNET INFRASTRUCTURE DATA</p>
+        <h2 id="searchable-title">Search the infrastructure behind the internet.</h2>
+        <p className="stage-intro">
+          Apcosys turns observations from publicly accessible internet infrastructure into
+          searchable technical data for security research and investigation.
+        </p>
+        <div className="stage-entity-grid">
+          {entities.map(([title, description], index) => (
+            <article key={title} className={'stage-entity stage-entity--' + index}>
+              <span className="stage-entity__count">0{index + 1}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </article>
+          ))}
         </div>
-      </section>
-      <section
-        className="stage-section stage-usecases section-space"
-        aria-labelledby="stage-usecases-title"
-      >
-        <div className="container">
-          <p className="eyebrow">BUILT FOR INVESTIGATION</p>
-          <h2 id="stage-usecases-title">
-            Different questions.
-            <br />
-            One place to investigate them.
-          </h2>
-          <div className="stage-usecase-grid">
-            {useCases.map(([name, title, description, route], i) => (
-              <article key={name} className={'stage-usecase stage-usecase--' + i}>
-                <span className="eyebrow">0{i + 1} / RESEARCH</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
-                </div>
-                <a href={siteHref(route)}>
-                  Explore {name} <span aria-hidden>↗</span>
-                </a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section
-        className="stage-section stage-capabilities section-space"
-        aria-labelledby="stage-capabilities-title"
-      >
-        <div className="container">
-          <p className="eyebrow">CAPABILITIES</p>
-          <h2 id="stage-capabilities-title">The tools to go deeper.</h2>
-          <p className="stage-intro">
-            The tools behind each step of an investigation — and a way to take the data into your
-            own workflows.
-          </p>
-          <div className="stage-capabilities-grid">
-            {capabilities.map(([title, description], i) => (
-              <div className="stage-capability" key={title}>
-                <span>0{i + 1}</span>
+        <a className="stage-text-link" href={siteHref('/platform/data-methodology')}>
+          Explore Data & Methodology →
+        </a>
+      </div>
+    </section>
+  );
+}
+
+export function UseCasePreview() {
+  return (
+    <section
+      className="stage-section stage-usecases section-space"
+      aria-labelledby="stage-usecases-title"
+    >
+      <div className="container">
+        <p className="eyebrow">BUILT FOR INVESTIGATION</p>
+        <h2 id="stage-usecases-title">
+          Different questions.
+          <br />
+          One place to investigate them.
+        </h2>
+        <div className="stage-usecase-grid">
+          {useCases.map(([name, title, description, route], i) => (
+            <article key={name} className={'stage-usecase stage-usecase--' + i}>
+              <span className="eyebrow">0{i + 1} / RESEARCH</span>
+              <div>
                 <h3>{title}</h3>
                 <p>{description}</p>
               </div>
-            ))}
-          </div>
-          <DoubleButton href={siteHref('/platform/search-investigation')}>
-            Explore Search & Investigation
-          </DoubleButton>
+              <a href={siteHref(route)}>
+                Explore {name} <span aria-hidden>↗</span>
+              </a>
+            </article>
+          ))}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
+  );
+}
+
+export function CapabilityPreview() {
+  return (
+    <section
+      className="stage-section stage-capabilities section-space"
+      aria-labelledby="stage-capabilities-title"
+    >
+      <div className="container">
+        <p className="eyebrow">CAPABILITIES</p>
+        <h2 id="stage-capabilities-title">The tools to go deeper.</h2>
+        <p className="stage-intro">
+          The tools behind each step of an investigation — and a way to take the data into your
+          own workflows.
+        </p>
+        <div className="stage-capabilities-grid">
+          {capabilities.map(([title, description], i) => (
+            <div className="stage-capability" key={title}>
+              <span>0{i + 1}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </div>
+          ))}
+        </div>
+        <DoubleButton href={siteHref('/platform/search-investigation')}>
+          Explore Search & Investigation
+        </DoubleButton>
+      </div>
+    </section>
   );
 }

@@ -8,15 +8,17 @@ import { PricingSection } from '../components/sections/PricingSection';
 import { FAQSection } from '../components/sections/FAQSection';
 import { ClosingSection } from '../components/sections/ClosingSection';
 import { Visual } from '../components/visuals/Visual';
-import { HomeOverview } from './HomeOverview';
+import { WhatYouCanSearch, UseCasePreview, CapabilityPreview } from './HomeOverview';
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <HomeOverview />
+      <WhatYouCanSearch />
       <SearchPreview />
       <StepCarousel />
+    <UseCasePreview />
+    <CapabilityPreview />
       <AudienceSection />
       <DataSection />
       <ApiSection />
