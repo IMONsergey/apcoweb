@@ -154,6 +154,24 @@ export function SearchPreview() {
               </h2>
             </div>
             <SearchForm />
+            <details className="search-scene__example">
+              <summary>
+                <span>See an example result</span>
+                <span aria-hidden="true">↗</span>
+              </summary>
+              <div className="search-scene__example-result">
+                <span className="eyebrow">ILLUSTRATIVE HOST · NOT LIVE DATA</span>
+                <div>
+                  <strong>198.51.100.24</strong>
+                  <span>443 / HTTPS</span>
+                </div>
+                <p>
+                  Documentation-only sample. A real host result includes observed services,
+                  technologies and time context. No observation is claimed for this IP.
+                </p>
+                <a href={productUrl + '/search'}>Run a search in Apcosys ↗</a>
+              </div>
+            </details>
           </div>
         </div>
       </div>
