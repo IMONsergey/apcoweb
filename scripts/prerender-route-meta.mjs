@@ -7,9 +7,19 @@ const compiled = ts.transpileModule(source, {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
 }).outputText;
 const module = { exports: {} };
-new Function('exports', 'module', compiled)(module.exports, module);
+const legalModule = { exports: {} };
+const legalCompiled = ts.transpileModule(
+  await readFile(resolve('src/content/legal-routes.ts'), 'utf8'),
+  { compilerOptions: { module: ts.ModuleKind.CommonJS } },
+).outputText;
+new Function('exports', 'module', legalCompiled)(legalModule.exports, legalModule);
+new Function('exports', 'module', 'require', compiled)(
+  module.exports,
+  module,
+  () => legalModule.exports,
+);
 const routes = module.exports.siteRoutes;
-if (!Array.isArray(routes) || routes.length !== 13) throw new Error('Unexpected route manifest');
+if (!Array.isArray(routes) || routes.length !== 19) throw new Error('Unexpected route manifest');
 const dist = resolve('dist');
 const template = await readFile(join(dist, 'index.html'), 'utf8');
 const escape = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');

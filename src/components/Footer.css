@@ -27,7 +27,8 @@
 }
 .footer-bottom {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 40px;
   margin-top: 48px;
@@ -42,9 +43,11 @@
 }
 .footer-meta {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px 24px;
 }
 .footer-meta p {
   font: 400 13px/18px var(--font-mono);
@@ -101,7 +104,8 @@
     max-width: 65%;
   }
   .footer-meta {
-    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px 16px;
   }
   .footer-meta p {
     font-size: 11px;
@@ -173,4 +177,27 @@
   .footer-email > strong::after {
     transition: none;
   }
+}
+
+.footer-meta > p,
+.footer-meta > .footer-email,
+.footer-meta > .footer-cookie-trigger {
+  white-space: nowrap;
+}
+.footer-meta > .footer-cookie-trigger {
+  min-height: 44px;
+  font-size: inherit;
+}
+.footer-meta {
+  font-size: 13px;
+}
+@media (min-width: 1600px) {
+  .footer-meta {
+    font-size: 15px;
+  }
+}
+
+.footer-columns .footer-company-title {
+  text-transform: none;
+  letter-spacing: normal;
 }

@@ -5,7 +5,9 @@ for (const width of [320, 768, 1440]) {
   test(`internal pages keep their hierarchy and illustration at ${width}px`, async ({ page }) => {
     test.setTimeout(90_000);
     await page.setViewportSize({ width, height: 900 });
-    for (const route of siteRoutes.filter((route) => route.path !== '/')) {
+    for (const route of siteRoutes.filter(
+      (route) => route.path !== '/' && !route.path.startsWith('/legal/'),
+    )) {
       await page.goto('.' + route.path);
       const hero = page.locator('.stage-page-hero');
       await expect(hero.locator('h1')).toBeVisible();

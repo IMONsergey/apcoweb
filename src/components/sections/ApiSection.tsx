@@ -21,7 +21,7 @@ export function ApiSection() {
           <p>
             <LocaleText>
               {t(
-                'Query APCOSYS programmatically and work with the results in your scripts, pipelines and reports. API access is available on Plus, Expert and Business plans.',
+                'Query Apcosys programmatically and work with the results in your scripts, pipelines and reports. API access is available on Plus, Expert and Business plans.',
               )}
             </LocaleText>
           </p>

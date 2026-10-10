@@ -5,7 +5,9 @@ test('every internal contents link reaches a unique section below the fixed head
   page,
 }) => {
   test.setTimeout(90_000);
-  for (const route of siteRoutes.filter((route) => route.path !== '/')) {
+  for (const route of siteRoutes.filter(
+    (route) => route.path !== '/' && !route.path.startsWith('/legal/'),
+  )) {
     await page.goto('.' + route.path);
     const links = page.getByRole('navigation', { name: 'On this page' }).getByRole('link');
     await expect(links.first()).toBeVisible();

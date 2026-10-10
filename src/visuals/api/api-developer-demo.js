@@ -1,4 +1,4 @@
-/* APCOSYS API product animation. Noninteractive DOM / SVG / GSAP. No network requests. */
+/* Apcosys API product animation. Noninteractive DOM / SVG / GSAP. No network requests. */
 (function () {
   'use strict';
   if (typeof window === 'undefined' || !window.customElements) return;
@@ -163,7 +163,7 @@
       super();
       this.attachShadow({ mode: 'open' });
       this.shadowRoot.innerHTML = `<style>${styles}</style>
-        <div class="viewport" role="img" aria-label="Animated APCOSYS API demo: parameters update the cURL request, a successful JSON response appears, then the next endpoint opens and a success confirmation completes the loop."><div class="sizer"><section class="shell" inert aria-hidden="true">
+        <div class="viewport" role="img" aria-label="Animated Apcosys API demo: parameters update the cURL request, a successful JSON response appears, then the next endpoint opens and a success confirmation completes the loop."><div class="sizer"><section class="shell" inert aria-hidden="true">
           <aside class="sidebar">
             <div class="sidebar-top"><span class="api-label">API</span></div>
             <div class="group-title">${icon('chevron')}<span>Datasets</span></div>

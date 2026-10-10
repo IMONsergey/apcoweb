@@ -6,7 +6,7 @@ export function ResearchFilm({ scene }: { scene: ResearchScene }) {
   return (
     <div className="research-film">
       <div className="research-film__caption">
-        <span>APCOSYS / {step.title.toUpperCase()}</span>
+        <span>Apcosys / {step.title.toUpperCase()}</span>
         <span>ANIMATED WALKTHROUGH</span>
       </div>
       <StepIllustration scene={scene} image={step.image} alt={step.alt} />

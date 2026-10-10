@@ -76,11 +76,11 @@ test('search clear preserves focus, input is mobile-zoom safe, and submitted fee
   await page.locator('.search-form').dispatchEvent('submit', { bubbles: true, cancelable: true });
   await expect(input).toHaveValue('example.com');
   await expect(page.locator('.search-form')).toHaveAttribute('aria-busy', 'true');
-  await expect(page.getByRole('button', { name: 'Search APCOSYS', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Search Apcosys', exact: true })).toBeDisabled();
   await page.evaluate(() =>
     window.dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true })),
   );
-  await expect(page.getByRole('button', { name: 'Search APCOSYS', exact: true })).toBeEnabled();
+  await expect(page.getByRole('button', { name: 'Search Apcosys', exact: true })).toBeEnabled();
 });
 
 test('closing action matches preserved desktop assets and the compact mobile button', async ({

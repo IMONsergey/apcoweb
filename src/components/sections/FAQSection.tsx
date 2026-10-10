@@ -27,7 +27,7 @@ export function FAQSection() {
           <AnimatedDetails title={t('What consumes search credits?')}>
             <p>
               <LocaleText>{t('For the current credit usage rules,')}</LocaleText>{' '}
-              <a href={`mailto:${supportEmail}?subject=APCOSYS%20search%20credits`}>
+              <a href={`mailto:${supportEmail}?subject=Apcosys%20search%20credits`}>
                 <LocaleText>{t('contact our team')}</LocaleText>
               </a>
               .

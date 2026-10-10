@@ -6,7 +6,7 @@ export function Logo({ className = '' }: { className?: string }) {
       width="134"
       height="26"
       role="img"
-      aria-label="APCOSYS"
+      aria-label="Apcosys"
     >
       <path
         d={

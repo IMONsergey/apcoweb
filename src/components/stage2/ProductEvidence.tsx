@@ -57,7 +57,7 @@ export function ProductEvidence({
       <MorphPanel>
         <div className="product-evidence__bar">
           <span>
-            APCOSYS <span className="product-evidence__slash">/</span>{' '}
+            Apcosys <span className="product-evidence__slash">/</span>{' '}
             {mode === 'cve' ? 'CVE CONTEXT' : 'INVESTIGATION'}
           </span>
           <button

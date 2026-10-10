@@ -12,7 +12,7 @@ export function Footer() {
         <nav className="footer-columns" aria-label={t('Footer')}>
           {footerGroups.map((group) => (
             <div key={group.title}>
-              <p className="eyebrow">
+              <p className={group.title === 'Apcosys' ? 'eyebrow footer-company-title' : 'eyebrow'}>
                 <LocaleText>{t(group.title)}</LocaleText>
               </p>
               <ul>
@@ -28,18 +28,18 @@ export function Footer() {
           ))}
         </nav>
         <div className="footer-bottom">
-          <a className="footer-brand" href={siteHref('/')} aria-label={t('APCOSYS home')}>
+          <a className="footer-brand" href={siteHref('/')} aria-label={t('Apcosys home')}>
             <Logo className="footer-logo" />
           </a>
           <div className="footer-meta">
-            <CookiePreferences />
             <p>
-              ©{'\u00a0'}APCOSYS{'\u00a0'}
-              {new Date().getFullYear()} ·{' '}
-              <a className="footer-email" href={`mailto:${supportEmail}`}>
-                <strong>{supportEmail}</strong>
-              </a>
+              ©{'\u00a0'}Apcosys{'\u00a0'}
+              {new Date().getFullYear()}
             </p>
+            <a className="footer-email" href={`mailto:${supportEmail}`}>
+              <strong>{supportEmail}</strong>
+            </a>
+            <CookiePreferences />
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Modal } from './Modal';
 import { DoubleButton } from './DoubleButton';
-import { productUrl } from '../../content/site';
+import { siteHref } from '../../app/router';
 
 const key = 'apcosys-cookie-preferences';
 export function CookiePreferences() {
@@ -41,7 +41,10 @@ export function CookiePreferences() {
           </label>
           <p className="stage-helper">
             For the current legal policy, see{' '}
-            <a href={productUrl + '/legal/cookie-policy'}>Cookie Policy</a>.
+            <a href={siteHref('/legal/cookie-policy')} onClick={() => setOpen(false)}>
+              Cookie Policy
+            </a>
+            .
           </p>
           <DoubleButton
             onClick={() => {

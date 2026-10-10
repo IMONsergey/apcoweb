@@ -1,6 +1,7 @@
 import { primaryContact, linkTo } from './pageLinks';
 import { useState, type FormEvent } from 'react';
-import { productUrl, supportEmail } from '../content/site';
+import { supportEmail } from '../content/site';
+import { siteHref } from '../app/router';
 import { PageFrame, Notice } from './PageUI';
 import { EditorialSection, ReadingRows, RelatedReading } from './PageSections';
 import { DoubleButton } from '../components/ui/DoubleButton';
@@ -8,7 +9,7 @@ import { DoubleButton } from '../components/ui/DoubleButton';
 function AboutPage() {
   return (
     <PageFrame
-      eyebrow="APCOSYS · ABOUT"
+      eyebrow="Apcosys · ABOUT"
       artwork="about"
       variant="editorial"
       title="Built for people who investigate the internet."
@@ -122,7 +123,7 @@ function ScanningPage() {
     );
   return (
     <PageFrame
-      eyebrow="APCOSYS · RESPONSIBLE SCANNING"
+      eyebrow="Apcosys · RESPONSIBLE SCANNING"
       artwork="scanning"
       variant="technical"
       title="How Apcosys scans."
@@ -275,7 +276,7 @@ function ContactForm({
         ?.focus();
       return;
     }
-    const subject = encodeURIComponent('APCOSYS: ' + topic);
+    const subject = encodeURIComponent('Apcosys: ' + topic);
     const body = encodeURIComponent(
       [
         'Name: ' + name,
@@ -342,10 +343,7 @@ function ContactForm({
         <input type="checkbox" name="consent" required />{' '}
         <span>
           I agree to the processing of my data in line with the{' '}
-          <a href={productUrl + '/legal/privacy-policy'} target="_blank" rel="noopener noreferrer">
-            Privacy Policy
-          </a>
-          .
+          <a href={siteHref('/legal/privacy-policy')}>Privacy Policy</a>.
         </span>
       </label>
       <DoubleButton type="submit" className="stage-contact-submit" disabled={opening}>
@@ -381,7 +379,7 @@ function ContactPage() {
   };
   return (
     <PageFrame
-      eyebrow="APCOSYS · TALK TO US"
+      eyebrow="Apcosys · TALK TO US"
       artwork="contact"
       variant="editorial"
       title="Talk to the Apcosys team."

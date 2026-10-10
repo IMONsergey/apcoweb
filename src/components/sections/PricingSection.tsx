@@ -246,12 +246,12 @@ export function PricingSection({
         <p className="modal-note">
           <LocaleText>
             {t(
-              'Final pricing, billing periods and purchase conditions are confirmed in APCOSYS before payment.',
+              'Final pricing, billing periods and purchase conditions are confirmed in Apcosys before payment.',
             )}
           </LocaleText>
         </p>
         <DoubleButton href={`${productUrl}/register`}>
-          <LocaleText>{t('Continue in APCOSYS')}</LocaleText>
+          <LocaleText>{t('Continue in Apcosys')}</LocaleText>
         </DoubleButton>
       </Modal>
       <Modal
@@ -307,7 +307,7 @@ export function PricingSection({
               </LocaleText>
             </p>
             <DoubleButton href={`${productUrl}/register`}>
-              <LocaleText>{t('Continue in APCOSYS')}</LocaleText>
+              <LocaleText>{t('Continue in Apcosys')}</LocaleText>
             </DoubleButton>
           </>
         )}

@@ -103,7 +103,7 @@ export function SearchForm({ className = '' }: { className?: string }) {
       <button
         type="submit"
         className="search-submit"
-        aria-label={t('Search APCOSYS')}
+        aria-label={t('Search Apcosys')}
         disabled={submitting}
       >
         {submitting ? (
@@ -130,7 +130,7 @@ export function SearchPreview() {
   const scene = useSearchEntrance();
   const [scenario, setScenario] = useState<EvidenceScenario>('domain');
   return (
-    <section className="search-preview" aria-label={t('Try APCOSYS public search')}>
+    <section className="search-preview" aria-label={t('Try Apcosys public search')}>
       <Visual kind="flow" eager onReady={flowReady} />
       <Visual kind="dots" eager onReady={dotsReady} />
       <div className="summary-wrap">
