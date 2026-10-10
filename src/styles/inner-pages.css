@@ -272,7 +272,7 @@ html[data-theme='dark'] .page-artwork img {
 }
 .site .inner-pages .stage-example-journey {
   border: 0;
-  gap: 24px;
+  gap: 24px var(--layout-gap);
   margin: 0;
 }
 .site .inner-pages .stage-example-journey > div {
@@ -1447,7 +1447,7 @@ html[data-theme='dark'] .page-artwork img {
     grid-template-columns: 1fr;
   }
   .site .inner-pages .business-allowance {
-    gap: 18px;
+    gap: 18px var(--layout-gap);
   }
   .site .inner-pages .business-allowance strong {
     font-size: 36px;
@@ -1463,8 +1463,8 @@ html[data-theme='dark'] .page-artwork img {
     font-size: 18px;
   }
   .site .inner-pages .about-path {
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
+    grid-template-columns: var(--layout-half);
+    gap: 28px var(--layout-gap);
     margin-top: 32px;
   }
   .site .inner-pages .about-path strong {

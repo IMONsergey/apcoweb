@@ -236,7 +236,7 @@
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--layout-gap);
   color: white;
 }
 .summary-grid dt {
@@ -327,8 +327,8 @@
 }
 .faq-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: var(--layout-half);
+  gap: var(--layout-gap);
 }
 .faq-list {
   display: flex;
@@ -594,7 +594,7 @@ th {
   }
   .summary-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
+    gap: 24px var(--layout-gap);
   }
   .summary-grid dt {
     font-size: 12px;
@@ -676,7 +676,7 @@ th {
   }
   .summary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px 16px;
+    gap: 20px var(--layout-gap);
   }
   .summary-grid dt {
     font-size: 11px;

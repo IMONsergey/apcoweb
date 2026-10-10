@@ -206,7 +206,7 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
+    gap: 16px var(--layout-gap);
   }
   .data-visual-field .data-metrics {
     margin-top: 0;
@@ -277,7 +277,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: repeat(5, var(--metric-height));
-    gap: var(--metric-gap);
+    gap: var(--metric-gap) var(--layout-gap);
     position: relative;
     inset: auto;
   }
