@@ -8,6 +8,6 @@ import base from './playwright.config';
 export default defineConfig({
   ...base,
   testMatch:
-    '**/{audit-r25,asset-delivery,column-rails,compact-layout,editorial-readability,font-loading,gradient-preservation,header-spacer-seam,inner-hero-layout,inner-page-content,inner-page-layout,legal-pages,motion-and-focus,reading-rails,responsive-navigation,route-motion,site-grid,stage2-final-rebuild,stage2-functional,stage2-motion,stage2-product-experience,stage2-quality,stage2-routes,visual-rhythm}.spec.ts',
+    '**/{audit-r25,asset-delivery,column-rails,compact-layout,dark-artwork,editorial-readability,font-loading,gradient-preservation,header-spacer-seam,inner-hero-layout,inner-page-content,inner-page-layout,legal-pages,motion-and-focus,reading-rails,responsive-navigation,route-motion,site-grid,stage2-final-rebuild,stage2-functional,stage2-motion,stage2-product-experience,stage2-quality,stage2-routes,visual-rhythm}.spec.ts',
   projects: base.projects?.filter((project) => project.name === 'chromium'),
 });

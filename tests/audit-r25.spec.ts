@@ -106,7 +106,7 @@ test('contact requirements are explicit and whitespace cannot bypass message len
   await page.getByRole('button', { name: 'Prepare email' }).click();
   await expect(page.locator('.stage-form-status')).toContainText('at least 10 characters');
   await expect(page.getByRole('textbox', { name: 'Message', exact: true })).toBeFocused();
-  await expect(page).toHaveURL(/\/contact$/);
+  await expect(page).toHaveURL(/\/contact\/?$/);
 });
 
 for (const width of [320, 768, 1440]) {

@@ -6,6 +6,8 @@ const groups = {
   'assets/editorial': ['evidence', 'investigation', 'scope'].flatMap((name) => [
     `${name}.webp`,
     `${name}-600.webp`,
+    `${name}-dark.webp`,
+    `${name}-dark-600.webp`,
   ]),
   'assets/inner': [
     'search',
@@ -17,8 +19,11 @@ const groups = {
     'about',
     'scanning',
     'contact',
-  ].map((name) => `${name}.webp`),
-  'assets/use-cases': ['bug-bounty.webp', 'vulnerability-research.webp', 'osint.webp'],
+  ].flatMap((name) => [`${name}.webp`, `${name}-dark.webp`]),
+  'assets/use-cases': ['bug-bounty', 'vulnerability-research', 'osint'].flatMap((name) => [
+    `${name}.webp`,
+    `${name}-dark.webp`,
+  ]),
   'assets/brand': ['favicon.svg', 'logo.svg'],
   'assets/partners': [
     'ibm.svg',

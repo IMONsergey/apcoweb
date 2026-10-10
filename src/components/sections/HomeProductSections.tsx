@@ -5,6 +5,7 @@ import { siteHref } from '../../app/router';
 import { DataLens, SearchFragment, HostFragment } from '../stage2/CompactFragments';
 import { TeamSignal } from '../stage2/TeamSignal';
 import { DoubleButton } from '../ui/DoubleButton';
+import { ThemedArtwork } from '../ui/ThemedArtwork';
 import { demoHosts } from '../../content/product-demo';
 import '../../styles/home-product.css';
 
@@ -135,8 +136,8 @@ export function HomeUseCases() {
                 aria-label={item.label}
                 tabIndex={-1}
               >
-                <img
-                  src={`${import.meta.env.BASE_URL}assets/use-cases/${['bug-bounty', 'vulnerability-research', 'osint'][i]}.webp`}
+                <ThemedArtwork
+                  asset={`use-cases/${['bug-bounty', 'vulnerability-research', 'osint'][i]}.webp`}
                   alt=""
                   width="1536"
                   height="1024"

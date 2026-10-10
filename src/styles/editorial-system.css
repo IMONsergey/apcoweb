@@ -101,10 +101,6 @@
   aspect-ratio: 2 / 1;
   object-fit: cover;
 }
-html[data-theme='dark'] .editorial-media img {
-  /* Preserve the material and palette; avoid inverting editorial photographs. */
-  filter: brightness(0.8) saturate(0.85);
-}
 .site .stage-page.inner-pages :is(.editorial-section, .stage-usage-guide) h3 {
   font-size: clamp(23px, 1.95vw, 27px);
   line-height: 1.25;
@@ -377,9 +373,6 @@ html[data-theme='dark'] .editorial-media img {
   background: var(--surface-card);
   border-radius: var(--radius-panel);
   margin-bottom: 26px;
-}
-html[data-theme='dark'] .related-reading__image {
-  filter: invert(1) hue-rotate(180deg) saturate(0.55);
 }
 .site .stage-page.inner-pages .related-reading h3 {
   font-size: 26px;

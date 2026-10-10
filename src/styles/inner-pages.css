@@ -79,9 +79,7 @@
   mask-image: radial-gradient(ellipse 70% 74% at 50% 50%, #000 40%, transparent 74%);
 }
 html[data-theme='dark'] .page-artwork img {
-  filter: invert(1) hue-rotate(180deg) saturate(0.55);
-  mix-blend-mode: screen;
-  opacity: 0.8;
+  mix-blend-mode: normal;
 }
 .page-artwork__trace {
   position: absolute;

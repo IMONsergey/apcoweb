@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { siteHref } from '../app/router';
+import { ThemedArtwork } from '../components/ui/ThemedArtwork';
 
 type EditorialMedia = { file: string; alt: string };
 
@@ -50,18 +51,9 @@ export function EditorialSection({
           <EditorialHeading id={id + '-title'} title={title} {...(intro ? { intro } : {})} />
           {media && (
             <figure className="editorial-media">
-              <img
-                src={import.meta.env.BASE_URL + 'assets/editorial/' + media.file + '.webp'}
-                srcSet={
-                  import.meta.env.BASE_URL +
-                  'assets/editorial/' +
-                  media.file +
-                  '-600.webp 600w, ' +
-                  import.meta.env.BASE_URL +
-                  'assets/editorial/' +
-                  media.file +
-                  '.webp 1200w'
-                }
+              <ThemedArtwork
+                asset={'editorial/' + media.file + '.webp'}
+                responsive
                 sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1520px) calc(50vw - 60px), 700px"
                 width="1200"
                 height="800"
@@ -143,9 +135,9 @@ export function RelatedReading({
       {items.map((item) => (
         <a key={item.path} href={siteHref(item.path)}>
           {relatedArtwork[item.path] && (
-            <img
+            <ThemedArtwork
               className="related-reading__image"
-              src={import.meta.env.BASE_URL + 'assets/' + relatedArtwork[item.path]}
+              asset={relatedArtwork[item.path]!}
               alt=""
               width="960"
               height="640"

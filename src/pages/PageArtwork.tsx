@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useMotion } from '../hooks/useMotion';
+import { ThemedArtwork } from '../components/ui/ThemedArtwork';
 
 export type ArtworkKey =
   | 'search'
@@ -135,8 +136,8 @@ export function PageArtwork({ kind }: { kind: ArtworkKey }) {
   const asset = artwork[kind];
   return (
     <figure className={'page-artwork page-artwork--' + kind}>
-      <img
-        src={import.meta.env.BASE_URL + 'assets/' + asset.file}
+      <ThemedArtwork
+        asset={asset.file}
         alt={asset.alt}
         width="960"
         height="640"
