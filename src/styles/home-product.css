@@ -215,8 +215,8 @@
 }
 .home-team-cta__layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: 5%;
+  grid-template-columns: var(--layout-half);
+  gap: var(--layout-gap);
   align-items: center;
   padding-block: clamp(72px, 7vw, 112px);
   min-height: 510px;
@@ -421,8 +421,8 @@
 
 .home-searchable__layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: clamp(28px, 5vw, 80px);
+  grid-template-columns: var(--layout-half);
+  gap: var(--layout-gap);
   align-items: stretch;
 }
 .home-searchable__index {

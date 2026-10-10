@@ -42,17 +42,17 @@
   gap: 16px;
 }
 .carousel-bleed {
-  padding-left: max(var(--gutter), calc((100cqw - 1760px) / 2));
+  padding-left: max(var(--gutter), calc((100cqw - var(--layout-max)) / 2));
 }
 .step-track {
-  --card-width: calc((min(100cqw - 2 * var(--gutter), 1760px) - 40px) / 3);
+  --card-width: calc((min(100cqw - 2 * var(--gutter), var(--layout-max)) - 40px) / 3);
   display: flex;
   gap: 20px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
-  padding-right: max(var(--gutter), calc((100cqw - 1760px) / 2));
+  padding-right: max(var(--gutter), calc((100cqw - var(--layout-max)) / 2));
   padding-bottom: 6px;
   scroll-padding-inline: 0;
 }

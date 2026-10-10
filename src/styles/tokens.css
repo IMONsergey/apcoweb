@@ -35,6 +35,12 @@
   --control-line: var(--border-strong);
   --radius-control: 5px;
   --radius-panel: 7px;
+  /* Shared page rails; text measures and inset product surfaces stay local. */
+  --layout-max: 1440px;
+  --layout-gap: clamp(24px, 2.5vw, 40px);
+  --layout-half: repeat(2, minmax(0, 1fr));
+  --layout-aside-width: calc((100% - 2 * var(--layout-gap)) / 3);
+  --layout-aside: minmax(0, var(--layout-aside-width)) minmax(0, 1fr);
   --gutter: clamp(32px, calc(4vw - 8px), 40px);
   --space-density: 1;
   --media-density: 1;
@@ -136,7 +142,7 @@ dd {
 }
 .container {
   width: calc(100% - 2 * var(--gutter));
-  max-width: 1760px;
+  max-width: var(--layout-max);
   margin-inline: auto;
 }
 .section-space {

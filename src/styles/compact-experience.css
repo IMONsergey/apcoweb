@@ -476,7 +476,7 @@
 .team-workflow__layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8%;
+  gap: var(--layout-gap);
   align-items: center;
   margin-top: 36px;
 }
