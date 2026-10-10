@@ -94,9 +94,26 @@ for (const width of [320, 390, 768, 1024, 1199, 1200, 1440, 1920, 2560]) {
           starts,
           ends,
           groups,
+          right: rail.right,
+          actions: Array.from(
+            document.querySelectorAll('.stage-related__links, .legal-tools, .footer-meta'),
+          ).map((group) => ({
+            name: group.className,
+            right: Math.max(
+              ...Array.from(group.children)
+                .map((child) => child.getBoundingClientRect())
+                .filter((rect) => rect.width > 0 && rect.height > 0)
+                .map((rect) => rect.right),
+            ),
+          })),
           legal: legal && innerWidth >= 768 ? legal.getBoundingClientRect().left : null,
         };
       }, structures);
+      for (const action of geometry.actions)
+        expect(
+          Math.abs(action.right - geometry.right),
+          `${path}: ${action.name} visible content reaches the right page rail`,
+        ).toBeLessThanOrEqual(1);
       for (const group of geometry.groups) {
         for (const child of group!.children) {
           if (child.hug) continue;

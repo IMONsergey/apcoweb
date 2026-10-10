@@ -33,6 +33,7 @@
 .legal-tools {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 12px;
   min-width: 0;
 }

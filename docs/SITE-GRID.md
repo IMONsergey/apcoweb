@@ -90,9 +90,10 @@ navigation and actions, and nested use-case steps. The tablet legal reading colu
 keeps the same four-column start. Mobile About/Teams groups no longer introduce
 independent 28/18 px horizontal gaps. Vertical spacing remains local to each section.
 
-The footer's copyright, email and cookie control start on the central rail on desktop;
-on smaller screens the bottom row stacks and begins on the page rail. At 768 px and
-above the three metadata items remain on one line. Contained product interfaces,
+R24 clarification: closing CTA groups, legal actions and footer metadata align their
+visible content with the right page edge. Their grid containers retain the shared
+columns; content must not be attached to the central rail. At 768 px and above the
+three metadata items remain on one line, with natural right-aligned wrapping below. Contained product interfaces,
 five-option toolbars and padded comparison surfaces retain their intentional local
 layouts; they are not page-level columns.
 
@@ -100,3 +101,6 @@ layouts; they are not page-level columns.
 lattice, independently of a component's computed gap. It covers all nineteen routes
 at 320, 390, 768, 1024, 1199, 1200, 1440, 1920 and 2560 px, including the footer
 breakpoint. This test reproduces the reported defect against the previous build.
+
+The column regression also checks the actual visible action/metadata edges against
+the right page rail, excluding the closed Cookie Preferences dialog.
