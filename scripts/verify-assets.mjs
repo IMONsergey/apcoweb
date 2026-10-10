@@ -3,6 +3,10 @@ import { join, relative } from 'node:path';
 
 const root = 'public';
 const groups = {
+  'assets/editorial': ['evidence', 'investigation', 'scope'].flatMap((name) => [
+    `${name}.webp`,
+    `${name}-600.webp`,
+  ]),
   'assets/inner': [
     'search',
     'methodology',

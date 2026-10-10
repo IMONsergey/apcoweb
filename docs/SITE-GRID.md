@@ -20,8 +20,8 @@ The twelve-column relationship does not require every component to render twelve
 
 - `.container` is the single page-width owner. Internal pages no longer override it.
 - Main-page search/data explanation, API and team CTA share equal-column alignment.
-- Internal hero, editorial headings, cases, evidence notes and closing blocks use the half layout.
-- Marketing-page headings, reading rows, API setup, usage and desktop Contact now use the same equal-half reading rail. Numbered rows preserve that body alignment. The 4 / 8 layout is reserved for the legal reading column and its contents sidebar.
+- Internal hero, paired work areas and closing blocks use the half layout. Editorial titles and introductions stack on the left rail; an optional illustration occupies the other half.
+- API setup, usage and desktop Contact retain the equal-half central rail. Explanatory reading groups keep each title above its own paragraph, in two columns (three for three short items on large desktops). The 4 / 8 layout is reserved for the legal reading column and its contents sidebar.
 - At tablet widths, text columns use equal halves where needed; Contact moves to a full-width form at 1000 px so field values remain readable.
 - At phone widths, sections stack. Token packages become full width. Existing horizontal scrolling remains confined to wide comparison tables and code samples.
 - The homepage carousel calculates both its start offset and three-card width from `--layout-max`; its next-card preview can intentionally extend beyond the content rail.
@@ -44,7 +44,7 @@ All twelve internal routes share the same hero sizing in `inner-pages.css`; Pric
 
 `tests/inner-hero-layout.spec.ts` compares all twelve routes at twelve widths from 320 to 1920 px, including both sides of the 768/1000 px breakpoints. It checks equal hero height, equal artwork size, aligned next-section starts, containment and separation. Two additional tests enlarge hero text to 200% on phone and desktop to verify that the section grows and copy does not overlap the illustration. Representative short and long heroes are also reviewed visually on desktop and mobile.
 
-## Continuous internal reading rails (global audit, 10 October)
+## Earlier rail audit (superseded editorial composition)
 
 An equal outer container was insufficient: introductions began halfway across the page, while body rows began one-third across it. Independent 32–64 px nested padding created further shifts. Marketing pages now use `--reading-columns` and `--reading-lead`, both derived from the common half grid.
 
@@ -56,3 +56,16 @@ An equal outer container was insufficient: introductions began halfway across th
 - Three-column comparisons, four plan choices and small product interfaces remain task-specific grids. These are bounded comparisons, not alternate page text rails.
 - Contact stacks below 1001 px for usable fields. Legal documents retain their 760 px reading measure and separate sidebar layout.
 - `reading-rails.spec.ts` measures actual paragraph positions across routes at 768, 1001, 1440 and 1920 px, plus wrapped card rows, mobile paragraphs and document reading position.
+
+## Editorial readability revision
+
+The earlier heading-left / introduction-right pattern was geometrically aligned but made reading fragmented and monotonous. `editorial-system.css` now owns internal content typography and grouping; `inner-pages.css` continues to own heroes and product demonstrations.
+
+- Section headings and lead paragraphs share a left edge and read top to bottom. H2 uses 34–48 px on desktop; lead copy 19–22 px; body 18 px, 1.7 line height; notes 15 px. On phones body is 17 px and lead copy 18 px.
+- Sections have 88–144 px between their content boundaries and a quiet rule on the shared page rails. No alternating page backgrounds.
+- Grouped comparisons use one surface with equal 22–32 px insets and dividers. These intentional interior insets do not change the outer site grid.
+- Reading rows are now coherent title-and-paragraph groups. The mobile paragraph remains aligned to its heading.
+- Three editorial illustrations appear alongside relevant introductions, not behind text. Aspect ratio is reserved, images are lazy loaded and have 600/1200 px variants.
+- Legal copy uses a 720 px maximum column, 18 px desktop / 17 px phone type, and clear rules before document sections. Source text remains intact.
+- Equal hero heights and original home GSAP engines remain unchanged.
+- `editorial-readability.spec.ts` verifies stacked introductions, readable body sizes, heading relationships and responsive image loading. `reading-rails.spec.ts` still checks the central rail of genuinely paired work areas.

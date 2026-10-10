@@ -129,6 +129,10 @@ function MethodologyPage() {
     >
       <EditorialSection
         id="observations"
+        media={{
+          file: 'evidence',
+          alt: 'A single teal connection links three transparent layers of observations.',
+        }}
         title="What Apcosys records."
         intro="Apcosys turns responses from publicly accessible infrastructure into searchable observations. Three different kinds of information appear together in a result."
       >

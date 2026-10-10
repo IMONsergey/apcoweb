@@ -1,5 +1,6 @@
 import '../styles/compact-experience.css';
 import '../styles/inner-pages.css';
+import '../styles/editorial-system.css';
 import { PageArtwork, type ArtworkKey } from './PageArtwork';
 import { useRef, type ReactNode } from 'react';
 import { useReadingPosition } from '../hooks/useReadingPosition';

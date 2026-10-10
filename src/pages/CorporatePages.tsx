@@ -28,6 +28,10 @@ function AboutPage() {
     >
       <EditorialSection
         id="why-apcosys"
+        media={{
+          file: 'investigation',
+          alt: 'A glass lens brings one connected host into focus within an infrastructure landscape.',
+        }}
         title="Why we built Apcosys."
         intro="The answer is rarely in the first result. A good investigation needs a clear path from a technical question to the evidence behind it."
       >
@@ -149,6 +153,10 @@ function ScanningPage() {
     >
       <EditorialSection
         id="scanning-collection"
+        media={{
+          file: 'scope',
+          alt: 'A glass boundary defines the infrastructure reached through a controlled entry point.',
+        }}
         title="What we collect."
         intro="Apcosys records how publicly accessible services respond to connection requests. Those responses become searchable technical observations."
       >

@@ -91,14 +91,15 @@
 .legal-mobile-contents a[aria-current='location'] {
   color: var(--accent-text);
   text-decoration: underline;
+  font-weight: 600;
 }
 .legal-reading {
   width: 100%;
-  max-width: 760px;
+  max-width: 720px;
   min-width: 0;
 }
 .legal-copy {
-  font: 400 17px/1.8 var(--font-sans);
+  font: 400 18px/1.75 var(--font-sans);
   color: var(--body);
   overflow-wrap: anywhere;
 }
@@ -106,7 +107,9 @@
   font: 500 clamp(25px, 2.2vw, 32px)/1.25 var(--font-sans);
   letter-spacing: -0.025em;
   color: var(--ink);
-  margin-block: 56px 24px;
+  margin-block: 64px 24px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
   text-wrap: balance;
 }
 .legal-copy h3 {
@@ -116,6 +119,8 @@
 }
 .legal-copy > :first-child {
   margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 .legal-copy p + p {
   margin-top: 18px;
@@ -218,7 +223,7 @@
     padding-block: 12px;
   }
   .legal-copy {
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.75;
   }
   .legal-copy h2 {

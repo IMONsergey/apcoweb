@@ -4,9 +4,7 @@ import { siteRoutes } from '../src/content/routes';
 
 const marketing = siteRoutes.filter(({ path }) => path !== '/' && !path.startsWith('/legal/'));
 for (const width of [768, 1001, 1440, 1920]) {
-  test(`headings and detail content keep a continuous reading rail at ${width}px`, async ({
-    page,
-  }) => {
+  test(`split work areas keep a continuous central rail at ${width}px`, async ({ page }) => {
     test.setTimeout(90_000);
     await page.setViewportSize({ width, height: 1000 });
     for (const { path } of marketing) {
@@ -19,11 +17,6 @@ for (const width of [768, 1001, 1440, 1920]) {
         const gap = parseFloat(getComputedStyle(hero).columnGap);
         const rail = box.left + (box.width + gap) / 2;
         const selectors = [
-          '.editorial-heading > p',
-          '.stage-workbench__intro > p',
-          '.stage-monitor-concept__heading > p',
-          '.stage-case-evidence__heading > p',
-          '.reading-row > div',
           '.api-first-request > :last-child',
           '.usage-layout > :last-child',
           '.date-reading',

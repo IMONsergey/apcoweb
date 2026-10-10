@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import { siteHref } from '../app/router';
 
+type EditorialMedia = { file: string; alt: string };
+
 export function EditorialHeading({
   title,
   intro,
@@ -24,12 +26,14 @@ export function EditorialSection({
   intro,
   children,
   className = '',
+  media,
 }: {
   id: string;
   title: string;
   intro?: string;
   children: ReactNode;
   className?: string;
+  media?: EditorialMedia;
 }) {
   return (
     <section
@@ -38,7 +42,36 @@ export function EditorialSection({
       aria-labelledby={id + '-title'}
     >
       <div className="container">
-        <EditorialHeading id={id + '-title'} title={title} {...(intro ? { intro } : {})} />
+        <div
+          className={
+            media ? 'editorial-opening editorial-opening--illustrated' : 'editorial-opening'
+          }
+        >
+          <EditorialHeading id={id + '-title'} title={title} {...(intro ? { intro } : {})} />
+          {media && (
+            <figure className="editorial-media">
+              <img
+                src={import.meta.env.BASE_URL + 'assets/editorial/' + media.file + '.webp'}
+                srcSet={
+                  import.meta.env.BASE_URL +
+                  'assets/editorial/' +
+                  media.file +
+                  '-600.webp 600w, ' +
+                  import.meta.env.BASE_URL +
+                  'assets/editorial/' +
+                  media.file +
+                  '.webp 1200w'
+                }
+                sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1520px) calc(50vw - 60px), 700px"
+                width="1200"
+                height="800"
+                loading="lazy"
+                decoding="async"
+                alt={media.alt}
+              />
+            </figure>
+          )}
+        </div>
         {children}
       </div>
     </section>
@@ -53,7 +86,11 @@ export function ReadingRows({
   numbered?: boolean;
 }) {
   return (
-    <div className={'reading-rows' + (numbered ? ' reading-rows--numbered' : '')}>
+    <div
+      className={
+        'reading-rows reading-rows--' + items.length + (numbered ? ' reading-rows--numbered' : '')
+      }
+    >
       {items.map((item, i) => (
         <article className="reading-row" key={item.title}>
           {numbered && (
@@ -99,6 +136,17 @@ export function RelatedReading({
     <div className="related-reading">
       {items.map((item) => (
         <a key={item.path} href={siteHref(item.path)}>
+          {relatedArtwork[item.path] && (
+            <img
+              className="related-reading__image"
+              src={import.meta.env.BASE_URL + 'assets/' + relatedArtwork[item.path]}
+              alt=""
+              width="960"
+              height="640"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
           <h3>{item.title}</h3>
           <p>{item.text}</p>
           <span>Explore</span>
@@ -107,3 +155,9 @@ export function RelatedReading({
     </div>
   );
 }
+
+const relatedArtwork: Record<string, string> = {
+  '/platform/search-investigation': 'inner/search.webp',
+  '/platform/data-methodology': 'inner/methodology.webp',
+  '/developers/api': 'inner/api.webp',
+};
