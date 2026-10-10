@@ -50,13 +50,24 @@ for (const width of [320, 390, 599, 768]) {
       // The original chrome's fog intentionally extends outside the scene.
       // Check the usable content instead, including its inner overflow and frame bounds.
       const frame = await scene.boundingBox();
-      for (const selector of ['.search-scene__content', '.search-form', '.search-scene__results']) {
+      for (const selector of ['.search-scene__heading', '.search-form', '.search-scene__results']) {
         const content = scene.locator(selector);
         const box = await content.boundingBox();
         expect(box!.x).toBeGreaterThanOrEqual(frame!.x - 1);
         expect(box!.x + box!.width).toBeLessThanOrEqual(frame!.x + frame!.width + 1);
-        const spill = await content.evaluate((el) => el.scrollWidth - el.clientWidth);
-        expect(spill).toBeLessThanOrEqual(1);
+        if (selector === '.search-form') {
+          // The approved invitation halo extends 4px outside the field. Measure
+          // actual controls independently so decorative overflow cannot conceal
+          // clipped inputs or buttons (or trigger a false content-overflow failure).
+          for (const control of await content.locator('input, button:visible').all()) {
+            const controlBox = await control.boundingBox();
+            expect(controlBox!.x).toBeGreaterThanOrEqual(box!.x - 1);
+            expect(controlBox!.x + controlBox!.width).toBeLessThanOrEqual(box!.x + box!.width + 1);
+          }
+        } else {
+          const spill = await content.evaluate((el) => el.scrollWidth - el.clientWidth);
+          expect(spill).toBeLessThanOrEqual(1);
+        }
       }
       await expect(page.locator('.search-scene__results .product-evidence__details')).toBeVisible();
     },
@@ -96,7 +107,7 @@ test('API response is collapsed initially and clipboard gives useful feedback', 
   const code = page.locator('.stage-code-window');
   await expect(code.locator('pre')).not.toContainText('198.51.100.24');
   await code.getByRole('button', { name: 'Copy', exact: true }).click();
-  await expect(code.getByRole('button', { name: /Copied|Select code to copy/ })).toBeVisible();
+  await expect(code.getByRole('button', { name: /Copied|Selected/ })).toBeVisible();
   if (browserName === 'chromium')
     expect(await page.evaluate(() => navigator.clipboard.readText())).toContain(
       'APCOSYS_API_ENDPOINT',

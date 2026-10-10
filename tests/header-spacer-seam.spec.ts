@@ -9,6 +9,7 @@ for (const theme of ['light', 'dark'] as const) {
       await page.addInitScript((value) => localStorage.setItem('apcosys-theme-mode', value), theme);
       await page.goto('./', { waitUntil: 'domcontentloaded' });
       await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+      await expect(page.locator('.hero h1')).toBeVisible();
 
       const inspect = () =>
         page.evaluate(() => {
