@@ -69,3 +69,11 @@ The earlier heading-left / introduction-right pattern was geometrically aligned 
 - Legal copy uses a 720 px maximum column, 18 px desktop / 17 px phone type, and clear rules before document sections. Source text remains intact.
 - Equal hero heights and original home GSAP engines remain unchanged.
 - `editorial-readability.spec.ts` verifies stacked introductions, readable body sizes, heading relationships and responsive image loading. `reading-rails.spec.ts` still checks the central rail of genuinely paired work areas.
+
+## R22: responsive reading groups and inner alignment
+
+Three-item prose groups use three columns above 1000 px and a single ordered column below; they never leave a 2+1 orphan. Comparisons keep one surface and switch their separators from vertical to horizontal. Contact topic choices also stack below 1001 px, while its form remains full width.
+
+Reading-row annotations, research-pair paragraphs, scanning descriptions and related-reading links now share natural subgrid tracks. Optional details allocate a track only when present. On phones these groups return to ordinary vertical flow. The plan grid uses the shared structural gap and a single heading-to-cards margin. Team workflow panels use one inset instead of compounding outer and inner padding.
+
+`tests/visual-rhythm.spec.ts` checks readable column measures, wrapped-title alignment, annotation/link alignment, the absence of orphaned three-card rows, matching H2 sizes, pricing gaps and breathing room in use-case journeys. See `VISUAL-AUDIT-R22-2026-10-10.md` for current-run evidence and the explicit distinction between desktop visual review and responsive geometry tests.
