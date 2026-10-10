@@ -78,7 +78,7 @@ for (const width of [768, 1000]) {
     });
     expect(Math.abs(geometry.form - geometry.container)).toBeLessThanOrEqual(1);
     expect(Math.min(...geometry.fields)).toBeGreaterThanOrEqual(220);
-    expect(new Set(geometry.topics.map((y) => Math.round(y))).size).toBe(1);
+    expect(new Set(geometry.topics.map((y) => Math.round(y))).size).toBe(3);
     await page.getByRole('button', { name: /Teams & procurement/ }).click();
     await expect(page.getByRole('combobox', { name: 'Topic', exact: true })).toHaveValue(
       'Team & Business plan',

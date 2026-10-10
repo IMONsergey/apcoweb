@@ -177,23 +177,61 @@ html[data-theme='dark'] .editorial-media img {
   padding: 0;
 }
 .site .stage-page.inner-pages .reading-row__detail {
-  margin-top: 20px;
+  margin-top: 0;
   padding-top: 16px;
   border-top: 1px solid var(--line);
 }
-@media (min-width: 1100px) {
+@media (min-width: 1001px) {
   .site .stage-page.inner-pages .reading-rows--3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 @supports (grid-template-rows: subgrid) {
+  .site .stage-page.inner-pages .reading-rows {
+    --reading-tracks: 2;
+  }
+  .site .stage-page.inner-pages .reading-rows--numbered,
+  .site .stage-page.inner-pages .reading-rows--with-details {
+    --reading-tracks: 3;
+  }
+  .site .stage-page.inner-pages .reading-rows--numbered.reading-rows--with-details {
+    --reading-tracks: 4;
+  }
   .site .stage-page.inner-pages .reading-rows .reading-row {
-    grid-row: span 2;
+    grid-row: span var(--reading-tracks);
     grid-template-rows: subgrid;
     row-gap: 18px;
   }
-  .site .stage-page.inner-pages .reading-rows--numbered .reading-row {
+  .site .stage-page.inner-pages .reading-row > * {
+    align-self: start;
+  }
+  .site .stage-page.inner-pages .research-pairs > article,
+  .site .stage-page.inner-pages .scanning-records > article,
+  .site .stage-page.inner-pages .feature-columns > article {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    align-content: start;
+    row-gap: 20px;
+  }
+  .site .stage-page.inner-pages .scanning-records > article > p {
+    margin-top: 0;
+  }
+  .site .stage-page.inner-pages .feature-columns--with-details > article {
     grid-row: span 3;
+  }
+  .site .stage-page.inner-pages .related-reading > a {
+    display: grid;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
+    row-gap: 18px;
+  }
+  .site .stage-page.inner-pages .related-reading > a > * {
+    margin-block: 0;
+    align-self: start;
+  }
+  .site .stage-page.inner-pages .related-reading > a > span {
+    padding-top: 4px;
   }
 }
 
@@ -471,27 +509,9 @@ html[data-theme='dark'] .related-reading__image {
   .site .stage-page.inner-pages .reading-rows .reading-row {
     display: flex;
     flex-direction: column;
+    grid-row: auto;
     gap: 16px;
     padding-top: 24px;
-  }
-  .site
-    .stage-page.inner-pages
-    :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records) {
-    gap: 0;
-    padding-block: 0;
-  }
-  .site
-    .stage-page.inner-pages
-    :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records)
-    > article:nth-child(n) {
-    padding: 26px var(--editorial-padding);
-    border-left: 0;
-  }
-  .site
-    .stage-page.inner-pages
-    :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records)
-    > article:nth-child(n + 2) {
-    border-top: 1px solid var(--line);
   }
   .site .stage-page.inner-pages .contact-topics {
     gap: 14px;
@@ -508,4 +528,129 @@ html[data-theme='dark'] .related-reading__image {
   .site .stage-page.inner-pages .stage-related {
     padding-block: 40px 64px;
   }
+}
+
+/* A single inset for the handoff: outer and inner padding must not compound. */
+.site .stage-page.inner-pages .team-workflow__visual {
+  padding: 0;
+}
+.site .stage-page.inner-pages .team-sequence {
+  padding: 8px var(--editorial-padding);
+}
+.site .stage-page.inner-pages .team-sequence > div {
+  padding-block: 22px;
+}
+.site .stage-page.inner-pages .team-sequence small {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.site .stage-page.inner-pages .team-workflow__record {
+  padding: 22px var(--editorial-padding);
+}
+.site .stage-page.inner-pages .team-workflow__record span {
+  font-size: 13px;
+}
+.site .stage-page.inner-pages .team-workflow__detail p {
+  font-size: var(--editorial-body);
+  max-width: 50ch;
+  line-height: 1.7;
+}
+
+/* Section titles and the plan grid use the same scale and rails as the editorial sections. */
+.site .stage-page.inner-pages :is(.pricing-heading, .stage-contact-aside) h2 {
+  font-size: var(--editorial-title);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  text-wrap: balance;
+}
+.site .stage-page.inner-pages .plan-grid {
+  gap: var(--layout-gap);
+  margin-top: 0;
+}
+.site .stage-page.inner-pages .stage-data-table {
+  font-size: 16px;
+}
+.site .stage-page.inner-pages .stage-data-table thead th {
+  font-size: 14px;
+}
+@media (min-width: 1001px) {
+  .site .stage-page.inner-pages .stage-plan-table th:first-child {
+    background: transparent;
+  }
+}
+/* Do not squeeze three prose columns into a tablet. Keep one ordered group,
+   with the same insets and horizontal separators used on the phone. */
+@media (max-width: 1000px) {
+  .site
+    .stage-page.inner-pages
+    :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records) {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-block: 0;
+  }
+  .site
+    .stage-page.inner-pages
+    :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records)
+    > article:nth-child(n) {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    grid-row: auto;
+    padding: 26px var(--editorial-padding);
+    border-left: 0;
+  }
+  .site
+    .stage-page.inner-pages
+    :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records)
+    > article:nth-child(n + 2) {
+    border-top: 1px solid var(--line);
+  }
+  .site .stage-page.inner-pages .scanning-records p {
+    margin-top: 0;
+  }
+  .site .stage-page.inner-pages .contact-topics {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .site .stage-page.inner-pages .contact-topics button {
+    min-width: 0;
+  }
+  .site .stage-page.inner-pages .reading-rows--3 {
+    grid-template-columns: 1fr;
+  }
+  .site .stage-page.inner-pages .reading-rows--3 .reading-row {
+    grid-row: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .site .stage-page.inner-pages .evidence-flow {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .site .stage-page.inner-pages .research-pairs > article,
+  .site .stage-page.inner-pages .related-reading > a {
+    grid-row: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .site .stage-page.inner-pages .related-reading > a > * {
+    margin-block: 0;
+  }
+}
+
+.site .stage-page.inner-pages .stage-example-journey > div {
+  padding-top: 18px;
+}
+.site .stage-page.inner-pages .stage-example-journey span {
+  font-size: 17px;
+  line-height: 1.4;
+}
+.site .stage-page.inner-pages .stage-example-journey p {
+  font-size: var(--editorial-body);
+  line-height: 1.65;
+  margin-top: 12px;
 }

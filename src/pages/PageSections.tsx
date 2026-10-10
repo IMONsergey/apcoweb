@@ -88,7 +88,10 @@ export function ReadingRows({
   return (
     <div
       className={
-        'reading-rows reading-rows--' + items.length + (numbered ? ' reading-rows--numbered' : '')
+        'reading-rows reading-rows--' +
+        items.length +
+        (numbered ? ' reading-rows--numbered' : '') +
+        (items.some((item) => item.detail) ? ' reading-rows--with-details' : '')
       }
     >
       {items.map((item, i) => (
@@ -99,10 +102,8 @@ export function ReadingRows({
             </span>
           )}
           <h3>{item.title}</h3>
-          <div>
-            <p>{item.text}</p>
-            {item.detail && <p className="reading-row__detail">{item.detail}</p>}
-          </div>
+          <p>{item.text}</p>
+          {item.detail && <p className="reading-row__detail">{item.detail}</p>}
         </article>
       ))}
     </div>
@@ -115,7 +116,12 @@ export function FeatureColumns({
   items: readonly { title: string; text: string; detail?: string }[];
 }) {
   return (
-    <div className="feature-columns">
+    <div
+      className={
+        'feature-columns' +
+        (items.some((item) => item.detail) ? ' feature-columns--with-details' : '')
+      }
+    >
       {items.map((item) => (
         <article key={item.title}>
           <h3>{item.title}</h3>
