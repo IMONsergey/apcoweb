@@ -26,8 +26,10 @@ export function CaseApproach({ kind, items }: { kind: CaseKind; items: readonly 
         <div className="research-pairs">
           {items.map((item, i) => (
             <article key={item.title}>
-              <span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              <h3>{item.title}</h3>
+              <h3>
+                <span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                {item.title}
+              </h3>
               <p>{item.description}</p>
             </article>
           ))}

@@ -87,7 +87,8 @@
   color: var(--muted);
   text-underline-offset: 4px;
 }
-.legal-sidebar a[aria-current='location'] {
+.legal-sidebar a[aria-current='location'],
+.legal-mobile-contents a[aria-current='location'] {
   color: var(--accent-text);
   text-decoration: underline;
 }

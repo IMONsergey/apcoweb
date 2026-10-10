@@ -1,6 +1,7 @@
 import '../styles/stage2-showcases.css';
 import { primarySearch, primaryContact, linkTo } from './pageLinks';
 import { metrics } from '../content/site';
+import { EvidenceFlow } from '../components/stage2/EvidenceFlow';
 import { InvestigationWorkbench } from '../components/stage2/InvestigationWorkbench';
 import { MonitoringConcept } from '../components/stage2/MonitoringConcept';
 import { PageFrame } from './PageUI';
@@ -131,6 +132,7 @@ function MethodologyPage() {
         title="What Apcosys records."
         intro="Apcosys turns responses from publicly accessible infrastructure into searchable observations. Three different kinds of information appear together in a result."
       >
+        <EvidenceFlow />
         <div className="evidence-levels">
           {[
             [

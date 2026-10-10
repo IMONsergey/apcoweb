@@ -7,7 +7,7 @@ import { plans } from '../content/site';
 import { apiDocumentationUrl } from '../config/site';
 import { siteHref } from '../app/router';
 import { PageFrame, Notice } from './PageUI';
-import { EditorialSection, ReadingRows, FeatureColumns } from './PageSections';
+import { EditorialSection, EditorialHeading, ReadingRows, FeatureColumns } from './PageSections';
 
 const planAccess = [
   { label: 'Credits', values: ['500', '25,000', '250,000', '1,500,000'] },
@@ -38,11 +38,10 @@ export function FullPlanComparison() {
   return (
     <section className="stage-plan-comparison section-space" id="compare-plans">
       <div className="container">
-        <h2>Compare plans.</h2>
-        <p className="stage-intro">
-          Compare the allowance, research tools and API access included at each level. Choose the
-          capabilities you need before adding more capacity.
-        </p>
+        <EditorialHeading
+          title="Compare plans."
+          intro="Compare the allowance, research tools and API access included at each level. Choose the capabilities you need before adding more capacity."
+        />
         <div
           role="region"
           aria-label="Scroll to compare plan features"
@@ -111,11 +110,10 @@ function PricingPage() {
       <FullPlanComparison />
       <section className="stage-credits section-space" id="search-token-packages">
         <div className="container">
-          <h2>Search Token packages.</h2>
-          <p className="stage-intro">
-            Need more search capacity without changing your level of access? Explore the available
-            Search Token packages. A package adds capacity; a plan upgrade changes capabilities.
-          </p>
+          <EditorialHeading
+            title="Search Token packages."
+            intro="Need more search capacity without changing your level of access? A package adds capacity; a plan upgrade changes capabilities."
+          />
           <div className="stage-token-grid">
             <div>
               <strong>25,000</strong>

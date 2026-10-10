@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useReadingPosition } from '../hooks/useReadingPosition';
 import { siteHref } from '../app/router';
 import { legalRoutes } from '../content/legal-routes';
 import documents from '../content/legal-documents.json';
@@ -22,18 +22,9 @@ function LegalDocument({
   document: (typeof documents)[keyof typeof documents];
   route: (typeof legalRoutes)[number];
 }) {
-  const [active, setActive] = useState('');
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting);
-        if (visible[0]) setActive(visible[0].target.id);
-      },
-      { rootMargin: '-120px 0px -55% 0px', threshold: 0 },
-    );
-    document.querySelectorAll('.legal-copy h2').forEach((heading) => observer.observe(heading));
-    return () => observer.disconnect();
-  }, []);
+  const active = useReadingPosition(
+    policy.headings.filter(({ level }) => level === 2).map(({ id }) => id),
+  );
   const contents = (
     <nav aria-label="On this page">
       <ol>

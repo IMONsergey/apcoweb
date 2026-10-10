@@ -2,6 +2,7 @@ import '../styles/compact-experience.css';
 import '../styles/inner-pages.css';
 import { PageArtwork, type ArtworkKey } from './PageArtwork';
 import { useRef, type ReactNode } from 'react';
+import { useReadingPosition } from '../hooks/useReadingPosition';
 import { usePageMotion } from '../hooks/usePageMotion';
 import { DoubleButton } from '../components/ui/DoubleButton';
 
@@ -88,6 +89,7 @@ export function PageFrame({
 }) {
   const root = useRef<HTMLElement>(null);
   usePageMotion(root, title);
+  const activeSection = useReadingPosition(sections?.map(({ id }) => id) ?? []);
   return (
     <article
       ref={root}
@@ -105,7 +107,11 @@ export function PageFrame({
       {sections && (
         <nav className="page-contents container" aria-label="On this page">
           {sections.map(({ label, id }) => (
-            <a key={id} href={'#' + id}>
+            <a
+              key={id}
+              href={'#' + id}
+              aria-current={activeSection === id ? 'location' : undefined}
+            >
               {label}
             </a>
           ))}

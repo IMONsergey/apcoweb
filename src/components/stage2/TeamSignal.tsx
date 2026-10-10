@@ -1,3 +1,4 @@
+import { EditorialHeading } from '../../pages/PageSections';
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { useMotion } from '../../hooks/useMotion';
@@ -147,11 +148,10 @@ export function TeamWorkflow() {
   return (
     <section id="team-workflow" className="team-workflow section-space">
       <div className="container">
-        <h2>
-          From analyst question
-          <br />
-          to technical context.
-        </h2>
+        <EditorialHeading
+          title="From analyst question to technical context."
+          intro="Follow one lead through a shared research process. Choose a step to see which evidence and open questions move with it."
+        />
         <div className="team-workflow__layout">
           <div className="team-workflow__visual">
             <div className="team-sequence" aria-label="Illustrative analyst handoff">

@@ -1,6 +1,23 @@
 import type { ReactNode } from 'react';
 import { siteHref } from '../app/router';
 
+export function EditorialHeading({
+  title,
+  intro,
+  id,
+}: {
+  title: string;
+  intro?: string;
+  id?: string;
+}) {
+  return (
+    <div className="editorial-heading">
+      <h2 id={id}>{title}</h2>
+      {intro && <p>{intro}</p>}
+    </div>
+  );
+}
+
 export function EditorialSection({
   id,
   title,
@@ -21,10 +38,7 @@ export function EditorialSection({
       aria-labelledby={id + '-title'}
     >
       <div className="container">
-        <div className="editorial-heading">
-          <h2 id={id + '-title'}>{title}</h2>
-          {intro && <p>{intro}</p>}
-        </div>
+        <EditorialHeading id={id + '-title'} title={title} {...(intro ? { intro } : {})} />
         {children}
       </div>
     </section>

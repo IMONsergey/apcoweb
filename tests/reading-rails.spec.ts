@@ -1,0 +1,119 @@
+import { expect, test } from '@playwright/test';
+import { siteRoutes } from '../src/content/routes';
+
+const marketing = siteRoutes.filter(({ path }) => path !== '/' && !path.startsWith('/legal/'));
+for (const width of [768, 1001, 1440, 1920]) {
+  test(`headings and detail content keep a continuous reading rail at ${width}px`, async ({
+    page,
+  }) => {
+    test.setTimeout(90_000);
+    await page.setViewportSize({ width, height: 1000 });
+    for (const { path } of marketing) {
+      await page.goto('.' + path);
+      await expect(page.locator('h1')).toBeVisible();
+      await page.evaluate(() => document.fonts.ready);
+      const geometry = await page.evaluate(() => {
+        const hero = document.querySelector('.stage-page-hero__grid')!;
+        const box = hero.getBoundingClientRect();
+        const gap = parseFloat(getComputedStyle(hero).columnGap);
+        const rail = box.left + (box.width + gap) / 2;
+        const selectors = [
+          '.editorial-heading > p',
+          '.stage-workbench__intro > p',
+          '.stage-monitor-concept__heading > p',
+          '.stage-case-evidence__heading > p',
+          '.reading-row > div',
+          '.api-first-request > :last-child',
+          '.usage-layout > :last-child',
+          '.date-reading',
+          '.handoff-record',
+          '.api-usage',
+          '.scanning-request > aside',
+          '.team-workflow__layout > :last-child',
+          '.stage-related__links',
+          ...(innerWidth > 1000 ? ['.stage-contact-form'] : []),
+        ];
+        return {
+          rail,
+          items: Array.from(document.querySelectorAll(selectors.join(',')))
+            .filter((el) => el.getBoundingClientRect().width > 0)
+            .map((el) => ({
+              name: el.className || el.parentElement?.className,
+              left: el.getBoundingClientRect().left,
+            })),
+        };
+      });
+      for (const item of geometry.items)
+        expect(Math.abs(item.left - geometry.rail), `${path}: ${item.name}`).toBeLessThanOrEqual(1);
+    }
+  });
+}
+
+test('parallel feature copy aligns naturally across wrapped titles', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  for (const path of [
+    '/platform/search-investigation',
+    '/platform/data-methodology',
+    '/platform/monitoring',
+    '/use-cases/vulnerability-research',
+    '/developers/api',
+  ]) {
+    await page.goto('.' + path);
+    await expect(page.locator('h1')).toBeVisible();
+    const rows = await page
+      .locator('.feature-columns, .query-guide, .change-ledger, .evidence-levels')
+      .evaluateAll((groups) =>
+        groups.map((group) =>
+          Array.from(group.querySelectorAll(':scope > article > p')).map(
+            (p) => p.getBoundingClientRect().top,
+          ),
+        ),
+      );
+    for (const row of rows)
+      expect(Math.max(...row) - Math.min(...row), path).toBeLessThanOrEqual(1);
+  }
+});
+
+test('mobile detail paragraphs return to the page rail, without a hanging number gutter', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./use-cases/bug-bounty');
+  const offsets = await page
+    .locator('.reading-row')
+    .evaluateAll((rows) =>
+      rows.map(
+        (row) =>
+          row.querySelector('p')!.getBoundingClientRect().left - row.getBoundingClientRect().left,
+      ),
+    );
+  for (const offset of offsets) expect(Math.abs(offset)).toBeLessThanOrEqual(1);
+});
+
+test('document contents follows long sections and reverse reading', async ({ page }) => {
+  await page.goto('./legal/terms');
+  const headings = page.locator('.legal-copy h2');
+  for (const index of [2, 10, 5]) {
+    const id = await headings.nth(index).getAttribute('id');
+    await headings
+      .nth(index)
+      .evaluate((el) => window.scrollTo(0, el.getBoundingClientRect().top + scrollY - 110));
+    await expect(page.locator('.legal-sidebar a[aria-current="location"]')).toHaveAttribute(
+      'href',
+      '#' + id,
+    );
+  }
+});
+
+test('evidence flow stays still for reduced motion and keeps the explanation in text', async ({
+  page,
+}) => {
+  await page.goto('./platform/data-methodology');
+  const canvas = page.locator('.evidence-flow');
+  await canvas.scrollIntoViewIfNeeded();
+  const before = await canvas.evaluate((el: HTMLCanvasElement) => el.toDataURL());
+  await page.waitForTimeout(150);
+  expect(await canvas.evaluate((el: HTMLCanvasElement) => el.toDataURL())).toBe(before);
+  await expect(page.locator('.evidence-levels article')).toHaveCount(3);
+  await expect(canvas).toHaveAttribute('aria-hidden', 'true');
+});
