@@ -121,7 +121,7 @@ function TeamPage() {
         description:
           'Tell us about the infrastructure you investigate, your existing tools and the access your team needs.',
       }}
-      links={[primaryContact, linkTo('View Business Plan', '/pricing', true)]}
+      links={[primaryContact, linkTo('View Business Plan', '/pricing#plan-business', true)]}
     >
       <TeamWorkflow />
       <TeamOperations />

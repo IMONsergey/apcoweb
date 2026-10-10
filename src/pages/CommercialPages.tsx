@@ -71,7 +71,7 @@ export function FullPlanComparison() {
             </tbody>
           </table>
         </div>
-        <p className="stage-helper">
+        <p className="stage-helper stage-table-hint">
           Swipe the table horizontally on smaller screens to compare all four plans.
         </p>
       </div>
@@ -105,7 +105,11 @@ function PricingPage() {
       }}
       links={[primarySearch, linkTo('Talk to Us', '/contact', true)]}
     >
-      <PricingSection showTeamBanner={false} title="Find your level of access." />
+      <PricingSection
+        showTeamBanner={false}
+        title="Find your level of access."
+        comparisonHref="#compare-plans"
+      />
       <CreditsExplained />
       <FullPlanComparison />
       <section className="stage-credits section-space" id="search-token-packages">

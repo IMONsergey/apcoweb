@@ -19,12 +19,23 @@ export function isSitePath(value: string): value is SitePath {
   return siteRoutes.some((route) => route.path === value);
 }
 
-function resolveScroll() {
-  const targetId = decodeURIComponent(location.hash.slice(1));
+function resolveScroll({ smooth = false, focus = false } = {}) {
+  let targetId: string;
+  try {
+    targetId = decodeURIComponent(location.hash.slice(1));
+  } catch {
+    return false;
+  }
   if (!targetId) return false;
   const target = document.getElementById(targetId);
   if (!target) return false;
-  target.scrollIntoView({ behavior: 'instant', block: 'start' });
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  target.scrollIntoView({ behavior: smooth && !reduced ? 'smooth' : 'instant', block: 'start' });
+  if (focus) {
+    if (!target.matches('a[href], button, input, select, textarea, [tabindex]'))
+      target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+  }
   return true;
 }
 
@@ -61,8 +72,9 @@ export function useSiteRoute() {
       }
       return false;
     };
-    const applyScroll = (y: number) => {
-      if (!location.hash || !resolveScroll()) scrollTo({ top: y, behavior: 'instant' });
+    const applyScroll = (y: number, smooth = false, focus = false) => {
+      if (!location.hash || !resolveScroll({ smooth, focus }))
+        scrollTo({ top: y, behavior: 'instant' });
     };
     const navigate = async (targetPath: string, url?: URL, rememberedY = 0) => {
       const version = ++navigationVersion;
@@ -84,7 +96,7 @@ export function useSiteRoute() {
           startTransition(() => setPath(targetPath));
           if (!(await waitForPage(targetPath, version))) return;
           currentPath = targetPath;
-          applyScroll(rememberedY);
+          applyScroll(rememberedY, samePage && !!url, samePage && !!url);
           if (!samePage) {
             const heading = document.querySelector<HTMLElement>('main h1');
             heading?.setAttribute('tabindex', '-1');
@@ -163,7 +175,7 @@ export function useSiteRoute() {
       if (!anchor) return;
       event.preventDefault();
       if (anchor.url.href === location.href && !navigating) {
-        if (anchor.url.hash) resolveScroll();
+        if (anchor.url.hash) resolveScroll({ smooth: true, focus: true });
         return;
       }
       void navigate(anchor.targetPath, anchor.url);

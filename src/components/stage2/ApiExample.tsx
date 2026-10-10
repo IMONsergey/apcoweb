@@ -1,10 +1,46 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MorphPanel } from '../ui/MorphPanel';
 import { apiRequestExample, apiResponseExample } from '../../content/product-demo';
 export function ApiExample({ compact = false }: { compact?: boolean }) {
   const [response, setResponse] = useState(false);
   const [copyState, setCopyState] = useState('Copy');
+  const copyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const copyVersion = useRef(0);
+  const code = useRef<HTMLPreElement>(null);
   const snippet = response ? apiResponseExample : apiRequestExample;
+  const resetCopy = () => {
+    copyVersion.current++;
+    clearTimeout(copyTimer.current);
+    setCopyState('Copy');
+  };
+  useEffect(
+    () => () => {
+      copyVersion.current++;
+      clearTimeout(copyTimer.current);
+    },
+    [],
+  );
+  const copy = async () => {
+    const version = ++copyVersion.current;
+    clearTimeout(copyTimer.current);
+    let result = 'Copied';
+    try {
+      await navigator.clipboard.writeText(snippet);
+    } catch {
+      if (version !== copyVersion.current) return;
+      const selection = window.getSelection();
+      if (code.current && selection) {
+        const range = document.createRange();
+        range.selectNodeContents(code.current);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        result = 'Selected';
+      } else result = 'Copy failed';
+    }
+    if (version !== copyVersion.current) return;
+    setCopyState(result);
+    copyTimer.current = setTimeout(() => setCopyState('Copy'), 2200);
+  };
   return (
     <div className={'stage-code-window' + (compact ? ' stage-code-window--compact' : '')}>
       <div className="stage-code-header">
@@ -14,7 +50,7 @@ export function ApiExample({ compact = false }: { compact?: boolean }) {
             aria-pressed={!response}
             onClick={() => {
               setResponse(false);
-              setCopyState('Copy');
+              resetCopy();
             }}
           >
             Request
@@ -24,24 +60,13 @@ export function ApiExample({ compact = false }: { compact?: boolean }) {
             aria-pressed={response}
             onClick={() => {
               setResponse(true);
-              setCopyState('Copy');
+              resetCopy();
             }}
           >
             Response
           </button>
         </div>
-        <button
-          type="button"
-          className="stage-code-copy"
-          onClick={async () => {
-            try {
-              await navigator.clipboard.writeText(snippet);
-              setCopyState('Copied');
-            } catch {
-              setCopyState('Select code to copy');
-            }
-          }}
-        >
+        <button type="button" className="stage-code-copy" onClick={copy}>
           {copyState}
         </button>
       </div>
@@ -56,6 +81,7 @@ export function ApiExample({ compact = false }: { compact?: boolean }) {
       )}
       <MorphPanel>
         <pre
+          ref={code}
           data-morph-enter
           tabIndex={0}
           aria-label={response ? 'Illustrative API response' : 'API request template'}
@@ -69,7 +95,11 @@ export function ApiExample({ compact = false }: { compact?: boolean }) {
         </p>
       </MorphPanel>
       <span className="sr-only" role="status">
-        {copyState === 'Copy' ? '' : copyState}
+        {copyState === 'Copy'
+          ? ''
+          : copyState === 'Selected'
+            ? 'Clipboard unavailable. Code selected; use your device’s copy command.'
+            : copyState}
       </span>
     </div>
   );

@@ -2,7 +2,7 @@ import { siteHref } from '../../app/router';
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { noBreakNumber } from '../../i18n/typography';
-import { useRef, useState } from 'react';
+import { useRef, useState, type MouseEvent } from 'react';
 import { MobileBillingDock } from './MobileBillingDock';
 import { plans, productUrl } from '../../content/site';
 import { DoubleButton } from '../ui/DoubleButton';
@@ -15,9 +15,11 @@ type Plan = (typeof plans)[number];
 export function PricingSection({
   showTeamBanner = true,
   title,
+  comparisonHref,
 }: {
   showTeamBanner?: boolean;
   title?: string;
+  comparisonHref?: string;
 }) {
   const { t } = useLocale();
   const [compare, setCompare] = useState(false);
@@ -143,10 +145,14 @@ export function PricingSection({
           <div className="comparison-action">
             <DoubleButton
               variant="inverse"
-              onClick={(event) => {
-                event.currentTarget.focus();
-                setCompare(true);
-              }}
+              {...(comparisonHref
+                ? { href: comparisonHref }
+                : {
+                    onClick: (event: MouseEvent<HTMLElement>) => {
+                      event.currentTarget.focus();
+                      setCompare(true);
+                    },
+                  })}
             >
               <LocaleText>{t('View a detailed comparison')}</LocaleText>
             </DoubleButton>
@@ -157,7 +163,7 @@ export function PricingSection({
             <Visual kind="dots" direction="left-to-right" />
             <div>
               <h3>
-                <LocaleText>{t('Have specific organisational requirements?')}</LocaleText>
+                <LocaleText>{t('Have specific requirements?')}</LocaleText>
               </h3>
               <p>
                 <LocaleText>{t('Tell us about your data, API or procurement needs.')}</LocaleText>

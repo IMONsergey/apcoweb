@@ -483,6 +483,8 @@
 }
 .stage-code-copy {
   color: var(--body);
+  min-width: 88px;
+  text-align: right;
 }
 .stage-code-window pre {
   max-width: 100%;

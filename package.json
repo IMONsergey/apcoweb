@@ -22,7 +22,8 @@
     "postbuild": "node scripts/verify-bundle.mjs",
     "audit:production": "npm audit --omit=dev --audit-level=high",
     "legal:compile": "node scripts/compile-legal.mjs",
-    "legal:check": "node scripts/compile-legal.mjs --check"
+    "legal:check": "node scripts/compile-legal.mjs --check",
+    "test:release": "playwright test --config=playwright.release.config.ts"
   },
   "dependencies": {
     "gsap": "3.13.0",

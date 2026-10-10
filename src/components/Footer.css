@@ -117,6 +117,9 @@
 .footer-email {
   font-family: var(--font-sans);
   font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 .footer-email strong {
   font-weight: 600;

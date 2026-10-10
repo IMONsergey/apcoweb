@@ -83,8 +83,9 @@
 .legal-sidebar a,
 .legal-mobile-contents nav a {
   display: block;
-  padding-block: 8px;
-  font: 400 14px/1.5 var(--font-sans);
+  min-height: 44px;
+  padding-block: 10px;
+  font: 400 15px/1.6 var(--font-sans);
   color: var(--muted);
   text-underline-offset: 4px;
 }
