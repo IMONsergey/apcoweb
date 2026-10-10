@@ -30,7 +30,7 @@ export function EvidenceFlow() {
       context.moveTo(points[0]!, y);
       context.lineTo(points[2]!, y);
       context.stroke();
-      const progress = (phase % 1) * 2;
+      const progress = phase * 2;
       const index = Math.min(1, Math.floor(progress));
       const x = points[index]! + (points[index + 1]! - points[index]!) * (progress - index);
       context.fillStyle = ink;
@@ -47,10 +47,10 @@ export function EvidenceFlow() {
       }
     };
     const tick = (time: number) => {
-      phase += Math.min(time - previous, 48) / 7000;
+      phase = Math.min(1, phase + Math.max(0, time - previous) / 4200);
       previous = time;
       draw();
-      frame = requestAnimationFrame(tick);
+      if (phase < 1) frame = requestAnimationFrame(tick);
     };
     const sync = () => {
       cancelAnimationFrame(frame);
@@ -59,7 +59,7 @@ export function EvidenceFlow() {
       line = style.getPropertyValue('--line').trim();
       surface = style.getPropertyValue('--page').trim();
       draw();
-      if (visible && !document.hidden && !reduced && !paused && width > 0) {
+      if (visible && !document.hidden && !reduced && !paused && width > 0 && phase < 1) {
         previous = performance.now();
         frame = requestAnimationFrame(tick);
       }

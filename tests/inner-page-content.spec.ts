@@ -18,6 +18,7 @@ test('every internal contents link reaches a unique section below the fixed head
       await expect(target).toHaveCount(1);
       await link.click();
       await expect(target).toBeInViewport();
+      await expect(link).toHaveAttribute('aria-current', 'location');
       const bounds = await target.boundingBox();
       const header = await page.locator('.site-header').boundingBox();
       expect(bounds!.y, `${route.path}${href}`).toBeGreaterThanOrEqual(

@@ -457,6 +457,7 @@ html[data-theme='dark'] .page-artwork img {
   display: none;
 }
 .site .inner-pages .stage-code-window {
+  margin: 0;
   max-width: none;
 }
 .site .inner-pages .stage-api-limits .stage-data-table {
@@ -728,7 +729,8 @@ html[data-theme='dark'] .page-artwork img {
   color: var(--accent-text);
 }
 .site .inner-pages :is(section[id], form[id]) {
-  scroll-margin-top: 128px;
+  /* Root scroll-padding already reserves the compact header. */
+  scroll-margin-top: 24px;
 }
 .site .inner-pages .editorial-heading {
   display: grid;
@@ -1702,5 +1704,10 @@ html[data-theme='dark'] .page-artwork img {
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
+}
+@media (min-width: 768px) {
+  .site .inner-pages .team-workflow__layout {
+    grid-template-columns: var(--reading-columns);
   }
 }

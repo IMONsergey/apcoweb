@@ -12,8 +12,7 @@ export function useReadingPosition(ids: readonly string[]) {
     let frame = 0;
     const update = () => {
       frame = 0;
-      const edge =
-        (document.querySelector('.site-header')?.getBoundingClientRect().height ?? 96) + 48;
+      const edge = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) + 25;
       let current = '';
       for (const target of targets) {
         if (target.getBoundingClientRect().top <= edge) current = target.id;

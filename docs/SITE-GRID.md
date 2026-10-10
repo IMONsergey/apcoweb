@@ -21,7 +21,7 @@ The twelve-column relationship does not require every component to render twelve
 - `.container` is the single page-width owner. Internal pages no longer override it.
 - Main-page search/data explanation, API and team CTA share equal-column alignment.
 - Internal hero, editorial headings, cases, evidence notes and closing blocks use the half layout.
-- Reading rows, API setup, usage and desktop Contact use the aside layout. Numbered reading rows keep their body on the same rail as unnumbered rows.
+- Marketing-page headings, reading rows, API setup, usage and desktop Contact now use the same equal-half reading rail. Numbered rows preserve that body alignment. The 4 / 8 layout is reserved for the legal reading column and its contents sidebar.
 - At tablet widths, text columns use equal halves where needed; Contact moves to a full-width form at 1000 px so field values remain readable.
 - At phone widths, sections stack. Token packages become full width. Existing horizontal scrolling remains confined to wide comparison tables and code samples.
 - The homepage carousel calculates both its start offset and three-card width from `--layout-max`; its next-card preview can intentionally extend beyond the content rail.
@@ -29,7 +29,7 @@ The twelve-column relationship does not require every component to render twelve
 
 ## Verification
 
-`tests/site-grid.spec.ts` checks all thirteen routes at 320, 768, 1440, 1920 and 2560 px: container edges match the header, content width does not exceed the maximum and pages do not overflow horizontally. Separate checks cover carousel rail alignment and the width of Contact fields at 768 and 1000 px.
+`tests/site-grid.spec.ts` checks all nineteen routes at 320, 768, 1440, 1920 and 2560 px: container edges match the header, content width does not exceed the maximum and pages do not overflow horizontally. Separate checks cover carousel rail alignment and the width of Contact fields at 768 and 1000 px.
 
 Also verified internal-page hierarchy, API table fit, Monitoring stages, original GSAP scenes, continuous panel-height animation and native/fallback/reduced-motion navigation. Reviewed desktop and tablet screenshots of the home page and representative internal pages, including the corrected Contact form.
 
@@ -43,3 +43,16 @@ All twelve internal routes share the same hero sizing in `inner-pages.css`; Pric
 - Existing headings, copy, links, image aspect ratios, colours and page transitions are preserved.
 
 `tests/inner-hero-layout.spec.ts` compares all twelve routes at twelve widths from 320 to 1920 px, including both sides of the 768/1000 px breakpoints. It checks equal hero height, equal artwork size, aligned next-section starts, containment and separation. Two additional tests enlarge hero text to 200% on phone and desktop to verify that the section grows and copy does not overlap the illustration. Representative short and long heroes are also reviewed visually on desktop and mobile.
+
+## Continuous internal reading rails (global audit, 10 October)
+
+An equal outer container was insufficient: introductions began halfway across the page, while body rows began one-third across it. Independent 32–64 px nested padding created further shifts. Marketing pages now use `--reading-columns` and `--reading-lead`, both derived from the common half grid.
+
+- Heading descriptions, reading-row bodies, API code, usage explanations, the team workflow and desktop contact form start on the same central rail.
+- Date, handoff, rate-limit and scanning explanations no longer add an extra horizontal inset. Their top rules group content without displacing text.
+- Numbered mobile rows return the body to the page edge; numbers no longer reduce paragraph width.
+- Parallel feature cards use natural subgrid rows so descriptions align after titles wrap. They become ordinary vertical reading groups on phones.
+- Pricing comparison and token-package headings use the same editorial heading; packages fill the shared two-column grid. The desktop billing control aligns with the reading rail.
+- Three-column comparisons, four plan choices and small product interfaces remain task-specific grids. These are bounded comparisons, not alternate page text rails.
+- Contact stacks below 1001 px for usable fields. Legal documents retain their 760 px reading measure and separate sidebar layout.
+- `reading-rails.spec.ts` measures actual paragraph positions across routes at 768, 1001, 1440 and 1920 px, plus wrapped card rows, mobile paragraphs and document reading position.

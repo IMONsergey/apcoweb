@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { expect, test } from '@playwright/test';
 import { siteRoutes } from '../src/content/routes';
 
@@ -116,4 +117,28 @@ test('evidence flow stays still for reduced motion and keeps the explanation in 
   expect(await canvas.evaluate((el: HTMLCanvasElement) => el.toDataURL())).toBe(before);
   await expect(page.locator('.evidence-levels article')).toHaveCount(3);
   await expect(canvas).toHaveAttribute('aria-hidden', 'true');
+});
+
+test('the API sample begins level with its setup steps', async ({ page }) => {
+  await page.goto('./developers/api');
+  const setup = await page.locator('.api-setup').boundingBox();
+  const code = await page.locator('.stage-code-window').boundingBox();
+  expect(Math.abs(setup!.y - code!.y)).toBeLessThanOrEqual(1);
+});
+
+test('the evidence trace makes one quiet pass and then stops', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('./platform/data-methodology');
+  const canvas = page.locator('.evidence-flow');
+  await canvas.scrollIntoViewIfNeeded();
+  const frame = async () =>
+    createHash('sha256')
+      .update(await canvas.evaluate((el: HTMLCanvasElement) => el.toDataURL()))
+      .digest('hex');
+  const start = await frame();
+  await expect.poll(frame).not.toBe(start);
+  await page.waitForTimeout(4600);
+  const settled = await frame();
+  await page.waitForTimeout(250);
+  expect(await frame()).toBe(settled);
 });
