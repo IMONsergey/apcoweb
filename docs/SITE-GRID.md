@@ -32,3 +32,14 @@ The twelve-column relationship does not require every component to render twelve
 `tests/site-grid.spec.ts` checks all thirteen routes at 320, 768, 1440, 1920 and 2560 px: container edges match the header, content width does not exceed the maximum and pages do not overflow horizontally. Separate checks cover carousel rail alignment and the width of Contact fields at 768 and 1000 px.
 
 Also verified internal-page hierarchy, API table fit, Monitoring stages, original GSAP scenes, continuous panel-height animation and native/fallback/reduced-motion navigation. Reviewed desktop and tablet screenshots of the home page and representative internal pages, including the corrected Contact form.
+
+## Equal internal-page first blocks
+
+All twelve internal routes share the same hero sizing in `inner-pages.css`; Pricing and Contact no longer override padding or artwork size.
+
+- At 768 px and above, the total hero minimum is `clamp(560px, 44vw, 640px)`. Its grid subtracts the shared top/bottom padding, so copy and artwork are vertically centred within the same space. The largest current headline/description/action combination fits without changing type size.
+- Below 768 px, the hero minimum is 760 px. Copy occupies the flexible first row and artwork sits in the second row, giving every route the same illustration position and lower boundary. Artwork is capped at 400 px to avoid an oversized image on wide phones.
+- These are minimum block sizes, not clipped fixed heights. Text enlargement or future longer content can expand the hero naturally. No measuring JavaScript, hidden duplicate content, overflow clipping or route-specific height exceptions are used.
+- Existing headings, copy, links, image aspect ratios, colours and page transitions are preserved.
+
+`tests/inner-hero-layout.spec.ts` compares all twelve routes at twelve widths from 320 to 1920 px, including both sides of the 768/1000 px breakpoints. It checks equal hero height, equal artwork size, aligned next-section starts, containment and separation. Two additional tests enlarge hero text to 200% on phone and desktop to verify that the section grows and copy does not overlap the illustration. Representative short and long heroes are also reviewed visually on desktop and mobile.

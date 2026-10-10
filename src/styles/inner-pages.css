@@ -14,9 +14,16 @@
   padding-block: calc(var(--inner-space) / 2);
 }
 .site .inner-pages .stage-page-hero {
-  padding-block: clamp(56px, 6vw, 88px) clamp(56px, 6vw, 88px);
+  /* One first-screen measure for every route; min-size lets enlarged text reflow. */
+  --hero-min-height: clamp(560px, 44vw, 640px);
+  --hero-padding-start: clamp(56px, 6vw, 88px);
+  --hero-padding-end: var(--hero-padding-start);
+  padding-block: var(--hero-padding-start) var(--hero-padding-end);
 }
 .site .inner-pages .stage-page-hero__grid {
+  min-block-size: calc(
+    var(--hero-min-height) - var(--hero-padding-start) - var(--hero-padding-end)
+  );
   display: grid;
   grid-template-columns: var(--layout-half);
   gap: var(--layout-gap);
@@ -533,10 +540,13 @@ html[data-theme='dark'] .page-artwork img {
     overflow-wrap: anywhere;
   }
   .site .inner-pages .stage-page-hero {
-    padding-block: 40px 32px;
+    --hero-min-height: 760px;
+    --hero-padding-start: 40px;
+    --hero-padding-end: 32px;
   }
   .site .inner-pages .stage-page-hero__grid {
     grid-template-columns: 1fr;
+    grid-template-rows: minmax(auto, 1fr) auto;
     gap: 20px;
   }
   .site .inner-pages .stage-page-hero h1 {
@@ -558,7 +568,7 @@ html[data-theme='dark'] .page-artwork img {
     white-space: normal;
   }
   .site .inner-pages .page-artwork {
-    max-width: 500px;
+    max-width: 400px;
     width: 100%;
     margin-inline: auto;
   }
@@ -1302,15 +1312,6 @@ html[data-theme='dark'] .page-artwork img {
   font-size: 14px;
   margin-top: 18px;
 }
-.site .inner-pages[data-page='contact'] .stage-page-hero,
-.site .inner-pages[data-page='pricing'] .stage-page-hero {
-  padding-block: 52px;
-}
-.site .inner-pages[data-page='contact'] .page-artwork,
-.site .inner-pages[data-page='pricing'] .page-artwork {
-  max-width: 450px;
-  justify-self: end;
-}
 @media (max-width: 1000px) {
   .site .inner-pages .coverage-register {
     column-gap: var(--layout-gap);
@@ -1478,10 +1479,6 @@ html[data-theme='dark'] .page-artwork img {
   }
   .site .inner-pages .contact-topics button > span {
     margin-top: 14px;
-  }
-  .site .inner-pages[data-page='contact'] .stage-page-hero,
-  .site .inner-pages[data-page='pricing'] .stage-page-hero {
-    padding-block: 40px 24px;
   }
 }
 
