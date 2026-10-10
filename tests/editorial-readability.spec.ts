@@ -73,3 +73,34 @@ test('editorial images load responsively without shifting the text', async ({ pa
     await page.setViewportSize({ width: 1280, height: 900 });
   }
 });
+
+test('reading surfaces retain symmetric space and readable body copy', async ({ page }) => {
+  for (const width of [390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const path of [
+      '/teams',
+      '/platform/data-methodology',
+      '/use-cases/osint-threat-investigation',
+    ]) {
+      await page.goto('.' + path);
+      const surfaces = await page
+        .locator('.handoff-record, .date-reading, .investigation-notebook')
+        .evaluateAll((els) =>
+          els.map((el) => {
+            const css = getComputedStyle(el);
+            return { left: parseFloat(css.paddingLeft), right: parseFloat(css.paddingRight) };
+          }),
+        );
+      for (const box of surfaces) {
+        expect(box.left, path).toBeGreaterThanOrEqual(22);
+        expect(Math.abs(box.left - box.right), path).toBeLessThanOrEqual(1);
+      }
+      const copy = await page
+        .locator(
+          '.indicator-approach article p, .team-handoff > div > p, .collection-layout > article > p',
+        )
+        .evaluateAll((els) => els.map((el) => parseFloat(getComputedStyle(el).fontSize)));
+      for (const size of copy) expect(size, path).toBeGreaterThanOrEqual(width > 1000 ? 18 : 17);
+    }
+  }
+});

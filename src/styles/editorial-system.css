@@ -1,16 +1,16 @@
 /* Internal editorial layer: shared outer rails, local reading groups and a clear type scale.
    Product demonstrations and the common hero retain their own compact geometry. */
-.site .inner-pages {
+.site .stage-page.inner-pages {
   --editorial-body: 18px;
   --editorial-lead: clamp(19px, 1.55vw, 22px);
   --editorial-title: clamp(34px, 3.35vw, 48px);
   --editorial-padding: clamp(24px, 2.3vw, 32px);
 }
-.site .inner-pages > .section-space {
+.site .stage-page.inner-pages > .section-space {
   padding-block: clamp(44px, 5vw, 72px);
   position: relative;
 }
-.site .inner-pages > .section-space + .section-space::before {
+.site .stage-page.inner-pages > .section-space + .section-space::before {
   content: '';
   position: absolute;
   top: 0;
@@ -21,14 +21,14 @@
   background: var(--line);
   transform: translateX(-50%);
 }
-.site .inner-pages .page-contents {
+.site .stage-page.inner-pages .page-contents {
   margin-bottom: 12px;
 }
-.site .inner-pages .page-contents a {
+.site .stage-page.inner-pages .page-contents a {
   font-size: 15px;
 }
 .site
-  .inner-pages
+  .stage-page.inner-pages
   :is(
     .editorial-heading,
     .stage-workbench__intro,
@@ -43,7 +43,7 @@
   margin-bottom: 40px;
 }
 .site
-  .inner-pages
+  .stage-page.inner-pages
   :is(
     .editorial-heading,
     .stage-workbench__intro,
@@ -60,7 +60,7 @@
   text-wrap: balance;
 }
 .site
-  .inner-pages
+  .stage-page.inner-pages
   :is(
     .editorial-heading,
     .stage-workbench__intro,
@@ -76,17 +76,17 @@
   margin: 0;
   text-wrap: pretty;
 }
-.site .inner-pages .editorial-opening--illustrated {
+.site .stage-page.inner-pages .editorial-opening--illustrated {
   display: grid;
   grid-template-columns: var(--layout-half);
   align-items: center;
   gap: var(--layout-gap);
   margin-bottom: 48px;
 }
-.site .inner-pages .editorial-opening--illustrated .editorial-heading {
+.site .stage-page.inner-pages .editorial-opening--illustrated .editorial-heading {
   margin-bottom: 0;
 }
-.site .inner-pages .editorial-opening--illustrated h2 {
+.site .stage-page.inner-pages .editorial-opening--illustrated h2 {
   max-width: 18ch;
 }
 .editorial-media {
@@ -105,7 +105,7 @@ html[data-theme='dark'] .editorial-media img {
   /* Preserve the material and palette; avoid inverting editorial photographs. */
   filter: brightness(0.8) saturate(0.85);
 }
-.site .inner-pages :is(.editorial-section, .stage-usage-guide) h3 {
+.site .stage-page.inner-pages :is(.editorial-section, .stage-usage-guide) h3 {
   font-size: clamp(23px, 1.95vw, 27px);
   line-height: 1.25;
   font-weight: 500;
@@ -114,7 +114,7 @@ html[data-theme='dark'] .editorial-media img {
   text-wrap: pretty;
 }
 .site
-  .inner-pages
+  .stage-page.inner-pages
   :is(
     .reading-row,
     .feature-columns,
@@ -139,67 +139,67 @@ html[data-theme='dark'] .editorial-media img {
   max-width: 62ch;
   text-wrap: pretty;
 }
-.site .inner-pages .editorial-note,
-.site .inner-pages .feature-columns__detail,
-.site .inner-pages .reading-row__detail {
+.site .stage-page.inner-pages .editorial-note,
+.site .stage-page.inner-pages .feature-columns__detail,
+.site .stage-page.inner-pages .reading-row__detail {
   font-size: 15px !important;
   line-height: 1.65;
   color: var(--muted);
   max-width: 78ch;
 }
-.site .inner-pages .editorial-note {
+.site .stage-page.inner-pages .editorial-note {
   padding-left: 16px;
   border-left: 2px solid var(--line);
   margin-top: 28px;
 }
 
 /* Keep each heading with its explanation, rather than making the eye cross a table. */
-.site .inner-pages .reading-rows {
+.site .stage-page.inner-pages .reading-rows {
   display: grid;
   grid-template-columns: var(--layout-half);
   gap: 36px var(--layout-gap);
 }
-.site .inner-pages .reading-rows .reading-row {
+.site .stage-page.inner-pages .reading-rows .reading-row {
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto 1fr;
   gap: 18px;
   padding-block: 28px 0;
   min-width: 0;
 }
-.site .inner-pages .reading-rows--numbered .reading-row {
+.site .stage-page.inner-pages .reading-rows--numbered .reading-row {
   grid-template-rows: auto auto 1fr;
 }
-.site .inner-pages .reading-row h3 {
+.site .stage-page.inner-pages .reading-row h3 {
   max-width: 28ch;
 }
-.site .inner-pages .reading-row__number {
+.site .stage-page.inner-pages .reading-row__number {
   font: 500 16px/1.4 var(--font-mono);
   padding: 0;
 }
-.site .inner-pages .reading-row__detail {
+.site .stage-page.inner-pages .reading-row__detail {
   margin-top: 20px;
   padding-top: 16px;
   border-top: 1px solid var(--line);
 }
 @media (min-width: 1100px) {
-  .site .inner-pages .reading-rows--3 {
+  .site .stage-page.inner-pages .reading-rows--3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 @supports (grid-template-rows: subgrid) {
-  .site .inner-pages .reading-rows .reading-row {
+  .site .stage-page.inner-pages .reading-rows .reading-row {
     grid-row: span 2;
     grid-template-rows: subgrid;
     row-gap: 18px;
   }
-  .site .inner-pages .reading-rows--numbered .reading-row {
+  .site .stage-page.inner-pages .reading-rows--numbered .reading-row {
     grid-row: span 3;
   }
 }
 
 /* A contained comparison, with equal insets and quiet dividers instead of loose fragments. */
 .site
-  .inner-pages
+  .stage-page.inner-pages
   :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records) {
   gap: 20px 0;
   border: 1px solid var(--line);
@@ -208,7 +208,7 @@ html[data-theme='dark'] .editorial-media img {
   padding-block: var(--editorial-padding);
 }
 .site
-  .inner-pages
+  .stage-page.inner-pages
   :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records)
   > article:nth-child(n) {
   padding: 0 var(--editorial-padding);
@@ -216,13 +216,12 @@ html[data-theme='dark'] .editorial-media img {
   min-width: 0;
 }
 .site
-  .inner-pages
+  .stage-page.inner-pages
   :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records)
-  > article
-  + article {
+  > article:nth-child(n + 2) {
   border-left: 1px solid var(--line);
 }
-.site .inner-pages :is(.query-guide, .change-ledger, .evidence-levels) code {
+.site .stage-page.inner-pages :is(.query-guide, .change-ledger, .evidence-levels) > article > code {
   font-size: clamp(16px, 1.4vw, 20px);
   line-height: 1.6;
   padding: 12px 14px;
@@ -231,100 +230,105 @@ html[data-theme='dark'] .editorial-media img {
   color: var(--accent-text);
   overflow-wrap: anywhere;
 }
-.site .inner-pages .change-ledger h4 {
+.site .stage-page.inner-pages .change-ledger h4 {
   font-size: 19px;
   font-weight: 500;
   line-height: 1.4;
 }
-.site .inner-pages .evidence-reading {
+.site .stage-page.inner-pages .evidence-reading {
   border: 0;
   margin-top: 28px;
   padding-top: 0;
 }
-.site .inner-pages .evidence-reading strong {
+.site .stage-page.inner-pages .evidence-reading strong {
   display: block;
   font-size: 20px;
   margin-bottom: 10px;
 }
-.site .inner-pages .coverage-register article {
+.site .stage-page.inner-pages .coverage-register article {
   flex-direction: column-reverse;
   justify-content: flex-end;
   gap: 20px;
   padding-block: 30px;
 }
-.site .inner-pages .coverage-register strong {
+.site .stage-page.inner-pages .coverage-register strong {
   font-size: clamp(32px, 3.2vw, 46px);
   color: var(--accent-text);
   letter-spacing: -0.04em;
 }
-.site .inner-pages .coverage-register h3 {
+.site .stage-page.inner-pages .coverage-register h3 {
   font-size: 22px;
 }
-.site .inner-pages .coverage-register p {
+.site .stage-page.inner-pages .coverage-register p {
   font-size: 16px;
   max-width: 45ch;
   margin-top: 8px;
 }
-.site .inner-pages :is(.date-reading, .handoff-record, .investigation-notebook) {
+.site .stage-page.inner-pages :is(.date-reading, .handoff-record, .investigation-notebook) {
   background: var(--surface-card);
   border: 1px solid var(--line);
   border-radius: var(--radius-panel);
   padding: var(--editorial-padding);
 }
+.site .stage-page.inner-pages .team-handoff .handoff-record,
+.site .stage-page.inner-pages .collection-layout .date-reading {
+  padding: var(--editorial-padding);
+  border: 1px solid var(--line);
+}
 .site
-  .inner-pages
+  .stage-page.inner-pages
   :is(.date-reading, .handoff-record, .scanning-request, .investigation-notebook)
   dt {
   font-size: 16px;
   font-weight: 600;
 }
 .site
-  .inner-pages
+  .stage-page.inner-pages
   :is(.date-reading, .handoff-record, .scanning-request, .investigation-notebook)
   dd {
   font-size: 17px;
   line-height: 1.7;
 }
-.site .inner-pages .research-pairs article {
+.site .stage-page.inner-pages .research-pairs article {
   padding-block: 28px 12px;
   gap: 20px;
 }
-.site .inner-pages .research-pairs h3 > span {
+.site .stage-page.inner-pages .research-pairs h3 > span {
   display: block;
   font-size: 16px;
   margin: 0 0 18px;
 }
-.site .inner-pages .indicator-approach article + article {
+.site .stage-page.inner-pages .indicator-approach article + article {
   padding-top: 26px;
   margin-top: 26px;
   border-top: 1px solid var(--line);
 }
-.site .inner-pages .about-statement {
+.site .stage-page.inner-pages .about-statement {
   gap: var(--layout-gap);
 }
-.site .inner-pages .about-statement p {
+.site .stage-page.inner-pages .about-statement p {
   font-size: 20px;
   line-height: 1.7;
   max-width: 55ch;
   color: var(--body);
 }
-.site .inner-pages .about-path {
+.site .stage-page.inner-pages .about-path {
   margin-top: 40px;
   padding-block: 32px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 0;
 }
-.site .inner-pages .about-path strong {
+.site .stage-page.inner-pages .about-path strong {
   color: var(--accent-text);
 }
-.site .inner-pages .about-path span {
+.site .stage-page.inner-pages .about-path span {
   font-size: 16px;
   line-height: 1.6;
 }
-.site .inner-pages .related-reading {
+.site .stage-page.inner-pages .related-reading {
   margin-top: 48px;
   gap: var(--layout-gap);
 }
-.site .inner-pages .related-reading a {
+.site .stage-page.inner-pages .related-reading a {
   padding-top: 0;
   border-top: 0;
 }
@@ -339,104 +343,112 @@ html[data-theme='dark'] .editorial-media img {
 html[data-theme='dark'] .related-reading__image {
   filter: invert(1) hue-rotate(180deg) saturate(0.55);
 }
-.site .inner-pages .related-reading h3 {
+.site .stage-page.inner-pages .related-reading h3 {
   font-size: 26px;
 }
-.site .inner-pages .related-reading span {
+.site .stage-page.inner-pages .related-reading span {
   font-size: 16px;
 }
-.site .inner-pages .api-setup h3 {
+.site .stage-page.inner-pages .api-setup h3 {
   font-size: 23px;
 }
-.site .inner-pages .api-setup li + li {
+.site .stage-page.inner-pages .api-setup li + li {
   padding-top: 26px;
   border-top: 1px solid var(--line);
 }
-.site .inner-pages .api-setup li + li::before {
+.site .stage-page.inner-pages .api-setup li + li::before {
   top: 29px;
 }
-.site .inner-pages .api-first-request .stage-code-window pre {
+.site .stage-page.inner-pages .api-first-request .stage-code-window pre {
   font-size: 14px;
   line-height: 1.8;
 }
-.site .inner-pages .api-first-request .stage-api-auth p {
+.site .stage-page.inner-pages .api-first-request .stage-api-auth p {
   font-size: 15px;
 }
-.site .inner-pages .contact-topics button:nth-child(n) {
+.site .stage-page.inner-pages .api-first-request .stage-note {
+  font-size: 14px;
+  line-height: 1.65;
+}
+.site .stage-page.inner-pages .contact-topics button:nth-child(n) {
   background: var(--surface-card);
   padding: var(--editorial-padding);
   border: 1px solid var(--line);
   border-radius: var(--radius-panel);
   text-align: left;
 }
-.site .inner-pages .contact-topics button[aria-pressed='true'] {
+.site .stage-page.inner-pages .contact-topics button[aria-pressed='true'] {
   border-color: var(--accent-text);
   box-shadow: inset 0 3px 0 var(--accent-text);
 }
-.site .inner-pages .contact-topics p {
+.site .stage-page.inner-pages .contact-topics p {
   font-size: 17px;
   line-height: 1.7;
 }
-.site .inner-pages .stage-contact-aside > p {
+.site .stage-page.inner-pages .stage-contact-aside > p {
   font-size: 19px;
   line-height: 1.7;
   max-width: 48ch;
 }
-.site .inner-pages .stage-contact-form label {
+.site .stage-page.inner-pages .stage-contact-form label {
   font-size: 16px;
 }
-.site .inner-pages .stage-usage-guide__questions p {
+.site .stage-page.inner-pages .stage-usage-guide__questions p {
   font-size: var(--editorial-body);
   line-height: 1.7;
   max-width: 62ch;
 }
-.site .inner-pages .stage-usage-guide__questions h3 {
+.site .stage-page.inner-pages .stage-usage-guide__questions h3 {
   font-size: 24px;
 }
-.site .inner-pages .request-costs > div p span {
+.site .stage-page.inner-pages .request-costs > div p span {
   font-size: 17px;
   line-height: 1.7;
 }
-.site .inner-pages .stage-data-table :is(th, td) {
+.site .stage-page.inner-pages .stage-data-table :is(th, td) {
   padding-block: 20px;
   line-height: 1.5;
 }
-.site .inner-pages .stage-data-table tbody tr:nth-child(even) {
+.site .stage-page.inner-pages .stage-data-table tbody tr:nth-child(even) {
   background: color-mix(in srgb, var(--surface-card) 60%, transparent);
 }
-.site .inner-pages .stage-related {
+.site .stage-page.inner-pages .stage-related {
   padding-block: 64px 88px;
 }
-.site .inner-pages .page-closing-copy p {
+.site .stage-page.inner-pages .page-closing-copy p {
   font-size: 18px;
   line-height: 1.7;
 }
 @media (max-width: 1000px) {
-  .site .inner-pages {
+  .site .stage-page.inner-pages {
     --editorial-body: 17px;
     --editorial-padding: 22px;
   }
-  .site .inner-pages :is(.query-guide, .change-ledger, .evidence-levels) code {
+  .site
+    .stage-page.inner-pages
+    :is(.query-guide, .change-ledger, .evidence-levels)
+    > article
+    > code {
     padding: 10px;
     font-size: 15px;
   }
   .site
-    .inner-pages
+    .stage-page.inner-pages
     :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records)
     h3 {
     font-size: 22px;
   }
 }
 @media (max-width: 767px) {
-  .site .inner-pages {
+  .site .stage-page.inner-pages {
     --editorial-title: clamp(30px, 7.8vw, 38px);
     --editorial-lead: 18px;
   }
-  .site .inner-pages > .section-space {
+  .site .stage-page.inner-pages > .section-space {
     padding-block: 40px;
   }
   .site
-    .inner-pages
+    .stage-page.inner-pages
     :is(
       .editorial-heading,
       .stage-workbench__intro,
@@ -447,54 +459,53 @@ html[data-theme='dark'] .related-reading__image {
     gap: 18px;
     margin-bottom: 28px;
   }
-  .site .inner-pages .editorial-opening--illustrated {
+  .site .stage-page.inner-pages .editorial-opening--illustrated {
     grid-template-columns: 1fr;
     gap: 28px;
     margin-bottom: 32px;
   }
-  .site .inner-pages .reading-rows {
+  .site .stage-page.inner-pages .reading-rows {
     grid-template-columns: 1fr;
     gap: 28px;
   }
-  .site .inner-pages .reading-rows .reading-row {
+  .site .stage-page.inner-pages .reading-rows .reading-row {
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding-top: 24px;
   }
   .site
-    .inner-pages
+    .stage-page.inner-pages
     :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records) {
     gap: 0;
     padding-block: 0;
   }
   .site
-    .inner-pages
+    .stage-page.inner-pages
     :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records)
     > article:nth-child(n) {
     padding: 26px var(--editorial-padding);
     border-left: 0;
   }
   .site
-    .inner-pages
+    .stage-page.inner-pages
     :is(.feature-columns, .query-guide, .change-ledger, .evidence-levels, .scanning-records)
-    > article
-    + article {
+    > article:nth-child(n + 2) {
     border-top: 1px solid var(--line);
   }
-  .site .inner-pages .contact-topics {
+  .site .stage-page.inner-pages .contact-topics {
     gap: 14px;
   }
-  .site .inner-pages .about-statement p {
+  .site .stage-page.inner-pages .about-statement p {
     font-size: 18px;
   }
-  .site .inner-pages .coverage-register strong {
+  .site .stage-page.inner-pages .coverage-register strong {
     font-size: clamp(29px, 7vw, 38px);
   }
   .related-reading__image {
     height: 170px;
   }
-  .site .inner-pages .stage-related {
+  .site .stage-page.inner-pages .stage-related {
     padding-block: 40px 64px;
   }
 }
