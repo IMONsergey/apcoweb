@@ -2,8 +2,8 @@ import '../styles/stage2-showcases.css';
 import '../styles/stage2-usecases.css';
 import { primaryContact, linkTo } from './pageLinks';
 import { productUrl } from '../config/site';
-import { siteHref } from '../app/router';
-import { PageFrame, StorySections, Notice } from './PageUI';
+import { PageFrame } from './PageUI';
+import { CaseApproach, CaseChecks } from './CaseGuidance';
 import { TeamWorkflow } from '../components/stage2/TeamSignal';
 import { TeamOperations } from '../components/stage2/TeamOperations';
 import {
@@ -109,7 +109,18 @@ function TeamPage() {
       artwork="teams"
       variant="technical"
       title="Internet intelligence for your security team."
-      description="Bring internet-facing infrastructure observations into technical research, security evaluation and existing team workflows."
+      description="Give analysts a common source of technical evidence about internet-facing infrastructure — from the first indicator to the context behind it."
+      sections={[
+        { label: 'Analyst workflow', id: 'team-workflow' },
+        { label: 'Research tasks', id: 'team-tasks' },
+        { label: 'Data & handoffs', id: 'team-trust' },
+        { label: 'Business access', id: 'team-access' },
+      ]}
+      closing={{
+        title: 'Evaluate it with your own research question.',
+        description:
+          'Tell us about the infrastructure you investigate, your existing tools and the access your team needs.',
+      }}
       links={[primaryContact, linkTo('View Business Plan', '/pricing', true)]}
     >
       <TeamWorkflow />
@@ -121,6 +132,12 @@ export default function ResearchPages({ path }: { path: string }) {
   if (path === '/teams') return <TeamPage />;
   const config = caseStudies[path as keyof typeof caseStudies];
   if (!config) return null;
+  const kind =
+    path === '/use-cases/bug-bounty'
+      ? 'scope'
+      : path === '/use-cases/vulnerability-research'
+        ? 'technology'
+        : 'indicator';
   return (
     <PageFrame
       variant="usecase"
@@ -134,6 +151,25 @@ export default function ResearchPages({ path }: { path: string }) {
       }
       title={config.title}
       description={config.description}
+      sections={[
+        { label: 'The approach', id: 'research-approach' },
+        { label: 'Example investigation', id: 'example-investigation' },
+        { label: 'Before you act', id: 'research-checks' },
+      ]}
+      closing={{
+        title:
+          kind === 'scope'
+            ? 'Find your next in-scope lead.'
+            : kind === 'technology'
+              ? 'Put a technology under the microscope.'
+              : 'Follow the next evidence-led question.',
+        description:
+          kind === 'scope'
+            ? 'Start free. Upgrade when your research needs more credits, filters or API access.'
+            : kind === 'technology'
+              ? 'Search observed products and versions. CVE context is available from Plus in the plan preview.'
+              : 'Start with an IP or domain, or use the API to bring repeat lookups into your investigation workflow.',
+      }}
       links={[
         {
           label:
@@ -147,6 +183,7 @@ export default function ResearchPages({ path }: { path: string }) {
         config.next,
       ]}
     >
+      <CaseApproach kind={kind} items={config.items} />
       {path === '/use-cases/bug-bounty' ? (
         <ScopeEvidence />
       ) : path === '/use-cases/vulnerability-research' ? (
@@ -154,25 +191,7 @@ export default function ResearchPages({ path }: { path: string }) {
       ) : (
         <IndicatorEvidence />
       )}
-      <StorySections items={config.items} variant="timeline" />
-      <section className="stage-case-bottom">
-        <div className="container">
-          <p className="stage-case-plan-line">
-            {path === '/use-cases/vulnerability-research'
-              ? 'CVE context is listed from Plus in the approved plan preview.'
-              : path === '/use-cases/bug-bounty'
-                ? 'Start free. Compare plans when your research needs more credits, filters or API access.'
-                : 'Use API access on eligible plans for repeat lookups in your own workflow.'}
-          </p>
-          <Notice>
-            Only investigate assets you own or are explicitly authorised to assess. A search result
-            does not grant testing permission or establish attribution.
-          </Notice>
-          <a className="stage-text-link" href={siteHref('/platform/search-investigation')}>
-            Explore Search & Investigation
-          </a>
-        </div>
-      </section>
+      <CaseChecks kind={kind} />
     </PageFrame>
   );
 }

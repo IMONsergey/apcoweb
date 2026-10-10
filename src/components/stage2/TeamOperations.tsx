@@ -1,60 +1,116 @@
-import { PageAction } from '../../pages/PageUI';
-import { linkTo, primaryContact } from '../../pages/pageLinks';
+import { EditorialSection, ReadingRows, RelatedReading } from '../../pages/PageSections';
 
 export function TeamOperations() {
   return (
-    <section className="stage-team-operations section-space" aria-labelledby="team-process-title">
-      <div className="container">
-        <div className="stage-team-operations__header">
-          <h2 id="team-process-title">A shared starting point for your team.</h2>
-          <p>
-            Evaluate the platform with the questions, tools and handoffs your analysts already use.
-          </p>
-        </div>
-        <div className="team-evaluation">
-          <article>
-            <h3>Start with a real question.</h3>
-            <p>
-              Choose an investigation your team understands. Compare the observations with your
-              existing evidence and identify what needs validation.
-            </p>
-          </article>
-          <article>
-            <h3>Keep the context.</h3>
-            <p>
-              Carry host details, service responses and open questions into the next review. Make
-              the distinction between an observation and a finding clear.
-            </p>
-          </article>
-          <article>
-            <h3>Connect your workflow.</h3>
-            <p>
-              Evaluate supported API requests with a small script or report before integrating them
-              into a wider process.
-            </p>
-          </article>
-        </div>
-        <div className="stage-team-operations__business">
+    <>
+      <EditorialSection
+        id="team-tasks"
+        title="Useful at the point of investigation."
+        intro="Bring an existing question to Apcosys. Use observed infrastructure to give the next review more technical context."
+      >
+        <ReadingRows
+          items={[
+            {
+              title: 'An indicator from an alert.',
+              text: 'Look up the host and review its services, products and versions. Give the analyst enough context to decide which part of the lead needs closer attention.',
+              detail:
+                'Carry forward: the host, relevant service response and the question that remains.',
+            },
+            {
+              title: 'A newly published advisory.',
+              text: 'Research the named technology and inspect potential version matches. Review the evidence before turning an association into a finding.',
+              detail:
+                'Carry forward: the detection, advisory applicability and checks still required.',
+            },
+            {
+              title: 'A repeat lookup or report.',
+              text: 'Use the API to bring supported search and host data into scripts, enrichment steps and internal reporting.',
+              detail:
+                'Carry forward: the observation context, the source and your own validation notes.',
+            },
+          ]}
+        />
+      </EditorialSection>
+      <EditorialSection
+        id="team-trust"
+        title="Make the handoff useful."
+        intro="Before a result informs a decision, another analyst should be able to see what was observed, why it matters and what has not yet been established."
+      >
+        <div className="team-handoff">
           <div>
-            <h3>Room for a team.</h3>
+            <h3>Give analysts the context they need.</h3>
             <p>
-              The Business plan includes a five-user allowance, 1.5 million credits and API access
-              in this plan preview.
+              Keep the host, port and supporting response together. Include detected products and
+              versions, potential CVE associations and available observation dates.
+            </p>
+            <p>
+              Record your reasoning separately from the source data, so the next person can
+              distinguish an observation from a validated finding.
             </p>
           </div>
-          <div className="stage-team-operations__metrics">
-            <div>
-              <strong>5</strong>
-              <span>Users</span>
-            </div>
-            <div>
-              <strong>1.5M</strong>
-              <span>Credits</span>
-            </div>
+          <div className="handoff-record">
+            <h3>A concise research handoff</h3>
+            <dl>
+              <div>
+                <dt>Question</dt>
+                <dd>What are we trying to establish?</dd>
+              </div>
+              <div>
+                <dt>Evidence</dt>
+                <dd>Which host, service and response support the lead?</dd>
+              </div>
+              <div>
+                <dt>Uncertainty</dt>
+                <dd>What needs independent verification?</dd>
+              </div>
+              <div>
+                <dt>Next action</dt>
+                <dd>Who reviews it, and what should they check?</dd>
+              </div>
+            </dl>
           </div>
-          <PageAction links={[primaryContact, linkTo('Compare Business', '/pricing', true)]} />
         </div>
-      </div>
-    </section>
+        <RelatedReading
+          items={[
+            {
+              title: 'Understand the data you rely on.',
+              text: 'Coverage, observation dates, CVE associations and the limits of internet scanning.',
+              path: '/platform/data-methodology',
+            },
+            {
+              title: 'Bring data into existing workflows.',
+              text: 'A compact introduction to API requests, access levels and usage.',
+              path: '/developers/api',
+            },
+          ]}
+        />
+      </EditorialSection>
+      <EditorialSection
+        id="team-access"
+        title="Choose access for your team."
+        intro="Business brings a larger allowance and access for up to five users. Discuss data needs, invoice payment and procurement questions with the team."
+      >
+        <div className="business-allowance">
+          <div>
+            <strong>5</strong>
+            <span>Users on one subscription</span>
+          </div>
+          <div>
+            <strong>1.5M</strong>
+            <span>Included credits</span>
+          </div>
+          <div>
+            <strong>
+              5<span>/s</span>
+            </strong>
+            <span>API request rate</span>
+          </div>
+        </div>
+        <p className="editorial-note">
+          Business plan figures shown for the client preview. Final access and commercial terms are
+          confirmed in the product.
+        </p>
+      </EditorialSection>
+    </>
   );
 }

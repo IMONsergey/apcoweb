@@ -204,7 +204,7 @@ test('unverified API docs remain within the supported on-site guidance', async (
   await expect(page).toHaveURL(/\/developers\/api#documentation$/);
   await expect(page.locator('#documentation')).toBeInViewport();
   await expect(
-    page.getByText('The production API documentation URL is not yet confirmed.', { exact: false }),
+    page.getByText('Illustrative request template, not a working API contract.', { exact: false }),
   ).toBeVisible();
 });
 

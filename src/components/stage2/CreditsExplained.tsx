@@ -1,50 +1,80 @@
-const questions = [
-  {
-    label: 'Who is each plan for?',
-    answer:
-      'Free introduces search. Plus supports individual research and API use. Expert is for deeper investigations and filtering. Business lists higher team allowances. See the plan cards for exact proposed entitlements.',
-  },
-  {
-    label: 'Credits or Search Tokens?',
-    answer:
-      'Plans list allowances in credits; additional packages are sold as Search Tokens. Their exact relationship and conversion are not yet verified. Do not assume they are interchangeable.',
-  },
-  {
-    label: 'What uses the balance?',
-    answer:
-      'The public Apcosys pricing page lists 1 Search Token for a request without analytics, such as host information or bucket search, and 4 Search Tokens for a search with category analytics. Search Tokens cover website and API requests; the credit-to-token conversion still needs confirmation.',
-  },
-  {
-    label: 'Upgrade or buy more?',
-    answer:
-      'Upgrade for capabilities or team access; consider a package when you only need more search capacity. The balance-exhaustion behaviour, package compatibility, expiry and rollover are not yet verified. Confirm these before purchasing.',
-  },
-] as const;
-
 export function CreditsExplained() {
   return (
-    <section className="stage-usage-guide section-space" aria-labelledby="usage-guide-title">
-      <div className="container stage-usage-guide__layout">
-        <div className="stage-usage-guide__lead">
+    <section
+      id="usage-guide"
+      className="stage-usage-guide section-space"
+      aria-labelledby="usage-guide-title"
+    >
+      <div className="container">
+        <div className="editorial-heading">
           <h2 id="usage-guide-title">Understand your allowance.</h2>
           <p>
-            Find the right level of access and understand what needs checking before adding search
-            capacity.
+            Choose a plan for its capabilities. Add capacity when the tools already fit and you need
+            to make more requests.
           </p>
-          <a className="stage-text-link" href="#search-token-packages">
-            See Search Token packages
-          </a>
         </div>
-        <div className="stage-usage-guide__questions">
-          {questions.map((question, i) => (
-            <article key={question.label}>
-              <span className="stage-credits__number">0{i + 1}</span>
+        <div className="usage-layout">
+          <div className="request-costs">
+            <h3>Request costs</h3>
+            <div>
+              <strong>1</strong>
+              <p>
+                Search Token
+                <span>Request without analytics, such as host information or bucket search.</span>
+              </p>
+            </div>
+            <div>
+              <strong>4</strong>
+              <p>
+                Search Tokens<span>Search with category analytics.</span>
+              </p>
+            </div>
+            <p className="editorial-note">
+              Usage applies to website and API requests. Check the current charge in your account.
+            </p>
+          </div>
+          <div className="stage-usage-guide__questions">
+            <article>
               <div>
-                <h3>{question.label}</h3>
-                <p>{question.answer}</p>
+                <h3>Who is each plan for?</h3>
+                <p>
+                  Free introduces search. Plus adds API access for individual research. Expert adds
+                  deeper filtering. Business brings access for a team and a larger allowance.
+                </p>
               </div>
             </article>
-          ))}
+            <article>
+              <div>
+                <h3>Credits or Search Tokens?</h3>
+                <p>
+                  Plan allowances are listed in credits; additional packages are sold as Search
+                  Tokens. The credit-to-token relationship is not yet verified. Confirm the account
+                  balance and package terms before adding capacity.
+                </p>
+              </div>
+            </article>
+            <article>
+              <div>
+                <h3>Upgrade or buy more?</h3>
+                <p>
+                  Upgrade when you need another capability or team access. Consider a package when
+                  you need more requests at the same access level.
+                </p>
+              </div>
+            </article>
+            <article>
+              <div>
+                <h3>What happens at the limit?</h3>
+                <p>
+                  Check the remaining balance before a larger investigation. Ask the team about
+                  exhaustion, expiry and rollover if these affect your workflow.
+                </p>
+              </div>
+            </article>
+            <a className="stage-text-link" href="#search-token-packages">
+              See Search Token packages
+            </a>
+          </div>
         </div>
       </div>
     </section>

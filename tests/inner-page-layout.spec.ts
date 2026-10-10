@@ -37,6 +37,7 @@ test('all monitoring stages fit on desktop without horizontal scrolling', async 
   const stages = page.locator('.stage-monitor-console__sidebar');
   await expect(stages.locator('button')).toHaveCount(5);
   expect(await stages.evaluate((el) => el.scrollWidth - el.clientWidth)).toBeLessThanOrEqual(1);
+  await stages.scrollIntoViewIfNeeded();
   await expect(stages.locator('button').last()).toBeInViewport();
 });
 

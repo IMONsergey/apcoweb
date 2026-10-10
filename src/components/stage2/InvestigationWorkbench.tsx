@@ -11,7 +11,7 @@ const stories = {
     tag: 'SEARCH & INVESTIGATION',
     heading: 'From query to technical context.',
     context:
-      'Follow an illustrative host research sequence from input to the next technical question.',
+      'Choose a step, select a host and inspect the evidence. The same record stays in view as the question becomes more specific.',
     query: 'example.com',
     captions: [
       'Enter an observed attribute',
@@ -21,11 +21,11 @@ const stories = {
       'Refine the next query',
     ],
     detail: [
-      'Start with a domain or IP, then refine with supported filters.',
-      'Compare the returned hosts by their reported services.',
-      'Review ports, services and technology on one selected host.',
-      'A detected version can suggest a CVE association — not a confirmed vulnerability.',
-      'Use an observed attribute to formulate a new search.',
+      'Begin with an IP, domain, service or technology. Use supported attributes to narrow the results to the infrastructure behind your question.',
+      'Compare open ports, services and detected technologies before opening a host. Look for the result that helps answer your question.',
+      'Read the observed ports and services together with the response evidence. Keep detected products and versions in the context of that host.',
+      'Check the evidence behind a detected version. A potential CVE association is a lead to validate against patches, configuration and observation time.',
+      'Carry a useful service, technology or domain into the next query. Keep the observation that led you there so the investigation remains traceable.',
     ],
   },
   bounty: {
@@ -133,6 +133,7 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
   return (
     <section
       className={'stage-workbench stage-workbench--' + story + ' section-space'}
+      id="investigation"
       aria-label={data.tag + ' interactive illustrated workflow'}
     >
       <div className="container">

@@ -71,6 +71,8 @@ export function PageFrame({
   variant = 'editorial',
   concept = false,
   artwork,
+  sections,
+  closing,
 }: {
   eyebrow: string;
   title: string;
@@ -81,11 +83,17 @@ export function PageFrame({
   variant?: 'editorial' | 'technical' | 'product' | 'commercial' | 'usecase' | 'developer';
   concept?: boolean;
   artwork?: ArtworkKey;
+  sections?: readonly { label: string; id: string }[];
+  closing?: { title: string; description: string };
 }) {
   const root = useRef<HTMLElement>(null);
   usePageMotion(root, title);
   return (
-    <article ref={root} className={'stage-page inner-pages stage-page--' + variant}>
+    <article
+      ref={root}
+      className={'stage-page inner-pages stage-page--' + variant}
+      data-page={artwork}
+    >
       <PageIntro
         eyebrow={eyebrow}
         title={title}
@@ -94,13 +102,33 @@ export function PageFrame({
         artwork={artwork}
         actions={heroLinks ?? links?.slice(0, 2)}
       />
+      {sections && (
+        <nav className="page-contents container" aria-label="On this page">
+          {sections.map(({ label, id }) => (
+            <a key={id} href={'#' + id}>
+              {label}
+            </a>
+          ))}
+        </nav>
+      )}
       {children}
       {links && (
         <nav className="stage-related" aria-label="Continue exploring Apcosys">
           <div className="container stage-related__inner">
+            {closing && (
+              <div className="page-closing-copy">
+                <h2>{closing.title}</h2>
+                <p>{closing.description}</p>
+              </div>
+            )}
             <div className="stage-related__links">
-              {links.map(({ label, href }) => (
-                <DoubleButton variant="secondary" compact href={href} key={href + label}>
+              {links.map(({ label, href, secondary }, index) => (
+                <DoubleButton
+                  variant={closing && index === 0 && !secondary ? 'primary' : 'secondary'}
+                  compact
+                  href={href}
+                  key={href + label}
+                >
                   {label}
                 </DoubleButton>
               ))}

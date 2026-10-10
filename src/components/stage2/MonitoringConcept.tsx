@@ -54,6 +54,7 @@ export function MonitoringConcept() {
   }, [current]);
   return (
     <section
+      id="monitoring-workflow"
       className="stage-monitor-concept section-space"
       aria-labelledby="monitor-concept-title"
     >

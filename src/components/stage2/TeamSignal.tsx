@@ -145,7 +145,7 @@ export function TeamWorkflow() {
   const [selected, setSelected] = useState(0);
   const item = teamStages[selected]!;
   return (
-    <section className="team-workflow section-space">
+    <section id="team-workflow" className="team-workflow section-space">
       <div className="container">
         <h2>
           From analyst question

@@ -98,7 +98,10 @@ function EvidenceJourney({ kind }: { kind: keyof typeof journeys }) {
     ],
   ] as const;
   return (
-    <section className={'stage-case-evidence stage-case-evidence--' + kind + ' section-space'}>
+    <section
+      id="example-investigation"
+      className={'stage-case-evidence stage-case-evidence--' + kind + ' section-space'}
+    >
       <div className="container">
         <div className="stage-case-evidence__heading">
           <h2>{item.title}</h2>
