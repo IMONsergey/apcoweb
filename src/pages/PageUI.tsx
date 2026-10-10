@@ -1,4 +1,6 @@
 import '../styles/compact-experience.css';
+import '../styles/inner-pages.css';
+import { PageArtwork, type ArtworkKey } from './PageArtwork';
 import { useRef, type ReactNode } from 'react';
 import { usePageMotion } from '../hooks/usePageMotion';
 import { DoubleButton } from '../components/ui/DoubleButton';
@@ -9,26 +11,34 @@ export function PageIntro({
   title,
   description,
   concept = false,
+  artwork,
+  actions,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   concept?: boolean;
+  artwork?: ArtworkKey | undefined;
+  actions?: readonly PageLink[] | undefined;
 }) {
   return (
     <header className="stage-page-hero">
       <div className="container stage-page-hero__grid">
-        <div className="stage-page-hero__title">
-          <h1>{title}</h1>
+        <div className="stage-page-hero__copy">
+          <div className="stage-page-hero__title">
+            <h1>{title}</h1>
+          </div>
+          <div className="stage-page-hero__aside">
+            <p className="stage-page-hero__description">{description}</p>
+            {concept && (
+              <p className="stage-concept-label">
+                Concept demonstration · Not a live product capability
+              </p>
+            )}
+          </div>
+          {actions && <PageAction links={actions} />}
         </div>
-        <div className="stage-page-hero__aside">
-          <p className="stage-page-hero__description">{description}</p>
-          {concept && (
-            <p className="stage-concept-label">
-              Concept demonstration · Not a live product capability
-            </p>
-          )}
-        </div>
+        {artwork && <PageArtwork kind={artwork} />}
       </div>
     </header>
   );
@@ -57,22 +67,33 @@ export function PageFrame({
   description,
   children,
   links,
+  heroLinks,
   variant = 'editorial',
   concept = false,
+  artwork,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   children: ReactNode;
   links?: readonly PageLink[];
+  heroLinks?: readonly PageLink[];
   variant?: 'editorial' | 'technical' | 'product' | 'commercial' | 'usecase' | 'developer';
   concept?: boolean;
+  artwork?: ArtworkKey;
 }) {
   const root = useRef<HTMLElement>(null);
   usePageMotion(root, title);
   return (
-    <article ref={root} className={'stage-page stage-page--' + variant}>
-      <PageIntro eyebrow={eyebrow} title={title} description={description} concept={concept} />
+    <article ref={root} className={'stage-page inner-pages stage-page--' + variant}>
+      <PageIntro
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
+        concept={concept}
+        artwork={artwork}
+        actions={heroLinks ?? links?.slice(0, 2)}
+      />
       {children}
       {links && (
         <nav className="stage-related" aria-label="Continue exploring Apcosys">
@@ -102,9 +123,8 @@ export function StorySections({
   return (
     <section className={'stage-story section-space stage-story--' + variant}>
       <div className="container">
-        {items.map((item, i) => (
+        {items.map((item) => (
           <article className="stage-story__item" key={item.title}>
-            <span className="stage-story__index">{String(i + 1).padStart(2, '0')}</span>
             <div>
               <h2>{item.title}</h2>
               <p>{item.description}</p>

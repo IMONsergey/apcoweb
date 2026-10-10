@@ -8,6 +8,7 @@ function AboutPage() {
   return (
     <PageFrame
       eyebrow="APCOSYS · ABOUT"
+      artwork="about"
       variant="editorial"
       title="Built for people who investigate the internet."
       description="Apcosys makes technical observations about internet-facing infrastructure searchable, so researchers and security teams can investigate them."
@@ -64,6 +65,7 @@ function ScanningPage() {
   return (
     <PageFrame
       eyebrow="APCOSYS · RESPONSIBLE SCANNING"
+      artwork="scanning"
       variant="technical"
       title="How Apcosys scans."
       description="The principles behind collecting observations from publicly accessible infrastructure — and where to direct questions or concerns."
@@ -160,7 +162,7 @@ function ContactForm() {
     window.setTimeout(() => setOpening(false), 700);
   }
   return (
-    <form className="stage-contact-form" onSubmit={submit} noValidate={false}>
+    <form id="contact-form" className="stage-contact-form" onSubmit={submit} noValidate={false}>
       <div className="stage-form-row">
         <label>
           Name <input name="name" required autoComplete="name" maxLength={100} />
@@ -228,6 +230,11 @@ function ContactPage() {
   return (
     <PageFrame
       eyebrow="APCOSYS · TALK TO US"
+      artwork="contact"
+      heroLinks={[
+        { label: 'Start a conversation', href: '#contact-form' },
+        { label: 'Email us', href: 'mailto:' + supportEmail, secondary: true },
+      ]}
       variant="editorial"
       title="Talk to the Apcosys team."
       description="Questions about data, API access, security teams or procurement? Tell us what you need."

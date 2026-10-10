@@ -19,12 +19,12 @@ export function usePageMotion(ref: RefObject<HTMLElement | null>, identity: stri
           context.add(() =>
             gsap.fromTo(
               entry.target,
-              { opacity: 0.55, y: 14 },
+              { opacity: 0.94, y: 4 },
               {
                 opacity: 1,
                 y: 0,
-                duration: 0.7,
-                ease: 'power3.out',
+                duration: 0.5,
+                ease: 'sine.out',
                 clearProps: 'opacity,transform',
               },
             ),
@@ -35,7 +35,7 @@ export function usePageMotion(ref: RefObject<HTMLElement | null>, identity: stri
     );
     root
       .querySelectorAll(
-        '.stage-page-hero__title, .stage-page-hero__aside, .stage-story__item, .stage-example-journey > div, .stage-team-operations__flow > article, .stage-team-operations__business',
+        '.stage-story__item, .stage-example-journey > div, .stage-team-operations__flow > article, .stage-team-operations__business',
       )
       .forEach((el) => observer.observe(el));
     return () => {

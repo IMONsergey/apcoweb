@@ -9,7 +9,7 @@ type Story = 'search' | 'bounty' | 'vulnerability' | 'osint' | 'team';
 const stories = {
   search: {
     tag: 'SEARCH & INVESTIGATION',
-    heading: 'One investigation. Five connected decisions.',
+    heading: 'From query to technical context.',
     context:
       'Follow an illustrative host research sequence from input to the next technical question.',
     query: 'example.com',
@@ -207,9 +207,6 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
             <MorphPanel>
               <div className="stage-workbench__insight" data-morph-enter>
                 <div>
-                  <span className="stage-workbench__mini">
-                    STEP {String(selected + 1).padStart(2, '0')} / 05
-                  </span>
                   <h3>{data.captions[selected]}</h3>
                   <p>{data.detail[selected]}</p>
                 </div>

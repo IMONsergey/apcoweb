@@ -60,10 +60,42 @@ const journeys: Record<'scope' | 'technology' | 'indicator', Journey> = {
 function EvidenceJourney({ kind }: { kind: keyof typeof journeys }) {
   const item = journeys[kind];
   const stages = [
-    ['01', 'Starting point', item.start],
-    ['02', 'Query', item.query],
-    ['03', 'Result', item.result],
-    ['04', 'Next step', item.next],
+    [
+      '01',
+      'Starting point',
+      kind === 'scope'
+        ? 'An authorised domain.'
+        : kind === 'technology'
+          ? 'A product and version.'
+          : 'An IP or domain from a report.',
+    ],
+    [
+      '02',
+      'Query',
+      kind === 'scope'
+        ? 'Find candidate infrastructure.'
+        : kind === 'technology'
+          ? 'Find matching observations.'
+          : 'Look up the indicator.',
+    ],
+    [
+      '03',
+      'Result',
+      kind === 'scope'
+        ? 'Review exposed services.'
+        : kind === 'technology'
+          ? 'Read the detection evidence.'
+          : 'Examine shared attributes.',
+    ],
+    [
+      '04',
+      'Next step',
+      kind === 'scope'
+        ? 'Confirm scope before testing.'
+        : kind === 'technology'
+          ? 'Validate applicability.'
+          : 'Record a new research lead.',
+    ],
   ] as const;
   return (
     <section className={'stage-case-evidence stage-case-evidence--' + kind + ' section-space'}>
@@ -76,9 +108,7 @@ function EvidenceJourney({ kind }: { kind: keyof typeof journeys }) {
           <div className="stage-example-journey" aria-label="Illustrative investigation stages">
             {stages.map(([number, title, description]) => (
               <div key={number}>
-                <span>
-                  {number} / {title}
-                </span>
+                <span>{title}</span>
                 <p>{description}</p>
               </div>
             ))}

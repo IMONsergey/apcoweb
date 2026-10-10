@@ -9,6 +9,7 @@ function InvestigationPage() {
   return (
     <PageFrame
       eyebrow="PLATFORM · SEARCH & INVESTIGATION"
+      artwork="search"
       title="Every investigation starts with a question."
       description="Turn a technical question into a query, review the hosts that match and open each one to see the services, technologies and context behind it."
       variant="product"
@@ -48,6 +49,7 @@ function MethodologyPage() {
   return (
     <PageFrame
       eyebrow="PLATFORM · DATA & METHODOLOGY"
+      artwork="methodology"
       title="Know what’s behind every result."
       description="How Apcosys represents internet infrastructure observations, what its coverage figures count and how to interpret technical context."
       variant="technical"
@@ -164,6 +166,7 @@ function MonitoringPage() {
   return (
     <PageFrame
       eyebrow="PLATFORM · FUTURE CAPABILITIES"
+      artwork="monitoring"
       title="Understand what changes across your exposure."
       description="A conceptual view of how observed infrastructure changes might support ongoing security investigation and team evaluation."
       concept

@@ -1,75 +1,58 @@
-import { siteHref } from '../../app/router';
+import { PageAction } from '../../pages/PageUI';
+import { linkTo, primaryContact } from '../../pages/pageLinks';
 
 export function TeamOperations() {
-  const process = [
-    {
-      step: '01',
-      name: 'Analyst input',
-      desc: 'A host, domain, report or relevant technology begins the question.',
-    },
-    {
-      step: '02',
-      name: 'Search evidence',
-      desc: 'Examine observed services and technical attributes with their time context.',
-    },
-    {
-      step: '03',
-      name: 'Validate context',
-      desc: 'Review related technology and CVE signals, then verify before escalation.',
-    },
-    {
-      step: '04',
-      name: 'Integrate workflow',
-      desc: 'Use the confirmed API capabilities in internal scripts and reporting.',
-    },
-  ] as const;
   return (
     <section className="stage-team-operations section-space" aria-labelledby="team-process-title">
       <div className="container">
         <div className="stage-team-operations__header">
-          <div>
-            <h2 id="team-process-title">
-              From question to evidence.
-              <br />
-              Then into your workflow.
-            </h2>
-          </div>
+          <h2 id="team-process-title">A shared starting point for your team.</h2>
           <p>
-            A technical evaluation of Apcosys can begin with one analyst and extend to a team
-            process.
+            Evaluate the platform with the questions, tools and handoffs your analysts already use.
           </p>
         </div>
-        <div className="stage-team-operations__flow">
-          {process.map((item) => (
-            <article key={item.step}>
-              <span>{item.step} / 04</span>
-              <h3>{item.name}</h3>
-              <p>{item.desc}</p>
-            </article>
-          ))}
+        <div className="team-evaluation">
+          <article>
+            <h3>Start with a real question.</h3>
+            <p>
+              Choose an investigation your team understands. Compare the observations with your
+              existing evidence and identify what needs validation.
+            </p>
+          </article>
+          <article>
+            <h3>Keep the context.</h3>
+            <p>
+              Carry host details, service responses and open questions into the next review. Make
+              the distinction between an observation and a finding clear.
+            </p>
+          </article>
+          <article>
+            <h3>Connect your workflow.</h3>
+            <p>
+              Evaluate supported API requests with a small script or report before integrating them
+              into a wider process.
+            </p>
+          </article>
         </div>
         <div className="stage-team-operations__business">
           <div>
-            <h3>Business plan</h3>
+            <h3>Room for a team.</h3>
             <p>
-              Up to five users, higher credit allowances and API access are listed in the approved
-              plan concept. Confirm current entitlements with the team.
+              The Business plan includes a five-user allowance, 1.5 million credits and API access
+              in this plan preview.
             </p>
           </div>
           <div className="stage-team-operations__metrics">
             <div>
               <strong>5</strong>
-              <span>Users (proposed)</span>
+              <span>Users</span>
             </div>
             <div>
               <strong>1.5M</strong>
-              <span>Credits (proposed)</span>
+              <span>Credits</span>
             </div>
           </div>
-          <div className="stage-team-operations__actions">
-            <a href={siteHref('/pricing')}>Compare Business</a>
-            <a href={siteHref('/developers/api')}>API integration</a>
-          </div>
+          <PageAction links={[primaryContact, linkTo('Compare Business', '/pricing', true)]} />
         </div>
       </div>
     </section>

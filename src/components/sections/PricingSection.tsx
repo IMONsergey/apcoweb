@@ -12,7 +12,13 @@ import { BillingSwitch } from '../ui/BillingSwitch';
 import { AnimatedPrice } from '../ui/AnimatedPrice';
 import { calculatePrice, formatPrice, type BillingPeriod } from '../../content/pricing';
 type Plan = (typeof plans)[number];
-export function PricingSection({ showTeamBanner = true }: { showTeamBanner?: boolean }) {
+export function PricingSection({
+  showTeamBanner = true,
+  title,
+}: {
+  showTeamBanner?: boolean;
+  title?: string;
+}) {
   const { t } = useLocale();
   const [compare, setCompare] = useState(false);
   const rangeRef = useRef<HTMLDivElement>(null);
@@ -25,13 +31,19 @@ export function PricingSection({ showTeamBanner = true }: { showTeamBanner?: boo
         <div className="pricing-options" ref={rangeRef} data-testid="pricing-options">
           <div className="pricing-heading">
             <h2 id="pricing-title">
-              <LocaleText>{t('Start free.')}</LocaleText>
-              <br />
-              <span>
-                <LocaleText>{t('Upgrade when your')}</LocaleText>
-                <br className="desktop-break" />{' '}
-                <LocaleText>{t('investigation needs more.')}</LocaleText>
-              </span>
+              {title ? (
+                title
+              ) : (
+                <>
+                  <LocaleText>{t('Start free.')}</LocaleText>
+                  <br />
+                  <span>
+                    <LocaleText>{t('Upgrade when your')}</LocaleText>
+                    <br className="desktop-break" />{' '}
+                    <LocaleText>{t('investigation needs more.')}</LocaleText>
+                  </span>
+                </>
+              )}
             </h2>
             <div className="billing billing--desktop">
               <p>

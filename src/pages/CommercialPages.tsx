@@ -6,7 +6,7 @@ import { CreditsExplained } from '../components/stage2/CreditsExplained';
 import { plans } from '../content/site';
 import { apiDocumentationUrl } from '../config/site';
 import { siteHref } from '../app/router';
-import { PageFrame, Notice, StorySections, PageAction } from './PageUI';
+import { PageFrame, Notice, StorySections } from './PageUI';
 
 const planAccess = [
   { label: 'Credits', values: ['500', '25,000', '250,000', '1,500,000'] },
@@ -83,12 +83,17 @@ function PricingPage() {
   return (
     <PageFrame
       eyebrow="PRICING · PLANS & ACCESS"
+      artwork="pricing"
+      heroLinks={[
+        { label: 'Explore plans', href: '#pricing' },
+        linkTo('Talk to Us', '/contact', true),
+      ]}
       variant="commercial"
       title="Choose the access your research needs."
       description="Start free. Upgrade when you need more searches, deeper filters, API access or a team."
       links={[primarySearch, linkTo('Talk to Us', '/contact', true)]}
     >
-      <PricingSection />
+      <PricingSection showTeamBanner={false} title="Find your level of access." />
       <CreditsExplained />
       <FullPlanComparison />
       <section className="stage-credits section-space" id="search-token-packages">
@@ -163,7 +168,6 @@ function ApiSample() {
             integration concepts only; do not use the illustrative request as an API contract.
           </Notice>
         )}
-        <PageAction links={[documentationLink, linkTo('Compare plans', '/pricing', true)]} />
       </div>
     </section>
   );
@@ -172,6 +176,7 @@ function ApiPage() {
   return (
     <PageFrame
       eyebrow="DEVELOPERS · API"
+      artwork="api"
       variant="developer"
       title="Apcosys data, in your own code."
       description="Query hosts, services and technologies programmatically and use the results in scripts, pipelines, reports and internal tools."

@@ -106,6 +106,7 @@ function TeamPage() {
   return (
     <PageFrame
       eyebrow="FOR TEAMS · SECURITY TEAMS"
+      artwork="teams"
       variant="technical"
       title="Internet intelligence for your security team."
       description="Bring internet-facing infrastructure observations into technical research, security evaluation and existing team workflows."
@@ -124,6 +125,13 @@ export default function ResearchPages({ path }: { path: string }) {
     <PageFrame
       variant="usecase"
       eyebrow={config.eyebrow}
+      artwork={
+        path === '/use-cases/bug-bounty'
+          ? 'bounty'
+          : path === '/use-cases/vulnerability-research'
+            ? 'vulnerability'
+            : 'osint'
+      }
       title={config.title}
       description={config.description}
       links={[

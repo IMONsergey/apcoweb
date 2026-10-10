@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { MorphPanel } from '../ui/MorphPanel';
-import { ObservationTrace } from './ObservationTrace';
 import { siteHref } from '../../app/router';
 import { demoHosts } from '../../content/product-demo';
 const views = [
@@ -69,15 +68,8 @@ export function MonitoringConcept() {
           </p>
         </div>
         <div className="stage-monitor-console">
-          <div className="stage-monitor-console__header">
-            <strong>
-              APCOSYS <span>/ MONITORING CONCEPT</span>
-            </strong>
-            <span>SYNTHETIC DEMONSTRATION</span>
-          </div>
           <div className="stage-monitor-console__body">
             <div className="stage-monitor-console__sidebar" ref={nav}>
-              <p className="stage-monitor-console__label">WORKFLOW</p>
               {views.map((item, i) => (
                 <button
                   type="button"
@@ -86,26 +78,15 @@ export function MonitoringConcept() {
                   aria-pressed={i === current}
                   className="stage-monitor-console__nav"
                 >
-                  0{i + 1} / {item.label}
+                  {item.label}
                 </button>
               ))}
-              <p className="stage-monitor-console__sidebar-footer">
-                Concept only · availability to be confirmed
-              </p>
             </div>
             <MorphPanel>
               <div className="stage-monitor-console__main">
-                <div className="stage-monitor-console__overline">
-                  <span>{view.label.toUpperCase()}</span>
-                  <span>0{current + 1} / 05</span>
-                </div>
                 <h3 data-morph-enter>{view.headline}</h3>
                 <p>{view.detail}</p>
                 <div className="stage-monitor-assets">
-                  <div className="stage-monitor-assets__intro">
-                    <span>OBSERVATION TARGETS</span>
-                    <span>SELECT AN EXAMPLE</span>
-                  </div>
                   <div className="stage-monitor-assets__list">
                     {demoHosts.map((host, i) => (
                       <button
@@ -123,7 +104,7 @@ export function MonitoringConcept() {
                     ))}
                   </div>
                   <div className="stage-monitor-assets__details" aria-live="polite">
-                    <span>SELECTED / DOCUMENTATION ADDRESS</span>
+                    <span>Selected example</span>
                     <strong>{asset.ip}</strong>
                     <div>
                       <span>Hostname</span>
@@ -135,7 +116,6 @@ export function MonitoringConcept() {
                     </div>
                   </div>
                 </div>
-                <ObservationTrace port={service.port} active={current} />
                 {current <= 2 ? (
                   <div className="stage-monitor-console__summary" aria-live="polite">
                     <div>
@@ -205,7 +185,7 @@ export function MonitoringConcept() {
             </MorphPanel>
           </div>
           <div className="stage-monitor-console__footer">
-            MONITORING CONCEPT · NO LIVE ALERTS · SYNTHETIC SERVICE RECORDS
+            Concept only · NO LIVE ALERTS · Illustrative service records
           </div>
         </div>
       </div>
