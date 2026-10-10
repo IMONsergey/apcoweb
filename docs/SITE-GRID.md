@@ -77,3 +77,26 @@ Three-item prose groups use three columns above 1000 px and a single ordered col
 Reading-row annotations, research-pair paragraphs, scanning descriptions and related-reading links now share natural subgrid tracks. Optional details allocate a track only when present. On phones these groups return to ordinary vertical flow. The plan grid uses the shared structural gap and a single heading-to-cards margin. Team workflow panels use one inset instead of compounding outer and inner padding.
 
 `tests/visual-rhythm.spec.ts` checks readable column measures, wrapped-title alignment, annotation/link alignment, the absence of orphaned three-card rows, matching H2 sizes, pricing gaps and breathing room in use-case journeys. See `VISUAL-AUDIT-R22-2026-10-10.md` for current-run evidence and the explicit distinction between desktop visual review and responsive geometry tests.
+
+## R23: column rails, including the shared footer
+
+R22 checked outer containers and selected paired work areas, but missed independent
+20/24 px column gaps in the footer and other page-level grids. This let the footer's
+Developers column drift left of closing actions even when both containers matched.
+
+All structural grids now use the shared horizontal gap: footer navigation and its
+bottom row, home metrics/use cases/audience/pricing/FAQ, capability panels, legal
+navigation and actions, and nested use-case steps. The tablet legal reading column
+keeps the same four-column start. Mobile About/Teams groups no longer introduce
+independent 28/18 px horizontal gaps. Vertical spacing remains local to each section.
+
+The footer's copyright, email and cookie control start on the central rail on desktop;
+on smaller screens the bottom row stacks and begins on the page rail. At 768 px and
+above the three metadata items remain on one line. Contained product interfaces,
+five-option toolbars and padded comparison surfaces retain their intentional local
+layouts; they are not page-level columns.
+
+`tests/column-rails.spec.ts` checks actual child edges against the common twelve-column
+lattice, independently of a component's computed gap. It covers all nineteen routes
+at 320, 390, 768, 1024, 1199, 1200, 1440, 1920 and 2560 px, including the footer
+breakpoint. This test reproduces the reported defect against the previous build.
