@@ -97,7 +97,7 @@
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
-.metric-card dd {
+.metric-card dd:not(.metric-observation-note) {
   font: 500 24px/28px var(--font-mono);
   letter-spacing: -0.02em;
   white-space: nowrap;
@@ -142,7 +142,7 @@
   background: var(--action);
   color: white;
 }
-.metric-card--protocols dd {
+.metric-card--protocols dd:not(.metric-observation-note) {
   font-size: 84px;
   line-height: 88px;
   font-weight: 400;
@@ -159,7 +159,7 @@
     width: 190px;
     height: 195px;
   }
-  .metric-card dd {
+  .metric-card dd:not(.metric-observation-note) {
     font-size: 21px;
   }
   .metric-card--ipv6 {
@@ -206,7 +206,7 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
+    gap: 16px var(--layout-gap);
   }
   .data-visual-field .data-metrics {
     margin-top: 0;
@@ -220,7 +220,7 @@
     width: auto;
     height: 172px;
   }
-  .metric-card--protocols dd {
+  .metric-card--protocols dd:not(.metric-observation-note) {
     font-size: 64px;
     line-height: 68px;
   }
@@ -277,7 +277,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: repeat(5, var(--metric-height));
-    gap: var(--metric-gap);
+    gap: var(--metric-gap) var(--layout-gap);
     position: relative;
     inset: auto;
   }
@@ -298,11 +298,11 @@
   .metric-card dt > span {
     padding: 4px 6px;
   }
-  .metric-card dd {
+  .metric-card dd:not(.metric-observation-note) {
     font-size: 15px;
     line-height: 22px;
   }
-  .metric-card--protocols dd {
+  .metric-card--protocols dd:not(.metric-observation-note) {
     font-size: 56px;
     line-height: 60px;
   }
@@ -343,10 +343,10 @@
     font-size: 38px;
     line-height: 40px;
   }
-  .metric-card dd {
+  .metric-card dd:not(.metric-observation-note) {
     font-size: 14px;
   }
-  .metric-card--protocols dd {
+  .metric-card--protocols dd:not(.metric-observation-note) {
     font-size: 56px;
   }
 }
@@ -354,14 +354,49 @@
   .metric-card {
     padding: 10px;
   }
-  .metric-card dd {
+  .metric-card dd:not(.metric-observation-note) {
     font-size: 13px;
   }
-  .metric-card--protocols dd {
+  .metric-card--protocols dd:not(.metric-observation-note) {
     font-size: 52px;
   }
   .data-copy h2 {
     font-size: 36px;
     line-height: 38px;
+  }
+}
+
+/* The coverage totals already sit above SearchPreview. The globe now explains how to read a record. */
+.data-section--observations .metric-card dd:not(.metric-observation-note) {
+  font: 500 clamp(18px, 1.5vw, 23px)/1.2 var(--font-sans);
+  white-space: normal;
+  letter-spacing: -0.035em;
+}
+.metric-observation-note {
+  font-size: 12px;
+  line-height: 1.45;
+}
+.data-section--observations .metric-card {
+  gap: 14px;
+  align-items: center;
+  text-align: center;
+}
+.data-section--observations .metric-card--protocols dd:not(.metric-observation-note) {
+  font-size: 23px;
+  line-height: 1.2;
+}
+@container data (max-width:599px) {
+  .data-section--observations .metric-card dd:not(.metric-observation-note),
+  .data-section--observations .metric-card--protocols dd:not(.metric-observation-note) {
+    font-size: 19px;
+  }
+  .metric-observation-note {
+    font-size: 11px;
+  }
+  .data-section--observations .metric-card {
+    gap: 8px;
+  }
+  .data-section--observations .metric-card dt {
+    font-size: 9px;
   }
 }

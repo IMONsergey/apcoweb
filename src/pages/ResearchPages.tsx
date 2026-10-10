@@ -1,9 +1,10 @@
 import '../styles/stage2-showcases.css';
 import '../styles/stage2-usecases.css';
-import { primarySearch, primaryContact, linkTo } from './pageLinks';
-import { siteHref } from '../app/router';
-import { PageFrame, StorySections, PageAction, Notice } from './PageUI';
-import { InvestigationWorkbench } from '../components/stage2/InvestigationWorkbench';
+import { primaryContact, linkTo } from './pageLinks';
+import { productUrl } from '../config/site';
+import { PageFrame } from './PageUI';
+import { CaseApproach, CaseChecks } from './CaseGuidance';
+import { TeamWorkflow } from '../components/stage2/TeamSignal';
 import { TeamOperations } from '../components/stage2/TeamOperations';
 import {
   ScopeEvidence,
@@ -97,11 +98,7 @@ const caseStudies = {
           'Record the observed attributes and their time context in your own investigation notes and analytical workflow.',
       },
     ],
-    next: {
-      label: 'View API Documentation',
-      href: 'https://apcosys.net/docs/api',
-      secondary: true,
-    },
+    next: linkTo('Explore API integration', '/developers/api', true),
   },
 } as const;
 
@@ -109,67 +106,25 @@ function TeamPage() {
   return (
     <PageFrame
       eyebrow="FOR TEAMS · SECURITY TEAMS"
+      artwork="teams"
       variant="technical"
       title="Internet intelligence for your security team."
-      description="Bring internet-facing infrastructure observations into technical research, security evaluation and existing team workflows."
-      links={[primaryContact, linkTo('View Business Plan', '/pricing', true)]}
+      description="Give analysts a common source of technical evidence about internet-facing infrastructure — from the first indicator to the context behind it."
+      sections={[
+        { label: 'Analyst workflow', id: 'team-workflow' },
+        { label: 'Research tasks', id: 'team-tasks' },
+        { label: 'Data & handoffs', id: 'team-trust' },
+        { label: 'Business access', id: 'team-access' },
+      ]}
+      closing={{
+        title: 'Evaluate it with your own research question.',
+        description:
+          'Tell us about the infrastructure you investigate, your existing tools and the access your team needs.',
+      }}
+      links={[primaryContact, linkTo('View Business Plan', '/pricing#plan-business', true)]}
     >
-      <section className="stage-team-banner section-space">
-        <div className="container">
-          <div>
-            <p className="eyebrow">SECURITY TEAMS</p>
-            <h2>Work from a question to the evidence.</h2>
-          </div>
-          <p>
-            Search, technical context and programmatic access support deeper security research. The
-            current Business plan is presented with five users and higher usage limits, subject to
-            product verification.
-          </p>
-        </div>
-      </section>
+      <TeamWorkflow />
       <TeamOperations />
-      <InvestigationWorkbench story="team" />
-      <StorySections
-        items={[
-          {
-            title: 'Investigate the infrastructure behind a question.',
-            description:
-              'Start from the relevant asset or technical observation, then examine the accessible infrastructure data.',
-          },
-          {
-            title: 'Give analysts the context they need.',
-            description:
-              'Review observed services, technologies and possible vulnerability associations with their methodological limits.',
-          },
-          {
-            title: 'Bring data into existing workflows.',
-            description:
-              'Use the available API access to integrate observations with scripts and internal research processes.',
-          },
-          {
-            title: 'Understand the data you rely on.',
-            description:
-              'Review coverage definitions, observation timestamps and responsible collection principles before evaluation.',
-          },
-          {
-            title: 'Choose access for your team.',
-            description:
-              'Compare the Business allowance, user access and API terms against the operational requirements of your team.',
-          },
-        ]}
-      />
-      <section className="stage-page-crosslink">
-        <div className="container">
-          <h2>Evaluating Apcosys for your security team?</h2>
-          <p>Tell us about your investigation workflows, data requirements and API needs.</p>
-          <PageAction
-            links={[
-              primaryContact,
-              linkTo('Data & Methodology', '/platform/data-methodology', true),
-            ]}
-          />
-        </div>
-      </section>
     </PageFrame>
   );
 }
@@ -177,37 +132,58 @@ export default function ResearchPages({ path }: { path: string }) {
   if (path === '/teams') return <TeamPage />;
   const config = caseStudies[path as keyof typeof caseStudies];
   if (!config) return null;
+  const kind =
+    path === '/use-cases/bug-bounty'
+      ? 'scope'
+      : path === '/use-cases/vulnerability-research'
+        ? 'technology'
+        : 'indicator';
   return (
     <PageFrame
-      variant="editorial"
+      variant="usecase"
       eyebrow={config.eyebrow}
+      artwork={
+        path === '/use-cases/bug-bounty'
+          ? 'bounty'
+          : path === '/use-cases/vulnerability-research'
+            ? 'vulnerability'
+            : 'osint'
+      }
       title={config.title}
       description={config.description}
-      links={[primarySearch, config.next]}
+      sections={[
+        { label: 'The approach', id: 'research-approach' },
+        { label: 'Example investigation', id: 'example-investigation' },
+        { label: 'Before you act', id: 'research-checks' },
+      ]}
+      closing={{
+        title:
+          kind === 'scope'
+            ? 'Find your next in-scope lead.'
+            : kind === 'technology'
+              ? 'Put a technology under the microscope.'
+              : 'Follow the next evidence-led question.',
+        description:
+          kind === 'scope'
+            ? 'Start free. Upgrade when your research needs more credits, filters or API access.'
+            : kind === 'technology'
+              ? 'Search observed products and versions. CVE context is available from Plus in the plan preview.'
+              : 'Start with an IP or domain, or use the API to bring repeat lookups into your investigation workflow.',
+      }}
+      links={[
+        {
+          label:
+            path === '/use-cases/bug-bounty'
+              ? 'Search your scope'
+              : path === '/use-cases/vulnerability-research'
+                ? 'Search by technology'
+                : 'Look up an IP or domain',
+          href: productUrl + '/search',
+        },
+        config.next,
+      ]}
     >
-      <section className="stage-case-proof section-space">
-        <div className="container">
-          <p className="eyebrow">RESEARCH WORKFLOW</p>
-          <h2>
-            Start with a lead.
-            <br />
-            Investigate what you find.
-          </h2>
-          <p className="stage-intro">
-            Each result is a technical observation. Use it to decide where to investigate next — not
-            as a final conclusion.
-          </p>
-        </div>
-      </section>
-      <InvestigationWorkbench
-        story={
-          path === '/use-cases/bug-bounty'
-            ? 'bounty'
-            : path === '/use-cases/vulnerability-research'
-              ? 'vulnerability'
-              : 'osint'
-        }
-      />
+      <CaseApproach kind={kind} items={config.items} />
       {path === '/use-cases/bug-bounty' ? (
         <ScopeEvidence />
       ) : path === '/use-cases/vulnerability-research' ? (
@@ -215,18 +191,7 @@ export default function ResearchPages({ path }: { path: string }) {
       ) : (
         <IndicatorEvidence />
       )}
-      <StorySections items={config.items} variant="timeline" />
-      <section className="stage-case-bottom">
-        <div className="container">
-          <Notice>
-            Only investigate assets you own or are explicitly authorised to assess. A search result
-            does not grant testing permission or establish attribution.
-          </Notice>
-          <a className="stage-text-link" href={siteHref('/platform/search-investigation')}>
-            Explore Search & Investigation →
-          </a>
-        </div>
-      </section>
+      <CaseChecks kind={kind} />
     </PageFrame>
   );
 }

@@ -2,12 +2,26 @@ import { Suspense, lazy } from 'react';
 import { siteHref } from '../app/router';
 import { PageFrame, PageAction } from './PageUI';
 
-const PlatformPages = lazy(() => import('./PlatformPages'));
-const ResearchPages = lazy(() => import('./ResearchPages'));
-const CommercialPages = lazy(() => import('./CommercialPages'));
-const CorporatePages = lazy(() => import('./CorporatePages'));
+import {
+  loadPlatform,
+  loadResearch,
+  loadCommercial,
+  loadCorporate,
+  loadLegal,
+} from '../app/routeModules';
+const PlatformPages = lazy(loadPlatform);
+const ResearchPages = lazy(loadResearch);
+const CommercialPages = lazy(loadCommercial);
+const CorporatePages = lazy(loadCorporate);
+const LegalPages = lazy(loadLegal);
 
 export default function InnerPage({ path }: { path: string }) {
+  if (path.startsWith('/legal/'))
+    return (
+      <Suspense fallback={null}>
+        <LegalPages path={path} />
+      </Suspense>
+    );
   if (path.startsWith('/platform/'))
     return (
       <Suspense fallback={null}>

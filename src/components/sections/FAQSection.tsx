@@ -1,6 +1,8 @@
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
-import { productUrl, supportEmail } from '../../content/site';
+import { supportEmail } from '../../content/site';
+import { apiDocumentationUrl } from '../../config/site';
+import { siteHref } from '../../app/router';
 import { AnimatedDetails } from '../ui/AnimatedDetails';
 export function FAQSection() {
   const { t } = useLocale();
@@ -25,7 +27,7 @@ export function FAQSection() {
           <AnimatedDetails title={t('What consumes search credits?')}>
             <p>
               <LocaleText>{t('For the current credit usage rules,')}</LocaleText>{' '}
-              <a href={`mailto:${supportEmail}?subject=APCOSYS%20search%20credits`}>
+              <a href={`mailto:${supportEmail}?subject=Apcosys%20search%20credits`}>
                 <LocaleText>{t('contact our team')}</LocaleText>
               </a>
               .
@@ -36,8 +38,14 @@ export function FAQSection() {
               <LocaleText>
                 {t('API access is available on Plus, Expert and Business plans.')}
               </LocaleText>{' '}
-              <a href={`${productUrl}/docs/api`}>
-                <LocaleText>{t('View API documentation')}</LocaleText>
+              <a href={apiDocumentationUrl ?? siteHref('/developers/api') + '#documentation'}>
+                <LocaleText>
+                  {t(
+                    apiDocumentationUrl
+                      ? 'View API documentation'
+                      : 'Read API integration guidance',
+                  )}
+                </LocaleText>
               </a>
               .
             </p>

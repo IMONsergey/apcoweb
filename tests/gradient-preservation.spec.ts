@@ -41,7 +41,7 @@ for (const theme of ['light', 'dark']) {
         expect(box.height).toBeGreaterThan(0);
       }
       await expect(
-        page.getByRole('link', { name: 'Create free account', exact: true }),
+        page.locator('.site-header').getByRole('link', { name: 'Try Search', exact: true }),
       ).toBeVisible();
     });
   }

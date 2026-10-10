@@ -6,7 +6,7 @@ import { installPageEntrance } from './pageEntrance';
 export function LocaleProvider({ children }: { children: ReactNode }) {
   useLayoutEffect(() => {
     document.documentElement.lang = 'en';
-    document.title = 'APCOSYS — Start with a query.';
+    document.title = 'Apcosys — Start with a query.';
     return installPageEntrance();
   }, []);
 

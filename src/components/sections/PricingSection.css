@@ -30,7 +30,7 @@
 .plan-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--layout-gap);
   margin-top: 80px;
 }
 .plan-card {

@@ -16,7 +16,7 @@ test('custom fonts resolve from the deployed base path', async ({ page }) => {
   await page.goto('./');
   const faces = await page.evaluate(async () => {
     await Promise.all([
-      document.fonts.load('400 18px "Instrument Sans"', 'APCOSYS'),
+      document.fonts.load('400 18px "Instrument Sans"', 'Apcosys'),
       document.fonts.load('400 18px "IBM Plex Mono"', 'Credits'),
     ]);
     return [...document.fonts].map(({ family, status }) => ({ family, status }));

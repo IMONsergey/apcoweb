@@ -3,7 +3,7 @@ import { wcagAxe } from './helpers/accessibility';
 
 async function openLanding(page: Page) {
   await page.goto('./', { waitUntil: 'networkidle' });
-  await expect(page).toHaveTitle(/^APCOSYS/);
+  await expect(page).toHaveTitle(/^Apcosys/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Start with a query.');
   await page.evaluate(() => document.fonts.ready);
 }
@@ -161,7 +161,7 @@ test('FAQ preserves independent states and grows with text', async ({ page }) =>
 test('search validates locally and forwards the verified URL parameter', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await openLanding(page);
-  await page.getByRole('button', { name: 'Search APCOSYS', exact: true }).click();
+  await page.getByRole('button', { name: 'Search Apcosys', exact: true }).click();
   await expect(page.getByRole('alert')).toHaveText('Enter a domain, IP or technical attribute.');
   await page.getByRole('searchbox').fill('example.com');
   await page.route('https://apcosys.net/search?*', (route) =>
@@ -171,7 +171,7 @@ test('search validates locally and forwards the verified URL parameter', async (
       body: '<title>Search handoff test</title>',
     }),
   );
-  await page.getByRole('button', { name: 'Search APCOSYS', exact: true }).click();
+  await page.getByRole('button', { name: 'Search Apcosys', exact: true }).click();
   await expect(page).toHaveURL('https://apcosys.net/search?search_value=example.com');
 });
 

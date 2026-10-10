@@ -9,7 +9,7 @@
 .audience-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--layout-gap);
 }
 .audience-card {
   position: relative;
@@ -128,7 +128,7 @@
 @container audiences (max-width: 899px) {
   .audience-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: var(--layout-gap);
   }
   .audience-card {
     min-height: 470px;

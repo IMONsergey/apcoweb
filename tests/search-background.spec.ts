@@ -4,7 +4,7 @@ for (const width of [1920, 1440, 768, 390, 320]) {
   test(`search background has no added statistics band at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('./', { waitUntil: 'networkidle' });
-    await expect(page).toHaveTitle(/^APCOSYS/);
+    await expect(page).toHaveTitle(/^Apcosys/);
     const section = page.locator('.search-preview');
     await section.scrollIntoViewIfNeeded();
     await expect(section.locator('.turquoise-flow canvas')).toBeVisible();

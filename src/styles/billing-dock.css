@@ -44,6 +44,12 @@
     transform: none;
     transition-delay: 0s;
   }
+  .billing-dock[data-occluded='true'] {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: none;
+  }
   .billing-dock__offer {
     display: flex;
     flex-direction: column;

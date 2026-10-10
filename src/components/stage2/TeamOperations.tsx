@@ -1,80 +1,116 @@
-import { siteHref } from '../../app/router';
-import { productUrl } from '../../config/site';
+import { EditorialSection, ReadingRows, RelatedReading } from '../../pages/PageSections';
 
 export function TeamOperations() {
-  const process = [
-    {
-      step: '01',
-      name: 'Analyst input',
-      desc: 'A host, domain, report or relevant technology begins the question.',
-    },
-    {
-      step: '02',
-      name: 'Search evidence',
-      desc: 'Examine observed services and technical attributes with their time context.',
-    },
-    {
-      step: '03',
-      name: 'Validate context',
-      desc: 'Review related technology and CVE signals, then verify before escalation.',
-    },
-    {
-      step: '04',
-      name: 'Integrate workflow',
-      desc: 'Use the confirmed API capabilities in internal scripts and reporting.',
-    },
-  ] as const;
   return (
-    <section className="stage-team-operations section-space" aria-labelledby="team-process-title">
-      <div className="container">
-        <div className="stage-team-operations__header">
+    <>
+      <EditorialSection
+        id="team-tasks"
+        title="Useful at the point of investigation."
+        intro="Bring an existing question to Apcosys. Use observed infrastructure to give the next review more technical context."
+      >
+        <ReadingRows
+          items={[
+            {
+              title: 'An indicator from an alert.',
+              text: 'Look up the host and review its services, products and versions. Give the analyst enough context to decide which part of the lead needs closer attention.',
+              detail:
+                'Carry forward: the host, relevant service response and the question that remains.',
+            },
+            {
+              title: 'A newly published advisory.',
+              text: 'Research the named technology and inspect potential version matches. Review the evidence before turning an association into a finding.',
+              detail:
+                'Carry forward: the detection, advisory applicability and checks still required.',
+            },
+            {
+              title: 'A repeat lookup or report.',
+              text: 'Use the API to bring supported search and host data into scripts, enrichment steps and internal reporting.',
+              detail:
+                'Carry forward: the observation context, the source and your own validation notes.',
+            },
+          ]}
+        />
+      </EditorialSection>
+      <EditorialSection
+        id="team-trust"
+        title="Make the handoff useful."
+        intro="Before a result informs a decision, another analyst should be able to see what was observed, why it matters and what has not yet been established."
+      >
+        <div className="team-handoff">
           <div>
-            <p className="eyebrow">ANALYST WORKFLOW</p>
-            <h2 id="team-process-title">
-              From question to evidence.
-              <br />
-              Then into your workflow.
-            </h2>
-          </div>
-          <p>
-            A technical evaluation of Apcosys can begin with one analyst and extend to a team
-            process.
-          </p>
-        </div>
-        <div className="stage-team-operations__flow">
-          {process.map((item) => (
-            <article key={item.step}>
-              <span>{item.step} / 04</span>
-              <h3>{item.name}</h3>
-              <p>{item.desc}</p>
-            </article>
-          ))}
-        </div>
-        <div className="stage-team-operations__business">
-          <div>
-            <p className="eyebrow">TEAM ACCESS</p>
-            <h3>Business plan</h3>
+            <h3>Give analysts the context they need.</h3>
             <p>
-              Up to five users, higher credit allowances and API access are listed in the approved
-              plan concept. Confirm current entitlements with the team.
+              Keep the host, port and supporting response together. Include detected products and
+              versions, potential CVE associations and available observation dates.
+            </p>
+            <p>
+              Record your reasoning separately from the source data, so the next person can
+              distinguish an observation from a validated finding.
             </p>
           </div>
-          <div className="stage-team-operations__metrics">
-            <div>
-              <strong>5</strong>
-              <span>Users (proposed)</span>
-            </div>
-            <div>
-              <strong>1.5M</strong>
-              <span>Credits (proposed)</span>
-            </div>
-          </div>
-          <div className="stage-team-operations__actions">
-            <a href={siteHref('/pricing')}>Compare Business ↗</a>
-            <a href={productUrl + '/docs/api'}>API documentation ↗</a>
+          <div className="handoff-record">
+            <h3>A concise research handoff</h3>
+            <dl>
+              <div>
+                <dt>Question</dt>
+                <dd>What are we trying to establish?</dd>
+              </div>
+              <div>
+                <dt>Evidence</dt>
+                <dd>Which host, service and response support the lead?</dd>
+              </div>
+              <div>
+                <dt>Uncertainty</dt>
+                <dd>What needs independent verification?</dd>
+              </div>
+              <div>
+                <dt>Next action</dt>
+                <dd>Who reviews it, and what should they check?</dd>
+              </div>
+            </dl>
           </div>
         </div>
-      </div>
-    </section>
+        <RelatedReading
+          items={[
+            {
+              title: 'Understand the data you rely on.',
+              text: 'Coverage, observation dates, CVE associations and the limits of internet scanning.',
+              path: '/platform/data-methodology',
+            },
+            {
+              title: 'Bring data into existing workflows.',
+              text: 'A compact introduction to API requests, access levels and usage.',
+              path: '/developers/api',
+            },
+          ]}
+        />
+      </EditorialSection>
+      <EditorialSection
+        id="team-access"
+        title="Choose access for your team."
+        intro="Business brings a larger allowance and access for up to five users. Discuss data needs, invoice payment and procurement questions with the team."
+      >
+        <div className="business-allowance">
+          <div>
+            <strong>5</strong>
+            <span>Users on one subscription</span>
+          </div>
+          <div>
+            <strong>1.5M</strong>
+            <span>Included credits</span>
+          </div>
+          <div>
+            <strong>
+              5<span>/s</span>
+            </strong>
+            <span>API request rate</span>
+          </div>
+        </div>
+        <p className="editorial-note">
+          Business plan figures shown for the client preview. Final access and commercial terms are
+          confirmed in the product.
+        </p>
+      </EditorialSection>
+    </>
   );
 }

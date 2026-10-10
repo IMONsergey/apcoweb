@@ -47,7 +47,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-/* APCOSYS product animations. DOM/SVG + GSAP. No clicks, inputs or network requests. */
+/* Apcosys product animations. DOM/SVG + GSAP. No clicks, inputs or network requests. */
 (function () {
   'use strict';
   if (typeof window === 'undefined' || !window.customElements || window.customElements.get('apcosys-product-demo')) return;
@@ -55,11 +55,11 @@ SOFTWARE.
   const live = new Set();
   let sharedGSAP = null;
   const SCENES = {
-    query: { height: 843, label: 'APCOSYS search demo: a query is typed, submitted, and added to recent queries.' },
-    results: { height: 840, label: 'APCOSYS search results demo: a country filter is applied and matching hosts appear.' },
-    host: { height: 840, label: 'APCOSYS host profile demo: exposure periods change, open services are reviewed, and the host analysis completes.' },
-    evidence: { height: 840, label: 'APCOSYS evidence demo: a service is selected, technical evidence is updated, and its banner is copied.' },
-    suggestions: { height: 840, label: 'APCOSYS suggested queries demo: a query is typed, results appear, and a suggested search is run.' }
+    query: { height: 843, label: 'Apcosys search demo: a query is typed, submitted, and added to recent queries.' },
+    results: { height: 840, label: 'Apcosys search results demo: a country filter is applied and matching hosts appear.' },
+    host: { height: 840, label: 'Apcosys host profile demo: exposure periods change, open services are reviewed, and the host analysis completes.' },
+    evidence: { height: 840, label: 'Apcosys evidence demo: a service is selected, technical evidence is updated, and its banner is copied.' },
+    suggestions: { height: 840, label: 'Apcosys suggested queries demo: a query is typed, results appear, and a suggested search is run.' }
   };
   const icon = function (name, extra) { return ASSETS.icons[name].replace(/\sclass="[^"]*"/,'').replace('<svg ', '<svg aria-hidden="true" class="ui-icon ' + (extra || '') + '" '); };
   const flag = function (country) { return '<img class="flag" alt="" draggable="false" src="' + ASSETS.flags[country] + '">'; };

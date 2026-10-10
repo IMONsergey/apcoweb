@@ -1,35 +1,52 @@
-import type { ReactNode } from 'react';
+import '../styles/compact-experience.css';
+import '../styles/inner-pages.css';
+import '../styles/editorial-system.css';
+import { PageArtwork, type ArtworkKey } from './PageArtwork';
+import { useRef, type ReactNode } from 'react';
+import { useReadingPosition } from '../hooks/useReadingPosition';
+import { usePageMotion } from '../hooks/usePageMotion';
 import { DoubleButton } from '../components/ui/DoubleButton';
 
 export type PageLink = { label: string; href: string; secondary?: boolean };
+
 export function PageIntro({
-  eyebrow,
   title,
   description,
   concept = false,
+  artwork,
+  actions,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   concept?: boolean;
+  artwork?: ArtworkKey | undefined;
+  actions?: readonly PageLink[] | undefined;
 }) {
   return (
     <header className="stage-page-hero">
       <div className="container stage-page-hero__grid">
-        <div>
-          <p className="eyebrow">{eyebrow}</p>
-          <h1>{title}</h1>
-          {concept && (
-            <p className="stage-concept-label">
-              Concept demonstration · Not a live product capability
-            </p>
-          )}
+        <div className="stage-page-hero__copy">
+          <div className="stage-page-hero__title">
+            <h1>{title}</h1>
+          </div>
+          <div className="stage-page-hero__aside">
+            <p className="stage-page-hero__description">{description}</p>
+            {concept && (
+              <p className="stage-concept-label">
+                Concept demonstration · Not a live product capability
+              </p>
+            )}
+          </div>
+          {actions && <PageAction links={actions} />}
         </div>
-        <p className="stage-page-hero__description">{description}</p>
+        {artwork && <PageArtwork kind={artwork} />}
       </div>
     </header>
   );
 }
+
+/** The site's primary CTAs use the original R21 double-button component. */
 export function PageAction({ links }: { links: readonly PageLink[] }) {
   return (
     <div className="stage-actions">
@@ -45,39 +62,92 @@ export function PageAction({ links }: { links: readonly PageLink[] }) {
     </div>
   );
 }
+
 export function PageFrame({
   eyebrow,
   title,
   description,
   children,
   links,
+  heroLinks,
   variant = 'editorial',
   concept = false,
+  artwork,
+  sections,
+  closing,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   children: ReactNode;
   links?: readonly PageLink[];
-  variant?: 'editorial' | 'technical' | 'product' | 'commercial';
+  heroLinks?: readonly PageLink[];
+  variant?: 'editorial' | 'technical' | 'product' | 'commercial' | 'usecase' | 'developer';
   concept?: boolean;
+  artwork?: ArtworkKey;
+  sections?: readonly { label: string; id: string }[];
+  closing?: { title: string; description: string };
 }) {
+  const root = useRef<HTMLElement>(null);
+  usePageMotion(root, title);
+  const activeSection = useReadingPosition(sections?.map(({ id }) => id) ?? []);
   return (
-    <article className={'stage-page stage-page--' + variant}>
-      <PageIntro eyebrow={eyebrow} title={title} description={description} concept={concept} />
+    <article
+      ref={root}
+      className={'stage-page inner-pages stage-page--' + variant}
+      data-page={artwork}
+    >
+      <PageIntro
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
+        concept={concept}
+        artwork={artwork}
+        actions={heroLinks ?? links?.slice(0, 2)}
+      />
+      {sections && (
+        <nav className="page-contents container" aria-label="On this page">
+          {sections.map(({ label, id }) => (
+            <a
+              key={id}
+              href={'#' + id}
+              aria-current={activeSection === id ? 'location' : undefined}
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+      )}
       {children}
       {links && (
-        <section className="stage-page-cta section-space">
-          <div className="container">
-            <p className="eyebrow">CONTINUE EXPLORING</p>
-            <h2>Follow the next lead.</h2>
-            <PageAction links={links} />
+        <nav className="stage-related" aria-label="Continue exploring Apcosys">
+          <div className="container stage-related__inner">
+            {closing && (
+              <div className="page-closing-copy">
+                <h2>{closing.title}</h2>
+                <p>{closing.description}</p>
+              </div>
+            )}
+            <div className="stage-related__links">
+              {links.map(({ label, href, secondary }, index) => (
+                <DoubleButton
+                  variant={closing && index === 0 && !secondary ? 'primary' : 'secondary'}
+                  compact
+                  href={href}
+                  key={href + label}
+                >
+                  {label}
+                </DoubleButton>
+              ))}
+            </div>
           </div>
-        </section>
+        </nav>
       )}
     </article>
   );
 }
+
+/** Sparse editorial facts, not a generic card grid or a replacement for product scenes. */
 export function StorySections({
   items,
   variant = 'split',
@@ -88,9 +158,8 @@ export function StorySections({
   return (
     <section className={'stage-story section-space stage-story--' + variant}>
       <div className="container">
-        {items.map((item, i) => (
+        {items.map((item) => (
           <article className="stage-story__item" key={item.title}>
-            <div className="stage-story__index">0{i + 1}</div>
             <div>
               <h2>{item.title}</h2>
               <p>{item.description}</p>
@@ -102,6 +171,7 @@ export function StorySections({
     </section>
   );
 }
+
 export function Notice({ children }: { children: ReactNode }) {
   return (
     <aside className="stage-note" role="note">

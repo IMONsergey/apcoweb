@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { researchSteps } from '../../content/site';
-import { StepIllustration } from '../visuals/StepIllustration';
+import { useState, useRef, useEffect } from 'react';
+import { MorphPanel } from '../ui/MorphPanel';
 import { productUrl } from '../../config/site';
 import { siteHref } from '../../app/router';
+import { ProductEvidence, type EvidenceMode, type EvidenceScenario } from './ProductEvidence';
 
 type Story = 'search' | 'bounty' | 'vulnerability' | 'osint' | 'team';
 
 const stories = {
   search: {
     tag: 'SEARCH & INVESTIGATION',
-    heading: 'One investigation. Five connected decisions.',
+    heading: 'From query to technical context.',
     context:
-      'Follow an illustrative host research sequence from input to the next technical question.',
+      'Choose a step, select a host and inspect the evidence. The same record stays in view as the question becomes more specific.',
     query: 'example.com',
     captions: [
       'Enter an observed attribute',
@@ -21,11 +21,11 @@ const stories = {
       'Refine the next query',
     ],
     detail: [
-      'Start with a domain or IP, then refine with supported filters.',
-      'Compare the returned hosts by their reported services.',
-      'Review ports, services and technology on one selected host.',
-      'A detected version can suggest a CVE association — not a confirmed vulnerability.',
-      'Use an observed attribute to formulate a new search.',
+      'Begin with an IP, domain, service or technology. Use supported attributes to narrow the results to the infrastructure behind your question.',
+      'Compare open ports, services and detected technologies before opening a host. Look for the result that helps answer your question.',
+      'Read the observed ports and services together with the response evidence. Keep detected products and versions in the context of that host.',
+      'Check the evidence behind a detected version. A potential CVE association is a lead to validate against patches, configuration and observation time.',
+      'Carry a useful service, technology or domain into the next query. Keep the observation that led you there so the investigation remains traceable.',
     ],
   },
   bounty: {
@@ -54,7 +54,7 @@ const stories = {
     heading: 'Technology signals need verification.',
     context:
       'A conceptual product walkthrough: detected technology, matching hosts and potential vulnerability context.',
-    query: 'Technology / version',
+    query: 'nginx 1.24.0',
     captions: [
       'Choose a technology',
       'Review matching hosts',
@@ -117,22 +117,35 @@ const stories = {
 export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) {
   const [selected, setSelected] = useState(0);
   const data = stories[story];
-  const step = researchSteps[selected] ?? researchSteps[0];
+  const [hostIndex, setHostIndex] = useState(() =>
+    new URLSearchParams(window.location.search).get('demoHost') === '203.0.113.42' ? 1 : 0,
+  );
+  const stepsRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const nav = stepsRef.current;
+    const active = nav?.querySelector<HTMLElement>('[aria-selected="true"]');
+    if (!nav || !active || nav.scrollWidth <= nav.clientWidth) return;
+    const box = active.getBoundingClientRect();
+    const frame = nav.getBoundingClientRect();
+    if (box.left < frame.left) nav.scrollLeft -= frame.left - box.left;
+    else if (box.right > frame.right) nav.scrollLeft += box.right - frame.right;
+  }, [selected]);
   return (
     <section
       className={'stage-workbench stage-workbench--' + story + ' section-space'}
+      id="investigation"
       aria-label={data.tag + ' interactive illustrated workflow'}
     >
       <div className="container">
         <div className="stage-workbench__intro">
           <div>
-            <p className="eyebrow">{data.tag}</p>
             <h2>{data.heading}</h2>
           </div>
           <p>{data.context}</p>
         </div>
         <div className="stage-workbench__stage">
           <nav
+            ref={stepsRef}
             className="stage-workbench__steps"
             role="tablist"
             aria-label="Investigation workflow steps"
@@ -145,12 +158,30 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
                 className="stage-workbench__step"
                 role="tab"
                 aria-selected={selected === index}
+                tabIndex={selected === index ? 0 : -1}
+                onKeyDown={(event) => {
+                  const keys = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'];
+                  if (!keys.includes(event.key)) return;
+                  event.preventDefault();
+                  const next =
+                    event.key === 'Home'
+                      ? 0
+                      : event.key === 'End'
+                        ? 4
+                        : (index +
+                            (event.key === 'ArrowRight' || event.key === 'ArrowDown' ? 1 : 4)) %
+                          5;
+                  setSelected(next);
+                  const nextButton = stepsRef.current
+                    ?.querySelectorAll<HTMLButtonElement>('button')
+                    .item(next);
+                  nextButton?.focus({ preventScroll: true });
+                }}
                 aria-controls={'stage-panel-' + story}
                 onClick={() => setSelected(index)}
               >
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <strong>{label}</strong>
-                <span aria-hidden="true">↗</span>
               </button>
             ))}
           </nav>
@@ -161,32 +192,30 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
             id={'stage-panel-' + story}
             aria-labelledby={'stage-step-' + story + '-' + selected}
           >
-            <div className="stage-workbench__bar">
-              <span>
-                <i aria-hidden="true" /> APCOSYS / RESEARCH
-              </span>
-              <span>ILLUSTRATIVE INTERFACE</span>
-            </div>
-            <div className="stage-workbench__illustration">
-              <StepIllustration
-                key={selected}
-                scene={step.scene}
-                image={step.image}
-                alt={step.alt}
+            <div className="stage-workbench__record">
+              <ProductEvidence
+                compact
+                embedded
+                selectedHost={hostIndex}
+                onSelectHost={setHostIndex}
+                mode={
+                  (['query', 'results', 'host', 'cve', 'continue'][selected] ??
+                    'host') as EvidenceMode
+                }
+                scenario={(story === 'team' ? 'indicator' : 'domain') as EvidenceScenario}
               />
             </div>
-            <div className="stage-workbench__insight">
-              <div>
-                <span className="stage-workbench__mini">
-                  STEP {String(selected + 1).padStart(2, '0')} / 05
+            <MorphPanel>
+              <div className="stage-workbench__insight" data-morph-enter>
+                <div>
+                  <h3>{data.captions[selected]}</h3>
+                  <p>{data.detail[selected]}</p>
+                </div>
+                <span className="stage-workbench__query" title="Example only">
+                  {data.query}
                 </span>
-                <h3>{data.captions[selected]}</h3>
-                <p>{data.detail[selected]}</p>
               </div>
-              <span className="stage-workbench__query" title="Example only">
-                {data.query}
-              </span>
-            </div>
+            </MorphPanel>
           </div>
         </div>
         <div className="stage-workbench__bottom">
@@ -195,8 +224,8 @@ export function InvestigationWorkbench({ story = 'search' }: { story?: Story }) 
             screens demonstrate the intended investigation sequence.
           </p>
           <div>
-            <a href={productUrl + '/search'}>Try Search ↗</a>
-            <a href={siteHref('/platform/data-methodology')}>Data & Methodology ↗</a>
+            <a href={productUrl + '/search'}>Try Search</a>
+            <a href={siteHref('/platform/data-methodology')}>Data & Methodology</a>
           </div>
         </div>
       </div>

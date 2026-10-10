@@ -1,4 +1,9 @@
-import '../styles/stage2-showcases.css';
+import {
+  SearchableSection,
+  HomeUseCases,
+  CapabilitiesSection,
+  SecurityTeamsCTA,
+} from '../components/sections/HomeProductSections';
 import { Hero } from '../components/sections/Hero';
 import { SearchPreview } from '../components/sections/SearchPreview';
 import { StepCarousel } from '../components/sections/StepCarousel';
@@ -9,27 +14,21 @@ import { PricingSection } from '../components/sections/PricingSection';
 import { FAQSection } from '../components/sections/FAQSection';
 import { ClosingSection } from '../components/sections/ClosingSection';
 import { Visual } from '../components/visuals/Visual';
-import {
-  WhatYouCanSearch,
-  UseCasePreview,
-  CapabilityPreview,
-  TeamEvaluationCTA,
-} from './HomeOverview';
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <WhatYouCanSearch />
       <SearchPreview />
+      <SearchableSection />
       <StepCarousel />
-      <UseCasePreview />
-      <CapabilityPreview />
+      <HomeUseCases />
+      <CapabilitiesSection />
       <AudienceSection />
       <DataSection />
       <ApiSection />
-      <PricingSection />
-      <TeamEvaluationCTA />
+      <PricingSection showTeamBanner={false} />
+      <SecurityTeamsCTA />
       <div className="lower-scene">
         <Visual kind="waves" />
         <FAQSection />

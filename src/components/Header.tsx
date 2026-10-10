@@ -58,7 +58,7 @@ export function Header() {
         inert={hidden}
       >
         <div className="container header-row">
-          <a ref={brand} className="brand" href={siteHref('/')} aria-label={t('APCOSYS home')}>
+          <a ref={brand} className="brand" href={siteHref('/')} aria-label={t('Apcosys home')}>
             <Logo />
           </a>
           <nav className="desktop-nav" aria-label={t('Main navigation')}>

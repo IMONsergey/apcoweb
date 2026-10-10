@@ -5,6 +5,8 @@ import { researchSteps } from '../../content/site';
 import { Icon } from '../ui/Icon';
 import { Visual } from '../visuals/Visual';
 import { StepIllustration } from '../visuals/StepIllustration';
+import { DoubleButton } from '../ui/DoubleButton';
+import { siteHref } from '../../app/router';
 export function StepCarousel() {
   const { t } = useLocale();
   const { track, position, positions, move, goTo } = useCarousel();
@@ -88,6 +90,14 @@ export function StepCarousel() {
             </li>
           ))}
         </ul>
+      </div>
+      <div className="container step-evidence-note">
+        <p>
+          Illustrative product walkthrough · Query, results, host, evidence and the next search.
+        </p>
+        <DoubleButton compact href={siteHref('/platform/search-investigation')}>
+          Explore Search & Investigation
+        </DoubleButton>
       </div>
     </section>
   );

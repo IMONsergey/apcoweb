@@ -48,7 +48,7 @@ export function ApiIllustration() {
       data-ready={ready}
       role="img"
       aria-label={t(
-        'Illustrative APCOSYS API documentation with a request and response. See the current documentation for the live API.',
+        'Illustrative Apcosys API documentation with a request and response. See the current documentation for the live API.',
       )}
     >
       <div className="api-demo-poster" aria-hidden="true">

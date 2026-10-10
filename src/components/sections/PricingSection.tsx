@@ -2,7 +2,7 @@ import { siteHref } from '../../app/router';
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { noBreakNumber } from '../../i18n/typography';
-import { useRef, useState } from 'react';
+import { useRef, useState, type MouseEvent } from 'react';
 import { MobileBillingDock } from './MobileBillingDock';
 import { plans, productUrl } from '../../content/site';
 import { DoubleButton } from '../ui/DoubleButton';
@@ -12,7 +12,15 @@ import { BillingSwitch } from '../ui/BillingSwitch';
 import { AnimatedPrice } from '../ui/AnimatedPrice';
 import { calculatePrice, formatPrice, type BillingPeriod } from '../../content/pricing';
 type Plan = (typeof plans)[number];
-export function PricingSection() {
+export function PricingSection({
+  showTeamBanner = true,
+  title,
+  comparisonHref,
+}: {
+  showTeamBanner?: boolean;
+  title?: string;
+  comparisonHref?: string;
+}) {
   const { t } = useLocale();
   const [compare, setCompare] = useState(false);
   const rangeRef = useRef<HTMLDivElement>(null);
@@ -25,13 +33,19 @@ export function PricingSection() {
         <div className="pricing-options" ref={rangeRef} data-testid="pricing-options">
           <div className="pricing-heading">
             <h2 id="pricing-title">
-              <LocaleText>{t('Start free.')}</LocaleText>
-              <br />
-              <span>
-                <LocaleText>{t('Upgrade when your')}</LocaleText>
-                <br className="desktop-break" />{' '}
-                <LocaleText>{t('investigation needs more.')}</LocaleText>
-              </span>
+              {title ? (
+                title
+              ) : (
+                <>
+                  <LocaleText>{t('Start free.')}</LocaleText>
+                  <br />
+                  <span>
+                    <LocaleText>{t('Upgrade when your')}</LocaleText>
+                    <br className="desktop-break" />{' '}
+                    <LocaleText>{t('investigation needs more.')}</LocaleText>
+                  </span>
+                </>
+              )}
             </h2>
             <div className="billing billing--desktop">
               <p>
@@ -98,57 +112,68 @@ export function PricingSection() {
                     <dd>{plan.users}</dd>
                   </div>
                 </dl>
-                {plan.id === 'free' ? (
-                  <a className="plan-button" href={`${productUrl}/register`}>
-                    <LocaleText>{t(plan.action)}</LocaleText>
-                  </a>
-                ) : (
-                  <button
-                    type="button"
-                    className="plan-button"
-                    onClick={(event) => {
-                      event.currentTarget.focus();
-                      setSelected(plan);
-                      setPlanOpen(true);
-                    }}
-                  >
-                    <LocaleText>{t(plan.action)}</LocaleText>
-                  </button>
-                )}
-                {plan.id === 'business' && (
-                  <a className="stage-plan-contact" href={siteHref('/contact')}>
-                    Talk to Us →
-                  </a>
-                )}
+                <div className="plan-actions">
+                  {plan.id === 'free' ? (
+                    <a className="plan-button" href={`${productUrl}/register`}>
+                      <LocaleText>{t(plan.action)}</LocaleText>
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      className="plan-button"
+                      onClick={(event) => {
+                        event.currentTarget.focus();
+                        setSelected(plan);
+                        setPlanOpen(true);
+                      }}
+                    >
+                      <LocaleText>{t(plan.action)}</LocaleText>
+                    </button>
+                  )}
+                  {plan.id === 'business' && (
+                    <a
+                      className="plan-button plan-button--accent stage-plan-contact"
+                      href={siteHref('/contact')}
+                    >
+                      Talk to Us
+                    </a>
+                  )}
+                </div>
               </article>
             ))}
           </div>
           <div className="comparison-action">
             <DoubleButton
               variant="inverse"
-              onClick={(event) => {
-                event.currentTarget.focus();
-                setCompare(true);
-              }}
+              {...(comparisonHref
+                ? { href: comparisonHref }
+                : {
+                    onClick: (event: MouseEvent<HTMLElement>) => {
+                      event.currentTarget.focus();
+                      setCompare(true);
+                    },
+                  })}
             >
               <LocaleText>{t('View a detailed comparison')}</LocaleText>
             </DoubleButton>
           </div>
         </div>
-        <div className="contact-banner">
-          <Visual kind="dots" direction="left-to-right" />
-          <div>
-            <h3>
-              <LocaleText>{t('Have specific organisational requirements?')}</LocaleText>
-            </h3>
-            <p>
-              <LocaleText>{t('Tell us about your data, API or procurement needs.')}</LocaleText>
-            </p>
+        {showTeamBanner && (
+          <div className="contact-banner">
+            <Visual kind="dots" direction="left-to-right" />
+            <div>
+              <h3>
+                <LocaleText>{t('Have specific requirements?')}</LocaleText>
+              </h3>
+              <p>
+                <LocaleText>{t('Tell us about your data, API or procurement needs.')}</LocaleText>
+              </p>
+            </div>
+            <DoubleButton variant="inverse" href={siteHref('/contact')}>
+              <LocaleText>{t('Talk to Us')}</LocaleText>
+            </DoubleButton>
           </div>
-          <DoubleButton variant="inverse" href={siteHref('/contact')}>
-            <LocaleText>{t('Talk to Us')}</LocaleText>
-          </DoubleButton>
-        </div>
+        )}
       </div>
 
       <Modal
@@ -227,12 +252,12 @@ export function PricingSection() {
         <p className="modal-note">
           <LocaleText>
             {t(
-              'Final pricing, billing periods and purchase conditions are confirmed in APCOSYS before payment.',
+              'Final pricing, billing periods and purchase conditions are confirmed in Apcosys before payment.',
             )}
           </LocaleText>
         </p>
         <DoubleButton href={`${productUrl}/register`}>
-          <LocaleText>{t('Continue in APCOSYS')}</LocaleText>
+          <LocaleText>{t('Continue in Apcosys')}</LocaleText>
         </DoubleButton>
       </Modal>
       <Modal
@@ -288,7 +313,7 @@ export function PricingSection() {
               </LocaleText>
             </p>
             <DoubleButton href={`${productUrl}/register`}>
-              <LocaleText>{t('Continue in APCOSYS')}</LocaleText>
+              <LocaleText>{t('Continue in Apcosys')}</LocaleText>
             </DoubleButton>
           </>
         )}

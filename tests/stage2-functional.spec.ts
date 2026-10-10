@@ -1,28 +1,34 @@
 import { expect, test } from '@playwright/test';
 
-test('Hero has one search input and example buttons populate it', async ({ page }) => {
+test('R21 home preserves one real search input inside the original SearchPreview', async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('./');
-  await expect(page.getByRole('searchbox')).toHaveCount(1);
-  await expect(page.locator('.search-preview .stage-preview-query')).toBeVisible();
-  const input = page.getByRole('searchbox');
-  for (const query of ['example.com', '1.1.1.1', '8.8.8.8']) {
-    await page.getByRole('button', { name: query, exact: true }).click();
-    await expect(input).toHaveValue(query);
-  }
-  await expect(page.locator('.search-form')).toHaveAttribute('action', /\/search$/);
-  await expect(page.locator('.search-form [name="search_value"]')).toHaveValue('8.8.8.8');
+  await expect(page.locator('.hero .search-form')).toHaveCount(0);
+  await expect(page.locator('.search-preview .search-form')).toHaveCount(1);
+  await expect(page.locator('.search-preview .stage-preview-query')).toHaveCount(0);
+  await expect(page.locator('.stage-query-examples')).toHaveCount(0);
+  await expect(page.locator('.stage-section')).toHaveCount(0);
+  const input = page.locator('.search-preview [name="search_value"]');
+  await input.fill('example.com');
+  await expect(input).toHaveValue('example.com');
+  await expect(page.locator('.search-preview .search-form')).toHaveAttribute('action', /\/search$/);
 });
 
 for (const height of [768, 900, 1080]) {
-  test('Hero form stays in first fold at desktop height ' + height, async ({ page }) => {
-    await page.setViewportSize({ width: 1440, height });
-    await page.goto('./');
-    const input = page.getByRole('searchbox');
-    const rect = await input.boundingBox();
-    expect(rect).not.toBeNull();
-    expect(rect!.y + rect!.height).toBeLessThanOrEqual(height + 2);
-  });
+  test(
+    'R21 hero CTA remains visible in the first desktop fold at height ' + height,
+    async ({ page }) => {
+      await page.setViewportSize({ width: 1440, height });
+      await page.goto('./');
+      await expect(page.locator('.hero h1')).toBeVisible();
+      const primary = page.locator('.hero .double-button').first();
+      const rect = await primary.boundingBox();
+      expect(rect).not.toBeNull();
+      expect(rect!.y + rect!.height).toBeLessThanOrEqual(height + 2);
+    },
+  );
 }
 
 for (const width of [320, 390, 1366, 1440, 1920]) {
@@ -65,9 +71,9 @@ test('monitoring concept changes state and does not claim real alerts', async ({
   const buttons = page.locator('.stage-monitor-console__nav');
   await buttons.nth(1).click();
   await expect(buttons.nth(1)).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.getByText('Service A + Service B')).toBeVisible();
+  await expect(page.getByText('443 / HTTPS + 80 / HTTP')).toBeVisible();
   await buttons.nth(2).click();
-  await expect(page.getByText('Inspect host context')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Review a possible change.' })).toBeVisible();
   await expect(page.getByText('NO LIVE ALERTS')).toBeVisible();
 });
 
@@ -106,10 +112,12 @@ test('API example is explicitly illustrative and request/response switch', async
   );
 });
 
-test('browser history and hashed syntax link work after lazy navigation', async ({ page }) => {
+test('R21 home navigation reaches search syntax and respects history', async ({ page }) => {
   await page.goto('./');
-  await page.getByRole('link', { name: /Explore search syntax/i }).click();
-  await expect(page).toHaveURL(/\/platform\/search-investigation#search-syntax$/);
+  await page.getByRole('button', { name: 'Platform', exact: true }).click();
+  await page.getByRole('link', { name: 'Search & Investigation' }).first().click();
+  await expect(page).toHaveURL(/\/platform\/search-investigation$/);
+  await page.locator('#search-syntax').scrollIntoViewIfNeeded();
   await expect(page.locator('#search-syntax')).toBeInViewport();
   await page.goBack();
   await expect(page.locator('main')).toHaveAttribute('data-route', '/');
@@ -187,21 +195,26 @@ test('browser history restores scroll after lazy route navigation', async ({ pag
 });
 
 test('unverified API docs remain within the supported on-site guidance', async ({ page }) => {
-  await page.goto('./developers/api');
+  await page.goto('./');
+  await page.getByText('Can I use the API?', { exact: true }).click();
+  await page.locator('#faq').getByRole('link', { name: 'Read API integration guidance' }).click();
+  await expect(page).toHaveURL(/\/developers\/api#documentation$/);
+  await expect(page.locator('#documentation')).toBeInViewport();
   await page.getByRole('link', { name: 'Read API integration guidance' }).first().click();
   await expect(page).toHaveURL(/\/developers\/api#documentation$/);
   await expect(page.locator('#documentation')).toBeInViewport();
   await expect(
-    page.getByText('The production API documentation URL is not yet confirmed.', { exact: false }),
+    page.getByText('Illustrative request template, not a working API contract.', { exact: false }),
   ).toBeVisible();
 });
 
-test('platform search keeps a single readable placeholder on desktop', async ({ page }) => {
+test('investigation page leads with one connected product scene, not another search widget', async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('./platform/search-investigation');
-  const input = page.locator('.stage-platform-search .search-form input');
-  await expect(input).toHaveAttribute('placeholder', /Domain, IP/);
-  await expect(page.locator('.stage-platform-search .search-desktop-placeholder')).toBeHidden();
-  await input.fill('example.com');
-  await expect(input).toHaveValue('example.com');
+  await expect(page.locator('.stage-platform-search .search-form')).toHaveCount(0);
+  await expect(page.locator('.stage-workbench__viewer')).toBeVisible();
+  await expect(page.locator('.stage-workbench__step')).toHaveCount(5);
+  await expect(page.locator('.stage-page-cta')).toHaveCount(0);
 });

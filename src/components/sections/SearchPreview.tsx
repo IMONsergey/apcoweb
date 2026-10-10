@@ -1,3 +1,5 @@
+import { ProductEvidence, type EvidenceScenario } from '../stage2/ProductEvidence';
+import { demoScenarios } from '../../content/product-demo';
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
 import { noBreakNumber } from '../../i18n/typography';
@@ -25,16 +27,6 @@ export function SearchForm({ className = '' }: { className?: string }) {
     return () => window.removeEventListener('pageshow', restore);
   }, []);
   const [error, setError] = useState(false);
-  useEffect(() => {
-    const applyExample = (event: Event) => {
-      if (!(event instanceof CustomEvent) || typeof event.detail !== 'string') return;
-      setQuery(event.detail);
-      setError(false);
-      input.current?.focus({ preventScroll: true });
-    };
-    window.addEventListener('apcosys:example-query', applyExample);
-    return () => window.removeEventListener('apcosys:example-query', applyExample);
-  }, []);
   const [query, setQuery] = useState('');
   function submit(event: FormEvent<HTMLFormElement>) {
     const normalized = query.trim();
@@ -63,6 +55,7 @@ export function SearchForm({ className = '' }: { className?: string }) {
       role="search"
       aria-label={t('Search internet infrastructure')}
     >
+      <span className="search-form__glow" aria-hidden="true" />
       <label className="sr-only" htmlFor={id}>
         {t('Domain, IP or technical attribute')}
       </label>
@@ -110,7 +103,7 @@ export function SearchForm({ className = '' }: { className?: string }) {
       <button
         type="submit"
         className="search-submit"
-        aria-label={t('Search APCOSYS')}
+        aria-label={t('Search Apcosys')}
         disabled={submitting}
       >
         {submitting ? (
@@ -135,11 +128,9 @@ export function SearchForm({ className = '' }: { className?: string }) {
 export function SearchPreview() {
   const { t } = useLocale();
   const scene = useSearchEntrance();
+  const [scenario, setScenario] = useState<EvidenceScenario>('domain');
   return (
-    <section
-      className="search-preview"
-      aria-label={t('Illustrative APCOSYS product search interface')}
-    >
+    <section className="search-preview" aria-label={t('Try Apcosys public search')}>
       <Visual kind="flow" eager onReady={flowReady} />
       <Visual kind="dots" eager onReady={dotsReady} />
       <div className="summary-wrap">
@@ -166,13 +157,27 @@ export function SearchPreview() {
                 </span>
               </h2>
             </div>
-            <div
-              className="stage-preview-query"
-              aria-label="Illustrative interface, search example"
-            >
-              <span>example.com</span>
-              <span aria-hidden="true">↗</span>
+            <SearchForm />
+            <div className="search-examples" role="group" aria-label="Example investigations">
+              <span>Explore an example</span>
+              {Object.entries(demoScenarios).map(([key, example]) => (
+                <button
+                  type="button"
+                  key={key}
+                  aria-pressed={scenario === key}
+                  onClick={() => setScenario(key as EvidenceScenario)}
+                >
+                  {example.label}
+                </button>
+              ))}
             </div>
+            <div className="search-scene__results">
+              <ProductEvidence scenario={scenario} compact embedded showPlaybackStatus={false} />
+            </div>
+            <p className="search-scene__demo-note">
+              Synthetic demonstration · No live observations.{' '}
+              <a href={productUrl + '/search'}>Open product search</a>
+            </p>
           </div>
         </div>
       </div>

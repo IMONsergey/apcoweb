@@ -161,12 +161,12 @@ export const footerGroups = [
   {
     title: 'Legal',
     links: [
-      ['API & Data License Agreement', productUrl + '/legal/api-data-license-agreement'],
-      ['Cookie Policy', productUrl + '/legal/cookie-policy'],
-      ['Data Collection Policy', productUrl + '/legal/data-collection-policy'],
-      ['Data Processing Agreement', productUrl + '/legal/data-processing-agreement'],
-      ['Privacy Policy', productUrl + '/legal/privacy-policy'],
-      ['Terms & Conditions', productUrl + '/legal/terms'],
+      ['API & Data License Agreement', '/legal/api-data-license-agreement'],
+      ['Cookie Policy', '/legal/cookie-policy'],
+      ['Data Collection Policy', '/legal/data-collection-policy'],
+      ['Data Processing Agreement', '/legal/data-processing-agreement'],
+      ['Privacy Policy', '/legal/privacy-policy'],
+      ['Terms & Conditions', '/legal/terms'],
     ],
   },
 ] as const;

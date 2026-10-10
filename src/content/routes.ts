@@ -1,4 +1,6 @@
-/** Client-preview routes. Legal documents remain on the existing product. */
+import { legalRoutes } from './legal-routes';
+
+/** Client-preview routes, including the locally hosted legal documents. */
 export const siteRoutes = [
   {
     path: '/',
@@ -66,6 +68,7 @@ export const siteRoutes = [
     title: 'Talk to Us',
     description: 'Contact Apcosys about data, teams, API access, billing or scanning.',
   },
+  ...legalRoutes,
 ] as const;
 
 export type SitePath = (typeof siteRoutes)[number]['path'];

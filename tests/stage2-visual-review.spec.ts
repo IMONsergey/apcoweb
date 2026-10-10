@@ -32,7 +32,7 @@ for (const route of siteRoutes) {
             theme,
           );
           await page.goto('.' + route.path, { waitUntil: 'networkidle' });
-          await expect(page.locator('main h1')).toBeVisible();
+          await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
           await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
           await page.evaluate(() => document.fonts.ready);
           await expect
@@ -71,7 +71,7 @@ for (const path of ['/', '/platform/search-investigation', '/pricing', '/platfor
             theme,
           );
           await page.goto('.' + path, { waitUntil: 'networkidle' });
-          await expect(page.locator('main h1')).toBeVisible();
+          await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
           const name = slug(path) + '-' + profile.id + '-' + theme + '.png';
           const output = testInfo.outputPath('stage2-visual', name);
           await mkdir(dirname(output), { recursive: true });

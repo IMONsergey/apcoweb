@@ -1,8 +1,19 @@
 import { siteHref } from '../../app/router';
 import { LocaleText } from '../../i18n/LocaleText';
 import { useLocale } from '../../i18n/context';
-import { noBreakNumber } from '../../i18n/typography';
-import { metrics } from '../../content/site';
+const observations = [
+  { id: 'ipv4', label: 'SERVICE RESPONSE', value: '443 / HTTPS', note: 'What a host returned' },
+  { id: 'ipv6', label: 'TECHNOLOGY', value: 'nginx 1.24.0', note: 'Detected, not verified' },
+  { id: 'domains', label: 'TIME CONTEXT', value: 'A snapshot', note: 'Not a live guarantee' },
+  {
+    id: 'products',
+    label: 'COLLECTION',
+    value: 'Public services',
+    note: 'Responses become records',
+  },
+  { id: 'cves', label: 'CVE ASSOCIATIONS', value: 'Research leads', note: 'Verify applicability' },
+  { id: 'protocols', label: 'COVERAGE', value: 'Has limits', note: 'Absence is not proof' },
+] as const;
 import { DoubleButton } from '../ui/DoubleButton';
 import { Visual } from '../visuals/Visual';
 
@@ -10,7 +21,11 @@ import { Visual } from '../visuals/Visual';
 export function DataSection() {
   const { t } = useLocale();
   return (
-    <section className="data-section" id="data" aria-labelledby="data-title">
+    <section
+      className="data-section data-section--observations"
+      id="data"
+      aria-labelledby="data-title"
+    >
       <div className="container data-stage">
         <div className="data-copy">
           <h2 id="data-title">
@@ -21,7 +36,7 @@ export function DataSection() {
           <p>
             <LocaleText>
               {t(
-                'APCOSYS scans the public internet and records how internet-facing hosts respond: open ports, services and detected products.',
+                'A response is an observation. A product version is a detection. A CVE association is a lead to verify. Read each result with its collection and time context.',
               )}
             </LocaleText>
           </p>
@@ -29,14 +44,15 @@ export function DataSection() {
         <div className="data-visual-field">
           <Visual kind="globe" />
           <dl className="data-metrics">
-            {metrics.map((metric) => (
+            {observations.map((metric) => (
               <div className={`metric-card metric-card--${metric.id}`} key={metric.id}>
                 <dt>
                   <span>
                     <LocaleText>{t(metric.label)}</LocaleText>
                   </span>
                 </dt>
-                <dd>{noBreakNumber(metric.value)}</dd>
+                <dd>{metric.value}</dd>
+                <dd className="metric-observation-note">{metric.note}</dd>
               </div>
             ))}
           </dl>

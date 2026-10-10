@@ -5,7 +5,7 @@
 .footer-columns {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--layout-gap);
 }
 .footer-columns ul {
   margin-top: 16px;
@@ -26,15 +26,16 @@
   color: var(--action);
 }
 .footer-bottom {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: var(--layout-half);
+  align-items: center;
+  gap: var(--layout-gap);
   margin-top: 48px;
 }
 .footer-brand {
   width: 360px;
-  max-width: 40%;
+  max-width: 100%;
+  justify-self: start;
 }
 .footer-brand img {
   width: 100%;
@@ -42,9 +43,11 @@
 }
 .footer-meta {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px 24px;
 }
 .footer-meta p {
   font: 400 13px/18px var(--font-mono);
@@ -57,7 +60,11 @@
   }
   .footer-columns {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 40px 24px;
+    gap: 40px var(--layout-gap);
+  }
+  .footer-bottom {
+    grid-template-columns: 1fr;
+    row-gap: 32px;
   }
 }
 @media (max-width: 899px) {
@@ -74,7 +81,7 @@
   }
   .footer-columns {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px 20px;
+    gap: 28px var(--layout-gap);
   }
   .footer-columns .eyebrow {
     font-size: 12px;
@@ -92,8 +99,7 @@
   }
   .footer-bottom {
     margin-top: 40px;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: start;
     gap: 24px;
   }
   .footer-brand {
@@ -101,7 +107,7 @@
     max-width: 65%;
   }
   .footer-meta {
-    align-items: flex-start;
+    gap: 8px 16px;
   }
   .footer-meta p {
     font-size: 11px;
@@ -111,6 +117,9 @@
 .footer-email {
   font-family: var(--font-sans);
   font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 .footer-email strong {
   font-weight: 600;
@@ -173,4 +182,27 @@
   .footer-email > strong::after {
     transition: none;
   }
+}
+
+.footer-meta > p,
+.footer-meta > .footer-email,
+.footer-meta > .footer-cookie-trigger {
+  white-space: nowrap;
+}
+.footer-meta > .footer-cookie-trigger {
+  min-height: 44px;
+  font-size: inherit;
+}
+.footer-meta {
+  font-size: 13px;
+}
+@media (min-width: 1600px) {
+  .footer-meta {
+    font-size: 15px;
+  }
+}
+
+.footer-columns .footer-company-title {
+  text-transform: none;
+  letter-spacing: normal;
 }
